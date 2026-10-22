@@ -160,7 +160,7 @@ def assess_attempt(directory, plan, initial, frozen, global_ok):
     required = ['assessment.json', 'database.json', 'app.json', 'before.json', 'after-load.json', 'after.json',
                 'stopped.json', 'dropped.json', 'load-commands.json', 'target-monitor.jsonl', 'load-monitor.jsonl', 'merged.json']
     required += [f'box{i}{suffix}' for i in range(4) for suffix in ['.json', '-merged.json']]
-    if plan['controller'] == 'paired-multi-load-v2':
+    if plan['controller'] in ['paired-multi-load-v2', 'paired-multi-load-v3']:
         required += ['before-load.json', 'app-process-limits.txt', 'app-process-status.txt']
     missing = [name for name in required if not (directory / name).exists()]
     check(checks, 'complete_attempt_evidence', not missing, missing)
@@ -170,7 +170,7 @@ def assess_attempt(directory, plan, initial, frozen, global_ok):
     case, protocol = out['case'], plan['protocol']
     app, db, before, live, after = (read(directory / n) for n in ['app.json', 'database.json', 'before.json', 'after-load.json', 'after.json'])
     actual_checks = []
-    if plan['controller'] == 'paired-multi-load-v2':
+    if plan['controller'] in ['paired-multi-load-v2', 'paired-multi-load-v3']:
         pre = read(directory / 'before-load.json')
         check(checks, 'common_nofile_launch_wrapper', app.get('app_user') == 'challenge'
               and app.get('launch_wrapper') == ['runuser', '-u', 'challenge', '--', 'prlimit', '--nofile=200000:200000', '--'])
@@ -239,7 +239,8 @@ def assess_attempt(directory, plan, initial, frozen, global_ok):
     check(checks, 'count_rps_error_rate_identity', math.isclose(overall['rps'], overall['count'] / 60, rel_tol=1e-12)
           and math.isclose(overall['error_rate'], overall['errors'] / overall['count'] if overall['count'] else 0, rel_tol=1e-12))
     tm = monitor(directory / 'target-monitor.jsonl', metas[0], 8, 16 * GiB)
-    lm = monitor(directory / 'load-monitor.jsonl', metas[0], 2, 4 * GiB)
+    load_cpus = 4 if plan['controller'] == 'paired-multi-load-v3' else 2
+    lm = monitor(directory / 'load-monitor.jsonl', metas[0], load_cpus, 4 * GiB)
     out.update(target_monitor=tm, load_monitor=lm, native_verdict=merged['verdict'], overall=overall,
                native_boxes=[r['box'] for r in raws], raw_metas=metas, endpoints=merged['endpoints'])
     timeline_errors = sum(second.get('errors', 0) for raw in raws for second in raw.get('timeline', []))
@@ -257,12 +258,14 @@ def assess_attempt(directory, plan, initial, frozen, global_ok):
         metrics[kind + '_cpu_ms_per_successful_request_estimate'] = cpu * 1000 / success if cpu is not None and success else None
     out.update(metrics=metrics, raw_run_id=metas[0]['run_id'], window=[metas[0]['window_start_ms'], metas[0]['window_end_ms']])
     invalid = []
+    if live.get('app_healthy') is False or any(new.get(k, 0) > old.get(k, 0) for k in ['oom', 'oom_kill', 'oom_group_kill']):
+        invalid.append('FAIL_TARGET_RUNTIME')
     if nofile: invalid.append('INVALID_TARGET_NOFILE')
     if actual_checks and not all(c['pass'] for c in actual_checks): invalid.append('INVALID_TARGET_NOFILE')
-    if not global_ok or not all(c['pass'] for c in checks): invalid.append('INVALID_EVIDENCE')
-    if not tm['eligible'] or not lm['eligible']: invalid.append('INVALID_MONITOR')
-    if expected['lg_limited']: invalid.append('INVALID_GENERATOR')
     if lm.get('cgroup_quota_utilization_pct', 101) > 75 or any(lm.get('oom_delta', {}).values()): invalid.append('INVALID_GENERATOR_CGROUP')
+    if expected['lg_limited']: invalid.append('INVALID_GENERATOR')
+    if not tm['eligible'] or not lm['eligible']: invalid.append('INVALID_MONITOR')
+    if not global_ok or not all(c['pass'] for c in checks): invalid.append('INVALID_EVIDENCE')
     if not expected['pass']: invalid.append('FAIL_SLO')
     out.update(classification=invalid[0] if invalid else 'PASS', all_classifications=invalid or ['PASS'], eligible=not invalid)
     return out
@@ -277,14 +280,20 @@ def audit_run(path):
     checks, initial = out['checks'], read(path / 'target-initial.json')
     research = path.parent.parent
     check(checks, 'frozen_plan_hash', sha(path / 'plan.json') == (path / 'plan.sha256').read_text().strip())
-    check(checks, 'exact_80k_protocol', plan['controller'] in ['paired-multi-load-v1', 'paired-multi-load-v2'] and plan['protocol']['users'] == 80000
+    check(checks, 'exact_80k_protocol', plan['controller'] in ['paired-multi-load-v1', 'paired-multi-load-v2', 'paired-multi-load-v3'] and plan['protocol']['users'] == 80000
           and plan['protocol']['order'] == [[0, 1], [1, 0], [0, 1]]
           and plan['protocol']['shards'] == [{'box_index': i, 'users': 20000, 'id_offset': i * 20000, 'host': f'127.0.0.{i + 1}'} for i in range(4)])
-    if plan['controller'] == 'paired-multi-load-v2':
+    if plan['controller'] in ['paired-multi-load-v2', 'paired-multi-load-v3']:
         check(checks, 'predeclared_actual_nofile_witness_required', plan['protocol'].get('app_nofile_minimum') == 200000
               and plan['protocol'].get('actual_app_uid_and_limits_required') is True)
+    load_cpus = 4 if plan['controller'] == 'paired-multi-load-v3' else 2
+    if plan['controller'] == 'paired-multi-load-v3':
+        check(checks, 'predeclared_external_client4cpu', plan['protocol'].get('load_cgroup_cpus') == 4)
+    out['resource_scope'] = {'target_app_plus_postgres_cpus': 8, 'target_memory_bytes': 16 * GiB,
+                             'external_client_cpus': load_cpus, 'external_client_memory_bytes': 4 * GiB,
+                             'cpu_per_request_scope': 'Target cgroup only; external client CPU is reported separately.'}
     initial_inspect = {}
-    for kind, cpus, memory in [('target', 8, 16 * GiB), ('load', 2, 4 * GiB)]:
+    for kind, cpus, memory in [('target', 8, 16 * GiB), ('load', load_cpus, 4 * GiB)]:
         first, last = read(path / (kind + '-inspect.json')), read(path / (kind + '-final-inspect.json'))
         initial_inspect[kind] = first
         check(checks, kind + '_inspect_budgets_and_identity', bool(first) and bool(last) and inspect_budget(first, cpus, memory)
@@ -322,7 +331,7 @@ def audit_run(path):
               == frozen[names[1]]['case']['env'].get(k) for k in shared))
         check(checks, 'portable_reference_explicitly_disclosed', bool(out['reference_disclosure']))
     tools = read(path / 'tool-source-sha256.json')
-    if plan['controller'] == 'paired-multi-load-v2':
+    if plan['controller'] in ['paired-multi-load-v2', 'paired-multi-load-v3']:
         archived = read(path / 'frozen-tool-sha256.json')
         check(checks, 'actual_run_tool_copies_frozen', all((path / 'tools' / name).exists() and sha(path / 'tools' / name) == h for name, h in archived.items()))
         check(checks, 'tool_hashes_match_frozen_copies', all(

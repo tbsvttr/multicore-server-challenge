@@ -1,0 +1,11 @@
+# Separate four-CPU client study
+
+V3 changes the external generator CPU quota from 2 to 4 CPUs. The target app plus PostgreSQL still share 8 CPUs and 16 GiB, with no swap or affinity; generator memory remains 4 GiB with no swap. Four unchanged native processes still use GOMAXPROCS=1 each, one synchronized start, and 20,000 users per loopback address. App binaries, environment, normal-user/prlimit launcher, and all source files are unchanged. The reviewed v2 helper is copied and frozen alongside the v3 controller and monitor.
+
+The two-CPU study remains retained. Its corrected Rust arm was native LG-limited during a ramp-boundary quota burst despite 66.8% average client utilization; the following Goose arm also exceeded the declared client-headroom threshold and reported sampler stalls. That study was stopped, with completed, interrupted, and unstarted arms retained in its records. V3 is a separately declared experiment with more client CPU. Those earlier attempts do not establish a server capacity limit.
+
+The protocol remains 80,000 total VUs, four 20,000-user shards, three alternating pairs, a fresh full database per arm, 60 seconds ramp, 60 seconds measured, 15 seconds tail, and 65-second drains. Native merge and LG verdicts are unchanged. The combined generator 75% headroom rule now divides usage by the declared 4-CPU quota; initial and final Docker budget checks use 4 CPUs, while app/PostgreSQL normalization stays at 8 CPUs. The final budget checks also gate overall study qualification. Actual UID, 200,000 soft and hard NOFILE limits, health, OOM, and monitor-coverage gates remain.
+
+Plans: `rust-goose-80k-v3-plan.json` and `pr31-goose-80k-v3-plan.json`. Their case configurations and pinned binaries match v2. Native generator, v2 helper, v2 plans/tools, and all prior results are untouched; `v3-preparation-proof.json` records the hashes and protocol comparison. Preparation uses pure fixtures and dry-plan checks, with no Docker, app, or load execution.
+
+Both quotas still compete on the same ARM64 Mac and Docker VM; they do not create 12 dedicated physical CPUs. This remains a local diagnostic without official warmup/search/five-minute holds or external load machines, and cannot establish the official leaderboard rank. Native VM-wide CPU and lag invalidity is preserved even when the separate client quota has headroom.

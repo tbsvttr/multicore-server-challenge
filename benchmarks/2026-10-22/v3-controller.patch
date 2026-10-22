@@ -1,0 +1,106 @@
+--- paired-multi-load-v2.py
++++ paired-multi-load-v3.py
+@@ -41,11 +41,12 @@
+     order=[[0,1],[1,0],[0,1]]
+     ramp,measure,tail=60,60,15
+     shards=[{'box_index':i,'users':20000,'id_offset':i*20000,'host':'127.0.0.'+str(i+1)} for i in range(4)]
+-    plan={'controller':'paired-multi-load-v2','scope':scope,
++    plan={'controller':'paired-multi-load-v3','scope':scope,
+           'configuration':cfg,'configuration_sha256':sha(a.config),
+           'protocol':{'users':users,'articles':500000,'think_scale':1.0,'ramp_s':ramp,'measure_s':measure,'tail_s':tail,
+                       'pairs':3,'order':order,'fresh_full_seed_per_attempt':True,
+                       'shards':shards,'gomaxprocs_per_shard':1,'synchronized_start_at':True,
++                      'load_cgroup_cpus':4,
+                       'app_nofile_minimum':200000,'actual_app_uid_and_limits_required':True,
+                       'launch_wrapper':'runuser -u challenge -- prlimit --nofile=200000:200000 -- binary',
+                       'load_cgroup_cpu_limit_pct':75.0,
+@@ -63,25 +64,26 @@
+ 
+ plan=json.loads(planfile.read_text())
+ cfg=plan['configuration'];protocol=plan['protocol']
+-assert plan['controller']=='paired-multi-load-v2'
++assert plan['controller']=='paired-multi-load-v3'
++assert protocol['load_cgroup_cpus']==4
+ assert protocol['users']==80000 and protocol['gomaxprocs_per_shard']==1
+ assert protocol['shards']==[{'box_index':i,'users':20000,'id_offset':i*20000,'host':'127.0.0.'+str(i+1)} for i in range(4)]
+ assert (protocol['ramp_s'],protocol['measure_s'],protocol['tail_s'])==(60,60,15)
+ hostroot=pathlib.Path(cfg.get('host_evidence','/private/tmp/multicore-research-20261022')).resolve()
+ target=cfg.get('target_container','multicore-goose-dev-20261022')
+ stamp=time.strftime('%Y%m%dT%H%M%S',time.gmtime()).lower()
+-runname='v2_multi_pair_'+stamp+'_'+os.urandom(3).hex()
+-root=hostroot/'paired-multi-load-v2'/runname
++runname='v3_multi_pair_'+stamp+'_'+os.urandom(3).hex()
++root=hostroot/'paired-multi-load-v3'/runname
+ root.mkdir(parents=True,exist_ok=False)
+-container_root='/evidence/paired-multi-load-v2/'+runname
++container_root='/evidence/paired-multi-load-v3/'+runname
+ toolroot=root/'tools'
+ toolroot.mkdir()
+-for tool in ['lab-target-control-v2.py','lab-monitor.py','paired-multi-load-v2.py']:
++for tool in ['lab-target-control-v2.py','lab-monitor.py','paired-multi-load-v3.py']:
+     shutil.copy2(hostroot/tool,toolroot/tool)
+ target_helper=container_root+'/tools/lab-target-control-v2.py'
+ monitor_helper=container_root+'/tools/lab-monitor.py'
+ write_json(root/'frozen-tool-sha256.json',{tool:sha(toolroot/tool) for tool in
+-    ['lab-target-control-v2.py','lab-monitor.py','paired-multi-load-v2.py']})
++    ['lab-target-control-v2.py','lab-monitor.py','paired-multi-load-v3.py']})
+ loadname='multicore-multi-load-'+runname.replace('_','-')
+ write_json(root/'plan.json',plan)
+ (root/'plan.sha256').write_text(sha(planfile)+'\n')
+@@ -233,14 +235,14 @@
+     docker('exec','--user','root',target,'python3','-c',check,str(cfg.get('port',3000)))
+     image=cfg.get('load_image') or targetobj['Image']
+     docker('run','-d','--user','root','--name',loadname,'--label','multicore.local.owner='+runname,
+-           '--cpus','2','--memory','4g','--memory-swap','4g','--ulimit','nofile=200000:200000',
++           '--cpus',str(protocol['load_cgroup_cpus']),'--memory','4g','--memory-swap','4g','--ulimit','nofile=200000:200000',
+            '--network','container:'+target,'--volume',str(hostroot)+':/evidence:rw',
+            '--entrypoint','/bin/sh',image,'-c','exec sleep infinity')
+     load_created=True
+     loadobj=inspect(loadname,root/'load-inspect.json')
+-    assert_budget(loadobj,2,4*1024**3)
++    assert_budget(loadobj,protocol['load_cgroup_cpus'],4*1024**3)
+     write_json(root/'tool-source-sha256.json',{str(f.relative_to(hostroot)):sha(f) for f in
+-        [hostroot/'tools/loadgen',hostroot/'lab-monitor.py',hostroot/'lab-target-control-v2.py',hostroot/'paired-multi-load-v2.py']})
++        [hostroot/'tools/loadgen',hostroot/'lab-monitor.py',hostroot/'lab-target-control-v2.py',hostroot/'paired-multi-load-v3.py']})
+     write_json(root/'original-10k-tools-readonly-sha256.json',{n:sha(hostroot/n) for n in
+         ['paired-load.py','lab-monitor.py','lab-target-control.py','article-10k-plan.json','article-smoke-plan.json']})
+     (root/'frozen').mkdir()
+@@ -342,7 +344,7 @@
+                     raw_files=[attempt/('box'+str(i)+'.json') for i in range(4) if (attempt/('box'+str(i)+'.json')).exists()]
+                     if raw_files:
+                         raw=json.loads(raw_files[0].read_text());meta=raw['meta']
+-                        for who,quota in [('target',8),('load',2)]:
++                        for who,quota in [('target',8),('load',protocol['load_cgroup_cpus'])]:
+                             path=attempt/(who+'-monitor.jsonl')
+                             if path.exists():
+                                 state[who+'_monitor']=summarize_monitor(path,meta['window_start_ms'],meta['window_end_ms'],quota)
+@@ -413,10 +415,27 @@
+ finally:
+     host_stop.set()
+     if 'hostthread' in locals(): hostthread.join(timeout=10)
++    final_budget_errors=[]
+     if load_created:
+         with contextlib.suppress(Exception): docker('stop','--time','10',loadname)
+-        with contextlib.suppress(Exception): inspect(loadname,root/'load-final-inspect.json')
+-    with contextlib.suppress(Exception): inspect(target,root/'target-final-inspect.json')
++        try:
++            final_load=inspect(loadname,root/'load-final-inspect.json')
++            assert_budget(final_load,protocol['load_cgroup_cpus'],4*1024**3)
++        except Exception as e:
++            final_budget_errors.append('final load budget verification failed: '+str(e))
++    try:
++        final_target=inspect(target,root/'target-final-inspect.json')
++        assert_budget(final_target,8,16*1024**3)
++    except Exception as e:
++        final_budget_errors.append('final target budget verification failed: '+str(e))
++    if final_budget_errors:failure=failure or '; '.join(final_budget_errors)
++    write_json(root/'final-resource-check.json',{'valid':not final_budget_errors,'errors':final_budget_errors,
++                                               'load_cgroup_cpus':protocol['load_cgroup_cpus'],'target_cgroup_cpus':8})
++    if (root/'summary.json').exists():
++        summary=json.loads((root/'summary.json').read_text())
++        summary['final_resource_valid']=not final_budget_errors
++        if final_budget_errors:summary['all_three_pairs_qualified']=False
++        write_json(root/'summary.json',summary)
+     event('controller_finished',output=str(root),error=failure)
+     events.close()
+ raise SystemExit(1 if failure else 0)

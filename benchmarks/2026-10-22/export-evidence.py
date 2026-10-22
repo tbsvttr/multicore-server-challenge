@@ -17,7 +17,9 @@ dest.mkdir(parents=True)
 extensions = {'.json', '.jsonl', '.txt', '.log', '.md', '.py', '.sh', '.c', '.h',
               '.goose', '.yml', '.patch', '.sql', '.go', '.mod', '.sum', '.toml', '.lock'}
 subtrees = {'audit', 'baseline', 'box', 'conformance', 'fork-ci', 'native-checks',
-            'paired-load', 'paired-multi-load', 'pr31-reference', 'setup',
+            'paired-load', 'paired-multi-load', 'paired-multi-load-v2',
+            'paired-multi-load-v3',
+            'pr31-reference', 'setup',
             'competitor-sources', 'nofile-v2'}
 skip = {'.git', '.build', '.goose', '.goose-home', '.deps', 'bin', 'target',
         '__pycache__', 'node_modules'}

@@ -1,0 +1,199 @@
+{
+  "scope": "Light independent first completed v2 attempt process/validity check; no target/Docker calls",
+  "attempt": "/private/tmp/multicore-research-20261022/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/01-p1-rust7",
+  "raw_process_checks": [
+    {
+      "check": "startup:normal_expected_uid",
+      "pass": true
+    },
+    {
+      "check": "startup:exactly_one_expected_process",
+      "pass": true
+    },
+    {
+      "check": "startup:raw_all_four_uids_match_normal_user",
+      "pass": true
+    },
+    {
+      "check": "startup:raw_actual_pid_matches",
+      "pass": true
+    },
+    {
+      "check": "startup:actual_process_identity_stable",
+      "pass": true
+    },
+    {
+      "check": "startup:raw_soft_hard_nofile_at_least_200000",
+      "pass": true,
+      "detail": [
+        200000,
+        200000
+      ]
+    },
+    {
+      "check": "startup:helper_validity_agrees_with_raw",
+      "pass": true
+    },
+    {
+      "check": "before-load:normal_expected_uid",
+      "pass": true
+    },
+    {
+      "check": "before-load:exactly_one_expected_process",
+      "pass": true
+    },
+    {
+      "check": "before-load:raw_all_four_uids_match_normal_user",
+      "pass": true
+    },
+    {
+      "check": "before-load:raw_actual_pid_matches",
+      "pass": true
+    },
+    {
+      "check": "before-load:actual_process_identity_stable",
+      "pass": true
+    },
+    {
+      "check": "before-load:raw_soft_hard_nofile_at_least_200000",
+      "pass": true,
+      "detail": [
+        200000,
+        200000
+      ]
+    },
+    {
+      "check": "before-load:helper_validity_agrees_with_raw",
+      "pass": true
+    },
+    {
+      "check": "after-load:normal_expected_uid",
+      "pass": true
+    },
+    {
+      "check": "after-load:exactly_one_expected_process",
+      "pass": true
+    },
+    {
+      "check": "after-load:raw_all_four_uids_match_normal_user",
+      "pass": true
+    },
+    {
+      "check": "after-load:raw_actual_pid_matches",
+      "pass": true
+    },
+    {
+      "check": "after-load:actual_process_identity_stable",
+      "pass": true
+    },
+    {
+      "check": "after-load:raw_soft_hard_nofile_at_least_200000",
+      "pass": true,
+      "detail": [
+        200000,
+        200000
+      ]
+    },
+    {
+      "check": "after-load:helper_validity_agrees_with_raw",
+      "pass": true
+    }
+  ],
+  "pass_process_checks": true,
+  "recorded_classification": "INVALID_GENERATOR",
+  "native_verdict": {
+    "pass": false,
+    "fail_reasons": [
+      "p95 832 ms >= 500",
+      "p99 2408 ms >= 1000"
+    ],
+    "lg_limited": true,
+    "lg_reasons": [
+      "box 0 fell behind: sampler tick 1807 ms late",
+      "box 1 fell behind: sampler tick 1312 ms late",
+      "box 2 fell behind: sampler tick 1588 ms late"
+    ]
+  },
+  "native_overall": {
+    "count": 1240487,
+    "rps": 20674.783333333333,
+    "p50_ms": 0.563,
+    "p90_ms": 27.039,
+    "p95_ms": 831.999,
+    "p99_ms": 2408.447,
+    "max_ms": 5824.511,
+    "mean_ms": 106.5671749482262,
+    "errors": 0,
+    "error_rate": 0,
+    "statuses": {
+      "200": 1218231,
+      "201": 21930,
+      "204": 326
+    }
+  },
+  "actual_app_pid": 21312,
+  "app_uid": 501,
+  "actual_app_limits_valid": true,
+  "target_runtime": {
+    "valid_witness": true,
+    "pass": true,
+    "reasons": [],
+    "app_healthy": true,
+    "oom_deltas": {
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0
+    }
+  },
+  "load_cgroup_headroom_pass": true,
+  "target_monitor": {
+    "samples": 60,
+    "elapsed_s": 59.07305886,
+    "cgroup_cpu_quota_pct": 55.248516844790316,
+    "cpu_scope": "sampled interval inside the measurement window",
+    "sampled_interval_start_ms": 1792696882195.7786,
+    "sampled_interval_end_ms": 1792696941292.597,
+    "memory_peak_sampled_bytes": 9476939776,
+    "swap_peak_sampled_bytes": 0,
+    "memory_events_before": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+    "memory_events_after": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+    "measurement_start_ms": 1792696882182,
+    "measurement_end_ms": 1792696942182,
+    "coverage_span_samples": 62,
+    "coverage_start_missing_s": 0.0,
+    "coverage_end_missing_s": 0.0,
+    "full_window_bracketed": true,
+    "max_sample_gap_s": 1.010605834,
+    "max_wall_sample_gap_s": 1.018305736,
+    "valid_sampling": true,
+    "app_whole_target_pct": 18.248589472145035,
+    "app_rss_sum_peak_bytes": 87732224,
+    "pg_whole_target_pct": 36.875947209076024,
+    "pg_rss_sum_peak_bytes": 14001184768
+  },
+  "load_monitor": {
+    "samples": 60,
+    "elapsed_s": 59.101406901,
+    "cgroup_cpu_quota_pct": 66.75610881156949,
+    "cpu_scope": "sampled interval inside the measurement window",
+    "sampled_interval_start_ms": 1792696882294.157,
+    "sampled_interval_end_ms": 1792696941419.323,
+    "memory_peak_sampled_bytes": 2476023808,
+    "swap_peak_sampled_bytes": 0,
+    "memory_events_before": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+    "memory_events_after": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+    "measurement_start_ms": 1792696882182,
+    "measurement_end_ms": 1792696942182,
+    "coverage_span_samples": 62,
+    "coverage_start_missing_s": 0.0,
+    "coverage_end_missing_s": 0.0,
+    "full_window_bracketed": true,
+    "max_sample_gap_s": 1.057001125,
+    "max_wall_sample_gap_s": 1.056999501,
+    "valid_sampling": true,
+    "app_whole_target_pct": 0.0,
+    "app_rss_sum_peak_bytes": 0,
+    "pg_whole_target_pct": 0.0,
+    "pg_rss_sum_peak_bytes": 0
+  }
+}

@@ -1,0 +1,950 @@
+[
+  {
+    "id": "01-p1-rust7",
+    "pair": 1,
+    "case": "rust7",
+    "database": "mc_pair_20261022_192010_01_2988",
+    "classification": "INVALID_GENERATOR",
+    "before_load_actual_app": {
+      "valid": true,
+      "expected_uid": 501,
+      "minimum_nofile": 200000,
+      "processes": [
+        {
+          "pid": 21312,
+          "pgid": 21311,
+          "start_ticks": 6633704,
+          "exe": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/frozen/rust7/app",
+          "uid": 501,
+          "uids": [
+            501,
+            501,
+            501,
+            501
+          ],
+          "nofile_soft": 200000,
+          "nofile_hard": 200000,
+          "proc_limits": "Limit                     Soft Limit           Hard Limit           Units     \nMax cpu time              unlimited            unlimited            seconds   \nMax file size             unlimited            unlimited            bytes     \nMax data size             unlimited            unlimited            bytes     \nMax stack size            8388608              unlimited            bytes     \nMax core file size        0                    unlimited            bytes     \nMax resident set          unlimited            unlimited            bytes     \nMax processes             unlimited            unlimited            processes \nMax open files            200000               200000               files     \nMax locked memory         unlimited            unlimited            bytes     \nMax address space         unlimited            unlimited            bytes     \nMax file locks            unlimited            unlimited            locks     \nMax pending signals       64023                64023                signals   \nMax msgqueue size         819200               819200               bytes     \nMax nice priority         0                    0                    \nMax realtime priority     0                    0                    \nMax realtime timeout      unlimited            unlimited            us        \n",
+          "proc_status": "Name:\tapp\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t21312\nNgid:\t0\nPid:\t21312\nPPid:\t21311\nTracerPid:\t0\nUid:\t501\t501\t501\t501\nGid:\t501\t501\t501\t501\nFDSize:\t64\nGroups:\t501 \nNStgid:\t21312\nNSpid:\t21312\nNSpgid:\t21311\nNSsid:\t21311\nKthread:\t0\nVmPeak:\t 1258736 kB\nVmSize:\t 1193220 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t    9384 kB\nVmRSS:\t    9384 kB\nRssAnon:\t    6456 kB\nRssFile:\t    2928 kB\nRssShmem:\t       0 kB\nVmData:\t 1057672 kB\nVmStk:\t     132 kB\nVmExe:\t    1656 kB\nVmLib:\t    2460 kB\nVmPTE:\t      92 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t3\nSigQ:\t13/64023\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000001000\nSigCgt:\t0000000100000440\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tvulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t3ff\nCpus_allowed_list:\t0-9\nMems_allowed:\t1\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t117\nnonvoluntary_ctxt_switches:\t9\n"
+        }
+      ],
+      "reasons": []
+    },
+    "load_exits": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "shard_verdicts": [
+      {
+        "box_index": 0,
+        "merge_exit": 3,
+        "verdict": {
+          "pass": false,
+          "fail_reasons": [
+            "p95 1129 ms >= 500",
+            "p99 2408 ms >= 1000"
+          ],
+          "lg_limited": true,
+          "lg_reasons": [
+            "box 0 fell behind: sampler tick 1807 ms late"
+          ]
+        },
+        "overall": {
+          "count": 309358,
+          "rps": 5155.966666666666,
+          "p50_ms": 0.562,
+          "p90_ms": 33.343,
+          "p95_ms": 1129.471,
+          "p99_ms": 2408.447,
+          "max_ms": 5709.823,
+          "mean_ms": 112.37648144867771,
+          "errors": 0,
+          "error_rate": 0,
+          "statuses": {
+            "200": 303784,
+            "201": 5498,
+            "204": 76
+          }
+        },
+        "boxes": [
+          {
+            "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/01-p1-rust7/box0.json",
+            "box_index": 0,
+            "host": "a40d58b68177",
+            "users": 20000,
+            "cpu_avg_measure_pct": 59.17950318526507,
+            "cpu_max_measure_pct": 73.43096234309624,
+            "proc_cpu_avg_measure_pct": 3.4655850118386455,
+            "rss_peak_mb": 537.61328125,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "sampler tick 1807 ms late"
+            ],
+            "requests_in_window": 309358,
+            "tcp_connects": 20000
+          }
+        ]
+      },
+      {
+        "box_index": 1,
+        "merge_exit": 3,
+        "verdict": {
+          "pass": false,
+          "fail_reasons": [
+            "p95 885 ms >= 500",
+            "p99 2392 ms >= 1000"
+          ],
+          "lg_limited": true,
+          "lg_reasons": [
+            "box 1 fell behind: sampler tick 1312 ms late"
+          ]
+        },
+        "overall": {
+          "count": 310894,
+          "rps": 5181.566666666667,
+          "p50_ms": 0.566,
+          "p90_ms": 22.687,
+          "p95_ms": 884.735,
+          "p99_ms": 2392.063,
+          "max_ms": 5181.439,
+          "mean_ms": 108.19751786139325,
+          "errors": 0,
+          "error_rate": 0,
+          "statuses": {
+            "200": 305297,
+            "201": 5498,
+            "204": 99
+          }
+        },
+        "boxes": [
+          {
+            "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/01-p1-rust7/box1.json",
+            "box_index": 1,
+            "host": "a40d58b68177",
+            "users": 20000,
+            "cpu_avg_measure_pct": 59.03180815235691,
+            "cpu_max_measure_pct": 73.40314136125654,
+            "proc_cpu_avg_measure_pct": 3.2046716716588524,
+            "rss_peak_mb": 510.52734375,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "sampler tick 1312 ms late"
+            ],
+            "requests_in_window": 310894,
+            "tcp_connects": 20000
+          }
+        ]
+      },
+      {
+        "box_index": 2,
+        "merge_exit": 3,
+        "verdict": {
+          "pass": false,
+          "fail_reasons": [
+            "p95 890 ms >= 500",
+            "p99 3105 ms >= 1000"
+          ],
+          "lg_limited": true,
+          "lg_reasons": [
+            "box 2 fell behind: sampler tick 1588 ms late"
+          ]
+        },
+        "overall": {
+          "count": 308133,
+          "rps": 5135.55,
+          "p50_ms": 0.557,
+          "p90_ms": 26.559,
+          "p95_ms": 889.855,
+          "p99_ms": 3104.767,
+          "max_ms": 5824.511,
+          "mean_ms": 125.41559205602783,
+          "errors": 0,
+          "error_rate": 0,
+          "statuses": {
+            "200": 302699,
+            "201": 5365,
+            "204": 69
+          }
+        },
+        "boxes": [
+          {
+            "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/01-p1-rust7/box2.json",
+            "box_index": 2,
+            "host": "a40d58b68177",
+            "users": 20000,
+            "cpu_avg_measure_pct": 59.22652021720969,
+            "cpu_max_measure_pct": 73.43096234309624,
+            "proc_cpu_avg_measure_pct": 3.3309432614626933,
+            "rss_peak_mb": 528.53125,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "sampler tick 1588 ms late"
+            ],
+            "requests_in_window": 308133,
+            "tcp_connects": 20000
+          }
+        ]
+      },
+      {
+        "box_index": 3,
+        "merge_exit": 3,
+        "verdict": {
+          "pass": false,
+          "fail_reasons": [
+            "p95 595 ms >= 500",
+            "p99 1835 ms >= 1000"
+          ],
+          "lg_limited": false
+        },
+        "overall": {
+          "count": 312102,
+          "rps": 5201.7,
+          "p50_ms": 0.567,
+          "p90_ms": 26.895,
+          "p95_ms": 594.943,
+          "p99_ms": 1835.007,
+          "max_ms": 4333.567,
+          "mean_ms": 80.57618937719094,
+          "errors": 0,
+          "error_rate": 0,
+          "statuses": {
+            "200": 306451,
+            "201": 5569,
+            "204": 82
+          }
+        },
+        "boxes": [
+          {
+            "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/01-p1-rust7/box3.json",
+            "box_index": 3,
+            "host": "a40d58b68177",
+            "users": 20000,
+            "cpu_avg_measure_pct": 58.87553271055789,
+            "cpu_max_measure_pct": 73.40314136125654,
+            "proc_cpu_avg_measure_pct": 3.3137300718212273,
+            "rss_peak_mb": 490.3203125,
+            "fell_behind": false,
+            "requests_in_window": 312102,
+            "tcp_connects": 20000
+          }
+        ]
+      }
+    ],
+    "merge_exit": 3,
+    "verdict": {
+      "pass": false,
+      "fail_reasons": [
+        "p95 832 ms >= 500",
+        "p99 2408 ms >= 1000"
+      ],
+      "lg_limited": true,
+      "lg_reasons": [
+        "box 0 fell behind: sampler tick 1807 ms late",
+        "box 1 fell behind: sampler tick 1312 ms late",
+        "box 2 fell behind: sampler tick 1588 ms late"
+      ]
+    },
+    "overall": {
+      "count": 1240487,
+      "rps": 20674.783333333333,
+      "p50_ms": 0.563,
+      "p90_ms": 27.039,
+      "p95_ms": 831.999,
+      "p99_ms": 2408.447,
+      "max_ms": 5824.511,
+      "mean_ms": 106.5671749482262,
+      "errors": 0,
+      "error_rate": 0,
+      "statuses": {
+        "200": 1218231,
+        "201": 21930,
+        "204": 326
+      }
+    },
+    "boxes": [
+      {
+        "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/01-p1-rust7/box0.json",
+        "box_index": 0,
+        "host": "a40d58b68177",
+        "users": 20000,
+        "cpu_avg_measure_pct": 59.17950318526507,
+        "cpu_max_measure_pct": 73.43096234309624,
+        "proc_cpu_avg_measure_pct": 3.4655850118386455,
+        "rss_peak_mb": 537.61328125,
+        "fell_behind": true,
+        "fell_behind_reasons": [
+          "sampler tick 1807 ms late"
+        ],
+        "requests_in_window": 309358,
+        "tcp_connects": 20000
+      },
+      {
+        "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/01-p1-rust7/box1.json",
+        "box_index": 1,
+        "host": "a40d58b68177",
+        "users": 20000,
+        "cpu_avg_measure_pct": 59.03180815235691,
+        "cpu_max_measure_pct": 73.40314136125654,
+        "proc_cpu_avg_measure_pct": 3.2046716716588524,
+        "rss_peak_mb": 510.52734375,
+        "fell_behind": true,
+        "fell_behind_reasons": [
+          "sampler tick 1312 ms late"
+        ],
+        "requests_in_window": 310894,
+        "tcp_connects": 20000
+      },
+      {
+        "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/01-p1-rust7/box2.json",
+        "box_index": 2,
+        "host": "a40d58b68177",
+        "users": 20000,
+        "cpu_avg_measure_pct": 59.22652021720969,
+        "cpu_max_measure_pct": 73.43096234309624,
+        "proc_cpu_avg_measure_pct": 3.3309432614626933,
+        "rss_peak_mb": 528.53125,
+        "fell_behind": true,
+        "fell_behind_reasons": [
+          "sampler tick 1588 ms late"
+        ],
+        "requests_in_window": 308133,
+        "tcp_connects": 20000
+      },
+      {
+        "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/01-p1-rust7/box3.json",
+        "box_index": 3,
+        "host": "a40d58b68177",
+        "users": 20000,
+        "cpu_avg_measure_pct": 58.87553271055789,
+        "cpu_max_measure_pct": 73.40314136125654,
+        "proc_cpu_avg_measure_pct": 3.3137300718212273,
+        "rss_peak_mb": 490.3203125,
+        "fell_behind": false,
+        "requests_in_window": 312102,
+        "tcp_connects": 20000
+      }
+    ],
+    "target_monitor": {
+      "samples": 60,
+      "elapsed_s": 59.07305886,
+      "cgroup_cpu_quota_pct": 55.248516844790316,
+      "cpu_scope": "sampled interval inside the measurement window",
+      "sampled_interval_start_ms": 1792696882195.7786,
+      "sampled_interval_end_ms": 1792696941292.597,
+      "memory_peak_sampled_bytes": 9476939776,
+      "swap_peak_sampled_bytes": 0,
+      "memory_events_before": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+      "memory_events_after": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+      "measurement_start_ms": 1792696882182,
+      "measurement_end_ms": 1792696942182,
+      "coverage_span_samples": 62,
+      "coverage_start_missing_s": 0.0,
+      "coverage_end_missing_s": 0.0,
+      "full_window_bracketed": true,
+      "max_sample_gap_s": 1.010605834,
+      "max_wall_sample_gap_s": 1.018305736,
+      "valid_sampling": true,
+      "app_whole_target_pct": 18.248589472145035,
+      "app_rss_sum_peak_bytes": 87732224,
+      "pg_whole_target_pct": 36.875947209076024,
+      "pg_rss_sum_peak_bytes": 14001184768
+    },
+    "load_monitor": {
+      "samples": 60,
+      "elapsed_s": 59.101406901,
+      "cgroup_cpu_quota_pct": 66.75610881156949,
+      "cpu_scope": "sampled interval inside the measurement window",
+      "sampled_interval_start_ms": 1792696882294.157,
+      "sampled_interval_end_ms": 1792696941419.323,
+      "memory_peak_sampled_bytes": 2476023808,
+      "swap_peak_sampled_bytes": 0,
+      "memory_events_before": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+      "memory_events_after": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+      "measurement_start_ms": 1792696882182,
+      "measurement_end_ms": 1792696942182,
+      "coverage_span_samples": 62,
+      "coverage_start_missing_s": 0.0,
+      "coverage_end_missing_s": 0.0,
+      "full_window_bracketed": true,
+      "max_sample_gap_s": 1.057001125,
+      "max_wall_sample_gap_s": 1.056999501,
+      "valid_sampling": true,
+      "app_whole_target_pct": 0.0,
+      "app_rss_sum_peak_bytes": 0,
+      "pg_whole_target_pct": 0.0,
+      "pg_rss_sum_peak_bytes": 0
+    },
+    "load_cgroup_headroom_pass": true,
+    "load_oom_delta": 0,
+    "after_load_actual_app": {
+      "valid": true,
+      "expected_uid": 501,
+      "minimum_nofile": 200000,
+      "processes": [
+        {
+          "pid": 21312,
+          "pgid": 21311,
+          "start_ticks": 6633704,
+          "exe": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/frozen/rust7/app",
+          "uid": 501,
+          "uids": [
+            501,
+            501,
+            501,
+            501
+          ],
+          "nofile_soft": 200000,
+          "nofile_hard": 200000,
+          "proc_limits": "Limit                     Soft Limit           Hard Limit           Units     \nMax cpu time              unlimited            unlimited            seconds   \nMax file size             unlimited            unlimited            bytes     \nMax data size             unlimited            unlimited            bytes     \nMax stack size            8388608              unlimited            bytes     \nMax core file size        0                    unlimited            bytes     \nMax resident set          unlimited            unlimited            bytes     \nMax processes             unlimited            unlimited            processes \nMax open files            200000               200000               files     \nMax locked memory         unlimited            unlimited            bytes     \nMax address space         unlimited            unlimited            bytes     \nMax file locks            unlimited            unlimited            locks     \nMax pending signals       64023                64023                signals   \nMax msgqueue size         819200               819200               bytes     \nMax nice priority         0                    0                    \nMax realtime priority     0                    0                    \nMax realtime timeout      unlimited            unlimited            us        \n",
+          "proc_status": "Name:\tapp\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t21312\nNgid:\t0\nPid:\t21312\nPPid:\t21311\nTracerPid:\t0\nUid:\t501\t501\t501\t501\nGid:\t501\t501\t501\t501\nFDSize:\t131072\nGroups:\t501 \nNStgid:\t21312\nNSpid:\t21312\nNSpgid:\t21311\nNSsid:\t21311\nKthread:\t0\nVmPeak:\t 1260888 kB\nVmSize:\t 1260888 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   87500 kB\nVmRSS:\t   74964 kB\nRssAnon:\t   72036 kB\nRssFile:\t    2928 kB\nRssShmem:\t       0 kB\nVmData:\t 1059868 kB\nVmStk:\t     132 kB\nVmExe:\t    1656 kB\nVmLib:\t    2460 kB\nVmPTE:\t     256 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t4\nSigQ:\t13/64023\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000001000\nSigCgt:\t0000000100000440\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tvulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t3ff\nCpus_allowed_list:\t0-9\nMems_allowed:\t1\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t59363\nnonvoluntary_ctxt_switches:\t2069\n"
+        }
+      ],
+      "reasons": []
+    },
+    "actual_app_limits_valid": true,
+    "target_runtime": {
+      "valid_witness": true,
+      "pass": true,
+      "reasons": [],
+      "app_healthy": true,
+      "oom_deltas": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      }
+    }
+  },
+  {
+    "id": "02-p1-goose",
+    "pair": 1,
+    "case": "goose",
+    "database": "mc_pair_20261022_192010_02_82ce",
+    "classification": "INVALID_GENERATOR_CGROUP",
+    "before_load_actual_app": {
+      "valid": true,
+      "expected_uid": 501,
+      "minimum_nofile": 200000,
+      "processes": [
+        {
+          "pid": 21433,
+          "pgid": 21432,
+          "start_ticks": 6655573,
+          "exe": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/frozen/goose/app",
+          "uid": 501,
+          "uids": [
+            501,
+            501,
+            501,
+            501
+          ],
+          "nofile_soft": 200000,
+          "nofile_hard": 200000,
+          "proc_limits": "Limit                     Soft Limit           Hard Limit           Units     \nMax cpu time              unlimited            unlimited            seconds   \nMax file size             unlimited            unlimited            bytes     \nMax data size             unlimited            unlimited            bytes     \nMax stack size            8388608              unlimited            bytes     \nMax core file size        0                    unlimited            bytes     \nMax resident set          unlimited            unlimited            bytes     \nMax processes             unlimited            unlimited            processes \nMax open files            200000               200000               files     \nMax locked memory         unlimited            unlimited            bytes     \nMax address space         unlimited            unlimited            bytes     \nMax file locks            unlimited            unlimited            locks     \nMax pending signals       64023                64023                signals   \nMax msgqueue size         819200               819200               bytes     \nMax nice priority         0                    0                    \nMax realtime priority     0                    0                    \nMax realtime timeout      unlimited            unlimited            us        \n",
+          "proc_status": "Name:\tapp\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t21433\nNgid:\t0\nPid:\t21433\nPPid:\t21432\nTracerPid:\t0\nUid:\t501\t501\t501\t501\nGid:\t501\t501\t501\t501\nFDSize:\t64\nGroups:\t501 \nNStgid:\t21433\nNSpid:\t21433\nNSpgid:\t21432\nNSsid:\t21432\nKthread:\t0\nVmPeak:\t248035352 kB\nVmSize:\t248035352 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t    5120 kB\nVmRSS:\t    5120 kB\nRssAnon:\t    2512 kB\nRssFile:\t    2608 kB\nRssShmem:\t       0 kB\nVmData:\t247514140 kB\nVmStk:\t     132 kB\nVmExe:\t     272 kB\nVmLib:\t    6536 kB\nVmPTE:\t     744 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t7\nSigQ:\t14/64023\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000000000\nSigCgt:\t0000000100000440\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tvulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t3ff\nCpus_allowed_list:\t0-9\nMems_allowed:\t1\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t11\nnonvoluntary_ctxt_switches:\t0\n"
+        }
+      ],
+      "reasons": []
+    },
+    "load_exits": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "shard_verdicts": [
+      {
+        "box_index": 0,
+        "merge_exit": 3,
+        "verdict": {
+          "pass": false,
+          "fail_reasons": [
+            "p95 9118 ms >= 500",
+            "p99 12812 ms >= 1000",
+            "errors 2.15% >= 1%"
+          ],
+          "lg_limited": true,
+          "lg_reasons": [
+            "box 0 fell behind: 22 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 3121 ms late; only 19512 of 20000 users active at window start"
+          ]
+        },
+        "overall": {
+          "count": 231389,
+          "rps": 3856.483333333333,
+          "p50_ms": 0.783,
+          "p90_ms": 4509.695,
+          "p95_ms": 9117.695,
+          "p99_ms": 12812.287,
+          "max_ms": 16195.583,
+          "mean_ms": 1216.701149687322,
+          "errors": 4968,
+          "error_rate": 0.02147033782936959,
+          "statuses": {
+            "200": 222434,
+            "201": 3936,
+            "204": 51
+          },
+          "error_classes": {
+            "timeout": 4968
+          },
+          "error_example": "request timeout"
+        },
+        "boxes": [
+          {
+            "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/02-p1-goose/box0.json",
+            "box_index": 0,
+            "host": "a40d58b68177",
+            "users": 20000,
+            "cpu_avg_measure_pct": 55.37228068256908,
+            "cpu_max_measure_pct": 100,
+            "proc_cpu_avg_measure_pct": 4.8321010774828554,
+            "rss_peak_mb": 568.21875,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "22 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 3121 ms late",
+              "only 19512 of 20000 users active at window start"
+            ],
+            "requests_in_window": 231389,
+            "tcp_connects": 27967
+          }
+        ]
+      },
+      {
+        "box_index": 1,
+        "merge_exit": 3,
+        "verdict": {
+          "pass": false,
+          "fail_reasons": [
+            "p95 8905 ms >= 500",
+            "p99 11305 ms >= 1000",
+            "errors 1.67% >= 1%"
+          ],
+          "lg_limited": true,
+          "lg_reasons": [
+            "box 1 fell behind: 14 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 8599 ms late"
+          ]
+        },
+        "overall": {
+          "count": 232430,
+          "rps": 3873.8333333333335,
+          "p50_ms": 0.798,
+          "p90_ms": 5521.407,
+          "p95_ms": 8904.703,
+          "p99_ms": 11304.959,
+          "max_ms": 18202.623,
+          "mean_ms": 1170.1173165038942,
+          "errors": 3882,
+          "error_rate": 0.016701802693283998,
+          "statuses": {
+            "200": 224498,
+            "201": 3996,
+            "204": 54
+          },
+          "error_classes": {
+            "timeout": 3882
+          },
+          "error_example": "request timeout"
+        },
+        "boxes": [
+          {
+            "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/02-p1-goose/box1.json",
+            "box_index": 1,
+            "host": "a40d58b68177",
+            "users": 20000,
+            "cpu_avg_measure_pct": 57.84520709039491,
+            "cpu_max_measure_pct": 79.79274611398964,
+            "proc_cpu_avg_measure_pct": 4.594060930113532,
+            "rss_peak_mb": 612.484375,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "14 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 8599 ms late"
+            ],
+            "requests_in_window": 232430,
+            "tcp_connects": 25317
+          }
+        ]
+      },
+      {
+        "box_index": 2,
+        "merge_exit": 3,
+        "verdict": {
+          "pass": false,
+          "fail_reasons": [
+            "p95 10887 ms >= 500",
+            "p99 13607 ms >= 1000",
+            "errors 2.64% >= 1%"
+          ],
+          "lg_limited": true,
+          "lg_reasons": [
+            "box 2 fell behind: 20 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 18406 ms late"
+          ]
+        },
+        "overall": {
+          "count": 226418,
+          "rps": 3773.633333333333,
+          "p50_ms": 0.774,
+          "p90_ms": 3430.399,
+          "p95_ms": 10887.167,
+          "p99_ms": 13606.911,
+          "max_ms": 19611.647,
+          "mean_ms": 1192.4162319603552,
+          "errors": 5988,
+          "error_rate": 0.026446660601188953,
+          "statuses": {
+            "200": 216618,
+            "201": 3767,
+            "204": 45
+          },
+          "error_classes": {
+            "timeout": 5988
+          },
+          "error_example": "request timeout"
+        },
+        "boxes": [
+          {
+            "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/02-p1-goose/box2.json",
+            "box_index": 2,
+            "host": "a40d58b68177",
+            "users": 20000,
+            "cpu_avg_measure_pct": 63.24863170326192,
+            "cpu_max_measure_pct": 79.4979079497908,
+            "proc_cpu_avg_measure_pct": 6.285981133308856,
+            "rss_peak_mb": 588.7265625,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "20 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 18406 ms late"
+            ],
+            "requests_in_window": 226418,
+            "tcp_connects": 30048
+          }
+        ]
+      },
+      {
+        "box_index": 3,
+        "merge_exit": 3,
+        "verdict": {
+          "pass": false,
+          "fail_reasons": [
+            "p95 10699 ms >= 500",
+            "p99 14328 ms >= 1000",
+            "errors 2.67% >= 1%"
+          ],
+          "lg_limited": true,
+          "lg_reasons": [
+            "box 3 fell behind: 19 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 4385 ms late"
+          ]
+        },
+        "overall": {
+          "count": 232835,
+          "rps": 3880.5833333333335,
+          "p50_ms": 0.814,
+          "p90_ms": 1952.767,
+          "p95_ms": 10698.751,
+          "p99_ms": 14327.807,
+          "max_ms": 20135.935,
+          "mean_ms": 1103.2112128245326,
+          "errors": 6208,
+          "error_rate": 0.026662658105525372,
+          "statuses": {
+            "200": 222669,
+            "201": 3908,
+            "204": 50
+          },
+          "error_classes": {
+            "timeout": 6208
+          },
+          "error_example": "request timeout"
+        },
+        "boxes": [
+          {
+            "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/02-p1-goose/box3.json",
+            "box_index": 3,
+            "host": "a40d58b68177",
+            "users": 20000,
+            "cpu_avg_measure_pct": 56.169594178437514,
+            "cpu_max_measure_pct": 80.02049180327869,
+            "proc_cpu_avg_measure_pct": 4.582532014662794,
+            "rss_peak_mb": 613.55859375,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "19 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 4385 ms late"
+            ],
+            "requests_in_window": 232835,
+            "tcp_connects": 29504
+          }
+        ]
+      }
+    ],
+    "merge_exit": 3,
+    "verdict": {
+      "pass": false,
+      "fail_reasons": [
+        "p95 9716 ms >= 500",
+        "p99 13607 ms >= 1000",
+        "errors 2.28% >= 1%"
+      ],
+      "lg_limited": true,
+      "lg_reasons": [
+        "box 0 fell behind: 22 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 3121 ms late; only 19512 of 20000 users active at window start",
+        "box 1 fell behind: 14 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 8599 ms late",
+        "box 2 fell behind: 20 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 18406 ms late",
+        "box 3 fell behind: 19 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 4385 ms late"
+      ]
+    },
+    "overall": {
+      "count": 923072,
+      "rps": 15384.533333333333,
+      "p50_ms": 0.792,
+      "p90_ms": 4333.567,
+      "p95_ms": 9715.711,
+      "p99_ms": 13606.911,
+      "max_ms": 20135.935,
+      "mean_ms": 1170.3879126937006,
+      "errors": 21046,
+      "error_rate": 0.022799954933092975,
+      "statuses": {
+        "200": 886219,
+        "201": 15607,
+        "204": 200
+      },
+      "error_classes": {
+        "timeout": 21046
+      },
+      "error_example": "request timeout"
+    },
+    "boxes": [
+      {
+        "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/02-p1-goose/box0.json",
+        "box_index": 0,
+        "host": "a40d58b68177",
+        "users": 20000,
+        "cpu_avg_measure_pct": 55.37228068256908,
+        "cpu_max_measure_pct": 100,
+        "proc_cpu_avg_measure_pct": 4.8321010774828554,
+        "rss_peak_mb": 568.21875,
+        "fell_behind": true,
+        "fell_behind_reasons": [
+          "22 of 60 seconds had mean timer wake-up lag > 50 ms",
+          "sampler tick 3121 ms late",
+          "only 19512 of 20000 users active at window start"
+        ],
+        "requests_in_window": 231389,
+        "tcp_connects": 27967
+      },
+      {
+        "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/02-p1-goose/box1.json",
+        "box_index": 1,
+        "host": "a40d58b68177",
+        "users": 20000,
+        "cpu_avg_measure_pct": 57.84520709039491,
+        "cpu_max_measure_pct": 79.79274611398964,
+        "proc_cpu_avg_measure_pct": 4.594060930113532,
+        "rss_peak_mb": 612.484375,
+        "fell_behind": true,
+        "fell_behind_reasons": [
+          "14 of 60 seconds had mean timer wake-up lag > 50 ms",
+          "sampler tick 8599 ms late"
+        ],
+        "requests_in_window": 232430,
+        "tcp_connects": 25317
+      },
+      {
+        "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/02-p1-goose/box2.json",
+        "box_index": 2,
+        "host": "a40d58b68177",
+        "users": 20000,
+        "cpu_avg_measure_pct": 63.24863170326192,
+        "cpu_max_measure_pct": 79.4979079497908,
+        "proc_cpu_avg_measure_pct": 6.285981133308856,
+        "rss_peak_mb": 588.7265625,
+        "fell_behind": true,
+        "fell_behind_reasons": [
+          "20 of 60 seconds had mean timer wake-up lag > 50 ms",
+          "sampler tick 18406 ms late"
+        ],
+        "requests_in_window": 226418,
+        "tcp_connects": 30048
+      },
+      {
+        "file": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/02-p1-goose/box3.json",
+        "box_index": 3,
+        "host": "a40d58b68177",
+        "users": 20000,
+        "cpu_avg_measure_pct": 56.169594178437514,
+        "cpu_max_measure_pct": 80.02049180327869,
+        "proc_cpu_avg_measure_pct": 4.582532014662794,
+        "rss_peak_mb": 613.55859375,
+        "fell_behind": true,
+        "fell_behind_reasons": [
+          "19 of 60 seconds had mean timer wake-up lag > 50 ms",
+          "sampler tick 4385 ms late"
+        ],
+        "requests_in_window": 232835,
+        "tcp_connects": 29504
+      }
+    ],
+    "target_monitor": {
+      "samples": 60,
+      "elapsed_s": 59.051628235,
+      "cgroup_cpu_quota_pct": 45.31892756369141,
+      "cpu_scope": "sampled interval inside the measurement window",
+      "sampled_interval_start_ms": 1792697100924.7075,
+      "sampled_interval_end_ms": 1792697159976.972,
+      "memory_peak_sampled_bytes": 9830481920,
+      "swap_peak_sampled_bytes": 0,
+      "memory_events_before": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+      "memory_events_after": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+      "measurement_start_ms": 1792697100901,
+      "measurement_end_ms": 1792697160901,
+      "coverage_span_samples": 62,
+      "coverage_start_missing_s": 0.0,
+      "coverage_end_missing_s": 0.0,
+      "full_window_bracketed": true,
+      "max_sample_gap_s": 1.003472001,
+      "max_wall_sample_gap_s": 1.003471,
+      "valid_sampling": true,
+      "app_whole_target_pct": 12.77695505697854,
+      "app_rss_sum_peak_bytes": 62373888,
+      "pg_whole_target_pct": 32.458884831628396,
+      "pg_rss_sum_peak_bytes": 22955507712
+    },
+    "load_monitor": {
+      "samples": 60,
+      "elapsed_s": 59.175970569,
+      "cgroup_cpu_quota_pct": 85.50797395202753,
+      "cpu_scope": "sampled interval inside the measurement window",
+      "sampled_interval_start_ms": 1792697101083.5286,
+      "sampled_interval_end_ms": 1792697160260.136,
+      "memory_peak_sampled_bytes": 2807455744,
+      "swap_peak_sampled_bytes": 0,
+      "memory_events_before": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+      "memory_events_after": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+      "measurement_start_ms": 1792697100901,
+      "measurement_end_ms": 1792697160901,
+      "coverage_span_samples": 62,
+      "coverage_start_missing_s": 0.0,
+      "coverage_end_missing_s": 0.0,
+      "full_window_bracketed": true,
+      "max_sample_gap_s": 1.070793417,
+      "max_wall_sample_gap_s": 1.070793,
+      "valid_sampling": true,
+      "app_whole_target_pct": 0.0,
+      "app_rss_sum_peak_bytes": 0,
+      "pg_whole_target_pct": 0.0,
+      "pg_rss_sum_peak_bytes": 0
+    },
+    "load_cgroup_headroom_pass": false,
+    "load_oom_delta": 0,
+    "after_load_actual_app": {
+      "valid": true,
+      "expected_uid": 501,
+      "minimum_nofile": 200000,
+      "processes": [
+        {
+          "pid": 21433,
+          "pgid": 21432,
+          "start_ticks": 6655573,
+          "exe": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/frozen/goose/app",
+          "uid": 501,
+          "uids": [
+            501,
+            501,
+            501,
+            501
+          ],
+          "nofile_soft": 200000,
+          "nofile_hard": 200000,
+          "proc_limits": "Limit                     Soft Limit           Hard Limit           Units     \nMax cpu time              unlimited            unlimited            seconds   \nMax file size             unlimited            unlimited            bytes     \nMax data size             unlimited            unlimited            bytes     \nMax stack size            8388608              unlimited            bytes     \nMax core file size        0                    unlimited            bytes     \nMax resident set          unlimited            unlimited            bytes     \nMax processes             unlimited            unlimited            processes \nMax open files            200000               200000               files     \nMax locked memory         unlimited            unlimited            bytes     \nMax address space         unlimited            unlimited            bytes     \nMax file locks            unlimited            unlimited            locks     \nMax pending signals       64023                64023                signals   \nMax msgqueue size         819200               819200               bytes     \nMax nice priority         0                    0                    \nMax realtime priority     0                    0                    \nMax realtime timeout      unlimited            unlimited            us        \n",
+          "proc_status": "Name:\tapp\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t21433\nNgid:\t0\nPid:\t21433\nPPid:\t21432\nTracerPid:\t0\nUid:\t501\t501\t501\t501\nGid:\t501\t501\t501\t501\nFDSize:\t131072\nGroups:\t501 \nNStgid:\t21433\nNSpid:\t21433\nNSpgid:\t21432\nNSsid:\t21432\nKthread:\t0\nVmPeak:\t248035352 kB\nVmSize:\t248035352 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   62536 kB\nVmRSS:\t   62536 kB\nRssAnon:\t   57816 kB\nRssFile:\t    4720 kB\nRssShmem:\t       0 kB\nVmData:\t247514244 kB\nVmStk:\t     132 kB\nVmExe:\t     272 kB\nVmLib:\t    6536 kB\nVmPTE:\t     980 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t7\nSigQ:\t14/64023\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000000000\nSigCgt:\t0000000100000440\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tvulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t3ff\nCpus_allowed_list:\t0-9\nMems_allowed:\t1\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t11\nnonvoluntary_ctxt_switches:\t0\n"
+        }
+      ],
+      "reasons": []
+    },
+    "actual_app_limits_valid": true,
+    "target_runtime": {
+      "valid_witness": true,
+      "pass": true,
+      "reasons": [],
+      "app_healthy": true,
+      "oom_deltas": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      }
+    }
+  },
+  {
+    "id": "03-p2-goose",
+    "pair": 2,
+    "case": "goose",
+    "database": "mc_pair_20261022_192010_03_7c9b",
+    "classification": "INCOMPLETE",
+    "before_load_actual_app": {
+      "valid": true,
+      "expected_uid": 501,
+      "minimum_nofile": 200000,
+      "processes": [
+        {
+          "pid": 21565,
+          "pgid": 21564,
+          "start_ticks": 6677431,
+          "exe": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/frozen/goose/app",
+          "uid": 501,
+          "uids": [
+            501,
+            501,
+            501,
+            501
+          ],
+          "nofile_soft": 200000,
+          "nofile_hard": 200000,
+          "proc_limits": "Limit                     Soft Limit           Hard Limit           Units     \nMax cpu time              unlimited            unlimited            seconds   \nMax file size             unlimited            unlimited            bytes     \nMax data size             unlimited            unlimited            bytes     \nMax stack size            8388608              unlimited            bytes     \nMax core file size        0                    unlimited            bytes     \nMax resident set          unlimited            unlimited            bytes     \nMax processes             unlimited            unlimited            processes \nMax open files            200000               200000               files     \nMax locked memory         unlimited            unlimited            bytes     \nMax address space         unlimited            unlimited            bytes     \nMax file locks            unlimited            unlimited            locks     \nMax pending signals       64023                64023                signals   \nMax msgqueue size         819200               819200               bytes     \nMax nice priority         0                    0                    \nMax realtime priority     0                    0                    \nMax realtime timeout      unlimited            unlimited            us        \n",
+          "proc_status": "Name:\tapp\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t21565\nNgid:\t0\nPid:\t21565\nPPid:\t21564\nTracerPid:\t0\nUid:\t501\t501\t501\t501\nGid:\t501\t501\t501\t501\nFDSize:\t64\nGroups:\t501 \nNStgid:\t21565\nNSpid:\t21565\nNSpgid:\t21564\nNSsid:\t21564\nKthread:\t0\nVmPeak:\t248035352 kB\nVmSize:\t248035352 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t    5120 kB\nVmRSS:\t    5120 kB\nRssAnon:\t    2516 kB\nRssFile:\t    2604 kB\nRssShmem:\t       0 kB\nVmData:\t247514140 kB\nVmStk:\t     132 kB\nVmExe:\t     272 kB\nVmLib:\t    6536 kB\nVmPTE:\t     744 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t7\nSigQ:\t15/64023\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000000000\nSigCgt:\t0000000100000440\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tvulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t3ff\nCpus_allowed_list:\t0-9\nMems_allowed:\t1\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t9\nnonvoluntary_ctxt_switches:\t1\n"
+        }
+      ],
+      "reasons": []
+    },
+    "after_load_actual_app": {
+      "valid": true,
+      "expected_uid": 501,
+      "minimum_nofile": 200000,
+      "processes": [
+        {
+          "pid": 21565,
+          "pgid": 21564,
+          "start_ticks": 6677431,
+          "exe": "/evidence/paired-multi-load-v2/v2_multi_pair_20261022t192010_1e24f0/frozen/goose/app",
+          "uid": 501,
+          "uids": [
+            501,
+            501,
+            501,
+            501
+          ],
+          "nofile_soft": 200000,
+          "nofile_hard": 200000,
+          "proc_limits": "Limit                     Soft Limit           Hard Limit           Units     \nMax cpu time              unlimited            unlimited            seconds   \nMax file size             unlimited            unlimited            bytes     \nMax data size             unlimited            unlimited            bytes     \nMax stack size            8388608              unlimited            bytes     \nMax core file size        0                    unlimited            bytes     \nMax resident set          unlimited            unlimited            bytes     \nMax processes             unlimited            unlimited            processes \nMax open files            200000               200000               files     \nMax locked memory         unlimited            unlimited            bytes     \nMax address space         unlimited            unlimited            bytes     \nMax file locks            unlimited            unlimited            locks     \nMax pending signals       64023                64023                signals   \nMax msgqueue size         819200               819200               bytes     \nMax nice priority         0                    0                    \nMax realtime priority     0                    0                    \nMax realtime timeout      unlimited            unlimited            us        \n",
+          "proc_status": "Name:\tapp\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t21565\nNgid:\t0\nPid:\t21565\nPPid:\t21564\nTracerPid:\t0\nUid:\t501\t501\t501\t501\nGid:\t501\t501\t501\t501\nFDSize:\t65536\nGroups:\t501 \nNStgid:\t21565\nNSpid:\t21565\nNSpgid:\t21564\nNSsid:\t21564\nKthread:\t0\nVmPeak:\t248035352 kB\nVmSize:\t248035352 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   41120 kB\nVmRSS:\t   41120 kB\nRssAnon:\t   36404 kB\nRssFile:\t    4716 kB\nRssShmem:\t       0 kB\nVmData:\t247514244 kB\nVmStk:\t     132 kB\nVmExe:\t     272 kB\nVmLib:\t    6536 kB\nVmPTE:\t     928 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t7\nSigQ:\t15/64023\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000000000\nSigCgt:\t0000000100000440\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tvulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t3ff\nCpus_allowed_list:\t0-9\nMems_allowed:\t1\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t9\nnonvoluntary_ctxt_switches:\t1\n"
+        }
+      ],
+      "reasons": []
+    },
+    "actual_app_limits_valid": true,
+    "target_runtime": {
+      "valid_witness": true,
+      "pass": true,
+      "reasons": [],
+      "app_healthy": true,
+      "oom_deltas": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      }
+    }
+  }
+]

@@ -1,0 +1,55 @@
+{
+  "protected_files_unchanged": true,
+  "protected_sha256": {
+    "paired-load.py": "de812f196f43bd647114d9fa5d1876ea90bcd7e637c02956d3ca2eec6d60bf8f",
+    "paired-multi-load.py": "a8fa5e882801e3fc8b05211c90479ce1f69b1e637197ecc02681d151732a71a2",
+    "paired-multi-load-v2.py": "6d79d86e55e04c5a901c1e94e190a6b6a5c41621ee2c1ef0605a501a5412aa13",
+    "lab-target-control.py": "3c614721356bca5a5c87719723f01f0ef29ead593768740faf8b8dcc079917db",
+    "lab-target-control-v2.py": "a079f25c5c1381392c4824267722c8ba74214ca6f73c98f4a6edfe6ec20b0581",
+    "lab-monitor.py": "c33fa617d1758269adb44d71372b457257c92e1ec877d23a7673a688f590a4b4",
+    "rust-goose-80k-v2-plan.json": "6c2dafd1ee25c07ba6a8e8ce9b8bac1b1f0d2ce9d2e2cb5ed32f324a0a02fff2",
+    "pr31-goose-80k-v2-plan.json": "2173e1ba7c0087893ff7f5a4d807c569d54444642e7af1411175807ff99ebe1f",
+    "rust-goose-80k-v2-config.json": "f8a9795b46f97aafec3df03cb508b69ff12853462a7a08edc70653b4e8d8cac6",
+    "pr31-goose-80k-v2-config.json": "cd1644910b791508a7c6a96c5167cad5010a4c669c26f98df5b1ece138aa686f"
+  },
+  "comparisons": {
+    "rust-goose": {
+      "same_exact_configuration": true,
+      "protocol_only_change": {
+        "load_cgroup_cpus": {
+          "previous_implicit": 2,
+          "new_explicit": 4
+        }
+      },
+      "new_plan_sha256": "54cfec269821eeb21f20150446112207fbca45506e232aec136f4f3a7d10d8b0",
+      "new_controller_marker": "paired-multi-load-v3",
+      "attempt_count": 6
+    },
+    "pr31-goose": {
+      "same_exact_configuration": true,
+      "protocol_only_change": {
+        "load_cgroup_cpus": {
+          "previous_implicit": 2,
+          "new_explicit": 4
+        }
+      },
+      "new_plan_sha256": "8dddffde357030429b0b7c3d30de0ebebe516cd23ec5d6576f28a89b1f0aa635",
+      "new_controller_marker": "paired-multi-load-v3",
+      "attempt_count": 6
+    }
+  },
+  "new_tools": {
+    "paired-multi-load-v3.py": "0d2e7d8e38bcdb7ce0fc29d7ff3c1d8d826f37b3a6d15bc1d0f486d99836f617",
+    "paired-multi-load-v3-README.md": "f1262efd198817984dea8c417571039cd9151a86df1a036c1b315042a1251410",
+    "test-multi-validity-v3.py": "e565e273bd5feb7c4626c9d5d0b331061aad1cf84ccc3bfb7171530eaa69c1a7"
+  },
+  "validation": {
+    "pure_fixtures": 29,
+    "fixtures_pass": true,
+    "log_sha256": "2a58975111133b5ade48a561a62e200da48d70f8462a843537ee3a88c59bd43c",
+    "docker_commands_during_v3_preparation": 0,
+    "load_or_app_launches_during_v3_preparation": 0
+  },
+  "study_rationale": "V2 2-CPU external client produced native LG-limited verdicts (late sampler ticks and >75% combined CPU); v3 is a separate predeclared study changing external client quota from 2 to 4 CPUs. Target remains combined app+PG 8 CPUs/16 GiB/no swap. V2 raw verdicts and interrupted/unstarted attempts remain retained.",
+  "native_loadgen_sha256": "886eaa564c6cdab1a791534d6931d1b8eb9b5c21d1e1ebaaa2824616c4562cdb"
+}

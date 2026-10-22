@@ -13,8 +13,9 @@ There is no explicit CPU affinity. PostgreSQL uses the published configuration
 formulas for eight CPUs and 16 GiB; the schema, seed and benchmark code are
 unchanged. The original dev and full seed fingerprints passed.
 
-Four official load-generator processes run in a separate combined two-CPU,
-four-GiB container. They still share the physical Mac and Docker VM with the
+Four official load-generator processes run in a separate four-GiB container.
+The first studies used a combined two-CPU client quota; the separately declared
+v3 study uses four CPUs for the clients. They still share the Mac and Docker VM with the
 target and unrelated workloads. They use four loopback destination addresses
 to stay below per-destination ephemeral-port limits. All resource limits,
 native generator verdicts, host pressure, raw histograms and failed attempts
@@ -71,6 +72,25 @@ verification passed for all three binaries as UID 501 with both limits set to
 inspector-permission failure is retained separately. No submission code changed.
 The original tool files, plans and attempt records remain available in the
 [launcher evidence](nofile-v2/launch-verification-2/result.json).
+
+## Generator-limited two-CPU client study
+
+The corrected v2 launcher verified the required actual process limits, normal
+UID, health and memory conditions in both completed arms. Both arms were
+generator-limited. Rust recorded zero measured errors but failed the native
+latency thresholds; Goose recorded 21,046 measured errors and also failed the
+latency thresholds. Their native results remain visible in
+[the independent audit](audit/multi-audit.md), and neither supports a clean
+performance comparison. The third attempt was interrupted; three other planned
+attempts were not started.
+
+The client cgroup hit its full two-CPU quota during the ramp-to-measurement
+transition. Goose's measured average was 85.5% of that quota, exceeding the
+predeclared 75% client limit. The study was stopped to correct client capacity.
+A separate v3 plan assigns four CPUs to the load container. The application and
+PostgreSQL retain the same combined eight-CPU / 16-GiB budget, and all binaries,
+application settings, workload arguments and validity thresholds are unchanged.
+All old tools, plans, completed and interrupted attempts remain available.
 
 ## Controlled competitor comparisons
 
