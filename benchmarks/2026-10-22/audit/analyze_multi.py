@@ -23,6 +23,8 @@ from analyze_paired import (EXPECTED_HEAD, GiB, check, events_dict, inspect_budg
 
 def histogram(text):
     """Decode saved HdrHistogramV2 bins to verify exact sums, not quantile means."""
+    if not text:
+        return None, collections.Counter()
     encoded = base64.b64decode(text, validate=True)
     cookie, length = struct.unpack('>II', encoded[:8])
     if cookie != 0x1c849314 or len(encoded) != length + 8:
@@ -50,6 +52,7 @@ def histogram(text):
 
 
 def histogram_quantile_ms(config, bins, quantile):
+    if not bins: return 0
     significant, low, _, ratio = config
     if ratio != 1: raise ValueError('unexpected histogram conversion ratio')
     unit = low.bit_length() - 1
@@ -78,17 +81,17 @@ def exact_merge(raws, merged):
             errors.update(endpoint.get('errors', {}))
             endpoints.setdefault(name, collections.Counter()).update(bins)
             check(checks, 'raw_hist_count:' + str(raw['meta']['box_index']) + ':' + name, sum(bins.values()) == endpoint['count'])
-    config, bins = histogram(merged['hist'])
+    config, bins = histogram(merged.get('hist', ''))
     check(checks, 'all_histogram_configurations_match', not configurations or configurations == {config})
     check(checks, 'merged_histogram_equals_exact_bin_sum', bins == total)
     for name, quantile in [('p50_ms', 50), ('p95_ms', 95), ('p99_ms', 99), ('max_ms', 100)]:
         check(checks, 'merged_quantile_from_exact_histogram:' + name,
               math.isclose(merged['overall'][name], histogram_quantile_ms(config, bins, quantile), rel_tol=1e-12))
     check(checks, 'merged_count_equals_raw_counts', merged['overall']['count'] == count == sum(total.values()))
-    check(checks, 'merged_statuses_equal_raw_counts', merged['overall']['statuses'] == dict(statuses))
+    check(checks, 'merged_statuses_equal_raw_counts', merged['overall'].get('statuses', {}) == dict(statuses))
     check(checks, 'merged_errors_equal_raw_counts', merged['overall']['errors'] == sum(errors.values())
           and merged['overall'].get('error_classes', {}) == dict(errors))
-    merged_endpoints = {endpoint['name']: endpoint for endpoint in merged['endpoints']}
+    merged_endpoints = {endpoint['name']: endpoint for endpoint in (merged.get('endpoints') or [])}
     check(checks, 'all_endpoints_retained', set(endpoints) == set(merged_endpoints))
     for name, counts in endpoints.items():
         if name in merged_endpoints:

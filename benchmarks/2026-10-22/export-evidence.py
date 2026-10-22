@@ -20,7 +20,8 @@ subtrees = {'audit', 'baseline', 'box', 'conformance', 'fork-ci', 'native-checks
             'paired-load', 'paired-multi-load', 'paired-multi-load-v2',
             'paired-multi-load-v3',
             'pr31-reference', 'setup',
-            'competitor-sources', 'nofile-v2'}
+            'competitor-sources', 'nofile-v2', 'diagnostics',
+            'proposed-w2-article1-v3'}
 skip = {'.git', '.build', '.goose', '.goose-home', '.deps', 'bin', 'target',
         '__pycache__', 'node_modules'}
 manifest = {}

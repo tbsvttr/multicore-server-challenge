@@ -94,6 +94,27 @@ All old tools, plans, completed and interrupted attempts remain available.
 
 ## Controlled competitor comparisons
 
-Pending. A clean performance comparison must pass the native generator and
-resource checks and have zero measured errors in both arms. Fixed-load latency
-and CPU differences will be reported separately from capacity.
+The default-configuration v3 Rust comparison completed all six attempts.
+Five passed with zero measured errors; one Goose attempt recorded no measured
+requests after a roughly 350-second wall-clock jump over one monotonic second.
+That clock-invalid attempt remains in the record. Only pairs 1 and 3 provide
+valid comparisons.
+
+There is **no stable overall improvement** with the submitted defaults. Goose
+application CPU per success is about 17% lower in both valid pairs, but combined
+app-plus-PostgreSQL CPU per success is 6.706% higher in pair 1 and 0.760% lower
+in pair 3 (geometric mean 2.905% higher). Tail latency also changes direction:
+Goose p95/p99 are 18.415/4.055 times Rust in pair 1 and 0.431/0.522 times Rust
+in pair 3. Fixed-load throughput is essentially equal. The
+[independent report](audit/multi-audit.md) retains every attempt and full metric
+details, including component-counter limitations.
+
+A separate [configuration experiment](proposed-w2-article1-v3/README.md) changes
+only `WORKERS=2` and `ARTICLE_BATCH=1`, reducing PostgreSQL connections from 16
+to 8. Full-seed conformance passes all 197 steps with the exact same binary.
+Its predefined acceptance requires three valid, zero-error pairs, at least 5%
+lower combined target CPU per success in **each** pair, and no paired p95 or
+p99 regression. The next run uses a temporary host idle-sleep assertion to
+avoid suspension; clock validity checks still apply. This is a configuration
+screen, not a capacity or first-place claim. Defaults remain unchanged pending
+the declared results.

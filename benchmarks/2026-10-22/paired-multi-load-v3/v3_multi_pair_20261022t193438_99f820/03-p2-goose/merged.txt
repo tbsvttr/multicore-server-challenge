@@ -1,0 +1,11 @@
+
+80000 users on 4 box(es), http://127.0.0.1:3000, measured 60 s after a 60 s ramp
+endpoint                                      count    req/s      p50      p90      p95      p99      max    err%
+ALL                                               0      0.0      0.0      0.0      0.0      0.0        0    0.00
+mix: 0.00 calls/page, 0.000 req/s per user, 0.0% writes, 0 page views
+box 0 (a40d58b68177): 20000 users, CPU avg N/A max N/A, loadgen proc 0%, RSS peak 164 MB, 4444 TCP connects, behind=true
+box 1 (a40d58b68177): 20000 users, CPU avg N/A max N/A, loadgen proc 0%, RSS peak 161 MB, 4465 TCP connects, behind=true
+box 2 (a40d58b68177): 20000 users, CPU avg N/A max N/A, loadgen proc 0%, RSS peak 161 MB, 4520 TCP connects, behind=true
+box 3 (a40d58b68177): 20000 users, CPU avg N/A max N/A, loadgen proc 0%, RSS peak 164 MB, 4490 TCP connects, behind=true
+verdict: FAIL (no requests in the measure window)   [p95 < 500 ms, p99 < 1000 ms, errors < 1%]
+LG-LIMITED: box 0 fell behind: no samples in the measure window; box 1 fell behind: no samples in the measure window; box 2 fell behind: no samples in the measure window; box 3 fell behind: no samples in the measure window
