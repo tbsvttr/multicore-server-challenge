@@ -1,0 +1,58 @@
+{
+  "scope": "paired live article batching correctness comparison",
+  "database": "multicore_probe_base",
+  "reference": "/evidence/baseline/article-probe-reference.json",
+  "pass": true,
+  "before": {
+    "requests": 512,
+    "shared_SQL_witness": [
+      {
+        "pid": 17154,
+        "wait_event_type": "Lock",
+        "query": "WITH r AS MATERIALIZED (SELECT * FROM unnest($1::bigint[], $2::text[]) WITH ORDINALITY AS q(viewer, slug, ord)), slugs AS (SELECT DISTINCT slug FROM r), e AS MATERIALIZED (SELECT a.id, a.slug, a.title, a.description, a.body, a.created_at, a.updated_at, a.author_id, convert_to(array_to_json(ARRAY(SELECT (SELECT t.name FROM tags t WHERE t.id = at.tag_id) FROM article_tags at WHERE at.article_id = a.id ORDER BY 1))::text, 'UTF8') AS tags, (SELECT count(*) FROM favorites f WHERE f.article_id = a.id) AS fc, u.username, u.bio, u.image FROM slugs JOIN articles a ON a.slug = slugs.slug JOIN users u ON u.id = a.author_id) SELECT e.slug, e.title, e.description, e.body, e.created_at, e.updated_at, e.tags, e.fc, (r.viewer <> 0 AND EXISTS (SELECT 1 FROM favorites f WHERE f.article_id = e.id AND f.user_id = r.viewer)), e.username, e.bio, e.image, (r.viewer <> 0 AND EXISTS (SELECT 1 FROM follows fo WHERE fo.follower_id = r.viewer AND fo.followee_id = e.author_id)), r.ord FROM r JOIN e ON e.slug = r.slug ORDER BY r.ord"
+      },
+      {
+        "pid": 17156,
+        "wait_event_type": "Lock",
+        "query": "WITH r AS MATERIALIZED (SELECT * FROM unnest($1::bigint[], $2::text[]) WITH ORDINALITY AS q(viewer, slug, ord)), slugs AS (SELECT DISTINCT slug FROM r), e AS MATERIALIZED (SELECT a.id, a.slug, a.title, a.description, a.body, a.created_at, a.updated_at, a.author_id, convert_to(array_to_json(ARRAY(SELECT (SELECT t.name FROM tags t WHERE t.id = at.tag_id) FROM article_tags at WHERE at.article_id = a.id ORDER BY 1))::text, 'UTF8') AS tags, (SELECT count(*) FROM favorites f WHERE f.article_id = a.id) AS fc, u.username, u.bio, u.image FROM slugs JOIN articles a ON a.slug = slugs.slug JOIN users u ON u.id = a.author_id) SELECT e.slug, e.title, e.description, e.body, e.created_at, e.updated_at, e.tags, e.fc, (r.viewer <> 0 AND EXISTS (SELECT 1 FROM favorites f WHERE f.article_id = e.id AND f.user_id = r.viewer)), e.username, e.bio, e.image, (r.viewer <> 0 AND EXISTS (SELECT 1 FROM follows fo WHERE fo.follower_id = r.viewer AND fo.followee_id = e.author_id)), r.ord FROM r JOIN e ON e.slug = r.slug ORDER BY r.ord"
+      }
+    ],
+    "differences": [],
+    "pass": true,
+    "lock_stderr": ""
+  },
+  "after_committed_update": {
+    "requests": 512,
+    "shared_SQL_witness": [
+      {
+        "pid": 17153,
+        "wait_event_type": "Lock",
+        "query": "WITH r AS MATERIALIZED (SELECT * FROM unnest($1::bigint[], $2::text[]) WITH ORDINALITY AS q(viewer, slug, ord)), slugs AS (SELECT DISTINCT slug FROM r), e AS MATERIALIZED (SELECT a.id, a.slug, a.title, a.description, a.body, a.created_at, a.updated_at, a.author_id, convert_to(array_to_json(ARRAY(SELECT (SELECT t.name FROM tags t WHERE t.id = at.tag_id) FROM article_tags at WHERE at.article_id = a.id ORDER BY 1))::text, 'UTF8') AS tags, (SELECT count(*) FROM favorites f WHERE f.article_id = a.id) AS fc, u.username, u.bio, u.image FROM slugs JOIN articles a ON a.slug = slugs.slug JOIN users u ON u.id = a.author_id) SELECT e.slug, e.title, e.description, e.body, e.created_at, e.updated_at, e.tags, e.fc, (r.viewer <> 0 AND EXISTS (SELECT 1 FROM favorites f WHERE f.article_id = e.id AND f.user_id = r.viewer)), e.username, e.bio, e.image, (r.viewer <> 0 AND EXISTS (SELECT 1 FROM follows fo WHERE fo.follower_id = r.viewer AND fo.followee_id = e.author_id)), r.ord FROM r JOIN e ON e.slug = r.slug ORDER BY r.ord"
+      },
+      {
+        "pid": 17154,
+        "wait_event_type": "Lock",
+        "query": "WITH r AS MATERIALIZED (SELECT * FROM unnest($1::bigint[], $2::text[]) WITH ORDINALITY AS q(viewer, slug, ord)), slugs AS (SELECT DISTINCT slug FROM r), e AS MATERIALIZED (SELECT a.id, a.slug, a.title, a.description, a.body, a.created_at, a.updated_at, a.author_id, convert_to(array_to_json(ARRAY(SELECT (SELECT t.name FROM tags t WHERE t.id = at.tag_id) FROM article_tags at WHERE at.article_id = a.id ORDER BY 1))::text, 'UTF8') AS tags, (SELECT count(*) FROM favorites f WHERE f.article_id = a.id) AS fc, u.username, u.bio, u.image FROM slugs JOIN articles a ON a.slug = slugs.slug JOIN users u ON u.id = a.author_id) SELECT e.slug, e.title, e.description, e.body, e.created_at, e.updated_at, e.tags, e.fc, (r.viewer <> 0 AND EXISTS (SELECT 1 FROM favorites f WHERE f.article_id = e.id AND f.user_id = r.viewer)), e.username, e.bio, e.image, (r.viewer <> 0 AND EXISTS (SELECT 1 FROM follows fo WHERE fo.follower_id = r.viewer AND fo.followee_id = e.author_id)), r.ord FROM r JOIN e ON e.slug = r.slug ORDER BY r.ord"
+      },
+      {
+        "pid": 17155,
+        "wait_event_type": "Lock",
+        "query": "WITH r AS MATERIALIZED (SELECT * FROM unnest($1::bigint[], $2::text[]) WITH ORDINALITY AS q(viewer, slug, ord)), slugs AS (SELECT DISTINCT slug FROM r), e AS MATERIALIZED (SELECT a.id, a.slug, a.title, a.description, a.body, a.created_at, a.updated_at, a.author_id, convert_to(array_to_json(ARRAY(SELECT (SELECT t.name FROM tags t WHERE t.id = at.tag_id) FROM article_tags at WHERE at.article_id = a.id ORDER BY 1))::text, 'UTF8') AS tags, (SELECT count(*) FROM favorites f WHERE f.article_id = a.id) AS fc, u.username, u.bio, u.image FROM slugs JOIN articles a ON a.slug = slugs.slug JOIN users u ON u.id = a.author_id) SELECT e.slug, e.title, e.description, e.body, e.created_at, e.updated_at, e.tags, e.fc, (r.viewer <> 0 AND EXISTS (SELECT 1 FROM favorites f WHERE f.article_id = e.id AND f.user_id = r.viewer)), e.username, e.bio, e.image, (r.viewer <> 0 AND EXISTS (SELECT 1 FROM follows fo WHERE fo.follower_id = r.viewer AND fo.followee_id = e.author_id)), r.ord FROM r JOIN e ON e.slug = r.slug ORDER BY r.ord"
+      },
+      {
+        "pid": 17156,
+        "wait_event_type": "Lock",
+        "query": "WITH r AS MATERIALIZED (SELECT * FROM unnest($1::bigint[], $2::text[]) WITH ORDINALITY AS q(viewer, slug, ord)), slugs AS (SELECT DISTINCT slug FROM r), e AS MATERIALIZED (SELECT a.id, a.slug, a.title, a.description, a.body, a.created_at, a.updated_at, a.author_id, convert_to(array_to_json(ARRAY(SELECT (SELECT t.name FROM tags t WHERE t.id = at.tag_id) FROM article_tags at WHERE at.article_id = a.id ORDER BY 1))::text, 'UTF8') AS tags, (SELECT count(*) FROM favorites f WHERE f.article_id = a.id) AS fc, u.username, u.bio, u.image FROM slugs JOIN articles a ON a.slug = slugs.slug JOIN users u ON u.id = a.author_id) SELECT e.slug, e.title, e.description, e.body, e.created_at, e.updated_at, e.tags, e.fc, (r.viewer <> 0 AND EXISTS (SELECT 1 FROM favorites f WHERE f.article_id = e.id AND f.user_id = r.viewer)), e.username, e.bio, e.image, (r.viewer <> 0 AND EXISTS (SELECT 1 FROM follows fo WHERE fo.follower_id = r.viewer AND fo.followee_id = e.author_id)), r.ord FROM r JOIN e ON e.slug = r.slug ORDER BY r.ord"
+      },
+      {
+        "pid": 17159,
+        "wait_event_type": "Lock",
+        "query": "WITH r AS MATERIALIZED (SELECT * FROM unnest($1::bigint[], $2::text[]) WITH ORDINALITY AS q(viewer, slug, ord)), slugs AS (SELECT DISTINCT slug FROM r), e AS MATERIALIZED (SELECT a.id, a.slug, a.title, a.description, a.body, a.created_at, a.updated_at, a.author_id, convert_to(array_to_json(ARRAY(SELECT (SELECT t.name FROM tags t WHERE t.id = at.tag_id) FROM article_tags at WHERE at.article_id = a.id ORDER BY 1))::text, 'UTF8') AS tags, (SELECT count(*) FROM favorites f WHERE f.article_id = a.id) AS fc, u.username, u.bio, u.image FROM slugs JOIN articles a ON a.slug = slugs.slug JOIN users u ON u.id = a.author_id) SELECT e.slug, e.title, e.description, e.body, e.created_at, e.updated_at, e.tags, e.fc, (r.viewer <> 0 AND EXISTS (SELECT 1 FROM favorites f WHERE f.article_id = e.id AND f.user_id = r.viewer)), e.username, e.bio, e.image, (r.viewer <> 0 AND EXISTS (SELECT 1 FROM follows fo WHERE fo.follower_id = r.viewer AND fo.followee_id = e.author_id)), r.ord FROM r JOIN e ON e.slug = r.slug ORDER BY r.ord"
+      }
+    ],
+    "differences": [],
+    "pass": true,
+    "lock_stderr": ""
+  },
+  "fixture_restored": true
+}

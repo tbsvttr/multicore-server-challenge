@@ -1,0 +1,34 @@
+{
+  "scope": "Independent NEW wrapper reproduction, not the historical Rust process",
+  "wall_ns": 1792696340135062000,
+  "command": [
+    "docker",
+    "exec",
+    "--user",
+    "root",
+    "multicore-goose-dev-20261022",
+    "runuser",
+    "-u",
+    "challenge",
+    "--",
+    "prlimit",
+    "--nofile=200000:200000",
+    "--",
+    "python3",
+    "-c",
+    "import json,os,resource;print(json.dumps({'pid':os.getpid(),'uid':os.getuid(),'euid':os.geteuid(),'nofile':resource.getrlimit(resource.RLIMIT_NOFILE)}))"
+  ],
+  "exit": 0,
+  "stdout": "{\"pid\": 20874, \"uid\": 501, \"euid\": 501, \"nofile\": [200000, 200000]}\n",
+  "stderr": "",
+  "actual": {
+    "pid": 20874,
+    "uid": 501,
+    "euid": 501,
+    "nofile": [
+      200000,
+      200000
+    ]
+  },
+  "pass": true
+}

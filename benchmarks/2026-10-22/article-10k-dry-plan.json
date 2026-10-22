@@ -1,0 +1,70 @@
+{
+  "scope": "local ARM64 Mac/Docker fixed-load comparison; not an official score or capacity search",
+  "configuration": {
+    "target_container": "multicore-goose-dev-20261022",
+    "host_evidence": "/private/tmp/multicore-research-20261022",
+    "users": 10000,
+    "port": 3000,
+    "jwt_secret": "multicore-server-challenge",
+    "cases": [
+      {
+        "name": "article_off",
+        "binary": "/work/submissions/goose-native-tbsvttr/bin/conduit",
+        "source_dir": "/work/submissions/goose-native-tbsvttr",
+        "env": {
+          "ARTICLE_BATCH": "0",
+          "WORKERS": "4",
+          "PG_READERS": "3",
+          "HASHERS": "2",
+          "BCRYPT_BATCH_MS": "250",
+          "READ_BATCH": "32",
+          "READ_HOLD": "1"
+        }
+      },
+      {
+        "name": "article_on",
+        "binary": "/work/submissions/goose-native-tbsvttr/bin/conduit",
+        "source_dir": "/work/submissions/goose-native-tbsvttr",
+        "env": {
+          "ARTICLE_BATCH": "1",
+          "WORKERS": "4",
+          "PG_READERS": "3",
+          "HASHERS": "2",
+          "BCRYPT_BATCH_MS": "250",
+          "READ_BATCH": "32",
+          "READ_HOLD": "1"
+        }
+      }
+    ]
+  },
+  "configuration_sha256": "d3b00339d6b06341f9fb2e321b0571dfb17a4fadb156c69686497d542276d33a",
+  "protocol": {
+    "users": 10000,
+    "articles": 500000,
+    "think_scale": 1.0,
+    "ramp_s": 60,
+    "measure_s": 60,
+    "tail_s": 15,
+    "pairs": 3,
+    "order": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "fresh_full_seed_per_attempt": true,
+    "paired_random_stream": "same native run-id and VU ids within each pair; fresh DBs prevent name collisions",
+    "warmup": "none; this is a fixed-load diagnostic, not the official warmup/search/hold protocol",
+    "invalid_policy": "native lg_limited or failed infrastructure is INVALID; retain, never replace",
+    "interpretation": "at fixed unsaturated load, compare latency/CPU; similar req/s cannot establish capacity"
+  },
+  "created_utc": "2026-10-22T17:30:14Z"
+}

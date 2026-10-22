@@ -1,0 +1,39 @@
+{
+  "target_container": "multicore-goose-dev-20261022",
+  "host_evidence": "/private/tmp/multicore-research-20261022",
+  "users": 80000,
+  "port": 3000,
+  "jwt_secret": "multicore-server-challenge",
+  "cases": [
+    {
+      "name": "goose31_portable",
+      "binary": "/evidence/pr31-reference/source/bin/conduit",
+      "source_dir": "/evidence/pr31-reference/source",
+      "env": {
+        "WORKERS": "4",
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "BCRYPT_BATCH_MS": "250",
+        "READ_BATCH": "32",
+        "READ_HOLD": "1"
+      },
+      "expected_binary_sha256": "5679b2f84562b352aa80faa6491ee9a6496224333881d2d96e585d468a6b67e2"
+    },
+    {
+      "name": "goose",
+      "binary": "/work/submissions/goose-native-tbsvttr/bin/conduit",
+      "source_dir": "/work/submissions/goose-native-tbsvttr",
+      "env": {
+        "ARTICLE_BATCH": "0",
+        "WORKERS": "4",
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "BCRYPT_BATCH_MS": "250",
+        "READ_BATCH": "32",
+        "READ_HOLD": "1"
+      },
+      "expected_binary_sha256": "6ab318a0ab9389dc2e77ec6122ff077a93adbcc183c6285c347104e0f734b6c3"
+    }
+  ],
+  "reference_disclosure": "PR31 at43e0919a, disclosed ABI portability and shared correctness repairs, matched compiler flags; pure Goose JSON/HMAC retained. Not the unmodified x86 PR31 binary."
+}

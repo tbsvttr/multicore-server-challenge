@@ -1,0 +1,188 @@
+{
+  "label": "PR31 portable, correctness-corrected local reference",
+  "upstream_repo": "XeonFX/multicore-server-challenge",
+  "upstream_pr": "https://github.com/arjaythedev/multicore-server-challenge/pull/31",
+  "upstream_commit": "43e0919ae5b693c1d3c1e8828b74bb774ef92ee0",
+  "upstream_folder": "submissions/goose-epoll-xeonfx",
+  "original_file_count": 17,
+  "reference_file_count": 20,
+  "status": "PREPARED_UNBUILT",
+  "original_license_git_blob": "312b0edf8358f33994a4dc29fc517a3a85f9ab92",
+  "original_license_sha256": "1c809f52dd742570746a8ac00694ad4ddd9229e12accc7d5c598075861b478a0",
+  "protected_byte_identical_files": [
+    "crypto.goose",
+    "jwt.goose",
+    "http.goose",
+    "server.goose",
+    "pg.goose",
+    "buf.goose",
+    "bcrypt_tables.goose",
+    "start.sh"
+  ],
+  "native_json_hmac": false,
+  "article_batching": false,
+  "gcc_flags_match_candidate": true,
+  "files": [
+    {
+      "path": ".gitignore",
+      "status": "modified",
+      "original_sha256": "d6a89bd04cfb5b6661213bac45837b8226d67ceee01b210c00592ef2a25e1b23",
+      "reference_sha256": "357df9f5de9d2aca77bc01dc1fb6b3ff6bb1a63790ae73d42c0ca85be99cf10d",
+      "reason": [
+        "Ignore generated C, compiler archive, and build output."
+      ]
+    },
+    {
+      "path": "LICENSE",
+      "status": "added",
+      "original_sha256": null,
+      "reference_sha256": "1c809f52dd742570746a8ac00694ad4ddd9229e12accc7d5c598075861b478a0",
+      "reason": [
+        "Preserve upstream MIT terms inside the independently copied source folder."
+      ]
+    },
+    {
+      "path": "README.md",
+      "status": "modified",
+      "original_sha256": "d372aff55b2c5f78b91597ee2caa90d39449fb0ed066a0eeded7ab392d9776fd",
+      "reference_sha256": "fe52cd545e704b957ef781e461c7614746fc19132b17b4554cc561362c0d91fc",
+      "reason": [
+        "Prominently disclose portability/correctness modifications and distinguish historical upstream GCP claims from this unmeasured reference."
+      ]
+    },
+    {
+      "path": "bcrypt.goose",
+      "status": "modified",
+      "original_sha256": "ca94c44448521ebdb69cfe0492a87562627fa0fbe7c648d077c18dc30d6283c0",
+      "reference_sha256": "732d130570f4a28820383fd0f698b56f381da33ee4c0a4b7d89a934b4f5f0f70",
+      "reason": [
+        "Retain completed replies through EINTR/full-pipe backpressure; fail explicitly on permanent delivery error."
+      ]
+    },
+    {
+      "path": "bcrypt_tables.goose",
+      "status": "unchanged",
+      "original_sha256": "e53976f8b58571ea33620baac93a42dedb9f30b4c72c32cfc27c65cde26f8d38",
+      "reference_sha256": "e53976f8b58571ea33620baac93a42dedb9f30b4c72c32cfc27c65cde26f8d38"
+    },
+    {
+      "path": "buf.goose",
+      "status": "unchanged",
+      "original_sha256": "e74b4bc8f83a9598c4971d4635179314940ea4198789c02fc5a30b904926e22c",
+      "reference_sha256": "e74b4bc8f83a9598c4971d4635179314940ea4198789c02fc5a30b904926e22c"
+    },
+    {
+      "path": "build.sh",
+      "status": "modified",
+      "original_sha256": "38dcebee6be504c0d902766c608df01d95c9dbe40fb391d0e78c55d0976f1001",
+      "reference_sha256": "d1142c65e0e5e0b0284ddb9397027d9c179e8f7b6ae05e4fcf55fd6e594210a5",
+      "reason": [
+        "Pin the full same Goose commit and source archive SHA256 as the candidate.",
+        "Use identical -O2 standalone generation and GCC -O3/-march=native/LTO2 optimization.",
+        "Link only native_sys.c and system math/thread libraries; no native JSON/OpenSSL HMAC."
+      ]
+    },
+    {
+      "path": "crypto.goose",
+      "status": "unchanged",
+      "original_sha256": "d703a1468b88d5f3485423e7edc35e87fa9eb6a05fab4a73aec7d5b5d16705a1",
+      "reference_sha256": "d703a1468b88d5f3485423e7edc35e87fa9eb6a05fab4a73aec7d5b5d16705a1"
+    },
+    {
+      "path": "http.goose",
+      "status": "unchanged",
+      "original_sha256": "9675d38f98ba6ceb4fcfbef20e3df9d5f81f0491a5378975d9b731a33afa9be6",
+      "reference_sha256": "9675d38f98ba6ceb4fcfbef20e3df9d5f81f0491a5378975d9b731a33afa9be6"
+    },
+    {
+      "path": "install.sh",
+      "status": "modified",
+      "original_sha256": "14b20800000a2585df65d6190cdcce8be87be45e8d40e4aa0ca5819202c5efd4",
+      "reference_sha256": "3ebe49089bf6bd0d9ccd0c9ee257f1701dfca4e78f7241c9f9c570f6e549882a",
+      "reason": [
+        "Install Ubuntu24 C/C++/CMake/curl/CA tools needed by the pinned archive bootstrap; no OpenSSL application dependency."
+      ]
+    },
+    {
+      "path": "jwt.goose",
+      "status": "unchanged",
+      "original_sha256": "818c0db5c60d120ae9349b21e2ae69e200c24a3df73ec8d502f63b69d1ee6324",
+      "reference_sha256": "818c0db5c60d120ae9349b21e2ae69e200c24a3df73ec8d502f63b69d1ee6324"
+    },
+    {
+      "path": "main.goose",
+      "status": "modified",
+      "original_sha256": "08ee5cfd63c104b7f2faf5823f27ef0a0516b4a7eb757ba9a5e983b3c0248628",
+      "reference_sha256": "42028ef54ac416299f0ea56fee6126255b86563945e98d62c4d255f3c2d822fb",
+      "reason": [
+        "Reject invalid PostgreSQL connection configurations above 95; preserve original pure-Goose HMAC key and default process counts."
+      ]
+    },
+    {
+      "path": "native_sys.c",
+      "status": "added",
+      "original_sha256": null,
+      "reference_sha256": "4764a0e451f83d94d242ef04ae7bb2f6b7f6204c67b2e8f044822795831ef290",
+      "reason": [
+        "Translate Goose slice arguments and ARM epoll layout explicitly; keep x86 epoll zero-copy.",
+        "Apply the same reliable atomic bcrypt pipe-delivery correctness fix as the candidate."
+      ]
+    },
+    {
+      "path": "native_sys.h",
+      "status": "added",
+      "original_sha256": null,
+      "reference_sha256": "2c75244ba5d09ff807883b64e57101e2397d74d9832f670e1dba1ee322149282",
+      "reason": [
+        "Define only borrowed slice ABI layouts; contains no JSON/HMAC primitive."
+      ]
+    },
+    {
+      "path": "pg.goose",
+      "status": "unchanged",
+      "original_sha256": "f2b9ee09d94f07336eaacdd2309c075ed153781d4b94f0f8699413eb416575b5",
+      "reference_sha256": "f2b9ee09d94f07336eaacdd2309c075ed153781d4b94f0f8699413eb416575b5"
+    },
+    {
+      "path": "routes.goose",
+      "status": "modified",
+      "original_sha256": "4aba94dab0dd3e0124ddfbb7ba6be1bd43c09fe1ee3de5d11a7b370ee18d6e1c",
+      "reference_sha256": "9970ef98dd0f1142352975a397fc80cdf20e384963ab39f0352e93690f43f902",
+      "reason": [
+        "Read favorite/unfavorite responses after writer commit; saved read retries cannot replay committed mutations.",
+        "Preserve original Goose JSON formatting and JWT signatures."
+      ]
+    },
+    {
+      "path": "server.goose",
+      "status": "unchanged",
+      "original_sha256": "adc361376b67ee69fbd4e22f2a5911b5d561f8bdca92722354ba8629d054d58f",
+      "reference_sha256": "adc361376b67ee69fbd4e22f2a5911b5d561f8bdca92722354ba8629d054d58f"
+    },
+    {
+      "path": "sql.goose",
+      "status": "modified",
+      "original_sha256": "6dfbdc2effc7dac421183c0615b73e24b098cf67471b299e1d375c826fcbe00c",
+      "reference_sha256": "a4b821f10b1a3591dc07f49b188898d7a3e0eb4ec80bbb72a03d2f13b695693e",
+      "reason": [
+        "Favorite mutations return existence; subsequent ST_ARTICLE reads the committed article/count."
+      ]
+    },
+    {
+      "path": "start.sh",
+      "status": "unchanged",
+      "original_sha256": "fa9abf9763b7e832e447c5f156f90a60823bdd10fcb688b3404a637a9da9fe2f",
+      "reference_sha256": "fa9abf9763b7e832e447c5f156f90a60823bdd10fcb688b3404a637a9da9fe2f"
+    },
+    {
+      "path": "sys.goose",
+      "status": "modified",
+      "original_sha256": "f63e410db4b498b2a03cba349ea47dfa2275a4e2108bdd8db0b43a8c966a1c53",
+      "reference_sha256": "0b38b2d281dd3da1e45f9a0ca8df542b58de01d64563b452d2428a41dc3b7320",
+      "reason": [
+        "Rename slice/epoll externs to the portable native ABI bridge.",
+        "Expose reliable atomic bcrypt reply delivery."
+      ]
+    }
+  ]
+}

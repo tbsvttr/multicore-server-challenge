@@ -1,0 +1,1879 @@
+{
+  "created_at_utc": "2026-10-22T19:04:47.619233+00:00",
+  "upstream_main_sha": "a99fc3b04a7ba6e620682df76cfba031a992a0bc",
+  "source_scope": "All 30 PRs returned by gh, all 30 pinned submission READMEs, PR bodies/comments, the pinned current leaderboard, and the current upstream submissions directory; local comparison status comes from the active work.",
+  "summary": {
+    "all_pr_records": 30,
+    "open_prs": 16,
+    "merged_prs": 12,
+    "closed_historical_prs": 2,
+    "upstream_merged_submission_folders": 12,
+    "active_competitors_excluding_ours": 27,
+    "published_official_scores": 17,
+    "active_competitors_without_published_official_score": 10,
+    "completed_our_competitor_comparisons": 0,
+    "planned_our_competitor_comparisons": [
+      31
+    ],
+    "in_progress_our_competitor_comparisons": [],
+    "all_competitor_superiority_proven": false,
+    "official_first_place_for_ours": false,
+    "pending_rerun_our_competitor_comparisons": [
+      7
+    ]
+  },
+  "conclusion": "No evidence presently establishes our Goose as faster than every competitor. The first Rust #7 comparison attempt was invalid because the launcher lowered its descriptor limit; a corrected rerun is pending. The portable corrected Goose #31 comparison is planned; other active competitors remain untested by us.",
+  "source_pin_policy": "Latest PR heads are pinned independently from historical measured revisions. Do not attach official scores to those exact heads without a measured-source witness. Pony #24 was explicitly scored at older a38283c. Self-reported hardware, durations, think scales and revisions differ; these numbers do not form a common speed ranking.",
+  "upstream_submission_folders": [
+    "c-iouring-tigokraft",
+    "cobol-gnucobol-benmandrew",
+    "cpp-asio-c-hatton",
+    "csharp-efcore-xeonfx",
+    "csharp-sockets-jh-d",
+    "d-arsd-cyrusmsk",
+    "elixir-raw-foovoo",
+    "lua-openresty-yar0slav",
+    "perl-mojolicious-denizakya",
+    "rust-hyper-cknutson12",
+    "rust-tokio-Scooter1337",
+    "swift-hummingbird-denizakya"
+  ],
+  "competitors": [
+    {
+      "pr": 1,
+      "implementation": "rust-hyper-cknutson12",
+      "variant": null,
+      "pr_state": "MERGED",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/1",
+      "author": "cknutson12",
+      "source": {
+        "pr_head_sha": "e93ab19c36a4b587edac01c1baa9292b25a2ccd4",
+        "head_repository": "cknutson12/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/cknutson12/multicore-server-challenge/tree/e93ab19c36a4b587edac01c1baa9292b25a2ccd4/submissions/rust-hyper-cknutson12",
+        "pinned_readme_url": "https://github.com/cknutson12/multicore-server-challenge/blob/e93ab19c36a4b587edac01c1baa9292b25a2ccd4/submissions/rust-hyper-cknutson12/README.md",
+        "updated_at": "2026-10-21T21:13:20Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 8,
+        "users": 58000,
+        "requests_per_second": 15075.0,
+        "p95_ms": 223.0,
+        "p99_ms": 367.0,
+        "front": "direct",
+        "cpu_app_postgres": "29% / 69%",
+        "qualification_note": "",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null,
+        "maintainer_confirmation_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/1#issuecomment-6326682507",
+        "errors_percent": 0
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "7,000 users ×0.1; 17,100 req/s; 197/576 ms p95/p99.",
+          "protocol": "Apple-silicon Docker; app + PostgreSQL 8 vCPUs; full seed; loadgen 4 other vCPUs; 20 s ramp+40 s measured; think-scale 0.1.",
+          "metrics": [
+            {
+              "users": 7000,
+              "requests_per_second": 17100,
+              "p95_ms": 197,
+              "p99_ms": 576,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "Accelerated think time; not an official capacity score."
+          ],
+          "source_url": "https://github.com/cknutson12/multicore-server-challenge/blob/e93ab19c36a4b587edac01c1baa9292b25a2ccd4/submissions/rust-hyper-cknutson12/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 2,
+      "implementation": "v-fasthttp-ulises-jeremias",
+      "variant": null,
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/2",
+      "author": "ulises-jeremias",
+      "source": {
+        "pr_head_sha": "826640029ece0ba773cfde87cedd0cdcb5184e7f",
+        "head_repository": "ulises-jeremias/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/ulises-jeremias/multicore-server-challenge/tree/826640029ece0ba773cfde87cedd0cdcb5184e7f/submissions/v-fasthttp-ulises-jeremias",
+        "pinned_readme_url": "https://github.com/ulises-jeremias/multicore-server-challenge/blob/826640029ece0ba773cfde87cedd0cdcb5184e7f/submissions/v-fasthttp-ulises-jeremias/README.md",
+        "updated_at": "2026-10-16T04:58:21Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 15,
+        "users": 20000,
+        "requests_per_second": 5193.0,
+        "p95_ms": 351.0,
+        "p99_ms": 563.0,
+        "front": "direct",
+        "cpu_app_postgres": "12% / 63%",
+        "qualification_note": "Not merged yet: install.sh fails on a clean box (V's bootstrap `vc` isn't pinned); scored with vc pinned by hand",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "4,000 users ×0.2; README 5,133 req/s; description 4,875 req/s.",
+          "protocol": "Shared 24-thread development host including app, PostgreSQL and generator; full seed; 60 s ramp+5-minute hold; think-scale 0.2.",
+          "metrics": [
+            {
+              "users": 4000,
+              "requests_per_second": 5133,
+              "p95_ms": 126.1,
+              "p99_ms": 487.7,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "PR description reports a different4,875-req/s trial; neither is official."
+          ],
+          "source_url": "https://github.com/ulises-jeremias/multicore-server-challenge/blob/826640029ece0ba773cfde87cedd0cdcb5184e7f/submissions/v-fasthttp-ulises-jeremias/README.md",
+          "measured_full_commit_sha": null
+        },
+        {
+          "type": "SELF_REPORTED",
+          "summary": "Description trial: 4,000 users ×0.2; 4,875 req/s.",
+          "protocol": "Same-host development hold; 5 minutes; think-scale 0.2.",
+          "metrics": [
+            {
+              "users": 4000,
+              "requests_per_second": 4875,
+              "p95_ms": 392.7,
+              "p99_ms": 915.5,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [],
+          "source_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/2",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 4,
+      "implementation": "cpp-asio-c-hatton",
+      "variant": null,
+      "pr_state": "MERGED",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/4",
+      "author": "C-Hatton",
+      "source": {
+        "pr_head_sha": "52a7ffba7ca0fd2829f38156e6f68660110418d0",
+        "head_repository": "C-Hatton/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/C-Hatton/multicore-server-challenge/tree/52a7ffba7ca0fd2829f38156e6f68660110418d0/submissions/cpp-asio-c-hatton",
+        "pinned_readme_url": "https://github.com/C-Hatton/multicore-server-challenge/blob/52a7ffba7ca0fd2829f38156e6f68660110418d0/submissions/cpp-asio-c-hatton/README.md",
+        "updated_at": "2026-10-21T22:00:59Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 7,
+        "users": 68000,
+        "requests_per_second": 17887.0,
+        "p95_ms": 94.0,
+        "p99_ms": 174.0,
+        "front": "direct",
+        "cpu_app_postgres": "27% / 71%",
+        "qualification_note": "",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null,
+        "maintainer_confirmation_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/4#issuecomment-6327505335",
+        "errors_percent": 0
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "~35,000 req/s, p99~20 ms; 140k users is extrapolated.",
+          "protocol": "Ryzen 7700X; app + PostgreSQL pinned to4 cores/8 threads; full seed; pgtune settings; generators on other threads; duration unspecified.",
+          "metrics": [
+            {
+              "users": null,
+              "requests_per_second": 35000,
+              "p95_ms": null,
+              "p99_ms": 20,
+              "errors_percent": null,
+              "verdict": "approximate passing-throughput claim"
+            }
+          ],
+          "notes": [
+            "Do not treat extrapolated140k as measured concurrent users."
+          ],
+          "source_url": "https://github.com/C-Hatton/multicore-server-challenge/blob/52a7ffba7ca0fd2829f38156e6f68660110418d0/submissions/cpp-asio-c-hatton/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 5,
+      "implementation": "c-iouring-27bhd",
+      "variant": null,
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/5",
+      "author": "27bhd",
+      "source": {
+        "pr_head_sha": "4bff8b7c420e08a47261223239ab9b87aa5706f9",
+        "head_repository": "27bhd/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/27bhd/multicore-server-challenge/tree/4bff8b7c420e08a47261223239ab9b87aa5706f9/submissions/c-iouring-27bhd",
+        "pinned_readme_url": "https://github.com/27bhd/multicore-server-challenge/blob/4bff8b7c420e08a47261223239ab9b87aa5706f9/submissions/c-iouring-27bhd/README.md",
+        "updated_at": "2026-10-16T23:48:01Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": null,
+      "official_unsuccessful_attempt": "Maintainer: no 5-minute hold passed; POST /api/articles~2 s even idle; 2-minute100-user probes passed but sustained p99 failed.",
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "64,000 users, p95/p99 143/443 ms, 0% errors.",
+          "protocol": "2% development seed, same-host generator; duration not specified in PR body.",
+          "metrics": [
+            {
+              "users": 64000,
+              "requests_per_second": null,
+              "p95_ms": 143,
+              "p99_ms": 443,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "Official attempt later had no passing5-minute hold; see official-attempt note."
+          ],
+          "source_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/5",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 7,
+      "implementation": "rust-tokio-Scooter1337",
+      "variant": null,
+      "pr_state": "MERGED",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/7",
+      "author": "Scooter1337",
+      "source": {
+        "pr_head_sha": "dc7c249229bd43d8752e7ffb28ce81ee4401d8ae",
+        "head_repository": "Scooter1337/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/Scooter1337/multicore-server-challenge/tree/dc7c249229bd43d8752e7ffb28ce81ee4401d8ae/submissions/rust-tokio-Scooter1337",
+        "pinned_readme_url": "https://github.com/Scooter1337/multicore-server-challenge/blob/dc7c249229bd43d8752e7ffb28ce81ee4401d8ae/submissions/rust-tokio-Scooter1337/README.md",
+        "updated_at": "2026-10-21T23:07:45Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results.",
+        "local_control_identity": {
+          "status": "IDENTICAL",
+          "files_compared": 66,
+          "submission_tree_sha1": "f542997eb07942e25fa44b7f288c8e1d508c176c",
+          "upstream_import_commit": "7e82d2c9fa505bd532a908c511250ed17939bdbb",
+          "proof": "competitor-sources/rust7-source-comparison.json"
+        }
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 1,
+        "users": 100000,
+        "requests_per_second": 26279.0,
+        "p95_ms": 119.0,
+        "p99_ms": 185.0,
+        "front": "direct",
+        "cpu_app_postgres": "20% / 70%",
+        "qualification_note": "",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null,
+        "maintainer_confirmation_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/7#issuecomment-6328160035",
+        "errors_percent": 0
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "92,000-user 5-minute hold; 23,256 req/s; 408/509 ms; 0 errors.",
+          "protocol": "MEGASERVER XeonE5-2690v3; app + PostgreSQL share 8-CPU quota/16 GiB; full repository scorer; same-physical-host generators; no affinity.",
+          "metrics": [
+            {
+              "users": 92000,
+              "requests_per_second": 23256,
+              "p95_ms": 408,
+              "p99_ms": 509,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "Local author measurement, distinct from official100k result."
+          ],
+          "source_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/7",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "RERUN_PENDING_AFTER_INVALID_FD_LIMIT",
+        "result": null,
+        "invalid_attempts": [
+          {
+            "status": "INVALID",
+            "reason": "runuser lowered the Rust process soft descriptor limit to 1024, producing EMFILE during the first80k-user attempt. The run is preserved and yields no valid relative-performance claim.",
+            "users": 80000,
+            "result": null
+          }
+        ]
+      },
+      "active_competitor": true,
+      "notes": [
+        "The 92k hold is in the PR description. The local and pinned-head READMEs are identical and retain historical 80k holds; code is identical across all 66 inventoried files."
+      ]
+    },
+    {
+      "pr": 8,
+      "implementation": "csharp-kestrel-xeonfx",
+      "variant": null,
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/8",
+      "author": "XeonFX",
+      "source": {
+        "pr_head_sha": "221f4ad1e4196861b96fb7d15df2ba9137c3c313",
+        "head_repository": "XeonFX/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/XeonFX/multicore-server-challenge/tree/221f4ad1e4196861b96fb7d15df2ba9137c3c313/submissions/csharp-kestrel-xeonfx",
+        "pinned_readme_url": "https://github.com/XeonFX/multicore-server-challenge/blob/221f4ad1e4196861b96fb7d15df2ba9137c3c313/submissions/csharp-kestrel-xeonfx/README.md",
+        "updated_at": "2026-10-22T04:40:36Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 5,
+        "users": 84000,
+        "requests_per_second": 20906.0,
+        "p95_ms": 404.0,
+        "p99_ms": 467.0,
+        "front": "direct",
+        "cpu_app_postgres": "25% / 74%",
+        "qualification_note": "Not merged yet: bcrypt comes from a prebuilt NuGet package; waiting for the source in the folder",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "125,000-user screen; 32,400 req/s; 192/231 ms; 0 errors.",
+          "protocol": "GCP c4-highcpu-8 target, full seed, remote two-load-box rig; fresh DB, 3 min warm-up, 60 s ramp+60 s measured; think-scale 1.",
+          "metrics": [
+            {
+              "users": 125000,
+              "requests_per_second": 32400,
+              "p95_ms": 192,
+              "p99_ms": 231,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "Rig connection ceiling125k; not a5-minute hold.",
+            "README says the replacement bcrypt library in the latest source has not run on that rig; reported numbers are for an earlier bcrypt implementation."
+          ],
+          "source_url": "https://github.com/XeonFX/multicore-server-challenge/blob/221f4ad1e4196861b96fb7d15df2ba9137c3c313/submissions/csharp-kestrel-xeonfx/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 9,
+      "implementation": "swift-hummingbird-denizakya",
+      "variant": null,
+      "pr_state": "MERGED",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/9",
+      "author": "denizak",
+      "source": {
+        "pr_head_sha": "a30eb35ed4b8af33c96b2d019b8c64129a43d3c8",
+        "head_repository": "denizak/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/denizak/multicore-server-challenge/tree/a30eb35ed4b8af33c96b2d019b8c64129a43d3c8/submissions/swift-hummingbird-denizakya",
+        "pinned_readme_url": "https://github.com/denizak/multicore-server-challenge/blob/a30eb35ed4b8af33c96b2d019b8c64129a43d3c8/submissions/swift-hummingbird-denizakya/README.md",
+        "updated_at": "2026-10-21T23:57:12Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 14,
+        "users": 20000,
+        "requests_per_second": 5077.0,
+        "p95_ms": 339.0,
+        "p99_ms": 400.0,
+        "front": "nginx",
+        "cpu_app_postgres": "48% / 40% (+ Nginx 10%)",
+        "qualification_note": "",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null,
+        "maintainer_confirmation_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/9#issuecomment-6329243640",
+        "errors_percent": 0
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "10,000-user screen; 2,644 req/s; 27.7/187 ms; 0 errors.",
+          "protocol": "MacBook: app + PostgreSQL 18+loadgen together; development seed10,000 articles; probe duration unspecified.",
+          "metrics": [
+            {
+              "users": 10000,
+              "requests_per_second": 2644,
+              "p95_ms": 27.7,
+              "p99_ms": 187,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "20k failed generator ports; does not establish server capacity."
+          ],
+          "source_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/9",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 10,
+      "implementation": "c-iouring-tigokraft",
+      "variant": null,
+      "pr_state": "MERGED",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/10",
+      "author": "tigokraft",
+      "source": {
+        "pr_head_sha": "19d78b3a694f673d5677c4bb0f9b22d4d6f85b9b",
+        "head_repository": "tigokraft/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/tigokraft/multicore-server-challenge/tree/19d78b3a694f673d5677c4bb0f9b22d4d6f85b9b/submissions/c-iouring-tigokraft",
+        "pinned_readme_url": "https://github.com/tigokraft/multicore-server-challenge/blob/19d78b3a694f673d5677c4bb0f9b22d4d6f85b9b/submissions/c-iouring-tigokraft/README.md",
+        "updated_at": "2026-10-22T00:37:51Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 3,
+        "users": 84000,
+        "requests_per_second": 21262.0,
+        "p95_ms": 339.0,
+        "p99_ms": 421.0,
+        "front": "direct",
+        "cpu_app_postgres": "18% / 80%",
+        "qualification_note": "",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null,
+        "maintainer_confirmation_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/10#issuecomment-6329794943",
+        "errors_percent": 0
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "10,000 users ×0.1; 12,800 req/s; 458/485 ms; 0 errors.",
+          "protocol": "i5-9500 VM; server+PostgreSQL pinned4 CPUs, loadgen 2 CPUs; full seed; 3 min warm-up+5-minute hold; think-scale 0.1.",
+          "metrics": [
+            {
+              "users": 10000,
+              "requests_per_second": 12800,
+              "p95_ms": 458,
+              "p99_ms": 485,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "Separate150k-connection screen used think-scale4 and is not a150k default-workload capacity score."
+          ],
+          "source_url": "https://github.com/tigokraft/multicore-server-challenge/blob/19d78b3a694f673d5677c4bb0f9b22d4d6f85b9b/submissions/c-iouring-tigokraft/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 11,
+      "implementation": "rust-mio-foovoo",
+      "variant": null,
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/11",
+      "author": "FooVoo",
+      "source": {
+        "pr_head_sha": "bc78b7742f3746a2c436c54015b1aafad61ef155",
+        "head_repository": "FooVoo/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/FooVoo/multicore-server-challenge/tree/bc78b7742f3746a2c436c54015b1aafad61ef155/submissions/rust-mio-foovoo",
+        "pinned_readme_url": "https://github.com/FooVoo/multicore-server-challenge/blob/bc78b7742f3746a2c436c54015b1aafad61ef155/submissions/rust-mio-foovoo/README.md",
+        "updated_at": "2026-10-21T10:10:15Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 6,
+        "users": 80000,
+        "requests_per_second": 20710.0,
+        "p95_ms": 474.0,
+        "p99_ms": 752.0,
+        "front": "direct",
+        "cpu_app_postgres": "18% / 75%",
+        "qualification_note": "Not merged yet: build.sh needs rustc on PATH (`export PATH=/usr/local/cargo/bin:$PATH`); scored with that one line added",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "Published head 76,000-user probe; 20,140.5 req/s; 9.4/22.6 ms.",
+          "protocol": "M1 Pro ARM64 Linux VM; app + PostgreSQL 4 CPUs, loadgen 6 CPUs; full seed; 60 s ramp+60 s measured+15 s tail; local affinity split.",
+          "metrics": [
+            {
+              "users": 76000,
+              "requests_per_second": 20140.5,
+              "p95_ms": 9.4,
+              "p99_ms": 22.6,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "README also includes an earlier80k probe on a different revision; no 5-minute hold for these published-head probes."
+          ],
+          "source_url": "https://github.com/FooVoo/multicore-server-challenge/blob/bc78b7742f3746a2c436c54015b1aafad61ef155/submissions/rust-mio-foovoo/README.md",
+          "measured_full_commit_sha": null
+        },
+        {
+          "type": "SELF_REPORTED_UNCOMMITTED_SOURCE",
+          "summary": "Separate uncommitted follow-up: two 96k-user holds at 25,405.33/25,409.17 req/s.",
+          "protocol": "Same M1 Pro physical host; server VM8 vCPU/16 GiB, generator VM4 vCPU/4 GiB; full fresh seed, 60 s ramp+300 s measured; think-scale 1.",
+          "metrics": [
+            {
+              "users": 96000,
+              "requests_per_second": 25405.33,
+              "p95_ms": 10.351,
+              "p99_ms": 20.559,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            },
+            {
+              "users": 96000,
+              "requests_per_second": 25409.17,
+              "p95_ms": 9.335,
+              "p99_ms": 18.703,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            },
+            {
+              "users": 128000,
+              "requests_per_second": 29153.41,
+              "p95_ms": 2096.127,
+              "p99_ms": 10002.431,
+              "errors_percent": 2.9351,
+              "verdict": "FAIL"
+            }
+          ],
+          "source_archive_sha256": "c610fb0ef60cea93f8e28184bee7da8f86398545cd6e48d272c0f958e4e45765",
+          "measured_full_commit_sha": null,
+          "source_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/11#issuecomment-6313436291",
+          "notes": [
+            "Not the published PR head.",
+            "A128k hold with 4-GiB generator RAM was invalidated by OOM; the8-GiB retry failed SLOs."
+          ]
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 12,
+      "implementation": "elixir-raw-foovoo",
+      "variant": null,
+      "pr_state": "MERGED",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/12",
+      "author": "FooVoo",
+      "source": {
+        "pr_head_sha": "24d85b6a261f1bfc9972896bbd1e79aac9ff63ae",
+        "head_repository": "FooVoo/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/FooVoo/multicore-server-challenge/tree/24d85b6a261f1bfc9972896bbd1e79aac9ff63ae/submissions/elixir-raw-foovoo",
+        "pinned_readme_url": "https://github.com/FooVoo/multicore-server-challenge/blob/24d85b6a261f1bfc9972896bbd1e79aac9ff63ae/submissions/elixir-raw-foovoo/README.md",
+        "updated_at": "2026-10-22T01:13:15Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 11,
+        "users": 32000,
+        "requests_per_second": 7999.0,
+        "p95_ms": 323.0,
+        "p99_ms": 382.0,
+        "front": "direct",
+        "cpu_app_postgres": "37% / 48%",
+        "qualification_note": "",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null,
+        "maintainer_confirmation_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/12#issuecomment-6330255500",
+        "errors_percent": 0
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "Two 33,000-user holds: 8,229.92/8,103.53 req/s; p95 443/474 ms.",
+          "protocol": "M1 Pro ARM VM; app + PostgreSQL 4 CPUs, loadgen 6 CPUs; full fresh seed; 300-user warm-up, 60 s ramp+nominal300 s measured+15 s tail; explicit tuned profile.",
+          "metrics": [
+            {
+              "users": 33000,
+              "requests_per_second": 8229.92,
+              "p95_ms": 443.135,
+              "p99_ms": 496.383,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            },
+            {
+              "users": 33000,
+              "requests_per_second": 8103.53,
+              "p95_ms": 474.111,
+              "p99_ms": 527.359,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "34k failed; local4-core profile, not default8-core capacity.",
+            "README discloses wall-clock corrections and nominal denominator, limiting throughput precision."
+          ],
+          "source_url": "https://github.com/FooVoo/multicore-server-challenge/blob/24d85b6a261f1bfc9972896bbd1e79aac9ff63ae/submissions/elixir-raw-foovoo/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 13,
+      "implementation": "python-uvloop-bensgilbert",
+      "variant": null,
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/13",
+      "author": "bensgilbert",
+      "source": {
+        "pr_head_sha": "d5d8c77268f77f97898aeb1e639eedf0cb0cef4a",
+        "head_repository": "bensgilbert/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/bensgilbert/multicore-server-challenge/tree/d5d8c77268f77f97898aeb1e639eedf0cb0cef4a/submissions/python-uvloop-bensgilbert",
+        "pinned_readme_url": "https://github.com/bensgilbert/multicore-server-challenge/blob/d5d8c77268f77f97898aeb1e639eedf0cb0cef4a/submissions/python-uvloop-bensgilbert/README.md",
+        "updated_at": "2026-10-17T12:36:34Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 9,
+        "users": 46000,
+        "requests_per_second": 11572.0,
+        "p95_ms": 423.0,
+        "p99_ms": 519.0,
+        "front": "direct",
+        "cpu_app_postgres": "38% / 58%",
+        "qualification_note": "Not merged yet: restarts crashed workers (rule 9). No worker restarted during the run, so the score stands",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "5,400 users ×0.2; 6,364–6,421 req/s; p95 185–215 ms.",
+          "protocol": "4-vCPU test VM shared by app, PostgreSQL and generator; full seed; 30 s measured; think-scale 0.2; PostgreSQL SSL on.",
+          "metrics": [
+            {
+              "users": 5400,
+              "requests_per_second": null,
+              "p95_ms": 215,
+              "p99_ms": 290,
+              "errors_percent": null,
+              "verdict": "reported pass",
+              "rps_range": [
+                6364,
+                6421
+              ]
+            }
+          ],
+          "notes": [
+            "8-vCPU extrapolations are not measured scores."
+          ],
+          "source_url": "https://github.com/bensgilbert/multicore-server-challenge/blob/d5d8c77268f77f97898aeb1e639eedf0cb0cef4a/submissions/python-uvloop-bensgilbert/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 14,
+      "implementation": "csharp-aspnetcore-jh-d",
+      "variant": "closed ASP.NET predecessor",
+      "pr_state": "CLOSED",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/14",
+      "author": "jh-d",
+      "source": {
+        "pr_head_sha": "7daae17175973867c741b75c562affb55d1f5f75",
+        "head_repository": null,
+        "pinned_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/7daae17175973867c741b75c562affb55d1f5f75/submissions/csharp-aspnetcore-jh-d",
+        "pinned_readme_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/7daae17175973867c741b75c562affb55d1f5f75/submissions/csharp-aspnetcore-jh-d/README.md",
+        "updated_at": "2026-10-19T22:49:40Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": null,
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "60,000-user 5-minute hold; ~15,400 req/s; 281/419 ms; 0.05% errors.",
+          "protocol": "Azure Standard_D8as_v5 target, EPYC7763,8 vCPU/~16 GB; full seed; three remote D4 load boxes; repository search; 60k passing/62k failing bracket.",
+          "metrics": [
+            {
+              "users": 60000,
+              "requests_per_second": 15400,
+              "p95_ms": 281,
+              "p99_ms": 419,
+              "errors_percent": 0.05,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "Closed historical PR; not a current active submission."
+          ],
+          "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/7daae17175973867c741b75c562affb55d1f5f75/submissions/csharp-aspnetcore-jh-d/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": false,
+      "notes": [
+        "Closed;kept only as historical inventory evidence."
+      ]
+    },
+    {
+      "pr": 15,
+      "implementation": "cobol-gnucobol-benmandrew",
+      "variant": null,
+      "pr_state": "MERGED",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/15",
+      "author": "benmandrew",
+      "source": {
+        "pr_head_sha": "f732c5988cc460868ffb37f45f668c2a35f177d7",
+        "head_repository": "benmandrew/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/benmandrew/multicore-server-challenge/tree/f732c5988cc460868ffb37f45f668c2a35f177d7/submissions/cobol-gnucobol-benmandrew",
+        "pinned_readme_url": "https://github.com/benmandrew/multicore-server-challenge/blob/f732c5988cc460868ffb37f45f668c2a35f177d7/submissions/cobol-gnucobol-benmandrew/README.md",
+        "updated_at": "2026-10-22T11:34:09Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 4,
+        "users": 84000,
+        "requests_per_second": 21292.0,
+        "p95_ms": 361.0,
+        "p99_ms": 461.0,
+        "front": "direct",
+        "cpu_app_postgres": "20% / 75%",
+        "qualification_note": "",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null,
+        "maintainer_confirmation_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/15#issuecomment-6331410591",
+        "errors_percent": 0
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true,
+      "notes": [
+        "No absolute self-reported performance result found in inspected PR body/comments/pinned README."
+      ]
+    },
+    {
+      "pr": 16,
+      "implementation": "d-arsd-cyrusmsk",
+      "variant": null,
+      "pr_state": "MERGED",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/16",
+      "author": "cyrusmsk",
+      "source": {
+        "pr_head_sha": "c2db52f22602207fb2adb009a520ddf3bcfeb6aa",
+        "head_repository": "cyrusmsk/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/cyrusmsk/multicore-server-challenge/tree/c2db52f22602207fb2adb009a520ddf3bcfeb6aa/submissions/d-arsd-cyrusmsk",
+        "pinned_readme_url": "https://github.com/cyrusmsk/multicore-server-challenge/blob/c2db52f22602207fb2adb009a520ddf3bcfeb6aa/submissions/d-arsd-cyrusmsk/README.md",
+        "updated_at": "2026-10-22T03:24:29Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 13,
+        "users": 23000,
+        "requests_per_second": 5952.0,
+        "p95_ms": 373.0,
+        "p99_ms": 577.0,
+        "front": "direct",
+        "cpu_app_postgres": "24% / 66%",
+        "qualification_note": "",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null,
+        "maintainer_confirmation_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/16#issuecomment-6331904408",
+        "errors_percent": 0
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true,
+      "notes": [
+        "No absolute self-reported performance result found in inspected PR body/comments/pinned README."
+      ]
+    },
+    {
+      "pr": 17,
+      "implementation": "d-vibe-cyrusmsk",
+      "variant": "standard Vibe.D",
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/17",
+      "author": "cyrusmsk",
+      "source": {
+        "pr_head_sha": "9c35a60e3a07597c756d6e9a2e04eaa186eda99b",
+        "head_repository": "cyrusmsk/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/cyrusmsk/multicore-server-challenge/tree/9c35a60e3a07597c756d6e9a2e04eaa186eda99b/submissions/d-vibe-cyrusmsk",
+        "pinned_readme_url": "https://github.com/cyrusmsk/multicore-server-challenge/blob/9c35a60e3a07597c756d6e9a2e04eaa186eda99b/submissions/d-vibe-cyrusmsk/README.md",
+        "updated_at": "2026-10-22T06:12:06Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": null,
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "8,000-user dev-seed screen; 2,118 req/s; 116/234 ms.",
+          "protocol": "Laptop; development seed; same local generator; duration/resource split unspecified.",
+          "metrics": [
+            {
+              "users": 8000,
+              "requests_per_second": 2118,
+              "p95_ms": 116,
+              "p99_ms": 234,
+              "errors_percent": null,
+              "verdict": "reported pass"
+            },
+            {
+              "users": 12000,
+              "requests_per_second": null,
+              "p95_ms": 116,
+              "p99_ms": null,
+              "errors_percent": 28,
+              "verdict": "FAIL:connection timeouts"
+            }
+          ],
+          "notes": [
+            "Same README measurement table appears on the distinct standard/light variants; does not independently establish each current variant capacity."
+          ],
+          "source_url": "https://github.com/cyrusmsk/multicore-server-challenge/blob/9c35a60e3a07597c756d6e9a2e04eaa186eda99b/submissions/d-vibe-cyrusmsk/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 18,
+      "implementation": "d-vibe-cyrusmsk",
+      "variant": "Vibe.D-light",
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/18",
+      "author": "cyrusmsk",
+      "source": {
+        "pr_head_sha": "5fd9b566c547295cab6decc35378e1b0cfc9ec8a",
+        "head_repository": "cyrusmsk/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/cyrusmsk/multicore-server-challenge/tree/5fd9b566c547295cab6decc35378e1b0cfc9ec8a/submissions/d-vibe-cyrusmsk",
+        "pinned_readme_url": "https://github.com/cyrusmsk/multicore-server-challenge/blob/5fd9b566c547295cab6decc35378e1b0cfc9ec8a/submissions/d-vibe-cyrusmsk/README.md",
+        "updated_at": "2026-10-17T22:18:02Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": null,
+      "official_unsuccessful_attempt": "Maintainer: SIGILL crash 11 minutes into an 8,000-user run; dependencies also need pinning.",
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "8,000-user dev-seed screen; 2,118 req/s; 116/234 ms.",
+          "protocol": "Laptop; development seed; same local generator; duration/resource split unspecified.",
+          "metrics": [
+            {
+              "users": 8000,
+              "requests_per_second": 2118,
+              "p95_ms": 116,
+              "p99_ms": 234,
+              "errors_percent": null,
+              "verdict": "reported pass"
+            },
+            {
+              "users": 12000,
+              "requests_per_second": null,
+              "p95_ms": 116,
+              "p99_ms": null,
+              "errors_percent": 28,
+              "verdict": "FAIL:connection timeouts"
+            }
+          ],
+          "notes": [
+            "Same README measurement table appears on the distinct standard/light variants; does not independently establish each current variant capacity."
+          ],
+          "source_url": "https://github.com/cyrusmsk/multicore-server-challenge/blob/5fd9b566c547295cab6decc35378e1b0cfc9ec8a/submissions/d-vibe-cyrusmsk/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 19,
+      "implementation": "lua-openresty-yar0slav",
+      "variant": null,
+      "pr_state": "MERGED",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/19",
+      "author": "yar0slav",
+      "source": {
+        "pr_head_sha": "ba6a946aa974209ddd485635668def98658bebcb",
+        "head_repository": "yar0slav/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/yar0slav/multicore-server-challenge/tree/ba6a946aa974209ddd485635668def98658bebcb/submissions/lua-openresty-yar0slav",
+        "pinned_readme_url": "https://github.com/yar0slav/multicore-server-challenge/blob/ba6a946aa974209ddd485635668def98658bebcb/submissions/lua-openresty-yar0slav/README.md",
+        "updated_at": "2026-10-22T16:17:26Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 10,
+        "users": 33000,
+        "requests_per_second": 8616.0,
+        "p95_ms": 432.0,
+        "p99_ms": 783.0,
+        "front": "direct",
+        "cpu_app_postgres": "37% / 49%",
+        "qualification_note": "",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null,
+        "maintainer_confirmation_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/19#issuecomment-6345601108",
+        "errors_percent": 0
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "9,000-user 5-minute hold; 210/572 ms; 0 errors.",
+          "protocol": "DigitalOcean 4-vCPU/8 GB shared-vCPU droplet, full seed; remote generator; five-minute fresh-seed hold; 4–10% steal reported.",
+          "metrics": [
+            {
+              "users": 9000,
+              "requests_per_second": null,
+              "p95_ms": 210,
+              "p99_ms": 572,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "Half-sized target; not official8-core score."
+          ],
+          "source_url": "https://github.com/yar0slav/multicore-server-challenge/blob/ba6a946aa974209ddd485635668def98658bebcb/submissions/lua-openresty-yar0slav/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 20,
+      "implementation": "csharp-efcore-xeonfx",
+      "variant": null,
+      "pr_state": "MERGED",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/20",
+      "author": "XeonFX",
+      "source": {
+        "pr_head_sha": "156440108adcf823a3f77214b72834d4874440cd",
+        "head_repository": "XeonFX/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/XeonFX/multicore-server-challenge/tree/156440108adcf823a3f77214b72834d4874440cd/submissions/csharp-efcore-xeonfx",
+        "pinned_readme_url": "https://github.com/XeonFX/multicore-server-challenge/blob/156440108adcf823a3f77214b72834d4874440cd/submissions/csharp-efcore-xeonfx/README.md",
+        "updated_at": "2026-10-22T16:52:04Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 16,
+        "users": 8300,
+        "requests_per_second": 2108.0,
+        "p95_ms": 447.0,
+        "p99_ms": 720.0,
+        "front": "direct",
+        "cpu_app_postgres": "19% / 78%",
+        "qualification_note": "",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null,
+        "maintainer_confirmation_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/20#issuecomment-6346275360",
+        "errors_percent": 0
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "12,000-user 5-minute hold; 3,152 req/s; 125/287 ms; 0 errors.",
+          "protocol": "GCP c4-highcpu-8 target, full seed, remote generator; repository box setup; 3 min warm-up, 60 s ramp+5 min hold; think-scale 1.",
+          "metrics": [
+            {
+              "users": 12000,
+              "requests_per_second": 3152,
+              "p95_ms": 125,
+              "p99_ms": 287,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "Different hardware from official8,300-user result; near-limit probes varied."
+          ],
+          "source_url": "https://github.com/XeonFX/multicore-server-challenge/blob/156440108adcf823a3f77214b72834d4874440cd/submissions/csharp-efcore-xeonfx/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 21,
+      "implementation": "pony-stallion-contact-red",
+      "variant": "closed predecessor of PR24",
+      "pr_state": "CLOSED",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/21",
+      "author": "redvers",
+      "source": {
+        "pr_head_sha": "f62c5f6d0cfd9f3bbf035510bc11abed0d78ca43",
+        "head_repository": "contact-red/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/contact-red/multicore-server-challenge/tree/f62c5f6d0cfd9f3bbf035510bc11abed0d78ca43/submissions/pony-stallion-contact-red",
+        "pinned_readme_url": "https://github.com/contact-red/multicore-server-challenge/blob/f62c5f6d0cfd9f3bbf035510bc11abed0d78ca43/submissions/pony-stallion-contact-red/README.md",
+        "updated_at": "2026-10-20T13:37:34Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": null,
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": false,
+      "notes": [
+        "Author explicitly points to replacement PR24;excluded from active competitor count.",
+        "No absolute self-reported performance result found in inspected PR body/comments/pinned README."
+      ]
+    },
+    {
+      "pr": 22,
+      "implementation": "csharp-sockets-jh-d",
+      "variant": null,
+      "pr_state": "MERGED",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/22",
+      "author": "jh-d",
+      "source": {
+        "pr_head_sha": "4aee3c3053aa7c91c69904fd5eccb79b982eb994",
+        "head_repository": "jh-d/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/jh-d/multicore-server-challenge/tree/4aee3c3053aa7c91c69904fd5eccb79b982eb994/submissions/csharp-sockets-jh-d",
+        "pinned_readme_url": "https://github.com/jh-d/multicore-server-challenge/blob/4aee3c3053aa7c91c69904fd5eccb79b982eb994/submissions/csharp-sockets-jh-d/README.md",
+        "updated_at": "2026-10-22T17:42:05Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 2,
+        "users": 95000,
+        "requests_per_second": 24696.0,
+        "p95_ms": 493.0,
+        "p99_ms": 737.0,
+        "front": "direct",
+        "cpu_app_postgres": "21% / 75%",
+        "qualification_note": "",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null,
+        "maintainer_confirmation_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/22#issuecomment-6347279329",
+        "errors_percent": 0
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true,
+      "notes": [
+        "No absolute self-reported performance result found in inspected PR body/comments/pinned README."
+      ]
+    },
+    {
+      "pr": 23,
+      "implementation": "perl-mojolicious-denizakya",
+      "variant": null,
+      "pr_state": "MERGED",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/23",
+      "author": "denizak",
+      "source": {
+        "pr_head_sha": "8a98960c84dc3b63cd8e86f840286db4056a1ba2",
+        "head_repository": "denizak/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/denizak/multicore-server-challenge/tree/8a98960c84dc3b63cd8e86f840286db4056a1ba2/submissions/perl-mojolicious-denizakya",
+        "pinned_readme_url": "https://github.com/denizak/multicore-server-challenge/blob/8a98960c84dc3b63cd8e86f840286db4056a1ba2/submissions/perl-mojolicious-denizakya/README.md",
+        "updated_at": "2026-10-22T18:12:05Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 17,
+        "users": 1100,
+        "requests_per_second": 287.0,
+        "p95_ms": 197.0,
+        "p99_ms": 327.0,
+        "front": "nginx",
+        "cpu_app_postgres": "8% / 3% (+ Nginx 0%)",
+        "qualification_note": "",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null,
+        "maintainer_confirmation_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/23#issuecomment-6347877589",
+        "errors_percent": 0
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true,
+      "notes": [
+        "No absolute self-reported performance result found in inspected PR body/comments/pinned README."
+      ]
+    },
+    {
+      "pr": 24,
+      "implementation": "pony-stallion-contact-red",
+      "variant": null,
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/24",
+      "author": "redvers",
+      "source": {
+        "pr_head_sha": "36fe3254cc7bf40fd0ce7b8699207f50be5e2022",
+        "head_repository": "contact-red/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/contact-red/multicore-server-challenge/tree/36fe3254cc7bf40fd0ce7b8699207f50be5e2022/submissions/pony-stallion-contact-red",
+        "pinned_readme_url": "https://github.com/contact-red/multicore-server-challenge/blob/36fe3254cc7bf40fd0ce7b8699207f50be5e2022/submissions/pony-stallion-contact-red/README.md",
+        "updated_at": "2026-10-22T15:21:58Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": {
+        "type": "OFFICIAL_LEADERBOARD",
+        "rank": 12,
+        "users": 25000,
+        "requests_per_second": 6496.0,
+        "p95_ms": 497.0,
+        "p99_ms": 986.0,
+        "front": "direct",
+        "cpu_app_postgres": "32% / 54%",
+        "qualification_note": "Scored at an earlier commit (a38283c); the author pushed 5 more commits (batched bcrypt, SQL changes) during the batch, re-run queued",
+        "protocol": "Official dedicated 8-vCPU/16-GB Ubuntu24 x86_64 target, PostgreSQL18 and app together, full seed, remote load generators; highest passing 5-minute hold after warm-up/probes; p95<500ms,p99<1000ms,errors<1%.",
+        "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md",
+        "measured_full_commit_sha": null,
+        "measured_commit_prefix": "a38283c"
+      },
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "More than30% ahead of provided examples; no absolute local score supplied.",
+          "protocol": "Author test environment and exact duration not specified.",
+          "metrics": [],
+          "notes": [
+            "Official25k result is explicitly for earlier commit a38283c; rerun of latest head is queued."
+          ],
+          "source_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/24",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 25,
+      "implementation": "rust-urus-markk116",
+      "variant": null,
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/25",
+      "author": "Markk116",
+      "source": {
+        "pr_head_sha": "88e2060e48dede41a8cb86ecf775d41f3e1d4425",
+        "head_repository": "Markk116/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/Markk116/multicore-server-challenge/tree/88e2060e48dede41a8cb86ecf775d41f3e1d4425/submissions/rust-urus-markk116",
+        "pinned_readme_url": "https://github.com/Markk116/multicore-server-challenge/blob/88e2060e48dede41a8cb86ecf775d41f3e1d4425/submissions/rust-urus-markk116/README.md",
+        "updated_at": "2026-10-20T20:43:49Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": null,
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "101,080 equivalent users ×0.1 (~17,500 req/s); not 101k real users.",
+          "protocol": "Ryzen 5900X; app + PostgreSQL 8 pinned hardware threads; generators on16 other threads; full seed; five-minute hold; think-scale 0.1.",
+          "metrics": [
+            {
+              "users": null,
+              "requests_per_second": 17500,
+              "p95_ms": 251,
+              "p99_ms": 278,
+              "errors_percent": 0,
+              "verdict": "reported pass",
+              "equivalent_users": 101080,
+              "think_scale": 0.1
+            },
+            {
+              "users": 101080,
+              "requests_per_second": 17900,
+              "p95_ms": 2200,
+              "p99_ms": 2300,
+              "errors_percent": null,
+              "verdict": "FAIL at think-scale1"
+            },
+            {
+              "users": 128000,
+              "requests_per_second": 16000,
+              "p95_ms": 5900,
+              "p99_ms": 6500,
+              "errors_percent": null,
+              "verdict": "FAIL at think-scale1"
+            }
+          ],
+          "notes": [
+            "Author explicitly warns equivalent-user scaling overstates capacity; ~60k real users is an extrapolation, not a qualifying hold."
+          ],
+          "source_url": "https://github.com/Markk116/multicore-server-challenge/blob/88e2060e48dede41a8cb86ecf775d41f3e1d4425/submissions/rust-urus-markk116/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 26,
+      "implementation": "bun-native-PetarGeorgiev-hash",
+      "variant": null,
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/26",
+      "author": "PetarGeorgiev-hash",
+      "source": {
+        "pr_head_sha": "4dcd406d1a0c2ae339cce079050147e8844fffb6",
+        "head_repository": "PetarGeorgiev-hash/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/PetarGeorgiev-hash/multicore-server-challenge/tree/4dcd406d1a0c2ae339cce079050147e8844fffb6/submissions/bun-native-PetarGeorgiev-hash",
+        "pinned_readme_url": "https://github.com/PetarGeorgiev-hash/multicore-server-challenge/blob/4dcd406d1a0c2ae339cce079050147e8844fffb6/submissions/bun-native-PetarGeorgiev-hash/README.md",
+        "updated_at": "2026-10-21T02:27:29Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": null,
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "10,000-user exploratory pass; 4.1/40.4 ms; 0 errors.",
+          "protocol": "MacBookAirM2; DockerPostgreSQL 18; full seed; think-scale 1; duration unspecified, no 5-minute hold claimed.",
+          "metrics": [
+            {
+              "users": 10000,
+              "requests_per_second": null,
+              "p95_ms": 4.1,
+              "p99_ms": 40.4,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "20k/40k attempts hit macOS descriptors/connections; not server capacity failures."
+          ],
+          "source_url": "https://github.com/PetarGeorgiev-hash/multicore-server-challenge/blob/4dcd406d1a0c2ae339cce079050147e8844fffb6/submissions/bun-native-PetarGeorgiev-hash/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 27,
+      "implementation": "go-fasthttp-o7livetype",
+      "variant": null,
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/27",
+      "author": "o7LiveType",
+      "source": {
+        "pr_head_sha": "e636c708a7795839293e0961227c93bbf3ce88a0",
+        "head_repository": "o7LiveType/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/o7LiveType/multicore-server-challenge/tree/e636c708a7795839293e0961227c93bbf3ce88a0/submissions/go-fasthttp-o7livetype",
+        "pinned_readme_url": "https://github.com/o7LiveType/multicore-server-challenge/blob/e636c708a7795839293e0961227c93bbf3ce88a0/submissions/go-fasthttp-o7livetype/README.md",
+        "updated_at": "2026-10-21T14:26:10Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": null,
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "67,500 users behind Nginx; 17,780 req/s; 49/77 ms.",
+          "protocol": "Local60-second screens; app + PostgreSQL 8 cores/16 GB; Nginx shares cores with separate2 GB cap; not official hardware.",
+          "metrics": [
+            {
+              "users": 67500,
+              "requests_per_second": 17780,
+              "p95_ms": 49,
+              "p99_ms": 77,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            },
+            {
+              "users": 100000,
+              "requests_per_second": 25818,
+              "p95_ms": 318,
+              "p99_ms": 360,
+              "errors_percent": 0,
+              "verdict": "reported pass",
+              "configuration": "direct,no Nginx"
+            }
+          ],
+          "notes": [
+            "Submitted Front is nginx; direct result is a separate mode.",
+            "Near-limit repeats vary; no 5-minute capacity hold."
+          ],
+          "source_url": "https://github.com/o7LiveType/multicore-server-challenge/blob/e636c708a7795839293e0961227c93bbf3ce88a0/submissions/go-fasthttp-o7livetype/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 28,
+      "implementation": "go-epoll-o7livetype",
+      "variant": null,
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/28",
+      "author": "o7LiveType",
+      "source": {
+        "pr_head_sha": "f6d82ed4bccf8a2e211282fb5c0788bd1fd7e26b",
+        "head_repository": "o7LiveType/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/o7LiveType/multicore-server-challenge/tree/f6d82ed4bccf8a2e211282fb5c0788bd1fd7e26b/submissions/go-epoll-o7livetype",
+        "pinned_readme_url": "https://github.com/o7LiveType/multicore-server-challenge/blob/f6d82ed4bccf8a2e211282fb5c0788bd1fd7e26b/submissions/go-epoll-o7livetype/README.md",
+        "updated_at": "2026-10-21T14:26:10Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": null,
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "Historical135,000-user screen; 33,645 req/s; 386/452 ms; did not repeat.",
+          "protocol": "Local60-second screens; app + PostgreSQL 8 cores/16 GB; not official hardware.",
+          "metrics": [
+            {
+              "users": 135000,
+              "requests_per_second": 33645,
+              "p95_ms": 386,
+              "p99_ms": 452,
+              "errors_percent": 0,
+              "verdict": "single reported pass;repeat latency failures"
+            }
+          ],
+          "notes": [
+            "Pinned README explicitly says the135k result did not repeat: old/new builds missed latency with 0 errors."
+          ],
+          "source_url": "https://github.com/o7LiveType/multicore-server-challenge/blob/f6d82ed4bccf8a2e211282fb5c0788bd1fd7e26b/submissions/go-epoll-o7livetype/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 29,
+      "implementation": "kotlin-ktor-canleon",
+      "variant": null,
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/29",
+      "author": "canleon",
+      "source": {
+        "pr_head_sha": "29ea7a4e70b19177890fc62c1e309c5257c5db99",
+        "head_repository": "canleon/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/canleon/multicore-server-challenge/tree/29ea7a4e70b19177890fc62c1e309c5257c5db99/submissions/kotlin-ktor-canleon",
+        "pinned_readme_url": "https://github.com/canleon/multicore-server-challenge/blob/29ea7a4e70b19177890fc62c1e309c5257c5db99/submissions/kotlin-ktor-canleon/README.md",
+        "updated_at": "2026-10-21T21:22:13Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": null,
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "18,000 users; 15,700 req/s; 19k failed.",
+          "protocol": "Local warmed Docker comparison to Java example; app + PostgreSQL 8 cores/full seed, generator8 other cores; measurement duration and think-scale unspecified.",
+          "metrics": [
+            {
+              "users": 18000,
+              "requests_per_second": 15700,
+              "p95_ms": null,
+              "p99_ms": null,
+              "errors_percent": null,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "Cannot compare user counts without the missing workload timing details."
+          ],
+          "source_url": "https://github.com/canleon/multicore-server-challenge/blob/29ea7a4e70b19177890fc62c1e309c5257c5db99/submissions/kotlin-ktor-canleon/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 30,
+      "implementation": "kotlin-vertx-canleon",
+      "variant": null,
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/30",
+      "author": "canleon",
+      "source": {
+        "pr_head_sha": "ee01d7f518156af632c993e7e495fd3567a4ef6c",
+        "head_repository": "canleon/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/canleon/multicore-server-challenge/tree/ee01d7f518156af632c993e7e495fd3567a4ef6c/submissions/kotlin-vertx-canleon",
+        "pinned_readme_url": "https://github.com/canleon/multicore-server-challenge/blob/ee01d7f518156af632c993e7e495fd3567a4ef6c/submissions/kotlin-vertx-canleon/README.md",
+        "updated_at": "2026-10-21T21:20:33Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": null,
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "19,000 users; 16,900 req/s.",
+          "protocol": "Local warmed Docker comparison to Java example; app + PostgreSQL 8 cores/full seed, generator8 other cores; measurement duration and think-scale unspecified.",
+          "metrics": [
+            {
+              "users": 19000,
+              "requests_per_second": 16900,
+              "p95_ms": null,
+              "p99_ms": null,
+              "errors_percent": null,
+              "verdict": "reported pass"
+            }
+          ],
+          "notes": [
+            "README documents non-atomic article creation; conformance pass alone does not settle that rule deviation."
+          ],
+          "source_url": "https://github.com/canleon/multicore-server-challenge/blob/ee01d7f518156af632c993e7e495fd3567a4ef6c/submissions/kotlin-vertx-canleon/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 31,
+      "implementation": "goose-epoll-xeonfx",
+      "variant": null,
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/31",
+      "author": "XeonFX",
+      "source": {
+        "pr_head_sha": "43e0919ae5b693c1d3c1e8828b74bb774ef92ee0",
+        "head_repository": "XeonFX/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/XeonFX/multicore-server-challenge/tree/43e0919ae5b693c1d3c1e8828b74bb774ef92ee0/submissions/goose-epoll-xeonfx",
+        "pinned_readme_url": "https://github.com/XeonFX/multicore-server-challenge/blob/43e0919ae5b693c1d3c1e8828b74bb774ef92ee0/submissions/goose-epoll-xeonfx/README.md",
+        "updated_at": "2026-10-22T11:12:33Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": null,
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [
+        {
+          "type": "SELF_REPORTED",
+          "summary": "160,000-user screen; 41,249 req/s; 368/501 ms; 0 errors.",
+          "protocol": "GCP c4-highcpu-8 target, full seed, two remote load boxes; fresh DB, 60 s ramp+60 s measured; think-scale 1.",
+          "metrics": [
+            {
+              "users": 160000,
+              "requests_per_second": 41249,
+              "p95_ms": 368,
+              "p99_ms": 501,
+              "errors_percent": 0,
+              "verdict": "reported pass"
+            },
+            {
+              "users": 175000,
+              "requests_per_second": 41500,
+              "p95_ms": 967,
+              "p99_ms": 2818,
+              "errors_percent": 0,
+              "verdict": "FAIL latency"
+            }
+          ],
+          "notes": [
+            "No 5-minute hold or scored warm-up on grown database claimed.",
+            "Our planned reference additionally discloses necessary ARM ABI and correctness fixes; it is not a stock official PR31 score."
+          ],
+          "source_url": "https://github.com/XeonFX/multicore-server-challenge/blob/43e0919ae5b693c1d3c1e8828b74bb774ef92ee0/submissions/goose-epoll-xeonfx/README.md",
+          "measured_full_commit_sha": null
+        }
+      ],
+      "our_comparison": {
+        "completed": false,
+        "status": "CORRECTED_REFERENCE_CONFORMANCE_PASSED_NOT_COMPARED",
+        "result": null
+      },
+      "active_competitor": true
+    },
+    {
+      "pr": 32,
+      "implementation": "goose-native-tbsvttr",
+      "variant": "our candidate",
+      "pr_state": "OPEN",
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/32",
+      "author": "tbsvttr",
+      "source": {
+        "pr_head_sha": "3e9087473da5c56d5800ae9ee00ac1e84c44a135",
+        "head_repository": "tbsvttr/multicore-server-challenge",
+        "pinned_source_url": "https://github.com/tbsvttr/multicore-server-challenge/tree/3e9087473da5c56d5800ae9ee00ac1e84c44a135/submissions/goose-native-tbsvttr",
+        "pinned_readme_url": "https://github.com/tbsvttr/multicore-server-challenge/blob/3e9087473da5c56d5800ae9ee00ac1e84c44a135/submissions/goose-native-tbsvttr/README.md",
+        "updated_at": "2026-10-22T17:33:33Z",
+        "head_pin_caveat": "This pins the inventoried source, not necessarily the revision measured in historical official/self-reported results."
+      },
+      "official_result": null,
+      "official_unsuccessful_attempt": null,
+      "self_reported_results": [],
+      "our_comparison": {
+        "completed": false,
+        "status": "OWN_ABLATION_ONLY_RUST_COMPARISON_IN_PROGRESS",
+        "result": null
+      },
+      "active_competitor": false,
+      "notes": [
+        "Correctness and same-source ARTICLE_BATCH ablation do not establish superiority over another PR.",
+        "Frozen 80k-user Rust7 comparison is in progress; no completed result is inventoried."
+      ]
+    }
+  ],
+  "reference_examples": [
+    {
+      "implementation": "examples/go",
+      "reported_video_users": 22000,
+      "type": "VIDEO_HARDWARE_REFERENCE",
+      "protocol": "Original DigitalOcean Premium AMD video setup with 8 vCPUs; its README explicitly says it is not directly comparable to the current challenge box.",
+      "our_comparison_completed": false,
+      "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/examples/go/README.md"
+    },
+    {
+      "implementation": "examples/java",
+      "reported_video_users": 21000,
+      "type": "VIDEO_HARDWARE_REFERENCE",
+      "protocol": "Original DigitalOcean Premium AMD video setup with 8 vCPUs; its README explicitly says it is not directly comparable to the current challenge box.",
+      "our_comparison_completed": false,
+      "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/examples/java/README.md"
+    },
+    {
+      "implementation": "examples/rust",
+      "reported_video_users": 19000,
+      "type": "VIDEO_HARDWARE_REFERENCE",
+      "protocol": "Original DigitalOcean Premium AMD video setup with 8 vCPUs; its README explicitly says it is not directly comparable to the current challenge box.",
+      "our_comparison_completed": false,
+      "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/examples/rust/README.md"
+    },
+    {
+      "implementation": "examples/python",
+      "reported_video_users": 10000,
+      "type": "VIDEO_HARDWARE_REFERENCE",
+      "protocol": "Original DigitalOcean Premium AMD video setup with 8 vCPUs; its README explicitly says it is not directly comparable to the current challenge box.",
+      "our_comparison_completed": false,
+      "source_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/examples/python/README.md"
+    }
+  ],
+  "source_snapshots": [
+    {
+      "path": "LEADERBOARD.md",
+      "sha256": "aae7a18af8ba2209ffc25e592a9d9769296127d400594677fb3b7c3621e741d9"
+    },
+    {
+      "path": "README.md",
+      "sha256": "fe6ad7b51c4f8621b5cc9b35a8453bd0cfa37ba2989a7d910950505a802e8ed2"
+    },
+    {
+      "path": "pr1-README.md",
+      "sha256": "c15d63ee4973b43463f81b009df358a604ed735b8ee4a10c8286e8f990447c8c"
+    },
+    {
+      "path": "pr10-README.md",
+      "sha256": "a82c4e1a9227282680c0a0efab192dab9346de0748f2fab55880c0b91f2965c6"
+    },
+    {
+      "path": "pr11-README.md",
+      "sha256": "2af076667dae2972e03889f0cf5c5f485a200f48ae9b18ac1c8604d6be971623"
+    },
+    {
+      "path": "pr12-README.md",
+      "sha256": "b7a9d9a2f7ccc8c9bdc16b2d25a9b4887db32da2ccedf0d11f0bc6a3a3546eb9"
+    },
+    {
+      "path": "pr13-README.md",
+      "sha256": "f3ef512158ffde66b36812042f4a9071a5233b32a0f8a880d4f1eb1fbf4eb306"
+    },
+    {
+      "path": "pr14-README.md",
+      "sha256": "20e9abb7abee3c3aabd9c9833fb407184ec04405717b03b7af903f62acf2df54"
+    },
+    {
+      "path": "pr15-README.md",
+      "sha256": "91900ce78395f2a820b2c5b2afd58cdcfcc765b322121db251e236e160e51cd3"
+    },
+    {
+      "path": "pr16-README.md",
+      "sha256": "376cf81029fe36357449096015411b0b67340e800ae59dd9c55de0dca880b925"
+    },
+    {
+      "path": "pr17-README.md",
+      "sha256": "034c0fe218f12a0eda35f10833722f8ba6a81cce21b5d0f08c42df4defdddc66"
+    },
+    {
+      "path": "pr18-README.md",
+      "sha256": "034c0fe218f12a0eda35f10833722f8ba6a81cce21b5d0f08c42df4defdddc66"
+    },
+    {
+      "path": "pr19-README.md",
+      "sha256": "d9d059bb78e38fef2fc3bb5b78396cf4059ff3f42bde0ac008f1e96dd1f40f9a"
+    },
+    {
+      "path": "pr2-README.md",
+      "sha256": "64b131baf143e52468118cbca0fb80bf7402d89368a3a3bbadf0db2a7eff6114"
+    },
+    {
+      "path": "pr20-README.md",
+      "sha256": "1d5d699392f979e678b43608efc3bfc270acdab23de12899cdef6013fe182b33"
+    },
+    {
+      "path": "pr21-README.md",
+      "sha256": "f09aeb3bab1a34bf10d0cbb86a263cf06d6765662713406632e3083cf552b5db"
+    },
+    {
+      "path": "pr22-README.md",
+      "sha256": "36564cd7e984e0f5b538922151d8c53bb8f2760a23bc81b8c24d5bb56d3f8fea"
+    },
+    {
+      "path": "pr23-README.md",
+      "sha256": "82f9ef1b760c6db25cd6d34dbf3ce43ecd361457cbe7de4d14501bdf731894f9"
+    },
+    {
+      "path": "pr24-README.md",
+      "sha256": "2e59507145cc6a52097d562fa4a8788a0f6177d4d6fb563204793ade2f1619c1"
+    },
+    {
+      "path": "pr25-README.md",
+      "sha256": "b1dba12d5565805dfabb8643491d72ab688933e97d8314f36e82316cd995a7d8"
+    },
+    {
+      "path": "pr26-README.md",
+      "sha256": "5fe29a2e4f8fec5ab97121d9d03dbc1b37e46890ba65bbe6ede6976feea50eab"
+    },
+    {
+      "path": "pr27-README.md",
+      "sha256": "a8edc74c6d356cb7e6ecec118770f0ac68b8ca533fb3e217b46f04417d18c19d"
+    },
+    {
+      "path": "pr28-README.md",
+      "sha256": "d501166c7d7a45613970d7b81c958129316b12edb4d2e00a307c6b37f1d63863"
+    },
+    {
+      "path": "pr29-README.md",
+      "sha256": "3fdc4ab42795241adb5c9a2e43d12346399679958072e4bafa133a58bd246a2c"
+    },
+    {
+      "path": "pr30-README.md",
+      "sha256": "2c04de1d81bff7e9c7991bc4f2c07aac219fa76d41a2bc51abbf7514759c915c"
+    },
+    {
+      "path": "pr31-README.md",
+      "sha256": "d372aff55b2c5f78b91597ee2caa90d39449fb0ed066a0eeded7ab392d9776fd"
+    },
+    {
+      "path": "pr32-README.md",
+      "sha256": "47a973c5f2ed12c7a40facf8abb5ebc044f4b8231927f7073726bf3f1b521b22"
+    },
+    {
+      "path": "pr4-README.md",
+      "sha256": "3bfa1667e45fbebf01bc4a8bdddb12be945973d1a983a5561eb858aa548a09f9"
+    },
+    {
+      "path": "pr5-README.md",
+      "sha256": "8040d14a15d7888ccc97d5cfa6978e685b659c31cf7927b40ea3b863cf8dfc3e"
+    },
+    {
+      "path": "pr7-README.md",
+      "sha256": "5e87e74195db33cde05eca81f839ab3752688f31287429f09c27642836b9e6d3"
+    },
+    {
+      "path": "pr8-README.md",
+      "sha256": "630e43c64acbd5b266231c01555339301b6b03d749ba102aa17fa9b4a07c4893"
+    },
+    {
+      "path": "pr9-README.md",
+      "sha256": "3e1910753d5545ca333c6e1cae2bf6cbad951192dc3bdc81bcd813c7dbdfdc55"
+    },
+    {
+      "path": "prs.json",
+      "sha256": "62a46616cc2898e9ee7bc3f50579d8d2683efb30571cf9646433a830657b8fd4"
+    },
+    {
+      "path": "readme-fetch-manifest.json",
+      "sha256": "c93d4f8c88124b8eb859ad6c624ba791cd80895d1974212116693a44e9fa1ee8"
+    },
+    {
+      "path": "upstream-main.json",
+      "sha256": "976a63e1b63c7b384d5bf7c66458e9c15028fb02857628afa48d5f6fc6c959fb"
+    },
+    {
+      "path": "upstream-submissions.json",
+      "sha256": "c2f0d8fa4cb50c8299dbc698f84da24f302cae628aca50aec69567950a378dcf"
+    }
+  ],
+  "coverage_status_updated_at_utc": "2026-10-22T19:11:43.348291+00:00"
+}

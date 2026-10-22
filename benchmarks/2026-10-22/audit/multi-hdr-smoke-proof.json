@@ -1,0 +1,194 @@
+{
+  "analyzer_sha256": "c861a295e59b883f1bb031b0084aa10e3b52b59d819759fc9d1245f8caeda471",
+  "shared_analyzer_sha256": "207c774f4b7719ec8c5f3148f8b925b1084e88cd85f2e7c0f48bca31385e66e0",
+  "raw_sha256": "54987c913f9c3cab18fa0d39fa463632a459fa146aeb5c3c7e11e002a1d1015e",
+  "native_merged_sha256": "e94cade2c660566e64a28ec31fcb70fe13830495902372d51a5a3db1008b8116",
+  "checks": [
+    {
+      "check": "raw_hist_count:0:DELETE /api/articles/:slug/favorite",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:DELETE /api/profiles/:username/follow",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/articles",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/articles/:slug",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/articles/:slug/comments",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/articles/feed",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/articles?author",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/articles?favorited",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/articles?tag",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/profiles/:username",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/tags",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/user",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:POST /api/articles",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:POST /api/articles/:slug/comments",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:POST /api/articles/:slug/favorite",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:POST /api/profiles/:username/follow",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:POST /api/users/login",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:PUT /api/user",
+      "pass": true
+    },
+    {
+      "check": "all_histogram_configurations_match",
+      "pass": true
+    },
+    {
+      "check": "merged_histogram_equals_exact_bin_sum",
+      "pass": true
+    },
+    {
+      "check": "merged_quantile_from_exact_histogram:p50_ms",
+      "pass": true
+    },
+    {
+      "check": "merged_quantile_from_exact_histogram:p95_ms",
+      "pass": true
+    },
+    {
+      "check": "merged_quantile_from_exact_histogram:p99_ms",
+      "pass": true
+    },
+    {
+      "check": "merged_quantile_from_exact_histogram:max_ms",
+      "pass": true
+    },
+    {
+      "check": "merged_count_equals_raw_counts",
+      "pass": true
+    },
+    {
+      "check": "merged_statuses_equal_raw_counts",
+      "pass": true
+    },
+    {
+      "check": "merged_errors_equal_raw_counts",
+      "pass": true
+    },
+    {
+      "check": "all_endpoints_retained",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:DELETE /api/articles/:slug/favorite",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:DELETE /api/profiles/:username/follow",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/articles",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/articles/:slug",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/articles/:slug/comments",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/articles/feed",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/articles?author",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/articles?favorited",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/articles?tag",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/profiles/:username",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/tags",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/user",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:POST /api/articles",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:POST /api/articles/:slug/comments",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:POST /api/articles/:slug/favorite",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:POST /api/profiles/:username/follow",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:POST /api/users/login",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:PUT /api/user",
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "scope": "Actual native smoke HDR decode, bin sum and independently recomputed quantiles; no Docker or load execution"
+}

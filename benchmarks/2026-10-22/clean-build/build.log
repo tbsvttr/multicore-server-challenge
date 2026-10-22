@@ -1,0 +1,124 @@
+/evidence/clean-build/source/.deps/goose-f605b5a07dd2aa3a5cb3f4c9b14002bd3c9d3d1a.tar.gz: OK
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- libtcc: TinyCC 0.9.28rc backend for arm64
+-- Configuring done (0.4s)
+-- Generating done (0.0s)
+-- Build files have been written to: /evidence/clean-build/source/.goose/build
+[ 10%] Building C object CMakeFiles/libtcc.dir/third_party/tinycc/libtcc.c.o
+[ 10%] Building C object CMakeFiles/goose_shaderc.dir/src/shaderc.c.o
+[ 15%] Linking C static library libgoose_shaderc.a
+[ 15%] Built target goose_shaderc
+[ 20%] Linking C static library libtcc.a
+[ 20%] Built target libtcc
+[ 25%] Building C object CMakeFiles/tcc_driver.dir/third_party/tinycc/tcc.c.o
+[ 30%] Linking C executable tcc/tcc
+[ 30%] Built target tcc_driver
+[ 40%] tcc lib/lib-arm64.c
+[ 45%] tcc lib/dsohandle.c
+[ 50%] tcc lib/stdatomic.c
+[ 50%] tcc lib/armflush.c
+[ 55%] tcc lib/atomic.S
+[ 70%] tcc lib/builtin.c
+[ 70%] tcc lib/alloca.S
+[ 70%] tcc lib/alloca-bt.S
+[ 75%] tcc lib/runmain.c
+[ 80%] tcc -ar libtcc1.a
+[ 80%] Built target tcc_runtime
+[ 95%] Building CXX object CMakeFiles/goose.dir/src/progress.cpp.o
+[ 95%] Building CXX object CMakeFiles/goose.dir/src/process.cpp.o
+[ 95%] Building CXX object CMakeFiles/goose.dir/src/main.cpp.o
+In file included from /evidence/clean-build/source/.goose/src/main.cpp:30:
+/evidence/clean-build/source/.goose/src/codegen_types.h: In member function 'void goose::CodeGen::EmitDefaultInto(const std::string&, goose::TypeExpr*)':
+/evidence/clean-build/source/.goose/src/codegen_types.h:1228:66: warning: unused parameter 't' [-Wunused-parameter]
+ 1228 | inline void CodeGen::EmitDefaultInto(const string &lv, TypeExpr *t) {
+      |                                                        ~~~~~~~~~~^
+In file included from /evidence/clean-build/source/.goose/src/main.cpp:5:
+In member function 'void goose::small_vector<T, N>::Free() [with T = goose::RootAlt; int N = 1]',
+    inlined from 'goose::small_vector<T, N>::~small_vector() [with T = goose::RootAlt; int N = 1]' at /evidence/clean-build/source/.goose/src/small_vector.h:90:27,
+    inlined from 'goose::Roots::~Roots()' at /evidence/clean-build/source/.goose/src/ast.h:521:8,
+    inlined from 'goose::RetRoot::~RetRoot()' at /evidence/clean-build/source/.goose/src/ast.h:2052:8,
+    inlined from 'goose::Val goose::TypeCheck::CallResult(goose::Call*, goose::FnSpec*, std::vector<goose::Val>&)' at /evidence/clean-build/source/.goose/src/typecheck_calls.h:3425:9:
+/evidence/clean-build/source/.goose/src/small_vector.h:25:58: warning: 'none.goose::RetRoot::alts.goose::Roots::alts.goose::small_vector<goose::RootAlt, 1>::<anonymous>.goose::small_vector<goose::RootAlt, 1>::<unnamed union>::buf' may be used uninitialized [-Wmaybe-uninitialized]
+   25 |     void Free() { if (OnHeap()) allocator<T>().deallocate(buf, cap); }
+      |                                 ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+In file included from /evidence/clean-build/source/.goose/src/main.cpp:20:
+/evidence/clean-build/source/.goose/src/typecheck_calls.h: In member function 'goose::Val goose::TypeCheck::CallResult(goose::Call*, goose::FnSpec*, std::vector<goose::Val>&)':
+/evidence/clean-build/source/.goose/src/typecheck_calls.h:3369:21: note: 'none' declared here
+ 3369 |             RetRoot none;
+      |                     ^~~~
+In file included from /evidence/clean-build/source/.goose/src/main.cpp:15:
+In member function 'int64_t goose::TypeCheck::ArraySize(goose::TypeArray*)',
+    inlined from 'goose::SizeClass goose::TypeCheck::ClassOf(goose::TypeExpr*)' at /evidence/clean-build/source/.goose/src/typecheck_types.h:342:49,
+    inlined from 'goose::TypeExpr* goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)' at /evidence/clean-build/source/.goose/src/typecheck_flow.h:53:16,
+    inlined from 'goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(goose::TypeExpr*)>' at /evidence/clean-build/source/.goose/src/typecheck_flow.h:56:67,
+    inlined from 'bool goose::AnyFieldOf(std::span<const FieldRun>, F) [with F = TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(TypeExpr*)>]' at /evidence/clean-build/source/.goose/src/ast.h:1831:48,
+    inlined from 'bool goose::TypeCheck::AnyField(goose::TypeExpr*, F) [with F = goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(goose::TypeExpr*)>]' at /evidence/clean-build/source/.goose/src/typecheck.h:1148:77,
+    inlined from 'goose::TypeExpr* goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)' at /evidence/clean-build/source/.goose/src/typecheck_flow.h:56:13,
+    inlined from 'goose::TypeExpr* goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)' at /evidence/clean-build/source/.goose/src/typecheck_flow.h:52:18,
+    inlined from 'goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(goose::TypeExpr*)>' at /evidence/clean-build/source/.goose/src/typecheck_flow.h:56:67,
+    inlined from 'bool goose::AnyFieldOf(std::span<const FieldRun>, F) [with F = TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(TypeExpr*)>]' at /evidence/clean-build/source/.goose/src/ast.h:1831:48,
+    inlined from 'bool goose::TypeCheck::AnyField(goose::TypeExpr*, F) [with F = goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(goose::TypeExpr*)>]' at /evidence/clean-build/source/.goose/src/typecheck.h:1148:77,
+    inlined from 'goose::TypeExpr* goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)' at /evidence/clean-build/source/.goose/src/typecheck_flow.h:56:13,
+    inlined from 'goose::TypeExpr* goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)' at /evidence/clean-build/source/.goose/src/typecheck_flow.h:52:18,
+    inlined from 'goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(goose::TypeExpr*)>' at /evidence/clean-build/source/.goose/src/typecheck_flow.h:56:67,
+    inlined from 'bool goose::AnyFieldOf(std::span<const FieldRun>, F) [with F = TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(TypeExpr*)>]' at /evidence/clean-build/source/.goose/src/ast.h:1831:48,
+    inlined from 'bool goose::TypeCheck::AnyField(goose::TypeExpr*, F) [with F = goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(goose::TypeExpr*)>]' at /evidence/clean-build/source/.goose/src/typecheck.h:1148:77,
+    inlined from 'goose::TypeExpr* goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)' at /evidence/clean-build/source/.goose/src/typecheck_flow.h:56:13,
+    inlined from 'goose::TypeExpr* goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)' at /evidence/clean-build/source/.goose/src/typecheck_flow.h:52:18,
+    inlined from 'goose::TypeCheck::MayHoldBuilt(goose::TypeExpr*, goose::Node*, goose::TypeExpr*)::<lambda(goose::TypeExpr*)>' at /evidence/clean-build/source/.goose/src/typecheck_builtins.h:3609:64,
+    inlined from 'bool goose::AnyFieldOf(std::span<const FieldRun>, F) [with F = TypeCheck::MayHoldBuilt(goose::TypeExpr*, goose::Node*, goose::TypeExpr*)::<lambda(TypeExpr*)>]' at /evidence/clean-build/source/.goose/src/ast.h:1831:48,
+    inlined from 'bool goose::TypeCheck::AnyField(goose::TypeExpr*, F) [with F = goose::TypeCheck::MayHoldBuilt(goose::TypeExpr*, goose::Node*, goose::TypeExpr*)::<lambda(goose::TypeExpr*)>]' at /evidence/clean-build/source/.goose/src/typecheck.h:1148:77,
+    inlined from 'bool goose::TypeCheck::MayHoldBuilt(goose::TypeExpr*, goose::Node*, goose::TypeExpr*)' at /evidence/clean-build/source/.goose/src/typecheck_builtins.h:3609:17:
+/evidence/clean-build/source/.goose/src/typecheck.h:808:21: warning: 'v' may be used uninitialized [-Wmaybe-uninitialized]
+  808 |             a->size = v;
+      |             ~~~~~~~~^~~
+/evidence/clean-build/source/.goose/src/typecheck.h: In member function 'bool goose::TypeCheck::MayHoldBuilt(goose::TypeExpr*, goose::Node*, goose::TypeExpr*)':
+/evidence/clean-build/source/.goose/src/typecheck.h:796:17: note: 'v' was declared here
+  796 |         int64_t v;
+      |                 ^
+[100%] Linking CXX executable goose
+[100%] Built target goose
+parsed ok: 652 top-level declarations, 16 file(s)
+typechecked ok: 494 specialization(s), 23 struct/1 enum instance(s); optimized -O2: 699 inlined, 0 base case(s), 283 folded, 500 propagated, 0 tail loop(s), 0 reassociated
+bce: elided 6711/7184 index and 55/222 slice checks
+wrote .build/main.c (2392895 bytes)
+goose runtime df5f78ce88d4
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+a52d51cc037f40156f79586e3547e1ecd450c5d8185ffe4d0a126c8447ebfce8  bin/conduit
+	Command being timed: "bash build.sh"
+	User time (seconds): 79.06
+	System time (seconds): 1.77
+	Percent of CPU this job got: 93%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:26.25
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2192628
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 124
+	Minor (reclaiming a frame) page faults: 711829
+	Voluntary context switches: 56706
+	Involuntary context switches: 6183
+	Swaps: 0
+	File system inputs: 281904
+	File system outputs: 157208
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

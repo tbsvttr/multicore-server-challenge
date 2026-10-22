@@ -1,0 +1,314 @@
+{
+  "scope": "additional JWT black-box checks; original conformance suite remains authoritative",
+  "base": "http://127.0.0.1:3000",
+  "checks": 39,
+  "passed": 39,
+  "all_passed": true,
+  "results": [
+    {
+      "name": "valid required auth",
+      "path": "/api/user",
+      "expected": 200,
+      "status": 200,
+      "pass": true
+    },
+    {
+      "name": "valid optional auth",
+      "path": "/api/articles?limit=1",
+      "expected": 200,
+      "status": 200,
+      "pass": true
+    },
+    {
+      "name": "anonymous optional auth",
+      "path": "/api/articles?limit=1",
+      "expected": 200,
+      "status": 200,
+      "pass": true
+    },
+    {
+      "name": "missing required auth",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "alternate HS256 header key order",
+      "path": "/api/user",
+      "expected": 200,
+      "status": 200,
+      "pass": true
+    },
+    {
+      "name": "HS256 header without typ",
+      "path": "/api/user",
+      "expected": 200,
+      "status": 200,
+      "pass": true
+    },
+    {
+      "name": "wrong key",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "wrong key",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "missing signature",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "missing signature",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "extra segment",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "extra segment",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "empty token",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "empty token",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "bad base64",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "bad base64",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "expired",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "expired",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "missing exp",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "missing exp",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "string exp",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "string exp",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "future nbf",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "future nbf",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "numeric sub",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "numeric sub",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "negative sub",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "negative sub",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "overflow sub",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "overflow sub",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "zero sub",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "zero sub",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "wrong alg none",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "wrong alg none",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "wrong alg RS256",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "wrong alg RS256",
+      "path": "/api/articles?limit=1",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "exp before deadline",
+      "path": "/api/user",
+      "expected": 200,
+      "status": 200,
+      "pass": true
+    },
+    {
+      "name": "same token after deadline",
+      "path": "/api/user",
+      "expected": 401,
+      "status": 401,
+      "pass": true,
+      "error_shape": true
+    },
+    {
+      "name": "valid token after invalid requests",
+      "path": "/api/user",
+      "expected": 200,
+      "status": 200,
+      "pass": true
+    }
+  ]
+}

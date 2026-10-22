@@ -1,0 +1,105 @@
+{
+  "controller": "paired-multi-load-v2",
+  "scope": "local ARM64 Mac/Docker80k-user four-shard fixed-load comparison; not an official score or capacity search",
+  "configuration": {
+    "target_container": "multicore-goose-dev-20261022",
+    "host_evidence": "/private/tmp/multicore-research-20261022",
+    "users": 80000,
+    "port": 3000,
+    "jwt_secret": "multicore-server-challenge",
+    "cases": [
+      {
+        "name": "goose31_portable",
+        "binary": "/evidence/pr31-reference/source/bin/conduit",
+        "source_dir": "/evidence/pr31-reference/source",
+        "env": {
+          "WORKERS": "4",
+          "PG_READERS": "3",
+          "HASHERS": "2",
+          "BCRYPT_BATCH_MS": "250",
+          "READ_BATCH": "32",
+          "READ_HOLD": "1"
+        },
+        "expected_binary_sha256": "5679b2f84562b352aa80faa6491ee9a6496224333881d2d96e585d468a6b67e2"
+      },
+      {
+        "name": "goose",
+        "binary": "/work/submissions/goose-native-tbsvttr/bin/conduit",
+        "source_dir": "/work/submissions/goose-native-tbsvttr",
+        "env": {
+          "ARTICLE_BATCH": "0",
+          "WORKERS": "4",
+          "PG_READERS": "3",
+          "HASHERS": "2",
+          "BCRYPT_BATCH_MS": "250",
+          "READ_BATCH": "32",
+          "READ_HOLD": "1"
+        },
+        "expected_binary_sha256": "6ab318a0ab9389dc2e77ec6122ff077a93adbcc183c6285c347104e0f734b6c3"
+      }
+    ],
+    "reference_disclosure": "PR31 at43e0919a, disclosed ABI portability and shared correctness repairs, matched compiler flags; pure Goose JSON/HMAC retained. Not the unmodified x86 PR31 binary."
+  },
+  "configuration_sha256": "cd1644910b791508a7c6a96c5167cad5010a4c669c26f98df5b1ece138aa686f",
+  "protocol": {
+    "users": 80000,
+    "articles": 500000,
+    "think_scale": 1.0,
+    "ramp_s": 60,
+    "measure_s": 60,
+    "tail_s": 15,
+    "pairs": 3,
+    "order": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "fresh_full_seed_per_attempt": true,
+    "shards": [
+      {
+        "box_index": 0,
+        "users": 20000,
+        "id_offset": 0,
+        "host": "127.0.0.1"
+      },
+      {
+        "box_index": 1,
+        "users": 20000,
+        "id_offset": 20000,
+        "host": "127.0.0.2"
+      },
+      {
+        "box_index": 2,
+        "users": 20000,
+        "id_offset": 40000,
+        "host": "127.0.0.3"
+      },
+      {
+        "box_index": 3,
+        "users": 20000,
+        "id_offset": 60000,
+        "host": "127.0.0.4"
+      }
+    ],
+    "gomaxprocs_per_shard": 1,
+    "synchronized_start_at": true,
+    "app_nofile_minimum": 200000,
+    "actual_app_uid_and_limits_required": true,
+    "launch_wrapper": "runuser -u challenge -- prlimit --nofile=200000:200000 -- binary",
+    "load_cgroup_cpu_limit_pct": 75.0,
+    "paired_random_stream": "same native run-id and VU ids within each pair; fresh DBs prevent name collisions",
+    "warmup": "none; this is a fixed-load diagnostic, not the official warmup/search/hold protocol",
+    "invalid_policy": "native lg_limited or failed infrastructure is INVALID; retain, never replace",
+    "interpretation": "at fixed unsaturated load, compare latency/CPU; similar req/s cannot establish capacity"
+  },
+  "created_utc": "2026-10-22T19:14:42Z"
+}

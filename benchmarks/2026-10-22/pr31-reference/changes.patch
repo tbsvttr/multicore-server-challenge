@@ -1,0 +1,349 @@
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,3 +1,5 @@
+ bin/
+ .goose/
+ .goose-home/
++.build/
++.deps/
+--- /dev/null
++++ b/LICENSE
+@@ -0,0 +1,21 @@
++MIT License
++
++Copyright (c) 2026 arjaythedev and the challenge contributors
++
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of this software and associated documentation files (the "Software"), to deal
++in the Software without restriction, including without limitation the rights
++to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++copies of the Software, and to permit persons to whom the Software is
++furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in all
++copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++SOFTWARE.
+--- a/README.md
++++ b/README.md
+@@ -1,3 +1,5 @@
++> **Local portable, correctness-corrected PR #31 reference.** This is a disclosed derivative of XeonFX's pinned source, prepared for a same-host comparison. It adds a C syscall/epoll ABI bridge, reliable bcrypt reply delivery, a PostgreSQL connection guard, and committed favorite responses. JSON and HMAC remain the original Goose implementation. The upstream GCP figures below are historical PR #31 claims, not measurements of this derivative and not an official score. See [the reference manifest](../manifest.json) and [comparison notes](../README.md).
++
+ # Goose: epoll loops and a hand-written Postgres client
+ 
+ **Front: direct.** The server listens on `HOST:PORT` (`0.0.0.0:80` on the box) and holds every user's keep-alive
+--- a/bcrypt.goose
++++ b/bcrypt.goose
+@@ -313,7 +313,8 @@
+ fn send_reply(job: BJob&, r: BReply) {
+     var bytes: u8[72] = [0; 72];
+     reply_bytes(r, bytes);
+-    sys_write(job.reply_fd, bytes);
++    // Same correctness fix as the candidate: retain completed replies through backpressure.
++    if native_write_atomic_reply(job.reply_fd, bytes) != REPLY_SIZE { abort("bcrypt reply delivery failed"); }
+ }
+ 
+ // How long the first job of a batch waits for company: five hashes interleaved cost about 1.3 times one hash,
+--- a/build.sh
++++ b/build.sh
+@@ -1,14 +1,47 @@
+ #!/usr/bin/env bash
+-# Builds the pinned Goose compiler from source, then the server with it (Goose compiles to C, built by gcc).
++# Portable PR31 reference: same pinned compiler and optimization as candidate.
++# Only native syscall/pipe ABI code is linked. JSON and HMAC remain Goose.
+ set -euo pipefail
+ cd "$(dirname "$0")"
+-GOOSE_COMMIT=f605b5a0
+-if [ ! -x .goose/build/goose ] || [ "$(git -C .goose rev-parse --short=8 HEAD)" != "$GOOSE_COMMIT" ]; then
+-    rm -rf .goose
+-    git clone -q https://github.com/aardappel/goose .goose
+-    git -C .goose checkout -q "$GOOSE_COMMIT"
+-    cmake -S .goose -B .goose/build -DCMAKE_BUILD_TYPE=Release >/dev/null
+-    cmake --build .goose/build -j"$(nproc)" >/dev/null
++
++goose_commit=f605b5a07dd2aa3a5cb3f4c9b14002bd3c9d3d1a
++goose_sha=86482df9e11ff9472d2214e93a71cd7f22b05d31260f66d7e760d5df784a7e92
++if [[ -n ${GOOSE_BIN:-} ]]; then
++    goose_bin=$(readlink -f "$GOOSE_BIN")
++    goose_source=$(cd "$(dirname "$goose_bin")/.." && pwd)
++else
++    goose_source="$PWD/.goose"
++    goose_bin="$goose_source/build/goose"
++    if [[ ! -x $goose_bin || ! -f $goose_source/COMMIT || $(cat "$goose_source/COMMIT") != "$goose_commit" ]]; then
++        mkdir -p .deps
++        archive="$PWD/.deps/goose-$goose_commit.tar.gz"
++        if [[ ! -f $archive ]]; then
++            curl -fsSL --retry 3 "https://codeload.github.com/aardappel/goose/tar.gz/$goose_commit" -o "$archive"
++        fi
++        printf '%s  %s\n' "$goose_sha" "$archive" | sha256sum -c -
++        rm -rf "$goose_source"
++        mkdir -p "$goose_source"
++        tar -xzf "$archive" --strip-components=1 -C "$goose_source"
++        cmake -S "$goose_source" -B "$goose_source/build" -DCMAKE_BUILD_TYPE=Release -DGOOSE_BUILTIN_LIBS=
++        cmake --build "$goose_source/build" --parallel "${BUILD_JOBS:-4}"
++        printf '%s\n' "$goose_commit" > "$goose_source/COMMIT"
++    fi
+ fi
+-mkdir -p bin
+-GOOSE_HOME="$PWD/.goose-home" GOOSE_CC=gcc .goose/build/goose build main.goose -o bin/conduit
++[[ -x $goose_bin && -f $goose_source/src/runtime/goose.h ]] || {
++    echo 'The pinned Goose executable and its adjacent source tree are required.' >&2
++    exit 1
++}
++[[ $("$goose_bin" version) == 'goose runtime df5f78ce88d4' ]] || {
++    echo "Expected Goose compiler $goose_commit (runtime df5f78ce88d4)." >&2
++    exit 1
++}
++mkdir -p .build bin
++"$goose_bin" -O2 --standalone -o .build/main.c main.goose
++cp "$goose_source/src/runtime/goose.h" .build/goose.h
++cc=${CC:-gcc}
++"$cc" -O3 -march=native -DNDEBUG -std=gnu11 -flto=2 -fno-semantic-interposition -fno-plt \
++    -I.build -pthread .build/main.c native_sys.c \
++    -lm -pthread -o bin/conduit
++"$goose_bin" version
++"$cc" --version | head -1
++sha256sum bin/conduit
+--- a/install.sh
++++ b/install.sh
+@@ -1,5 +1,8 @@
+ #!/usr/bin/env bash
+-# Runs once as root on a clean Ubuntu 24.04: the C toolchain the Goose compiler is built with and compiles to.
++# Ubuntu 24.04: build.sh compiles the pinned Goose source as a normal user.
+ set -euo pipefail
+-apt-get update -q && apt-get install -y -q build-essential cmake git ca-certificates
++export DEBIAN_FRONTEND=noninteractive
++apt-get update -q
++apt-get install -y -q --no-install-recommends build-essential cmake curl ca-certificates
++printf 'C compiler: '
+ gcc --version | head -1
+--- a/main.goose
++++ b/main.goose
+@@ -82,6 +82,9 @@
+     listen_port = port;
+     let workers = env_int("WORKERS", 4);
+     readers = env_int("PG_READERS", 3);
++    // Same configuration guard as the candidate; default workers/readers are unchanged.
++    if readers > 94 { abort("PG_READERS leaves no room within the 95-connection limit"); }
++    if workers > 95 / (readers + 1) { abort("WORKERS * (PG_READERS + 1) must be at most 95"); }
+     let hashers = env_int("HASHERS", 2);
+     batch_ms = env_int("BCRYPT_BATCH_MS", 250);
+     batch_max = if env_or("READ_BATCH", "") == "0" { 0 } else { env_int("READ_BATCH", 32) };
+--- /dev/null
++++ b/native_sys.c
+@@ -0,0 +1,91 @@
++/* Portable syscall/pipe boundary reused from tbsvttr's multicore Goose
++   implementation (PR #32). This comparator otherwise retains XeonFX's PR #31
++   scheduler and pure Goose JSON/HMAC. C translates the native syscall ABI,
++   ARM epoll padding, and reliable delivery of completed bcrypt replies. */
++#define _GNU_SOURCE
++#include "native_sys.h"
++#include <errno.h>
++#include <limits.h>
++#include <stddef.h>
++#include <poll.h>
++#include <sys/epoll.h>
++#include <sys/random.h>
++#include <sys/socket.h>
++#include <unistd.h>
++
++#pragma pack(push, 1)
++typedef struct { uint32_t events; uint64_t data; } GooseEpollEvent;
++typedef struct { GooseEpollEvent *data; int64_t len; } GooseEpollSlice;
++#pragma pack(pop)
++
++int64_t native_sys_read(int32_t fd, mutable_bytes buffer) {
++    return read(fd, buffer.data, (size_t)buffer.len);
++}
++
++int64_t native_sys_write(int32_t fd, bytes buffer) {
++    return write(fd, buffer.data, (size_t)buffer.len);
++}
++
++/* A bcrypt reply is one 72-byte record on an O_NONBLOCK pipe. Writes no
++   larger than PIPE_BUF either transfer the complete record or return EAGAIN;
++   waiting here backpressures the hash worker instead of discarding its job. */
++int64_t native_write_atomic_reply(int32_t fd, bytes buffer) {
++    if (buffer.len <= 0 || buffer.len > PIPE_BUF) { errno = EINVAL; return -1; }
++    for (;;) {
++        ssize_t n = write(fd, buffer.data, (size_t)buffer.len);
++        if (n == buffer.len) return n;
++        if (n >= 0) { errno = EIO; return -1; }
++        if (errno == EINTR) continue;
++        if (errno != EAGAIN && errno != EWOULDBLOCK) return -1;
++        struct pollfd pipe = { .fd = fd, .events = POLLOUT };
++        int ready;
++        do { ready = poll(&pipe, 1, -1); } while (ready < 0 && errno == EINTR);
++        if (ready < 0) return -1;
++        if (pipe.revents & POLLNVAL) { errno = EBADF; return -1; }
++        if (pipe.revents & (POLLERR | POLLHUP)) { errno = EPIPE; return -1; }
++        /* Another worker can fill the pipe before this one writes. Retry. */
++    }
++}
++
++int64_t native_sys_recv(int32_t fd, mutable_bytes buffer, int32_t flags) {
++    return recv(fd, buffer.data, (size_t)buffer.len, flags);
++}
++
++int64_t native_sys_send(int32_t fd, bytes buffer, int32_t flags) {
++    return send(fd, buffer.data, (size_t)buffer.len, flags);
++}
++
++int64_t native_sys_getrandom(mutable_bytes buffer, uint32_t flags) {
++    return getrandom(buffer.data, (size_t)buffer.len, flags);
++}
++
++int32_t native_sys_epoll_ctl(int32_t epfd, int32_t op, int32_t fd, GooseEpollEvent *event) {
++#if defined(__x86_64__) || defined(__i386__)
++    /* Linux x86 packs epoll_event exactly like Goose: retain zero-copy. */
++    _Static_assert(sizeof(struct epoll_event) == sizeof(GooseEpollEvent), "x86 epoll size");
++    _Static_assert(offsetof(struct epoll_event, data) == offsetof(GooseEpollEvent, data), "x86 epoll offset");
++    return epoll_ctl(epfd, op, fd, (struct epoll_event *)(void *)event);
++#else
++    struct epoll_event native;
++    if (event) { native.events = event->events; native.data.u64 = event->data; }
++    return epoll_ctl(epfd, op, fd, event ? &native : NULL);
++#endif
++}
++
++int32_t native_sys_epoll_wait(int32_t epfd, GooseEpollSlice events, int32_t timeout) {
++    if (events.len <= 0 || events.len > INT_MAX) { errno = EINVAL; return -1; }
++#if defined(__x86_64__) || defined(__i386__)
++    return epoll_wait(epfd, (struct epoll_event *)(void *)events.data, (int)events.len, timeout);
++#else
++    /* The scheduler asks for 256 events. A larger slice is safely capped to
++       that many; no allocation or per-event ownership survives this call. */
++    struct epoll_event native[256];
++    int capacity = events.len < 256 ? (int)events.len : 256;
++    int n = epoll_wait(epfd, native, capacity, timeout);
++    for (int i = 0; i < n; ++i) {
++        events.data[i].events = native[i].events;
++        events.data[i].data = native[i].data.u64;
++    }
++    return n;
++#endif
++}
+--- /dev/null
++++ b/native_sys.h
+@@ -0,0 +1,12 @@
++#ifndef PR31_REFERENCE_NATIVE_SYS_H
++#define PR31_REFERENCE_NATIVE_SYS_H
++
++#include <stdint.h>
++
++/* Borrowed Goose slice ABI only. No native JSON or crypto operations. */
++#pragma pack(push, 1)
++typedef struct { const uint8_t *data; int64_t len; } bytes;
++typedef struct { uint8_t *data; int64_t len; } mutable_bytes;
++#pragma pack(pop)
++
++#endif
+--- a/routes.goose
++++ b/routes.goose
+@@ -399,7 +399,22 @@
+     param_int(msg, viewer);
+     param_text(msg, pval);
+     bind_end(msg, b);
++    if kind == K_FAVORITE || kind == K_UNFAVORITE { set_ctx(slot, pval); }
+     submit(slot, msg, auth);
++}
++
++// Same correctness fix as the candidate: read the committed favorite count.
++// Save only the following read for retries; a committed mutation is never replayed.
++fn favorite_committed(slot: i64, rows: const u8[:]) {
++    if first_row(rows).len == 0 { fail(slot, 404, "article not found"); return; }
++    let viewer = conns[slot].viewer;
++    begin(slot, K_ARTICLE, viewer);
++    var msg: u8[>..] = [];
++    let b = stmt(slot, msg, ST_ARTICLE, 2);
++    param_int(msg, viewer);
++    param_text(msg, ctx(slot));
++    bind_end(msg, b);
++    submit(slot, msg, false);
+ }
+ 
+ fn create_article(slot: i64, r: Request&) {
+@@ -589,6 +604,7 @@
+     let m = first_row(rows);
+     var out: u8[>..] = [];
+     match c.kind {
++        K_FAVORITE, K_UNFAVORITE => { favorite_committed(slot, rows); return; },
+         K_REGISTER, K_CURRENT, K_UPDATE_USER => {
+             if m.len == 0 { fail(slot, 401, "unauthorized"); return; }
+             var r = row(m);
+@@ -646,7 +662,7 @@
+             out.push('}');
+             end_response(out, at);
+         },
+-        K_ARTICLE, K_FAVORITE, K_UNFAVORITE, K_CREATE, K_UPDATE_ARTICLE => {
++        K_ARTICLE, K_CREATE, K_UPDATE_ARTICLE => {
+             if m.len == 0 { fail(slot, 404, "article not found"); return; }
+             var r = row(m);
+             if c.kind == K_UPDATE_ARTICLE {
+--- a/sql.goose
++++ b/sql.goose
+@@ -214,18 +214,9 @@
+             out.append(" FROM a JOIN users u ON u.id = a.author_id) x ON true");
+         },
+         ST_DELETE_ARTICLE => out.append("WITH t AS (SELECT id, author_id FROM articles WHERE slug = $2), d AS (DELETE FROM articles WHERE id = (SELECT id FROM t WHERE author_id = $1)) SELECT author_id FROM t"),
+-        // The toggles write and read in one statement, and the read sees the statement's snapshot, so the count is
+-        // the snapshot's corrected by whether the snapshot holds the viewer's favorite.
+-        ST_FAVORITE => {
+-            out.append("WITH t AS (SELECT id FROM articles WHERE slug = $2), w AS (INSERT INTO favorites (user_id, article_id) SELECT $1, id FROM t ON CONFLICT DO NOTHING) SELECT ");
+-            columns(out, true, "true", str("(", FAVORITES_COUNT, " + (NOT ", VIEWER_FAVORITE, ")::int)"), "");
+-            out.append(" FROM articles a JOIN users u ON u.id = a.author_id WHERE a.id = (SELECT id FROM t)");
+-        },
+-        ST_UNFAVORITE => {
+-            out.append("WITH t AS (SELECT id FROM articles WHERE slug = $2), w AS (DELETE FROM favorites WHERE user_id = $1 AND article_id = (SELECT id FROM t)) SELECT ");
+-            columns(out, true, "false", str("(", FAVORITES_COUNT, " - (", VIEWER_FAVORITE, ")::int)"), "");
+-            out.append(" FROM articles a JOIN users u ON u.id = a.author_id WHERE a.id = (SELECT id FROM t)");
+-        },
++        // Same correctness fix as the candidate: mutate first, then read after commit.
++        ST_FAVORITE => out.append("WITH t AS (SELECT id FROM articles WHERE slug = $2), w AS (INSERT INTO favorites (user_id, article_id) SELECT $1, id FROM t ON CONFLICT DO NOTHING) SELECT id FROM t"),
++        ST_UNFAVORITE => out.append("WITH t AS (SELECT id FROM articles WHERE slug = $2), w AS (DELETE FROM favorites WHERE user_id = $1 AND article_id = (SELECT id FROM t)) SELECT id FROM t"),
+         // No row: unknown article. One row with a NULL id: no comments. The viewer's followees are read once.
+         ST_COMMENTS => {
+             out.append("SELECT x.id, x.created_at, x.updated_at, x.body, x.username, x.bio, x.image, x.following FROM articles a LEFT JOIN LATERAL (SELECT c.id, c.created_at, c.updated_at, c.body, u.username, u.bio, u.image, ");
+--- a/sys.goose
++++ b/sys.goose
+@@ -1,6 +1,6 @@
+-// The Linux calls the server makes, bound straight to glibc. A Goose slice crosses as { data, len } by value, which
+-// x86-64 passes in two registers, so `send(fd, buf, flags)` here is C's `send(fd, buf.data, buf.len, flags)`.
+-// Nothing variadic is called (no fcntl or ioctl): sockets are made non-blocking by SOCK_NONBLOCK instead.
++// Portable reference adaptation: C explicitly translates slice arguments and
++// native epoll layout. The original Goose scheduler and all JSON/crypto remain.
++// x86 epoll stays zero-copy; ARM's native 16-byte event layout is translated.
+ 
+ struct EpollEvent { events: u32, data: u64 }                 // struct epoll_event: packed, 12 bytes
+ struct SockAddrIn { family: u16, port: u16, addr: u32, zero: u64 }   // struct sockaddr_in, both numbers big-endian
+@@ -12,16 +12,17 @@
+ extern "accept4" fn sys_accept4(fd: i32, addr: i64, len: i64, flags: i32) -> i32;     // addr, len: NULL
+ extern "connect" fn sys_connect(fd: i32, addr: const SockAddrIn&, len: u32) -> i32;
+ extern "setsockopt" fn sys_setsockopt(fd: i32, level: i32, name: i32, value: const i32&, len: u32) -> i32;
+-extern "recv" fn sys_recv(fd: i32, buf: u8[:], flags: i32) -> i64;
+-extern "send" fn sys_send(fd: i32, buf: const u8[:], flags: i32) -> i64;
+-extern "read" fn sys_read(fd: i32, buf: u8[:]) -> i64;
+-extern "write" fn sys_write(fd: i32, buf: const u8[:]) -> i64;
++extern "native_sys_recv" fn sys_recv(fd: i32, buf: u8[:], flags: i32) -> i64;
++extern "native_sys_send" fn sys_send(fd: i32, buf: const u8[:], flags: i32) -> i64;
++extern "native_sys_read" fn sys_read(fd: i32, buf: u8[:]) -> i64;
++extern "native_sys_write" fn sys_write(fd: i32, buf: const u8[:]) -> i64;
++extern fn native_write_atomic_reply(fd: i32, buf: const u8[:]) -> i64;
+ extern "close" fn sys_close(fd: i32) -> i32;
+ extern "pipe2" fn sys_pipe2(fds: i32[2]&, flags: i32) -> i32;
+ extern "epoll_create1" fn sys_epoll_create1(flags: i32) -> i32;
+-extern "epoll_ctl" fn sys_epoll_ctl(epfd: i32, op: i32, fd: i32, ev: EpollEvent&) -> i32;
+-extern "epoll_wait" fn sys_epoll_wait(epfd: i32, evs: EpollEvent[:], timeout: i32) -> i32;
+-extern "getrandom" fn sys_getrandom(buf: u8[:], flags: u32) -> i64;
++extern "native_sys_epoll_ctl" fn sys_epoll_ctl(epfd: i32, op: i32, fd: i32, ev: EpollEvent&) -> i32;
++extern "native_sys_epoll_wait" fn sys_epoll_wait(epfd: i32, evs: EpollEvent[:], timeout: i32) -> i32;
++extern "native_sys_getrandom" fn sys_getrandom(buf: u8[:], flags: u32) -> i64;
+ extern "getrlimit" fn sys_getrlimit(resource: i32, limit: RLimit&) -> i32;
+ extern "setrlimit" fn sys_setrlimit(resource: i32, limit: const RLimit&) -> i32;
+ extern "setpriority" fn sys_setpriority(which: i32, who: u32, prio: i32) -> i32;

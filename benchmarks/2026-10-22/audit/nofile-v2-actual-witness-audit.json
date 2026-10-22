@@ -1,0 +1,299 @@
+{
+  "scope": "Independent reparse of actual three-app kernel witnesses and negative raw-record tampering probes; no Docker or live app launch",
+  "analyzer_sha256": "f0ced4e1c9db006ff0123f8a163e0cd9e853a6b31978dea18e86b79117d7e487",
+  "cases": {
+    "rust7": {
+      "pass": true,
+      "checks": [
+        {
+          "check": "startup:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "startup:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "startup:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "startup:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "after-health:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "after-health:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "after-health:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "after-health:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "after-health:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "after-health:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "after-health:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "raw_limit_sidecar",
+          "pass": true
+        },
+        {
+          "check": "raw_status_sidecar",
+          "pass": true
+        },
+        {
+          "check": "owned_app_stopped",
+          "pass": true
+        },
+        {
+          "check": "owned_clone_dropped",
+          "pass": true
+        },
+        {
+          "check": "raw_lower_limit_rejected_despite_valid_true",
+          "pass": true
+        },
+        {
+          "check": "raw_saved_root_uid_rejected_despite_valid_true",
+          "pass": true
+        }
+      ],
+      "actual_pid": 21011,
+      "uid": 501,
+      "source_app_sha256": "e86f2206fac121ffd8502a29f708f12811a683baae21f6515caa83b385050c7f",
+      "source_snapshot_sha256": "3ae70b94bf820095119901dab7e92b2dd7f95a2a2b0134e055e7c8ab0cb52321"
+    },
+    "goose": {
+      "pass": true,
+      "checks": [
+        {
+          "check": "startup:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "startup:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "startup:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "startup:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "after-health:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "after-health:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "after-health:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "after-health:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "after-health:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "after-health:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "after-health:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "raw_limit_sidecar",
+          "pass": true
+        },
+        {
+          "check": "raw_status_sidecar",
+          "pass": true
+        },
+        {
+          "check": "owned_app_stopped",
+          "pass": true
+        },
+        {
+          "check": "owned_clone_dropped",
+          "pass": true
+        },
+        {
+          "check": "raw_lower_limit_rejected_despite_valid_true",
+          "pass": true
+        },
+        {
+          "check": "raw_saved_root_uid_rejected_despite_valid_true",
+          "pass": true
+        }
+      ],
+      "actual_pid": 21086,
+      "uid": 501,
+      "source_app_sha256": "ee26c2fd5372ac5182bd54d51c015b3d381b28c281667316fc171dd7c426d948",
+      "source_snapshot_sha256": "2c88ab792327d7e59fcdff2790893c4c69abaa359512565cb007f70ab4be2e81"
+    },
+    "goose31_portable": {
+      "pass": true,
+      "checks": [
+        {
+          "check": "startup:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "startup:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "startup:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "startup:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "after-health:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "after-health:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "after-health:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "after-health:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "after-health:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "after-health:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "after-health:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "raw_limit_sidecar",
+          "pass": true
+        },
+        {
+          "check": "raw_status_sidecar",
+          "pass": true
+        },
+        {
+          "check": "owned_app_stopped",
+          "pass": true
+        },
+        {
+          "check": "owned_clone_dropped",
+          "pass": true
+        },
+        {
+          "check": "raw_lower_limit_rejected_despite_valid_true",
+          "pass": true
+        },
+        {
+          "check": "raw_saved_root_uid_rejected_despite_valid_true",
+          "pass": true
+        }
+      ],
+      "actual_pid": 21172,
+      "uid": 501,
+      "source_app_sha256": "21f246d00478a2817af90acf473d84830c7ae649b2a8e359002c1a78f78a77e2",
+      "source_snapshot_sha256": "be6ae066707c0fc6107315b1892645569b6119d400117ae8e89bc768d24c385a"
+    }
+  },
+  "pass": true,
+  "checks": 60
+}

@@ -1,0 +1,90 @@
+--- a/paired-multi-load.py
++++ b/paired-multi-load.py
+@@ -132,21 +132,69 @@
+ 
+ def summarize_monitor(path,start_ms,end_ms,quota):
+     rows=[json.loads(line) for line in pathlib.Path(path).read_text().splitlines()]
++    if not rows or end_ms<=start_ms:return {'valid_sampling':False,'error':'empty witness or invalid window'}
++    monotonic_order=all(b['monotonic_ns']>x['monotonic_ns'] for x,b in zip(rows,rows[1:]))
++    wall_order=all(b['wall_ns']>=x['wall_ns'] for x,b in zip(rows,rows[1:]))
++    if not monotonic_order or not wall_order:
++        return {'valid_sampling':False,'error':'witness timestamps are not ordered','monotonic_order':monotonic_order,'wall_order':wall_order}
++    # Include the nearest sample outside either boundary when available. This
++    # exposes gaps straddling a boundary instead of checking only inner samples.
++    left=[i for i,r in enumerate(rows) if r['wall_ns']/10**6<=start_ms]
++    right=[i for i,r in enumerate(rows) if r['wall_ns']/10**6>=end_ms]
++    lo=left[-1] if left else 0
++    hi=right[0] if right else len(rows)-1
++    span=rows[lo:hi+1]
++    start_missing=max(0,span[0]['wall_ns']/10**6-start_ms)/1000
++    end_missing=max(0,end_ms-span[-1]['wall_ns']/10**6)/1000
++    mono_gaps=[(b['monotonic_ns']-x['monotonic_ns'])/10**9 for x,b in zip(span,span[1:])]
++    wall_gaps=[(b['wall_ns']-x['wall_ns'])/10**9 for x,b in zip(span,span[1:])]
++    coverage={'measurement_start_ms':start_ms,'measurement_end_ms':end_ms,
++              'coverage_span_samples':len(span),'coverage_start_missing_s':start_missing,
++              'coverage_end_missing_s':end_missing,'full_window_bracketed':bool(left and right),
++              'max_sample_gap_s':max(mono_gaps,default=None),
++              'max_wall_sample_gap_s':max(wall_gaps,default=None)}
+     selected=[r for r in rows if start_ms<=r['wall_ns']/10**6<=end_ms]
+-    if len(selected)<2: return {'valid_sampling':False,'samples':len(selected)}
++    if len(selected)<2:return {'valid_sampling':False,'samples':len(selected),**coverage}
+     first,last=selected[0],selected[-1]
+     elapsed=(last['monotonic_ns']-first['monotonic_ns'])/10**9
+     cpu=(last['cpu']['usage_usec']-first['cpu']['usage_usec'])/10**6
+     out={'samples':len(selected),'elapsed_s':elapsed,'cgroup_cpu_quota_pct':cpu/elapsed/quota*100,
++         'cpu_scope':'sampled interval inside the measurement window',
++         'sampled_interval_start_ms':first['wall_ns']/10**6,'sampled_interval_end_ms':last['wall_ns']/10**6,
+          'memory_peak_sampled_bytes':max(int(r['memory.current']) for r in selected),
+          'swap_peak_sampled_bytes':max(int(r['memory.swap.current']) for r in selected),
+-         'max_sample_gap_s':max((b['monotonic_ns']-x['monotonic_ns'])/10**9 for x,b in zip(selected,selected[1:])),
+          'memory_events_before':first['memory.events'],'memory_events_after':last['memory.events']}
+-    out['valid_sampling']=out['max_sample_gap_s']<=3
++    out.update(coverage)
++    out['valid_sampling']=(start_missing<=3 and end_missing<=3 and out['max_sample_gap_s']<=3
++                           and out['max_wall_sample_gap_s']<=3 and cpu>=0)
+     for kind in ['app','pg']:
+         out[kind+'_whole_target_pct']=(last[kind]['cpu_s']-first[kind]['cpu_s'])/elapsed/8*100
+         out[kind+'_rss_sum_peak_bytes']=max(r[kind]['rss_bytes'] for r in selected)
+     return out
++
++def memory_event_counts(text):
++    return {key:int(value) for key,value in (line.split() for line in text.splitlines())}
++
++def assess_target_runtime(before,after):
++    result={'valid_witness':False,'pass':False,'reasons':[]}
++    if not isinstance(after.get('app_healthy'),bool):
++        result['reasons'].append('after-load app health witness is missing')
++        return result
++    try:
++        old=memory_event_counts(before['memory.events'])
++        new=memory_event_counts(after['memory.events'])
++        if not {'oom','oom_kill'}<=old.keys() or not {'oom','oom_kill'}<=new.keys():
++            raise ValueError('OOM counter keys are missing')
++        deltas={name:new.get(name,0)-old.get(name,0) for name in ['oom','oom_kill','oom_group_kill']}
++        if any(value<0 for value in deltas.values()):raise ValueError('OOM counters moved backwards')
++    except (KeyError,TypeError,ValueError,AttributeError) as e:
++        result['reasons'].append('invalid target OOM witness: '+str(e))
++        return result
++    result.update(valid_witness=True,app_healthy=after['app_healthy'],oom_deltas=deltas)
++    if not after['app_healthy']:result['reasons'].append('app is unhealthy after load and before clean stop')
++    if any(deltas.values()):result['reasons'].append('target cgroup recorded OOM events during the attempt')
++    result['pass']=not result['reasons']
++    return result
+ 
+ attempts=[]
+ failure=None
+@@ -287,7 +335,13 @@
+                 try:
+                     argv=['--case',cdir+'/app.json'] if (attempt/'app.json').exists() else []
+                     control('snapshot',cdir+'/after-load.json',*argv)
+-                except Exception as e: state['after_snapshot_error']=str(e)
++                    state['target_runtime']=assess_target_runtime(json.loads((attempt/'before.json').read_text()),
++                                                                  json.loads((attempt/'after-load.json').read_text()))
++                except Exception as e:
++                    state['after_snapshot_error']=str(e)
++                    state['target_runtime']={'valid_witness':False,'pass':False,'reasons':['after-load snapshot unavailable']}
++                if state['classification']=='PASS' and not state['target_runtime']['pass']:
++                    state['classification']='FAIL_TARGET_RUNTIME' if state['target_runtime']['valid_witness'] else 'INVALID_TARGET_WITNESS'
+                 if (attempt/'app.json').exists():
+                     try: control('stop',cdir+'/stopped.json','--case',cdir+'/app.json')
+                     except Exception as e: state['stop_error']=str(e)

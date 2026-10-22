@@ -1,0 +1,90 @@
+{
+  "scope": "local ARM64 Mac/Docker correctness-only modified-duration smoke",
+  "attempts": [
+    {
+      "id": "01-p1-article_on",
+      "pair": 1,
+      "case": "article_on",
+      "database": "mc_pair_20261022_173322_01_83c7",
+      "classification": "PASS",
+      "load_exit": 0,
+      "merge_exit": 0,
+      "verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "overall": {
+        "count": 3984,
+        "rps": 265.6,
+        "p50_ms": 0.736,
+        "p90_ms": 1.75,
+        "p95_ms": 2.169,
+        "p99_ms": 3.001,
+        "max_ms": 316.415,
+        "mean_ms": 1.0007831325301202,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 3929,
+          "201": 55
+        }
+      },
+      "boxes": [
+        {
+          "file": "/evidence/paired-load/pair_20261022t173322_6500cd/01-p1-article_on/box0.json",
+          "box_index": 0,
+          "host": "a40d58b68177",
+          "users": 1000,
+          "cpu_avg_measure_pct": 3.2506198959879593,
+          "cpu_max_measure_pct": 3.8922155688622753,
+          "proc_cpu_avg_measure_pct": 0.6887226754080863,
+          "rss_peak_mb": 41.55078125,
+          "fell_behind": false,
+          "requests_in_window": 3984,
+          "tcp_connects": 977
+        }
+      ],
+      "target_monitor": {
+        "samples": 15,
+        "elapsed_s": 14.028089006,
+        "cgroup_cpu_quota_pct": 2.346774566793763,
+        "memory_peak_sampled_bytes": 10024439808,
+        "swap_peak_sampled_bytes": 0,
+        "max_sample_gap_s": 1.005553167,
+        "memory_events_before": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+        "memory_events_after": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+        "valid_sampling": true,
+        "app_whole_target_pct": 0.4544453629623627,
+        "app_rss_sum_peak_bytes": 10334208,
+        "pg_whole_target_pct": 1.7999600650666094,
+        "pg_rss_sum_peak_bytes": 3991719936
+      },
+      "load_monitor": {
+        "samples": 15,
+        "elapsed_s": 14.02711459,
+        "cgroup_cpu_quota_pct": 3.494414313471435,
+        "memory_peak_sampled_bytes": 55336960,
+        "swap_peak_sampled_bytes": 0,
+        "max_sample_gap_s": 1.005741667,
+        "memory_events_before": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+        "memory_events_after": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+        "valid_sampling": true,
+        "app_whole_target_pct": 0.0,
+        "app_rss_sum_peak_bytes": 0,
+        "pg_whole_target_pct": 0.0,
+        "pg_rss_sum_peak_bytes": 0
+      },
+      "load_cgroup_headroom_pass": true,
+      "load_oom_delta": 0
+    }
+  ],
+  "plan_sha256": "816aa3387dd55e0ef2d982fb7bf4d1a6f660d7d43868df476cf88f2619bca4b1",
+  "pairs": [
+    {
+      "pair": 1,
+      "qualified": false
+    }
+  ],
+  "smoke_only": true,
+  "smoke_pass": true
+}

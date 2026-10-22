@@ -1,0 +1,1086 @@
+Goose source build and conformance	Set up job	﻿2026-10-22T18:45:51.1515516Z Current runner version: '2.338.0'
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1552422Z ##[group]Runner Image Provisioner
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1553690Z Hosted Compute Agent
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1554765Z Version: 20261012.601
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1555802Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1557381Z Build Date: 2026-10-12T17:48:21Z
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1558556Z Worker ID: {70cf7882-7577-4b26-b79d-faf74792641e}
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1559746Z Region: eastus
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1560882Z Cloud: Azure
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1561808Z ##[endgroup]
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1564456Z ##[group]Operating System
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1565631Z Ubuntu
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1566619Z 24.04.5
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1567955Z LTS
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1568860Z ##[endgroup]
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1569916Z ##[group]Runner Image
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1571040Z Image: ubuntu-24.04
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1572028Z Version: 20261012.334.1
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1574116Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1577455Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1579188Z ##[endgroup]
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1581158Z ##[group]GITHUB_TOKEN Permissions
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1584118Z Contents: read
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1585280Z Metadata: read
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1586194Z ##[endgroup]
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1590019Z Secret source: Actions
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1591780Z Cache mode: write
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.1593153Z Prepare workflow directory
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.2234756Z Prepare all required actions
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.2307262Z Getting action download info
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.3823227Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.4765930Z Download action repository 'actions/setup-go@v5' (SHA:40f1582b2485089dde7abd97c1529aa768e1baff)
+Goose source build and conformance	Set up job	2026-10-22T18:45:51.7503070Z Complete job name: Goose source build and conformance
+Goose source build and conformance	Initialize containers	﻿2026-10-22T18:45:51.8031649Z ##[group]Checking docker version
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:51.8044119Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.3622526Z '1.48'
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.3642036Z Docker daemon API version: '1.48'
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.3643517Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.3922613Z '1.48'
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.3937298Z Docker client API version: '1.48'
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.3943279Z ##[endgroup]
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.3946628Z ##[group]Clean up resources from previous jobs
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.3952673Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=6981ab"
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.4473424Z ##[command]/usr/bin/docker network prune --force --filter "label=6981ab"
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.4710012Z ##[endgroup]
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.4711269Z ##[group]Create local container network
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.4722822Z ##[command]/usr/bin/docker network create --label 6981ab github_network_a610459a51f449c3a97b11d11a07b18b
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.5240162Z cfc434343df2897a7ed42cb820e3a64b8a0a5cfbacae65d0652e8848725db4a0
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.5262835Z ##[endgroup]
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.5290561Z ##[group]Starting postgres service container
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.5312980Z ##[command]/usr/bin/docker pull postgres:18
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.8438366Z 18: Pulling from library/postgres
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9327900Z f2be67225471: Pulling fs layer
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9328687Z 36f05ca1a259: Pulling fs layer
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9329266Z 92accee5624e: Pulling fs layer
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9329822Z 5bf0df4dfeec: Pulling fs layer
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9330428Z fc259989795e: Pulling fs layer
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9331002Z 33e59af3458c: Pulling fs layer
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9331520Z bea9e19f5a74: Pulling fs layer
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9332012Z 19f779d0bd48: Pulling fs layer
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9332488Z cf9efa127f85: Pulling fs layer
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9332956Z af1084bcb355: Pulling fs layer
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9334488Z 40ebd398ec37: Pulling fs layer
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9335044Z 00490e632b75: Pulling fs layer
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9336096Z 8ed0c854313a: Pulling fs layer
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9336558Z 5bf0df4dfeec: Waiting
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9336890Z fc259989795e: Waiting
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9337441Z 33e59af3458c: Waiting
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9337735Z bea9e19f5a74: Waiting
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9338116Z 19f779d0bd48: Waiting
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9338553Z cf9efa127f85: Waiting
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9338917Z 00490e632b75: Waiting
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9339252Z af1084bcb355: Waiting
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9339717Z 8ed0c854313a: Waiting
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9340008Z 40ebd398ec37: Waiting
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9630360Z 36f05ca1a259: Verifying Checksum
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9631073Z 36f05ca1a259: Download complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9852964Z 92accee5624e: Verifying Checksum
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:54.9854486Z 92accee5624e: Download complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.0006871Z 5bf0df4dfeec: Verifying Checksum
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.0009020Z 5bf0df4dfeec: Download complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.0483800Z 33e59af3458c: Verifying Checksum
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.0487952Z 33e59af3458c: Download complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.0551915Z fc259989795e: Verifying Checksum
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.0553185Z fc259989795e: Download complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.0677727Z f2be67225471: Verifying Checksum
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.0679330Z f2be67225471: Download complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.0744319Z bea9e19f5a74: Verifying Checksum
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.0744968Z bea9e19f5a74: Download complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.0803050Z 19f779d0bd48: Verifying Checksum
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.0803870Z 19f779d0bd48: Download complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.1089603Z 40ebd398ec37: Download complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.1102265Z af1084bcb355: Verifying Checksum
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.1102877Z af1084bcb355: Download complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.1386999Z 8ed0c854313a: Download complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.1432259Z 00490e632b75: Verifying Checksum
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.1433854Z 00490e632b75: Download complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.7239841Z cf9efa127f85: Verifying Checksum
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:55.7241329Z cf9efa127f85: Download complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:56.2010008Z f2be67225471: Pull complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:59.1270820Z 36f05ca1a259: Pull complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:59.2966756Z 92accee5624e: Pull complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:59.3377409Z 5bf0df4dfeec: Pull complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:59.6328264Z fc259989795e: Pull complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:59.7055480Z 33e59af3458c: Pull complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:59.7129773Z bea9e19f5a74: Pull complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:45:59.7223372Z 19f779d0bd48: Pull complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:02.7673449Z cf9efa127f85: Pull complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:02.7798327Z af1084bcb355: Pull complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:02.7892095Z 40ebd398ec37: Pull complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:02.7990803Z 00490e632b75: Pull complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:02.8071529Z 8ed0c854313a: Pull complete
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:02.8105925Z Digest: sha256:edb0c08dc33befd0262ab3b5cf1c4f3f8cfd8b09e88c05b45adee29d6761ddb6
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:02.8116352Z Status: Downloaded newer image for postgres:18
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:02.8124489Z docker.io/library/postgres:18
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:02.8184135Z ##[command]/usr/bin/docker create --name 85769244c2f94ce19e6a39c8a07762db_postgres18_d00fc0 --label 6981ab --network github_network_a610459a51f449c3a97b11d11a07b18b --network-alias postgres -p 5432:5432 --health-cmd pg_isready --health-interval 2s --health-timeout 5s --health-retries 30 -e "POSTGRES_PASSWORD=postgres" -e GITHUB_ACTIONS=true -e CI=true postgres:18
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:02.8454231Z 8bd01b7af3c12b69b884ccc356c7110aca2faff956b64228ea9ff4aa9710b782
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:02.8474024Z ##[command]/usr/bin/docker start 8bd01b7af3c12b69b884ccc356c7110aca2faff956b64228ea9ff4aa9710b782
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:04.3640629Z 8bd01b7af3c12b69b884ccc356c7110aca2faff956b64228ea9ff4aa9710b782
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:04.3660700Z ##[command]/usr/bin/docker ps --all --filter id=8bd01b7af3c12b69b884ccc356c7110aca2faff956b64228ea9ff4aa9710b782 --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:04.3792994Z 8bd01b7af3c12b69b884ccc356c7110aca2faff956b64228ea9ff4aa9710b782 Up 1 second (health: starting)
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:04.3819563Z ##[command]/usr/bin/docker port 8bd01b7af3c12b69b884ccc356c7110aca2faff956b64228ea9ff4aa9710b782
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:04.3948521Z 5432/tcp -> 0.0.0.0:5432
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:04.3949185Z 5432/tcp -> [::]:5432
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:04.3993821Z ##[endgroup]
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:04.4002529Z ##[group]Waiting for all services to be ready
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:04.4015277Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" 8bd01b7af3c12b69b884ccc356c7110aca2faff956b64228ea9ff4aa9710b782
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:04.4158025Z starting
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:04.4178697Z postgres service is starting, waiting 2 seconds before checking again.
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:06.4185708Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" 8bd01b7af3c12b69b884ccc356c7110aca2faff956b64228ea9ff4aa9710b782
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:06.4318429Z starting
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:06.4338173Z postgres service is starting, waiting 3 seconds before checking again.
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:10.3111293Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" 8bd01b7af3c12b69b884ccc356c7110aca2faff956b64228ea9ff4aa9710b782
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:10.3231734Z healthy
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:10.3247560Z postgres service is healthy.
+Goose source build and conformance	Initialize containers	2026-10-22T18:46:10.3248331Z ##[endgroup]
+Goose source build and conformance	Run actions/checkout@v4	﻿2026-10-22T18:46:10.3608029Z ##[group]Run actions/checkout@v4
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3608637Z with:
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3608888Z   repository: tbsvttr/multicore-server-challenge
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3611290Z   token: ***
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3611498Z   ssh-strict: true
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3611702Z   ssh-user: git
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3611904Z   persist-credentials: true
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3612135Z   clean: true
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3612343Z   sparse-checkout-cone-mode: true
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3612589Z   fetch-depth: 1
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3612781Z   fetch-tags: false
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3612981Z   show-progress: true
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3613182Z   lfs: false
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3613383Z   submodules: false
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3613586Z   set-safe-directory: true
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3613823Z   allow-unsafe-pr-checkout: false
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3614244Z env:
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3614426Z   PGHOST: 127.0.0.1
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3614626Z   PGPORT: 5432
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3614817Z   PGUSER: postgres
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3615015Z   PGPASSWORD: postgres
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3615272Z   BUILD_JOBS: 2
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.3615459Z ##[endgroup]
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4631368Z Syncing repository: tbsvttr/multicore-server-challenge
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4633189Z ##[group]Getting Git version info
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4634028Z Working directory is '/home/runner/work/multicore-server-challenge/multicore-server-challenge'
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4635148Z [command]/usr/bin/git version
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4696784Z git version 2.55.0
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4718380Z ##[endgroup]
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4732650Z Temporarily overriding HOME='/home/runner/work/_temp/81d25517-4749-4a18-9853-8fd7ba6e4d4f' before making global git config changes
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4734079Z Adding repository directory to the temporary git global config as a safe directory
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4739840Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/multicore-server-challenge/multicore-server-challenge
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4797211Z Deleting the contents of '/home/runner/work/multicore-server-challenge/multicore-server-challenge'
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4801715Z ##[group]Initializing the repository
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4806792Z [command]/usr/bin/git init /home/runner/work/multicore-server-challenge/multicore-server-challenge
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4941478Z hint: Using 'master' as the name for the initial branch. This default branch name
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4942490Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4943401Z hint: to use in all of your new repositories, which will suppress this warning,
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4944115Z hint: call:
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4944514Z hint:
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4945503Z hint: 	git config --global init.defaultBranch <name>
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4952659Z hint:
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4953233Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4954405Z hint: 'development'. The just-created branch can be renamed via this command:
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4955120Z hint:
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4955528Z hint: 	git branch -m <name>
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4955957Z hint:
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4956545Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4958052Z Initialized empty Git repository in /home/runner/work/multicore-server-challenge/multicore-server-challenge/.git/
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.4975958Z [command]/usr/bin/git remote add origin https://github.com/tbsvttr/multicore-server-challenge
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.5039228Z ##[endgroup]
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.5040773Z ##[group]Disabling automatic garbage collection
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.5043025Z [command]/usr/bin/git config --local gc.auto 0
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.5096080Z ##[endgroup]
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.5097473Z ##[group]Setting up auth
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.5098458Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.5169922Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.5658651Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.5689420Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.5951432Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.5990343Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.6212994Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.6256426Z ##[endgroup]
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.6256835Z ##[group]Fetching the repository
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.6266286Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +f57aad71a91d2cc8bb20ad651276a540f95008ee:refs/remotes/origin/validation/goose-native-2026-10-22
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.9390319Z From https://github.com/tbsvttr/multicore-server-challenge
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.9391609Z  * [new ref]         f57aad71a91d2cc8bb20ad651276a540f95008ee -> origin/validation/goose-native-2026-10-22
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.9399472Z ##[endgroup]
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.9400196Z ##[group]Determining the checkout info
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.9401059Z ##[endgroup]
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.9407534Z [command]/usr/bin/git sparse-checkout disable
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.9465820Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.9500054Z ##[group]Checking out the ref
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.9506071Z [command]/usr/bin/git checkout --progress --force -B validation/goose-native-2026-10-22 refs/remotes/origin/validation/goose-native-2026-10-22
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.9803617Z Switched to a new branch 'validation/goose-native-2026-10-22'
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.9810036Z branch 'validation/goose-native-2026-10-22' set up to track 'origin/validation/goose-native-2026-10-22'.
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.9816300Z ##[endgroup]
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.9861479Z [command]/usr/bin/git log -1 --format=%H
+Goose source build and conformance	Run actions/checkout@v4	2026-10-22T18:46:10.9889160Z f57aad71a91d2cc8bb20ad651276a540f95008ee
+Goose source build and conformance	Run actions/setup-go@v5	﻿2026-10-22T18:46:11.0138336Z ##[group]Run actions/setup-go@v5
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.0138624Z with:
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.0138826Z   go-version-file: bench/go.mod
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.0139091Z   cache-dependency-path: bench/go.sum
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.0139421Z   check-latest: false
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.0141750Z   token: ***
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.0141947Z   cache: true
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.0142312Z env:
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.0142495Z   PGHOST: 127.0.0.1
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.0142702Z   PGPORT: 5432
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.0142895Z   PGUSER: postgres
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.0143100Z   PGPASSWORD: postgres
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.0143316Z   BUILD_JOBS: 2
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.0143506Z ##[endgroup]
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.1420136Z Setup go version spec 1.27.1
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.1430804Z Attempting to download 1.27.1...
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.1539555Z (node:2792) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.1541224Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.6234471Z matching 1.27.1...
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:11.6271251Z Acquiring 1.27.1 from https://github.com/actions/go-versions/releases/download/1.27.1-33583469715/go-1.27.1-linux-x64.tar.gz
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:12.0784348Z Extracting Go...
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:12.0902648Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/8a61c183-41f5-482c-ae25-d78b62ffd964 -f /home/runner/work/_temp/93910dc8-57dd-4082-9972-297a91fe85ee
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:13.8306184Z Successfully extracted go to /home/runner/work/_temp/8a61c183-41f5-482c-ae25-d78b62ffd964
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:13.8307328Z Adding to the cache ...
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:19.5803939Z Successfully cached go to /opt/hostedtoolcache/go/1.27.1/x64
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:19.5806450Z Added go to the path
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:19.5809092Z Successfully set up Go version 1.27.1
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:19.6074574Z [command]/opt/hostedtoolcache/go/1.27.1/x64/bin/go env GOMODCACHE
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:19.6118299Z [command]/opt/hostedtoolcache/go/1.27.1/x64/bin/go env GOCACHE
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:19.6170861Z /home/runner/go/pkg/mod
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:19.6185865Z /home/runner/.cache/go-build
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:19.6855568Z Cache is not found
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:19.6880406Z go version go1.27.1 linux/amd64
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:19.6881128Z 
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:19.6881894Z ##[group]go env
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9531640Z AR='ar'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9531930Z CC='gcc'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9532318Z CGO_CFLAGS='-O2 -g'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9532666Z CGO_CPPFLAGS=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9532989Z CGO_CXXFLAGS='-O2 -g'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9533332Z CGO_ENABLED='1'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9533657Z CGO_FFLAGS='-O2 -g'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9533998Z CGO_LDFLAGS='-O2 -g'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9534338Z CXX='g++'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9534637Z GCCGO='gccgo'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9534940Z GO111MODULE=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9535238Z GOAMD64='v1'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9535549Z GOARCH='amd64'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9535852Z GOAUTH='netrc'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9536194Z GOBIN='/home/runner/go/bin'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9536630Z GOCACHE='/home/runner/.cache/go-build'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9537410Z GOCACHEPROG=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9537748Z GODEBUG=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9538136Z GOENV='/home/runner/.config/go/env'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9538566Z GOEXE=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9538889Z GOEXPERIMENT=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9539247Z GOFIPS140='off'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9539604Z GOFLAGS=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9540731Z GOGCCFLAGS='-fPIC -m64 -pthread -Wl,--no-gc-sections -fmessage-length=0 -ffile-prefix-map=/tmp/go-build3581264506=/tmp/go-build -gno-record-gcc-switches'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9541960Z GOHOSTARCH='amd64'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9542338Z GOHOSTOS='linux'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9542714Z GOINSECURE=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9543156Z GOMOD='/dev/null'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9543567Z GOMODCACHE='/home/runner/go/pkg/mod'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9544065Z GONOPROXY=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9544401Z GONOSUMDB=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9544722Z GOOS='linux'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9545056Z GOPACKAGESDRIVER=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9545437Z GOPATH='/home/runner/go'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9546468Z GOPRIVATE=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9547542Z GOPROXY='https://proxy.golang.org,direct'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9548545Z GOROOT='/opt/hostedtoolcache/go/1.27.1/x64'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9549553Z GOSUMDB='sum.golang.org'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9550141Z GOTELEMETRY='local'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9550859Z GOTELEMETRYDIR='/home/runner/.config/go/telemetry'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9551957Z GOTMPDIR=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9552545Z GOTOOLCHAIN='auto'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9553428Z GOTOOLDIR='/opt/hostedtoolcache/go/1.27.1/x64/pkg/tool/linux_amd64'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9554392Z GOVCS=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9554967Z GOVERSION='go1.27.1'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9555649Z GOWORK=''
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9556249Z PKG_CONFIG='pkg-config'
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9556738Z 
+Goose source build and conformance	Run actions/setup-go@v5	2026-10-22T18:46:20.9558335Z ##[endgroup]
+Goose source build and conformance	Record validation host and source	﻿2026-10-22T18:46:20.9769644Z ##[group]Run uname -a
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:20.9769948Z ^[[36;1muname -a^[[0m
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:20.9770177Z ^[[36;1mtest "$(uname -m)" = x86_64^[[0m
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:20.9770445Z ^[[36;1mnproc^[[0m
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:20.9770639Z ^[[36;1mfree -m^[[0m
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:20.9770849Z ^[[36;1mgit rev-parse HEAD^[[0m
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:20.9771175Z ^[[36;1mgit ls-tree -r HEAD submissions/goose-native-tbsvttr^[[0m
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:20.9998766Z shell: /usr/bin/bash -e {0}
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:20.9999099Z env:
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:20.9999339Z   PGHOST: 127.0.0.1
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:20.9999620Z   PGPORT: 5432
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:20.9999875Z   PGUSER: postgres
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0000144Z   PGPASSWORD: postgres
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0000421Z   BUILD_JOBS: 2
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0000666Z ##[endgroup]
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0113329Z Linux runnervm8k3b6 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0142169Z 4
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0159662Z                total        used        free      shared  buff/cache   available
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0160552Z Mem:           15989        1500       11067          62        3830       14488
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0161080Z Swap:           3071           0        3071
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0175283Z f57aad71a91d2cc8bb20ad651276a540f95008ee
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0192143Z 100644 blob c534a8021eb47005fcde63b457c844824ebe33fc	submissions/goose-native-tbsvttr/.gitignore
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0193398Z 100644 blob 312b0edf8358f33994a4dc29fc517a3a85f9ab92	submissions/goose-native-tbsvttr/LICENSE
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0194214Z 100644 blob aa49ec5b7c000aec607dcf87fb086db583995bf8	submissions/goose-native-tbsvttr/NOTICE.md
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0194902Z 100644 blob 8c311f3ac09d8ad8d814174664aefa496e61d038	submissions/goose-native-tbsvttr/README.md
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0195586Z 100644 blob 3d94eed94093dca4b9e4d9ba35f92e224bb4d01f	submissions/goose-native-tbsvttr/bcrypt.goose
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0196321Z 100644 blob 34d764521659c00ea2c4094e4a869f147562f5cc	submissions/goose-native-tbsvttr/bcrypt_tables.goose
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0197275Z 100644 blob 2f3303f81ad406a8f6c6dffdf965cf08225946f5	submissions/goose-native-tbsvttr/buf.goose
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0197952Z 100755 blob 2ea6d3a018888ec70532b2c443bbbf580d4ee21f	submissions/goose-native-tbsvttr/build.sh
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0198615Z 100644 blob e903c7d5ec68df070ee37a283080b82b15410f0e	submissions/goose-native-tbsvttr/crypto.goose
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0199286Z 100644 blob 604cf58c15aa05d26ccc1d45568f176eb510e0da	submissions/goose-native-tbsvttr/http.goose
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0199958Z 100755 blob 824dab0c1737ff0f13dfd1b5cec6c74ad577cc31	submissions/goose-native-tbsvttr/install.sh
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0200642Z 100644 blob 99a10d8bc6fa20de9a633d1fb6c4c0816c9fb3c3	submissions/goose-native-tbsvttr/json_fast.c
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0201318Z 100644 blob 5ab5487c0da80e9e41d85ae2e329193bfe01fabc	submissions/goose-native-tbsvttr/json_fast.h
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0201973Z 100644 blob 9e11657ce94d1fd986f112afbf9d5c543787e0b7	submissions/goose-native-tbsvttr/jwt.goose
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0202632Z 100644 blob 1324a8d51300b6cb0e119ad382eb28aa09da8e48	submissions/goose-native-tbsvttr/main.goose
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0203316Z 100644 blob 8b06e03a7ca15804331ef31e8a31e714433df2da	submissions/goose-native-tbsvttr/native_crypto.c
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0203999Z 100644 blob 3fe76ddee65e0090637b585c7587658525e1a10a	submissions/goose-native-tbsvttr/native_sys.c
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0204652Z 100644 blob 116144212f89eae9f16446ec6b51c78adc4a04aa	submissions/goose-native-tbsvttr/pg.goose
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0205343Z 100644 blob f828b6ee3cdaa30af3c9fa30d95d37413a1a2a9b	submissions/goose-native-tbsvttr/routes.goose
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0206245Z 100644 blob 828cfacf17ad40a6acd3813355afb545f3b5eedc	submissions/goose-native-tbsvttr/server.goose
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0206912Z 100644 blob 77bb2fbcf01edcb2bf07d10d210674a622168862	submissions/goose-native-tbsvttr/sql.goose
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0207800Z 100755 blob 0b07d1deaf47ed11daaa4245f1f65a1e86eaf334	submissions/goose-native-tbsvttr/start.sh
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0208645Z 100644 blob 7d84f53e36df09e720b859a448bdeed44ad4f171	submissions/goose-native-tbsvttr/sys.goose
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0209349Z 100644 blob 7dc8ca5152d4d6364315dd330c31e1a0e0a02176	submissions/goose-native-tbsvttr/tests/jwt-ffi.goose
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0210224Z 100644 blob a23761f1a0477f33206f95e2af97beb2296a01c8	submissions/goose-native-tbsvttr/tests/native.c
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0211179Z 100755 blob 46e2873be63448de6e54db0109822eff33a83dd9	submissions/goose-native-tbsvttr/tests/native.sh
+Goose source build and conformance	Record validation host and source	2026-10-22T18:46:21.0211899Z 100644 blob b3c80404a714d8239874609f66e8a03a4408cbd0	submissions/goose-native-tbsvttr/tests/pipe-reply.c
+Goose source build and conformance	Install harness tools	﻿2026-10-22T18:46:21.0244612Z ##[group]Run sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client curl jq
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:21.0245262Z ^[[36;1msudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client curl jq^[[0m
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:21.0304438Z shell: /usr/bin/bash -e {0}
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:21.0304695Z env:
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:21.0304881Z   PGHOST: 127.0.0.1
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:21.0305093Z   PGPORT: 5432
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:21.0305292Z   PGUSER: postgres
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:21.0305495Z   PGPASSWORD: postgres
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:21.0305711Z   BUILD_JOBS: 2
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:21.0305907Z ##[endgroup]
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:26.5692833Z (Reading database ... 
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:26.5693197Z (Reading database ... 5%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:26.5693481Z (Reading database ... 10%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:26.5693746Z (Reading database ... 15%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:26.5694012Z (Reading database ... 20%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:26.5694261Z (Reading database ... 25%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:26.5694544Z (Reading database ... 30%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:26.5694793Z (Reading database ... 35%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:26.5695102Z (Reading database ... 40%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:26.5695532Z (Reading database ... 45%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:26.5695851Z (Reading database ... 50%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:26.5752176Z (Reading database ... 55%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:26.7059004Z (Reading database ... 60%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:26.9122245Z (Reading database ... 65%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:27.1175839Z (Reading database ... 70%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:27.3049089Z (Reading database ... 75%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:27.4709209Z (Reading database ... 80%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:27.6662971Z (Reading database ... 85%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:27.8631853Z (Reading database ... 90%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.0619600Z (Reading database ... 95%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.0620103Z (Reading database ... 100%
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.0620624Z (Reading database ... 203540 files and directories currently installed.)
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.0659499Z Preparing to unpack .../curl_8.5.0-2ubuntu10.16_amd64.deb ...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.0702168Z Unpacking curl (8.5.0-2ubuntu10.16) over (8.5.0-2ubuntu10.15) ...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.1200157Z Preparing to unpack .../libcurl4t64_8.5.0-2ubuntu10.16_amd64.deb ...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.1231629Z Unpacking libcurl4t64:amd64 (8.5.0-2ubuntu10.16) over (8.5.0-2ubuntu10.15) ...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.1691584Z Preparing to unpack .../libcurl3t64-gnutls_8.5.0-2ubuntu10.16_amd64.deb ...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.1803259Z Unpacking libcurl3t64-gnutls:amd64 (8.5.0-2ubuntu10.16) over (8.5.0-2ubuntu10.15) ...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.2111434Z Selecting previously unselected package postgresql-client.
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.2229262Z Preparing to unpack .../postgresql-client_16+257build1.1_all.deb ...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.2235863Z Unpacking postgresql-client (16+257build1.1) ...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.2578010Z Setting up postgresql-client (16+257build1.1) ...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.2595137Z Setting up libcurl4t64:amd64 (8.5.0-2ubuntu10.16) ...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.2611642Z Setting up libcurl3t64-gnutls:amd64 (8.5.0-2ubuntu10.16) ...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.2627727Z Setting up curl (8.5.0-2ubuntu10.16) ...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.2645951Z Processing triggers for man-db (2.12.0-4build2) ...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.2666092Z Not building database; man-db/auto-update is not 'true'.
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:28.2676251Z Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:29.0278795Z 
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:29.0279381Z Running kernel seems to be up-to-date.
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:29.0279752Z 
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:29.0279923Z Restarting services...
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:29.0457353Z  systemctl restart packagekit.service php8.3-fpm.service
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:29.1549056Z 
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:29.1550523Z No containers need to be restarted.
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:29.1550863Z 
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:29.1551250Z No user sessions are running outdated binaries.
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:29.1551770Z 
+Goose source build and conformance	Install harness tools	2026-10-22T18:46:29.1552273Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Goose source build and conformance	Generate original dev seed	﻿2026-10-22T18:46:29.9879023Z ##[group]Run bash seed/make-seed.sh --dev
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:29.9879409Z ^[[36;1mbash seed/make-seed.sh --dev^[[0m
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:29.9943161Z shell: /usr/bin/bash -e {0}
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:29.9943417Z env:
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:29.9943610Z   PGHOST: 127.0.0.1
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:29.9943831Z   PGPORT: 5432
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:29.9944044Z   PGUSER: postgres
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:29.9944263Z   PGPASSWORD: postgres
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:29.9944487Z   BUILD_JOBS: 2
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:29.9944689Z ##[endgroup]
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:30.0057379Z == seedgen -scale 0.02 -> /home/runner/work/multicore-server-challenge/multicore-server-challenge/seed/data-0.02
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:35.3421255Z 2026/10/22 18:46:35 seed written to /home/runner/work/multicore-server-challenge/multicore-server-challenge/seed/data-0.02 in 581ms (scale 0.020, 10000 articles)
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:35.3424210Z == load into conduit_dev
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:35.5504495Z NOTICE:  database "conduit_dev" does not exist, skipping
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:41.3422437Z loaded in 6 s, 95 MB
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:42.2324565Z == check
+Goose source build and conformance	Generate original dev seed	2026-10-22T18:46:42.2325124Z OK: conduit_dev matches the reference seed
+Goose source build and conformance	Install submission dependencies	﻿2026-10-22T18:46:42.2373407Z ##[group]Run sudo bash submissions/goose-native-tbsvttr/install.sh
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.2374253Z ^[[36;1msudo bash submissions/goose-native-tbsvttr/install.sh^[[0m
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.2467896Z shell: /usr/bin/bash -e {0}
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.2468315Z env:
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.2468632Z   PGHOST: 127.0.0.1
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.2468990Z   PGPORT: 5432
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.2469339Z   PGUSER: postgres
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.2469697Z   PGPASSWORD: postgres
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.2470060Z   BUILD_JOBS: 2
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.2470398Z ##[endgroup]
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.3168425Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.3454154Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.3466315Z Hit:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.3474838Z Hit:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.3482032Z Hit:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:42.3490706Z Hit:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.5961984Z Reading package lists...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.6184220Z Reading package lists...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.8185662Z Building dependency tree...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.8193686Z Reading state information...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.9503192Z curl is already the newest version (8.5.0-2ubuntu10.16).
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.9503841Z libssl-dev is already the newest version (3.0.13-0ubuntu3.16).
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.9504374Z The following additional packages will be installed:
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.9509245Z   cmake-data libjsoncpp25 librhash0
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.9514088Z Suggested packages:
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.9514423Z   cmake-doc cmake-format elpa-cmake-mode ninja-build
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.9751277Z The following NEW packages will be installed:
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.9757385Z   build-essential cmake cmake-data libjsoncpp25 librhash0
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.9760260Z The following packages will be upgraded:
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.9765816Z   ca-certificates
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.9915982Z 1 upgraded, 5 newly installed, 0 to remove and 93 not upgraded.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.9916596Z Need to get 13.7 MB of archives.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.9917772Z After this operation, 49.1 MB of additional disk space will be used.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:43.9918565Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:44.0227188Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 ca-certificates all 20260816ubuntu0.24.04.1 [139 kB]
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:44.0439726Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 build-essential amd64 12.10ubuntu1 [4928 B]
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:44.0580953Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libjsoncpp25 amd64 1.9.5-6build1 [82.8 kB]
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:44.0753242Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 librhash0 amd64 1.4.3-3build1 [129 kB]
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:44.0954491Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 cmake-data all 3.28.3-1build7 [2155 kB]
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:44.1608712Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 cmake amd64 3.28.3-1build7 [11.2 MB]
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:44.4364634Z Preconfiguring packages ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.0132386Z Fetched 13.7 MB in 0s (54.9 MB/s)
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1577500Z (Reading database ... 
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1578326Z (Reading database ... 5%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1578970Z (Reading database ... 10%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1579404Z (Reading database ... 15%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1579837Z (Reading database ... 20%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1580268Z (Reading database ... 25%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1580683Z (Reading database ... 30%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1581100Z (Reading database ... 35%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1581512Z (Reading database ... 40%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1581934Z (Reading database ... 45%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1582372Z (Reading database ... 50%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1600886Z (Reading database ... 55%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1700277Z (Reading database ... 60%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1725930Z (Reading database ... 65%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1744859Z (Reading database ... 70%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1775988Z (Reading database ... 75%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1801773Z (Reading database ... 80%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.1928617Z (Reading database ... 85%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.2131071Z (Reading database ... 90%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.2209842Z (Reading database ... 95%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.2210411Z (Reading database ... 100%
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.2211060Z (Reading database ... 203543 files and directories currently installed.)
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.2246081Z Preparing to unpack .../0-ca-certificates_20260816ubuntu0.24.04.1_all.deb ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.2371402Z Unpacking ca-certificates (20260816ubuntu0.24.04.1) over (20260601~24.04.1) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.3415078Z Selecting previously unselected package build-essential.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.3536405Z Preparing to unpack .../1-build-essential_12.10ubuntu1_amd64.deb ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.3543662Z Unpacking build-essential (12.10ubuntu1) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.3835609Z Selecting previously unselected package libjsoncpp25:amd64.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.3950778Z Preparing to unpack .../2-libjsoncpp25_1.9.5-6build1_amd64.deb ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.3964137Z Unpacking libjsoncpp25:amd64 (1.9.5-6build1) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.4160455Z Selecting previously unselected package librhash0:amd64.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.4276675Z Preparing to unpack .../3-librhash0_1.4.3-3build1_amd64.deb ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.4283832Z Unpacking librhash0:amd64 (1.4.3-3build1) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.4494181Z Selecting previously unselected package cmake-data.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.4609890Z Preparing to unpack .../4-cmake-data_3.28.3-1build7_all.deb ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.4674607Z Unpacking cmake-data (3.28.3-1build7) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:45.9988371Z Selecting previously unselected package cmake.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:46.0127455Z Preparing to unpack .../5-cmake_3.28.3-1build7_amd64.deb ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:46.0134426Z Unpacking cmake (3.28.3-1build7) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:46.1924842Z Setting up ca-certificates (20260816ubuntu0.24.04.1) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:47.7252972Z Updating certificates in /etc/ssl/certs...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:48.4616264Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:48.4663720Z 4 added, 5 removed; done.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:48.4895960Z Setting up libjsoncpp25:amd64 (1.9.5-6build1) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:48.4912384Z Setting up librhash0:amd64 (1.4.3-3build1) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:48.4931037Z Setting up build-essential (12.10ubuntu1) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:48.4947593Z Setting up cmake-data (3.28.3-1build7) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:48.5006839Z Setting up cmake (3.28.3-1build7) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:48.5029498Z Processing triggers for man-db (2.12.0-4build2) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:48.5043836Z Not building database; man-db/auto-update is not 'true'.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:48.5054179Z Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:48.5186314Z Processing triggers for ca-certificates (20260816ubuntu0.24.04.1) ...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:48.5225375Z Updating certificates in /etc/ssl/certs...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:48.9796710Z 0 added, 0 removed; done.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:48.9797658Z Running hooks in /etc/ca-certificates/update.d...
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:49.0940942Z /etc/ssl/certs/adoptium/cacerts successfully populated.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:49.0943355Z done.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:49.6305423Z 
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:49.6306038Z Running kernel seems to be up-to-date.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:49.6306545Z 
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:49.6306806Z No services need to be restarted.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:49.6307430Z 
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:49.6307679Z No containers need to be restarted.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:49.6308064Z 
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:49.6308365Z No user sessions are running outdated binaries.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:49.6308822Z 
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:49.6309201Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Goose source build and conformance	Install submission dependencies	2026-10-22T18:46:50.4798950Z C compiler: gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Goose source build and conformance	Original dev conformance with default settings	﻿2026-10-22T18:46:50.4856029Z ##[group]Run bash test/run.sh submissions/goose-native-tbsvttr
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:46:50.4856874Z ^[[36;1mbash test/run.sh submissions/goose-native-tbsvttr^[[0m
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:46:50.4946216Z shell: /usr/bin/bash -e {0}
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:46:50.4946478Z env:
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:46:50.4946664Z   PGHOST: 127.0.0.1
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:46:50.4946884Z   PGPORT: 5432
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:46:50.4947443Z   PGUSER: postgres
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:46:50.4947714Z   PGPASSWORD: postgres
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:46:50.4947933Z   BUILD_JOBS: 2
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:46:50.4948134Z ##[endgroup]
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:46:50.5436923Z == conformance suite
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:46:50.5500511Z go: downloading github.com/golang-jwt/jwt/v5 v5.3.1
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:46:59.2199604Z == fresh database challenge_test_10385 from conduit_dev
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:46:59.4659209Z == build
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:00.3524057Z /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.deps/goose-f605b5a07dd2aa3a5cb3f4c9b14002bd3c9d3d1a.tar.gz: OK
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:02.1383914Z -- The C compiler identification is GNU 13.3.0
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:03.9929420Z -- The CXX compiler identification is GNU 13.3.0
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:04.1939145Z -- Detecting C compiler ABI info
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:04.6125473Z -- Detecting C compiler ABI info - done
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:04.6297197Z -- Check for working C compiler: /usr/bin/cc - skipped
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:04.6400968Z -- Detecting C compile features
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:04.6544316Z -- Detecting C compile features - done
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:04.7024945Z -- Detecting CXX compiler ABI info
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:04.8436859Z -- Detecting CXX compiler ABI info - done
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:04.8610353Z -- Check for working CXX compiler: /usr/bin/c++ - skipped
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:04.8614544Z -- Detecting CXX compile features
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:04.8621380Z -- Detecting CXX compile features - done
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:04.9413955Z -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:05.1196858Z -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:05.1371343Z -- Found Threads: TRUE
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:05.1598438Z -- libtcc: TinyCC 0.9.28rc backend for x86_64
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:05.2124514Z -- Configuring done (3.7s)
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:05.2327573Z -- Generating done (0.0s)
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:05.2363732Z -- Build files have been written to: /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/build
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:05.2649217Z [  5%] Building C object CMakeFiles/libtcc.dir/third_party/tinycc/libtcc.c.o
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:05.2650487Z [ 10%] Building C object CMakeFiles/goose_shaderc.dir/src/shaderc.c.o
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:10.8096740Z [ 15%] Linking C static library libgoose_shaderc.a
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:13.3515124Z [ 20%] Linking C static library libtcc.a
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.2228742Z [ 20%] Built target goose_shaderc
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.2235931Z [ 20%] Built target libtcc
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.2305035Z [ 25%] Building C object CMakeFiles/tcc_driver.dir/third_party/tinycc/tcc.c.o
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.4772595Z [ 30%] Linking C executable tcc/tcc
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.5045321Z [ 30%] Built target tcc_driver
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.5114497Z [ 35%] tcc lib/dsohandle.c
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.5117597Z [ 40%] tcc lib/libtcc1.c
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.5148934Z [ 45%] tcc lib/va_list.c
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.5155305Z [ 50%] tcc lib/stdatomic.c
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.5182939Z [ 55%] tcc lib/atomic.S
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.5197939Z [ 60%] tcc lib/builtin.c
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.5217351Z [ 65%] tcc lib/alloca.S
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.5236855Z [ 70%] tcc lib/alloca-bt.S
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.5249476Z [ 75%] tcc lib/runmain.c
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.5265803Z [ 80%] tcc -ar libtcc1.a
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.5302152Z [ 80%] Built target tcc_runtime
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.5370386Z [ 85%] Building CXX object CMakeFiles/goose.dir/src/main.cpp.o
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:25.5373504Z [ 90%] Building CXX object CMakeFiles/goose.dir/src/process.cpp.o
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:29.5742834Z [ 95%] Building CXX object CMakeFiles/goose.dir/src/progress.cpp.o
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:30.9319856Z In file included from /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/main.cpp:30:
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:30.9326544Z /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/codegen_types.h: In member function ‘void goose::CodeGen::EmitDefaultInto(const std::string&, goose::TypeExpr*)’:
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:30.9332488Z /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/codegen_types.h:1228:66: warning: unused parameter ‘t’ [-Wunused-parameter]
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:30.9334325Z  1228 | inline void CodeGen::EmitDefaultInto(const string &lv, TypeExpr *t) {
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:47:30.9335272Z       |                                                        ~~~~~~~~~~^
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4781983Z In file included from /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/main.cpp:15:
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4784288Z In member function ‘int64_t goose::TypeCheck::ArraySize(goose::TypeArray*)’,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4787336Z     inlined from ‘goose::SizeClass goose::TypeCheck::ClassOf(goose::TypeExpr*)’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck_types.h:342:49,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4790706Z     inlined from ‘goose::TypeExpr* goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck_flow.h:53:16,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4793639Z     inlined from ‘goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(goose::TypeExpr*)>’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck_flow.h:56:67,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4796525Z     inlined from ‘bool goose::AnyFieldOf(std::span<const FieldRun>, F) [with F = TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(TypeExpr*)>]’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/ast.h:1831:48,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4799653Z     inlined from ‘bool goose::TypeCheck::AnyField(goose::TypeExpr*, F) [with F = goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(goose::TypeExpr*)>]’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck.h:1148:77,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4801872Z     inlined from ‘goose::TypeExpr* goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck_flow.h:56:13,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4803856Z     inlined from ‘goose::TypeExpr* goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck_flow.h:52:18,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4805886Z     inlined from ‘goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(goose::TypeExpr*)>’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck_flow.h:56:67,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4809347Z     inlined from ‘bool goose::AnyFieldOf(std::span<const FieldRun>, F) [with F = TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(TypeExpr*)>]’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/ast.h:1831:48,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4811995Z     inlined from ‘bool goose::TypeCheck::AnyField(goose::TypeExpr*, F) [with F = goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(goose::TypeExpr*)>]’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck.h:1148:77,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4814212Z     inlined from ‘goose::TypeExpr* goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck_flow.h:56:13,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4816472Z     inlined from ‘goose::TypeExpr* goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck_flow.h:52:18,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4818776Z     inlined from ‘goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(goose::TypeExpr*)>’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck_flow.h:56:67,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4821013Z     inlined from ‘bool goose::AnyFieldOf(std::span<const FieldRun>, F) [with F = TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(TypeExpr*)>]’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/ast.h:1831:48,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4823462Z     inlined from ‘bool goose::TypeCheck::AnyField(goose::TypeExpr*, F) [with F = goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)::<lambda(goose::TypeExpr*)>]’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck.h:1148:77,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4825671Z     inlined from ‘goose::TypeExpr* goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck_flow.h:56:13,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4827910Z     inlined from ‘goose::TypeExpr* goose::TypeCheck::ResizableArrayIn(goose::TypeExpr*)’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck_flow.h:52:18,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4830106Z     inlined from ‘goose::TypeCheck::MayHoldBuilt(goose::TypeExpr*, goose::Node*, goose::TypeExpr*)::<lambda(goose::TypeExpr*)>’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck_builtins.h:3609:64,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4832749Z     inlined from ‘bool goose::AnyFieldOf(std::span<const FieldRun>, F) [with F = TypeCheck::MayHoldBuilt(goose::TypeExpr*, goose::Node*, goose::TypeExpr*)::<lambda(TypeExpr*)>]’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/ast.h:1831:48,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4835390Z     inlined from ‘bool goose::TypeCheck::AnyField(goose::TypeExpr*, F) [with F = goose::TypeCheck::MayHoldBuilt(goose::TypeExpr*, goose::Node*, goose::TypeExpr*)::<lambda(goose::TypeExpr*)>]’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck.h:1148:77,
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4838000Z     inlined from ‘bool goose::TypeCheck::MayHoldBuilt(goose::TypeExpr*, goose::Node*, goose::TypeExpr*)’ at /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck_builtins.h:3609:17:
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4839782Z /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck.h:808:21: warning: ‘v’ may be used uninitialized [-Wmaybe-uninitialized]
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4840651Z   808 |             a->size = v;
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4840927Z       |             ~~~~~~~~^~~
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4842123Z /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck.h: In member function ‘bool goose::TypeCheck::MayHoldBuilt(goose::TypeExpr*, goose::Node*, goose::TypeExpr*)’:
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4843674Z /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.goose/src/typecheck.h:796:17: note: ‘v’ was declared here
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4844406Z   796 |         int64_t v;
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:31.4844654Z       |                 ^
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:55.3143851Z [100%] Linking CXX executable goose
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:55.4351355Z [100%] Built target goose
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:56.0358903Z parsed ok: 652 top-level declarations, 16 file(s)
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:56.0359944Z typechecked ok: 494 specialization(s), 23 struct/1 enum instance(s); optimized -O2: 699 inlined, 0 base case(s), 283 folded, 500 propagated, 0 tail loop(s), 0 reassociated
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:56.0360840Z bce: elided 6711/7184 index and 55/222 slice checks
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:48:56.0361217Z wrote .build/main.c (2393123 bytes)
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:49:03.9816859Z goose runtime df5f78ce88d4
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:49:03.9830550Z gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:49:03.9847612Z 7545aa192fc88721317ec7994f4e1567c96e785938de4d016d30c9da54b76679  bin/conduit
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:49:03.9852082Z == start
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:49:05.0300233Z == test
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:49:08.5067731Z 
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:49:08.5068416Z 197 steps, 197 passed, 0 failed (3.5s)
+Goose source build and conformance	Original dev conformance with default settings	2026-10-22T18:49:08.5068988Z RESULT: PASS
+Goose source build and conformance	Native primitive and Goose FFI checks	﻿2026-10-22T18:49:08.6069951Z ##[group]Run bash submissions/goose-native-tbsvttr/tests/native.sh
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:08.6070919Z ^[[36;1mbash submissions/goose-native-tbsvttr/tests/native.sh^[[0m
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:08.6144522Z shell: /usr/bin/bash -e {0}
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:08.6144789Z env:
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:08.6144972Z   PGHOST: 127.0.0.1
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:08.6145180Z   PGPORT: 5432
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:08.6145376Z   PGUSER: postgres
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:08.6145588Z   PGPASSWORD: postgres
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:08.6145798Z   BUILD_JOBS: 2
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:08.6145992Z ##[endgroup]
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:09.0164703Z {"status":"PASS","checks":228377,"hmac_vectors":5,"hmac_thread_calls":6400,"threads":8,"json_lengths":1025,"epoll_native_size":12}
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:09.2110210Z {"status":"PASS","cases":12,"checks":65589,"reply_bytes":72,"write_eintr_injected":1,"poll_eintr_injected":1,"real_poll_eintr":1,"real_signals":1}
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:09.2700994Z parsed ok: 262 top-level declarations, 6 file(s)
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:09.2702065Z typechecked ok: 224 specialization(s), 9 struct/1 enum instance(s); optimized -O2: 65 inlined, 0 base case(s), 40 folded, 41 propagated, 0 tail loop(s), 0 reassociated
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:09.2703317Z bce: elided 50/110 index and 17/27 slice checks
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:09.2704277Z wrote /home/runner/work/multicore-server-challenge/multicore-server-challenge/submissions/goose-native-tbsvttr/.build/native-checks/jwt-ffi.c (441810 bytes)
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:11.5378855Z PASS: 4000 Goose JWT assertions across 8 workers, including initialized global key, expiration, wrong key and tampering
+Goose source build and conformance	Native primitive and Goose FFI checks	2026-10-22T18:49:11.5402318Z PASS: native vectors, failure handling, threads, JSON differential, syscall ABI, reliable pipe replies and Goose JWT FFI
+Goose source build and conformance	Generate original full seed	﻿2026-10-22T18:49:11.5451449Z ##[group]Run bash seed/make-seed.sh
+Goose source build and conformance	Generate original full seed	2026-10-22T18:49:11.5451956Z ^[[36;1mbash seed/make-seed.sh^[[0m
+Goose source build and conformance	Generate original full seed	2026-10-22T18:49:11.5538566Z shell: /usr/bin/bash -e {0}
+Goose source build and conformance	Generate original full seed	2026-10-22T18:49:11.5538996Z env:
+Goose source build and conformance	Generate original full seed	2026-10-22T18:49:11.5539302Z   PGHOST: 127.0.0.1
+Goose source build and conformance	Generate original full seed	2026-10-22T18:49:11.5539639Z   PGPORT: 5432
+Goose source build and conformance	Generate original full seed	2026-10-22T18:49:11.5539965Z   PGUSER: postgres
+Goose source build and conformance	Generate original full seed	2026-10-22T18:49:11.5540309Z   PGPASSWORD: postgres
+Goose source build and conformance	Generate original full seed	2026-10-22T18:49:11.5540651Z   BUILD_JOBS: 2
+Goose source build and conformance	Generate original full seed	2026-10-22T18:49:11.5540980Z ##[endgroup]
+Goose source build and conformance	Generate original full seed	2026-10-22T18:49:11.5667946Z == seedgen -scale 1.0 -> /home/runner/work/multicore-server-challenge/multicore-server-challenge/seed/data-1.0
+Goose source build and conformance	Generate original full seed	2026-10-22T18:49:22.5360861Z 2026/10/22 18:49:22 seed written to /home/runner/work/multicore-server-challenge/multicore-server-challenge/seed/data-1.0 in 10.839s (scale 1.000, 500000 articles)
+Goose source build and conformance	Generate original full seed	2026-10-22T18:49:22.5368371Z == load into conduit_seed
+Goose source build and conformance	Generate original full seed	2026-10-22T18:49:22.6086690Z NOTICE:  database "conduit_seed" does not exist, skipping
+Goose source build and conformance	Generate original full seed	2026-10-22T18:52:25.2421037Z loaded in 183 s, 2314 MB
+Goose source build and conformance	Generate original full seed	2026-10-22T18:52:25.2421468Z == check
+Goose source build and conformance	Generate original full seed	2026-10-22T18:52:36.7694980Z OK: conduit_seed matches the reference seed
+Goose source build and conformance	Original full-seed conformance with live article batching	﻿2026-10-22T18:52:36.7729563Z ##[group]Run bash test/run.sh submissions/goose-native-tbsvttr
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:36.7730044Z ^[[36;1mbash test/run.sh submissions/goose-native-tbsvttr^[[0m
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:36.7791993Z shell: /usr/bin/bash -e {0}
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:36.7792248Z env:
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:36.7792429Z   PGHOST: 127.0.0.1
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:36.7792638Z   PGPORT: 5432
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:36.7792844Z   PGUSER: postgres
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:36.7793056Z   PGPASSWORD: postgres
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:36.7793261Z   BUILD_JOBS: 2
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:36.7793460Z   TEMPLATE: conduit_seed
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:36.7793669Z   ARTICLE_BATCH: 1
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:36.7793855Z ##[endgroup]
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:36.8304274Z == conformance suite
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:37.1787378Z == fresh database challenge_test_15589 from conduit_seed
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:43.1654771Z == build
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:43.7579938Z parsed ok: 652 top-level declarations, 16 file(s)
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:43.7581260Z typechecked ok: 494 specialization(s), 23 struct/1 enum instance(s); optimized -O2: 699 inlined, 0 base case(s), 283 folded, 500 propagated, 0 tail loop(s), 0 reassociated
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:43.7582486Z bce: elided 6711/7184 index and 55/222 slice checks
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:43.7582960Z wrote .build/main.c (2393123 bytes)
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:49.7732524Z goose runtime df5f78ce88d4
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:49.7746224Z gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:49.7763429Z 7545aa192fc88721317ec7994f4e1567c96e785938de4d016d30c9da54b76679  bin/conduit
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:49.7767770Z == start
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:50.8012018Z == test
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:54.3178600Z 
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:54.3179150Z 197 steps, 197 passed, 0 failed (3.5s)
+Goose source build and conformance	Original full-seed conformance with live article batching	2026-10-22T18:52:54.3179483Z RESULT: PASS
+Goose source build and conformance	Post Run actions/setup-go@v5	﻿2026-10-22T18:52:54.5419790Z Post job cleanup.
+Goose source build and conformance	Post Run actions/setup-go@v5	2026-10-22T18:52:54.6643859Z (node:15934) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Goose source build and conformance	Post Run actions/setup-go@v5	2026-10-22T18:52:54.6644747Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Goose source build and conformance	Post Run actions/setup-go@v5	2026-10-22T18:52:54.6712520Z [command]/opt/hostedtoolcache/go/1.27.1/x64/bin/go env GOMODCACHE
+Goose source build and conformance	Post Run actions/setup-go@v5	2026-10-22T18:52:54.6775698Z [command]/opt/hostedtoolcache/go/1.27.1/x64/bin/go env GOCACHE
+Goose source build and conformance	Post Run actions/setup-go@v5	2026-10-22T18:52:54.6792756Z /home/runner/go/pkg/mod
+Goose source build and conformance	Post Run actions/setup-go@v5	2026-10-22T18:52:54.6816838Z /home/runner/.cache/go-build
+Goose source build and conformance	Post Run actions/setup-go@v5	2026-10-22T18:52:54.7038227Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/multicore-server-challenge/multicore-server-challenge --files-from manifest.txt --use-compress-program zstdmt
+Goose source build and conformance	Post Run actions/setup-go@v5	2026-10-22T18:52:55.1046555Z (node:15934) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Goose source build and conformance	Post Run actions/setup-go@v5	2026-10-22T18:52:55.4637588Z Sent 24085508 of 24085508 (100.0%), 62.6 MBs/sec
+Goose source build and conformance	Post Run actions/setup-go@v5	2026-10-22T18:52:55.5893437Z Cache saved with the key: setup-go-Linux-x64-ubuntu24-go-1.27.1-9f3deb7ae22ee72d3ec770b582d6695e4a6a26c8e7d5276c9c975d7acd6507ef
+Goose source build and conformance	Post Run actions/checkout@v4	﻿2026-10-22T18:52:55.6041750Z Post job cleanup.
+Goose source build and conformance	Post Run actions/checkout@v4	2026-10-22T18:52:55.6879475Z [command]/usr/bin/git version
+Goose source build and conformance	Post Run actions/checkout@v4	2026-10-22T18:52:55.6921759Z git version 2.55.0
+Goose source build and conformance	Post Run actions/checkout@v4	2026-10-22T18:52:55.6961879Z Temporarily overriding HOME='/home/runner/work/_temp/456767d5-3bea-4659-abb0-fba2e92308cd' before making global git config changes
+Goose source build and conformance	Post Run actions/checkout@v4	2026-10-22T18:52:55.6963817Z Adding repository directory to the temporary git global config as a safe directory
+Goose source build and conformance	Post Run actions/checkout@v4	2026-10-22T18:52:55.6988241Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/multicore-server-challenge/multicore-server-challenge
+Goose source build and conformance	Post Run actions/checkout@v4	2026-10-22T18:52:55.7006392Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Goose source build and conformance	Post Run actions/checkout@v4	2026-10-22T18:52:55.7042547Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Goose source build and conformance	Post Run actions/checkout@v4	2026-10-22T18:52:55.7287920Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Goose source build and conformance	Post Run actions/checkout@v4	2026-10-22T18:52:55.7316168Z http.https://github.com/.extraheader
+Goose source build and conformance	Post Run actions/checkout@v4	2026-10-22T18:52:55.7329055Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Goose source build and conformance	Post Run actions/checkout@v4	2026-10-22T18:52:55.7369525Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Goose source build and conformance	Post Run actions/checkout@v4	2026-10-22T18:52:55.7625981Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Goose source build and conformance	Post Run actions/checkout@v4	2026-10-22T18:52:55.7664906Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Goose source build and conformance	Stop containers	﻿2026-10-22T18:52:55.8123599Z Print service container logs: 85769244c2f94ce19e6a39c8a07762db_postgres18_d00fc0
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8131585Z ##[command]/usr/bin/docker logs --details 8bd01b7af3c12b69b884ccc356c7110aca2faff956b64228ea9ff4aa9710b782
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8265605Z  The files belonging to this database system will be owned by user "postgres".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8270305Z  initdb: warning: enabling "trust" authentication for local connections
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8271052Z  This user must also own the server process.
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8272906Z  initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8274219Z  
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8275198Z  The database cluster will be initialized with locale "en_US.utf8".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8276414Z  The default database encoding has accordingly been set to "UTF8".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8277693Z  The default text search configuration will be set to "english".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8278973Z  2026-10-22 18:46:05.242 UTC [1] LOG:  starting PostgreSQL 18.6 (Debian 18.6-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8279987Z  
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8280305Z  Data page checksums are enabled.
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8280846Z  
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8281290Z  fixing permissions on existing directory /var/lib/postgresql/18/docker ... ok
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8281984Z  creating subdirectories ... ok
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8282435Z  selecting dynamic shared memory implementation ... posix
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8282901Z  selecting default "max_connections" ... 100
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8283500Z  selecting default "shared_buffers" ... 128MB
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8284355Z  selecting default time zone ... Etc/UTC
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8284763Z  creating configuration files ... ok
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8285147Z  running bootstrap script ... ok
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8285750Z  performing post-bootstrap initialization ... ok
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8286500Z  syncing data to disk ... ok
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8286921Z  
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8287203Z  
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8288434Z  Success. You can now start the database server using:
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8289266Z  
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8289729Z      pg_ctl -D /var/lib/postgresql/18/docker -l logfile start
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8290439Z  
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8291084Z  waiting for server to start....2026-10-22 18:46:05.005 UTC [54] LOG:  starting PostgreSQL 18.6 (Debian 18.6-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8292133Z  2026-10-22 18:46:05.005 UTC [54] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8293467Z  2026-10-22 18:46:05.008 UTC [60] LOG:  database system was shut down at 2026-10-22 18:46:04 UTC
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8294114Z  2026-10-22 18:46:05.011 UTC [54] LOG:  database system is ready to accept connections
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8294675Z   done
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8294861Z  server started
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8295071Z  
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8295393Z  /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8295785Z  
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8296032Z  2026-10-22 18:46:05.121 UTC [54] LOG:  received fast shutdown request
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8296554Z  waiting for server to shut down....2026-10-22 18:46:05.122 UTC [54] LOG:  aborting any active transactions
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8297575Z  2026-10-22 18:46:05.124 UTC [54] LOG:  background worker "logical replication launcher" (PID 63) exited with exit code 1
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8298124Z  2026-10-22 18:46:05.124 UTC [58] LOG:  shutting down
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8298556Z  2026-10-22 18:46:05.242 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8299056Z  2026-10-22 18:46:05.242 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8299570Z  2026-10-22 18:46:05.243 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8300124Z  2026-10-22 18:46:05.246 UTC [74] LOG:  database system was shut down at 2026-10-22 18:46:05 UTC
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8300874Z  2026-10-22 18:46:05.250 UTC [1] LOG:  database system is ready to accept connections
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8301308Z  2026-10-22 18:46:06.434 UTC [85] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8301693Z  2026-10-22 18:46:08.493 UTC [93] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8302076Z  2026-10-22 18:46:10.568 UTC [102] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8302462Z  2026-10-22 18:46:12.631 UTC [110] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8302842Z  2026-10-22 18:46:14.705 UTC [117] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8303257Z  2026-10-22 18:46:16.789 UTC [125] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8303628Z  2026-10-22 18:46:18.874 UTC [132] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8303998Z  2026-10-22 18:46:20.947 UTC [140] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8304373Z  2026-10-22 18:46:23.010 UTC [148] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8304757Z  2026-10-22 18:46:25.076 UTC [156] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8305138Z  2026-10-22 18:46:27.135 UTC [164] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8305526Z  2026-10-22 18:46:29.198 UTC [172] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8305902Z  2026-10-22 18:46:31.260 UTC [180] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8306272Z  2026-10-22 18:46:33.364 UTC [187] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8306791Z  2026-10-22 18:46:35.424 UTC [196] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8307527Z  2026-10-22 18:46:37.486 UTC [217] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8308101Z  2026-10-22 18:46:39.559 UTC [231] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8308506Z  2026-10-22 18:46:41.620 UTC [258] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8308887Z  2026-10-22 18:46:43.681 UTC [271] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8309295Z  2026-10-22 18:46:45.750 UTC [279] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8309679Z  2026-10-22 18:46:47.819 UTC [287] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8310058Z  2026-10-22 18:46:49.882 UTC [295] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8310454Z  2026-10-22 18:46:52.004 UTC [304] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8310835Z  2026-10-22 18:46:54.069 UTC [312] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8311207Z  2026-10-22 18:46:56.169 UTC [320] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8311583Z  2026-10-22 18:46:58.244 UTC [329] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8312233Z  2026-10-22 18:46:59.254 UTC [72] LOG:  checkpoint starting: immediate force wait flush-all
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8312883Z  2026-10-22 18:46:05.125 UTC [58] LOG:  checkpoint starting: shutdown immediate
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8313999Z  2026-10-22 18:46:05.126 UTC [58] LOG:  checkpoint complete: wrote 0 buffers (0.0%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.003 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/1761918, redo lsn=0/1761918
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8315975Z  2026-10-22 18:46:05.134 UTC [54] LOG:  database system is shut down
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8317224Z   done
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8317934Z  server stopped
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8318283Z  
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8318679Z  PostgreSQL init process complete; ready for start up.
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8319188Z  
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8320939Z  2026-10-22 18:46:59.357 UTC [72] LOG:  checkpoint complete: wrote 12089 buffers (73.8%), wrote 3 SLRU buffers; 0 WAL file(s) added, 0 removed, 8 recycled; write=0.096 s, sync=0.003 s, total=0.104 s; sync files=385, longest=0.001 s, average=0.001 s; distance=137892 kB, estimate=137892 kB; lsn=0/9E0AD08, redo lsn=0/9E0ACB0
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8323071Z  2026-10-22 18:46:59.461 UTC [72] LOG:  checkpoint starting: immediate force wait
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8325218Z  2026-10-22 18:46:59.463 UTC [72] LOG:  checkpoint complete: wrote 0 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.002 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=124103 kB; lsn=0/9E0AE08, redo lsn=0/9E0ADB0
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8327144Z  2026-10-22 18:47:00.304 UTC [338] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8327707Z  2026-10-22 18:47:02.363 UTC [346] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8328109Z  2026-10-22 18:47:04.422 UTC [354] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8328818Z  2026-10-22 18:47:06.502 UTC [363] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8329377Z  2026-10-22 18:47:08.586 UTC [371] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8330090Z  2026-10-22 18:47:10.670 UTC [379] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8330497Z  2026-10-22 18:47:12.739 UTC [387] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8331162Z  2026-10-22 18:47:14.799 UTC [395] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8331561Z  2026-10-22 18:47:16.857 UTC [403] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8332049Z  2026-10-22 18:47:18.914 UTC [411] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8332739Z  2026-10-22 18:47:20.973 UTC [419] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8333374Z  2026-10-22 18:47:23.032 UTC [427] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8334016Z  2026-10-22 18:47:25.090 UTC [435] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8334627Z  2026-10-22 18:47:27.151 UTC [443] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8335501Z  2026-10-22 18:47:29.238 UTC [451] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8336235Z  2026-10-22 18:47:31.324 UTC [458] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8336907Z  2026-10-22 18:47:33.387 UTC [466] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8337866Z  2026-10-22 18:47:35.452 UTC [475] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8338604Z  2026-10-22 18:47:37.513 UTC [483] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8339309Z  2026-10-22 18:47:39.587 UTC [491] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8340029Z  2026-10-22 18:47:41.649 UTC [499] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8340706Z  2026-10-22 18:47:43.710 UTC [508] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8341310Z  2026-10-22 18:47:45.770 UTC [516] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8341703Z  2026-10-22 18:47:47.840 UTC [524] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8342092Z  2026-10-22 18:47:49.901 UTC [532] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8342462Z  2026-10-22 18:47:51.961 UTC [540] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8342831Z  2026-10-22 18:47:54.025 UTC [548] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8343227Z  2026-10-22 18:47:56.088 UTC [557] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8343609Z  2026-10-22 18:47:58.151 UTC [565] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8343981Z  2026-10-22 18:48:00.213 UTC [573] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8344352Z  2026-10-22 18:48:02.277 UTC [581] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8344725Z  2026-10-22 18:48:04.338 UTC [590] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8345096Z  2026-10-22 18:48:06.405 UTC [598] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8345467Z  2026-10-22 18:48:08.467 UTC [606] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8345853Z  2026-10-22 18:48:10.534 UTC [614] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8346251Z  2026-10-22 18:48:12.600 UTC [622] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8346631Z  2026-10-22 18:48:14.660 UTC [630] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8347246Z  2026-10-22 18:48:16.725 UTC [639] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8347930Z  2026-10-22 18:48:18.791 UTC [647] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8348317Z  2026-10-22 18:48:20.860 UTC [655] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8348692Z  2026-10-22 18:48:22.923 UTC [664] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8349061Z  2026-10-22 18:48:24.988 UTC [672] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8349428Z  2026-10-22 18:48:27.051 UTC [680] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8349800Z  2026-10-22 18:48:29.113 UTC [688] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8350173Z  2026-10-22 18:48:31.175 UTC [696] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8350547Z  2026-10-22 18:48:33.236 UTC [704] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8350919Z  2026-10-22 18:48:35.297 UTC [712] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8351290Z  2026-10-22 18:48:37.364 UTC [721] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8351659Z  2026-10-22 18:48:39.425 UTC [729] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8352039Z  2026-10-22 18:48:41.487 UTC [737] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8352414Z  2026-10-22 18:48:43.549 UTC [746] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8352800Z  2026-10-22 18:48:45.609 UTC [754] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8353172Z  2026-10-22 18:48:47.670 UTC [762] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8353549Z  2026-10-22 18:48:49.731 UTC [770] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8353918Z  2026-10-22 18:48:51.792 UTC [778] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8354407Z  2026-10-22 18:48:53.854 UTC [786] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8354784Z  2026-10-22 18:48:55.914 UTC [795] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8355157Z  2026-10-22 18:48:57.973 UTC [803] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8355526Z  2026-10-22 18:49:00.035 UTC [811] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8355904Z  2026-10-22 18:49:02.121 UTC [819] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8356275Z  2026-10-22 18:49:04.182 UTC [843] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8356788Z  2026-10-22 18:49:05.655 UTC [833] ERROR:  duplicate key value violates unique constraint "users_username_key"
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8357890Z  2026-10-22 18:49:05.655 UTC [833] DETAIL:  Key (username)=(conformance_user) already exists.
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8358652Z  2026-10-22 18:49:05.655 UTC [833] STATEMENT:  INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING id, username, email, bio, image
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8359445Z  2026-10-22 18:49:05.962 UTC [833] ERROR:  duplicate key value violates unique constraint "users_email_key"
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8360054Z  2026-10-22 18:49:05.962 UTC [833] DETAIL:  Key (email)=(conformance_user@example.com) already exists.
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8360803Z  2026-10-22 18:49:05.962 UTC [833] STATEMENT:  INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING id, username, email, bio, image
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8361491Z  2026-10-22 18:49:06.241 UTC [851] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8362011Z  2026-10-22 18:49:06.270 UTC [833] ERROR:  duplicate key value violates unique constraint "users_username_key"
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8362603Z  2026-10-22 18:49:06.270 UTC [833] DETAIL:  Key (username)=(bruxrazaston37996) already exists.
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8363368Z  2026-10-22 18:49:06.270 UTC [833] STATEMENT:  INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING id, username, email, bio, image
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8364166Z  2026-10-22 18:49:07.505 UTC [833] ERROR:  duplicate key value violates unique constraint "users_username_key"
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8364753Z  2026-10-22 18:49:07.505 UTC [833] DETAIL:  Key (username)=(chetojairlanor100) already exists.
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8365843Z  2026-10-22 18:49:07.505 UTC [833] STATEMENT:  UPDATE users SET email = COALESCE($2, email), username = COALESCE($3, username), password_hash = COALESCE($4, password_hash), bio = COALESCE($5, bio), image = COALESCE($6, image) WHERE id = $1 RETURNING username, email, bio, image
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8367447Z  2026-10-22 18:49:07.505 UTC [833] ERROR:  duplicate key value violates unique constraint "users_email_key"
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8368073Z  2026-10-22 18:49:07.505 UTC [833] DETAIL:  Key (email)=(chetojairlanor100@example.com) already exists.
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8369184Z  2026-10-22 18:49:07.505 UTC [833] STATEMENT:  UPDATE users SET email = COALESCE($2, email), username = COALESCE($3, username), password_hash = COALESCE($4, password_hash), bio = COALESCE($5, bio), image = COALESCE($6, image) WHERE id = $1 RETURNING username, email, bio, image
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8370194Z  2026-10-22 18:49:08.300 UTC [859] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8370627Z  2026-10-22 18:49:08.565 UTC [72] LOG:  checkpoint starting: immediate force wait
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8371768Z  2026-10-22 18:49:08.568 UTC [72] LOG:  checkpoint complete: wrote 77 buffers (0.5%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.004 s; sync files=13, longest=0.001 s, average=0.001 s; distance=922 kB, estimate=111785 kB; lsn=0/9EF1900, redo lsn=0/9EF18A8
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8372856Z  2026-10-22 18:49:10.366 UTC [869] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8373245Z  2026-10-22 18:49:12.453 UTC [877] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8373619Z  2026-10-22 18:49:14.542 UTC [885] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8373991Z  2026-10-22 18:49:16.626 UTC [894] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8374497Z  2026-10-22 18:49:18.709 UTC [903] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8374865Z  2026-10-22 18:49:20.787 UTC [911] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8375235Z  2026-10-22 18:49:22.849 UTC [924] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8375612Z  2026-10-22 18:49:24.919 UTC [933] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8375982Z  2026-10-22 18:49:26.985 UTC [942] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8376352Z  2026-10-22 18:49:29.045 UTC [950] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8376724Z  2026-10-22 18:49:31.110 UTC [959] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8377527Z  2026-10-22 18:49:32.184 UTC [72] LOG:  checkpoints are occurring too frequently (24 seconds apart)
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8378131Z  2026-10-22 18:49:32.184 UTC [72] HINT:  Consider increasing the configuration parameter "max_wal_size".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8378640Z  2026-10-22 18:49:32.184 UTC [72] LOG:  checkpoint starting: wal
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8379027Z  2026-10-22 18:49:33.181 UTC [967] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8379405Z  2026-10-22 18:49:35.247 UTC [977] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8379783Z  2026-10-22 18:49:37.318 UTC [986] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8380162Z  2026-10-22 18:49:39.407 UTC [996] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8380540Z  2026-10-22 18:49:41.483 UTC [1004] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8381665Z  2026-10-22 18:49:41.777 UTC [72] LOG:  checkpoint complete: wrote 1897 buffers (11.6%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 33 recycled; write=7.635 s, sync=1.950 s, total=9.594 s; sync files=345, longest=1.205 s, average=0.006 s; distance=526014 kB, estimate=526014 kB; lsn=0/48976168, redo lsn=0/2A0A1240
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8382865Z  2026-10-22 18:49:42.903 UTC [72] LOG:  checkpoints are occurring too frequently (10 seconds apart)
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8383453Z  2026-10-22 18:49:42.903 UTC [72] HINT:  Consider increasing the configuration parameter "max_wal_size".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8383948Z  2026-10-22 18:49:42.903 UTC [72] LOG:  checkpoint starting: wal
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8384324Z  2026-10-22 18:49:43.547 UTC [1013] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8384844Z  2026-10-22 18:49:45.613 UTC [1020] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8385227Z  2026-10-22 18:49:47.675 UTC [1029] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8385601Z  2026-10-22 18:49:49.752 UTC [1037] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8385976Z  2026-10-22 18:49:51.818 UTC [1047] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8387292Z  2026-10-22 18:49:53.614 UTC [72] LOG:  checkpoint complete: wrote 127 buffers (0.8%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 33 recycled; write=9.620 s, sync=1.082 s, total=10.712 s; sync files=12, longest=0.874 s, average=0.091 s; distance=544124 kB, estimate=544124 kB; lsn=0/69B07310, redo lsn=0/4B400268
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8388558Z  2026-10-22 18:49:53.882 UTC [1055] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8389041Z  2026-10-22 18:49:54.269 UTC [72] LOG:  checkpoints are occurring too frequently (12 seconds apart)
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8389629Z  2026-10-22 18:49:54.269 UTC [72] HINT:  Consider increasing the configuration parameter "max_wal_size".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8390123Z  2026-10-22 18:49:54.269 UTC [72] LOG:  checkpoint starting: wal
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8390503Z  2026-10-22 18:49:55.952 UTC [1064] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8390884Z  2026-10-22 18:49:58.020 UTC [1072] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8391264Z  2026-10-22 18:50:00.081 UTC [1080] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8392375Z  2026-10-22 18:50:01.865 UTC [72] LOG:  checkpoint complete: wrote 5454 buffers (33.3%), wrote 1 SLRU buffers; 0 WAL file(s) added, 1 removed, 32 recycled; write=6.648 s, sync=0.938 s, total=7.596 s; sync files=15, longest=0.587 s, average=0.063 s; distance=540369 kB, estimate=543748 kB; lsn=0/8B9D67D8, redo lsn=0/6C3B4A40
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8393719Z  2026-10-22 18:50:02.146 UTC [1088] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8394187Z  2026-10-22 18:50:02.835 UTC [72] LOG:  checkpoints are occurring too frequently (8 seconds apart)
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8394772Z  2026-10-22 18:50:02.835 UTC [72] HINT:  Consider increasing the configuration parameter "max_wal_size".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8395256Z  2026-10-22 18:50:02.835 UTC [72] LOG:  checkpoint starting: wal
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8395629Z  2026-10-22 18:50:04.216 UTC [1096] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8396013Z  2026-10-22 18:50:06.286 UTC [1105] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8396388Z  2026-10-22 18:50:08.347 UTC [1113] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8396764Z  2026-10-22 18:50:10.413 UTC [1122] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8397468Z  2026-10-22 18:50:12.475 UTC [1130] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8397864Z  2026-10-22 18:50:14.540 UTC [1139] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8398243Z  2026-10-22 18:50:16.603 UTC [1147] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8398622Z  2026-10-22 18:50:18.664 UTC [1155] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8399738Z  2026-10-22 18:50:20.272 UTC [72] LOG:  checkpoint complete: wrote 4122 buffers (25.2%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 33 recycled; write=16.765 s, sync=0.664 s, total=17.438 s; sync files=19, longest=0.254 s, average=0.035 s; distance=537204 kB, estimate=543094 kB; lsn=0/AB3911B8, redo lsn=0/8D051AB0
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8400857Z  2026-10-22 18:50:20.731 UTC [1164] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8401238Z  2026-10-22 18:50:22.792 UTC [1172] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8401700Z  2026-10-22 18:50:24.438 UTC [72] LOG:  checkpoints are occurring too frequently (22 seconds apart)
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8402285Z  2026-10-22 18:50:24.438 UTC [72] HINT:  Consider increasing the configuration parameter "max_wal_size".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8402768Z  2026-10-22 18:50:24.438 UTC [72] LOG:  checkpoint starting: wal
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8403138Z  2026-10-22 18:50:24.856 UTC [1180] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8403656Z  2026-10-22 18:50:26.923 UTC [1188] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8404030Z  2026-10-22 18:50:28.992 UTC [1196] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8404403Z  2026-10-22 18:50:31.053 UTC [1205] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8404780Z  2026-10-22 18:50:33.115 UTC [1213] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8405159Z  2026-10-22 18:50:35.178 UTC [1221] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8405534Z  2026-10-22 18:50:37.245 UTC [1230] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8406642Z  2026-10-22 18:50:38.324 UTC [72] LOG:  checkpoint complete: wrote 2163 buffers (13.2%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 33 recycled; write=13.444 s, sync=0.434 s, total=13.887 s; sync files=10, longest=0.203 s, average=0.044 s; distance=540378 kB, estimate=542822 kB; lsn=0/CC7BBAE8, redo lsn=0/AE008578
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8408276Z  2026-10-22 18:50:39.319 UTC [72] LOG:  checkpoints are occurring too frequently (15 seconds apart)
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8408877Z  2026-10-22 18:50:39.319 UTC [72] HINT:  Consider increasing the configuration parameter "max_wal_size".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8409369Z  2026-10-22 18:50:39.319 UTC [72] LOG:  checkpoint starting: wal
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8409745Z  2026-10-22 18:50:39.324 UTC [1238] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8410126Z  2026-10-22 18:50:41.390 UTC [1246] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8410511Z  2026-10-22 18:50:43.452 UTC [1254] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8410886Z  2026-10-22 18:50:45.519 UTC [1262] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8411398Z  2026-10-22 18:50:47.579 UTC [1270] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8411779Z  2026-10-22 18:50:49.641 UTC [1279] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8412154Z  2026-10-22 18:50:51.708 UTC [1288] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8412535Z  2026-10-22 18:50:53.776 UTC [1295] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8413646Z  2026-10-22 18:50:55.620 UTC [72] LOG:  checkpoint complete: wrote 3984 buffers (24.3%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 33 recycled; write=15.371 s, sync=0.920 s, total=16.301 s; sync files=14, longest=0.411 s, average=0.066 s; distance=541576 kB, estimate=542698 kB; lsn=0/ED4C58D8, redo lsn=0/CF0EA7E8
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8414762Z  2026-10-22 18:50:55.838 UTC [1303] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8415229Z  2026-10-22 18:50:57.128 UTC [72] LOG:  checkpoints are occurring too frequently (18 seconds apart)
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8415815Z  2026-10-22 18:50:57.128 UTC [72] HINT:  Consider increasing the configuration parameter "max_wal_size".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8416299Z  2026-10-22 18:50:57.128 UTC [72] LOG:  checkpoint starting: wal
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8416669Z  2026-10-22 18:50:57.906 UTC [1311] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8417224Z  2026-10-22 18:50:59.974 UTC [1319] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8417772Z  2026-10-22 18:51:02.047 UTC [1327] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8418154Z  2026-10-22 18:51:04.111 UTC [1336] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8418531Z  2026-10-22 18:51:06.173 UTC [1346] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8418905Z  2026-10-22 18:51:08.237 UTC [1354] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8419280Z  2026-10-22 18:51:10.304 UTC [1363] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8419659Z  2026-10-22 18:51:12.366 UTC [1371] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8420042Z  2026-10-22 18:51:14.436 UTC [1379] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8421144Z  2026-10-22 18:51:15.562 UTC [72] LOG:  checkpoint complete: wrote 2979 buffers (18.2%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 33 recycled; write=18.081 s, sync=0.335 s, total=18.435 s; sync files=17, longest=0.303 s, average=0.020 s; distance=543823 kB, estimate=543823 kB; lsn=1/E112850, redo lsn=0/F03FE558
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8422439Z  2026-10-22 18:51:16.499 UTC [1387] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8422912Z  2026-10-22 18:51:17.978 UTC [72] LOG:  checkpoints are occurring too frequently (20 seconds apart)
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8423502Z  2026-10-22 18:51:17.978 UTC [72] HINT:  Consider increasing the configuration parameter "max_wal_size".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8423990Z  2026-10-22 18:51:17.978 UTC [72] LOG:  checkpoint starting: wal
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8424365Z  2026-10-22 18:51:18.562 UTC [1395] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8424753Z  2026-10-22 18:51:20.626 UTC [1405] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8425140Z  2026-10-22 18:51:22.699 UTC [1413] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8425523Z  2026-10-22 18:51:24.770 UTC [1421] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8425903Z  2026-10-22 18:51:26.833 UTC [1429] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8426293Z  2026-10-22 18:51:28.894 UTC [1437] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8427632Z  2026-10-22 18:51:30.825 UTC [72] LOG:  checkpoint complete: wrote 3347 buffers (20.4%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 33 recycled; write=12.154 s, sync=0.683 s, total=12.847 s; sync files=9, longest=0.411 s, average=0.076 s; distance=537504 kB, estimate=543191 kB; lsn=1/2F1A0800, redo lsn=1/110E67A0
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8428766Z  2026-10-22 18:51:30.964 UTC [1445] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8429231Z  2026-10-22 18:51:31.830 UTC [72] LOG:  checkpoints are occurring too frequently (14 seconds apart)
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8429936Z  2026-10-22 18:51:31.830 UTC [72] HINT:  Consider increasing the configuration parameter "max_wal_size".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8430428Z  2026-10-22 18:51:31.830 UTC [72] LOG:  checkpoint starting: wal
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8430801Z  2026-10-22 18:51:33.035 UTC [1453] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8431191Z  2026-10-22 18:51:35.098 UTC [1460] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8431573Z  2026-10-22 18:51:37.169 UTC [1469] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8431957Z  2026-10-22 18:51:39.231 UTC [1477] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8433066Z  2026-10-22 18:51:40.003 UTC [72] LOG:  checkpoint complete: wrote 5077 buffers (31.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 33 recycled; write=7.453 s, sync=0.712 s, total=8.174 s; sync files=10, longest=0.429 s, average=0.072 s; distance=539874 kB, estimate=542859 kB; lsn=1/50B3BCD8, redo lsn=1/3201F330
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8434189Z  2026-10-22 18:51:41.295 UTC [1485] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8434651Z  2026-10-22 18:51:41.312 UTC [72] LOG:  checkpoints are occurring too frequently (10 seconds apart)
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8435238Z  2026-10-22 18:51:41.312 UTC [72] HINT:  Consider increasing the configuration parameter "max_wal_size".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8435737Z  2026-10-22 18:51:41.312 UTC [72] LOG:  checkpoint starting: wal
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8436111Z  2026-10-22 18:51:43.358 UTC [1494] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8436492Z  2026-10-22 18:51:45.428 UTC [1502] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8437820Z  2026-10-22 18:51:47.372 UTC [72] LOG:  checkpoint complete: wrote 3353 buffers (20.5%), wrote 1 SLRU buffers; 0 WAL file(s) added, 1 removed, 32 recycled; write=5.193 s, sync=0.857 s, total=6.061 s; sync files=17, longest=0.652 s, average=0.051 s; distance=541437 kB, estimate=542717 kB; lsn=1/72AEC3D0, redo lsn=1/530DE770
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8438951Z  2026-10-22 18:51:47.503 UTC [1510] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8439421Z  2026-10-22 18:51:47.807 UTC [72] LOG:  checkpoints are occurring too frequently (6 seconds apart)
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8439996Z  2026-10-22 18:51:47.807 UTC [72] HINT:  Consider increasing the configuration parameter "max_wal_size".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8440600Z  2026-10-22 18:51:47.807 UTC [72] LOG:  checkpoint starting: wal
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8440979Z  2026-10-22 18:51:49.575 UTC [1518] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8441361Z  2026-10-22 18:51:51.639 UTC [1527] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8441738Z  2026-10-22 18:51:53.713 UTC [1535] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8442124Z  2026-10-22 18:51:55.774 UTC [1544] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8443222Z  2026-10-22 18:51:57.164 UTC [72] LOG:  checkpoint complete: wrote 3364 buffers (20.5%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 33 recycled; write=8.457 s, sync=0.892 s, total=9.358 s; sync files=14, longest=0.699 s, average=0.064 s; distance=541304 kB, estimate=542576 kB; lsn=1/925B66B0, redo lsn=1/7417C9D8
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8444336Z  2026-10-22 18:51:57.846 UTC [1553] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8444807Z  2026-10-22 18:51:59.157 UTC [72] LOG:  checkpoints are occurring too frequently (12 seconds apart)
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8445388Z  2026-10-22 18:51:59.157 UTC [72] HINT:  Consider increasing the configuration parameter "max_wal_size".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8445870Z  2026-10-22 18:51:59.157 UTC [72] LOG:  checkpoint starting: wal
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8446250Z  2026-10-22 18:51:59.912 UTC [1562] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8446632Z  2026-10-22 18:52:01.973 UTC [1571] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8447132Z  2026-10-22 18:52:04.041 UTC [1579] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8447523Z  2026-10-22 18:52:06.110 UTC [1588] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8448018Z  2026-10-22 18:52:08.182 UTC [1597] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8448400Z  2026-10-22 18:52:10.254 UTC [1605] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8448782Z  2026-10-22 18:52:12.320 UTC [1613] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8449165Z  2026-10-22 18:52:14.382 UTC [1622] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8449545Z  2026-10-22 18:52:16.444 UTC [1630] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8449927Z  2026-10-22 18:52:18.506 UTC [1638] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8450303Z  2026-10-22 18:52:20.568 UTC [1651] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8451416Z  2026-10-22 18:52:21.134 UTC [72] LOG:  checkpoint complete: wrote 5348 buffers (32.6%), wrote 1 SLRU buffers; 0 WAL file(s) added, 2 removed, 31 recycled; write=21.275 s, sync=0.690 s, total=21.978 s; sync files=20, longest=0.275 s, average=0.035 s; distance=540748 kB, estimate=542393 kB; lsn=1/B5294EB8, redo lsn=1/9518FC58
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8452627Z  2026-10-22 18:52:21.142 UTC [72] LOG:  checkpoints are occurring too frequently (22 seconds apart)
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8453204Z  2026-10-22 18:52:21.142 UTC [72] HINT:  Consider increasing the configuration parameter "max_wal_size".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8453694Z  2026-10-22 18:52:21.142 UTC [72] LOG:  checkpoint starting: wal
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8454072Z  2026-10-22 18:52:22.633 UTC [1663] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8455188Z  2026-10-22 18:52:24.512 UTC [72] LOG:  checkpoint complete: wrote 14711 buffers (89.8%), wrote 1 SLRU buffers; 0 WAL file(s) added, 2 removed, 31 recycled; write=1.886 s, sync=1.410 s, total=3.371 s; sync files=39, longest=0.965 s, average=0.037 s; distance=539164 kB, estimate=542070 kB; lsn=1/D639CAB8, redo lsn=1/B6016DB0
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8456389Z  2026-10-22 18:52:24.521 UTC [72] LOG:  checkpoints are occurring too frequently (3 seconds apart)
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8457073Z  2026-10-22 18:52:24.521 UTC [72] HINT:  Consider increasing the configuration parameter "max_wal_size".
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8457711Z  2026-10-22 18:52:24.521 UTC [72] LOG:  checkpoint starting: wal
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8458092Z  2026-10-22 18:52:24.707 UTC [1671] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8458475Z  2026-10-22 18:52:26.805 UTC [1688] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8458987Z  2026-10-22 18:52:28.906 UTC [1703] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8459371Z  2026-10-22 18:52:31.003 UTC [1714] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8459747Z  2026-10-22 18:52:33.099 UTC [1722] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8460122Z  2026-10-22 18:52:35.198 UTC [1733] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8460506Z  2026-10-22 18:52:37.267 UTC [1744] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8461615Z  2026-10-22 18:52:37.272 UTC [72] LOG:  checkpoint complete: wrote 49 buffers (0.3%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 33 recycled; write=12.705 s, sync=0.038 s, total=12.752 s; sync files=55, longest=0.034 s, average=0.001 s; distance=540744 kB, estimate=541937 kB; lsn=1/DE44CB48, redo lsn=1/D70290A8
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8462791Z  2026-10-22 18:52:37.272 UTC [72] LOG:  checkpoint starting: immediate force wait flush-all
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8463965Z  2026-10-22 18:52:37.276 UTC [72] LOG:  checkpoint complete: wrote 74 buffers (0.5%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 7 recycled; write=0.001 s, sync=0.001 s, total=0.004 s; sync files=21, longest=0.001 s, average=0.001 s; distance=118926 kB, estimate=499636 kB; lsn=1/DE44CC18, redo lsn=1/DE44CBC0
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8465065Z  2026-10-22 18:52:39.336 UTC [1752] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8465453Z  2026-10-22 18:52:41.396 UTC [1760] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8465873Z  2026-10-22 18:52:43.162 UTC [72] LOG:  checkpoint starting: immediate force wait
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8467223Z  2026-10-22 18:52:43.163 UTC [72] LOG:  checkpoint complete: wrote 0 buffers (0.0%), wrote 0 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.002 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=449673 kB; lsn=1/DE44CD18, redo lsn=1/DE44CCC0
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8468318Z  2026-10-22 18:52:43.460 UTC [1768] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8468698Z  2026-10-22 18:52:45.524 UTC [1776] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8469073Z  2026-10-22 18:52:47.612 UTC [1784] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8469454Z  2026-10-22 18:52:49.676 UTC [1792] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8469966Z  2026-10-22 18:52:51.427 UTC [1805] ERROR:  duplicate key value violates unique constraint "users_username_key"
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8470563Z  2026-10-22 18:52:51.427 UTC [1805] DETAIL:  Key (username)=(conformance_user) already exists.
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8471321Z  2026-10-22 18:52:51.427 UTC [1805] STATEMENT:  INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING id, username, email, bio, image
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8471994Z  2026-10-22 18:52:51.735 UTC [1817] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8472502Z  2026-10-22 18:52:51.736 UTC [1805] ERROR:  duplicate key value violates unique constraint "users_email_key"
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8473121Z  2026-10-22 18:52:51.736 UTC [1805] DETAIL:  Key (email)=(conformance_user@example.com) already exists.
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8473887Z  2026-10-22 18:52:51.736 UTC [1805] STATEMENT:  INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING id, username, email, bio, image
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8474691Z  2026-10-22 18:52:52.043 UTC [1805] ERROR:  duplicate key value violates unique constraint "users_username_key"
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8475291Z  2026-10-22 18:52:52.043 UTC [1805] DETAIL:  Key (username)=(bruxrazaston37996) already exists.
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8476037Z  2026-10-22 18:52:52.043 UTC [1805] STATEMENT:  INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING id, username, email, bio, image
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8476828Z  2026-10-22 18:52:53.279 UTC [1805] ERROR:  duplicate key value violates unique constraint "users_username_key"
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8477614Z  2026-10-22 18:52:53.279 UTC [1805] DETAIL:  Key (username)=(chetojairlanor100) already exists.
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8478845Z  2026-10-22 18:52:53.279 UTC [1805] STATEMENT:  UPDATE users SET email = COALESCE($2, email), username = COALESCE($3, username), password_hash = COALESCE($4, password_hash), bio = COALESCE($5, bio), image = COALESCE($6, image) WHERE id = $1 RETURNING username, email, bio, image
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8479978Z  2026-10-22 18:52:53.279 UTC [1805] ERROR:  duplicate key value violates unique constraint "users_email_key"
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8480591Z  2026-10-22 18:52:53.279 UTC [1805] DETAIL:  Key (email)=(chetojairlanor100@example.com) already exists.
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8481701Z  2026-10-22 18:52:53.279 UTC [1805] STATEMENT:  UPDATE users SET email = COALESCE($2, email), username = COALESCE($3, username), password_hash = COALESCE($4, password_hash), bio = COALESCE($5, bio), image = COALESCE($6, image) WHERE id = $1 RETURNING username, email, bio, image
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8482718Z  2026-10-22 18:52:53.793 UTC [1825] FATAL:  role "root" does not exist
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8483152Z  2026-10-22 18:52:54.376 UTC [72] LOG:  checkpoint starting: immediate force wait
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8484283Z  2026-10-22 18:52:54.379 UTC [72] LOG:  checkpoint complete: wrote 2 buffers (0.0%), wrote 1 SLRU buffers; 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.003 s; sync files=3, longest=0.001 s, average=0.001 s; distance=409 kB, estimate=404746 kB; lsn=1/DE4B3328, redo lsn=1/DE4B32D0
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8490771Z Stop and remove container: 85769244c2f94ce19e6a39c8a07762db_postgres18_d00fc0
+Goose source build and conformance	Stop containers	2026-10-22T18:52:55.8496172Z ##[command]/usr/bin/docker rm --force 8bd01b7af3c12b69b884ccc356c7110aca2faff956b64228ea9ff4aa9710b782
+Goose source build and conformance	Stop containers	2026-10-22T18:52:56.0046858Z 8bd01b7af3c12b69b884ccc356c7110aca2faff956b64228ea9ff4aa9710b782
+Goose source build and conformance	Stop containers	2026-10-22T18:52:56.0075889Z Remove container network: github_network_a610459a51f449c3a97b11d11a07b18b
+Goose source build and conformance	Stop containers	2026-10-22T18:52:56.0080535Z ##[command]/usr/bin/docker network rm github_network_a610459a51f449c3a97b11d11a07b18b
+Goose source build and conformance	Stop containers	2026-10-22T18:52:56.1082561Z github_network_a610459a51f449c3a97b11d11a07b18b
+Goose source build and conformance	Complete job	﻿2026-10-22T18:52:56.1161892Z Cleaning up orphan processes
+Goose source build and conformance	Complete job	2026-10-22T18:52:56.1535345Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-go@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

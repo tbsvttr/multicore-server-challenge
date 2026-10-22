@@ -1,0 +1,37 @@
+Focused behavioral probes for the robustness/correctness fixes
+
+1. Favorite visibility under real lock contention
+   Run favorite-race-probe.py against the rebuilt server. Keep the competing
+   favorite transaction open until pg_stat_activity proves the API transaction
+   is waiting on its transactionid lock. Commit the competing transaction and
+   require API favoritesCount to match the committed DB and immediate GET
+   (the original deterministic counterexample reported 1 instead of 2).
+   Retain the same-user existing-favorite/repeated toggle checks and all 197
+   official checks, including unknown-article404. Confirm no HTTP success before
+   writer commit with the competing transaction still open.
+
+2. Completed bcrypt jobs survive actual pipe backpressure
+   Fill an O_NONBLOCK pipe until a 72-byte write returns EAGAIN. Submit distinct
+   72-byte records from hash-worker threads while delaying the reader. Release
+   the reader, then require every submitted record exactly once and intact,
+   with no worker reporting success before its record is delivered. Include
+   multiple writers to exercise the poll-to-write race. Interrupt a waiting
+   worker with a harmless signal without SA_RESTART and require full eventual
+   delivery. A closed descriptor must report permanent failure; the Goose call
+   site then terminates instead of leaving its request waiting forever.
+
+3. Connection limit boundaries, without opening database connections
+   Start with the normal required environment but rejected resource knobs:
+   WORKERS=9223372036854775807/PG_READERS=1 and
+   WORKERS=1/PG_READERS=9223372036854775807 must immediately reject, without
+   overflow or spawning threads. WORKERS=2/PG_READERS=47 (96 connections) must
+   reject. WORKERS=19/PG_READERS=4 (95) is the accepted arithmetic boundary;
+   inspect readiness/observed connections only in an appropriately sized test.
+
+State-machine review:
+   Initial favorite/unfavorite writes retain the original request slug in ctx.
+   Only the existing ReadyForQuery-delimited successful group completion can
+   enter favorite_committed. It replaces the saved mutation with ST_ARTICLE,
+   resets request-stage retry state, and selects a reader connection. A failure
+   during that read retries only the read. Unknown outcome of a writer socket
+   loss still follows the existing fatal path and never replays a write.

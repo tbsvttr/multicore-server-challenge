@@ -1,0 +1,2903 @@
+{
+  "created_utc": "2026-10-22T19:10:03Z",
+  "analyzer_sha256": "d327cfc8de4cd0a1c0b8fc68f414dfd25882f8b1956fdf3825201bcaf44736cd",
+  "shared_analyzer_sha256": "207c774f4b7719ec8c5f3148f8b925b1084e88cd85f2e7c0f48bca31385e66e0",
+  "runs": [
+    {
+      "run": "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1",
+      "scope": "local ARM64 Mac/Docker80k-user four-shard fixed-load comparison; not an official score or capacity search",
+      "checks": [
+        {
+          "check": "frozen_plan_hash",
+          "pass": true
+        },
+        {
+          "check": "exact_80k_protocol",
+          "pass": true
+        },
+        {
+          "check": "target_inspect_budgets_and_identity",
+          "pass": true
+        },
+        {
+          "check": "load_inspect_budgets_and_identity",
+          "pass": true
+        },
+        {
+          "check": "generator_separate_cgroup_shared_net",
+          "pass": true
+        },
+        {
+          "check": "durable_pg18",
+          "pass": true
+        },
+        {
+          "check": "original_full_seed_fingerprint_pass",
+          "pass": true
+        },
+        {
+          "check": "rust7_pinned_binary",
+          "pass": true
+        },
+        {
+          "check": "rust7_all_source_files_frozen",
+          "pass": true
+        },
+        {
+          "check": "rust7_source_manifest_hash",
+          "pass": true
+        },
+        {
+          "check": "rust7_exact_predeclared_case",
+          "pass": true
+        },
+        {
+          "check": "goose_pinned_binary",
+          "pass": true
+        },
+        {
+          "check": "goose_all_source_files_frozen",
+          "pass": true
+        },
+        {
+          "check": "goose_source_manifest_hash",
+          "pass": true
+        },
+        {
+          "check": "goose_exact_predeclared_case",
+          "pass": true
+        },
+        {
+          "check": "rust_8cpu_defaults_and_start_script_exports",
+          "pass": true
+        },
+        {
+          "check": "tool_hashes_unchanged",
+          "pass": true
+        },
+        {
+          "check": "all_six_planned_attempts_retained_without_replacement",
+          "pass": false,
+          "detail": null
+        },
+        {
+          "check": "controller_no_global_failure",
+          "pass": false,
+          "detail": null
+        },
+        {
+          "check": "unique_database_each_attempt",
+          "pass": true
+        }
+      ],
+      "attempts": [
+        {
+          "id": "01-p1-rust7",
+          "case": "rust7",
+          "pair": 1,
+          "recorded_classification": "FAIL_SLO",
+          "recorded_assessment": {
+            "id": "01-p1-rust7",
+            "pair": 1,
+            "case": "rust7",
+            "database": "mc_pair_20261022_190313_01_da93",
+            "classification": "FAIL_SLO",
+            "load_exits": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "shard_verdicts": [
+              {
+                "box_index": 0,
+                "merge_exit": 3,
+                "verdict": {
+                  "pass": false,
+                  "fail_reasons": [
+                    "p95 10011 ms >= 500",
+                    "p99 10019 ms >= 1000",
+                    "errors 95.66% >= 1%"
+                  ],
+                  "lg_limited": false
+                },
+                "overall": {
+                  "count": 91357,
+                  "rps": 1522.6166666666666,
+                  "p50_ms": 10002.431,
+                  "p90_ms": 10002.431,
+                  "p95_ms": 10010.623,
+                  "p99_ms": 10018.815,
+                  "max_ms": 10043.391,
+                  "mean_ms": 9565.384072911766,
+                  "errors": 87395,
+                  "error_rate": 0.9566316757336603,
+                  "statuses": {
+                    "200": 3877,
+                    "201": 84,
+                    "204": 1
+                  },
+                  "error_classes": {
+                    "timeout": 87395
+                  },
+                  "error_example": "request timeout"
+                },
+                "boxes": [
+                  {
+                    "file": "/evidence/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box0.json",
+                    "box_index": 0,
+                    "host": "a40d58b68177",
+                    "users": 20000,
+                    "cpu_avg_measure_pct": 9.964604405277537,
+                    "cpu_max_measure_pct": 17.151454363089268,
+                    "proc_cpu_avg_measure_pct": 2.024452939068432,
+                    "rss_peak_mb": 412.09375,
+                    "fell_behind": false,
+                    "requests_in_window": 91357,
+                    "tcp_connects": 157705
+                  }
+                ]
+              },
+              {
+                "box_index": 1,
+                "merge_exit": 3,
+                "verdict": {
+                  "pass": false,
+                  "fail_reasons": [
+                    "p95 10002 ms >= 500",
+                    "p99 10011 ms >= 1000",
+                    "errors 95.63% >= 1%"
+                  ],
+                  "lg_limited": false
+                },
+                "overall": {
+                  "count": 91449,
+                  "rps": 1524.15,
+                  "p50_ms": 10002.431,
+                  "p90_ms": 10002.431,
+                  "p95_ms": 10002.431,
+                  "p99_ms": 10010.623,
+                  "max_ms": 10035.199,
+                  "mean_ms": 9561.55298977572,
+                  "errors": 87452,
+                  "error_rate": 0.9562925783770189,
+                  "statuses": {
+                    "200": 3937,
+                    "201": 58,
+                    "204": 2
+                  },
+                  "error_classes": {
+                    "timeout": 87452
+                  },
+                  "error_example": "request timeout"
+                },
+                "boxes": [
+                  {
+                    "file": "/evidence/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box1.json",
+                    "box_index": 1,
+                    "host": "a40d58b68177",
+                    "users": 20000,
+                    "cpu_avg_measure_pct": 9.964569480476182,
+                    "cpu_max_measure_pct": 17.182817182817182,
+                    "proc_cpu_avg_measure_pct": 1.6269660934474552,
+                    "rss_peak_mb": 405.9375,
+                    "fell_behind": false,
+                    "requests_in_window": 91449,
+                    "tcp_connects": 157690
+                  }
+                ]
+              },
+              {
+                "box_index": 2,
+                "merge_exit": 3,
+                "verdict": {
+                  "pass": false,
+                  "fail_reasons": [
+                    "p95 10011 ms >= 500",
+                    "p99 10019 ms >= 1000",
+                    "errors 95.64% >= 1%"
+                  ],
+                  "lg_limited": false
+                },
+                "overall": {
+                  "count": 91634,
+                  "rps": 1527.2333333333333,
+                  "p50_ms": 10002.431,
+                  "p90_ms": 10002.431,
+                  "p95_ms": 10010.623,
+                  "p99_ms": 10018.815,
+                  "max_ms": 10059.775,
+                  "mean_ms": 9562.967898127334,
+                  "errors": 87636,
+                  "error_rate": 0.9563699063666324,
+                  "statuses": {
+                    "200": 3929,
+                    "201": 67,
+                    "204": 2
+                  },
+                  "error_classes": {
+                    "timeout": 87636
+                  },
+                  "error_example": "request timeout"
+                },
+                "boxes": [
+                  {
+                    "file": "/evidence/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box2.json",
+                    "box_index": 2,
+                    "host": "a40d58b68177",
+                    "users": 20000,
+                    "cpu_avg_measure_pct": 9.964526803772502,
+                    "cpu_max_measure_pct": 17.16566866267465,
+                    "proc_cpu_avg_measure_pct": 2.1190408745964313,
+                    "rss_peak_mb": 409.5546875,
+                    "fell_behind": false,
+                    "requests_in_window": 91634,
+                    "tcp_connects": 158280
+                  }
+                ]
+              },
+              {
+                "box_index": 3,
+                "merge_exit": 3,
+                "verdict": {
+                  "pass": false,
+                  "fail_reasons": [
+                    "p95 10002 ms >= 500",
+                    "p99 10011 ms >= 1000",
+                    "errors 95.38% >= 1%"
+                  ],
+                  "lg_limited": false
+                },
+                "overall": {
+                  "count": 91784,
+                  "rps": 1529.7333333333333,
+                  "p50_ms": 10002.431,
+                  "p90_ms": 10002.431,
+                  "p95_ms": 10002.431,
+                  "p99_ms": 10010.623,
+                  "max_ms": 10035.199,
+                  "mean_ms": 9536.918140285889,
+                  "errors": 87546,
+                  "error_rate": 0.9538263749673146,
+                  "statuses": {
+                    "200": 4153,
+                    "201": 84,
+                    "204": 1
+                  },
+                  "error_classes": {
+                    "timeout": 87546
+                  },
+                  "error_example": "request timeout"
+                },
+                "boxes": [
+                  {
+                    "file": "/evidence/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box3.json",
+                    "box_index": 3,
+                    "host": "a40d58b68177",
+                    "users": 20000,
+                    "cpu_avg_measure_pct": 9.964524958113113,
+                    "cpu_max_measure_pct": 17.182817182817182,
+                    "proc_cpu_avg_measure_pct": 1.6442626720085278,
+                    "rss_peak_mb": 404.375,
+                    "fell_behind": false,
+                    "requests_in_window": 91784,
+                    "tcp_connects": 157942
+                  }
+                ]
+              }
+            ],
+            "merge_exit": 3,
+            "verdict": {
+              "pass": false,
+              "fail_reasons": [
+                "p95 10002 ms >= 500",
+                "p99 10011 ms >= 1000",
+                "errors 95.58% >= 1%"
+              ],
+              "lg_limited": false
+            },
+            "overall": {
+              "count": 366224,
+              "rps": 6103.733333333334,
+              "p50_ms": 10002.431,
+              "p90_ms": 10002.431,
+              "p95_ms": 10002.431,
+              "p99_ms": 10010.623,
+              "max_ms": 10059.775,
+              "mean_ms": 9556.688657968893,
+              "errors": 350029,
+              "error_rate": 0.9557784306872297,
+              "statuses": {
+                "200": 15896,
+                "201": 293,
+                "204": 6
+              },
+              "error_classes": {
+                "timeout": 350029
+              },
+              "error_example": "request timeout"
+            },
+            "boxes": [
+              {
+                "file": "/evidence/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box0.json",
+                "box_index": 0,
+                "host": "a40d58b68177",
+                "users": 20000,
+                "cpu_avg_measure_pct": 9.964604405277537,
+                "cpu_max_measure_pct": 17.151454363089268,
+                "proc_cpu_avg_measure_pct": 2.024452939068432,
+                "rss_peak_mb": 412.09375,
+                "fell_behind": false,
+                "requests_in_window": 91357,
+                "tcp_connects": 157705
+              },
+              {
+                "file": "/evidence/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box1.json",
+                "box_index": 1,
+                "host": "a40d58b68177",
+                "users": 20000,
+                "cpu_avg_measure_pct": 9.964569480476182,
+                "cpu_max_measure_pct": 17.182817182817182,
+                "proc_cpu_avg_measure_pct": 1.6269660934474552,
+                "rss_peak_mb": 405.9375,
+                "fell_behind": false,
+                "requests_in_window": 91449,
+                "tcp_connects": 157690
+              },
+              {
+                "file": "/evidence/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box2.json",
+                "box_index": 2,
+                "host": "a40d58b68177",
+                "users": 20000,
+                "cpu_avg_measure_pct": 9.964526803772502,
+                "cpu_max_measure_pct": 17.16566866267465,
+                "proc_cpu_avg_measure_pct": 2.1190408745964313,
+                "rss_peak_mb": 409.5546875,
+                "fell_behind": false,
+                "requests_in_window": 91634,
+                "tcp_connects": 158280
+              },
+              {
+                "file": "/evidence/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box3.json",
+                "box_index": 3,
+                "host": "a40d58b68177",
+                "users": 20000,
+                "cpu_avg_measure_pct": 9.964524958113113,
+                "cpu_max_measure_pct": 17.182817182817182,
+                "proc_cpu_avg_measure_pct": 1.6442626720085278,
+                "rss_peak_mb": 404.375,
+                "fell_behind": false,
+                "requests_in_window": 91784,
+                "tcp_connects": 157942
+              }
+            ],
+            "target_monitor": {
+              "samples": 60,
+              "elapsed_s": 59.035935402,
+              "cgroup_cpu_quota_pct": 1.3025939112568854,
+              "cpu_scope": "sampled interval inside the measurement window",
+              "sampled_interval_start_ms": 1792695864653.86,
+              "sampled_interval_end_ms": 1792695923689.942,
+              "memory_peak_sampled_bytes": 8852426752,
+              "swap_peak_sampled_bytes": 0,
+              "memory_events_before": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+              "memory_events_after": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+              "measurement_start_ms": 1792695864616,
+              "measurement_end_ms": 1792695924616,
+              "coverage_span_samples": 62,
+              "coverage_start_missing_s": 0.0,
+              "coverage_end_missing_s": 0.0,
+              "full_window_bracketed": true,
+              "max_sample_gap_s": 1.003374584,
+              "max_wall_sample_gap_s": 1.003375042,
+              "valid_sampling": true,
+              "app_whole_target_pct": 0.43829236927993886,
+              "app_rss_sum_peak_bytes": 16166912,
+              "pg_whole_target_pct": 0.8172988142128323,
+              "pg_rss_sum_peak_bytes": 4569182208
+            },
+            "load_monitor": {
+              "samples": 60,
+              "elapsed_s": 59.033339111,
+              "cgroup_cpu_quota_pct": 36.84734986631781,
+              "cpu_scope": "sampled interval inside the measurement window",
+              "sampled_interval_start_ms": 1792695864700.4336,
+              "sampled_interval_end_ms": 1792695923733.9202,
+              "memory_peak_sampled_bytes": 2148319232,
+              "swap_peak_sampled_bytes": 0,
+              "memory_events_before": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+              "memory_events_after": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+              "measurement_start_ms": 1792695864616,
+              "measurement_end_ms": 1792695924616,
+              "coverage_span_samples": 62,
+              "coverage_start_missing_s": 0.0,
+              "coverage_end_missing_s": 0.0,
+              "full_window_bracketed": true,
+              "max_sample_gap_s": 1.001813542,
+              "max_wall_sample_gap_s": 1.001812668,
+              "valid_sampling": true,
+              "app_whole_target_pct": 0.0,
+              "app_rss_sum_peak_bytes": 0,
+              "pg_whole_target_pct": 0.0,
+              "pg_rss_sum_peak_bytes": 0
+            },
+            "load_cgroup_headroom_pass": true,
+            "load_oom_delta": 0,
+            "target_runtime": {
+              "valid_witness": true,
+              "pass": true,
+              "reasons": [],
+              "app_healthy": true,
+              "oom_deltas": {
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              }
+            }
+          },
+          "checks": [
+            {
+              "check": "complete_attempt_evidence",
+              "pass": true,
+              "detail": []
+            },
+            {
+              "check": "all_generator_exits_successful",
+              "pass": true
+            },
+            {
+              "check": "pinned_binary_launched",
+              "pass": true
+            },
+            {
+              "check": "exact_case_environment",
+              "pass": true
+            },
+            {
+              "check": "shared_runtime_contract",
+              "pass": true
+            },
+            {
+              "check": "fresh_full_seed_clone",
+              "pass": true
+            },
+            {
+              "check": "post_tail_app_healthy",
+              "pass": true
+            },
+            {
+              "check": "target_no_new_oom_entire_attempt",
+              "pass": true
+            },
+            {
+              "check": "owned_app_stopped",
+              "pass": true
+            },
+            {
+              "check": "owned_database_dropped",
+              "pass": true
+            },
+            {
+              "check": "before_actual_budget",
+              "pass": true
+            },
+            {
+              "check": "before_official_source_and_head_fixed",
+              "pass": true
+            },
+            {
+              "check": "before_pg_settings_fixed",
+              "pass": true
+            },
+            {
+              "check": "after-load_actual_budget",
+              "pass": true
+            },
+            {
+              "check": "after-load_official_source_and_head_fixed",
+              "pass": true
+            },
+            {
+              "check": "after-load_pg_settings_fixed",
+              "pass": true
+            },
+            {
+              "check": "after_actual_budget",
+              "pass": true
+            },
+            {
+              "check": "after_official_source_and_head_fixed",
+              "pass": true
+            },
+            {
+              "check": "after_pg_settings_fixed",
+              "pass": true
+            },
+            {
+              "check": "four_synchronized_raw_windows",
+              "pass": true
+            },
+            {
+              "check": "normal_60_60_15_protocol",
+              "pass": true
+            },
+            {
+              "check": "exact_native_measurement_window",
+              "pass": true
+            },
+            {
+              "check": "shard0_disjoint_users_and_destination",
+              "pass": true
+            },
+            {
+              "check": "shard0_saved_command_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_hist_count:0:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard0:all_histogram_configurations_match",
+              "pass": true
+            },
+            {
+              "check": "shard0:merged_histogram_equals_exact_bin_sum",
+              "pass": true
+            },
+            {
+              "check": "shard0:merged_quantile_from_exact_histogram:p50_ms",
+              "pass": true
+            },
+            {
+              "check": "shard0:merged_quantile_from_exact_histogram:p95_ms",
+              "pass": true
+            },
+            {
+              "check": "shard0:merged_quantile_from_exact_histogram:p99_ms",
+              "pass": true
+            },
+            {
+              "check": "shard0:merged_quantile_from_exact_histogram:max_ms",
+              "pass": true
+            },
+            {
+              "check": "shard0:merged_count_equals_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "shard0:merged_statuses_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "shard0:merged_errors_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "shard0:all_endpoints_retained",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "shard0:endpoint_count:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard0_native_verdict_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard1_disjoint_users_and_destination",
+              "pass": true
+            },
+            {
+              "check": "shard1_saved_command_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_hist_count:1:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard1:all_histogram_configurations_match",
+              "pass": true
+            },
+            {
+              "check": "shard1:merged_histogram_equals_exact_bin_sum",
+              "pass": true
+            },
+            {
+              "check": "shard1:merged_quantile_from_exact_histogram:p50_ms",
+              "pass": true
+            },
+            {
+              "check": "shard1:merged_quantile_from_exact_histogram:p95_ms",
+              "pass": true
+            },
+            {
+              "check": "shard1:merged_quantile_from_exact_histogram:p99_ms",
+              "pass": true
+            },
+            {
+              "check": "shard1:merged_quantile_from_exact_histogram:max_ms",
+              "pass": true
+            },
+            {
+              "check": "shard1:merged_count_equals_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "shard1:merged_statuses_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "shard1:merged_errors_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "shard1:all_endpoints_retained",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "shard1:endpoint_count:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard1_native_verdict_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard2_disjoint_users_and_destination",
+              "pass": true
+            },
+            {
+              "check": "shard2_saved_command_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_hist_count:2:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard2:all_histogram_configurations_match",
+              "pass": true
+            },
+            {
+              "check": "shard2:merged_histogram_equals_exact_bin_sum",
+              "pass": true
+            },
+            {
+              "check": "shard2:merged_quantile_from_exact_histogram:p50_ms",
+              "pass": true
+            },
+            {
+              "check": "shard2:merged_quantile_from_exact_histogram:p95_ms",
+              "pass": true
+            },
+            {
+              "check": "shard2:merged_quantile_from_exact_histogram:p99_ms",
+              "pass": true
+            },
+            {
+              "check": "shard2:merged_quantile_from_exact_histogram:max_ms",
+              "pass": true
+            },
+            {
+              "check": "shard2:merged_count_equals_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "shard2:merged_statuses_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "shard2:merged_errors_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "shard2:all_endpoints_retained",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "shard2:endpoint_count:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard2_native_verdict_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard3_disjoint_users_and_destination",
+              "pass": true
+            },
+            {
+              "check": "shard3_saved_command_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_hist_count:3:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard3:all_histogram_configurations_match",
+              "pass": true
+            },
+            {
+              "check": "shard3:merged_histogram_equals_exact_bin_sum",
+              "pass": true
+            },
+            {
+              "check": "shard3:merged_quantile_from_exact_histogram:p50_ms",
+              "pass": true
+            },
+            {
+              "check": "shard3:merged_quantile_from_exact_histogram:p95_ms",
+              "pass": true
+            },
+            {
+              "check": "shard3:merged_quantile_from_exact_histogram:p99_ms",
+              "pass": true
+            },
+            {
+              "check": "shard3:merged_quantile_from_exact_histogram:max_ms",
+              "pass": true
+            },
+            {
+              "check": "shard3:merged_count_equals_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "shard3:merged_statuses_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "shard3:merged_errors_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "shard3:all_endpoints_retained",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "shard3:endpoint_count:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "shard3_native_verdict_reproduced",
+              "pass": true
+            },
+            {
+              "check": "four_commands_present",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "all_histogram_configurations_match",
+              "pass": true
+            },
+            {
+              "check": "merged_histogram_equals_exact_bin_sum",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p50_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p95_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p99_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:max_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_count_equals_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "merged_statuses_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "merged_errors_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "all_endpoints_retained",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "merged_all_four_shards_80k",
+              "pass": true
+            },
+            {
+              "check": "native_merged_verdict_reproduced",
+              "pass": true
+            },
+            {
+              "check": "assessment_native_results_preserved",
+              "pass": true
+            },
+            {
+              "check": "count_rps_error_rate_identity",
+              "pass": true
+            }
+          ],
+          "warnings": [],
+          "nofile_invalidity": {
+            "classification": "INVALID_TARGET_NOFILE",
+            "expected_soft_and_hard": 200000,
+            "observed_old_child_soft_limit": null,
+            "observed_old_child_hard_limit": null,
+            "reason": "Actual accept EMFILE occurred. Original app witness did not capture child limits, so inheritance of the intended200000 limit is unverified. A later runuser reproduction is separate evidence, not an old-process measurement.",
+            "log_path": "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/server.log",
+            "log_sha256": "802449c5a8f9bdf79192ce96c1d3f20c0e33d8f7c372784cf0b5bf8c7fef8b5f",
+            "sample_log_lines": [
+              "[server] accept: Too many open files (os error 24)",
+              "[server] accept: Too many open files (os error 24)",
+              "[server] accept: Too many open files (os error 24)",
+              "[server] accept: Too many open files (os error 24)",
+              "[server] accept: Too many open files (os error 24)"
+            ]
+          },
+          "observed_clone_counts": {
+            "users": 100000,
+            "articles": 500000,
+            "size_bytes": 2428491455
+          },
+          "target_monitor": {
+            "checks": [
+              {
+                "check": "monitor_has_samples",
+                "pass": true
+              },
+              {
+                "check": "strict_wall_and_monotonic_order",
+                "pass": true
+              },
+              {
+                "check": "full_measurement_window_bracketed",
+                "pass": true,
+                "detail": {
+                  "first_ms": 1792695799589.18,
+                  "start_ms": 1792695864616.0,
+                  "last_ms": 1792695943704.925,
+                  "end_ms": 1792695924616.0
+                }
+              },
+              {
+                "check": "max_sample_gap_at_most_3s",
+                "pass": true,
+                "detail": 1.003374584
+              },
+              {
+                "check": "cgroup_budget_continuous",
+                "pass": true
+              },
+              {
+                "check": "total_cpu_counter_nondecreasing",
+                "pass": true
+              },
+              {
+                "check": "no_measurement_oom",
+                "pass": true,
+                "detail": {
+                  "oom": 0,
+                  "oom_kill": 0,
+                  "oom_group_kill": 0
+                }
+              },
+              {
+                "check": "wall_to_monotonic_drift_below_100ms",
+                "pass": true,
+                "detail": 0.00023984909057617188
+              }
+            ],
+            "warnings": [],
+            "eligible": true,
+            "samples": 62,
+            "max_gap_s": 1.003374584,
+            "window_s": 60.0,
+            "cgroup_cpu_seconds_estimate": 6.247143852755244,
+            "cgroup_quota_utilization_pct": 1.3014883026573423,
+            "max_sample_interval_quota_utilization_pct": 2.210889168785244,
+            "memory_peak_sampled_bytes": 8852426752,
+            "memory_counter_peak_bytes": 10101002240,
+            "swap_peak_sampled_bytes": 0,
+            "oom_delta": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            },
+            "app_cpu_seconds_estimate": 2.0985267860310564,
+            "app_counter_valid": true,
+            "app_pids_stable": true,
+            "app_process_count_max": 2,
+            "app_whole_target_cpu_pct": 0.43719308042313676,
+            "pg_cpu_seconds_estimate": 3.9278241596636594,
+            "pg_counter_valid": true,
+            "pg_pids_stable": true,
+            "pg_process_count_max": 17,
+            "pg_whole_target_cpu_pct": 0.818296699929929
+          },
+          "load_monitor": {
+            "checks": [
+              {
+                "check": "monitor_has_samples",
+                "pass": true
+              },
+              {
+                "check": "strict_wall_and_monotonic_order",
+                "pass": true
+              },
+              {
+                "check": "full_measurement_window_bracketed",
+                "pass": true,
+                "detail": {
+                  "first_ms": 1792695799653.0894,
+                  "start_ms": 1792695864616.0,
+                  "last_ms": 1792695943750.115,
+                  "end_ms": 1792695924616.0
+                }
+              },
+              {
+                "check": "max_sample_gap_at_most_3s",
+                "pass": true,
+                "detail": 1.001813542
+              },
+              {
+                "check": "cgroup_budget_continuous",
+                "pass": true
+              },
+              {
+                "check": "total_cpu_counter_nondecreasing",
+                "pass": true
+              },
+              {
+                "check": "no_measurement_oom",
+                "pass": true,
+                "detail": {
+                  "oom": 0,
+                  "oom_kill": 0,
+                  "oom_group_kill": 0
+                }
+              },
+              {
+                "check": "wall_to_monotonic_drift_below_100ms",
+                "pass": true,
+                "detail": 0.0002512931823730469
+              }
+            ],
+            "warnings": [],
+            "eligible": true,
+            "samples": 62,
+            "max_gap_s": 1.001813542,
+            "window_s": 60.0,
+            "cgroup_cpu_seconds_estimate": 44.58999953550905,
+            "cgroup_quota_utilization_pct": 37.158332946257545,
+            "max_sample_interval_quota_utilization_pct": 76.18712399774189,
+            "memory_peak_sampled_bytes": 2148331520,
+            "memory_counter_peak_bytes": 2149064704,
+            "swap_peak_sampled_bytes": 0,
+            "oom_delta": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            },
+            "app_cpu_seconds_estimate": 0.0,
+            "app_counter_valid": true,
+            "app_pids_stable": true,
+            "app_process_count_max": 0,
+            "app_whole_target_cpu_pct": 0.0,
+            "pg_cpu_seconds_estimate": 0.0,
+            "pg_counter_valid": true,
+            "pg_pids_stable": true,
+            "pg_process_count_max": 0,
+            "pg_whole_target_cpu_pct": 0.0
+          },
+          "native_verdict": {
+            "pass": false,
+            "fail_reasons": [
+              "p95 10002 ms >= 500",
+              "p99 10011 ms >= 1000",
+              "errors 95.58% >= 1%"
+            ],
+            "lg_limited": false
+          },
+          "overall": {
+            "count": 366224,
+            "rps": 6103.733333333334,
+            "p50_ms": 10002.431,
+            "p90_ms": 10002.431,
+            "p95_ms": 10002.431,
+            "p99_ms": 10010.623,
+            "max_ms": 10059.775,
+            "mean_ms": 9556.688657968893,
+            "errors": 350029,
+            "error_rate": 0.9557784306872297,
+            "statuses": {
+              "200": 15896,
+              "201": 293,
+              "204": 6
+            },
+            "error_classes": {
+              "timeout": 350029
+            },
+            "error_example": "request timeout"
+          },
+          "native_boxes": [
+            {
+              "cpu_avg_measure_pct": 9.964604405277537,
+              "cpu_max_measure_pct": 17.151454363089268,
+              "proc_cpu_avg_measure_pct": 2.024452939068432,
+              "rss_peak_mb": 412.09375,
+              "fell_behind": false,
+              "active_vus_at_window_start": 20000,
+              "tcp_connects": 157705
+            },
+            {
+              "cpu_avg_measure_pct": 9.964569480476182,
+              "cpu_max_measure_pct": 17.182817182817182,
+              "proc_cpu_avg_measure_pct": 1.6269660934474552,
+              "rss_peak_mb": 405.9375,
+              "fell_behind": false,
+              "active_vus_at_window_start": 20000,
+              "tcp_connects": 157690
+            },
+            {
+              "cpu_avg_measure_pct": 9.964526803772502,
+              "cpu_max_measure_pct": 17.16566866267465,
+              "proc_cpu_avg_measure_pct": 2.1190408745964313,
+              "rss_peak_mb": 409.5546875,
+              "fell_behind": false,
+              "active_vus_at_window_start": 20000,
+              "tcp_connects": 158280
+            },
+            {
+              "cpu_avg_measure_pct": 9.964524958113113,
+              "cpu_max_measure_pct": 17.182817182817182,
+              "proc_cpu_avg_measure_pct": 1.6442626720085278,
+              "rss_peak_mb": 404.375,
+              "fell_behind": false,
+              "active_vus_at_window_start": 20000,
+              "tcp_connects": 157942
+            }
+          ],
+          "raw_metas": [
+            {
+              "version": "loadgen/1",
+              "run_id": "multi_pair_20261022t190313_9c13b1-pair1",
+              "target": "http://127.0.0.1:3000",
+              "host": "a40d58b68177",
+              "box_index": 0,
+              "users": 20000,
+              "id_offset": 0,
+              "start_at_ms": 1792695804616,
+              "ramp_s": 60,
+              "measure_s": 60,
+              "tail_s": 15,
+              "think_scale": 1,
+              "articles": 500000,
+              "ncpu": 10,
+              "gomaxprocs": 1,
+              "window_start_ms": 1792695864616,
+              "window_end_ms": 1792695924616,
+              "finished_at_ms": 1792695943837
+            },
+            {
+              "version": "loadgen/1",
+              "run_id": "multi_pair_20261022t190313_9c13b1-pair1",
+              "target": "http://127.0.0.2:3000",
+              "host": "a40d58b68177",
+              "box_index": 1,
+              "users": 20000,
+              "id_offset": 20000,
+              "start_at_ms": 1792695804616,
+              "ramp_s": 60,
+              "measure_s": 60,
+              "tail_s": 15,
+              "think_scale": 1,
+              "articles": 500000,
+              "ncpu": 10,
+              "gomaxprocs": 1,
+              "window_start_ms": 1792695864616,
+              "window_end_ms": 1792695924616,
+              "finished_at_ms": 1792695943839
+            },
+            {
+              "version": "loadgen/1",
+              "run_id": "multi_pair_20261022t190313_9c13b1-pair1",
+              "target": "http://127.0.0.3:3000",
+              "host": "a40d58b68177",
+              "box_index": 2,
+              "users": 20000,
+              "id_offset": 40000,
+              "start_at_ms": 1792695804616,
+              "ramp_s": 60,
+              "measure_s": 60,
+              "tail_s": 15,
+              "think_scale": 1,
+              "articles": 500000,
+              "ncpu": 10,
+              "gomaxprocs": 1,
+              "window_start_ms": 1792695864616,
+              "window_end_ms": 1792695924616,
+              "finished_at_ms": 1792695943839
+            },
+            {
+              "version": "loadgen/1",
+              "run_id": "multi_pair_20261022t190313_9c13b1-pair1",
+              "target": "http://127.0.0.4:3000",
+              "host": "a40d58b68177",
+              "box_index": 3,
+              "users": 20000,
+              "id_offset": 60000,
+              "start_at_ms": 1792695804616,
+              "ramp_s": 60,
+              "measure_s": 60,
+              "tail_s": 15,
+              "think_scale": 1,
+              "articles": 500000,
+              "ncpu": 10,
+              "gomaxprocs": 1,
+              "window_start_ms": 1792695864616,
+              "window_end_ms": 1792695924616,
+              "finished_at_ms": 1792695943838
+            }
+          ],
+          "endpoints": [
+            {
+              "name": "GET /api/articles/:slug",
+              "count": 123409,
+              "rps": 2056.8166666666666,
+              "p50_ms": 10002.431,
+              "p90_ms": 10002.431,
+              "p95_ms": 10002.431,
+              "p99_ms": 10010.623,
+              "max_ms": 10059.775,
+              "mean_ms": 9739.791290051775,
+              "errors": 120212,
+              "error_rate": 0.9740942718926496,
+              "statuses": {
+                "200": 3197
+              },
+              "error_classes": {
+                "timeout": 120212
+              },
+              "error_example": "request timeout"
+            },
+            {
+              "name": "GET /api/articles/:slug/comments",
+              "count": 120430,
+              "rps": 2007.1666666666667,
+              "p50_ms": 10002.431,
+              "p90_ms": 10002.431,
+              "p95_ms": 10002.431,
+              "p99_ms": 10010.623,
+              "max_ms": 10059.775,
+              "mean_ms": 9733.495063821305,
+              "errors": 117234,
+              "error_rate": 0.9734617620194304,
+              "statuses": {
+                "200": 3196
+              },
+              "error_classes": {
+                "timeout": 117234
+              },
+              "error_example": "request timeout"
+            },
+            {
+              "name": "GET /api/tags",
+              "count": 49410,
+              "rps": 823.5,
+              "p50_ms": 10002.431,
+              "p90_ms": 10002.431,
+              "p95_ms": 10002.431,
+              "p99_ms": 10010.623,
+              "max_ms": 10051.583,
+              "mean_ms": 9350.037474478848,
+              "errors": 46204,
+              "error_rate": 0.9351143493219995,
+              "statuses": {
+                "200": 3206
+              },
+              "error_classes": {
+                "timeout": 46204
+              },
+              "error_example": "request timeout"
+            },
+            {
+              "name": "GET /api/articles",
+              "count": 31658,
+              "rps": 527.6333333333333,
+              "p50_ms": 10002.431,
+              "p90_ms": 10002.431,
+              "p95_ms": 10002.431,
+              "p99_ms": 10010.623,
+              "max_ms": 10051.583,
+              "mean_ms": 9406.347229673383,
+              "errors": 29782,
+              "error_rate": 0.9407416766694042,
+              "statuses": {
+                "200": 1876
+              },
+              "error_classes": {
+                "timeout": 29782
+              },
+              "error_example": "request timeout"
+            },
+            {
+              "name": "GET /api/articles/feed",
+              "count": 21503,
+              "rps": 358.3833333333333,
+              "p50_ms": 10002.431,
+              "p90_ms": 10002.431,
+              "p95_ms": 10002.431,
+              "p99_ms": 10010.623,
+              "max_ms": 10043.391,
+              "mean_ms": 9380.457572478259,
+              "errors": 20173,
+              "error_rate": 0.9381481653722736,
+              "statuses": {
+                "200": 1330
+              },
+              "error_classes": {
+                "timeout": 20173
+              },
+              "error_example": "request timeout"
+            },
+            {
+              "name": "GET /api/articles?tag",
+              "count": 10496,
+              "rps": 174.93333333333334,
+              "p50_ms": 10002.431,
+              "p90_ms": 10002.431,
+              "p95_ms": 10002.431,
+              "p99_ms": 10010.623,
+              "max_ms": 10043.391,
+              "mean_ms": 9386.304084603658,
+              "errors": 9853,
+              "error_rate": 0.9387385670731707,
+              "statuses": {
+                "200": 643
+              },
+              "error_classes": {
+                "timeout": 9853
+              },
+              "error_example": "request timeout"
+            },
+            {
+              "name": "GET /api/user",
+              "count": 4085,
+              "rps": 68.08333333333333,
+              "p50_ms": 10002.431,
+              "p90_ms": 10002.431,
+              "p95_ms": 10002.431,
+              "p99_ms": 10010.623,
+              "max_ms": 10051.583,
+              "mean_ms": 9829.892539534883,
+              "errors": 4016,
+              "error_rate": 0.9831089351285189,
+              "statuses": {
+                "200": 69
+              },
+              "error_classes": {
+                "timeout": 4016
+              },
+              "error_example": "request timeout"
+            },
+            {
+              "name": "POST /api/users/login",
+              "count": 1173,
+              "rps": 19.55,
+              "p50_ms": 10002.431,
+              "p90_ms": 10002.431,
+              "p95_ms": 10010.623,
+              "p99_ms": 10018.815,
+              "max_ms": 10027.007,
+              "mean_ms": 9940.580228474,
+              "errors": 1166,
+              "error_rate": 0.9940323955669225,
+              "statuses": {
+                "200": 7
+              },
+              "error_classes": {
+                "timeout": 1166
+              },
+              "error_example": "request timeout"
+            },
+            {
+              "name": "POST /api/articles",
+              "count": 1023,
+              "rps": 17.05,
+              "p50_ms": 10002.431,
+              "p90_ms": 10002.431,
+              "p95_ms": 10002.431,
+              "p99_ms": 10018.815,
+              "max_ms": 10027.007,
+              "mean_ms": 9393.025560117301,
+              "errors": 961,
+              "error_rate": 0.9393939393939394,
+              "statuses": {
+                "201": 62
+              },
+              "error_classes": {
+                "timeout": 961
+              },
+              "error_example": "request timeout"
+            },
+            {
+              "name": "GET /api/profiles/:username",
+              "count": 925,
+              "rps": 15.416666666666666,
+              "p50_ms": 0.227,
+              "p90_ms": 0.445,
+              "p95_ms": 1.485,
+              "p99_ms": 5.847,
+              "max_ms": 76.671,
+              "mean_ms": 0.5775481081081081,
+              "errors": 0,
+              "error_rate": 0,
+              "statuses": {
+                "200": 925
+              }
+            },
+            {
+              "name": "GET /api/articles?author",
+              "count": 731,
+              "rps": 12.183333333333334,
+              "p50_ms": 0.456,
+              "p90_ms": 0.756,
+              "p95_ms": 1.353,
+              "p99_ms": 2.231,
+              "max_ms": 10.631,
+              "mean_ms": 0.5617811217510257,
+              "errors": 0,
+              "error_rate": 0,
+              "statuses": {
+                "200": 731
+              }
+            },
+            {
+              "name": "PUT /api/user",
+              "count": 438,
+              "rps": 7.3,
+              "p50_ms": 10002.431,
+              "p90_ms": 10002.431,
+              "p95_ms": 10002.431,
+              "p99_ms": 10010.623,
+              "max_ms": 10035.199,
+              "mean_ms": 9291.322710045664,
+              "errors": 407,
+              "error_rate": 0.9292237442922374,
+              "statuses": {
+                "200": 31
+              },
+              "error_classes": {
+                "timeout": 407
+              },
+              "error_example": "request timeout"
+            },
+            {
+              "name": "POST /api/articles/:slug/favorite",
+              "count": 326,
+              "rps": 5.433333333333334,
+              "p50_ms": 3.369,
+              "p90_ms": 4.539,
+              "p95_ms": 6.871,
+              "p99_ms": 21.359,
+              "max_ms": 28.991,
+              "mean_ms": 3.9891717791411065,
+              "errors": 0,
+              "error_rate": 0,
+              "statuses": {
+                "200": 326
+              }
+            },
+            {
+              "name": "POST /api/articles/:slug/comments",
+              "count": 231,
+              "rps": 3.85,
+              "p50_ms": 3.357,
+              "p90_ms": 4.207,
+              "p95_ms": 4.811,
+              "p99_ms": 7.443,
+              "max_ms": 21.215,
+              "mean_ms": 3.563160173160172,
+              "errors": 0,
+              "error_rate": 0,
+              "statuses": {
+                "201": 231
+              }
+            },
+            {
+              "name": "GET /api/articles?favorited",
+              "count": 194,
+              "rps": 3.2333333333333334,
+              "p50_ms": 0.565,
+              "p90_ms": 0.772,
+              "p95_ms": 0.989,
+              "p99_ms": 6.071,
+              "max_ms": 31.455,
+              "mean_ms": 0.8549175257731962,
+              "errors": 0,
+              "error_rate": 0,
+              "statuses": {
+                "200": 194
+              }
+            },
+            {
+              "name": "POST /api/profiles/:username/follow",
+              "count": 90,
+              "rps": 1.5,
+              "p50_ms": 3.271,
+              "p90_ms": 4.415,
+              "p95_ms": 4.907,
+              "p99_ms": 7.539,
+              "max_ms": 7.699,
+              "mean_ms": 3.419011111111111,
+              "errors": 0,
+              "error_rate": 0,
+              "statuses": {
+                "200": 90
+              }
+            },
+            {
+              "name": "DELETE /api/articles/:slug/favorite",
+              "count": 40,
+              "rps": 0.6666666666666666,
+              "p50_ms": 3.037,
+              "p90_ms": 5.491,
+              "p95_ms": 11.903,
+              "p99_ms": 14.487,
+              "max_ms": 14.487,
+              "mean_ms": 3.9843999999999995,
+              "errors": 0,
+              "error_rate": 0,
+              "statuses": {
+                "200": 40
+              }
+            },
+            {
+              "name": "DELETE /api/profiles/:username/follow",
+              "count": 34,
+              "rps": 0.5666666666666667,
+              "p50_ms": 2.997,
+              "p90_ms": 4.543,
+              "p95_ms": 4.883,
+              "p99_ms": 6.591,
+              "max_ms": 6.591,
+              "mean_ms": 3.3513823529411764,
+              "errors": 0,
+              "error_rate": 0,
+              "statuses": {
+                "200": 34
+              }
+            },
+            {
+              "name": "POST /api/users",
+              "count": 21,
+              "rps": 0.35,
+              "p50_ms": 10002.431,
+              "p90_ms": 10010.623,
+              "p95_ms": 10010.623,
+              "p99_ms": 10018.815,
+              "max_ms": 10018.815,
+              "mean_ms": 9999.896380952381,
+              "errors": 21,
+              "error_rate": 1,
+              "error_classes": {
+                "timeout": 21
+              },
+              "error_example": "request timeout"
+            },
+            {
+              "name": "DELETE /api/articles/:slug/comments/:id",
+              "count": 6,
+              "rps": 0.1,
+              "p50_ms": 3.117,
+              "p90_ms": 3.575,
+              "p95_ms": 5.175,
+              "p99_ms": 5.175,
+              "max_ms": 5.175,
+              "mean_ms": 3.455166666666667,
+              "errors": 0,
+              "error_rate": 0,
+              "statuses": {
+                "204": 6
+              }
+            },
+            {
+              "name": "PUT /api/articles/:slug",
+              "count": 1,
+              "rps": 0.016666666666666666,
+              "p50_ms": 4.139,
+              "p90_ms": 4.139,
+              "p95_ms": 4.139,
+              "p99_ms": 4.139,
+              "max_ms": 4.139,
+              "mean_ms": 4.138,
+              "errors": 0,
+              "error_rate": 0,
+              "statuses": {
+                "200": 1
+              }
+            }
+          ],
+          "native_slo_pass": false,
+          "zero_measured_errors": false,
+          "observed_timeline_errors": 581936,
+          "zero_observed_errors": false,
+          "error_scope": "Native SLO/counts apply to the measured60s. Timeline error count includes all recorded ramp/measure/tail seconds.",
+          "metrics": {
+            "rps": 6103.733333333334,
+            "p50_ms": 10002.431,
+            "p95_ms": 10002.431,
+            "p99_ms": 10010.623,
+            "mean_ms": 9556.688657968893,
+            "errors": 350029,
+            "error_rate": 0.9557784306872297,
+            "successful_requests": 16195,
+            "successful_rps": 269.9166666666667,
+            "total_cpu_seconds_estimate": 6.247143852755244,
+            "total_cpu_pct_of_8": 1.3014883026573423,
+            "total_cpu_ms_per_successful_request_estimate": 0.3857452209172735,
+            "app_cpu_seconds_estimate": 2.0985267860310564,
+            "app_cpu_pct_of_8": 0.43719308042313676,
+            "app_cpu_ms_per_successful_request_estimate": 0.12957868391670618,
+            "pg_cpu_seconds_estimate": 3.9278241596636594,
+            "pg_cpu_pct_of_8": 0.818296699929929,
+            "pg_cpu_ms_per_successful_request_estimate": 0.24253313736731458
+          },
+          "raw_run_id": "multi_pair_20261022t190313_9c13b1-pair1",
+          "window": [
+            1792695864616,
+            1792695924616
+          ],
+          "classification": "INVALID_TARGET_NOFILE",
+          "all_classifications": [
+            "INVALID_TARGET_NOFILE",
+            "INVALID_EVIDENCE",
+            "FAIL_SLO"
+          ],
+          "eligible": false
+        },
+        {
+          "id": "02-p1-goose",
+          "case": "goose",
+          "pair": 1,
+          "recorded_classification": "INCOMPLETE",
+          "recorded_assessment": {
+            "id": "02-p1-goose",
+            "pair": 1,
+            "case": "goose",
+            "database": "mc_pair_20261022_190313_02_10a9",
+            "classification": "INCOMPLETE",
+            "target_runtime": {
+              "valid_witness": true,
+              "pass": true,
+              "reasons": [],
+              "app_healthy": true,
+              "oom_deltas": {
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              }
+            }
+          },
+          "checks": [
+            {
+              "check": "complete_attempt_evidence",
+              "pass": false,
+              "detail": [
+                "merged.json",
+                "box0.json",
+                "box0-merged.json",
+                "box1.json",
+                "box1-merged.json",
+                "box2.json",
+                "box2-merged.json",
+                "box3.json",
+                "box3-merged.json"
+              ]
+            }
+          ],
+          "warnings": [],
+          "classification": "INCOMPLETE",
+          "eligible": false
+        }
+      ],
+      "official_score_proven": false,
+      "capacity_or_number_one_proven": false,
+      "all_competitors_beaten": false,
+      "seed_proof": {
+        "log_sha256": "f329e84653f2f08a449752ff2c8981023e3336190653d14f4474fa462c8ffaea",
+        "script_sha256": "dcf356577ddaa1d70fb5dec5e81a23302281c1eb0fee57014dcb8ca8ef41f3e8",
+        "scope": "Original script checks counts/content fingerprints of all7 tables; each fresh FILE_COPY clone independently checks users/articles only."
+      },
+      "reference_case": "rust7",
+      "candidate_case": "goose",
+      "reference_disclosure": null,
+      "pairs": [
+        {
+          "pair": 1,
+          "slo_and_evidence_qualified": false,
+          "qualified": false,
+          "clean_performance_comparison": false,
+          "attempt_ids": [
+            "01-p1-rust7",
+            "02-p1-goose"
+          ]
+        },
+        {
+          "pair": 2,
+          "slo_and_evidence_qualified": false,
+          "qualified": false,
+          "clean_performance_comparison": false,
+          "attempt_ids": []
+        },
+        {
+          "pair": 3,
+          "slo_and_evidence_qualified": false,
+          "qualified": false,
+          "clean_performance_comparison": false,
+          "attempt_ids": []
+        }
+      ],
+      "aggregate": {},
+      "host_memory_witness": {
+        "samples": 311,
+        "scope": "Diagnostic only; shared physical Mac pressure never retroactively excludes attempts.",
+        "clock_offsets_range_s": 0.0003476142883300781,
+        "memory_free_percent_range": [
+          55,
+          62
+        ],
+        "host_swap_used_mib_range": [
+          1718.88,
+          1718.88
+        ],
+        "compressor_pages_range": [
+          547413,
+          709673
+        ],
+        "collection_errors": 0
+      },
+      "frozen_identity": {
+        "rust7": {
+          "binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+          "source_manifest_sha256": "75df8e5d5c8e45aaa1a763fa93d4052684e6cd0df54a7993d542318b73cc5b99"
+        },
+        "goose": {
+          "binary_sha256": "6ab318a0ab9389dc2e77ec6122ff077a93adbcc183c6285c347104e0f734b6c3",
+          "source_manifest_sha256": "7e5b277cd1f2f6fcc50cb1d340de473f8ef06a6f49d6a88d1349c67c887dedb9"
+        }
+      },
+      "classification_counts": {
+        "INVALID_TARGET_NOFILE": 1,
+        "INCOMPLETE": 1
+      },
+      "planned_but_not_started": [
+        "03-p2-goose",
+        "04-p2-rust7",
+        "05-p3-rust7",
+        "06-p3-goose"
+      ],
+      "clean_performance_pairs": 0,
+      "zero_measured_errors_all_attempts": false,
+      "zero_observed_errors_all_attempts": false,
+      "status": "INVALID_TARGET_NOFILE",
+      "interpretation": "Four native histograms are verified by exact bin sum. At fixed closed-model load, similar request rates do not establish equal capacity; lower latency or CPU per success is diagnostic only. No warmup/search/5min hold, official x86 score, or ranking proof."
+    }
+  ],
+  "raw_input_sha256": {
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/tool-source-sha256.json": "702a27129e9a0f33ea41b0413df140cfb253d59eed94cb5722f72521901ff6fb",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/target-final-inspect.json": "713daccd7dfe59bbaf7f163beddf3fe78e752f6a5940aa95ddee05d33eb07bd4",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/plan.json": "de3bb8b02167a174f80b3f14fe62715574f1d1d70da6a68c21ec0cec3613f4a0",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/controller-error.json": "e1b744e7804ee077cf64a29bf14cdfbe8086e88b17847a36b6b013c605622061",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/target-inspect.json": "713daccd7dfe59bbaf7f163beddf3fe78e752f6a5940aa95ddee05d33eb07bd4",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/attempts.json": "3bbdd890d3263416aa58b909726c425f8b2c937feea661d2656cfd5ebbc49f5b",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/target-initial.json": "83c2a77a2851e29e5cc85de82a262a838e2ead3a80fc095b31f2cc8c5893baac",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/load-final-inspect.json": "c24b878fc98737cfb2e2b66a940907d23bc8e1ed9b3c11d6e07d408f3c0b0fa4",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/original-10k-tools-readonly-sha256.json": "6af59bbc05ccc9c962c17094d5321b3767d4c81de71408cd9a6649218fea42f9",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/events.jsonl": "a9cf27a2f32e1e25df4f80a38f23e75d046a9056e07168de750ab60ca33afe25",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/plan.sha256": "124d6cd85cf3fbbeef68f8deb646dc9ecb6c54ba0636e7fb4d1dc9bd05225881",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/load-inspect.json": "bf06da7abd53248c7e9bccfc352f0cb404c0f1fa258073e2ae6131592ed07f91",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/goose.json": "f283d68ffb1b968817112e92e289dec77587de975eda2db71e8e21c04e4dd630",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/host-memory.jsonl": "2318dec9f11556a257d5d7b7853320435c8b66bcb9386ec23bbf0c5a38dd9466",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/rust7.json": "9fa8d0136e65fdcf02bd010bfb3cd53cec2e62a8a223d9c15951c618b0836154",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/before.json": "eaac543c5abb7931ce594b92e4ac961314ebe5cbd3c0c04fac78ec4b6725b366",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/assessment.json": "91d499e29622a8b948a1a652353b7cd32a6e4901963f05da37855ad088748bb9",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/app.json": "64bd7e0f8136e01fea0e68a0423a9b87c1a72b9d3c8238b5cf23b88727336f52",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/target-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/stopped.json": "401b39009e4f9a1c7264fb9c7e330e4730684acc559dab571a570ba3663d7463",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/load-monitor.jsonl": "3e82dd7cd1953bc9811d391b9713d4141d05f852a62cf1b0279bab72b9cdc093",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/after.json": "0146ffe94f3a0f3e103040b1f5a57277465dab776cfdb540cd34353e774ca3f4",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/after-load.json": "896956950585a3aa27ac0b21af64282f5869dc5853841eed8e95b07e041be3a2",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/database.json": "17e83eccb3454e25e7366f87303bf3401bb9f4705182f675c8c709dcf7545b36",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/load-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/load-commands.json": "675defd0597d6602a651e296887aaec43b0127af794c0e8f6c5fc33dba307707",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/server.log": "bd465d0bd67c0ca178210e0eaf9464f49aaef5a31bc3c17524cead5ea15e0b2f",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/box0.log": "9959a668c8459499c144804d4103b77c28ed28c75ae25e0b78c2ad9d026b8ec4",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/target-monitor.jsonl": "d8c2d48e2a86648325c62382f386dab19ca52fa9f1ffed51f48f9facbe9b2df0",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/box1.log": "1b20c21d49c97b2fa43b6d828674fe7d0b6754ed2afaeaf902eada3e2f136390",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/box3.log": "0e11f99e42ea80b581de08b1b48824384852337527f54f3534a2f6a66dfe0289",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/dropped.json": "523492e6626795508f30a0d29d6573ff780fbb9f86183ddedaf6f444f9e6eca2",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/02-p1-goose/box2.log": "484c4ff351ee33c040fc3c7424152f2cc0b939139f599c127d6be81f10e99bbe",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/before.json": "a4eab4eb0afd8cf3cb55ed5edb7c09ae098a3afe0e49da6cf82527892349d296",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/merged.json": "56b310c303951436e7c109c39b7fbc6b16fe8c17919e45d48e0c0dd72e661225",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box3-merged.json": "d25eb2501172fdb32bb73ec4222fd64e8f172049c722f24933f6c0c380ef2a05",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box1-merged.txt": "7b68e3868cd7d764689d9ef9181805669f2107f5ff4d60e3708d306c59a8e3ad",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/assessment.json": "77ea5111947eb9853cfe1bbd6eeacb1eba01e4099a5433f74303c1df00459634",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/app.json": "674bf080c12cbef140dd703454a339f5381233d974e50d7e5f7a45bb5773bd2b",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box3.json": "725e7aa2089cfca2dbc720e43fc2855caaff62137e95ddfb29a6fc57e6c504b3",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box3-merged.txt": "b96e79742ec4543b5be1b0b1ea57e3fe016cbb3c02846761944c7c3b318feaf2",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/target-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/stopped.json": "279f9eb2b216d0c5e82b915404927fbd1746383556ff4932224bd0347502d728",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/load-monitor.jsonl": "bdeb760eb90eb9f4922bada6e601c255e76ac279d518232ff1875256e6f9250c",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box2.json": "ae7813100027c55ecc07cd3331e374ebf5aad0e3f711b84d8ca9ea2486556c51",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box0-merged.json": "3bc04b62c14bab7f1d1bf65128acc51f6eb56c1d1126acd84d193b232d81770d",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/after.json": "b1496bd3e726745204e64afa2ad9caea5c7174da753a6911203db8a53f2e4cd3",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/merged.txt": "e9bf3a99cf586652b9b2eec2ced54a28774e1cb22e64a669be5a61133b199c5a",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/after-load.json": "f9da4b903e7df5c59fba8edd7beb4527638912ada4764bfcb3ba469a13cf6306",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box1.json": "9e3db252946ce65d6709221b79d562ad92dac76c952e8a1aea0b550acc8386b1",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box0.json": "058fa34e2e5b5376049052ccfc8e5f48557e9315dcf58b25c884a658e39eae58",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/database.json": "6683acb0fd1f49b2fa2f21faf7e18dcc2ddc63ec25707fe580b47c067497a7e4",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/load-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/load-commands.json": "5814ac63548d6335fcd6d7393625ff109696df64e2a7b256130b856e5fc19d86",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box0-merged.txt": "730759f6bf52f4bf1409da494d11797d1ae9b22fb79914720538db60e97926a2",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box2-merged.json": "c7f54f9709b512a264cc2f4ed4351850ed0416ba1b79c341c15bd6e3883c4fbf",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box1-merged.json": "65a047b40ce583ffdd130c36172d64456c29967b5d63372134ef240ba32ba04c",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/server.log": "802449c5a8f9bdf79192ce96c1d3f20c0e33d8f7c372784cf0b5bf8c7fef8b5f",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box0.log": "2f64ff734ac0438a2fb8410452cb63eeefe8cf72de1c7c937a22e57217d030bd",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/target-monitor.jsonl": "38039faf3ac2e2f9327457ace5b53d87196d86ac3793e7130594b45817a6b599",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box1.log": "4bf21462d15fb6cb80bff6cf11200b4d1d1be787abd0461b2bdf9f35c9f1826a",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box3.log": "5261cf0b360a48bdf49cdda4668cba66eed7e535514a1ef60c2180dc0218fc01",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/dropped.json": "54fb20f930157a4c7435c98e755afd8b65c529ca00f279278f893344ad957758",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box2.log": "1a96c2f1795b38ddfa3ebf7ccf2073f33fbc4332b5d787d0450d5b73c06f7eb5",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/01-p1-rust7/box2-merged.txt": "9cf49dd8af8fb6bac00a1a2310b89b0fdecc6f819b86a3265694b01dfc4e58e7",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/app": "6ab318a0ab9389dc2e77ec6122ff077a93adbcc183c6285c347104e0f734b6c3",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/metadata.json": "d254c1c17f45ecc210f4cd5ec5c55757eb982de1624fc29fb02d4afa33ffd89c",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/app": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/metadata.json": "12dcb9b78e582e95cabfec7ed3c0dc8e01742ac598f72cc6815db0e982a8f0aa",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/Cargo.toml": "ab86173bb85ba27044f08fb9a567f78e3d500e1f94df535d1f0f63bfc2db6123",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/LICENSE": "1c809f52dd742570746a8ac00694ad4ddd9229e12accc7d5c598075861b478a0",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/install.sh": "0b5b878fce647ad19be4af31950416fc8bf06afca54b02602febcb10da70c1f9",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/Cargo.lock": "b5130487b2c982bc757c39bac0f299039ec343ff73ca255d1cef5571b6e52f17",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/build.rs": "544b5019a774744eea0062e8516f4b84dfef28858851728e3d7e5543365e4f23",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/README.md": "5e87e74195db33cde05eca81f839ab3752688f31287429f09c27642836b9e6d3",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/build.sh": "abb71fe1b2e2d8e5a7d4272aa069dc451a5bcd55267624a05f7332aded9efa48",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/.gitignore": "b53ee26e6ff1da219b0563333a76d2c9ec19eec713d6ee54e11a1edacb0e9f3d",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/start.sh": "1a729bf89b8aae10ba9e5cc1fb3f63ed4f5ab9500f44f30a9dd48411880f8d3c",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/native/crypt-port.h": "b58abb9c42e8a5902aa20bc7cbe516260f54a831d1b43261b5228f8325622d4e",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/native/byteorder.h": "cdfa3a3ae45955ad5da880053522b123f2e2d4e2a9dd74adb1f7a206d6ca6dfa",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/native/bcrypt-batch.c": "be69f39655a6e8680d756aeade92d37a060ef08d3e75a875f13c953508c0aff7",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/native/README.md": "4340724fec97fc5a5eb9526338d2c32f5312c71abc8942e98a676afda6475e1e",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/native/bcrypt-batch-impl.h": "554687a11fcc46da412c76a40f46a198a1a2462005cc992091eeb2a38ac637c5",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/native/crypt-bcrypt.c": "c6166e3d3d42d23bdc8c151e22e6aa60f33a4b4eeb008de54cf0243881fa1413",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/src/password_batch.rs": "9b3df6f737115863224f9e74116209a8e4a1963720a433b83bcf5ba5646b63a6",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/src/read_batch.rs": "8cc6c0d086f459e3424aadc61c9bdaf313331f741408c92145a7092469d083ab",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/src/auth.rs": "79e2f21ec84c7fd22ce948da8c7e18540d4df566681a90a8f185819b7afba9f4",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/src/db.rs": "5d90731241e2d68bbce670a2c58525e86a51a516aa053af04a9eaabb2e08ac5e",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/src/json.rs": "95096ea3af69a87995781f439c11f953244379eaf4b72989ea781ba22767b11e",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/src/sql.rs": "287dffe546b9c06b99d905b57f8069ced06fdbfd7290c9d8a74003e87e0d29be",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/src/main.rs": "c447e56d6e0158e9df40b2f02fb01a3f55520f11abd9cf3b4a68ac0b6e451bc3",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/src/password.rs": "69959c617f2aa1d7a7dac163123ee6cd387bbed78adbcff27625a39f3f2afcfb",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/src/http.rs": "6fc2d2605e5f6d9510e487f8dfefdfc8353a68b7b58a9240399d7e9716c8a5e1",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/src/writer.rs": "9f9367a0056602d97d4ffa7c666118f5c6233433eb1064ddc31a33a84f0fa7f2",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/src/security_tests.rs": "e900d2d0eb971adffd7d4406e81e398f4f04bd6b0b45fb0c0c83cb2a167f3a22",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/src/api.rs": "8b90d5ec2061f2e16c45e213051b9488df3685e0b3ea2e9b45dbb364157c163c",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/Cargo.toml": "02bd134a85a0aa1cec2e5f8152ab94dc34f2345922a9ef0cb0ce51f63d8bfe90",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/LICENSE-APACHE": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/README.md": "e4e7c2898f072a85c14db07fc4ee2d32cc5916215e7ed1b180653173ae389a0c",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/MODIFICATIONS.md": "f0540b4746140c3274cbcb271acb4785483f67b4b0a739022e7ffa729698f8ab",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/LICENSE-MIT": "ae3ead0b640a2ee59f9789a9af84e65e631cfa3b13254f3f99a9ed73e0472239",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/binary_copy.rs": "ac29f50281c1285640e7887352911958eaf9e0872ad2eb1b1fcfa49d2a949e28",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/types.rs": "86688c4b5f9811b43854d8302c30080489eb147a63dd3e6189ca61259ed75aa7",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/transaction.rs": "a2c0261a3ca426e9046d73b2b330720918f4d4a6010d0a143707f17f0333d62e",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/generic_client.rs": "1f733c86857f08a6e4dfc124340d572e9212f70bb5204e9c426832ebc77dadc7",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/keepalive.rs": "f7def5d0362d178d9a9b644200404a907187269f7b9e83c6b4b93018497bc298",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/copy_out.rs": "298ee2abd795f685bdb3d7073a4532d80d3fcdb2625babe7e8bbfd281d359bf2",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/client.rs": "4e439a9434b56c8d150bfd741cb06ba28011433cb9614d4207c48ad28d54477e",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/statement.rs": "fe832bf51b576b931c7cb33b25826f7a3b5bc8c8f77cbe4c5ed948d3daff33f6",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/connect_socket.rs": "9acb06f2f4a71c8b5e6e9d781fad6e09bfcc42730b7486903e274c3005e55efb",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/config.rs": "d06bffc37f9aa290ca72961508dcbcfdcab6d05e76fbf52fe450a268a0043b89",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/portal.rs": "db23661d8cfa9d4054bd6ff1780404ceae29be28b86c8fb8f189ca800394cfff",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/connect_tls.rs": "d407bd286a40348570c887139eb149340f835ae96f624668c6b04a99ccc95b00",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/lib.rs": "adee98d0271bf2427700499383f1ca0725495f30fe1a89e7b09115af9f6568c1",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/connect.rs": "ac6506a445aa5f89a2567788fd04a98421ee028cd57c0d9c2aa9a604de92d322",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/to_statement.rs": "41961c2d7608a8199693be35d0598597925f24ed9ba802f032c20f96f52838f7",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/query.rs": "820248e2f9406b2a7ab95a26d9f5cfb2218da3115769f3d685edca5c641cff91",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/maybe_tls_stream.rs": "d3a324ba2fbb9c8a1853a36ebb5102f140e41b2d0a7320ffdee3a7a631b83cb3",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/prepare.rs": "f143d9ff55a1e52da02fb47026ec7badaa4fb3305de90bd87479aae18526e2fa",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/socket.rs": "1bd0fbfde1fbb086a81b91ee8b334a312364116a3b45dbb32c015fe4a5f76827",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/codec.rs": "84419b83f836e3dfeecc4f48b338376e310266ba0c995f59f3abe6ef57450de6",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/row.rs": "699579818c8b23e47d5257d99a4244ade57b3b80f58ef00a200594218c7a021d",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/transaction_builder.rs": "c9767f9593c86e4432ba3f7551345e1673490b8b51a98ed6c5edead444d0028b",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/cancel_query_raw.rs": "e84be160e7785a9dc6672de482e25d34c1008a8340ca0c7017daa59611e8a782",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/connection.rs": "c7dd2c8259d306144ba60e0acabd210eada65cd88631aaa9e8e350620d880e4d",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/tls.rs": "43369e9b11cf26b59c04c17cc4238c1ca53340b9f0b639e5c65288f4349981a4",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/cancel_query.rs": "acb4b26aaa846b3f6095d2b5e531c8ab542548acb04c449077de1b8ee1028ec8",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/bind.rs": "9ba6d6ad5929bbee776cce58519fc34676a851104ddc2954e08203a0c572442e",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/copy_in.rs": "f0652721e158d800b843d38204c7faec88cbe869953161d4d4832150ecc2b9a9",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/connect_raw.rs": "2acee488ed3f4da7aac9cbbed0d584535080c3a8e1a11cfb68f4a6f9953c50a2",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/simple_query.rs": "9d64246d0ab386fd909b096730eb3f763145cf628bbb6c6a274e42ab7cd9111a",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/cancel_token.rs": "ed5b966eaea244ddcd01583dd20164dacb63fcc9b781dbb2847ebeeea72f5400",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/error/sqlstate.rs": "ef35424d3e762487c0ec2dfb13c1c404e8593885a4e1c1887ba88067844bd387",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/rust7/source/vendor/tokio-postgres/src/error/mod.rs": "f06b3055ddee536e766ef0c580855f9422368465218519de22417d55f398d378",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/jwt.goose": "8d0693dc64751fb3ff58a2f78b64c4625c2cb65a55cc07fb81bd160180f76104",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/native_sys.c": "30e7eb19e455929e6ee68b868fd086131f9fca668f95679662e3d2be1d603bbd",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/server.goose": "866f0fc87a7c035918b09b21ae11c2488149cfb09a7b2daff6e8792f58ce904f",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/LICENSE": "1c809f52dd742570746a8ac00694ad4ddd9229e12accc7d5c598075861b478a0",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/crypto.goose": "d703a1468b88d5f3485423e7edc35e87fa9eb6a05fab4a73aec7d5b5d16705a1",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/install.sh": "6efc40cc66a6aa3aca9af24c89d287e579bd4527d43bb2a8f9176f6ad44f9fcd",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/json_fast.c": "538bb9c0a25005fb4d14b6d86231b4a8430e4986d20ef24356de5b8b595901ec",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/bcrypt.goose": "a4be922858348f3ab42f937fd8d3db6ef66bdc5930e865a8ccc4bc1b1e40f93f",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/bcrypt_tables.goose": "e53976f8b58571ea33620baac93a42dedb9f30b4c72c32cfc27c65cde26f8d38",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/buf.goose": "e74b4bc8f83a9598c4971d4635179314940ea4198789c02fc5a30b904926e22c",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/README.md": "47a973c5f2ed12c7a40facf8abb5ebc044f4b8231927f7073726bf3f1b521b22",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/main.goose": "2e374d7d9a6a9cb868ada6dbedc9665f7f89986fa62536fc0a9270bf8f9a1fa0",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/build.sh": "12e965a6977c1369a73a9ad21498ee8247e8c4a1feddc931fe929674a2b2ffe6",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/pg.goose": "f2b9ee09d94f07336eaacdd2309c075ed153781d4b94f0f8699413eb416575b5",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/.gitignore": "357df9f5de9d2aca77bc01dc1fb6b3ff6bb1a63790ae73d42c0ca85be99cf10d",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/routes.goose": "01967f45236459503605c86445cbc6f307fdb505301704ac67692251d2396a4a",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/sys.goose": "76e673330dfcf2ed611f11509367ac8fc0577a3942e8a4ff7b3fb46df003db8e",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/json_fast.h": "63f94824a5ded4af32c1d66b17bdb584b43b57f0bff945b37d2579b8b545fe18",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/native_crypto.c": "173c4113c2f331f47972c8298055eee21b003d0380f34707049484ddd36ece06",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/http.goose": "3c48b9f1526022748a6e80bd5eed7dfd55c8991360d4ea6d5fd8b109c3797242",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/NOTICE.md": "cb4366f7db68518a1f1c0de537c05d834610783ae510348afc1469bfa65f0dbe",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/start.sh": "fa9abf9763b7e832e447c5f156f90a60823bdd10fcb688b3404a637a9da9fe2f",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/sql.goose": "d98db84adf2fbea8268e60df9e70ae90edda61a7a3f9176b10cf5b26f1910e19",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/tests/pipe-reply.c": "89d4327f7b88c93e0f2aa891e874045d9e9481bca0100b2feaeb4fed70075f60",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/tests/native.c": "33493e945a23f2b205349d4fd6993db30711012ce06d304c1ac29f9cc3e27fdf",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/tests/jwt-ffi.goose": "7ac98e344d8141604d4fa7854f92962750c835b91884ce0f2ea5e2446634cea8",
+    "/private/tmp/multicore-research-20261022/paired-multi-load/multi_pair_20261022t190313_9c13b1/frozen/goose/source/tests/native.sh": "5ab68f7c0464291b1dc3018b1c7d0d91107cd131c1c1429d4630101c94fe3b75"
+  }
+}
