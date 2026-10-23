@@ -1,11 +1,13 @@
-# Goose / native primitives / PostgreSQL
+# Goose / native primitives / bounded PostgreSQL readers
 
 Front: direct
 
 Goose implements the Conduit API, PostgreSQL wire protocol and SQL, HS256
 claim validation, response construction, epoll scheduling and cost-10 bcrypt.
 Small C helpers provide our SIMD JSON string writer, per-thread prepared
-OpenSSL HMAC and Linux syscall bindings.
+OpenSSL HMAC and Linux syscall bindings. This fork validation revision adds
+bounded reader admission with age-based selection and cancellation of reads
+that have not reached PostgreSQL.
 
 This adapts our [single-core Goose implementation](https://github.com/arjaythedev/twelve-dollar-server-challenge/pull/143)
 and the MIT-licensed asynchronous Conduit/Postgres core from
@@ -36,6 +38,7 @@ Build and start run as a normal user after the dependency installation.
 |---|---:|---|
 | `WORKERS` | 2 | Independent epoll loops |
 | `PG_READERS` | 3 | Read connections per loop, plus one writer |
+| `PG_READ_GROUPS` | 4 | Maximum outstanding Sync groups per reader; 0 disables the admission bound |
 | `HASHERS` | 2 | Dedicated bcrypt workers |
 | `BCRYPT_BATCH_MS` | 250 | Collection deadline measured from job enqueue |
 | `READ_BATCH` | 32 | Maximum members of a compatible read batch; 0 disables pooling |
@@ -54,11 +57,22 @@ Configurations exceeding 95 total connections are rejected. `DATABASE_URL`,
   each member's viewer flags, ordering, missing-resource and empty-page behavior.
   Shared rows and followee sets exist only inside that SQL execution; no response
   or query result is retained for a later request.
+- Reader Sync groups contain at most four SQL executions; writer commit
+  groups retain their existing maximum of 64. A reader admits at most four
+  outstanding groups by default, limiting it to 16 SQL executions awaiting
+  ReadyForQuery. With the default batch size of 32, that represents at most
+  512 batched HTTP members per reader, rather than a limit on the total local
+  waiting queue. Sync completion returns admission credit.
+- Eligible pooled families and direct reads are selected by enqueue age. One
+  batch is submitted before ages are compared again, so a hot family cannot
+  repeatedly refill ahead of older work. Each local queue retains FIFO order.
+  Reads waiting locally carry connection-generation tags and removable queue
+  nodes. Disconnects remove unsent work; already-submitted SQL is drained normally.
 - Quiet reads wake on their collection deadline without another HTTP request.
-  A full pool can dispatch earlier. The event loop waits for the earlier eligible
-  read or writer deadline, so read collection does not delay an independent write.
-  The existing in-flight admission gate can also make an underfull pool wait
-  for a PostgreSQL reply.
+  A full pool can become eligible earlier, subject to available reader credit.
+  The loop waits for the earlier eligible read or writer deadline; reader
+  collection does not delay an independent write. Underfull pools can also wait
+  for an in-flight execution before dispatch.
 - Writers collect compatible work before Sync and wait for commit completion
   before returning success. Article updates and favorite/unfavorite responses
   then reread by **immutable article ID in a fresh statement snapshot**. A
@@ -79,42 +93,35 @@ Configurations exceeding 95 total connections are rejected. `DATABASE_URL`,
 
 ## Correctness validation
 
-The final Linux ARM64 binary `7a7c31fb...` passed the unchanged **197/197**
-conformance steps on both dev and full seeds. Original seed fingerprints match.
-Additional black-box checks passed:
+The Linux ARM64 candidate binary `9016ff93e924c0d94652490ac895d1fbc64153fd9d3ea4b8b52b66ae892c3424`
+passed the unchanged 197-step conformance suite on both dev and full seeds,
+with original seed fingerprints. Additional local checks passed 1,664
+baseline/candidate read comparisons, deferred-COMMIT/grouped-rollback and
+quiet-timer probes, favorite freshness, update/rename races and legal-NUL
+password interoperability against the trusted Go bcrypt implementation.
 
-- 1,664 baseline/candidate read comparisons across global, tag, author,
-  favorited, feed and comments routes, including actual batch-SQL witnesses,
-  mixed viewers, Unicode, empty/missing resources, count caps, ordering and
-  committed changes.
-- Deferred-COMMIT/no-early-response and grouped-rollback probes; quiet read and
-  writer timer checks; concurrent favorite counts, article updates and
-  favorite/slug-rename races with fresh post-commit responses.
-- Embedded-NUL password interoperability in both directions against pinned
-  Go `x/crypto/bcrypt` at cost 10, including rejection of truncated prefixes
-  and unchanged nonpassword text/length validation.
+A separate PostgreSQL wire probe passed 26 checks covering reader credits,
+four-execution Sync boundaries, age/FIFO selection, unsent cancellation,
+ready-queue retry and quiet dispatch. Its recorded source hashes match this
+revision's main.goose and server.goose. That probe is local correctness evidence;
+it is not a throughput or capacity measurement.
 
-`bash tests/native.sh` passes **293,966 native assertions plus 4,000 Goose JWT
-assertions**: threaded HMAC and failure recovery, SIMD boundaries, syscall ABI
-and reply-pipe backpressure/signals. `bash tests/bcrypt-lanes.sh` passes **252**
-comparisons against the single-lane reference, using distinct keys/salts and
-costs 4, 5 and 10. These checks use no database.
+The unchanged native test commands remain available:
 
-These local checks use Ubuntu 24.04 ARM64 Docker on a Mac, with the app and
-PostgreSQL sharing eight CPUs / 16 GiB / no swap and no CPU affinity. Native
-x86 validation and its exact submission-tree receipt are tracked in
-[PR #32](https://github.com/arjaythedev/multicore-server-challenge/pull/32).
+```sh
+bash tests/native.sh
+bash tests/bcrypt-lanes.sh
+```
 
-## Measurement status
+They cover threaded HMAC/failure recovery, SIMD boundaries, syscall ABI,
+reply-pipe backpressure/signals, Goose JWT checks and exact-lane bcrypt.
+The fork-only Ubuntu 24.04 x86 workflow performs a clean pinned compiler/app
+build and the original full correctness stages on the exact submission tree.
+Its run and source-equivalence receipts are recorded separately.
 
-One exploratory 80,000-user calibration block of the earlier `a34ee531...`
-binary used **26.3% less combined app + PostgreSQL CPU per successful request**
-than Rust #7. Its p50/p95 were slower: 3.081/5.611 ms versus 0.414/2.783 ms.
-That fixed-load ARM64 comparison selected the defaults above; subsequent
-correctness fixes produced a different binary. It is not a capacity result
-or a measurement of this final binary.
+## Validation scope
 
-The [published official result](https://github.com/arjaythedev/multicore-server-challenge/blob/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/LEADERBOARD.md)
-for the earlier `3e908747` source remains **eighth place at 65,000 users**.
-This revision awaits a new official run. No first-place or lead-over-all result
-is established by the local calibration or correctness checks.
+This source is a separate reader-admission validation candidate. It is not the
+current PR #32 source, and no capacity, performance improvement or rank is
+claimed. Local ARM checks and native x86 correctness serve different validation
+purposes; performance requires a valid, separately declared measurement.
