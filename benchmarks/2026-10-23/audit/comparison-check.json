@@ -1,0 +1,1908 @@
+{
+  "created_utc": "2026-10-23T07:01:41Z",
+  "status": "PASS_PUBLISHED_TABLE_AUDIT",
+  "scope": "Audit of maintainer-published same-box five-minute capacity table and coverage; no new performance runs.",
+  "canonical_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/LEADERBOARD.md",
+  "canonical_commit": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+  "canonical_git_blob": "1e48908381e0a0b70f09d306da184ed2e5130a8a",
+  "canonical_sha256": "48102ff81170135ebda1086be4a4068056d1438c4e199131a0370d94bd4bd7ab",
+  "checks": [
+    {
+      "check": "pinned_commit_matches_canonical_url",
+      "pass": true
+    },
+    {
+      "check": "actual_git_tree_matches_commit_tree",
+      "pass": true
+    },
+    {
+      "check": "local_leaderboard_git_blob_matches_canonical_tree",
+      "pass": true
+    },
+    {
+      "check": "local_text_identical_to_fresh_pinned_github_content",
+      "pass": true
+    },
+    {
+      "check": "current_main_github_content_identical_to_pinned_snapshot",
+      "pass": true
+    },
+    {
+      "check": "29_scored_rows_and_two_unscored",
+      "pass": true
+    },
+    {
+      "check": "published_ranks_contiguous_and_preserved",
+      "pass": true
+    },
+    {
+      "check": "scores_nonincreasing_preserving_tie_order",
+      "pass": true
+    },
+    {
+      "check": "one_official_row_per_submission",
+      "pass": true
+    },
+    {
+      "check": "all_published_prs_present_in_fresh_inventory",
+      "pass": true
+    },
+    {
+      "check": "all_merged_submission_prs_have_published_scores",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "all_published_latency_values_meet_declared_slo",
+      "pass": true
+    },
+    {
+      "check": "four_examples_included_on_same_box",
+      "pass": true
+    },
+    {
+      "check": "our_published_row_is_65000_users_at_rank8",
+      "pass": true
+    },
+    {
+      "check": "leader_is_rust7_at100000",
+      "pass": true
+    }
+  ],
+  "official_conditions": {
+    "target_cpus": 8,
+    "target_memory_gb_as_published": 16,
+    "postgres_version": 18,
+    "full_seed": true,
+    "load_generator_separate_machine": true,
+    "hold_measured_seconds": 300,
+    "p95_strictly_below_ms": 500,
+    "p99_strictly_below_ms": 1000,
+    "error_rate_strictly_below": 0.01
+  },
+  "coverage": {
+    "scored_rows": 29,
+    "scored_submission_prs": 25,
+    "scored_examples": 4,
+    "explicit_unscored_prs": 2,
+    "submission_prs_in_inventory": 30,
+    "unlisted_prs": [
+      14,
+      17,
+      21
+    ],
+    "all_merged_submission_prs_scored": true,
+    "all_submission_prs_have_published_result": false
+  },
+  "scored_rows": [
+    {
+      "id": "pr-7",
+      "published_rank": 1,
+      "users": 100000,
+      "submission": "rust-tokio-Scooter1337",
+      "submission_link": "submissions/rust-tokio-Scooter1337",
+      "pr": 7,
+      "front": "direct",
+      "rps": 26279,
+      "p95_ms": 119,
+      "p99_ms": 185,
+      "app_cpu_pct_of_whole8cpu_box": 20,
+      "postgres_cpu_pct_of_whole8cpu_box": 70,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "dc7c249229bd43d8752e7ffb28ce81ee4401d8ae",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-22",
+      "published_rank": 2,
+      "users": 95000,
+      "submission": "csharp-sockets-jh-d",
+      "submission_link": "submissions/csharp-sockets-jh-d",
+      "pr": 22,
+      "front": "direct",
+      "rps": 24696,
+      "p95_ms": 493,
+      "p99_ms": 737,
+      "app_cpu_pct_of_whole8cpu_box": 21,
+      "postgres_cpu_pct_of_whole8cpu_box": 75,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "4aee3c3053aa7c91c69904fd5eccb79b982eb994",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-10",
+      "published_rank": 3,
+      "users": 84000,
+      "submission": "c-iouring-tigokraft",
+      "submission_link": "submissions/c-iouring-tigokraft",
+      "pr": 10,
+      "front": "direct",
+      "rps": 21262,
+      "p95_ms": 339,
+      "p99_ms": 421,
+      "app_cpu_pct_of_whole8cpu_box": 18,
+      "postgres_cpu_pct_of_whole8cpu_box": 80,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "19d78b3a694f673d5677c4bb0f9b22d4d6f85b9b",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-15",
+      "published_rank": 4,
+      "users": 84000,
+      "submission": "cobol-gnucobol-benmandrew",
+      "submission_link": "submissions/cobol-gnucobol-benmandrew",
+      "pr": 15,
+      "front": "direct",
+      "rps": 21292,
+      "p95_ms": 361,
+      "p99_ms": 461,
+      "app_cpu_pct_of_whole8cpu_box": 20,
+      "postgres_cpu_pct_of_whole8cpu_box": 75,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "f732c5988cc460868ffb37f45f668c2a35f177d7",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-8",
+      "published_rank": 5,
+      "users": 84000,
+      "submission": "csharp-kestrel-xeonfx",
+      "submission_link": "https://github.com/arjaythedev/multicore-server-challenge/pull/8",
+      "pr": 8,
+      "front": "direct",
+      "rps": 20906,
+      "p95_ms": 404,
+      "p99_ms": 467,
+      "app_cpu_pct_of_whole8cpu_box": 25,
+      "postgres_cpu_pct_of_whole8cpu_box": 74,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED_WITH_NOTE",
+      "maintainer_note": "Not merged yet: bcrypt comes from a prebuilt NuGet package; waiting for the source in the folder",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "221f4ad1e4196861b96fb7d15df2ba9137c3c313",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "open",
+      "currently_merged": false,
+      "current_draft": false
+    },
+    {
+      "id": "pr-11",
+      "published_rank": 6,
+      "users": 80000,
+      "submission": "rust-mio-foovoo",
+      "submission_link": "submissions/rust-mio-foovoo",
+      "pr": 11,
+      "front": "direct",
+      "rps": 20710,
+      "p95_ms": 474,
+      "p99_ms": 752,
+      "app_cpu_pct_of_whole8cpu_box": 18,
+      "postgres_cpu_pct_of_whole8cpu_box": 75,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "bc78b7742f3746a2c436c54015b1aafad61ef155",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-4",
+      "published_rank": 7,
+      "users": 68000,
+      "submission": "cpp-asio-c-hatton",
+      "submission_link": "submissions/cpp-asio-c-hatton",
+      "pr": 4,
+      "front": "direct",
+      "rps": 17887,
+      "p95_ms": 94,
+      "p99_ms": 174,
+      "app_cpu_pct_of_whole8cpu_box": 27,
+      "postgres_cpu_pct_of_whole8cpu_box": 71,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "52a7ffba7ca0fd2829f38156e6f68660110418d0",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-32",
+      "published_rank": 8,
+      "users": 65000,
+      "submission": "goose-native-tbsvttr",
+      "submission_link": "https://github.com/arjaythedev/multicore-server-challenge/pull/32",
+      "pr": 32,
+      "front": "direct",
+      "rps": 17125,
+      "p95_ms": 27,
+      "p99_ms": 721,
+      "app_cpu_pct_of_whole8cpu_box": 18,
+      "postgres_cpu_pct_of_whole8cpu_box": 71,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED_WITH_NOTE",
+      "maintainer_note": "Not merged yet: the pull request is marked as a draft",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "3e9087473da5c56d5800ae9ee00ac1e84c44a135",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "open",
+      "currently_merged": false,
+      "current_draft": true
+    },
+    {
+      "id": "pr-31",
+      "published_rank": 9,
+      "users": 62000,
+      "submission": "goose-epoll-xeonfx",
+      "submission_link": "submissions/goose-epoll-xeonfx",
+      "pr": 31,
+      "front": "direct",
+      "rps": 16311,
+      "p95_ms": 30,
+      "p99_ms": 842,
+      "app_cpu_pct_of_whole8cpu_box": 17,
+      "postgres_cpu_pct_of_whole8cpu_box": 71,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "43e0919ae5b693c1d3c1e8828b74bb774ef92ee0",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-28",
+      "published_rank": 10,
+      "users": 61000,
+      "submission": "go-epoll-o7livetype",
+      "submission_link": "submissions/go-epoll-o7livetype",
+      "pr": 28,
+      "front": "direct",
+      "rps": 15865,
+      "p95_ms": 351,
+      "p99_ms": 484,
+      "app_cpu_pct_of_whole8cpu_box": 20,
+      "postgres_cpu_pct_of_whole8cpu_box": 73,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "f6d82ed4bccf8a2e211282fb5c0788bd1fd7e26b",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-1",
+      "published_rank": 11,
+      "users": 58000,
+      "submission": "rust-hyper-cknutson12",
+      "submission_link": "submissions/rust-hyper-cknutson12",
+      "pr": 1,
+      "front": "direct",
+      "rps": 15075,
+      "p95_ms": 223,
+      "p99_ms": 367,
+      "app_cpu_pct_of_whole8cpu_box": 29,
+      "postgres_cpu_pct_of_whole8cpu_box": 69,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "e93ab19c36a4b587edac01c1baa9292b25a2ccd4",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-30",
+      "published_rank": 12,
+      "users": 46000,
+      "submission": "kotlin-vertx-canleon",
+      "submission_link": "submissions/kotlin-vertx-canleon",
+      "pr": 30,
+      "front": "direct",
+      "rps": 11923,
+      "p95_ms": 352,
+      "p99_ms": 440,
+      "app_cpu_pct_of_whole8cpu_box": 37,
+      "postgres_cpu_pct_of_whole8cpu_box": 51,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "ee01d7f518156af632c993e7e495fd3567a4ef6c",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-13",
+      "published_rank": 13,
+      "users": 46000,
+      "submission": "python-uvloop-bensgilbert",
+      "submission_link": "https://github.com/arjaythedev/multicore-server-challenge/pull/13",
+      "pr": 13,
+      "front": "direct",
+      "rps": 11572,
+      "p95_ms": 423,
+      "p99_ms": 519,
+      "app_cpu_pct_of_whole8cpu_box": 38,
+      "postgres_cpu_pct_of_whole8cpu_box": 58,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED_WITH_NOTE",
+      "maintainer_note": "Not merged yet: restarts crashed workers (rule 9). No worker restarted during the run, so the score stands",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "d5d8c77268f77f97898aeb1e639eedf0cb0cef4a",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "open",
+      "currently_merged": false,
+      "current_draft": false
+    },
+    {
+      "id": "pr-27",
+      "published_rank": 14,
+      "users": 44000,
+      "submission": "go-fasthttp-o7livetype",
+      "submission_link": "submissions/go-fasthttp-o7livetype",
+      "pr": 27,
+      "front": "nginx",
+      "rps": 11321,
+      "p95_ms": 496,
+      "p99_ms": 620,
+      "app_cpu_pct_of_whole8cpu_box": 23,
+      "postgres_cpu_pct_of_whole8cpu_box": 53,
+      "nginx_cpu_pct_of_whole8cpu_box": 19,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "e636c708a7795839293e0961227c93bbf3ce88a0",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-29",
+      "published_rank": 15,
+      "users": 44000,
+      "submission": "kotlin-ktor-canleon",
+      "submission_link": "submissions/kotlin-ktor-canleon",
+      "pr": 29,
+      "front": "direct",
+      "rps": 10948,
+      "p95_ms": 496,
+      "p99_ms": 664,
+      "app_cpu_pct_of_whole8cpu_box": 45,
+      "postgres_cpu_pct_of_whole8cpu_box": 49,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "29ea7a4e70b19177890fc62c1e309c5257c5db99",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-19",
+      "published_rank": 16,
+      "users": 33000,
+      "submission": "lua-openresty-yar0slav",
+      "submission_link": "submissions/lua-openresty-yar0slav",
+      "pr": 19,
+      "front": "direct",
+      "rps": 8616,
+      "p95_ms": 432,
+      "p99_ms": 783,
+      "app_cpu_pct_of_whole8cpu_box": 37,
+      "postgres_cpu_pct_of_whole8cpu_box": 49,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "ba6a946aa974209ddd485635668def98658bebcb",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-12",
+      "published_rank": 17,
+      "users": 32000,
+      "submission": "elixir-raw-foovoo",
+      "submission_link": "submissions/elixir-raw-foovoo",
+      "pr": 12,
+      "front": "direct",
+      "rps": 7999,
+      "p95_ms": 323,
+      "p99_ms": 382,
+      "app_cpu_pct_of_whole8cpu_box": 37,
+      "postgres_cpu_pct_of_whole8cpu_box": 48,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "24d85b6a261f1bfc9972896bbd1e79aac9ff63ae",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-25",
+      "published_rank": 18,
+      "users": 32000,
+      "submission": "rust-urus-markk116",
+      "submission_link": "submissions/rust-urus-markk116",
+      "pr": 25,
+      "front": "direct",
+      "rps": 8313,
+      "p95_ms": 438,
+      "p99_ms": 540,
+      "app_cpu_pct_of_whole8cpu_box": 27,
+      "postgres_cpu_pct_of_whole8cpu_box": 46,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "88e2060e48dede41a8cb86ecf775d41f3e1d4425",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-24",
+      "published_rank": 19,
+      "users": 25000,
+      "submission": "pony-stallion-contact-red",
+      "submission_link": "submissions/pony-stallion-contact-red",
+      "pr": 24,
+      "front": "direct",
+      "rps": 6454,
+      "p95_ms": 473,
+      "p99_ms": 733,
+      "app_cpu_pct_of_whole8cpu_box": 33,
+      "postgres_cpu_pct_of_whole8cpu_box": 52,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "36fe3254cc7bf40fd0ce7b8699207f50be5e2022",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "examples-go",
+      "published_rank": 20,
+      "users": 24000,
+      "submission": "go example",
+      "submission_link": "examples/go",
+      "pr": null,
+      "front": "nginx",
+      "rps": 6192,
+      "p95_ms": 483,
+      "p99_ms": 701,
+      "app_cpu_pct_of_whole8cpu_box": 27,
+      "postgres_cpu_pct_of_whole8cpu_box": 47,
+      "nginx_cpu_pct_of_whole8cpu_box": 11,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false
+    },
+    {
+      "id": "pr-16",
+      "published_rank": 21,
+      "users": 23000,
+      "submission": "d-arsd-cyrusmsk",
+      "submission_link": "submissions/d-arsd-cyrusmsk",
+      "pr": 16,
+      "front": "direct",
+      "rps": 5952,
+      "p95_ms": 373,
+      "p99_ms": 577,
+      "app_cpu_pct_of_whole8cpu_box": 24,
+      "postgres_cpu_pct_of_whole8cpu_box": 66,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "c2db52f22602207fb2adb009a520ddf3bcfeb6aa",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "examples-rust",
+      "published_rank": 22,
+      "users": 22000,
+      "submission": "rust example",
+      "submission_link": "examples/rust",
+      "pr": null,
+      "front": "nginx",
+      "rps": 5734,
+      "p95_ms": 233,
+      "p99_ms": 334,
+      "app_cpu_pct_of_whole8cpu_box": 25,
+      "postgres_cpu_pct_of_whole8cpu_box": 50,
+      "nginx_cpu_pct_of_whole8cpu_box": 11,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false
+    },
+    {
+      "id": "examples-java",
+      "published_rank": 23,
+      "users": 21000,
+      "submission": "java example",
+      "submission_link": "examples/java",
+      "pr": null,
+      "front": "nginx",
+      "rps": 5528,
+      "p95_ms": 104,
+      "p99_ms": 182,
+      "app_cpu_pct_of_whole8cpu_box": 30,
+      "postgres_cpu_pct_of_whole8cpu_box": 46,
+      "nginx_cpu_pct_of_whole8cpu_box": 11,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false
+    },
+    {
+      "id": "pr-9",
+      "published_rank": 24,
+      "users": 20000,
+      "submission": "swift-hummingbird-denizakya",
+      "submission_link": "submissions/swift-hummingbird-denizakya",
+      "pr": 9,
+      "front": "nginx",
+      "rps": 5077,
+      "p95_ms": 339,
+      "p99_ms": 400,
+      "app_cpu_pct_of_whole8cpu_box": 48,
+      "postgres_cpu_pct_of_whole8cpu_box": 40,
+      "nginx_cpu_pct_of_whole8cpu_box": 10,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "a30eb35ed4b8af33c96b2d019b8c64129a43d3c8",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-2",
+      "published_rank": 25,
+      "users": 20000,
+      "submission": "v-fasthttp-ulises-jeremias",
+      "submission_link": "https://github.com/arjaythedev/multicore-server-challenge/pull/2",
+      "pr": 2,
+      "front": "direct",
+      "rps": 5193,
+      "p95_ms": 351,
+      "p99_ms": 563,
+      "app_cpu_pct_of_whole8cpu_box": 12,
+      "postgres_cpu_pct_of_whole8cpu_box": 63,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED_WITH_NOTE",
+      "maintainer_note": "Not merged yet: install.sh fails on a clean box (V's bootstrap `vc` isn't pinned); scored with vc pinned by hand",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "826640029ece0ba773cfde87cedd0cdcb5184e7f",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "open",
+      "currently_merged": false,
+      "current_draft": false
+    },
+    {
+      "id": "pr-26",
+      "published_rank": 26,
+      "users": 18000,
+      "submission": "bun-native-PetarGeorgiev-hash",
+      "submission_link": "submissions/bun-native-PetarGeorgiev-hash",
+      "pr": 26,
+      "front": "direct",
+      "rps": 4591,
+      "p95_ms": 296,
+      "p99_ms": 736,
+      "app_cpu_pct_of_whole8cpu_box": 18,
+      "postgres_cpu_pct_of_whole8cpu_box": 33,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "4dcd406d1a0c2ae339cce079050147e8844fffb6",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "examples-python",
+      "published_rank": 27,
+      "users": 10000,
+      "submission": "python example",
+      "submission_link": "examples/python",
+      "pr": null,
+      "front": "nginx",
+      "rps": 2634,
+      "p95_ms": 82,
+      "p99_ms": 150,
+      "app_cpu_pct_of_whole8cpu_box": 49,
+      "postgres_cpu_pct_of_whole8cpu_box": 25,
+      "nginx_cpu_pct_of_whole8cpu_box": 6,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false
+    },
+    {
+      "id": "pr-20",
+      "published_rank": 28,
+      "users": 8300,
+      "submission": "csharp-efcore-xeonfx",
+      "submission_link": "submissions/csharp-efcore-xeonfx",
+      "pr": 20,
+      "front": "direct",
+      "rps": 2108,
+      "p95_ms": 447,
+      "p99_ms": 720,
+      "app_cpu_pct_of_whole8cpu_box": 19,
+      "postgres_cpu_pct_of_whole8cpu_box": 78,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "156440108adcf823a3f77214b72834d4874440cd",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    },
+    {
+      "id": "pr-23",
+      "published_rank": 29,
+      "users": 1100,
+      "submission": "perl-mojolicious-denizakya",
+      "submission_link": "submissions/perl-mojolicious-denizakya",
+      "pr": 23,
+      "front": "nginx",
+      "rps": 287,
+      "p95_ms": 197,
+      "p99_ms": 327,
+      "app_cpu_pct_of_whole8cpu_box": 8,
+      "postgres_cpu_pct_of_whole8cpu_box": 3,
+      "nginx_cpu_pct_of_whole8cpu_box": 0,
+      "cpu_values_are_rounded_published_percentages": true,
+      "status": "OFFICIAL_SCORED",
+      "maintainer_note": "",
+      "measured_error_count": null,
+      "zero_errors_proven": false,
+      "measured_source_commit": null,
+      "measured_source_version_proven": false,
+      "raw_trials_independently_audited": false,
+      "current_head": "8a98960c84dc3b63cd8e86f840286db4056a1ba2",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": true,
+      "current_draft": false
+    }
+  ],
+  "unscored_rows": [
+    {
+      "id": "pr-5",
+      "pr": 5,
+      "submission": "c-iouring-27bhd",
+      "submission_link": "https://github.com/arjaythedev/multicore-server-challenge/pull/5",
+      "status": "OFFICIAL_NOT_SCORED",
+      "users": null,
+      "published_rank": null,
+      "maintainer_note": "No 5-minute hold passed: POST /api/articles takes ~2 s even on an idle box and blocks its worker, so p99 > 1 s from ~100 users (2-minute probes passed at 100)",
+      "raw_trials_independently_audited": false,
+      "measured_source_version_proven": false,
+      "current_head": "4bff8b7c420e08a47261223239ab9b87aa5706f9",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "open",
+      "currently_merged": false,
+      "current_draft": false
+    },
+    {
+      "id": "pr-18",
+      "pr": 18,
+      "submission": "d-vibe-cyrusmsk",
+      "submission_link": "https://github.com/arjaythedev/multicore-server-challenge/pull/18",
+      "status": "OFFICIAL_NOT_SCORED",
+      "users": null,
+      "published_rank": null,
+      "maintainer_note": "Crashed 11 minutes into the run (SIGILL, core dumped) at 8,000 users; PR #18 also needs pinned dependencies",
+      "raw_trials_independently_audited": false,
+      "measured_source_version_proven": false,
+      "current_head": "5fd9b566c547295cab6decc35378e1b0cfc9ec8a",
+      "current_head_is_measured_revision_proven": false,
+      "current_pr_state": "closed",
+      "currently_merged": false,
+      "current_draft": false
+    }
+  ],
+  "unlisted_pull_requests": [
+    {
+      "pr": 14,
+      "submission": "csharp-aspnetcore-jh-d",
+      "current_head": "7daae17175973867c741b75c562affb55d1f5f75",
+      "pull_request_state": "closed",
+      "merged_at": null,
+      "status": "NOT_LISTED_CLOSED_UNMERGED_PROPOSAL",
+      "users": null,
+      "published_rank": null,
+      "reason": "No separate result or failure reason for this PR is published in the pinned leaderboard. Do not copy a score from a similarly named folder or successor PR."
+    },
+    {
+      "pr": 17,
+      "submission": "d-vibe-cyrusmsk",
+      "current_head": "9c35a60e3a07597c756d6e9a2e04eaa186eda99b",
+      "pull_request_state": "open",
+      "merged_at": null,
+      "status": "NOT_LISTED_OPEN_SUBMISSION",
+      "users": null,
+      "published_rank": null,
+      "reason": "No separate result or failure reason for this PR is published in the pinned leaderboard. Do not copy a score from a similarly named folder or successor PR."
+    },
+    {
+      "pr": 21,
+      "submission": "pony-stallion-contact-red",
+      "current_head": "f62c5f6d0cfd9f3bbf035510bc11abed0d78ca43",
+      "pull_request_state": "closed",
+      "merged_at": null,
+      "status": "NOT_LISTED_CLOSED_UNMERGED_PROPOSAL",
+      "users": null,
+      "published_rank": null,
+      "reason": "No separate result or failure reason for this PR is published in the pinned leaderboard. Do not copy a score from a similarly named folder or successor PR."
+    }
+  ],
+  "published_ties_users_to_row_positions": {
+    "84000": [
+      3,
+      4,
+      5
+    ],
+    "46000": [
+      12,
+      13
+    ],
+    "44000": [
+      14,
+      15
+    ],
+    "32000": [
+      17,
+      18
+    ],
+    "20000": [
+      24,
+      25
+    ]
+  },
+  "our_result": {
+    "pr": 32,
+    "published_rank": 8,
+    "users": 65000,
+    "rps": 17125,
+    "p95_ms": 27,
+    "p99_ms": 721,
+    "app_cpu_pct": 18,
+    "postgres_cpu_pct": 71,
+    "capacity_delta_vs_rust7_fraction": -0.35,
+    "capacity_delta_vs_pr31_fraction": 0.048387096774193505,
+    "more_users_needed_to_match_rust7": 35000,
+    "users_for5pct_above_current_leader": 105000.0,
+    "more_users_needed_for5pct_above_current_leader": 40000.0,
+    "first_place_proven": false,
+    "at_least5pct_more_capacity_than_pr31": false
+  },
+  "caveats": [
+    "These are maintainer-reported official capacity results, not an independent replay or raw-trial audit.",
+    "The leaderboard does not identify the exact measured commit, binary hash or runtime environment for every row; current PR heads must not be assumed measured.",
+    "Raw probes, holds, per-endpoint data and second-by-second CPU are described as retained and available on request, but are not provided in this table.",
+    "The SLO permits fewer than1% errors; exact error counts and zero-error status are not published.",
+    "Latency and CPU columns are measured at different maximum user loads; they do not isolate implementation effects at matched load.",
+    "Published notes about manual dependency pinning, prebuilt dependencies, worker-restart policy and draft state are retained verbatim; score and merge eligibility differ.",
+    "Equal user counts are ties in measured capacity; the canonical row order is preserved without inventing a tie-break rule.",
+    "No ARM Mac result is substituted into the official x86 leaderboard. Historical local invalid attempts remain in their original evidence record."
+  ],
+  "raw_input_sha256": {
+    "/private/tmp/multicore-comparison-20261023/inventory/LEADERBOARD.md": "48102ff81170135ebda1086be4a4068056d1438c4e199131a0370d94bd4bd7ab",
+    "/private/tmp/multicore-comparison-20261023/inventory/README.md": "a326c33f33e5edbc821319df4f1045901ac39e9cf3e70366d32e650992cb2953",
+    "/private/tmp/multicore-comparison-20261023/inventory/WORKLOAD.md": "a44c62ab56e9df6c1314dc74af96b43da5a9c9713cd8b85253a42514c0fbed04",
+    "/private/tmp/multicore-comparison-20261023/inventory/main-commit-raw.json": "fddf3ee6100e36a72977af39413dc7cf8098ad38897ebf52cd25e9a85041e037",
+    "/private/tmp/multicore-comparison-20261023/inventory/main-actual-tree-raw.json": "30b9eb6c588fb3dd2c098f1ecf0b05e37fa48e591ac9e89a0a2d48cbe793e28e",
+    "/private/tmp/multicore-comparison-20261023/inventory/pulls-raw.json": "dabd4eee7429819abd2cadde542ed1c52bf5a5c76322deaac4ab26a5ab811144",
+    "/private/tmp/multicore-comparison-20261023/inventory/head-source-manifest.json": "89632327193c1798039be4f6c148ab3e71aa205cc2dd8a9e4e3651c275df12a9",
+    "/private/tmp/multicore-comparison-20261023/audit/canonical-leaderboard.json": "846533c576ee3564484f38c87113684c5a814ea9363be53fbb6f1d5215a37bd9",
+    "/private/tmp/multicore-comparison-20261023/audit/canonical-current-leaderboard.json": "61d427474ea55a838203db9d55f3ef3440e0da261e6fcd2023bfd678eccb2088"
+  },
+  "auditor_sha256": "c1629ea57047fc66f8192d5447233291d89a7a2f7d568389d4f59a8e4f1af147",
+  "new_capacity_benchmarks_executed": false,
+  "derived_export_audit": {
+    "status": "PASS",
+    "checks": [
+      {
+        "check": "31_unique_current_rows",
+        "pass": true
+      },
+      {
+        "check": "29_scored_plus_active_unscored5_and17",
+        "pass": true
+      },
+      {
+        "check": "historical14_18_21_retained_once_outside_current_table",
+        "pass": true
+      },
+      {
+        "check": "pr-7:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-7:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-7:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-7:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-7:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-22:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-22:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-22:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-22:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-22:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-10:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-10:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-10:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-10:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-10:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-15:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-15:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-15:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-15:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-15:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-8:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-8:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-8:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-8:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-8:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-11:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-11:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-11:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-11:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-11:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-4:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-4:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-4:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-4:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-4:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-32:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-32:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-32:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-32:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-32:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-31:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-31:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-31:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-31:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-31:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-28:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-28:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-28:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-28:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-28:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-1:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-1:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-1:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-1:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-1:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-30:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-30:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-30:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-30:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-30:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-13:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-13:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-13:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-13:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-13:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-27:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-27:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-27:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-27:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-27:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-29:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-29:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-29:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-29:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-29:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-19:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-19:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-19:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-19:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-19:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-12:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-12:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-12:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-12:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-12:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-25:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-25:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-25:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-25:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-25:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-24:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-24:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-24:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-24:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-24:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "examples-go:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "examples-go:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "examples-go:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "examples-go:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "examples-go:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-16:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-16:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-16:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-16:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-16:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "examples-rust:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "examples-rust:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "examples-rust:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "examples-rust:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "examples-rust:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "examples-java:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "examples-java:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "examples-java:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "examples-java:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "examples-java:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-9:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-9:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-9:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-9:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-9:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-2:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-2:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-2:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-2:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-2:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-26:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-26:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-26:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-26:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-26:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "examples-python:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "examples-python:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "examples-python:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "examples-python:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "examples-python:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-20:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-20:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-20:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-20:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-20:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-23:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-23:all_published_values_and_note_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-23:whole_box_cpu_values_preserved",
+        "pass": true
+      },
+      {
+        "check": "pr-23:signed_gap_vs_ours",
+        "pass": true
+      },
+      {
+        "check": "pr-23:signed_gap_vs_leader",
+        "pass": true
+      },
+      {
+        "check": "pr-5:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-5:unscored_gaps_are_null",
+        "pass": true
+      },
+      {
+        "check": "pr-17:no_new_local_run_or_measured_source_claim",
+        "pass": true
+      },
+      {
+        "check": "pr-17:unscored_gaps_are_null",
+        "pass": true
+      },
+      {
+        "check": "official_failure_reasons_retained_for5_and18",
+        "pass": true
+      },
+      {
+        "check": "same_pinned_official_snapshot",
+        "pass": true
+      },
+      {
+        "check": "markdown31_rows",
+        "pass": true
+      },
+      {
+        "check": "pr-7:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-7:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-22:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-22:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-10:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-10:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-15:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-15:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-8:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-8:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-11:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-11:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-4:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-4:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-32:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-32:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-31:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-31:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-28:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-28:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-1:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-1:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-30:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-30:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-13:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-13:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-27:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-27:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-29:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-29:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-19:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-19:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-12:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-12:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-25:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-25:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-24:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-24:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "examples-go:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "examples-go:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-16:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-16:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "examples-rust:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "examples-rust:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "examples-java:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "examples-java:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-9:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-9:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-2:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-2:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-26:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-26:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "examples-python:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "examples-python:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-20:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-20:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-23:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-23:markdown_published_values",
+        "pass": true
+      },
+      {
+        "check": "pr-5:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-5:markdown_unscored_not_zero",
+        "pass": true
+      },
+      {
+        "check": "pr-17:markdown_name_and_link",
+        "pass": true
+      },
+      {
+        "check": "pr-17:markdown_unscored_not_zero",
+        "pass": true
+      },
+      {
+        "check": "different_load_latency_and_source_version_limits_disclosed",
+        "pass": true
+      }
+    ],
+    "input_sha256": {
+      "/private/tmp/multicore-comparison-20261023/official-comparison.json": "7412767f703c7071ec3e1b38444fd27117694247402578092a115cb61e3a3ccc",
+      "/private/tmp/multicore-comparison-20261023/official-comparison.md": "bcb016e7c08ef740042ae30cef4c1ed1446f26d581f005c9672424fd7caac184"
+    },
+    "scope": "All canonical values, CPU/latency/note fields, signed JSON gaps,31current rows and3historical records; no benchmark replay."
+  },
+  "export_auditor_sha256": "83acb1c43db4a4a2af33111c8e174a32c690d6cfb13d5a23a410c119a5048f7c"
+}

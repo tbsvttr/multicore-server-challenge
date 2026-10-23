@@ -1,0 +1,2022 @@
+{
+  "snapshot_at_utc": "2026-10-23T06:59:05.240087+00:00",
+  "upstream_commit": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+  "upstream_git_tree": "dbabfe14215dbfd78f449d25f6a42cd9639e4719",
+  "leaderboard_blob_sha1": "1e48908381e0a0b70f09d306da184ed2e5130a8a",
+  "leaderboard_sha256": "48102ff81170135ebda1086be4a4068056d1438c4e199131a0370d94bd4bd7ab",
+  "leaderboard_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/LEADERBOARD.md",
+  "publication_path": "benchmarks/2026-10-23/README.md",
+  "source_inventory": "inventory/inventory.json",
+  "summary": {
+    "pr_records": 30,
+    "merged_prs": 21,
+    "open_prs": 6,
+    "closed_historical_prs": 3,
+    "active_submission_prs_including_ours": 27,
+    "active_competitors_excluding_ours": 26,
+    "reference_examples": 4,
+    "official_scored_rows": 29,
+    "official_scored_submission_prs": 25,
+    "active_unscored_prs": [
+      5,
+      17
+    ],
+    "historical_closed_prs": [
+      14,
+      18,
+      21
+    ],
+    "canonical_main_submissions_differing_from_head_tree": [
+      11,
+      25
+    ]
+  },
+  "official_protocol": "8 dedicated vCPU / 16 GB; application, optional Nginx and PostgreSQL18 on the target; full seed; separate-machine load generation; highest users held for five minutes with p95<500ms,p99<1000ms,errors<1%.",
+  "comparison_scope": "Maintainer-published official batch, not a new Mac benchmark. Each latency/RPS value is measured at that implementation's own scored user count; do not interpret these as matched-load relative latency/RPS.",
+  "gap_definition": "Signed users difference: row users minus reference users; percentage is 100*(row/reference-1), using ours65000 or leader100000 as denominator. Unscored entries have null gaps.",
+  "ours_reference": {
+    "pr": 32,
+    "users": 65000,
+    "rank": 8,
+    "head": "3e9087473da5c56d5800ae9ee00ac1e84c44a135",
+    "draft": true
+  },
+  "leader_reference": {
+    "pr": 7,
+    "users": 100000,
+    "rank": 1
+  },
+  "raw_trial_limitation": "Leaderboard says per-trial/probe/hold histograms and CPU records can be shared on request; they are not included in this public snapshot. No request/message was sent.",
+  "rows": [
+    {
+      "id": "pr-7",
+      "pr": 7,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/7",
+      "name": "rust-tokio-Scooter1337",
+      "variant": null,
+      "language": "Rust",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "Scooter1337/multicore-server-challenge",
+      "head_commit": "dc7c249229bd43d8752e7ffb28ce81ee4401d8ae",
+      "head_root_tree": "e714a365bdf40108605eb98a4f8ae94940e0cd9e",
+      "head_submission_tree": "f542997eb07942e25fa44b7f288c8e1d508c176c",
+      "source_folder": "submissions/rust-tokio-Scooter1337",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "f542997eb07942e25fa44b7f288c8e1d508c176c",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/rust-tokio-Scooter1337",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/rust-tokio-Scooter1337",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "0b5b878fce647ad19be4af31950416fc8bf06afca54b02602febcb10da70c1f9"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "abb71fe1b2e2d8e5a7d4272aa069dc451a5bcd55267624a05f7332aded9efa48"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "1a729bf89b8aae10ba9e5cc1fb3f63ed4f5ab9500f44f30a9dd48411880f8d3c"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "5e87e74195db33cde05eca81f839ab3752688f31287429f09c27642836b9e6d3"
+        }
+      },
+      "official_score": {
+        "rank": 1,
+        "users": 100000,
+        "requests_per_second": 26279.0,
+        "p95_ms": 119.0,
+        "p99_ms": 185.0,
+        "front": "direct",
+        "cpu_app_postgres": "20% / 70%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": 35000,
+      "gap_percent_vs_ours": 53.846153846153854,
+      "gap_users_vs_leader": 0,
+      "gap_percent_vs_leader": 0.0
+    },
+    {
+      "id": "pr-22",
+      "pr": 22,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/22",
+      "name": "csharp-sockets-jh-d",
+      "variant": null,
+      "language": "C#",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "jh-d/multicore-server-challenge",
+      "head_commit": "4aee3c3053aa7c91c69904fd5eccb79b982eb994",
+      "head_root_tree": "4f6b2709a8344dedfddf065f6b1b742c054055bb",
+      "head_submission_tree": "98a38b41d8661ccf9d8a9098d7bfc73f1c8f9972",
+      "source_folder": "submissions/csharp-sockets-jh-d",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "98a38b41d8661ccf9d8a9098d7bfc73f1c8f9972",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/csharp-sockets-jh-d",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/csharp-sockets-jh-d",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "ad56c288f12312076b2bb7ac79ca752b31e012be6837527d0f3ede55472af959"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "f467ae2afe08c303cf4f3b237355e25d90613565a18d50c91e545ba25fe5795b"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "0779956a7d896318133b330a25a459d631d662b3bbfb897a546c49614b0e3361"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "36564cd7e984e0f5b538922151d8c53bb8f2760a23bc81b8c24d5bb56d3f8fea"
+        }
+      },
+      "official_score": {
+        "rank": 2,
+        "users": 95000,
+        "requests_per_second": 24696.0,
+        "p95_ms": 493.0,
+        "p99_ms": 737.0,
+        "front": "direct",
+        "cpu_app_postgres": "21% / 75%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": 30000,
+      "gap_percent_vs_ours": 46.153846153846146,
+      "gap_users_vs_leader": -5000,
+      "gap_percent_vs_leader": -5.000000000000004
+    },
+    {
+      "id": "pr-10",
+      "pr": 10,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/10",
+      "name": "c-iouring-tigokraft",
+      "variant": null,
+      "language": "C",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "tigokraft/multicore-server-challenge",
+      "head_commit": "19d78b3a694f673d5677c4bb0f9b22d4d6f85b9b",
+      "head_root_tree": "8e58d3928f83e3dbbead3cb7e6e1b91e5fe67a9f",
+      "head_submission_tree": "b9c29262635e3cad347c21d6bce04dc1fed8f857",
+      "source_folder": "submissions/c-iouring-tigokraft",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "b9c29262635e3cad347c21d6bce04dc1fed8f857",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/c-iouring-tigokraft",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/c-iouring-tigokraft",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "a8b7ebb44710eefd4077f3b574a44a0337cfc92d8d18ba69f6da92f123091d26"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "d234be7f66461cb45cfa49c66e95b2f3f6b10d1e7d1c103ad5dd4c68c22e059e"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "f1d8ae72e7196a4c95d3aedff9cd068b025fe13cb8f4f409b8d20bffa30381df"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "a82c4e1a9227282680c0a0efab192dab9346de0748f2fab55880c0b91f2965c6"
+        }
+      },
+      "official_score": {
+        "rank": 3,
+        "users": 84000,
+        "requests_per_second": 21262.0,
+        "p95_ms": 339.0,
+        "p99_ms": 421.0,
+        "front": "direct",
+        "cpu_app_postgres": "18% / 80%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": 19000,
+      "gap_percent_vs_ours": 29.230769230769237,
+      "gap_users_vs_leader": -16000,
+      "gap_percent_vs_leader": -16.000000000000004
+    },
+    {
+      "id": "pr-15",
+      "pr": 15,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/15",
+      "name": "cobol-gnucobol-benmandrew",
+      "variant": null,
+      "language": "COBOL",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "benmandrew/multicore-server-challenge",
+      "head_commit": "f732c5988cc460868ffb37f45f668c2a35f177d7",
+      "head_root_tree": "c9d36e3bdfbcb3b39d66a1f58040278c380f491d",
+      "head_submission_tree": "f4a77daa9211f33f6400a6a6fd4b5dfbc78a144a",
+      "source_folder": "submissions/cobol-gnucobol-benmandrew",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "f4a77daa9211f33f6400a6a6fd4b5dfbc78a144a",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/cobol-gnucobol-benmandrew",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/cobol-gnucobol-benmandrew",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "946e3eec65b31d72f3dd1d65e1da715e61f153cdb1bde40c1209f6f54ca1cba9"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "56621586d59f70390c00303d7457f8d8dbcf0401779ac50b43676252098fd604"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "01b77fe5122b0ae90bfd8a2f0a31f339e72a9e59241a9a060e15033a69dbe2de"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "91900ce78395f2a820b2c5b2afd58cdcfcc765b322121db251e236e160e51cd3"
+        }
+      },
+      "official_score": {
+        "rank": 4,
+        "users": 84000,
+        "requests_per_second": 21292.0,
+        "p95_ms": 361.0,
+        "p99_ms": 461.0,
+        "front": "direct",
+        "cpu_app_postgres": "20% / 75%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": 19000,
+      "gap_percent_vs_ours": 29.230769230769237,
+      "gap_users_vs_leader": -16000,
+      "gap_percent_vs_leader": -16.000000000000004
+    },
+    {
+      "id": "pr-8",
+      "pr": 8,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/8",
+      "name": "csharp-kestrel-xeonfx",
+      "variant": null,
+      "language": "C#",
+      "state": "open",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "XeonFX/multicore-server-challenge",
+      "head_commit": "221f4ad1e4196861b96fb7d15df2ba9137c3c313",
+      "head_root_tree": "584fadc8d30fe48d348c4dd79ade658e33469cdf",
+      "head_submission_tree": "0b1d045b6cbb75ab8a501794f48a3772153e245f",
+      "source_folder": "submissions/csharp-kestrel-xeonfx",
+      "canonical_source_ref": "221f4ad1e4196861b96fb7d15df2ba9137c3c313",
+      "canonical_source_tree": "0b1d045b6cbb75ab8a501794f48a3772153e245f",
+      "canonical_source_kind": "open_pr_head",
+      "canonical_source_url": "https://github.com/XeonFX/multicore-server-challenge/tree/221f4ad1e4196861b96fb7d15df2ba9137c3c313/submissions/csharp-kestrel-xeonfx",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/pr-8-221f4ad1/XeonFX-multicore-server-challenge-221f4ad/submissions/csharp-kestrel-xeonfx",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "e109d503dbdf3a8b123a5f3b0fd322b1a1dd829abd9fe4ed5563c3fb6ade121a"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "5e37ee86c26b119935fd255c2ba234960b2c28397096be9c6f4c11fdda8d42b8"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "e4062b01658f20ef22b679c39115c163487328e64fb6c582138821dfcd8191df"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "630e43c64acbd5b266231c01555339301b6b03d749ba102aa17fa9b4a07c4893"
+        }
+      },
+      "official_score": {
+        "rank": 5,
+        "users": 84000,
+        "requests_per_second": 20906.0,
+        "p95_ms": 404.0,
+        "p99_ms": 467.0,
+        "front": "direct",
+        "cpu_app_postgres": "25% / 74%",
+        "note": "Not merged yet: bcrypt comes from a prebuilt NuGet package; waiting for the source in the folder"
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": 19000,
+      "gap_percent_vs_ours": 29.230769230769237,
+      "gap_users_vs_leader": -16000,
+      "gap_percent_vs_leader": -16.000000000000004
+    },
+    {
+      "id": "pr-11",
+      "pr": 11,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/11",
+      "name": "rust-mio-foovoo",
+      "variant": null,
+      "language": "Rust",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "FooVoo/multicore-server-challenge",
+      "head_commit": "bc78b7742f3746a2c436c54015b1aafad61ef155",
+      "head_root_tree": "010250c343d83caa81cfbcb37898c3cae31f72f1",
+      "head_submission_tree": "bdd608b54d27daa0bf88cf1d52370f160d5f73c7",
+      "source_folder": "submissions/rust-mio-foovoo",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "0eeccf38c2699c32b740ffd5fd529d928a6f419e",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/rust-mio-foovoo",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/rust-mio-foovoo",
+      "canonical_matches_pr_submission_tree": false,
+      "canonical_changes_from_pr_head_paths": [
+        "submissions/rust-mio-foovoo/build.sh"
+      ],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "8079f8bd14f0171bdc6bf515b987e630d909a829baa08e75933fbb5a7507fdc9"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "4f567db7d337a6ce5428c58b63b362137386d1c3a91f20c5c44a17f9602d7361"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "dc63b26a071766cb4614296f0f72692598bae76927b2c0d1b1100335d0de0e01"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "2af076667dae2972e03889f0cf5c5f485a200f48ae9b18ac1c8604d6be971623"
+        }
+      },
+      "official_score": {
+        "rank": 6,
+        "users": 80000,
+        "requests_per_second": 20710.0,
+        "p95_ms": 474.0,
+        "p99_ms": 752.0,
+        "front": "direct",
+        "cpu_app_postgres": "18% / 75%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": 15000,
+      "gap_percent_vs_ours": 23.076923076923084,
+      "gap_users_vs_leader": -20000,
+      "gap_percent_vs_leader": -19.999999999999996
+    },
+    {
+      "id": "pr-4",
+      "pr": 4,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/4",
+      "name": "cpp-asio-c-hatton",
+      "variant": null,
+      "language": "C++",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "C-Hatton/multicore-server-challenge",
+      "head_commit": "52a7ffba7ca0fd2829f38156e6f68660110418d0",
+      "head_root_tree": "eee18d1b768b29f15ba4ba1ed0af23d1e0abba12",
+      "head_submission_tree": "51f6ee1f57a8c4b0da5b094838f45372fe68e775",
+      "source_folder": "submissions/cpp-asio-c-hatton",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "51f6ee1f57a8c4b0da5b094838f45372fe68e775",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/cpp-asio-c-hatton",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/cpp-asio-c-hatton",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "c5d4b055987d6fb8dc49bb99328af6df2cd22b92466fdc0409febdfff2f0895e"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "4d9362c8d16e80c62f16462c53d3c3fe38a9cff0471f74af7d44dfda38bd74d3"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "c12d40811975e489bab3155444fb33f9f79b9d150c5ca81efa0266d123e349fb"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "3bfa1667e45fbebf01bc4a8bdddb12be945973d1a983a5561eb858aa548a09f9"
+        }
+      },
+      "official_score": {
+        "rank": 7,
+        "users": 68000,
+        "requests_per_second": 17887.0,
+        "p95_ms": 94.0,
+        "p99_ms": 174.0,
+        "front": "direct",
+        "cpu_app_postgres": "27% / 71%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": 3000,
+      "gap_percent_vs_ours": 4.615384615384621,
+      "gap_users_vs_leader": -32000,
+      "gap_percent_vs_leader": -31.999999999999996
+    },
+    {
+      "id": "pr-32",
+      "pr": 32,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/32",
+      "name": "goose-native-tbsvttr",
+      "variant": null,
+      "language": "Goose",
+      "state": "open",
+      "draft": true,
+      "active": true,
+      "is_ours": true,
+      "head_repository": "tbsvttr/multicore-server-challenge",
+      "head_commit": "3e9087473da5c56d5800ae9ee00ac1e84c44a135",
+      "head_root_tree": "7c6ea39d4ffa3683370925703afa1b4fdf7f4f2e",
+      "head_submission_tree": "d24aef13e096e2b01728c8ef8880f6ca7b739775",
+      "source_folder": "submissions/goose-native-tbsvttr",
+      "canonical_source_ref": "3e9087473da5c56d5800ae9ee00ac1e84c44a135",
+      "canonical_source_tree": "d24aef13e096e2b01728c8ef8880f6ca7b739775",
+      "canonical_source_kind": "open_pr_head",
+      "canonical_source_url": "https://github.com/tbsvttr/multicore-server-challenge/tree/3e9087473da5c56d5800ae9ee00ac1e84c44a135/submissions/goose-native-tbsvttr",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/pr-32-3e908747/tbsvttr-multicore-server-challenge-3e90874/submissions/goose-native-tbsvttr",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "6efc40cc66a6aa3aca9af24c89d287e579bd4527d43bb2a8f9176f6ad44f9fcd"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "12e965a6977c1369a73a9ad21498ee8247e8c4a1feddc931fe929674a2b2ffe6"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "fa9abf9763b7e832e447c5f156f90a60823bdd10fcb688b3404a637a9da9fe2f"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "47a973c5f2ed12c7a40facf8abb5ebc044f4b8231927f7073726bf3f1b521b22"
+        }
+      },
+      "official_score": {
+        "rank": 8,
+        "users": 65000,
+        "requests_per_second": 17125.0,
+        "p95_ms": 27.0,
+        "p99_ms": 721.0,
+        "front": "direct",
+        "cpu_app_postgres": "18% / 71%",
+        "note": "Not merged yet: the pull request is marked as a draft"
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": 0,
+      "gap_percent_vs_ours": 0.0,
+      "gap_users_vs_leader": -35000,
+      "gap_percent_vs_leader": -35.0
+    },
+    {
+      "id": "pr-31",
+      "pr": 31,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/31",
+      "name": "goose-epoll-xeonfx",
+      "variant": null,
+      "language": "Goose",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "XeonFX/multicore-server-challenge",
+      "head_commit": "43e0919ae5b693c1d3c1e8828b74bb774ef92ee0",
+      "head_root_tree": "898de523c9f045499d0eac61f620c4aa86531fe1",
+      "head_submission_tree": "6fee24cffe829d12e3404a71347cee21d07d9544",
+      "source_folder": "submissions/goose-epoll-xeonfx",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "6fee24cffe829d12e3404a71347cee21d07d9544",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/goose-epoll-xeonfx",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/goose-epoll-xeonfx",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "14b20800000a2585df65d6190cdcce8be87be45e8d40e4aa0ca5819202c5efd4"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "38dcebee6be504c0d902766c608df01d95c9dbe40fb391d0e78c55d0976f1001"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "fa9abf9763b7e832e447c5f156f90a60823bdd10fcb688b3404a637a9da9fe2f"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "d372aff55b2c5f78b91597ee2caa90d39449fb0ed066a0eeded7ab392d9776fd"
+        }
+      },
+      "official_score": {
+        "rank": 9,
+        "users": 62000,
+        "requests_per_second": 16311.0,
+        "p95_ms": 30.0,
+        "p99_ms": 842.0,
+        "front": "direct",
+        "cpu_app_postgres": "17% / 71%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -3000,
+      "gap_percent_vs_ours": -4.61538461538461,
+      "gap_users_vs_leader": -38000,
+      "gap_percent_vs_leader": -38.0
+    },
+    {
+      "id": "pr-28",
+      "pr": 28,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/28",
+      "name": "go-epoll-o7livetype",
+      "variant": null,
+      "language": "Go",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "o7LiveType/multicore-server-challenge",
+      "head_commit": "f6d82ed4bccf8a2e211282fb5c0788bd1fd7e26b",
+      "head_root_tree": "7f1fdb3154685b0ca6aa0981f4a3e1c40edc9637",
+      "head_submission_tree": "f71b0bd8d377675a2eb9cebb1c482becd91d3588",
+      "source_folder": "submissions/go-epoll-o7livetype",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "f71b0bd8d377675a2eb9cebb1c482becd91d3588",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/go-epoll-o7livetype",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/go-epoll-o7livetype",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "ad56c330ebcdc127f9dd082e0d4f738b70148e721d6160f98a972b1292171d7c"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "67ff45c7920841f5d8e4b6906ce53b7cb23ccbc96fe2644e1156c7509210fd6d"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "d288ba910bff3f6ef2c3e7d55c3607a06173c9ac22068f99f5fe604aa37b9b70"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "d501166c7d7a45613970d7b81c958129316b12edb4d2e00a307c6b37f1d63863"
+        }
+      },
+      "official_score": {
+        "rank": 10,
+        "users": 61000,
+        "requests_per_second": 15865.0,
+        "p95_ms": 351.0,
+        "p99_ms": 484.0,
+        "front": "direct",
+        "cpu_app_postgres": "20% / 73%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -4000,
+      "gap_percent_vs_ours": -6.153846153846154,
+      "gap_users_vs_leader": -39000,
+      "gap_percent_vs_leader": -39.0
+    },
+    {
+      "id": "pr-1",
+      "pr": 1,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/1",
+      "name": "rust-hyper-cknutson12",
+      "variant": null,
+      "language": "Rust",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "cknutson12/multicore-server-challenge",
+      "head_commit": "e93ab19c36a4b587edac01c1baa9292b25a2ccd4",
+      "head_root_tree": "343846cebaf32e2d10daea2661d1913097c91d9d",
+      "head_submission_tree": "4d3a952f54e231a399b274375dc9ecaad0a32dde",
+      "source_folder": "submissions/rust-hyper-cknutson12",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "4d3a952f54e231a399b274375dc9ecaad0a32dde",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/rust-hyper-cknutson12",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/rust-hyper-cknutson12",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "0b5b878fce647ad19be4af31950416fc8bf06afca54b02602febcb10da70c1f9"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "abb71fe1b2e2d8e5a7d4272aa069dc451a5bcd55267624a05f7332aded9efa48"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "870a0cdef03af79a1dedc2572f7d8a8a2e8381f88a4a198f3fc1556c92a2b7e4"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "c15d63ee4973b43463f81b009df358a604ed735b8ee4a10c8286e8f990447c8c"
+        }
+      },
+      "official_score": {
+        "rank": 11,
+        "users": 58000,
+        "requests_per_second": 15075.0,
+        "p95_ms": 223.0,
+        "p99_ms": 367.0,
+        "front": "direct",
+        "cpu_app_postgres": "29% / 69%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -7000,
+      "gap_percent_vs_ours": -10.769230769230765,
+      "gap_users_vs_leader": -42000,
+      "gap_percent_vs_leader": -42.00000000000001
+    },
+    {
+      "id": "pr-30",
+      "pr": 30,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/30",
+      "name": "kotlin-vertx-canleon",
+      "variant": null,
+      "language": "Kotlin",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "canleon/multicore-server-challenge",
+      "head_commit": "ee01d7f518156af632c993e7e495fd3567a4ef6c",
+      "head_root_tree": "4d89470ae7c6abc9efca1a135bb2d8b5921734fb",
+      "head_submission_tree": "105a2086a5034841db0daf2077f58ee544deb79a",
+      "source_folder": "submissions/kotlin-vertx-canleon",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "105a2086a5034841db0daf2077f58ee544deb79a",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/kotlin-vertx-canleon",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/kotlin-vertx-canleon",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "973d33009affa8e0ba3d102cd43cac53a1fe686e20f9f3bf202e5878bc7c8457"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "c15b31650c5c755805ed726c8f8e6b53d166694bd669b5ebfe1c5a7b53488f49"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "4bbab5b4bd2ba13623cd883ccd2449d38114b31fa00571ad332a692e8bb63d73"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "2c04de1d81bff7e9c7991bc4f2c07aac219fa76d41a2bc51abbf7514759c915c"
+        }
+      },
+      "official_score": {
+        "rank": 12,
+        "users": 46000,
+        "requests_per_second": 11923.0,
+        "p95_ms": 352.0,
+        "p99_ms": 440.0,
+        "front": "direct",
+        "cpu_app_postgres": "37% / 51%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -19000,
+      "gap_percent_vs_ours": -29.230769230769226,
+      "gap_users_vs_leader": -54000,
+      "gap_percent_vs_leader": -54.0
+    },
+    {
+      "id": "pr-13",
+      "pr": 13,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/13",
+      "name": "python-uvloop-bensgilbert",
+      "variant": null,
+      "language": "Python",
+      "state": "open",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "bensgilbert/multicore-server-challenge",
+      "head_commit": "d5d8c77268f77f97898aeb1e639eedf0cb0cef4a",
+      "head_root_tree": "13c8fca1add281b51abe2e7289f621f80b10492b",
+      "head_submission_tree": "d4bceb7565594fd19b07441e5f4b89feac82104c",
+      "source_folder": "submissions/python-uvloop-bensgilbert",
+      "canonical_source_ref": "d5d8c77268f77f97898aeb1e639eedf0cb0cef4a",
+      "canonical_source_tree": "d4bceb7565594fd19b07441e5f4b89feac82104c",
+      "canonical_source_kind": "open_pr_head",
+      "canonical_source_url": "https://github.com/bensgilbert/multicore-server-challenge/tree/d5d8c77268f77f97898aeb1e639eedf0cb0cef4a/submissions/python-uvloop-bensgilbert",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/pr-13-d5d8c772/bensgilbert-multicore-server-challenge-d5d8c77/submissions/python-uvloop-bensgilbert",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "55e6316e8a4c6d8f46bc10ecfc04cc8a5252222dc8e0b6c7cd6895c5937b4e61"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "5e4e92ccbdee1b459f099dbabf6e829af63058bf3589ea78320563aa19788b6a"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "fe8850fc5561e6128b11e4a18752c461e5ed7b79b999ecd9c9446273a21a56a3"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "f3ef512158ffde66b36812042f4a9071a5233b32a0f8a880d4f1eb1fbf4eb306"
+        }
+      },
+      "official_score": {
+        "rank": 13,
+        "users": 46000,
+        "requests_per_second": 11572.0,
+        "p95_ms": 423.0,
+        "p99_ms": 519.0,
+        "front": "direct",
+        "cpu_app_postgres": "38% / 58%",
+        "note": "Not merged yet: restarts crashed workers (rule 9). No worker restarted during the run, so the score stands"
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -19000,
+      "gap_percent_vs_ours": -29.230769230769226,
+      "gap_users_vs_leader": -54000,
+      "gap_percent_vs_leader": -54.0
+    },
+    {
+      "id": "pr-27",
+      "pr": 27,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/27",
+      "name": "go-fasthttp-o7livetype",
+      "variant": null,
+      "language": "Go",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "o7LiveType/multicore-server-challenge",
+      "head_commit": "e636c708a7795839293e0961227c93bbf3ce88a0",
+      "head_root_tree": "c11675d695ef4ae0f9e35e2f6049bb8397141171",
+      "head_submission_tree": "53662cbe151300021bc7c474efbcb8ab52664341",
+      "source_folder": "submissions/go-fasthttp-o7livetype",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "53662cbe151300021bc7c474efbcb8ab52664341",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/go-fasthttp-o7livetype",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/go-fasthttp-o7livetype",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "ad56c330ebcdc127f9dd082e0d4f738b70148e721d6160f98a972b1292171d7c"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "67ff45c7920841f5d8e4b6906ce53b7cb23ccbc96fe2644e1156c7509210fd6d"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "d288ba910bff3f6ef2c3e7d55c3607a06173c9ac22068f99f5fe604aa37b9b70"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "a8edc74c6d356cb7e6ecec118770f0ac68b8ca533fb3e217b46f04417d18c19d"
+        }
+      },
+      "official_score": {
+        "rank": 14,
+        "users": 44000,
+        "requests_per_second": 11321.0,
+        "p95_ms": 496.0,
+        "p99_ms": 620.0,
+        "front": "nginx",
+        "cpu_app_postgres": "23% / 53% (+ Nginx 19%)",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -21000,
+      "gap_percent_vs_ours": -32.30769230769231,
+      "gap_users_vs_leader": -56000,
+      "gap_percent_vs_leader": -56.00000000000001
+    },
+    {
+      "id": "pr-29",
+      "pr": 29,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/29",
+      "name": "kotlin-ktor-canleon",
+      "variant": null,
+      "language": "Kotlin",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "canleon/multicore-server-challenge",
+      "head_commit": "29ea7a4e70b19177890fc62c1e309c5257c5db99",
+      "head_root_tree": "3949fa4d2b5fc576a7583c5808109a87d431b5bf",
+      "head_submission_tree": "3a999923c18d66a38f3e45c7ca726ac021b024b9",
+      "source_folder": "submissions/kotlin-ktor-canleon",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "3a999923c18d66a38f3e45c7ca726ac021b024b9",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/kotlin-ktor-canleon",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/kotlin-ktor-canleon",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "973d33009affa8e0ba3d102cd43cac53a1fe686e20f9f3bf202e5878bc7c8457"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "c15b31650c5c755805ed726c8f8e6b53d166694bd669b5ebfe1c5a7b53488f49"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "4bbab5b4bd2ba13623cd883ccd2449d38114b31fa00571ad332a692e8bb63d73"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "3fdc4ab42795241adb5c9a2e43d12346399679958072e4bafa133a58bd246a2c"
+        }
+      },
+      "official_score": {
+        "rank": 15,
+        "users": 44000,
+        "requests_per_second": 10948.0,
+        "p95_ms": 496.0,
+        "p99_ms": 664.0,
+        "front": "direct",
+        "cpu_app_postgres": "45% / 49%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -21000,
+      "gap_percent_vs_ours": -32.30769230769231,
+      "gap_users_vs_leader": -56000,
+      "gap_percent_vs_leader": -56.00000000000001
+    },
+    {
+      "id": "pr-19",
+      "pr": 19,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/19",
+      "name": "lua-openresty-yar0slav",
+      "variant": null,
+      "language": "Lua",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "yar0slav/multicore-server-challenge",
+      "head_commit": "ba6a946aa974209ddd485635668def98658bebcb",
+      "head_root_tree": "2a34515d520edfa45d972712234a80160fe6591c",
+      "head_submission_tree": "c7a0544bc92c8df477ea74341b68e624f3010387",
+      "source_folder": "submissions/lua-openresty-yar0slav",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "c7a0544bc92c8df477ea74341b68e624f3010387",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/lua-openresty-yar0slav",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/lua-openresty-yar0slav",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "7dfbc1ef9f281cc34e4352b6a20fbde8e580a5c8dca7bbe5c8e8a601ab7dc389"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "46a1c9eeff2661758927bf604ec6f588cfb75a5d0508ade8c16f6c60b1181597"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "4ba7f6bfb94230bdac037bd04a5918042a7d8d95a7123ca99cefda6768d0260b"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "d9d059bb78e38fef2fc3bb5b78396cf4059ff3f42bde0ac008f1e96dd1f40f9a"
+        }
+      },
+      "official_score": {
+        "rank": 16,
+        "users": 33000,
+        "requests_per_second": 8616.0,
+        "p95_ms": 432.0,
+        "p99_ms": 783.0,
+        "front": "direct",
+        "cpu_app_postgres": "37% / 49%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -32000,
+      "gap_percent_vs_ours": -49.23076923076923,
+      "gap_users_vs_leader": -67000,
+      "gap_percent_vs_leader": -67.0
+    },
+    {
+      "id": "pr-12",
+      "pr": 12,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/12",
+      "name": "elixir-raw-foovoo",
+      "variant": null,
+      "language": "Elixir",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "FooVoo/multicore-server-challenge",
+      "head_commit": "24d85b6a261f1bfc9972896bbd1e79aac9ff63ae",
+      "head_root_tree": "74ada4fdef100897523d3c7489dfffd4e2011da5",
+      "head_submission_tree": "9952ae6eae55a14c3f958d790de768af91b3ca7d",
+      "source_folder": "submissions/elixir-raw-foovoo",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "9952ae6eae55a14c3f958d790de768af91b3ca7d",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/elixir-raw-foovoo",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/elixir-raw-foovoo",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "f93c8d55aeb03394c7e6609226c17ac9804a6fcf7ab7c9186bf098a6008c0c40"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "3ac153b00344da496827e60b3a96274d7e6b59f0e53bcfea7fcd4974192d5086"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "90e870721a430c99d8ac97976d932472785088aaf286deb1d36abe486dec78b3"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "b7a9d9a2f7ccc8c9bdc16b2d25a9b4887db32da2ccedf0d11f0bc6a3a3546eb9"
+        }
+      },
+      "official_score": {
+        "rank": 17,
+        "users": 32000,
+        "requests_per_second": 7999.0,
+        "p95_ms": 323.0,
+        "p99_ms": 382.0,
+        "front": "direct",
+        "cpu_app_postgres": "37% / 48%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -33000,
+      "gap_percent_vs_ours": -50.76923076923077,
+      "gap_users_vs_leader": -68000,
+      "gap_percent_vs_leader": -68.0
+    },
+    {
+      "id": "pr-25",
+      "pr": 25,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/25",
+      "name": "rust-urus-markk116",
+      "variant": null,
+      "language": "Rust",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "Markk116/multicore-server-challenge",
+      "head_commit": "88e2060e48dede41a8cb86ecf775d41f3e1d4425",
+      "head_root_tree": "4d11a3153a39511f11dc4b9efae603daf08ac098",
+      "head_submission_tree": "2f17c7bf49d5310360b7f55fe91697764953e49c",
+      "source_folder": "submissions/rust-urus-markk116",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "db2d55e760b93c4dc4af92752a74b9e85a0fa99f",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/rust-urus-markk116",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/rust-urus-markk116",
+      "canonical_matches_pr_submission_tree": false,
+      "canonical_changes_from_pr_head_paths": [
+        "submissions/rust-urus-markk116/build.sh"
+      ],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "63d152c69fc17d11d2041f0d5a6f760cab6d6dd81c4c2de65699cd23c1f6d34e"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "0248a5207bccc68fb54f3a79b84664f7fcb5e76f3bab8bccd1c0058a61525359"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "b3d2b394c844ddca7456b29860ee08c3cf43c71e2208cf9d0da237c4f30a969f"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "b1dba12d5565805dfabb8643491d72ab688933e97d8314f36e82316cd995a7d8"
+        }
+      },
+      "official_score": {
+        "rank": 18,
+        "users": 32000,
+        "requests_per_second": 8313.0,
+        "p95_ms": 438.0,
+        "p99_ms": 540.0,
+        "front": "direct",
+        "cpu_app_postgres": "27% / 46%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -33000,
+      "gap_percent_vs_ours": -50.76923076923077,
+      "gap_users_vs_leader": -68000,
+      "gap_percent_vs_leader": -68.0
+    },
+    {
+      "id": "pr-24",
+      "pr": 24,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/24",
+      "name": "pony-stallion-contact-red",
+      "variant": null,
+      "language": "Pony",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "contact-red/multicore-server-challenge",
+      "head_commit": "36fe3254cc7bf40fd0ce7b8699207f50be5e2022",
+      "head_root_tree": "02dbdeb7cce6d8688514858b7e1696bb9dabd330",
+      "head_submission_tree": "d56f2c5b9606ea236c882994bf3f87a0dc2ca874",
+      "source_folder": "submissions/pony-stallion-contact-red",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "d56f2c5b9606ea236c882994bf3f87a0dc2ca874",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/pony-stallion-contact-red",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/pony-stallion-contact-red",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "04a022ab1a1ae7b97746ec7641d8f7db873edb2021be654c80e15a71d5e4a4ba"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "8f8995a58928075dad7a4444a4fa9dced02bb124b60000525fa6bef2d13c8c28"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "6f118ec9b8e3b0a5e60551bba97b32c02dc8d4d88be5b5af5d3397bbb66243f4"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "2e59507145cc6a52097d562fa4a8788a0f6177d4d6fb563204793ade2f1619c1"
+        }
+      },
+      "official_score": {
+        "rank": 19,
+        "users": 25000,
+        "requests_per_second": 6454.0,
+        "p95_ms": 473.0,
+        "p99_ms": 733.0,
+        "front": "direct",
+        "cpu_app_postgres": "33% / 52%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -40000,
+      "gap_percent_vs_ours": -61.53846153846154,
+      "gap_users_vs_leader": -75000,
+      "gap_percent_vs_leader": -75.0
+    },
+    {
+      "id": "examples-go",
+      "pr": null,
+      "pr_url": null,
+      "name": "go example",
+      "variant": "original reference example, officially rerun",
+      "language": "Go",
+      "state": "reference",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_commit": null,
+      "source_folder": "examples/go",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "677ce9a02db1c00e935cc8cd050cbc036e23b12c",
+      "canonical_source_kind": "current_upstream_example",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/examples/go",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/examples/go",
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "ad56c330ebcdc127f9dd082e0d4f738b70148e721d6160f98a972b1292171d7c"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "494f0886bf1ff34416f0f2e883bec869d8d517d1a0965925985b5606cb6c881d"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "911ff097e4712753506b3626025d2942a9a471abd23324b8afec534aa03bd94a"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "6f453a84c08f3ac829cc76a13114aedbdc0698f4100de264c225348b732c70aa"
+        }
+      },
+      "official_score": {
+        "rank": 20,
+        "users": 24000,
+        "requests_per_second": 6192.0,
+        "p95_ms": 483.0,
+        "p99_ms": 701.0,
+        "front": "nginx",
+        "cpu_app_postgres": "27% / 47% (+ Nginx 11%)",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -41000,
+      "gap_percent_vs_ours": -63.07692307692307,
+      "gap_users_vs_leader": -76000,
+      "gap_percent_vs_leader": -76.0
+    },
+    {
+      "id": "pr-16",
+      "pr": 16,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/16",
+      "name": "d-arsd-cyrusmsk",
+      "variant": null,
+      "language": "D",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "cyrusmsk/multicore-server-challenge",
+      "head_commit": "c2db52f22602207fb2adb009a520ddf3bcfeb6aa",
+      "head_root_tree": "fa920ed667eb5c63c32507f062a3e94378e1419c",
+      "head_submission_tree": "927b7b3550890ae4f815742eca463a30ac8aef1f",
+      "source_folder": "submissions/d-arsd-cyrusmsk",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "927b7b3550890ae4f815742eca463a30ac8aef1f",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/d-arsd-cyrusmsk",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/d-arsd-cyrusmsk",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "ee4b6f2d809a23392ad2cf3756599a08449d27bff546fe3a178931c19a5dcb58"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "c352f45d6cb627d47a5ff4133db0c9a69fe92f4686f567bbc60e6cc197f8cb0b"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "7552e316f232afdc5a299b2d951d06b608877974eba360037f95d23a9c874841"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "376cf81029fe36357449096015411b0b67340e800ae59dd9c55de0dca880b925"
+        }
+      },
+      "official_score": {
+        "rank": 21,
+        "users": 23000,
+        "requests_per_second": 5952.0,
+        "p95_ms": 373.0,
+        "p99_ms": 577.0,
+        "front": "direct",
+        "cpu_app_postgres": "24% / 66%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -42000,
+      "gap_percent_vs_ours": -64.61538461538461,
+      "gap_users_vs_leader": -77000,
+      "gap_percent_vs_leader": -77.0
+    },
+    {
+      "id": "examples-rust",
+      "pr": null,
+      "pr_url": null,
+      "name": "rust example",
+      "variant": "original reference example, officially rerun",
+      "language": "Rust",
+      "state": "reference",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_commit": null,
+      "source_folder": "examples/rust",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "63a0ddef950e49f165afd2b48a7301a4c354eaf1",
+      "canonical_source_kind": "current_upstream_example",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/examples/rust",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/examples/rust",
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "63d152c69fc17d11d2041f0d5a6f760cab6d6dd81c4c2de65699cd23c1f6d34e"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "11276e0f43018d67ae70bed9fcda284074b5a23341d491f73c711d0d04a6192f"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "bd98df15d0a9909485c27cdc2294461e4c04b991ce398b8f6fa8e41ede2fa548"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "84c9a1a5e49c0d6e124626b228e3c01322c0fb261dbf3fa65694143e97c09545"
+        }
+      },
+      "official_score": {
+        "rank": 22,
+        "users": 22000,
+        "requests_per_second": 5734.0,
+        "p95_ms": 233.0,
+        "p99_ms": 334.0,
+        "front": "nginx",
+        "cpu_app_postgres": "25% / 50% (+ Nginx 11%)",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -43000,
+      "gap_percent_vs_ours": -66.15384615384615,
+      "gap_users_vs_leader": -78000,
+      "gap_percent_vs_leader": -78.0
+    },
+    {
+      "id": "examples-java",
+      "pr": null,
+      "pr_url": null,
+      "name": "java example",
+      "variant": "original reference example, officially rerun",
+      "language": "Java",
+      "state": "reference",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_commit": null,
+      "source_folder": "examples/java",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "73be66de7a6c1abddeb14aa8e85db9d6c9546986",
+      "canonical_source_kind": "current_upstream_example",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/examples/java",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/examples/java",
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "973d33009affa8e0ba3d102cd43cac53a1fe686e20f9f3bf202e5878bc7c8457"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "8197f9981309bfda44a2d65a55208cf8252b5067c6138ad05f81b75f1599b95f"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "5ab1af6cd1c43922243e6283e813bf2bf71297a63b08b1b3722289dbc06213b4"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "cefae7159f5e51afac8f2e32ab86a8f60d510b297ed19aee0f7e197c3a154de2"
+        }
+      },
+      "official_score": {
+        "rank": 23,
+        "users": 21000,
+        "requests_per_second": 5528.0,
+        "p95_ms": 104.0,
+        "p99_ms": 182.0,
+        "front": "nginx",
+        "cpu_app_postgres": "30% / 46% (+ Nginx 11%)",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -44000,
+      "gap_percent_vs_ours": -67.6923076923077,
+      "gap_users_vs_leader": -79000,
+      "gap_percent_vs_leader": -79.0
+    },
+    {
+      "id": "pr-9",
+      "pr": 9,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/9",
+      "name": "swift-hummingbird-denizakya",
+      "variant": null,
+      "language": "Swift",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "denizak/multicore-server-challenge",
+      "head_commit": "a30eb35ed4b8af33c96b2d019b8c64129a43d3c8",
+      "head_root_tree": "848fdaa3aa943e936cb509ee1653eaa7dd0c9a27",
+      "head_submission_tree": "683830810fa63ec5d80392168efd7113c2f44d68",
+      "source_folder": "submissions/swift-hummingbird-denizakya",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "683830810fa63ec5d80392168efd7113c2f44d68",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/swift-hummingbird-denizakya",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/swift-hummingbird-denizakya",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "fdbf0c57b99fb7d4931984e46354e137860e62be461ad390422ab50b014cb061"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "4b44733f14aaf1c69d523dc92978312c1bbbc1dc9d708a24c77bcb4a6cf2fcd9"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "b3e07bff70c466b51dde707ff442a777e55bc175cbcbfd4bd0d412e6a06714d5"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "3e1910753d5545ca333c6e1cae2bf6cbad951192dc3bdc81bcd813c7dbdfdc55"
+        }
+      },
+      "official_score": {
+        "rank": 24,
+        "users": 20000,
+        "requests_per_second": 5077.0,
+        "p95_ms": 339.0,
+        "p99_ms": 400.0,
+        "front": "nginx",
+        "cpu_app_postgres": "48% / 40% (+ Nginx 10%)",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -45000,
+      "gap_percent_vs_ours": -69.23076923076923,
+      "gap_users_vs_leader": -80000,
+      "gap_percent_vs_leader": -80.0
+    },
+    {
+      "id": "pr-2",
+      "pr": 2,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/2",
+      "name": "v-fasthttp-ulises-jeremias",
+      "variant": null,
+      "language": "V",
+      "state": "open",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "ulises-jeremias/multicore-server-challenge",
+      "head_commit": "826640029ece0ba773cfde87cedd0cdcb5184e7f",
+      "head_root_tree": "de885b1a486b840d9a4abcc7df24c802ef1521fd",
+      "head_submission_tree": "17bdaa49dab3fa37772811db6ba0da6d3a7305d1",
+      "source_folder": "submissions/v-fasthttp-ulises-jeremias",
+      "canonical_source_ref": "826640029ece0ba773cfde87cedd0cdcb5184e7f",
+      "canonical_source_tree": "17bdaa49dab3fa37772811db6ba0da6d3a7305d1",
+      "canonical_source_kind": "open_pr_head",
+      "canonical_source_url": "https://github.com/ulises-jeremias/multicore-server-challenge/tree/826640029ece0ba773cfde87cedd0cdcb5184e7f/submissions/v-fasthttp-ulises-jeremias",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/pr-2-82664002/ulises-jeremias-multicore-server-challenge-8266400/submissions/v-fasthttp-ulises-jeremias",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "6ba9c4c2390d8d2246c93a3806780f7840e7dc83df1edaf51b0840f834c8353a"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "bcdc0ff6c7422230945b54b7016346e610be1e45a79d30218b3160d62f0d3fd7"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "652200e1faf40d88b77b939afb578181aa5d32ea0bb38fc4ec7680398a5de9d7"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "64b131baf143e52468118cbca0fb80bf7402d89368a3a3bbadf0db2a7eff6114"
+        }
+      },
+      "official_score": {
+        "rank": 25,
+        "users": 20000,
+        "requests_per_second": 5193.0,
+        "p95_ms": 351.0,
+        "p99_ms": 563.0,
+        "front": "direct",
+        "cpu_app_postgres": "12% / 63%",
+        "note": "Not merged yet: install.sh fails on a clean box (V's bootstrap `vc` isn't pinned); scored with vc pinned by hand"
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -45000,
+      "gap_percent_vs_ours": -69.23076923076923,
+      "gap_users_vs_leader": -80000,
+      "gap_percent_vs_leader": -80.0
+    },
+    {
+      "id": "pr-26",
+      "pr": 26,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/26",
+      "name": "bun-native-PetarGeorgiev-hash",
+      "variant": null,
+      "language": "TypeScript/Bun",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "PetarGeorgiev-hash/multicore-server-challenge",
+      "head_commit": "4dcd406d1a0c2ae339cce079050147e8844fffb6",
+      "head_root_tree": "3e0edc4aad2f888224fae0bc5939bd74de326c49",
+      "head_submission_tree": "a77dc3cf6c24cac8d73520c23bdc095d16051c12",
+      "source_folder": "submissions/bun-native-PetarGeorgiev-hash",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "a77dc3cf6c24cac8d73520c23bdc095d16051c12",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/bun-native-PetarGeorgiev-hash",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/bun-native-PetarGeorgiev-hash",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "07225d8a84decde99903d212f1fbb26159e8a05fc2aa06d67ac02f9646c4f17f"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "fded6e0ae9546fe723efbd0419cb01f95c2e0546f024296940acba42b0cbe0d7"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "404d0cf236139957b0bceb85d6efde00553bffb8d9879d6755b2c338d0ff53f5"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "5fe29a2e4f8fec5ab97121d9d03dbc1b37e46890ba65bbe6ede6976feea50eab"
+        }
+      },
+      "official_score": {
+        "rank": 26,
+        "users": 18000,
+        "requests_per_second": 4591.0,
+        "p95_ms": 296.0,
+        "p99_ms": 736.0,
+        "front": "direct",
+        "cpu_app_postgres": "18% / 33%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -47000,
+      "gap_percent_vs_ours": -72.3076923076923,
+      "gap_users_vs_leader": -82000,
+      "gap_percent_vs_leader": -82.0
+    },
+    {
+      "id": "examples-python",
+      "pr": null,
+      "pr_url": null,
+      "name": "python example",
+      "variant": "original reference example, officially rerun",
+      "language": "Python",
+      "state": "reference",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_commit": null,
+      "source_folder": "examples/python",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "268ff9fe569e81b46fcbe413b981e2d018ed82d7",
+      "canonical_source_kind": "current_upstream_example",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/examples/python",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/examples/python",
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "78f2068aa74a84dee0cc2714a2db962767098b05e780f9aa24dba85bcb01f8ac"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "39c0cfd2b77913074f840185770a3ae68e6c912eb9c204560e57692101033073"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "2b70003034360f8780b8b90471922a8f5128487cd1ee12a1440695cb4d250762"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "b818280cd5d20b982446fa05cd83e940bbe86887103d57baf5639c5f90ba18b0"
+        }
+      },
+      "official_score": {
+        "rank": 27,
+        "users": 10000,
+        "requests_per_second": 2634.0,
+        "p95_ms": 82.0,
+        "p99_ms": 150.0,
+        "front": "nginx",
+        "cpu_app_postgres": "49% / 25% (+ Nginx 6%)",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -55000,
+      "gap_percent_vs_ours": -84.61538461538461,
+      "gap_users_vs_leader": -90000,
+      "gap_percent_vs_leader": -90.0
+    },
+    {
+      "id": "pr-20",
+      "pr": 20,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/20",
+      "name": "csharp-efcore-xeonfx",
+      "variant": null,
+      "language": "C#",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "XeonFX/multicore-server-challenge",
+      "head_commit": "156440108adcf823a3f77214b72834d4874440cd",
+      "head_root_tree": "473dcf3be1c11828a8787b0f056c63cd25bf7bb0",
+      "head_submission_tree": "7f07a7a7d62b04026bc6a366ea8cd2ec88d1c1bb",
+      "source_folder": "submissions/csharp-efcore-xeonfx",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "7f07a7a7d62b04026bc6a366ea8cd2ec88d1c1bb",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/csharp-efcore-xeonfx",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/csharp-efcore-xeonfx",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "e109d503dbdf3a8b123a5f3b0fd322b1a1dd829abd9fe4ed5563c3fb6ade121a"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "110fb9ffd6500797703b8993d3528b63191a272252ecf87d10fa469b522b23ce"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "a4a392779e1bb106ccf3e8aeb9daf5621f8c1eda854afc9680822ee707e77628"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "1d5d699392f979e678b43608efc3bfc270acdab23de12899cdef6013fe182b33"
+        }
+      },
+      "official_score": {
+        "rank": 28,
+        "users": 8300,
+        "requests_per_second": 2108.0,
+        "p95_ms": 447.0,
+        "p99_ms": 720.0,
+        "front": "direct",
+        "cpu_app_postgres": "19% / 78%",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -56700,
+      "gap_percent_vs_ours": -87.23076923076924,
+      "gap_users_vs_leader": -91700,
+      "gap_percent_vs_leader": -91.7
+    },
+    {
+      "id": "pr-23",
+      "pr": 23,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/23",
+      "name": "perl-mojolicious-denizakya",
+      "variant": null,
+      "language": "Perl",
+      "state": "merged",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "denizak/multicore-server-challenge",
+      "head_commit": "8a98960c84dc3b63cd8e86f840286db4056a1ba2",
+      "head_root_tree": "3aade016dc3308a28d7dcc606fe933ae00222279",
+      "head_submission_tree": "82296dc9bf981919536467771253be7ff8883f1c",
+      "source_folder": "submissions/perl-mojolicious-denizakya",
+      "canonical_source_ref": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+      "canonical_source_tree": "82296dc9bf981919536467771253be7ff8883f1c",
+      "canonical_source_kind": "current_upstream_main",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/submissions/perl-mojolicious-denizakya",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/upstream-c3012257-archive/arjaythedev-multicore-server-challenge-c301225/submissions/perl-mojolicious-denizakya",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "6ac550f8ca0139bcc86ed85dcd0e048b0187f9ee1d88c576ec6931f6a392f36b"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "3b2996b3e8f6a892ce6c734f907e010be2aab1099f552a22638c771f45bc6c5b"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "3e67b3240d58e9c184f7a9837725f37d60cc5c9be7b1b142539b90019badf48c"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "82f9ef1b760c6db25cd6d34dbf3ce43ecd361457cbe7de4d14501bdf731894f9"
+        }
+      },
+      "official_score": {
+        "rank": 29,
+        "users": 1100,
+        "requests_per_second": 287.0,
+        "p95_ms": 197.0,
+        "p99_ms": 327.0,
+        "front": "nginx",
+        "cpu_app_postgres": "8% / 3% (+ Nginx 0%)",
+        "note": ""
+      },
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": -63900,
+      "gap_percent_vs_ours": -98.3076923076923,
+      "gap_users_vs_leader": -98900,
+      "gap_percent_vs_leader": -98.9
+    },
+    {
+      "id": "pr-5",
+      "pr": 5,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/5",
+      "name": "c-iouring-27bhd",
+      "variant": null,
+      "language": "C",
+      "state": "open",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "27bhd/multicore-server-challenge",
+      "head_commit": "4bff8b7c420e08a47261223239ab9b87aa5706f9",
+      "head_root_tree": "dce1bc102033020d332094b7dd4d9cd42e5d8246",
+      "head_submission_tree": "a04d0742896facd3d31883af68233473d68723b7",
+      "source_folder": "submissions/c-iouring-27bhd",
+      "canonical_source_ref": "4bff8b7c420e08a47261223239ab9b87aa5706f9",
+      "canonical_source_tree": "a04d0742896facd3d31883af68233473d68723b7",
+      "canonical_source_kind": "open_pr_head",
+      "canonical_source_url": "https://github.com/27bhd/multicore-server-challenge/tree/4bff8b7c420e08a47261223239ab9b87aa5706f9/submissions/c-iouring-27bhd",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/pr-5-4bff8b7c/27bhd-multicore-server-challenge-4bff8b7/submissions/c-iouring-27bhd",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "2768ac375ea8ebd9b782363aebf4c14e8ec671a35a6ca2b9d692265d99f19a46"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "1679a192972088dd2bba420158276c8328fcff21810ca29264f6b94adbfedb70"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "1152a2ced02fd9fe3a4f2b1db54aa23c82f84c6584796cadb9838baeb2e90b73"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "8040d14a15d7888ccc97d5cfa6978e685b659c31cf7927b40ea3b863cf8dfc3e"
+        }
+      },
+      "official_score": null,
+      "official_unscored_reason": "No 5-minute hold passed: POST /api/articles takes ~2 s even on an idle box and blocks its worker, so p99 > 1 s from ~100 users (2-minute probes passed at 100)",
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": null,
+      "gap_percent_vs_ours": null,
+      "gap_users_vs_leader": null,
+      "gap_percent_vs_leader": null
+    },
+    {
+      "id": "pr-17",
+      "pr": 17,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/17",
+      "name": "d-vibe-cyrusmsk",
+      "variant": "Vibe.D standard",
+      "language": "D",
+      "state": "open",
+      "draft": false,
+      "active": true,
+      "is_ours": false,
+      "head_repository": "cyrusmsk/multicore-server-challenge",
+      "head_commit": "9c35a60e3a07597c756d6e9a2e04eaa186eda99b",
+      "head_root_tree": "d07ad2fc204dac020e9b3ceab70d639303efe140",
+      "head_submission_tree": "bc3badd1a0d0ced71a64c2385a3440faba310b95",
+      "source_folder": "submissions/d-vibe-cyrusmsk",
+      "canonical_source_ref": "9c35a60e3a07597c756d6e9a2e04eaa186eda99b",
+      "canonical_source_tree": "bc3badd1a0d0ced71a64c2385a3440faba310b95",
+      "canonical_source_kind": "open_pr_head",
+      "canonical_source_url": "https://github.com/cyrusmsk/multicore-server-challenge/tree/9c35a60e3a07597c756d6e9a2e04eaa186eda99b/submissions/d-vibe-cyrusmsk",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/pr-17-9c35a60e/cyrusmsk-multicore-server-challenge-9c35a60/submissions/d-vibe-cyrusmsk",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "cf204e69a651afa8630a265d1d28173e86d9f220858a23cafc63785b7c3b594b"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "cab93bdc47a7737b4b0274191c6e6d34bde27e29c01e9d7c100ddcbba05c4638"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "dcc371eedefd1eb5a4d0468f628e821af4d66dfc4af049cb2a531cc6da75001d"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "034c0fe218f12a0eda35f10833722f8ba6a81cce21b5d0f08c42df4defdddc66"
+        }
+      },
+      "official_score": null,
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit.",
+      "gap_users_vs_ours": null,
+      "gap_percent_vs_ours": null,
+      "gap_users_vs_leader": null,
+      "gap_percent_vs_leader": null
+    }
+  ],
+  "historical_closed_records": [
+    {
+      "id": "pr-14",
+      "pr": 14,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/14",
+      "name": "csharp-aspnetcore-jh-d",
+      "variant": null,
+      "language": "C#",
+      "state": "closed",
+      "draft": false,
+      "active": false,
+      "is_ours": false,
+      "head_repository": null,
+      "head_commit": "7daae17175973867c741b75c562affb55d1f5f75",
+      "head_root_tree": "2213a555b7743e84b6f30485e4bb96963622f419",
+      "head_submission_tree": "61b67f3fb8f7de86d50920a4852e95e90dff0491",
+      "source_folder": "submissions/csharp-aspnetcore-jh-d",
+      "canonical_source_ref": "7daae17175973867c741b75c562affb55d1f5f75",
+      "canonical_source_tree": "61b67f3fb8f7de86d50920a4852e95e90dff0491",
+      "canonical_source_kind": "closed_historical_head",
+      "canonical_source_url": "https://github.com/arjaythedev/multicore-server-challenge/tree/7daae17175973867c741b75c562affb55d1f5f75/submissions/csharp-aspnetcore-jh-d",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/pr-14-7daae171/arjaythedev-multicore-server-challenge-7daae17/submissions/csharp-aspnetcore-jh-d",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "cbbb36038454205709c80ff7ea4a3e23f5a4d2b9260034c771f3211a03cb2dc6"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "54b5c6a1c0eac358e5b6b7feea3a280f4877ded6cc17068a1bb2c3d6925ae196"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "5c41d16a943928563a71598a0cb2dd267ef6cdad43f49adbce91dd2f90918cd7"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "20e9abb7abee3c3aabd9c9833fb407184ec04405717b03b7af903f62acf2df54"
+        }
+      },
+      "official_score": null,
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit."
+    },
+    {
+      "id": "pr-18",
+      "pr": 18,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/18",
+      "name": "d-vibe-cyrusmsk",
+      "variant": "Vibe.D light",
+      "language": "D",
+      "state": "closed",
+      "draft": false,
+      "active": false,
+      "is_ours": false,
+      "head_repository": "cyrusmsk/multicore-server-challenge",
+      "head_commit": "5fd9b566c547295cab6decc35378e1b0cfc9ec8a",
+      "head_root_tree": "31071febdea731fa9bedd88c138d67911b4fe1c3",
+      "head_submission_tree": "70db526e0a2459693bd96b1f3854b669961567d3",
+      "source_folder": "submissions/d-vibe-cyrusmsk",
+      "canonical_source_ref": "5fd9b566c547295cab6decc35378e1b0cfc9ec8a",
+      "canonical_source_tree": "70db526e0a2459693bd96b1f3854b669961567d3",
+      "canonical_source_kind": "closed_historical_head",
+      "canonical_source_url": "https://github.com/cyrusmsk/multicore-server-challenge/tree/5fd9b566c547295cab6decc35378e1b0cfc9ec8a/submissions/d-vibe-cyrusmsk",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/pr-18-5fd9b566/cyrusmsk-multicore-server-challenge-5fd9b56/submissions/d-vibe-cyrusmsk",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "cf204e69a651afa8630a265d1d28173e86d9f220858a23cafc63785b7c3b594b"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "cab93bdc47a7737b4b0274191c6e6d34bde27e29c01e9d7c100ddcbba05c4638"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "12148d65dc20a510af6e5b77630d66c9ae3deefe9dc5f5be9a917a832e699433"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "034c0fe218f12a0eda35f10833722f8ba6a81cce21b5d0f08c42df4defdddc66"
+        }
+      },
+      "official_score": null,
+      "official_unscored_reason": "Crashed 11 minutes into the run (SIGILL, core dumped) at 8,000 users; PR #18 also needs pinned dependencies",
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit."
+    },
+    {
+      "id": "pr-21",
+      "pr": 21,
+      "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/21",
+      "name": "pony-stallion-contact-red",
+      "variant": null,
+      "language": "Pony",
+      "state": "closed",
+      "draft": false,
+      "active": false,
+      "is_ours": false,
+      "head_repository": "contact-red/multicore-server-challenge",
+      "head_commit": "f62c5f6d0cfd9f3bbf035510bc11abed0d78ca43",
+      "head_root_tree": "89087bf56cfe7c56c148ca5df914699c6bd7ce50",
+      "head_submission_tree": "47e398c1ca51cdd5d7acdd94ea3ae49d47ee2c0a",
+      "source_folder": "submissions/pony-stallion-contact-red",
+      "canonical_source_ref": "f62c5f6d0cfd9f3bbf035510bc11abed0d78ca43",
+      "canonical_source_tree": "47e398c1ca51cdd5d7acdd94ea3ae49d47ee2c0a",
+      "canonical_source_kind": "closed_historical_head",
+      "canonical_source_url": "https://github.com/contact-red/multicore-server-challenge/tree/f62c5f6d0cfd9f3bbf035510bc11abed0d78ca43/submissions/pony-stallion-contact-red",
+      "local_source_dir": "/private/tmp/multicore-comparison-20261023/sources/pr-21-f62c5f6d/contact-red-multicore-server-challenge-f62c5f6/submissions/pony-stallion-contact-red",
+      "canonical_matches_pr_submission_tree": true,
+      "canonical_changes_from_pr_head_paths": [],
+      "scripts": {
+        "install.sh": {
+          "exists": true,
+          "sha256": "76d37f81cfb1dcb9656b43dfca30bb7e159179307c6c52ba514b0fb8e57f1ffa"
+        },
+        "build.sh": {
+          "exists": true,
+          "sha256": "8f8995a58928075dad7a4444a4fa9dced02bb124b60000525fa6bef2d13c8c28"
+        },
+        "start.sh": {
+          "exists": true,
+          "sha256": "f36edf4431670817adbc419d5f5416ae0b437b2aaedcb32766f53e7b3e9dc074"
+        },
+        "README.md": {
+          "exists": true,
+          "sha256": "f09aeb3bab1a34bf10d0cbb86a263cf06d6765662713406632e3083cf552b5db"
+        }
+      },
+      "official_score": null,
+      "official_unscored_reason": null,
+      "local_run_this_refresh": "NOT_RUN",
+      "measured_source_revision_known": false,
+      "score_source_pin_caveat": "Official scoreboard values and current source pins are separate evidence; the scoreboard does not identify the exact scored commit."
+    }
+  ],
+  "no_new_local_benchmarks": true
+}

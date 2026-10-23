@@ -1,0 +1,155 @@
+{
+  "created_at_utc": "2026-10-23T06:59:32.478770+00:00",
+  "status": "VERIFIED_MAINTAINER_PUBLISHED_OFFICIAL_SUMMARY_ONLY",
+  "scope": "Independent public GitHub reads and saved canonical snapshot inspection; no new benchmark, install, build, Docker mutation, source/default edit, or external message was performed.",
+  "canonical_table": {
+    "url": "https://github.com/arjaythedev/multicore-server-challenge/blob/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/LEADERBOARD.md",
+    "live_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/main/LEADERBOARD.md",
+    "commit": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+    "git_blob": "1e48908381e0a0b70f09d306da184ed2e5130a8a",
+    "local_snapshot": "inventory/root-verified-LEADERBOARD.md",
+    "snapshot_sha256": "48102ff81170135ebda1086be4a4068056d1438c4e199131a0370d94bd4bd7ab",
+    "scored_rows": 29,
+    "source_type": "Maintainer-published official same-box leaderboard"
+  },
+  "maintainer_score_addition": {
+    "commit": "e3a31a748ff3013488d70c1308c6f70cbffc08c0",
+    "commit_url": "https://github.com/arjaythedev/multicore-server-challenge/commit/e3a31a748ff3013488d70c1308c6f70cbffc08c0",
+    "api_url": "https://api.github.com/repos/arjaythedev/multicore-server-challenge/commits/e3a31a748ff3013488d70c1308c6f70cbffc08c0",
+    "author_login": "arjaythedev",
+    "committed_at_utc": "2026-10-23T04:02:12Z",
+    "changed_file": "LEADERBOARD.md",
+    "observation": "The commit patch inserts the PR32 rank8/65000/17125/27/721 row. This is the canonical maintainer score attribution; no PR comment exists."
+  },
+  "source_identity": {
+    "pr_url": "https://github.com/arjaythedev/multicore-server-challenge/pull/32",
+    "current_head_commit": "3e9087473da5c56d5800ae9ee00ac1e84c44a135",
+    "pr_commit_count": 1,
+    "pr_only_source_commit": "3e9087473da5c56d5800ae9ee00ac1e84c44a135",
+    "source_commit_authored_at_utc": "2026-10-22T17:32:48Z",
+    "submission_tree_sha": "d24aef13e096e2b01728c8ef8880f6ca7b739775",
+    "source_dir": "/private/tmp/multicore-comparison-20261023/sources/pr-32-3e908747/tbsvttr-multicore-server-challenge-3e90874/submissions/goose-native-tbsvttr",
+    "source_url": "https://github.com/tbsvttr/multicore-server-challenge/tree/3e9087473da5c56d5800ae9ee00ac1e84c44a135/submissions/goose-native-tbsvttr",
+    "default_config_in_source": {
+      "WORKERS": 4,
+      "PG_READERS": 3,
+      "HASHERS": 2,
+      "ARTICLE_BATCH": 0,
+      "postgres_connections": 16
+    },
+    "current_pr_draft": true,
+    "current_issue_comments_count": 0,
+    "current_review_comments_count": 0,
+    "live_reads": {
+      "pr_commits_api": "https://api.github.com/repos/arjaythedev/multicore-server-challenge/pulls/32/commits",
+      "issue_comments_api": "https://api.github.com/repos/arjaythedev/multicore-server-challenge/issues/32/comments",
+      "review_comments_api": "https://api.github.com/repos/arjaythedev/multicore-server-challenge/pulls/32/comments"
+    },
+    "identity_limit": "The PR has only one submitted source revision and it remains the current head. The leaderboard points to PR32, but does not publish a scored binary hash, source hash receipt, or effective environment; exact scored-binary identity is not independently witnessed."
+  },
+  "published_protocol": {
+    "target": "Same dedicated8-vCPU/16GB Ubuntu24 x8664 box, app and PostgreSQL18 together",
+    "seed": "Full seed",
+    "load_generator": "Separate machine(s)",
+    "score": "Most users passing a five-minute measured hold after warmup and search/probes",
+    "passing_thresholds": {
+      "p95_ms_exclusive": 500,
+      "p99_ms_exclusive": 1000,
+      "error_rate_exclusive": 0.01
+    },
+    "zero_errors_not_established_by_summary": true
+  },
+  "official_rows": {
+    "goose32": {
+      "implementation": "goose-native-tbsvttr",
+      "pr": 32,
+      "rank": 8,
+      "users": 65000,
+      "rps": 17125,
+      "p95_ms": 27,
+      "p99_ms": 721,
+      "app_cpu_percent_of_8core_box": 18,
+      "postgres_cpu_percent_of_8core_box": 71,
+      "front": "direct",
+      "note": "Not merged yet: the pull request is marked as a draft"
+    },
+    "rust7": {
+      "implementation": "rust-tokio-Scooter1337",
+      "pr": 7,
+      "rank": 1,
+      "users": 100000,
+      "rps": 26279,
+      "p95_ms": 119,
+      "p99_ms": 185,
+      "app_cpu_percent_of_8core_box": 20,
+      "postgres_cpu_percent_of_8core_box": 70,
+      "front": "direct"
+    },
+    "goose31": {
+      "implementation": "goose-epoll-xeonfx",
+      "pr": 31,
+      "rank": 9,
+      "users": 62000,
+      "rps": 16311,
+      "p95_ms": 30,
+      "p99_ms": 842,
+      "app_cpu_percent_of_8core_box": 17,
+      "postgres_cpu_percent_of_8core_box": 71,
+      "front": "direct"
+    }
+  },
+  "numeric_comparisons": {
+    "goose32_vs_rust7": {
+      "users_change_percent": -35.0,
+      "rps_change_percent": -34.83389778910917,
+      "p95_ms_change_percent": -77.31092436974791,
+      "p99_ms_change_percent": 289.72972972972974,
+      "p99_ratio": 3.8972972972972975
+    },
+    "goose32_vs_goose31": {
+      "users_change_percent": 4.8387096774193505,
+      "rps_change_percent": 4.990497210471467,
+      "p95_ms_change_percent": -9.999999999999998,
+      "p99_ms_change_percent": -14.37054631828979
+    }
+  },
+  "what_is_established": [
+    "The maintainer currently ranks PR32 eighth among29 scored entries at65000 passing users.",
+    "The published PR32 score exceeds PR31 by4.8387096774% users and4.9904972105% reported RPS at their separate scored capacities.",
+    "PR32 remains35% below Rust7 in published passing-user capacity; the first-place objective is unmet.",
+    "PR32 has a lower published p95 but a3.8972972973-times higher p99 than Rust7, at different user counts."
+  ],
+  "interpretation_limits": [
+    "Separate capacity points are not a matched-load latency or CPU experiment.",
+    "The PR31 capacity difference is below5%; it is not evidence of a stable at-least5% matched-load win.",
+    "CPU18%app/71%Postgres versus Rust20%/70% shows PostgreSQL dominates both published summaries, but cannot identify the cause of the capacity or tail difference.",
+    "SQL work, backend fan-out, batching, bcrypt and transient pauses remain hypotheses without raw endpoint/probe/CPU traces.",
+    "The local W2/ARTICLE1 experiment failed its all-three-pair acceptance and cannot be substituted for this stock-source official row."
+  ],
+  "raw_evidence_availability": {
+    "public_run_artifact_found_in_pinned_tree": false,
+    "pr32_public_raw_link_found": false,
+    "maintainer_statement_url": "https://github.com/arjaythedev/multicore-server-challenge/blob/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/LEADERBOARD.md",
+    "maintainer_statement_summary": "Raw probe/hold results, per-endpoint latencies and per-second box CPU are kept and can be shared on request.",
+    "fields_not_published_for_this_row": [
+      "measured_binary_sha256",
+      "exact_scored_source_sha_receipt",
+      "effective_runtime_environment",
+      "exact_error_count_or_rate",
+      "per_endpoint_latency_histograms",
+      "probe_and_failed_hold_history",
+      "per_second_cpu_or_latency_timeline",
+      "trial_order_or_repeated_capacity_holds"
+    ],
+    "additional_messages_sent": false
+  },
+  "prepared_plan_disposition": {
+    "new_all_implementation_build_or_launch_manifests_created": false,
+    "new_builds_executed": false,
+    "new_benchmarks_executed": false,
+    "previous_pr31_configuration_plan": "/private/tmp/multicore-research-20261022/proposed-pr31-w2-article1-v3/plan.json",
+    "previous_pr31_configuration_plan_status": "PREPARED_NOT_EXECUTED",
+    "previous_pr31_configuration_plan_sha256": "9a4b3add0ca1fd22ac1ad65e1a75272543ec557d90410b90787e27d170bd8f4e"
+  },
+  "communication_policy": "No issue/PR/email/chat message was sent to the maintainer or another external person."
+}

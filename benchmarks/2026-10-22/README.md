@@ -1,3 +1,5 @@
+> **Historical local diagnostics (22 October).** The maintainer has since published a same-machine capacity comparison, placing PR #32 eighth at 65,000 users. See the [current unified comparison](../2026-10-23/README.md). Statements below about the absence of an official score describe the earlier snapshot; all raw local attempts remain preserved.
+
 # Goose multicore validation and local comparisons
 
 This is development evidence for [PR #32](https://github.com/arjaythedev/multicore-server-challenge/pull/32).
