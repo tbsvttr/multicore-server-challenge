@@ -1,0 +1,89 @@
+{
+  "source_commit": "23a14e8cbf32113509cd0ad941320ef947508981",
+  "submission_tree": "334be131b9c0297e78a2377656e207a11a0bada6",
+  "PR": "https://github.com/arjaythedev/multicore-server-challenge/pull/32",
+  "ready_for_review": true,
+  "native_x86_validation": "PASS",
+  "native_x86_run": "https://github.com/tbsvttr/multicore-server-challenge/actions/runs/39937895836",
+  "official_rank_proven_first": false,
+  "official_published_rank": 8,
+  "official_published_users": 65000,
+  "official_score_predates_optimized_revision": true,
+  "optimized_revision_official_score": null,
+  "qualified_local_300s_holds": {
+    "goose32": null,
+    "rust7": null
+  },
+  "final_binary_ARM64_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+  "native_CI_binary_x86_64_sha256": "acf76363b478e591c221817f78c7aeb88c5fe815fcf21fa54fa303956a081755",
+  "current_local_capacity_status": "NOT_ESTABLISHED: generator scheduling failures and actual host sleep; no invalid phase counted as server capacity boundary",
+  "implementation_correctness": "PASS; invalid measurements are not application conformance failures",
+  "server_resources": "app+PostgreSQL together8CPU16GiB/noSwap/noAffinity; originalschema/config/fullseed",
+  "local_platform": "shared ARM64 Mac/Ubuntu24Docker; not officialdedicatedx86 hardware",
+  "valid_control_probe": {
+    "case": "rust7",
+    "users": 100000,
+    "measure_seconds": 60,
+    "p95_ms": 7.403,
+    "p99_ms": 29.999,
+    "rps": 26473.766666666666,
+    "errors": 0,
+    "native_qualified": true,
+    "capacity_score": false
+  },
+  "completed_study_audits": [
+    "audit/capacity-first-result.json",
+    "audit/capacity-v2-result.json",
+    "audit/capacity-v3-result.json",
+    "audit/capacity-powered-result.json",
+    "audit/capacity-rust110-115-result.json"
+  ],
+  "power_precondition": "ConnectpowerandkeepMacawakebeforeafreshcompletecomparison;8pctbatteryandmaintenanceSleepconfirmed",
+  "owned_containers_stopped": true,
+  "official_check_utc": "2026-10-23T17:50:13Z",
+  "source_revision_officially_scored": false,
+  "local_qualified_300s_holds": 0,
+  "local_capacity_status": "NOT_ESTABLISHED; all five searches stopped on invalid generation/clock timing before any hold",
+  "last_confirmed_power": "1% and discharging; all owned benchmark infrastructure stopped",
+  "unpromoted_prototype": {
+    "path": "candidates/leader2",
+    "binary_sha256": "9016ff93e924c0d94652490ac895d1fbc64153fd9d3ea4b8b52b66ae892c3424",
+    "changes": "generation-safe age-ordered read queues, reader Sync4/cap4, writer64 unchanged",
+    "passed": "dev197/full197/read1664/commit/rollback/timer/races/NUL-Go",
+    "not_run": "new wire-admission probe, native x86 validation, performance comparison",
+    "promoted": false
+  },
+  "final_source_100k_point": {
+    "scope": "one exploratory60s point, no capacity/stablegain/rank proof",
+    "target_cpu_ms_per_success": {
+      "rust7": 0.19117154,
+      "goose32": 0.16041094
+    },
+    "goose_cpu_change_percent": -16.0906,
+    "errors_both": 0,
+    "native_qualified_both": true,
+    "goose_p50_p95_p99_ms": [
+      2.961,
+      6.603,
+      46.751
+    ],
+    "rust_p50_p95_p99_ms": [
+      0.812,
+      15.703,
+      78.463
+    ],
+    "mean_ms": {
+      "goose32": 4.4591546727942175,
+      "rust7": 4.147805658631758
+    },
+    "max_ms": {
+      "goose32": 669.695,
+      "rust7": 332.287
+    },
+    "audit": "audit/final-source-100k-comparison.json"
+  },
+  "diagnostics": [
+    "diagnosticgoose110_20261023t164733_2f2b88: partial instrumented replay; no110k/no score",
+    "diagnosticgoose110p2_20261023t171939_5bbab0: power preflight failure before runtime"
+  ]
+}

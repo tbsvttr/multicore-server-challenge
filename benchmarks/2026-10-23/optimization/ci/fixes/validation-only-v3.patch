@@ -1,0 +1,2003 @@
+diff --git a/.github/validation-goose/article-update-race.py b/.github/validation-goose/article-update-race.py
+new file mode 100644
+index 0000000..8dd06bd
+--- /dev/null
++++ b/.github/validation-goose/article-update-race.py
+@@ -0,0 +1,196 @@
++#!/usr/bin/env python3
++"""Deterministic update snapshot and favorite/rename races on a disposable DB.
++
++No server, compiler or Docker process is started. Root owns setup/scheduling.
++--expect-stale is a baseline reproduction mode, not a correctness pass.
++"""
++import argparse
++import base64
++import concurrent.futures
++import contextlib
++import hmac
++import json
++import os
++from pathlib import Path
++import select
++import subprocess
++import time
++import urllib.error
++import urllib.parse
++import urllib.request
++import uuid
++
++p = argparse.ArgumentParser(description=__doc__)
++p.add_argument('--base', default=os.environ.get('BASE'))
++p.add_argument('--database-url', default=os.environ.get('DATABASE_URL'))
++p.add_argument('--secret', default=os.environ.get('JWT_SECRET'))
++p.add_argument('--case', choices=['all','update','favorite-rename'], default='all')
++p.add_argument('--expect-stale', action='store_true')
++p.add_argument('--out', type=Path, required=True)
++a = p.parse_args()
++if not a.base or not a.database_url or not a.secret:
++    p.error('BASE, DATABASE_URL and JWT_SECRET are required')
++assert not a.out.exists(), 'preserve prior attempts: choose a new output'
++pg = os.environ.copy()
++url = urllib.parse.urlsplit(a.database_url)
++pg['PGDATABASE'] = urllib.parse.unquote(url.path.lstrip('/'))
++for key,value in [('PGHOST',url.hostname),('PGPORT',str(url.port or 5432)),
++                  ('PGUSER',urllib.parse.unquote(url.username or '')),
++                  ('PGPASSWORD',urllib.parse.unquote(url.password or ''))]:
++    if value and key not in pg:
++        pg[key] = value
++if not pg['PGDATABASE'].startswith('mc_pair_'):
++    p.error('requires a dedicated owned mc_pair_ database clone')
++cmd = ['psql','-X','-A','-t','-q','-v','ON_ERROR_STOP=1','-d',pg['PGDATABASE']]
++record = {'scope':'Disposable correctness fixtures only; no schema/config changes',
++          'database':pg['PGDATABASE'],'base':a.base,'expectation':'baseline-stale' if a.expect_stale else 'fresh',
++          'started_unix_s':time.time(),'cases':[],'pass':False,'implementation_correct':False}
++a.out.parent.mkdir(parents=True,exist_ok=True)
++a.out.write_text(json.dumps(record,indent=2)+'\n')
++
++def quote(value):
++    return "'"+value.replace("'","''")+"'"
++
++def sql(text):
++    result = subprocess.run(cmd+['-c',text],env=pg,text=True,capture_output=True,timeout=20)
++    if result.returncode:
++        raise RuntimeError(result.stderr)
++    return result.stdout.strip()
++
++def token(uid):
++    now = int(time.time())
++    enc = lambda x:base64.urlsafe_b64encode(json.dumps(x,separators=(',',':')).encode()).decode().rstrip('=')
++    text = enc({'alg':'HS256','typ':'JWT'})+'.'+enc({'sub':str(uid),'iat':now,'exp':now+600})
++    return text+'.'+base64.urlsafe_b64encode(hmac.digest(a.secret.encode(),text.encode(),'sha256')).decode().rstrip('=')
++
++def api(method,path,auth,body=None):
++    req = urllib.request.Request(a.base.rstrip('/')+path,
++        data=json.dumps(body).encode() if body is not None else (b'' if method=='POST' else None),
++        method=method,headers={'Authorization':'Token '+auth,'Content-Type':'application/json'})
++    start = time.monotonic()
++    try:
++        response = urllib.request.urlopen(req,timeout=25)
++    except urllib.error.HTTPError as error:
++        response = error
++    with response:
++        return {'status':response.code,'body':json.loads(response.read()),
++                'start_monotonic':start,'complete_monotonic':time.monotonic()}
++
++def marker(proc,want,timeout=10):
++    deadline = time.monotonic()+timeout
++    while time.monotonic()<deadline:
++        if proc.poll() is not None:
++            raise RuntimeError('transaction exited: '+proc.stderr.read())
++        ready,_,_ = select.select([proc.stdout],[],[],min(.1,max(.001,deadline-time.monotonic())))
++        if ready and proc.stdout.readline().strip()==want:
++            return
++    raise TimeoutError('missing transaction marker '+want)
++
++def transaction_send(proc,text):
++    proc.stdin.write(text+'\n')
++    proc.stdin.flush()
++
++def run_case(kind):
++    nonce = 'article_race_'+uuid.uuid4().hex
++    state = {'case':kind,'nonce':nonce,'events':[],'pass':False}
++    record['cases'].append(state)
++    proc = None
++    ids = None
++    try:
++        text = sql("BEGIN; INSERT INTO users(username,email,password_hash) VALUES ("+
++            quote(nonce)+','+quote(nonce+'@example.com')+","+
++            quote('$2a$10$ZSfEoPvlcsj2XfvsSeK25em4NZ9Jm7ntGqXuLgQfHEeZPYB8899wq')+") RETURNING id; "+
++            "INSERT INTO articles(slug,author_id,title,description,body) SELECT "+quote(nonce)+",id,'before','fixture','before body' FROM users WHERE username="+quote(nonce)+"; "+
++            "SELECT u.id,a.id FROM users u JOIN articles a ON a.author_id=u.id WHERE u.username="+quote(nonce)+"; COMMIT;")
++        uid,aid = [int(x) for x in text.splitlines()[-1].split('|')]
++        ids = uid,aid
++        auth = token(uid)
++        old_path = '/api/articles/'+urllib.parse.quote(nonce,safe='')
++        before = api('GET',old_path,auth)
++        assert before['status']==200 and before['body']['article']['favoritesCount']==0
++        proc = subprocess.Popen(cmd,env=pg,stdin=subprocess.PIPE,stdout=subprocess.PIPE,
++                                stderr=subprocess.PIPE,text=True,bufsize=1)
++        if kind=='update':
++            transaction_send(proc,f"BEGIN; DO $gate$ BEGIN PERFORM 1 FROM articles WHERE id={aid} FOR UPDATE; END $gate$; "+
++                             f"INSERT INTO favorites(user_id,article_id) VALUES({uid},{aid}); SELECT 'LOCK_HELD';")
++            request = ('PUT',old_path,auth,{'article':{'title':nonce+' updated','body':'updated body — Unicode'}})
++            query_match = '%UPDATE articles%'
++        else:
++            renamed = nonce+'-renamed'
++            transaction_send(proc,f"BEGIN; INSERT INTO favorites(user_id,article_id) VALUES({uid},{aid}); "+
++                'UPDATE articles SET slug='+quote(renamed)+",title='renamed concurrently',updated_at=now() WHERE id="+str(aid)+"; SELECT 'LOCK_HELD';")
++            request = ('POST',old_path+'/favorite',auth,None)
++            query_match = '%INSERT INTO favorites%'
++        marker(proc,'LOCK_HELD')
++        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
++            future = executor.submit(api,*request)
++            deadline = time.monotonic()+12
++            witness = None
++            while time.monotonic()<deadline:
++                text = sql("SELECT json_agg(json_build_object('pid',pid,'wait_type',wait_event_type,'wait',wait_event,'query',query)) "+
++                    "FROM pg_stat_activity WHERE datname=current_database() AND pid<>pg_backend_pid() "+
++                    "AND wait_event_type='Lock' AND query ILIKE "+quote(query_match))
++                if text and text!='null':
++                    witness = json.loads(text)
++                    break
++                assert not future.done(), 'API returned before its blocked mutation was witnessed'
++                time.sleep(.03)
++            assert witness, 'no blocked API mutation was witnessed'
++            state['events'].append({'event':'API blocked on uncommitted transaction','witness':witness})
++            transaction_send(proc,"COMMIT; SELECT 'COMMITTED';")
++            marker(proc,'COMMITTED')
++            state['events'].append({'event':'fixture favorite/rename committed','monotonic':time.monotonic()})
++            response = future.result(timeout=15)
++        committed = int(sql(f'SELECT count(*) FROM favorites WHERE article_id={aid}'))
++        current_slug = sql(f'SELECT slug FROM articles WHERE id={aid}')
++        immediate = api('GET','/api/articles/'+urllib.parse.quote(current_slug,safe=''),auth)
++        assert committed==1 and immediate['status']==200
++        assert immediate['body']['article']['favoritesCount']==1 and immediate['body']['article']['favorited'] is True
++        state.update(response=response,committed_count=committed,current_slug=current_slug,immediate_get=immediate)
++        fresh = response['status']==200 and response['body'].get('article')==immediate['body']['article']
++        if kind=='update':
++            assert immediate['body']['article']['title']==nonce+' updated'
++            assert immediate['body']['article']['body']=='updated body — Unicode'
++            assert current_slug!=nonce and current_slug.endswith('-'+str(aid))
++            stale = response['status']==200 and response['body']['article']['favoritesCount']==0 and response['body']['article']['favorited'] is False
++        else:
++            assert current_slug==renamed
++            stale = response['status']==404
++        state.update(implementation_correct=fresh,baseline_bug_observed=stale,
++                     pass_expected_behavior=stale if a.expect_stale else fresh)
++        assert state['pass_expected_behavior'], 'response did not match selected baseline/fixed expectation'
++        state['pass'] = True
++    except BaseException as error:
++        state['error'] = type(error).__name__+': '+str(error)
++    finally:
++        if proc is not None:
++            with contextlib.suppress(Exception):
++                transaction_send(proc,'ROLLBACK;')
++                proc.stdin.close()
++                proc.wait(timeout=3)
++            if proc.poll() is None:
++                proc.terminate()
++                proc.wait(timeout=3)
++            state['transaction_stderr'] = proc.stderr.read()
++        if ids:
++            try:
++                uid,aid = ids
++                sql(f'BEGIN; DELETE FROM articles WHERE id={aid}; DELETE FROM users WHERE id={uid}; COMMIT;')
++                assert sql(f'SELECT count(*) FROM articles WHERE id={aid}')=='0'
++                assert sql(f'SELECT count(*) FROM users WHERE id={uid}')=='0'
++                state['fixture_cleaned'] = True
++            except Exception as error:
++                state.update({'pass':False,'cleanup_error':type(error).__name__+': '+str(error)})
++        a.out.write_text(json.dumps(record,indent=2)+'\n')
++
++for kind in (['update','favorite-rename'] if a.case=='all' else [a.case]):
++    run_case(kind)
++record['pass'] = all(c['pass'] for c in record['cases'])
++record['implementation_correct'] = all(c.get('implementation_correct') for c in record['cases'])
++record['finished_unix_s'] = time.time()
++a.out.write_text(json.dumps(record,indent=2)+'\n')
++print(json.dumps({'pass':record['pass'],'expectation':record['expectation'],
++                  'implementation_correct':record['implementation_correct'],
++                  'cases':[{k:c.get(k) for k in ['case','pass','baseline_bug_observed','fixture_cleaned','error']}
++                           for c in record['cases']]}))
++raise SystemExit(0 if record['pass'] else 1)
+diff --git a/.github/validation-goose/bcrypt-passwords.go b/.github/validation-goose/bcrypt-passwords.go
+new file mode 100644
+index 0000000..d09c17e
+--- /dev/null
++++ b/.github/validation-goose/bcrypt-passwords.go
+@@ -0,0 +1,35 @@
++// Trusted interop helper. Run from the repository's pinned bench Go module.
++// It never starts a server or contacts a database.
++package main
++
++import (
++    "encoding/json"
++    "os"
++
++    "golang.org/x/crypto/bcrypt"
++)
++
++type item struct {
++    Password string `json:"password"`
++    Prefix string `json:"prefix"`
++    Hash string `json:"hash"`
++}
++
++func main() {
++    var input struct { Items []item `json:"items"` }
++    if err := json.NewDecoder(os.Stdin).Decode(&input); err != nil { panic(err) }
++    output := make([]map[string]interface{}, 0, len(input.Items))
++    for _, in := range input.Items {
++        cost, err := bcrypt.Cost([]byte(in.Hash))
++        if err != nil { panic(err) }
++        generated, err := bcrypt.GenerateFromPassword([]byte(in.Password), 10)
++        if err != nil { panic(err) }
++        output = append(output, map[string]interface{}{
++            "password_bytes":len([]byte(in.Password)), "stored_cost":cost,
++            "full_verify":bcrypt.CompareHashAndPassword([]byte(in.Hash), []byte(in.Password)) == nil,
++            "prefix_verify":bcrypt.CompareHashAndPassword([]byte(in.Hash), []byte(in.Prefix)) == nil,
++            "generated_hash":string(generated),
++        })
++    }
++    if err := json.NewEncoder(os.Stdout).Encode(output); err != nil { panic(err) }
++}
+diff --git a/.github/validation-goose/favorite-race-probe.py b/.github/validation-goose/favorite-race-probe.py
+new file mode 100644
+index 0000000..2f71180
+--- /dev/null
++++ b/.github/validation-goose/favorite-race-probe.py
+@@ -0,0 +1,185 @@
++#!/usr/bin/env python3
++"""Deterministic favorite snapshot race on an owned, disposable test database.
++
++Inputs: DATABASE_URL (target DB), normal PG* superuser credentials, BASE,
++JWT_SECRET; optional --out. Never use a seed template directly.
++"""
++import argparse
++import base64
++import concurrent.futures
++import contextlib
++import hashlib
++import hmac
++import json
++import os
++import pathlib
++import select
++import subprocess
++import time
++import urllib.error
++import urllib.parse
++import urllib.request
++import uuid
++
++p = argparse.ArgumentParser(description=__doc__)
++p.add_argument('--base', default=os.environ.get('BASE'))
++p.add_argument('--secret', default=os.environ.get('JWT_SECRET'))
++p.add_argument('--database-url', default=os.environ.get('DATABASE_URL'))
++p.add_argument('--out', default='favorite-race-probe.json')
++a = p.parse_args()
++if not a.base or not a.secret:
++    p.error('BASE and JWT_SECRET, or --base and --secret, are required')
++
++pg_env = os.environ.copy()
++if a.database_url:
++    u = urllib.parse.urlsplit(a.database_url)
++    pg_env['PGDATABASE'] = urllib.parse.unquote(u.path.lstrip('/'))
++    for k, v in [('PGHOST', u.hostname), ('PGPORT', str(u.port or 5432)),
++                 ('PGUSER', urllib.parse.unquote(u.username or '')),
++                 ('PGPASSWORD', urllib.parse.unquote(u.password or ''))]:
++        if v and k not in pg_env:
++            pg_env[k] = v
++dbname = pg_env.get('PGDATABASE', '')
++if not dbname or dbname in {'postgres', 'template0', 'template1', 'conduit_seed', 'conduit_dev'}:
++    p.error('requires a disposable database clone, never a seed or system database')
++
++cmd = ['psql', '-X', '-q', '-A', '-t', '-v', 'ON_ERROR_STOP=1', '-d', dbname]
++record = {'scope': 'deterministic two-transaction favorite count correctness probe',
++          'base': a.base, 'database': dbname, 'started_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
++          'pass': False, 'events': []}
++nonce = 'favorite_probe_' + uuid.uuid4().hex
++fixture_ids = None
++t1 = None
++
++def event(name, **kwargs):
++    record['events'].append({'event': name, 'at_monotonic': time.monotonic(), **kwargs})
++
++def sql(text):
++    r = subprocess.run(cmd + ['-c', text], env=pg_env, text=True, capture_output=True, timeout=15)
++    if r.returncode:
++        raise RuntimeError('psql failed: ' + r.stderr.strip())
++    return r.stdout.strip()
++
++def send(text):
++    t1.stdin.write(text + '\n')
++    t1.stdin.flush()
++
++def marker(want, timeout=10):
++    deadline = time.monotonic() + timeout
++    while time.monotonic() < deadline:
++        if t1.poll() is not None:
++            raise RuntimeError('transaction process exited: ' + t1.stderr.read())
++        ready, _, _ = select.select([t1.stdout], [], [], min(0.1, max(0, deadline-time.monotonic())))
++        if ready:
++            line = t1.stdout.readline().strip()
++            if line == want:
++                return
++    raise TimeoutError('no transaction marker ' + want)
++
++def enc(b):
++    return base64.urlsafe_b64encode(b).decode().rstrip('=')
++
++def jwt(uid):
++    now = int(time.time())
++    b = '.'.join(enc(json.dumps(x, separators=(',', ':')).encode()) for x in
++                 [{'alg': 'HS256', 'typ': 'JWT'}, {'sub': str(uid), 'iat': now, 'exp': now + 600}])
++    return b + '.' + enc(hmac.digest(a.secret.encode(), b.encode(), 'sha256'))
++
++def api(method, path, tok):
++    req = urllib.request.Request(a.base.rstrip('/') + path,
++                                 data=b'' if method == 'POST' else None,
++                                 method=method, headers={'Authorization': 'Token ' + tok})
++    try:
++        with urllib.request.urlopen(req, timeout=20) as r:
++            status, body = r.status, r.read()
++    except urllib.error.HTTPError as e:
++        status, body = e.code, e.read()
++    return {'status': status, 'body': json.loads(body)}
++
++try:
++    # Fresh fixture gives an exact expected count, independent of the seed's favorites.
++    # This bcrypt hash is the public cost-10 seed fixture, never an authentication shortcut.
++    rows = sql("BEGIN; "
++        "INSERT INTO users(username,email,password_hash) VALUES "
++        f"('{nonce}_a','{nonce}_a@example.com','$2a$10$ZSfEoPvlcsj2XfvsSeK25em4NZ9Jm7ntGqXuLgQfHEeZPYB8899wq'),"
++        f"('{nonce}_b','{nonce}_b@example.com','$2a$10$ZSfEoPvlcsj2XfvsSeK25em4NZ9Jm7ntGqXuLgQfHEeZPYB8899wq'); "
++        "INSERT INTO articles(slug,author_id,title,description,body) "
++        f"SELECT '{nonce}',id,'race probe','dedicated test fixture','probe body' FROM users WHERE username='{nonce}_a'; "
++        f"SELECT (SELECT id FROM users WHERE username='{nonce}_a'),"
++        f"(SELECT id FROM users WHERE username='{nonce}_b'),"
++        f"(SELECT id FROM articles WHERE slug='{nonce}'); COMMIT;")
++    uid_a, uid_b, aid = [int(v) for v in rows.splitlines()[-1].split('|')]
++    fixture_ids = (uid_a, uid_b, aid)
++    tok = jwt(uid_a)
++    record['fixture'] = {'user_a': uid_a, 'user_b': uid_b, 'article': aid, 'slug': nonce}
++    before = api('GET', '/api/articles/' + nonce, tok)
++    assert before['status'] == 200 and before['body']['article']['favoritesCount'] == 0, before
++    event('fresh fixture visible', count=0)
++
++    t1 = subprocess.Popen(cmd, env=pg_env, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
++                          stderr=subprocess.PIPE, text=True, bufsize=1)
++    send(f"BEGIN; INSERT INTO favorites(user_id,article_id) VALUES ({uid_a},{aid}),({uid_b},{aid}); SELECT 'LOCK_HELD';")
++    marker('LOCK_HELD')
++    event('transaction T1 inserted two favorites without committing')
++    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
++        future = executor.submit(api, 'POST', '/api/articles/' + nonce + '/favorite', tok)
++        # Witness the API backend actually waiting on T1's unique-key conflict.
++        # A sleep alone cannot establish that the request took its snapshot before COMMIT.
++        deadline = time.monotonic() + 10
++        witness = None
++        while time.monotonic() < deadline:
++            waiting = sql("SELECT json_agg(json_build_object('pid',pid,'wait_event_type',wait_event_type,"
++                          "'wait_event',wait_event,'query',query)) FROM pg_stat_activity "
++                          "WHERE datname=current_database() AND pid<>pg_backend_pid() "
++                          "AND wait_event_type='Lock' AND query ILIKE '%favorites%'")
++            if waiting and waiting != 'null':
++                witness = json.loads(waiting)
++                break
++            if future.done():
++                raise AssertionError('API returned before blocked-write witness: ' + repr(future.result()))
++            time.sleep(0.03)
++        if witness is None:
++            raise TimeoutError('API did not show the expected blocked INSERT')
++        event('API backend blocked on T1', witness=witness)
++        send("COMMIT; SELECT 'COMMITTED';")
++        marker('COMMITTED')
++        event('transaction T1 committed')
++        response = future.result(timeout=10)
++    record['favorite_response'] = response
++    committed = int(sql(f'SELECT count(*) FROM favorites WHERE article_id={aid}'))
++    immediate = api('GET', '/api/articles/' + nonce, tok)
++    record['committed_count'] = committed
++    record['immediate_get'] = immediate
++    record['pass'] = (committed == 2 and response['status'] == 200
++                      and response['body']['article']['favoritesCount'] == committed
++                      and response['body']['article']['favorited'] is True
++                      and immediate['status'] == 200
++                      and immediate['body']['article']['favoritesCount'] == committed
++                      and immediate['body']['article']['favorited'] is True)
++    event('comparison complete', response_count=response['body'].get('article', {}).get('favoritesCount'),
++          committed_count=committed, passed=record['pass'])
++except BaseException as e:
++    record['error'] = type(e).__name__ + ': ' + str(e)
++finally:
++    if t1 is not None:
++        with contextlib.suppress(Exception):
++            send('ROLLBACK;')
++            t1.stdin.close()
++            t1.wait(timeout=3)
++        if t1.poll() is None:
++            t1.terminate()
++            t1.wait(timeout=3)
++        record['transaction_stderr'] = t1.stderr.read()
++    if fixture_ids:
++        uid_a, uid_b, aid = fixture_ids
++        try:
++            sql(f'BEGIN; DELETE FROM articles WHERE id={aid}; DELETE FROM users WHERE id IN ({uid_a},{uid_b}); COMMIT;')
++            record['fixture_cleaned'] = True
++        except Exception as e:
++            record['fixture_cleaned'] = False
++            record['cleanup_error'] = str(e)
++            record['pass'] = False
++    pathlib.Path(a.out).write_text(json.dumps(record, indent=2) + '\n')
++
++print(json.dumps({k: record.get(k) for k in ['pass', 'committed_count', 'fixture_cleaned', 'error']}))
++raise SystemExit(0 if record['pass'] else 1)
+diff --git a/.github/validation-goose/password-nul-probe.py b/.github/validation-goose/password-nul-probe.py
+new file mode 100644
+index 0000000..8e86e12
+--- /dev/null
++++ b/.github/validation-goose/password-nul-probe.py
+@@ -0,0 +1,137 @@
++#!/usr/bin/env python3
++"""Legal embedded-NUL password interoperability on a disposable test database.
++
++Baseline --expect-rejected reproduces the inherited422 input bug. Fixed mode
++requires a trusted Go/x-crypto helper and proves both hash directions at cost10.
++No server, compiler or Docker process is started by this script itself.
++"""
++import argparse
++import contextlib
++import json
++import os
++from pathlib import Path
++import subprocess
++import time
++import urllib.error
++import urllib.parse
++import urllib.request
++import uuid
++
++p = argparse.ArgumentParser(description=__doc__)
++p.add_argument('--base', default=os.environ.get('BASE'))
++p.add_argument('--database-url', default=os.environ.get('DATABASE_URL'))
++p.add_argument('--expect-rejected', action='store_true')
++p.add_argument('--go-helper', nargs='+')
++p.add_argument('--out', type=Path, required=True)
++a = p.parse_args()
++if not a.base or not a.database_url:
++    p.error('BASE and DATABASE_URL are required')
++if not a.expect_rejected and not a.go_helper:
++    p.error('fixed-mode interop requires --go-helper EXECUTABLE [ARG...]')
++assert not a.out.exists(), 'preserve previous attempts'
++pg = os.environ.copy()
++url = urllib.parse.urlsplit(a.database_url)
++pg['PGDATABASE'] = urllib.parse.unquote(url.path.lstrip('/'))
++for key,value in [('PGHOST',url.hostname),('PGPORT',str(url.port or 5432)),
++                  ('PGUSER',urllib.parse.unquote(url.username or '')),
++                  ('PGPASSWORD',urllib.parse.unquote(url.password or ''))]:
++    if value and key not in pg:
++        pg[key] = value
++if not pg['PGDATABASE'].startswith('mc_pair_'):
++    p.error('requires a dedicated owned mc_pair_ database clone')
++cmd = ['psql','-X','-A','-t','-q','-v','ON_ERROR_STOP=1','-d',pg['PGDATABASE']]
++nonce = 'nul_password_'+uuid.uuid4().hex
++record = {'scope':'Disposable password-input correctness and trusted bcrypt interoperability',
++          'database':pg['PGDATABASE'],'base':a.base,'nonce':nonce,
++          'expectation':'baseline-rejection' if a.expect_rejected else 'accepted-full-bcrypt',
++          'started_unix_s':time.time(),'pass':False,'implementation_correct':False,'cases':[]}
++a.out.parent.mkdir(parents=True,exist_ok=True)
++a.out.write_text(json.dumps(record,indent=2)+'\n')
++
++def quote(value):
++    assert '\0' not in value
++    return "'"+value.replace("'","''")+"'"
++
++def sql(text):
++    r = subprocess.run(cmd+['-c',text],env=pg,text=True,capture_output=True,timeout=20)
++    if r.returncode:
++        raise RuntimeError(r.stderr)
++    return r.stdout.strip()
++
++def api(path,body):
++    req = urllib.request.Request(a.base.rstrip('/')+path,data=json.dumps(body).encode(),
++                                 method='POST',headers={'Content-Type':'application/json'})
++    try:
++        response = urllib.request.urlopen(req,timeout=30)
++    except urllib.error.HTTPError as error:
++        response = error
++    with response:
++        return {'status':response.code,'body':json.loads(response.read())}
++
++passwords = ['prefix\0suffix','é\0🙂','é'*35+'\0x']
++assert [len(p.encode()) for p in passwords]==[13,7,72]
++try:
++    items = []
++    for i,password in enumerate(passwords):
++        name,email = nonce+'_'+str(i),nonce+'_'+str(i)+'@example.com'
++        result = api('/api/users',{'user':{'username':name,'email':email,'password':password}})
++        case = {'index':i,'password_bytes':len(password.encode()),'register_status':result['status']}
++        record['cases'].append(case)
++        if a.expect_rejected:
++            assert result['status']==422, result
++            assert sql('SELECT count(*) FROM users WHERE username='+quote(name))=='0'
++            case['baseline_bug_observed'] = True
++            continue
++        assert result['status']==201, result
++        stored = sql('SELECT password_hash FROM users WHERE username='+quote(name))
++        assert stored.startswith('$2b$10$') and len(stored)==60, stored
++        full = api('/api/users/login',{'user':{'email':email,'password':password}})
++        prefix = password.split('\0',1)[0]
++        bad = api('/api/users/login',{'user':{'email':email,'password':prefix}})
++        assert full['status']==200 and full['body']['user']['email']==email, full
++        assert bad['status']==401, bad
++        case.update(full_login_status=full['status'],prefix_login_status=bad['status'],stored_hash=stored)
++        items.append({'password':password,'prefix':prefix,'hash':stored})
++    if not a.expect_rejected:
++        trusted = subprocess.run(a.go_helper,input=json.dumps({'items':items}),text=True,
++                                 capture_output=True,timeout=180)
++        record['trusted_helper'] = {'command':a.go_helper,'exit':trusted.returncode,'stderr':trusted.stderr}
++        assert trusted.returncode==0, trusted.stderr
++        checked = json.loads(trusted.stdout)
++        assert len(checked)==len(items)
++        for i,(case,proof,password) in enumerate(zip(record['cases'],checked,passwords)):
++            assert proof['stored_cost']==10 and proof['full_verify'] is True and proof['prefix_verify'] is False, proof
++            generated = proof['generated_hash']
++            assert generated.startswith('$2a$10$') or generated.startswith('$2b$10$')
++            name,email = nonce+'_go_'+str(i),nonce+'_go_'+str(i)+'@example.com'
++            sql('INSERT INTO users(username,email,password_hash) VALUES ('+quote(name)+','+quote(email)+','+quote(generated)+')')
++            full = api('/api/users/login',{'user':{'email':email,'password':password}})
++            bad = api('/api/users/login',{'user':{'email':email,'password':password.split('\0',1)[0]}})
++            assert full['status']==200 and full['body']['user']['email']==email
++            assert bad['status']==401
++            case.update(trusted_go=proof,go_hash_full_login_status=full['status'],go_hash_prefix_login_status=bad['status'])
++        # NUL remains invalid in PostgreSQL text fields; the relaxation is only
++        # for plaintext passwords, which never enter those columns.
++        text_checks = []
++        for user in [{'username':'bad\0name','email':nonce+'_badname@example.com','password':'ordinary'},
++                     {'username':nonce+'_bademail','email':'bad\0@example.com','password':'ordinary'},
++                     {'username':nonce+'_long','email':nonce+'_long@example.com','password':'p'*73}]:
++            result = api('/api/users',{'user':user})
++            assert result['status']==422, result
++            text_checks.append(result['status'])
++        record['unchanged_text_and_length_guards'] = text_checks
++    record['pass'] = True
++    record['implementation_correct'] = not a.expect_rejected
++except BaseException as error:
++    record['error'] = type(error).__name__+': '+str(error)
++finally:
++    try:
++        sql('DELETE FROM users WHERE left(username,'+str(len(nonce))+')='+quote(nonce))
++        assert sql('SELECT count(*) FROM users WHERE left(username,'+str(len(nonce))+')='+quote(nonce))=='0'
++        record['fixtures_cleaned'] = True
++    except Exception as error:
++        record.update({'pass':False,'cleanup_error':type(error).__name__+': '+str(error)})
++    record['finished_unix_s'] = time.time()
++    a.out.write_text(json.dumps(record,indent=2)+'\n')
++print(json.dumps({k:record.get(k) for k in ['pass','expectation','implementation_correct','fixtures_cleaned','error']}))
++raise SystemExit(0 if record['pass'] else 1)
+diff --git a/.github/validation-goose/quiet-read-timer.py b/.github/validation-goose/quiet-read-timer.py
+new file mode 100644
+index 0000000..15e6353
+--- /dev/null
++++ b/.github/validation-goose/quiet-read-timer.py
+@@ -0,0 +1,198 @@
++#!/usr/bin/env python3
++"""Real HTTP timer/liveness probe; no server, compiler or Docker is started.
++
++Use a dedicated disposable DB/server with no other HTTP traffic, WORKERS=1,
++READ_BATCH=32, READ_HOLD=1, WRITE_BATCH_US=1000 and READ_BATCH_US=500000.
++BASE, DATABASE_URL (or PROBE_DATABASE_URL), JWT_SECRET configure the probe.
++--expected-us 0 also checks the disabled mode; stress writer/read independence
++is asserted for windows >=200ms. Private users/follow are cleaned afterwards.
++"""
++import argparse
++import base64
++import concurrent.futures
++import hashlib
++import hmac
++import http.client
++import json
++import os
++from pathlib import Path
++import subprocess
++import threading
++import time
++import urllib.parse
++import uuid
++
++
++def quote(value):
++    return "'" + str(value).replace("'", "''") + "'"
++
++
++def token(secret, uid):
++    encode = lambda raw: base64.urlsafe_b64encode(raw).decode().rstrip("=")
++    now = int(time.time())
++    text = ".".join(encode(json.dumps(obj, separators=(",", ":")).encode()) for obj in
++                    [{"alg": "HS256", "typ": "JWT"}, {"sub": str(uid), "iat": now, "exp": now + 600}])
++    return text + "." + encode(hmac.digest(secret.encode(), text.encode(), "sha256"))
++
++
++class Probe:
++    def __init__(self, args):
++        self.args = args
++        self.base = urllib.parse.urlsplit(args.base)
++        parsed = urllib.parse.urlsplit(args.database_url)
++        if parsed.scheme not in {"postgres", "postgresql"}:
++            raise ValueError("requires a postgres:// or postgresql:// disposable DB URL")
++        self.database = urllib.parse.unquote(parsed.path.lstrip("/"))
++        if not self.database or self.database in {"postgres", "template0", "template1", "conduit_seed", "conduit_dev"}:
++            raise ValueError("requires a disposable clone, never a seed/system database")
++        self.pg_env = os.environ.copy()
++        for key in ["PGDATABASE", "PGHOST", "PGPORT", "PGUSER", "PGPASSWORD", "PGSERVICE"]:
++            self.pg_env.pop(key, None)
++        self.pg_env.update(PGDATABASE=self.database, PGPORT=str(parsed.port or 5432), PGCONNECT_TIMEOUT="5")
++        for key, value in [("PGHOST", parsed.hostname),
++                           ("PGUSER", urllib.parse.unquote(parsed.username or "")),
++                           ("PGPASSWORD", urllib.parse.unquote(parsed.password or ""))]:
++            if value:
++                self.pg_env[key] = value
++        options = dict(urllib.parse.parse_qsl(parsed.query))
++        if set(options) - {"sslmode", "sslrootcert"}:
++            raise ValueError("only sslmode/sslrootcert database URL options are supported")
++        for key, env in [("sslmode", "PGSSLMODE"), ("sslrootcert", "PGSSLROOTCERT")]:
++            if key in options:
++                self.pg_env[env] = options[key]
++
++    def sql(self, text):
++        run = subprocess.run([self.args.psql, "-X", "-qAt", "-v", "ON_ERROR_STOP=1"],
++                             input=text, env=self.pg_env, text=True, capture_output=True, timeout=15)
++        if run.returncode:
++            raise RuntimeError("fixture SQL failed: " + run.stderr.strip())
++        return run.stdout.strip()
++
++    def api(self, method, path, auth=None, sent=None):
++        connection_type = http.client.HTTPSConnection if self.base.scheme == "https" else http.client.HTTPConnection
++        connection = connection_type(self.base.hostname, self.base.port, timeout=4)
++        headers = {"Connection": "close"}
++        if auth:
++            headers["Authorization"] = "Token " + auth
++        try:
++            connection.request(method, self.base.path.rstrip("/") + path, headers=headers)
++            sent_at = time.monotonic()
++            if sent is not None:
++                sent["sent_s"] = sent_at
++                sent["event"].set()
++            response = connection.getresponse()
++            headers_at = time.monotonic()
++            body = response.read()
++            return {"status": response.status, "body": json.loads(body), "sent_s": sent_at,
++                    "headers_s": headers_at, "completed_s": time.monotonic()}
++        finally:
++            if sent is not None:
++                sent["event"].set()
++            connection.close()
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--base", default=os.environ.get("BASE") or os.environ.get("BASE_URL"))
++    parser.add_argument("--database-url", default=os.environ.get("PROBE_DATABASE_URL") or os.environ.get("DATABASE_URL"))
++    parser.add_argument("--secret", default=os.environ.get("JWT_SECRET"))
++    parser.add_argument("--psql", default="psql")
++    parser.add_argument("--expected-us", type=int, default=500000)
++    parser.add_argument("--out", type=Path, required=True)
++    args = parser.parse_args()
++    if not args.base or not args.database_url or not args.secret:
++        parser.error("BASE, disposable DATABASE_URL and JWT_SECRET (or corresponding arguments) are required")
++    if not 0 <= args.expected_us <= 1000000:
++        parser.error("expected-us must be0..1000000")
++    parsed = urllib.parse.urlsplit(args.base)
++    if parsed.scheme not in {"http", "https"} or not parsed.hostname or parsed.username or parsed.password or parsed.query:
++        parser.error("base must be a credential-free HTTP(S) URL without a query")
++    seconds = args.expected_us / 1e6
++    lower, upper = max(0, seconds - .1), max(2, seconds * 4)
++    nonce = "quiet_read_" + uuid.uuid4().hex
++    names = [nonce + "_actor", nonce + "_target"]
++    record = {"scope": "Correctness only: quiet read wake, reset and independent writer deadline",
++              "test_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
++              "base": args.base, "expected_read_batch_us": args.expected_us,
++              "expected_writer_batch_us": 1000, "latency_bounds_s": [lower, upper],
++              "stress_independence_applicable": seconds >= .2, "nonce": nonce,
++              "created_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
++              "pass": False, "failures": [], "cleanup": {}}
++    probe, fixture = None, None
++    try:
++        probe = Probe(args)
++        record["database"] = probe.database
++        public_hash = "$2a$10$ZSfEoPvlcsj2XfvsSeK25em4NZ9Jm7ntGqXuLgQfHEeZPYB8899wq"
++        fixture = json.loads(probe.sql("WITH u AS (INSERT INTO users(username,email,password_hash) VALUES "
++                                      + ",".join("(" + ",".join([quote(n), quote(n + "@example.test"), quote(public_hash)]) + ")"
++                                                 for n in names)
++                                      + " RETURNING id,username) SELECT json_object_agg(username,id) FROM u;"))
++        actor, target = fixture[names[0]], fixture[names[1]]
++        record["fixture"] = {"actor_id": actor, "target_id": target, "actor_username": names[0], "target_username": names[1]}
++
++        # No second HTTP request, DB query or polling occurs while this request
++        # waits. Completion therefore requires the server's quiet timer wake.
++        quiet = probe.api("GET", "/api/tags")
++        record["quiet_read"] = quiet
++        elapsed = quiet["headers_s"] - quiet["sent_s"]
++        assert quiet["status"] == 200 and isinstance(quiet["body"].get("tags"), list), "quiet tags response"
++        assert lower <= elapsed <= upper, ("quiet read timer bounds", elapsed, lower, upper)
++
++        # A new otherwise-idle pool must start a fresh deadline, not inherit the
++        # prior pool timestamp. The only additional HTTP traffic is the writer.
++        sent = {"event": threading.Event()}
++        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
++            future = executor.submit(probe.api, "GET", "/api/tags", None, sent)
++            assert sent["event"].wait(timeout=5) and "sent_s" in sent, "second read was not sent"
++            pause = min(.1, seconds * .2) if seconds else .05
++            time.sleep(pause)
++            if seconds >= .2:
++                assert not future.done(), "read completed before its declared stress window"
++            write = probe.api("POST", "/api/profiles/" + urllib.parse.quote(names[1], safe="") + "/follow",
++                              token(args.secret, actor))
++            pending_at_write_response = not future.done()
++            record["writer"] = {**write, "read_pending_at_writer_response": pending_at_write_response,
++                                "started_after_read_sent_s": write["sent_s"] - sent["sent_s"],
++                                "completed_after_read_sent_s": write["completed_s"] - sent["sent_s"]}
++            assert write["status"] == 200 and write["body"]["profile"]["username"] == names[1], "follow response"
++            assert write["body"]["profile"]["following"] is True, "follow flag"
++            committed = probe.sql("SELECT EXISTS(SELECT 1 FROM follows WHERE follower_id=%d AND followee_id=%d);"
++                                  % (actor, target)) == "t"
++            record["writer"]["follow_visible_immediately_after_response"] = committed
++            assert committed, "follow was not visible immediately after the response"
++            if seconds >= .2:
++                deadline = sent["sent_s"] + seconds * .8
++                record["writer"]["latest_allowed_completion_s"] = deadline
++                assert pending_at_write_response and write["completed_s"] < deadline, "writer waited for read deadline"
++            second = future.result(timeout=5)
++        record["second_read"] = second
++        elapsed = second["headers_s"] - second["sent_s"]
++        assert second["status"] == 200 and second["body"] == quiet["body"], "second tags response"
++        assert lower <= elapsed <= upper, ("fresh read deadline bounds", elapsed, lower, upper)
++        if seconds >= .2:
++            assert write["completed_s"] < second["headers_s"], "writer did not complete before pending read"
++        record["pass"] = True
++    except Exception as error:
++        record["failures"].append({"error": type(error).__name__ + ": " + str(error)})
++    finally:
++        if probe is not None and fixture is not None:
++            try:
++                probe.sql("DELETE FROM users WHERE username IN (" + ",".join(map(quote, names)) + ");")
++                remaining = json.loads(probe.sql("SELECT json_build_object('users',(SELECT count(*) FROM users WHERE username IN ("
++                                                + ",".join(map(quote, names)) + ")),'follows',(SELECT count(*) FROM follows WHERE "
++                                                + "follower_id=%d OR followee_id=%d));" % (fixture[names[0]], fixture[names[1]])))
++                record["cleanup"] = {"remaining_private_rows": remaining}
++                assert all(n == 0 for n in remaining.values()), "fixture cleanup incomplete"
++            except Exception as error:
++                record["cleanup"]["error"] = type(error).__name__ + ": " + str(error)
++                record["pass"] = False
++        args.out.parent.mkdir(parents=True, exist_ok=True)
++        args.out.write_text(json.dumps(record, indent=2, ensure_ascii=False, allow_nan=False) + "\n")
++    print(json.dumps({"out": str(args.out), "pass": record["pass"],
++                      "stress_independence_applicable": record["stress_independence_applicable"],
++                      "failures": len(record["failures"]) + int("error" in record["cleanup"])}))
++    return 0 if record["pass"] else 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/.github/validation-goose/read-batches.py b/.github/validation-goose/read-batches.py
+new file mode 100644
+index 0000000..5341056
+--- /dev/null
++++ b/.github/validation-goose/read-batches.py
+@@ -0,0 +1,526 @@
++#!/usr/bin/env python3
++"""Finite black-box feed/comments batching check; standard library + psql only.
++
++Run two servers against one disposable DB (or equivalent disposable clones).
++The candidate should use WORKERS=1 PG_READERS=3 READ_BATCH=32 READ_HOLD=1.
++Default workload: 384 baseline singletons + 1,280 contended candidate requests.
++This writes/cleans private fixtures. It is correctness evidence, not a benchmark.
++"""
++import argparse
++import base64
++import concurrent.futures
++import contextlib
++import hashlib
++import hmac
++import json
++import os
++from pathlib import Path
++import select
++import subprocess
++import threading
++import time
++import urllib.error
++import urllib.parse
++import urllib.request
++import uuid
++
++
++T0 = "2026-10-23T00:00:00.000Z"
++T1 = "2026-10-23T00:00:01.000Z"
++T2 = "2026-10-23T00:00:02.000Z"
++PUBLIC_HASH = "$2a$10$ZSfEoPvlcsj2XfvsSeK25em4NZ9Jm7ntGqXuLgQfHEeZPYB8899wq"
++PROTECTED_DATABASES = {"postgres", "template0", "template1", "conduit_seed", "conduit_dev"}
++
++
++def quote(value):
++    return "'" + str(value).replace("'", "''") + "'"
++
++
++def digest(value):
++    raw = json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
++    return hashlib.sha256(raw).hexdigest()
++
++
++class Database:
++    def __init__(self, url, psql):
++        parsed = urllib.parse.urlsplit(url)
++        if parsed.scheme not in {"postgres", "postgresql"}:
++            raise ValueError("database URL must use postgres:// or postgresql://")
++        self.name = urllib.parse.unquote(parsed.path.lstrip("/"))
++        if not self.name or self.name in PROTECTED_DATABASES:
++            raise ValueError("requires disposable clones, never a seed or system database")
++        self.env = os.environ.copy()
++        for key in ["PGDATABASE", "PGHOST", "PGPORT", "PGUSER", "PGPASSWORD", "PGSERVICE"]:
++            self.env.pop(key, None)
++        self.env.update(PGDATABASE=self.name, PGPORT=str(parsed.port or 5432), PGCONNECT_TIMEOUT="5")
++        if parsed.hostname:
++            self.env["PGHOST"] = parsed.hostname
++        if parsed.username:
++            self.env["PGUSER"] = urllib.parse.unquote(parsed.username)
++        if parsed.password is not None:
++            self.env["PGPASSWORD"] = urllib.parse.unquote(parsed.password)
++        options = dict(urllib.parse.parse_qsl(parsed.query))
++        for key, env in [("sslmode", "PGSSLMODE"), ("sslrootcert", "PGSSLROOTCERT")]:
++            if key in options:
++                self.env[env] = options[key]
++        unsupported = set(options) - {"sslmode", "sslrootcert"}
++        if unsupported:
++            raise ValueError("unsupported database URL options: " + ",".join(sorted(unsupported)))
++        self.argv = [psql, "-X", "-q", "-A", "-t", "-v", "ON_ERROR_STOP=1"]
++        self.identity = json.loads(self.sql(
++            "SELECT json_build_object('database',current_database(),'database_oid',"
++            "(SELECT oid FROM pg_database WHERE datname=current_database()),"
++            "'server_address',inet_server_addr(),'server_port',inet_server_port(),"
++            "'postmaster_start',pg_postmaster_start_time())"))
++
++    def sql(self, text, timeout=20):
++        run = subprocess.run(self.argv, input=text, env=self.env, text=True,
++                             capture_output=True, timeout=timeout)
++        if run.returncode:
++            raise RuntimeError("psql failed: " + run.stderr.strip())
++        return run.stdout.strip()
++
++    def batch_witness(self, family):
++        pattern = ("%WITH ORDINALITY AS r(p1,p2,p3,p4,ord)%" if family == "feed" else
++                   "%viewers AS MATERIALIZED%" if family == "comments" else
++                   "%queries AS MATERIALIZED%")
++        value = self.sql("SELECT COALESCE(json_agg(json_build_object('pid',pid,"
++                         "'wait_event_type',wait_event_type,'query',query)), '[]'::json) "
++                         "FROM pg_stat_activity WHERE datname=current_database() "
++                         "AND pid<>pg_backend_pid() AND wait_event_type='Lock' "
++                         "AND query LIKE " + quote(pattern))
++        return json.loads(value)
++
++    @contextlib.contextmanager
++    def block_reads(self):
++        proc = subprocess.Popen(self.argv, env=self.env, stdin=subprocess.PIPE,
++                                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
++                                text=True, bufsize=1)
++        try:
++            proc.stdin.write("BEGIN; LOCK TABLE articles IN ACCESS EXCLUSIVE MODE; "
++                             "SELECT 'READ_BATCH_LOCKED';\n")
++            proc.stdin.flush()
++            deadline = time.monotonic() + 10
++            while time.monotonic() < deadline:
++                if proc.poll() is not None:
++                    raise RuntimeError("read-lock transaction exited: " + proc.stderr.read())
++                if select.select([proc.stdout], [], [], .1)[0]:
++                    if proc.stdout.readline().strip() == "READ_BATCH_LOCKED":
++                        break
++            else:
++                raise TimeoutError("fixture read lock did not become ready")
++            yield
++        finally:
++            with contextlib.suppress(Exception):
++                proc.stdin.write("ROLLBACK;\n\\q\n")
++                proc.stdin.flush()
++                proc.stdin.close()
++                proc.wait(timeout=5)
++            if proc.poll() is None:
++                proc.terminate()
++                with contextlib.suppress(subprocess.TimeoutExpired):
++                    proc.wait(timeout=3)
++            if proc.poll() is None:
++                proc.kill()
++                proc.wait(timeout=3)
++            proc.stdout.close()
++            proc.stderr.close()
++
++
++class Fixture:
++    def __init__(self):
++        nonce = uuid.uuid4().hex
++        self.nonce = "read_batch_" + nonce
++        self.base = 5_000_000_000 + int(nonce[:10], 16) * 100_000
++        self.users = [self.base + n + 1 for n in range(7)]
++        self.usernames = {uid: self.nonce + "_" + chr(97 + n) for n, uid in enumerate(self.users)}
++        self.article_ids = [self.base + 1000 + n for n in range(1100)]
++        self.slugs = [self.nonce + ("-grün-🌱" if n == 0 else "-article-" + str(n)) for n in range(1100)]
++        self.missing = [self.nonce + "-missing-first", self.nonce + "-不存在-missing-last"]
++        self.tag_ids = [1_500_000_000 + int(nonce[10:17], 16) % 100_000_000 + n for n in range(3)]
++        self.tags = [self.nonce + '-a "\\\n', self.nonce + "-é", self.nonce + "-空"]
++
++    def follows(self, changed):
++        a, b, c, d, e, _, g = self.users
++        out = {(a, b), (b, a), (c, a), (c, b), (e, c), (g, a)}
++        if changed:
++            out.remove((c, b))
++            out.add((d, a))
++        return out
++
++    def favorites(self, changed):
++        a, b, c, d, *_ = self.users
++        out = {(b, self.article_ids[1098]), (c, self.article_ids[0]), (a, self.article_ids[1099])}
++        if changed:
++            out.remove((b, self.article_ids[1098]))
++            out.update({(c, self.article_ids[1098]), (d, self.article_ids[1098])})
++        return out
++
++    def comments(self, changed):
++        out = []
++        for n in range(108):
++            out.append({"id": self.base + 10_000 + n, "article": 0,
++                        "author": self.users[n % 7], "stamp": T0,
++                        "body": 'Comment %d: Grüße 🌱 空 "quote" \\slash\nline\ttab' % n})
++        for n, article in enumerate([1, 1, 1, 3, 3, 4]):
++            out.append({"id": self.base + 10_200 + n, "article": article,
++                        "author": self.users[(n + 2) % 7], "stamp": T0,
++                        "body": 'Small comment %d: 世界 🌱\n"quoted"' % n})
++        if changed:
++            out = [comment for comment in out if comment["id"] != self.base + 10_107]
++            out[0] = {**out[0], "body": 'COMMITTED oldest comment: 世界 🌱 "fresh"\n', "stamp": T1}
++            out.append({"id": self.base + 11_000, "article": 2, "author": self.users[1],
++                        "stamp": T2, "body": 'COMMITTED formerly-empty comment: 空 🌱\t'})
++        return out
++
++    def profile(self, uid, viewer, changed):
++        n = self.users.index(uid)
++        return {"username": self.usernames[uid],
++                "bio": "COMMITTED bio 世界\n" if changed and n == 0 else (None if n % 2 else "Bio Grüße " + str(n)),
++                "image": "https://example.test/updated-🌱.png" if changed and n == 0 else (None if n % 2 else "https://example.test/" + str(n)),
++                "following": (viewer, uid) in self.follows(changed)}
++
++    def install(self, db):
++        previous_max = int(db.sql("SELECT COALESCE(max(id),0) FROM articles"))
++        if previous_max >= self.article_ids[0]:
++            raise ValueError("fixture IDs must sort above all existing articles")
++        users = []
++        for n, uid in enumerate(self.users):
++            profile = self.profile(uid, 0, False)
++            values = [str(uid), quote(self.usernames[uid]), quote(self.usernames[uid] + "@example.test"),
++                      quote(PUBLIC_HASH), "NULL" if profile["bio"] is None else quote(profile["bio"]),
++                      "NULL" if profile["image"] is None else quote(profile["image"]), quote(T0)]
++            users.append("(" + ",".join(values) + ")")
++        a, b, *_ = self.users
++        text = ("BEGIN; INSERT INTO users(id,username,email,password_hash,bio,image,created_at) VALUES "
++                + ",".join(users) + "; INSERT INTO articles(id,slug,author_id,title,description,body,created_at,updated_at) "
++                + "SELECT " + str(self.base + 1000) + "+g, CASE WHEN g=0 THEN " + quote(self.slugs[0])
++                + " ELSE " + quote(self.nonce + "-article-") + "||g END, CASE WHEN g%2=0 THEN " + str(a)
++                + " ELSE " + str(b) + " END, " + quote("Article Grüße 🌱 ") + "||g, "
++                + quote('Description 空 "quoted"') + "," + quote("Fixture body 🌱\nline\t")
++                + "," + quote(T0) + "," + quote(T0) + " FROM generate_series(0,1099) g; ")
++        text += "INSERT INTO tags(id,name) VALUES " + ",".join(
++            "(" + str(uid) + "," + quote(name) + ")" for uid, name in zip(self.tag_ids, self.tags)) + "; "
++        text += "INSERT INTO article_tags(article_id,tag_id) VALUES " + ",".join(
++            "(" + str(self.article_ids[n]) + "," + str(tag) + ")" for n in [0, 1098, 1099] for tag in self.tag_ids) + "; "
++        text += "INSERT INTO follows(follower_id,followee_id) VALUES " + ",".join(
++            "(%d,%d)" % pair for pair in sorted(self.follows(False))) + "; "
++        text += "INSERT INTO favorites(user_id,article_id) VALUES " + ",".join(
++            "(%d,%d)" % pair for pair in sorted(self.favorites(False))) + "; "
++        text += "INSERT INTO comments(id,article_id,author_id,body,created_at,updated_at) VALUES " + ",".join(
++            "(" + ",".join([str(c["id"]), str(self.article_ids[c["article"]]), str(c["author"]),
++                             quote(c["body"]), quote(c["stamp"]), quote(c["stamp"])]) + ")" for c in self.comments(False))
++        db.sql(text + "; COMMIT;")
++
++    def mutate(self, db):
++        a, b, c, d, *_ = self.users
++        aid = self.article_ids[1098]
++        db.sql("BEGIN; DELETE FROM follows WHERE follower_id=%d AND followee_id=%d; " % (c, b)
++               + "INSERT INTO follows(follower_id,followee_id) VALUES (%d,%d); " % (d, a)
++               + "DELETE FROM favorites WHERE user_id=%d AND article_id=%d; " % (b, aid)
++               + "INSERT INTO favorites(user_id,article_id) VALUES (%d,%d),(%d,%d); " % (c, aid, d, aid)
++               + "UPDATE users SET bio=" + quote("COMMITTED bio 世界\n") + ",image="
++               + quote("https://example.test/updated-🌱.png") + " WHERE id=%d; " % a
++               + "UPDATE articles SET title=" + quote('COMMITTED title 世界 🌱 "fresh"') + ",updated_at="
++               + quote(T1) + " WHERE id=%d; " % aid
++               + "UPDATE comments SET body=" + quote('COMMITTED oldest comment: 世界 🌱 "fresh"\n')
++               + ",created_at=" + quote(T1) + ",updated_at=" + quote(T1) + " WHERE id=%d; " % (self.base + 10_000)
++               + "DELETE FROM comments WHERE id=%d; " % (self.base + 10_107)
++               + "INSERT INTO comments(id,article_id,author_id,body,created_at,updated_at) VALUES ("
++               + ",".join([str(self.base + 11_000), str(self.article_ids[2]), str(b),
++                            quote('COMMITTED formerly-empty comment: 空 🌱\t'), quote(T2), quote(T2)]) + "); COMMIT;")
++
++    def cleanup(self, db):
++        db.sql("BEGIN; DELETE FROM users WHERE id IN (" + ",".join(map(str, self.users))
++               + ") AND username LIKE " + quote(self.nonce + "%")
++               + "; DELETE FROM tags WHERE id IN (" + ",".join(map(str, self.tag_ids))
++               + ") AND name LIKE " + quote(self.nonce + "%") + "; COMMIT;")
++        users = ",".join(map(str, self.users))
++        remaining = json.loads(db.sql("SELECT json_build_object('users',(SELECT count(*) FROM users WHERE id IN ("
++                                     + users + ")),'articles',(SELECT count(*) FROM articles WHERE author_id IN ("
++                                     + users + ")),'comments',(SELECT count(*) FROM comments WHERE author_id IN ("
++                                     + users + ")),'tags',(SELECT count(*) FROM tags WHERE id IN ("
++                                     + ",".join(map(str, self.tag_ids))
++                                     + ")),'follows',(SELECT count(*) FROM follows WHERE follower_id IN ("
++                                     + users + ") OR followee_id IN (" + users
++                                     + ")),'favorites',(SELECT count(*) FROM favorites WHERE user_id IN ("
++                                     + users + ")),'article_tags',(SELECT count(*) FROM article_tags WHERE article_id BETWEEN "
++                                     + str(self.article_ids[0]) + " AND " + str(self.article_ids[-1]) + "))"))
++        assert all(value == 0 for value in remaining.values()), ("fixture cleanup incomplete", remaining)
++        return remaining
++
++    def cases(self):
++        feed = []
++        for limit in [1, 10, 100]:
++            for offset in [0, 1, 10, 40, 2000]:
++                for viewer in self.users[:4]:
++                    feed.append({"viewer": viewer, "limit": limit, "offset": offset,
++                                 "path": "/api/articles/feed?limit=%d&offset=%d" % (limit, offset)})
++        for offset in [0, 1, 10, 40]:
++            feed.append({"viewer": 0, "limit": 10, "offset": offset,
++                         "path": "/api/articles/feed?limit=10&offset=" + str(offset)})
++        comments = []
++        slugs = [self.missing[0], self.slugs[0], self.slugs[2], self.slugs[1],
++                 self.slugs[3], self.slugs[4], self.slugs[5], self.missing[1]]
++        for slug in slugs:
++            for viewer in [0, *self.users]:
++                comments.append({"viewer": viewer, "slug": slug,
++                                 "path": "/api/articles/" + urllib.parse.quote(slug, safe="") + "/comments"})
++        families = {"feed": feed, "comments": comments}
++        for family in ["global", "tag", "author", "favorited"]:
++            rows = []
++            first = {"tag": self.tags[1], "author": self.usernames[self.users[0]],
++                     "favorited": self.usernames[self.users[1]]}.get(family)
++            second = {"tag": self.tags[0], "author": self.usernames[self.users[1]],
++                      "favorited": self.usernames[self.users[2]]}.get(family)
++            for viewer in [0, *self.users]:
++                rows.append({"viewer": viewer, "limit": 10, "offset": 0, "filter": first})
++            for viewer in [0, *self.users[:3]]:
++                rows.append({"viewer": viewer, "limit": 1, "offset": 1, "filter": second})
++            rows += [{"viewer": self.users[0], "limit": 10, "offset": 10_000_000, "filter": first},
++                     {"viewer": 0, "limit": 10, "offset": 0, "filter": self.nonce + "-missing-filter" if first else None},
++                     {"viewer": self.users[1], "limit": 100, "offset": 40, "filter": first},
++                     {"viewer": self.users[2], "limit": 5, "offset": 10, "filter": first}]
++            for case in rows:
++                query = {"limit": case["limit"], "offset": case["offset"]}
++                if family != "global":
++                    query[family] = case["filter"]
++                case["path"] = "/api/articles?" + urllib.parse.urlencode(query)
++            families[family] = rows
++        for family, rows in families.items():
++            assert len(rows) == (64 if family in {"feed", "comments"} else 16)
++            for n, row in enumerate(rows):
++                row.update(family=family, id=family + "-" + str(n))
++        return families
++
++    def oracle(self, case, response, changed):
++        viewer, family = case["viewer"], case["family"]
++        status = 401 if family == "feed" and viewer == 0 else 404 if case.get("slug") in self.missing else 200
++        assert response["status"] == status, (case["id"], "status", response["status"], status)
++        if status != 200:
++            return
++        if family == "comments":
++            article = self.slugs.index(case["slug"])
++            expected = sorted((c for c in self.comments(changed) if c["article"] == article),
++                              key=lambda c: (c["stamp"], c["id"]), reverse=True)[:100]
++            expected = [{"id": c["id"], "createdAt": c["stamp"], "updatedAt": c["stamp"],
++                         "body": c["body"], "author": self.profile(c["author"], viewer, changed)} for c in expected]
++            assert response["body"] == {"comments": expected}, (case["id"], "comment oracle")
++        else:
++            if family == "feed":
++                eligible = [n for n in reversed(range(1100)) if (viewer, self.users[n % 2]) in self.follows(changed)]
++            elif family == "global":
++                # Fixture IDs are above the original seed, so all nonempty test
++                # pages come from these1,100 articles; huge offsets are empty.
++                eligible = list(reversed(range(1100)))
++            elif family == "tag":
++                eligible = [1099, 1098, 0] if case["filter"] in self.tags else []
++            elif family == "author":
++                eligible = [n for n in reversed(range(1100))
++                            if self.usernames[self.users[n % 2]] == case["filter"]]
++            else:
++                eligible = [n for n in reversed(range(1100)) if any(
++                    aid == self.article_ids[n] and self.usernames[uid] == case["filter"]
++                    for uid, aid in self.favorites(changed))]
++            obj = response["body"]
++            assert obj["articlesCount"] == min(1000, len(eligible)), (case["id"], "list count")
++            selected = eligible[case["offset"]:case["offset"] + case["limit"]]
++            assert [row["slug"] for row in obj["articles"]] == [self.slugs[n] for n in selected], (case["id"], "list order")
++            favorites = self.favorites(changed)
++            for n, row in zip(selected, obj["articles"]):
++                aid = self.article_ids[n]
++                assert row["author"] == self.profile(self.users[n % 2], viewer, changed), (case["id"], "list author")
++                assert row["favorited"] is ((viewer, aid) in favorites), (case["id"], "favorited")
++                assert row["favoritesCount"] == sum(article == aid for _, article in favorites), (case["id"], "favorites count")
++                assert row["title"] == ('COMMITTED title 世界 🌱 "fresh"' if changed and n == 1098 else "Article Grüße 🌱 " + str(n)), (case["id"], "title")
++                assert set(row["tagList"]) == (set(self.tags) if n in {0, 1098, 1099} else set()), (case["id"], "tags")
++
++
++def token(secret, uid):
++    encode = lambda b: base64.urlsafe_b64encode(b).decode().rstrip("=")
++    now = int(time.time())
++    text = ".".join(encode(json.dumps(obj, separators=(",", ":")).encode()) for obj in
++                    [{"alg": "HS256", "typ": "JWT"}, {"sub": str(uid), "iat": now, "exp": now + 3600}])
++    return text + "." + encode(hmac.digest(secret.encode(), text.encode(), "sha256"))
++
++
++def api(base, secret, case, timeout):
++    headers = {"Connection": "close"}
++    if case["viewer"]:
++        headers["Authorization"] = "Token " + token(secret, case["viewer"])
++    request = urllib.request.Request(base.rstrip("/") + case["path"], headers=headers)
++    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
++    try:
++        with opener.open(request, timeout=timeout) as reply:
++            status, body = reply.status, reply.read()
++    except urllib.error.HTTPError as reply:
++        status, body = reply.code, reply.read()
++    obj = json.loads(body)
++    if status in {401, 404}:
++        assert isinstance(obj.get("errors", {}).get("body"), list) and obj["errors"]["body"], "error shape"
++        obj = {"errors": {"body_is_nonempty_list": True}}
++    return {"status": status, "body": obj}
++
++
++def concurrent_wave(args, db, fixture, cases, reference, changed, gated):
++    barrier = threading.Barrier(len(cases) + 1)
++    results, failures, witness = [], [], []
++    family = cases[0]["family"]
++    def request(case):
++        barrier.wait(timeout=10)
++        return api(args.candidate, args.secret, case, args.http_timeout)
++    executor = concurrent.futures.ThreadPoolExecutor(max_workers=args.concurrency)
++    futures = []
++    try:
++        with db.block_reads() if gated else contextlib.nullcontext():
++            futures = [(case, executor.submit(request, case)) for case in cases]
++            barrier.wait(timeout=10)
++            if gated:
++                deadline = time.monotonic() + 6
++                while time.monotonic() < deadline:
++                    witness = db.batch_witness(family)
++                    if witness:
++                        break
++                    time.sleep(.04)
++        deadline = time.monotonic() + args.http_timeout + 5
++        for case, future in futures:
++            actual = None
++            try:
++                actual = future.result(timeout=max(.1, deadline - time.monotonic()))
++                fixture.oracle(case, actual, changed)
++                if actual != reference[case["id"]]:
++                    raise AssertionError("candidate differs from baseline singleton")
++                results.append({"case": case["id"], "response_sha256": digest(actual), "pass": True})
++            except Exception as error:
++                failure = {"case": case["id"], "error": type(error).__name__ + ": " + str(error),
++                           "expected_response_sha256": digest(reference[case["id"]])}
++                if actual is not None:
++                    failure["actual_response_sha256"] = digest(actual)
++                    if len(failures) < 4:
++                        failure["actual_response"] = actual
++                failures.append(failure)
++        if gated and not witness:
++            failures.append({"error": "actual " + family + " batch SQL was not witnessed while blocked"})
++    finally:
++        executor.shutdown(wait=True, cancel_futures=True)
++    return {"requests": len(futures), "gated": gated, "batch_sql_witness": witness,
++            "responses": results, "failures": failures, "pass": not failures and len(results) == len(cases)}
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--baseline", required=True, help="baseline server URL")
++    parser.add_argument("--candidate", required=True, help="candidate server URL")
++    parser.add_argument("--secret", default=os.environ.get("JWT_SECRET"))
++    parser.add_argument("--database-url", default=os.environ.get("DATABASE_URL"), help="disposable baseline DB")
++    parser.add_argument("--candidate-database-url", default=os.environ.get("CANDIDATE_DATABASE_URL"))
++    parser.add_argument("--psql", default="psql")
++    parser.add_argument("--out", type=Path, required=True)
++    parser.add_argument("--concurrency", type=int, default=64)
++    parser.add_argument("--rounds", type=int, default=3)
++    parser.add_argument("--http-timeout", type=float, default=25)
++    parser.add_argument("--keep-fixture", action="store_true")
++    args = parser.parse_args()
++    if not args.secret or not args.database_url:
++        parser.error("JWT_SECRET and disposable DATABASE_URL (or corresponding arguments) are required")
++    if args.baseline.rstrip("/") == args.candidate.rstrip("/"):
++        parser.error("baseline and candidate must be distinct server URLs")
++    for url in [args.baseline, args.candidate]:
++        parsed = urllib.parse.urlsplit(url)
++        if parsed.scheme not in {"http", "https"} or not parsed.hostname or parsed.username or parsed.password:
++            parser.error("server URLs must be HTTP(S) URLs without credentials")
++    if not 64 <= args.concurrency <= 256 or not 1 <= args.rounds <= 6 or not 10 <= args.http_timeout <= 60:
++        parser.error("concurrency64..256, rounds1..6 and http-timeout10..60 are required")
++    report = {"scope": "Finite black-box read-batch correctness; no capacity/performance claim",
++              "test_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
++              "created_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
++              "baseline": args.baseline, "candidate": args.candidate, "pass": False,
++              "rounds": args.rounds, "concurrency": args.concurrency, "phases": [], "failures": []}
++    report["expected_http_requests_on_complete_pass"] = 896 + 256 * args.rounds
++    fixture, installed = Fixture(), []
++    try:
++        baseline_db = Database(args.database_url, args.psql)
++        candidate_db = Database(args.candidate_database_url or args.database_url, args.psql)
++        databases = [baseline_db]
++        if candidate_db.identity != baseline_db.identity:
++            databases.append(candidate_db)
++        report.update(databases=[db.identity for db in databases], same_database=len(databases) == 1,
++                      fixture={"nonce": fixture.nonce, "users": fixture.users,
++                               "base_id": fixture.base, "usernames": fixture.usernames,
++                               "tag_ids": fixture.tag_ids, "tags": fixture.tags,
++                               "article_count": 1100, "tied_comment_count": 108,
++                               "slugs": fixture.slugs[:6], "missing": fixture.missing},
++                      expected_candidate_config={"WORKERS": 1, "PG_READERS": 3, "READ_HOLD": 1, "READ_BATCH": 32})
++        for db in databases:
++            fixture.install(db)
++            installed.append(db)
++        cases = fixture.cases()
++        report["cases"] = cases
++        previous = None
++        for changed in [False, True]:
++            if changed:
++                for db in databases:
++                    fixture.mutate(db)
++            reference = {}
++            phase = {"state": "after_committed_mutations" if changed else "initial",
++                     "baseline_requests": 0, "reference_responses": reference, "waves": []}
++            report["phases"].append(phase)
++            for case in [case for family in cases.values() for case in family]:
++                actual = api(args.baseline, args.secret, case, args.http_timeout)
++                reference[case["id"]] = actual
++                phase["baseline_requests"] += 1
++                fixture.oracle(case, actual, changed)
++            if previous is not None:
++                deltas = {family: sum(reference[case["id"]] != previous[case["id"]] for case in cases[family])
++                          for family in cases}
++                assert all(deltas.values()), "committed mutations must change every endpoint family"
++                phase["baseline_responses_changed_since_commit"] = deltas
++            for family in cases:
++                rounds = args.rounds if family in {"feed", "comments"} else 1
++                for round_number in range(rounds):
++                    repeated = cases[family] * (64 // len(cases[family]))
++                    offset = (round_number * 13) % len(repeated)
++                    batch = repeated[offset:] + repeated[:offset]
++                    wave = concurrent_wave(args, candidate_db, fixture, batch, reference, changed, round_number == 0)
++                    wave.update(family=family, round=round_number + 1)
++                    phase["waves"].append(wave)
++                    if not wave["pass"]:
++                        report["failures"].append({"state": phase["state"], "family": family,
++                                                   "round": round_number + 1, "failures": wave["failures"]})
++                        raise AssertionError("stopping after first failing candidate wave")
++            previous = reference
++        report["pass"] = not report["failures"]
++    except Exception as error:
++        report["failures"].append({"error": type(error).__name__ + ": " + str(error)})
++    finally:
++        cleanup_errors, cleanup_witnesses = [], []
++        if not args.keep_fixture:
++            for db in reversed(installed):
++                try:
++                    cleanup_witnesses.append({"database": db.name, "remaining_fixture_rows": fixture.cleanup(db)})
++                except Exception as error:
++                    cleanup_errors.append({"database": db.name, "error": type(error).__name__ + ": " + str(error)})
++        report["fixture_cleanup"] = {"requested": not args.keep_fixture,
++                                     "databases_installed": len(installed), "witnesses": cleanup_witnesses,
++                                     "errors": cleanup_errors}
++        if cleanup_errors:
++            report["pass"] = False
++        report["baseline_requests"] = sum(p["baseline_requests"] for p in report["phases"])
++        report["candidate_requests"] = sum(w["requests"] for p in report["phases"] for w in p["waves"])
++        report["http_requests"] = report["baseline_requests"] + report["candidate_requests"]
++        report["verified_batch_waves"] = sum(bool(w["batch_sql_witness"])
++                                              for p in report["phases"] for w in p["waves"])
++        if report["pass"] and (report["http_requests"] != report["expected_http_requests_on_complete_pass"]
++                               or report["verified_batch_waves"] != 12):
++            report["pass"] = False
++            report["failures"].append({"error": "incomplete request coverage or missing batch witnesses"})
++        args.out.parent.mkdir(parents=True, exist_ok=True)
++        args.out.write_text(json.dumps(report, indent=2, ensure_ascii=False, allow_nan=False) + "\n")
++    print(json.dumps({"out": str(args.out), "pass": report["pass"],
++                      "http_requests": report["http_requests"], "verified_batch_waves": report["verified_batch_waves"],
++                      "failures": len(report["failures"]) + len(report["fixture_cleanup"]["errors"])}))
++    return 0 if report["pass"] else 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/.github/validation-goose/runtime-write-probe-v2.py b/.github/validation-goose/runtime-write-probe-v2.py
+new file mode 100644
+index 0000000..f70c3f3
+--- /dev/null
++++ b/.github/validation-goose/runtime-write-probe-v2.py
+@@ -0,0 +1,308 @@
++#!/usr/bin/env python3
++"""Black-box runtime correctness probe against an owned disposable DB clone.
++
++Run only against a dedicated correctness server, e.g. WORKERS=1 WRITE_BATCH_US=50000.
++Inputs BASE, DATABASE_URL, JWT_SECRET, normal administrative PG* credentials.
++No compiler/server/Docker is started. A temporary deferred test trigger blocks
++one commit on an advisory lock; it and all uniquely named fixtures are removed.
++V2 retains registration evidence before statistics checks and accommodates PG18
++backend-local statistics flushing (10-second idle callback).
++These fixture conditions are deliberately not performance-measurement conditions.
++"""
++import argparse
++import base64
++import concurrent.futures
++import contextlib
++import hmac
++import json
++import os
++import pathlib
++import select
++import subprocess
++import threading
++import time
++import urllib.error
++import urllib.parse
++import urllib.request
++import uuid
++
++p = argparse.ArgumentParser(description=__doc__)
++p.add_argument('--base', default=os.environ.get('BASE') or os.environ.get('BASE_URL'))
++p.add_argument('--database-url', default=os.environ.get('PROBE_DATABASE_URL') or os.environ.get('DATABASE_URL'))
++p.add_argument('--secret', default=os.environ.get('JWT_SECRET'))
++p.add_argument('--parallel', type=int, default=16)
++p.add_argument('--out', default='runtime-write-probe.json')
++a = p.parse_args()
++if not a.base or not a.secret:
++    p.error('BASE and JWT_SECRET are required')
++if a.parallel < 8 or a.parallel > 64 or a.parallel % 2:
++    p.error('--parallel must be even, between8 and64')
++pg_env = os.environ.copy()
++if a.database_url:
++    u = urllib.parse.urlsplit(a.database_url)
++    pg_env['PGDATABASE'] = urllib.parse.unquote(u.path.lstrip('/'))
++    for key, value in [('PGHOST', u.hostname), ('PGPORT', str(u.port or 5432)),
++                       ('PGUSER', urllib.parse.unquote(u.username or '')),
++                       ('PGPASSWORD', urllib.parse.unquote(u.password or ''))]:
++        if value and key not in pg_env:
++            pg_env[key] = value
++name = pg_env.get('PGDATABASE', '')
++if not name or name in {'postgres', 'template0', 'template1', 'conduit_seed', 'conduit_dev'}:
++    p.error('requires an owned disposable DB clone, never a seed/system DB')
++cmd = ['psql', '-X', '-q', '-A', '-t', '-v', 'ON_ERROR_STOP=1', '-d', name]
++nonce = 'rtprobe_' + uuid.uuid4().hex
++function = nonce + '_commit_gate'
++trigger = nonce + '_deferred'
++gate_user = nonce + '_commit'
++lock_a = int(uuid.uuid4().hex[:7], 16) + 1
++lock_b = int(uuid.uuid4().hex[:7], 16) + 1
++record = {'scope': 'Correctness only: quiet writer deadline, grouped rollback and commit-before-response',
++          'base': a.base, 'database': name, 'nonce': nonce,
++          'started_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
++          'pass': False, 'events': [], 'cleanup': {}}
++lock_process = None
++fixture_created = False
++trigger_created = False
++record_lock = threading.Lock()
++
++def event(what, **data):
++    with record_lock:
++        record['events'].append({'event': what, 'monotonic_s': time.monotonic(), **data})
++
++def sql(query, timeout=15):
++    r = subprocess.run(cmd + ['-c', query], env=pg_env, text=True,
++                       capture_output=True, timeout=timeout)
++    if r.returncode:
++        raise RuntimeError('psql failed: ' + r.stderr.strip())
++    return r.stdout.strip()
++
++def quote(value):
++    return "'" + value.replace("'", "''") + "'"
++
++def token(uid):
++    now = int(time.time())
++    enc = lambda value: base64.urlsafe_b64encode(json.dumps(value, separators=(',', ':')).encode()).decode().rstrip('=')
++    text = enc({'alg': 'HS256', 'typ': 'JWT'}) + '.' + enc({'sub': str(uid), 'iat': now, 'exp': now + 600})
++    return text + '.' + base64.urlsafe_b64encode(hmac.digest(a.secret.encode(), text.encode(), 'sha256')).decode().rstrip('=')
++
++def api(method, path, body=None, auth=None, headers_seen=None):
++    req_headers = {'Content-Type': 'application/json'}
++    if auth:
++        req_headers['Authorization'] = 'Token ' + auth
++    data = json.dumps(body).encode() if body is not None else None
++    req = urllib.request.Request(a.base.rstrip('/') + path, data=data,
++                                 headers=req_headers, method=method)
++    started = time.monotonic()
++    try:
++        response = urllib.request.urlopen(req, timeout=30)
++    except urllib.error.HTTPError as error:
++        response = error
++    with response:
++        headers_at = time.monotonic()
++        if headers_seen is not None:
++            headers_seen.set()
++        payload = response.read()
++        result = json.loads(payload) if payload else None
++        return {'status': response.code, 'body': result, 'started_s': started,
++                'headers_s': headers_at, 'completed_s': time.monotonic()}
++
++def committed_user(username, expected_email):
++    # A new libpq connection cannot see another transaction's uncommitted insert.
++    text = sql('SELECT id,email FROM users WHERE username=' + quote(username))
++    assert text, '201 response had no immediately committed user: ' + username
++    uid, email = text.split('|')
++    assert email == expected_email, (email, expected_email)
++    return int(uid)
++
++def rollback_count():
++    # This clears only the observer snapshot; it cannot flush another backend's counters.
++    return int(sql("SET stats_fetch_consistency='none'; SELECT pg_stat_clear_snapshot(); "
++                   "SELECT xact_rollback FROM pg_stat_database WHERE datname=current_database()"))
++
++def session_send(query):
++    lock_process.stdin.write(query + '\n')
++    lock_process.stdin.flush()
++
++def session_marker(want, timeout=10):
++    deadline = time.monotonic() + timeout
++    while time.monotonic() < deadline:
++        if lock_process.poll() is not None:
++            raise RuntimeError('advisory-lock session exited: ' + lock_process.stderr.read())
++        ready, _, _ = select.select([lock_process.stdout], [], [], min(.1, deadline-time.monotonic()))
++        if ready and lock_process.stdout.readline().strip() == want:
++            return
++    raise TimeoutError('missing lock-session marker ' + want)
++
++def release_lock():
++    global lock_process
++    if lock_process is None:
++        return
++    if lock_process.poll() is None:
++        try:
++            session_send(f'DO $$ BEGIN PERFORM pg_advisory_unlock({lock_a},{lock_b}); END $$; SELECT \'UNLOCKED\';')
++            session_marker('UNLOCKED', timeout=3)
++        except Exception:
++            # Closing the session also releases its advisory locks.
++            lock_process.terminate()
++        with contextlib.suppress(Exception):
++            lock_process.stdin.close()
++        try:
++            lock_process.wait(timeout=3)
++        except subprocess.TimeoutExpired:
++            lock_process.kill()
++            lock_process.wait(timeout=3)
++    lock_process = None
++
++try:
++    role = sql("SELECT current_user, current_database(), pg_is_in_recovery()")
++    record['pg_context'] = role
++    assert role.endswith('|f'), 'requires a writable primary'
++    owner = nonce + '_owner'
++    owner_email = owner + '@example.com'
++    # Public seed fixture hash, not an authentication shortcut: the API still verifies JWTs.
++    uid = int(sql('INSERT INTO users(username,email,password_hash) VALUES (' +
++                  quote(owner) + ',' + quote(owner_email) + ',' +
++                  quote('$2a$10$ZSfEoPvlcsj2XfvsSeK25em4NZ9Jm7ntGqXuLgQfHEeZPYB8899wq') + ') RETURNING id'))
++    fixture_created = True
++    auth = token(uid)
++
++    # No following HTTP request is sent to wake the worker: only its writer timer can flush.
++    quiet = api('POST', '/api/articles', {'article': {'title': nonce + ' quiet',
++                'description': 'quiet writer timer fixture', 'body': 'runtime probe', 'tagList': []}}, auth)
++    assert quiet['status'] == 201, {'quiet_status': quiet['status'], 'body': quiet['body']}
++    slug = quiet['body']['article']['slug']
++    assert sql('SELECT count(*) FROM articles WHERE slug=' + quote(slug)) == '1'
++    event('quiet write completed and immediately committed', elapsed_s=quiet['completed_s']-quiet['started_s'], slug=slug)
++    record['quiet_write'] = {'status': 201, 'elapsed_s': quiet['completed_s']-quiet['started_s'],
++                             'committed_read_after_response': True}
++
++    # Half collide on username, half are independent peers which must survive any group rollback.
++    before_rollbacks = rollback_count()
++    barrier = threading.Barrier(a.parallel)
++    shared = nonce + '_shared'
++    def registration(index):
++        username = shared if index % 2 == 0 else nonce + '_peer_' + str(index)
++        email = nonce + '_' + str(index) + '@example.com'
++        barrier.wait(timeout=10)
++        response = api('POST', '/api/users', {'user': {'username': username, 'email': email,
++                       'password': 'runtime probe password ' + str(index)}})
++        out = {'index': index, 'username': username, 'email': email, 'status': response['status'],
++               'elapsed_s': response['completed_s']-response['started_s']}
++        if response['status'] == 201:
++            ident = committed_user(username, email)
++            # Also check the real authenticated read path, immediately after the DB witness.
++            current = api('GET', '/api/user', auth=response['body']['user']['token'])
++            assert current['status'] == 200 and current['body']['user']['email'] == email, current['status']
++            out.update({'id': ident, 'immediately_committed': True, 'authenticated_read_pass': True})
++        elif response['status'] != 422:
++            raise AssertionError({'unexpected_registration_status': response['status'], 'index': index})
++        return out
++    with concurrent.futures.ThreadPoolExecutor(max_workers=a.parallel) as executor:
++        registered = list(executor.map(registration, range(a.parallel)))
++    collisions = [r for r in registered if r['index'] % 2 == 0]
++    peers = [r for r in registered if r['index'] % 2]
++    assert sum(r['status'] == 201 for r in collisions) == 1, collisions
++    assert all(r['status'] == 201 for r in peers), peers
++    assert sql('SELECT count(*) FROM users WHERE username=' + quote(shared)) == '1'
++    record['grouped_error_probe'] = {'registrations': registered,
++        'duplicate_successes': 1, 'independent_successes': len(peers),
++        'xact_rollback_before': before_rollbacks,
++        'limitation': 'Concurrent peer outcomes and DB rollback counters verify the error path; exact membership of each Sync group is not instrumented.'}
++    # PG18 pgstat.c: non-forced updates are limited to one per second; its idle
++    # callback is10s. A fresh observer cannot force the application writer to flush.
++    # With the required WORKERS=1, this benign committed update wakes that same sole
++    # writer after the minimum interval. It cannot itself create a rollback.
++    time.sleep(1.1)
++    pulse_bio = nonce + ' statistics flush witness'
++    pulse = api('PUT', '/api/user', {'user': {'bio': pulse_bio}}, auth)
++    assert pulse['status'] == 200, {'statistics_pulse_status': pulse['status']}
++    assert sql('SELECT bio FROM users WHERE id=' + str(uid)) == pulse_bio
++    record['grouped_error_probe']['statistics_flush_assistance'] = {
++        'wait_before_benign_writer_update_s': 1.1, 'update_status': pulse['status'],
++        'update_committed': True, 'observer_consistency': 'none, clear snapshot, fresh connection',
++        'wait_after_update_limit_s': 12,
++        'pg18_source': 'https://raw.githubusercontent.com/postgres/postgres/REL_18_STABLE/src/backend/utils/activity/pgstat.c',
++        'documentation': 'https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-STATS-VIEWS'}
++    after_rollbacks = before_rollbacks
++    deadline = time.monotonic() + 12
++    readings = []
++    while time.monotonic() < deadline:
++        after_rollbacks = rollback_count()
++        readings.append({'monotonic_s': time.monotonic(), 'xact_rollback': after_rollbacks})
++        if after_rollbacks > before_rollbacks:
++            break
++        time.sleep(.2)
++    record['grouped_error_probe'].update(xact_rollback_after=after_rollbacks,
++        rollback_delta=after_rollbacks-before_rollbacks, statistics_readings=readings)
++    assert after_rollbacks > before_rollbacks, 'no PostgreSQL rollback counter increase after writer wake and idle-flush allowance'
++    event('duplicate/independent registration peers passed', successes=len(peers)+1,
++          expected_422=len(collisions)-1, rollback_delta=after_rollbacks-before_rollbacks)
++
++    # A DEFERRED trigger executes at COMMIT, after INSERT RETURNING. It blocks only our gate fixture.
++    # An implementation that responds to INSERT completion before Sync/commit will fail headers_seen.
++    trigger_created = True  # cleanup also covers a partially failed multi-statement DDL call
++    sql(f'''CREATE FUNCTION {function}() RETURNS trigger LANGUAGE plpgsql AS $probe$
++            BEGIN IF NEW.username={quote(gate_user)} THEN
++            PERFORM pg_advisory_xact_lock({lock_a},{lock_b}); END IF; RETURN NEW; END $probe$;
++            CREATE CONSTRAINT TRIGGER {trigger} AFTER INSERT ON users
++            DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION {function}();''')
++    lock_process = subprocess.Popen(cmd, env=pg_env, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
++                                    stderr=subprocess.PIPE, text=True, bufsize=1)
++    session_send(f'DO $$ BEGIN PERFORM pg_advisory_lock({lock_a},{lock_b}); END $$; SELECT \'LOCK_HELD\';')
++    session_marker('LOCK_HELD')
++    headers_seen = threading.Event()
++    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
++        future = executor.submit(api, 'POST', '/api/users', {'user': {'username': gate_user,
++                                 'email': gate_user+'@example.com', 'password': 'deferred commit fixture'}},
++                                 None, headers_seen)
++        try:
++            deadline = time.monotonic() + 15
++            witness = ''
++            while time.monotonic() < deadline:
++                witness = sql(f'''SELECT l.pid,a.wait_event_type,a.wait_event
++                    FROM pg_locks l JOIN pg_stat_activity a ON a.pid=l.pid
++                    WHERE l.locktype='advisory' AND NOT l.granted
++                    AND l.classid={lock_a}::oid AND l.objid={lock_b}::oid
++                    AND a.datname=current_database()''')
++                if witness:
++                    break
++                assert not headers_seen.is_set(), 'HTTP headers arrived before reaching blocked COMMIT'
++                time.sleep(.02)
++            assert witness, 'did not observe the deferred COMMIT actually blocked on our advisory lock'
++            assert sql('SELECT count(*) FROM users WHERE username=' + quote(gate_user)) == '0'
++            assert not headers_seen.wait(.2), 'HTTP headers arrived while COMMIT was blocked'
++            event('commit blocked, no response headers and no committed row', pg_lock_witness=witness)
++            released_at = time.monotonic()
++            release_lock()
++            response = future.result(timeout=20)
++            assert response['status'] == 201, response['status']
++            assert response['headers_s'] >= released_at, 'HTTP headers predated commit release'
++            ident = committed_user(gate_user, gate_user+'@example.com')
++            record['commit_gate'] = {'status': 201, 'id': ident, 'pg_lock_witness': witness,
++                'row_invisible_while_commit_blocked': True, 'no_http_headers_while_commit_blocked': True,
++                'headers_after_release': True, 'immediately_committed_after_response': True}
++        finally:
++            release_lock()
++    record['pass'] = True
++except Exception as error:
++    record['error'] = type(error).__name__ + ': ' + str(error)
++finally:
++    release_lock()
++    try:
++        if trigger_created:
++            sql(f'DROP TRIGGER IF EXISTS {trigger} ON users; DROP FUNCTION IF EXISTS {function}();')
++            record['cleanup']['deferred_trigger_removed'] = True
++        if fixture_created:
++            sql('DELETE FROM users WHERE left(username,' + str(len(nonce)) + ')=' + quote(nonce))
++            record['cleanup']['fixture_users_and_cascaded_data_removed'] = True
++        assert sql('SELECT count(*) FROM pg_trigger WHERE tgname=' + quote(trigger)) == '0'
++        assert sql('SELECT count(*) FROM users WHERE left(username,' + str(len(nonce)) + ')=' + quote(nonce)) == '0'
++        record['cleanup']['verified'] = True
++    except Exception as error:
++        record['cleanup']['error'] = type(error).__name__ + ': ' + str(error)
++        record['pass'] = False
++    record['finished_utc'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
++    pathlib.Path(a.out).write_text(json.dumps(record, indent=2)+'\n')
++print(json.dumps({'pass': record['pass'], 'out': a.out, 'error': record.get('error'),
++                  'cleanup': record['cleanup']}, indent=2))
++raise SystemExit(0 if record['pass'] else 1)
+diff --git a/.github/validation-goose/validate.sh b/.github/validation-goose/validate.sh
+new file mode 100644
+index 0000000..606a65c
+--- /dev/null
++++ b/.github/validation-goose/validate.sh
+@@ -0,0 +1,306 @@
++#!/usr/bin/env bash
++# Fork-only correctness validation. Run as the normal Ubuntu24 x86 runner user.
++set -euo pipefail
++submission=submissions/goose-native-tbsvttr
++source_ref=${SOURCE_REF:-submissions/goose-native-tbsvttr}
++out=${VALIDATION_OUT:-"${RUNNER_TEMP:-/tmp}/goose-optimized-validation"}
++while (($#)); do
++    case "$1" in
++        --submission) submission=$2; shift 2 ;;
++        --source-ref) source_ref=$2; shift 2 ;;
++        --out) out=$2; shift 2 ;;
++        *) echo "Unknown argument: $1" >&2; exit 2 ;;
++    esac
++done
++repo=${GITHUB_WORKSPACE:-$(git rev-parse --show-toplevel)}
++cd "$repo"
++[[ $submission == submissions/* && $submission != *..* && $submission != /* ]]
++[[ $source_ref =~ ^[A-Za-z0-9][A-Za-z0-9_./-]*$ ]]
++[[ $(id -u) != 0 && $(uname -m) == x86_64 ]]
++submission=$(realpath "$submission")
++[[ $submission == "$repo"/submissions/* && -f $submission/build.sh ]]
++relative=${submission#"$repo"/}
++helpers="$repo/.github/validation-goose"
++mkdir -p "$out"
++out=$(realpath "$out")
++printf '%s\n' 'Correctness only; this runner is not official challenge hardware.' > "$out/SCOPE.txt"
++git fetch --no-tags origin "$source_ref"
++source_commit=$(git rev-parse FETCH_HEAD)
++export VALIDATION_SOURCE_COMMIT="$source_commit" VALIDATION_SUBMISSION="$relative" VALIDATION_OUT="$out"
++python3 - <<'PY'
++import json, os, pathlib, subprocess
++run=lambda *a: subprocess.check_output(a,text=True).strip()
++source=os.environ['VALIDATION_SOURCE_COMMIT']; sub=os.environ['VALIDATION_SUBMISSION']
++head=run('git','rev-parse','HEAD')
++source_tree=run('git','rev-parse',source+':'+sub)
++head_tree=run('git','rev-parse','HEAD:'+sub)
++assert source_tree==head_tree, 'validation branch submission differs from PR source'
++changes=run('git','diff','--name-status',source,'HEAD').splitlines()
++for change in changes:
++    status,path=change.split('\t',1)
++    assert status=='A' and (path=='.github/workflows/goose-optimized-validation.yml' or path.startswith('.github/validation-goose/')), change
++out=pathlib.Path(os.environ['VALIDATION_OUT'])
++(out/'source-equivalence.json').write_text(json.dumps({'source_commit':source,'validation_commit':head,
++    'submission':sub,'source_tree':source_tree,'validation_tree':head_tree,'identical_submission_tree':True,
++    'only_added_validation_files':True,'added_paths':changes},indent=2)+'\n')
++PY
++{ uname -a; id; nproc; free -m; go version; gcc --version | head -1; psql --version; } > "$out/host.txt"
++psql -X -qAt -v ON_ERROR_STOP=1 -d postgres -c 'SHOW server_version' > "$out/postgres-version.txt"
++[[ $(cat "$out/postgres-version.txt") == 18.* ]]
++sha256sum seed/make-seed.sh schema.sql test/run.sh bench/cmd/conformance/golden-dev.jsonl > "$out/original-harness-sha256.txt"
++stages="$out/stages.tsv"
++: > "$stages"
++declare -a server_pids=() databases=()
++finish_status=FAIL
++
++stage() {
++    local name=$1
++    shift
++    set +e
++    "$@" 2>&1 | tee "$out/$name.log"
++    local codes=("${PIPESTATUS[@]}")
++    set -e
++    local rc=${codes[0]}
++    if ((rc == 0 && codes[1] != 0)); then rc=${codes[1]}; fi
++    printf '%s\t%s\n' "$name" "$rc" >> "$stages"
++    return "$rc"
++}
++server_running() {
++    local pid=$1 state
++    kill -0 "$pid" 2>/dev/null || return 1
++    state=$(ps -o stat= -p "$pid" 2>/dev/null) || return 0
++    state=${state//[[:space:]]/}
++    [[ $state != Z* ]]
++}
++terminate_server() {
++    local pid=$1 mode=TERM i
++    kill -TERM -- "-$pid" 2>/dev/null || true
++    for i in {1..30}; do
++        server_running "$pid" || break
++        sleep .1
++    done
++    if server_running "$pid"; then
++        mode=KILL
++        kill -KILL -- "-$pid" 2>/dev/null || true
++        for i in {1..20}; do
++            server_running "$pid" || break
++            sleep .1
++        done
++    fi
++    if server_running "$pid"; then
++        printf '%s\tFAILED_AFTER_KILL\n' "$pid" >> "$out/server-shutdown.tsv"
++        return 1
++    fi
++    wait "$pid" 2>/dev/null || true
++    printf '%s\t%s\n' "$pid" "$mode" >> "$out/server-shutdown.tsv"
++}
++stop_server() {
++    local pid=$1 i
++    terminate_server "$pid"
++    for i in "${!server_pids[@]}"; do
++        if [[ ${server_pids[i]} == "$pid" ]]; then server_pids[i]=0; fi
++    done
++}
++drop_db() {
++    local db=$1 i
++    timeout 20s psql -X -q -v ON_ERROR_STOP=1 -d postgres -c "DROP DATABASE IF EXISTS $db WITH (FORCE)"
++    for i in "${!databases[@]}"; do
++        if [[ ${databases[i]} == "$db" ]]; then databases[i]=''; fi
++    done
++}
++cleanup() {
++    local rc=$? pid db
++    trap - EXIT
++    set +e
++    for pid in "${server_pids[@]}"; do
++        if [[ $pid != 0 ]]; then terminate_server "$pid" || rc=1; fi
++    done
++    for db in "${databases[@]}"; do
++        if [[ -n $db ]]; then
++            timeout 20s psql -X -q -v ON_ERROR_STOP=1 -d postgres -c "DROP DATABASE IF EXISTS $db WITH (FORCE)" || rc=1
++        fi
++    done
++    VALIDATION_STATUS="$finish_status" VALIDATION_EXIT="$rc" python3 - <<'PY'
++import hashlib,json,os,pathlib,subprocess
++out=pathlib.Path(os.environ['VALIDATION_OUT']); sub=pathlib.Path(os.environ['VALIDATION_SUBMISSION'])
++files={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in out.rglob('*') if p.is_file() and p.name!='receipt.json'}
++exit_code=int(os.environ['VALIDATION_EXIT'])
++receipt={'status':'PASS' if os.environ['VALIDATION_STATUS']=='PASS' and exit_code==0 else 'FAIL','exit':exit_code,
++  'scope':'Clean native x86 source-build and correctness only; no capacity or performance claim.',
++  'source_commit':os.environ['VALIDATION_SOURCE_COMMIT'],'source_tree':subprocess.check_output(['git','rev-parse','HEAD:'+str(sub)],text=True).strip(),
++  'stages':[dict(name=n,exit=int(c)) for n,c in (line.split('\t') for line in (out/'stages.tsv').read_text().splitlines())],
++  'artifact_sha256':files}
++binary=sub/'bin/conduit'
++if binary.exists(): receipt['candidate_binary_sha256']=hashlib.sha256(binary.read_bytes()).hexdigest()
++(out/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
++PY
++    exit "$rc"
++}
++trap cleanup EXIT
++
++ensure_inherited_nofile() {
++    # Change this normal user's existing harness shell, so every later child
++    # inherits the limit without a privileged app-launch wrapper or extra PID.
++    local runner_uid soft hard
++    runner_uid=$(id -u)
++    [[ $runner_uid != 0 ]]
++    printf 'before uid=%s soft=%s hard=%s\n' "$runner_uid" "$(ulimit -Sn)" "$(ulimit -Hn)"
++    hard=$(ulimit -Hn)
++    if [[ $hard != unlimited ]] && ((hard < 200000)); then
++        sudo -n prlimit --pid "$$" --nofile=200000:200000
++    else
++        soft=$(ulimit -Sn)
++        if [[ $soft != unlimited ]] && ((soft < 200000)); then
++            ulimit -S -n 200000
++        fi
++    fi
++    soft=$(ulimit -Sn)
++    hard=$(ulimit -Hn)
++    [[ $soft == unlimited || ( $soft =~ ^[0-9]+$ && $soft -ge 200000 ) ]]
++    [[ $hard == unlimited || ( $hard =~ ^[0-9]+$ && $hard -ge 200000 ) ]]
++    [[ $(id -u) == "$runner_uid" ]]
++    printf 'after uid=%s soft=%s hard=%s\n' "$runner_uid" "$soft" "$hard"
++    cat "/proc/$$/limits"
++}
++# Do not use stage's pipeline here: limits must apply to the main shell.
++ensure_inherited_nofile > "$out/harness-limits.txt" 2>&1
++
++make_db() {
++    local suffix=$1 template=${2:-conduit_seed}
++    db_name="mc_pair_ci_${GITHUB_RUN_ID:-local}_${GITHUB_RUN_ATTEMPT:-1}_$suffix"
++    [[ $db_name =~ ^[a-z][a-z0-9_]+$ && ${#db_name} -le 63 ]]
++    psql -X -q -v ON_ERROR_STOP=1 -d postgres -c "CREATE DATABASE $db_name TEMPLATE $template STRATEGY FILE_COPY"
++    databases+=("$db_name")
++}
++start_server() {
++    local name=$1 dir=$2 db=$3 port=$4
++    shift 4
++    local dbhost=${PGHOST:-127.0.0.1}
++    if [[ $dbhost == /* ]]; then dbhost=127.0.0.1; fi
++    local app_url="postgres://conduit:conduit@$dbhost:${PGPORT:-5432}/$db"
++    (ulimit -S -n 200000; exec setsid env DATABASE_URL="$app_url" JWT_SECRET="$JWT_SECRET" HOST=127.0.0.1 PORT="$port" "$@" bash "$dir/start.sh") > "$out/$name-server.log" 2>&1 &
++    server_pid=$!
++    server_pids+=("$server_pid")
++    for _ in {1..60}; do
++        if curl --max-time 2 -fsS -o /dev/null "http://127.0.0.1:$port/api/tags"; then
++            ps -o pid=,euid=,pgid=,comm= -p "$server_pid" > "$out/$name-process.txt"
++            [[ $(awk '/^Uid:/ {print $2}' "/proc/$server_pid/status") != 0 ]]
++            cat "/proc/$server_pid/limits" > "$out/$name-limits.txt"
++            return
++        fi
++        kill -0 "$server_pid" 2>/dev/null || { cat "$out/$name-server.log"; return 1; }
++        sleep 1
++    done
++    echo "Server $name never became healthy" >&2
++    return 1
++}
++fixture_url() {
++    # Public CI service credentials; never used as the application's role.
++    printf 'postgres://postgres:postgres@127.0.0.1:%s/%s' "${PGPORT:-5432}" "$1"
++}
++
++export BUILD_JOBS=${BUILD_JOBS:-2} CC=gcc PGCONNECT_TIMEOUT=5
++unset GOOSE_BIN GOOSE_HOME
++[[ ! -e $submission/.goose && ! -e $submission/.build && ! -e $submission/bin ]]
++stage dependencies sudo bash "$submission/install.sh"
++stage clean-build bash "$submission/build.sh"
++[[ $(cat "$submission/.goose/COMMIT") == f605b5a07dd2aa3a5cb3f4c9b14002bd3c9d3d1a ]]
++export GOOSE_BIN="$submission/.goose/build/goose"
++"$GOOSE_BIN" version > "$out/goose-version.txt"
++sha256sum "$submission/.deps/goose-f605b5a07dd2aa3a5cb3f4c9b14002bd3c9d3d1a.tar.gz" > "$out/goose-archive-sha256.txt"
++[[ $(cut -d' ' -f1 "$out/goose-archive-sha256.txt") == 86482df9e11ff9472d2214e93a71cd7f22b05d31260f66d7e760d5df784a7e92 ]]
++stage seed-dev bash seed/make-seed.sh --dev
++grep -F 'OK: conduit_dev matches the reference seed' "$out/seed-dev.log"
++stage conformance-dev bash test/run.sh "$submission"
++stage native bash "$submission/tests/native.sh"
++stage bcrypt-lanes bash "$submission/tests/bcrypt-lanes.sh"
++cp -a "$submission/.build/native-checks" "$out/native-checks"
++cp -a "$submission/.build/bcrypt-lane-checks" "$out/bcrypt-lane-checks"
++python3 - "$out" <<'PY'
++import json,pathlib,sys
++p=pathlib.Path(sys.argv[1]); native=json.loads((p/'native-checks/native.json').read_text()); pipe=json.loads((p/'native-checks/pipe-reply.json').read_text())
++assert native['status']==pipe['status']=='PASS' and native['checks']+pipe['checks']==293966
++assert 'PASS: 4000 Goose JWT assertions' in (p/'native-checks/jwt-ffi.log').read_text()
++assert 'PASS: 252 exact-lane bcrypt comparisons' in (p/'bcrypt-lane-checks/bcrypt-lanes.log').read_text()
++PY
++stage seed-full bash seed/make-seed.sh
++grep -F 'OK: conduit_seed matches the reference seed' "$out/seed-full.log"
++stage conformance-full env TEMPLATE=conduit_seed bash test/run.sh "$submission"
++stage conformance-full-features env TEMPLATE=conduit_seed WORKERS=1 PG_READERS=3 READ_BATCH=32 READ_HOLD=1 READ_BATCH_US=5000 WRITE_BATCH_US=1000 ARTICLE_BATCH=1 bash test/run.sh "$submission"
++stage conformance-full-selected env TEMPLATE=conduit_seed WORKERS=2 PG_READERS=3 HASHERS=2 READ_BATCH=32 READ_HOLD=1 READ_BATCH_US=5000 WRITE_BATCH_US=1000 ARTICLE_BATCH=1 bash test/run.sh "$submission"
++
++baseline_commit=3e9087473da5c56d5800ae9ee00ac1e84c44a135
++baseline="$out/stock-source"
++mkdir -p "$baseline"
++if ! git cat-file -e "$baseline_commit^{commit}" 2>/dev/null; then
++    git fetch --no-tags origin "$baseline_commit"
++fi
++git archive "$baseline_commit" "$relative" | tar -x -C "$baseline"
++baseline="$baseline/$relative"
++stage stock-build bash "$baseline/build.sh"
++sha256sum "$baseline/bin/conduit" "$submission/bin/conduit" > "$out/comparison-binaries-sha256.txt"
++export JWT_SECRET=multicore-server-challenge
++make_db reads
++read_db=$db_name
++start_server stock "$baseline" "$read_db" 3101 WORKERS=1 PG_READERS=3 HASHERS=2 READ_BATCH=32 READ_HOLD=1 ARTICLE_BATCH=0
++stock_pid=$server_pid
++start_server candidate "$submission" "$read_db" 3102 WORKERS=1 PG_READERS=3 HASHERS=2 READ_BATCH=32 READ_HOLD=1 READ_BATCH_US=5000 WRITE_BATCH_US=1000 ARTICLE_BATCH=0
++candidate_pid=$server_pid
++stage read-batches python3 "$helpers/read-batches.py" --baseline http://127.0.0.1:3101 --candidate http://127.0.0.1:3102 --database-url "$(fixture_url "$read_db")" --out "$out/read-batches.json"
++stop_server "$stock_pid"; stop_server "$candidate_pid"; drop_db "$read_db"
++
++make_db quiet conduit_dev
++quiet_db=$db_name
++for us in 500000 0; do
++    start_server "quiet-$us" "$submission" "$quiet_db" 3103 WORKERS=1 PG_READERS=3 READ_BATCH=32 READ_HOLD=1 READ_BATCH_US="$us" WRITE_BATCH_US=1000 ARTICLE_BATCH=0
++    quiet_pid=$server_pid
++    stage "quiet-$us" python3 "$helpers/quiet-read-timer.py" --base http://127.0.0.1:3103 --database-url "$(fixture_url "$quiet_db")" --expected-us "$us" --out "$out/quiet-$us.json"
++    stop_server "$quiet_pid"
++done
++drop_db "$quiet_db"
++
++make_db writes conduit_dev
++write_db=$db_name
++start_server writer "$submission" "$write_db" 3104 WORKERS=1 PG_READERS=3 READ_BATCH=32 READ_HOLD=1 READ_BATCH_US=0 WRITE_BATCH_US=50000 ARTICLE_BATCH=0
++writer_pid=$server_pid
++export BASE=http://127.0.0.1:3104 DATABASE_URL="$(fixture_url "$write_db")"
++stage runtime-writes python3 "$helpers/runtime-write-probe-v2.py" --out "$out/runtime-writes.json"
++stage favorite-fresh python3 "$helpers/favorite-race-probe.py" --out "$out/favorite-fresh.json"
++stop_server "$writer_pid"
++start_server writer-selected "$submission" "$write_db" 3104 WORKERS=2 PG_READERS=3 HASHERS=2 READ_BATCH=32 READ_HOLD=1 READ_BATCH_US=5000 WRITE_BATCH_US=1000 ARTICLE_BATCH=1
++writer_pid=$server_pid
++stage article-update-fresh python3 "$helpers/article-update-race.py" --case all --out "$out/article-update-fresh.json"
++trusted_dir="$out/trusted-bcrypt"
++mkdir -p "$trusted_dir"
++cp "$repo/bench/go.mod" "$trusted_dir/go.mod"
++cp "$repo/bench/go.sum" "$trusted_dir/go.sum"
++cat >> "$trusted_dir/go.sum" <<'SUM'
++golang.org/x/crypto v0.58.0 h1:COkYLr4k7nDI4r6QtMML2AfzeIswWHAJthLS6K/M/54=
++golang.org/x/crypto v0.58.0/go.mod h1:Xh+kl5A+M0gMiWDytH2Hhr5Z7WbNCpv/eB/EFgfSk+w=
++SUM
++(
++    cd "$repo/bench"
++    go mod edit -modfile "$trusted_dir/go.mod" -require=golang.org/x/crypto@v0.58.0
++)
++# Keep Go's original module files unchanged; the wrapper runs from the pinned
++# bench module with a separate, version-pinned module/sum under the evidence dir.
++export VALIDATION_REPO="$repo" VALIDATION_BCRYPT_MODULE="$trusted_dir/go.mod" VALIDATION_BCRYPT_HELPER="$helpers/bcrypt-passwords.go"
++cat > "$trusted_dir/run-helper.sh" <<'SH'
++#!/usr/bin/env bash
++set -euo pipefail
++cd "$VALIDATION_REPO/bench"
++exec env GOWORK=off go run -mod=mod -modfile "$VALIDATION_BCRYPT_MODULE" "$VALIDATION_BCRYPT_HELPER" "$@"
++SH
++stage password-nul-interop python3 "$helpers/password-nul-probe.py" --out "$out/password-nul-interop.json" --go-helper bash "$trusted_dir/run-helper.sh"
++python3 - "$out" <<'PY'
++import json,pathlib,sys
++p=pathlib.Path(sys.argv[1])
++for name in ['article-update-fresh','password-nul-interop']:
++    result=json.loads((p/(name+'.json')).read_text())
++    assert result['pass'] is True and result['implementation_correct'] is True, name
++PY
++stop_server "$writer_pid"; drop_db "$write_db"
++git diff --exit-code "$source_commit" HEAD -- "$relative"
++git diff --exit-code -- "$relative"
++git diff --exit-code -- bench/go.mod bench/go.sum
++finish_status=PASS
+diff --git a/.github/workflows/goose-optimized-validation.yml b/.github/workflows/goose-optimized-validation.yml
+new file mode 100644
+index 0000000..7bb8510
+--- /dev/null
++++ b/.github/workflows/goose-optimized-validation.yml
+@@ -0,0 +1,58 @@
++name: Optimized Goose native x86 correctness
++
++on:
++  push:
++    branches: [validation/goose-native-optimized-2026-10-23]
++  workflow_dispatch:
++    inputs:
++      source_ref:
++        description: PR32 source commit or branch whose submission tree must match
++        required: true
++        default: submissions/goose-native-tbsvttr
++        type: string
++
++permissions:
++  contents: read
++
++jobs:
++  validate:
++    name: 'Native x86 correctness: W2/R3/article1/read5ms'
++    if: github.repository == 'tbsvttr/multicore-server-challenge'
++    runs-on: ubuntu-24.04
++    timeout-minutes: 45
++    services:
++      postgres:
++        # Exact PostgreSQL18 image from the previous successful native x86 job.
++        image: postgres:18@sha256:edb0c08dc33befd0262ab3b5cf1c4f3f8cfd8b09e88c05b45adee29d6761ddb6
++        env:
++          POSTGRES_PASSWORD: postgres
++        ports: ["5432:5432"]
++        options: --health-cmd pg_isready --health-interval 2s --health-timeout 5s --health-retries 30
++    env:
++      PGHOST: 127.0.0.1
++      PGPORT: 5432
++      PGUSER: postgres
++      PGPASSWORD: postgres
++      BUILD_JOBS: 2
++      SOURCE_REF: ${{ inputs.source_ref || 'submissions/goose-native-tbsvttr' }}
++      VALIDATION_OUT: /tmp/goose-optimized-validation
++    steps:
++      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, prior successful job
++        with:
++          fetch-depth: 0
++      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5, prior successful job
++        with:
++          go-version: '1.27.1'
++          cache: false
++      - name: Install correctness harness tools
++        run: sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client curl jq python3
++      - name: Clean native source build and complete correctness checks
++        run: bash .github/validation-goose/validate.sh --submission submissions/goose-native-tbsvttr --source-ref "$SOURCE_REF" --out "$VALIDATION_OUT"
++      - name: Preserve validation evidence
++        if: always()
++        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
++        with:
++          name: goose-native-x86-correctness-${{ github.run_id }}-${{ github.run_attempt }}
++          path: ${{ env.VALIDATION_OUT }}
++          if-no-files-found: warn
++          retention-days: 30

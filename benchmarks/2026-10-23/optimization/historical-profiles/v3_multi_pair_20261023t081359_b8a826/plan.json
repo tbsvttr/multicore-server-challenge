@@ -1,0 +1,112 @@
+{
+  "controller": "paired-multi-load-v3",
+  "scope": "Exploratory80k combined SQL/runtime candidate at2loops/3readers/articlebatch1/1mswrites; no capacity, stablegain or rank claim.",
+  "configuration": {
+    "target_container": "multicore-comparison-target-20261023",
+    "host_evidence": "/private/tmp/multicore-research-20261022",
+    "users": 80000,
+    "port": 3000,
+    "jwt_secret": "multicore-server-challenge",
+    "cases": [
+      {
+        "name": "rust7",
+        "binary": "/work/submissions/rust-tokio-Scooter1337/target/release/conduit",
+        "source_dir": "/work/submissions/rust-tokio-Scooter1337",
+        "env": {
+          "APP_THREADS": "2",
+          "DB_CONNS": "6",
+          "DB_WRITE_CONNS": "2",
+          "BCRYPT_THREADS": "1",
+          "WRITE_BATCH_US": "1000",
+          "BCRYPT_BATCH_MS": "160",
+          "READ_BATCH_SIZE": "32",
+          "READ_BATCH_US": "0",
+          "READ_SQL_BATCH": "1",
+          "READ_ROUTE_SLACK": "8",
+          "READ_TAG_ROUTE": "1",
+          "READ_COMMENT_SET": "1",
+          "READ_TAG_BATCH": "1"
+        },
+        "expected_binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241"
+      },
+      {
+        "name": "combined2",
+        "binary": "/comparison/optimization/candidates/combined1/bin/conduit",
+        "source_dir": "/comparison/optimization/candidates/combined1",
+        "env": {
+          "ARTICLE_BATCH": "1",
+          "WORKERS": "2",
+          "PG_READERS": "3",
+          "HASHERS": "2",
+          "BCRYPT_BATCH_MS": "250",
+          "READ_BATCH": "32",
+          "READ_HOLD": "1",
+          "WRITE_BATCH_US": "1000"
+        },
+        "expected_binary_sha256": "dc9ae7ad8b87aea89da1be5d476176e331153a3cc0ac6c51cbbc880939bc10af"
+      }
+    ]
+  },
+  "configuration_sha256": "f8a9795b46f97aafec3df03cb508b69ff12853462a7a08edc70653b4e8d8cac6",
+  "protocol": {
+    "users": 80000,
+    "articles": 500000,
+    "think_scale": 1.0,
+    "ramp_s": 60,
+    "measure_s": 60,
+    "tail_s": 15,
+    "pairs": 1,
+    "order": [
+      [
+        1
+      ]
+    ],
+    "fresh_full_seed_per_attempt": true,
+    "shards": [
+      {
+        "box_index": 0,
+        "users": 20000,
+        "id_offset": 0,
+        "host": "127.0.0.1"
+      },
+      {
+        "box_index": 1,
+        "users": 20000,
+        "id_offset": 20000,
+        "host": "127.0.0.2"
+      },
+      {
+        "box_index": 2,
+        "users": 20000,
+        "id_offset": 40000,
+        "host": "127.0.0.3"
+      },
+      {
+        "box_index": 3,
+        "users": 20000,
+        "id_offset": 60000,
+        "host": "127.0.0.4"
+      }
+    ],
+    "gomaxprocs_per_shard": 1,
+    "synchronized_start_at": true,
+    "load_cgroup_cpus": 4,
+    "app_nofile_minimum": 200000,
+    "actual_app_uid_and_limits_required": true,
+    "launch_wrapper": "runuser -u challenge -- prlimit --nofile=200000:200000 -- binary",
+    "load_cgroup_cpu_limit_pct": 75.0,
+    "paired_random_stream": "same native run-id and VU ids within each pair; fresh DBs prevent name collisions",
+    "warmup": "none; this is a fixed-load diagnostic, not the official warmup/search/hold protocol",
+    "invalid_policy": "native lg_limited or failed infrastructure is INVALID; retain, never replace",
+    "interpretation": "at fixed unsaturated load, compare latency/CPU; similar req/s cannot establish capacity"
+  },
+  "created_utc": "2026-10-22T19:31:26Z",
+  "diagnostic_only": true,
+  "new_plan_note": "Separate one-arm plan declared before execution; existing study plans and attempts are unchanged.",
+  "prerequisites": [
+    "197/197 fullseed atbinarydc9",
+    "native293966/JWT4000/exactbcrypt252 PASS",
+    "1664contended readcomparison PASS",
+    "runtime commitgate/groupedrollback/quietwrite+favoritefreshrace PASS"
+  ]
+}

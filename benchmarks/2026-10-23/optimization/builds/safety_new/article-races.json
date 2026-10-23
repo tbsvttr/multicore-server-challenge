@@ -1,0 +1,166 @@
+{
+  "scope": "Disposable correctness fixtures only; no schema/config changes",
+  "database": "mc_pair_safety_093704",
+  "base": "http://127.0.0.1:3030",
+  "expectation": "fresh",
+  "started_unix_s": 1792748233.8699958,
+  "cases": [
+    {
+      "case": "update",
+      "nonce": "article_race_30170895e94f4715b743e7b98c557776",
+      "events": [
+        {
+          "event": "API blocked on uncommitted transaction",
+          "witness": [
+            {
+              "pid": 11619,
+              "wait_type": "Lock",
+              "wait": "transactionid",
+              "query": "WITH t AS (SELECT id, author_id FROM articles WHERE slug = $2), a AS (UPDATE articles SET title = COALESCE($3, title), description = COALESCE($4, description), body = COALESCE($5, body), slug = CASE WHEN $3::text IS NULL THEN slug ELSE trim(both '-' from lower(regexp_replace($3, '[^A-Za-z0-9]+', '-', 'g'))) || '-' || id END, updated_at = now() WHERE id = (SELECT id FROM t WHERE author_id = $1) RETURNING id) SELECT t.author_id, COALESCE(a.id,t.id) AS id FROM t LEFT JOIN a ON true"
+            }
+          ]
+        },
+        {
+          "event": "fixture favorite/rename committed",
+          "monotonic": 83827.061570939
+        }
+      ],
+      "pass": true,
+      "response": {
+        "status": 200,
+        "body": {
+          "article": {
+            "slug": "article-race-30170895e94f4715b743e7b98c557776-updated-500001",
+            "title": "article_race_30170895e94f4715b743e7b98c557776 updated",
+            "description": "fixture",
+            "body": "updated body \u2014 Unicode",
+            "createdAt": "2026-10-23T09:37:13.898Z",
+            "updatedAt": "2026-10-23T09:37:13.956Z",
+            "tagList": [],
+            "favoritesCount": 1,
+            "favorited": true,
+            "author": {
+              "username": "article_race_30170895e94f4715b743e7b98c557776",
+              "bio": null,
+              "image": null,
+              "following": false
+            }
+          }
+        },
+        "start_monotonic": 83827.032641814,
+        "complete_monotonic": 83827.062541981
+      },
+      "committed_count": 1,
+      "current_slug": "article-race-30170895e94f4715b743e7b98c557776-updated-500001",
+      "immediate_get": {
+        "status": 200,
+        "body": {
+          "article": {
+            "slug": "article-race-30170895e94f4715b743e7b98c557776-updated-500001",
+            "title": "article_race_30170895e94f4715b743e7b98c557776 updated",
+            "description": "fixture",
+            "body": "updated body \u2014 Unicode",
+            "createdAt": "2026-10-23T09:37:13.898Z",
+            "updatedAt": "2026-10-23T09:37:13.956Z",
+            "tagList": [],
+            "favoritesCount": 1,
+            "favorited": true,
+            "author": {
+              "username": "article_race_30170895e94f4715b743e7b98c557776",
+              "bio": null,
+              "image": null,
+              "following": false
+            }
+          }
+        },
+        "start_monotonic": 83827.113083939,
+        "complete_monotonic": 83827.118747856
+      },
+      "implementation_correct": true,
+      "baseline_bug_observed": false,
+      "pass_expected_behavior": true,
+      "transaction_stderr": "WARNING:  there is no transaction in progress\n",
+      "fixture_cleaned": true
+    },
+    {
+      "case": "favorite-rename",
+      "nonce": "article_race_90b25b90ea9040bfa99f394f376ce2a7",
+      "events": [
+        {
+          "event": "API blocked on uncommitted transaction",
+          "witness": [
+            {
+              "pid": 11619,
+              "wait_type": "Lock",
+              "wait": "transactionid",
+              "query": "WITH t AS (SELECT id FROM articles WHERE slug = $2), w AS (INSERT INTO favorites (user_id, article_id) SELECT $1, id FROM t ON CONFLICT DO NOTHING) SELECT id FROM t"
+            }
+          ]
+        },
+        {
+          "event": "fixture favorite/rename committed",
+          "monotonic": 83827.287202523
+        }
+      ],
+      "pass": true,
+      "response": {
+        "status": 200,
+        "body": {
+          "article": {
+            "slug": "article_race_90b25b90ea9040bfa99f394f376ce2a7-renamed",
+            "title": "renamed concurrently",
+            "description": "fixture",
+            "body": "before body",
+            "createdAt": "2026-10-23T09:37:14.145Z",
+            "updatedAt": "2026-10-23T09:37:14.178Z",
+            "tagList": [],
+            "favoritesCount": 1,
+            "favorited": true,
+            "author": {
+              "username": "article_race_90b25b90ea9040bfa99f394f376ce2a7",
+              "bio": null,
+              "image": null,
+              "following": false
+            }
+          }
+        },
+        "start_monotonic": 83827.258858939,
+        "complete_monotonic": 83827.287467023
+      },
+      "committed_count": 1,
+      "current_slug": "article_race_90b25b90ea9040bfa99f394f376ce2a7-renamed",
+      "immediate_get": {
+        "status": 200,
+        "body": {
+          "article": {
+            "slug": "article_race_90b25b90ea9040bfa99f394f376ce2a7-renamed",
+            "title": "renamed concurrently",
+            "description": "fixture",
+            "body": "before body",
+            "createdAt": "2026-10-23T09:37:14.145Z",
+            "updatedAt": "2026-10-23T09:37:14.178Z",
+            "tagList": [],
+            "favoritesCount": 1,
+            "favorited": true,
+            "author": {
+              "username": "article_race_90b25b90ea9040bfa99f394f376ce2a7",
+              "bio": null,
+              "image": null,
+              "following": false
+            }
+          }
+        },
+        "start_monotonic": 83827.34022869,
+        "complete_monotonic": 83827.346934856
+      },
+      "implementation_correct": true,
+      "baseline_bug_observed": false,
+      "pass_expected_behavior": true,
+      "transaction_stderr": "WARNING:  there is no transaction in progress\n",
+      "fixture_cleaned": true
+    }
+  ],
+  "pass": true,
+  "implementation_correct": true,
+  "finished_unix_s": 1792748234.349083
+}

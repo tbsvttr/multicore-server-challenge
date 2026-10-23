@@ -1,0 +1,15 @@
+--- a/benchmarks/2026-10-23/README.md
++++ b/benchmarks/2026-10-23/README.md
+@@ -1,8 +1,10 @@
+ # Official multicore comparison — 23 October 2026
+ 
+-Snapshot: 2026-10-23T06:59:05.240087+00:00. The [maintainer’s official leaderboard](https://github.com/arjaythedev/multicore-server-challenge/blob/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/LEADERBOARD.md) already compares all 29 scored implementations/examples on the same challenge box. This record adds the two active submissions without a score, giving one row for each of the 31 current implementations/examples. It does not rerun them on the Mac.
++Official scores and PR states snapshot: 2026-10-23T06:59:05.240087+00:00. The [maintainer’s official leaderboard](https://github.com/arjaythedev/multicore-server-challenge/blob/c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e/LEADERBOARD.md) already compares all 29 scored implementations/examples on the same challenge box. This record adds the two active submissions without a score, giving one row for each of the 31 current implementations/examples. It does not rerun them on the Mac.
+ 
+-Our Goose is **#8 at 65,000 users**, compared with Rust #7 at **100,000 users**. Goose holds 35,000 fewer users (35.00% below the leader); matching 100,000 would require 53.85% more users than its current score. Goose #31 holds 62,000 users. Our PR remains a draft at source `3e908747`; the tested proposal to change local defaults was not applied.
++Our Goose’s published snapshot result is **#8 at 65,000 users**, compared with Rust #7 at **100,000 users**. Goose holds 35,000 fewer users (35.00% below the leader); matching 100,000 would require 53.85% more users than its current score. Goose #31 holds 62,000 users. At that snapshot, our PR was a draft at source `3e908747`; the tested proposal to change local defaults had not been applied.
++
++Post-snapshot update: [PR #32](https://github.com/arjaythedev/multicore-server-challenge/pull/32) is ready for review at optimized source [`23a14e8`](https://github.com/tbsvttr/multicore-server-challenge/tree/23a14e8cbf32113509cd0ad941320ef947508981/submissions/goose-native-tbsvttr). The [native Ubuntu 24.04 x86 fork correctness workflow](https://github.com/tbsvttr/multicore-server-challenge/actions/runs/39937895836) passed a clean pinned build, the original conformance suites and additional batching, commit, race and password probes; its submission tree is identical to the PR source. This optimized revision awaits a new maintainer capacity score. The table below retains the published snapshot, including its historical PR states and notes. [Follow-up optimization evidence](optimization/README.md) records the newer source, correctness receipts and local studies; shared-Mac ARM results do not establish the official x86 rank.
+ 
+ The official conditions are 8 dedicated vCPUs and 16 GB, with the application, PostgreSQL 18 and any Nginx sharing the target budget, full seed, and load generation on another machine. Score is the highest user count sustained for a five-minute run with p95 <500 ms, p99 <1 s and <1% errors.
+ 

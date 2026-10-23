@@ -1,0 +1,4928 @@
+{
+  "schema": "diagnostic_client_gc_analysis_v1",
+  "generated_at_utc": "2026-10-23T16:57:50.563611+00:00",
+  "run": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88",
+  "scope": "Diagnostic client/runtime evidence only; no performance, capacity, or rank claim.",
+  "completed_phases_analyzed": [
+    "01-warmup-10000",
+    "02-probe-100000"
+  ],
+  "pending_phases_not_read": [],
+  "evidence_rules": [
+    "Only box logs whose phase already has assessment.json are read.",
+    "GC first+last clock values are separate stop-the-world sweep/mark termination phases; the middle clock value is concurrent marking, not a full stop-the-world pause.",
+    "Printed CPU values are cumulative worker/assist CPU time per GC cycle; concurrent-mark wall duration can include descheduling and mutator work.",
+    "No exact runtime-init wall anchor was saved. GC @ times are process-relative and retain the controller's 0..5-second phase alignment uncertainty.",
+    "Sampler histograms can be shifted relative to nominal counter buckets after delayed sampling; timeline quantiles are not an independent server service-time trace.",
+    "Absence of long completed STW traces alone does not exclude uncompleted runtime work, host descheduling, allocation assists, or server/backlog effects."
+  ],
+  "format_reference": {
+    "path": "/opt/homebrew/opt/go/libexec/src/runtime/mgc.go",
+    "version": "go1.27.2",
+    "lines": [
+      1588,
+      1633
+    ],
+    "exact_native_runtime_version_not_inferred_from_this_local_reference": true
+  },
+  "phases": [
+    {
+      "id": "01-warmup-10000",
+      "users": 10000,
+      "assessment_path": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/01-warmup-10000/assessment.json",
+      "assessment_sha256": "1608f84942b6585facda158f4403b70440ed58779be05201489b71dc8fd71a6c",
+      "classification": "INVALID_GENERATOR",
+      "phase_error": null,
+      "all_classifications": [
+        "INVALID_GENERATOR",
+        "INVALID_MONITOR",
+        "FAIL_SLO"
+      ],
+      "native_verdict": {
+        "pass": false,
+        "fail_reasons": [
+          "p95 1552 ms >= 500",
+          "p99 2912 ms >= 1000"
+        ],
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 fell behind: 21 of 120 seconds had mean timer wake-up lag > 50 ms; sampler tick 2085 ms late"
+        ]
+      },
+      "overall": {
+        "count": 296612,
+        "rps": 2471.766666666667,
+        "p50_ms": 6.495,
+        "p90_ms": 721.407,
+        "p95_ms": 1552.383,
+        "p99_ms": 2912.255,
+        "max_ms": 8462.335,
+        "mean_ms": 218.9572576564675,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 291172,
+          "201": 5334,
+          "204": 106
+        }
+      },
+      "diagnostic_only": true,
+      "capacity_score": null,
+      "boxes": [
+        {
+          "box": 0,
+          "meta": {
+            "version": "loadgen/1",
+            "run_id": "diagnosticgoose110_20261023t164733_2f2b88-warmup-10000",
+            "target": "http://127.0.0.1:3000",
+            "host": "831ef5b57bce",
+            "box_index": 0,
+            "users": 10000,
+            "id_offset": 0,
+            "start_at_ms": 1792774081876,
+            "ramp_s": 60,
+            "measure_s": 120,
+            "tail_s": 15,
+            "think_scale": 1,
+            "articles": 500000,
+            "ncpu": 10,
+            "gomaxprocs": 1,
+            "window_start_ms": 1792774141876,
+            "window_end_ms": 1792774261876,
+            "finished_at_ms": 1792774277515
+          },
+          "native_box_summary": {
+            "cpu_avg_measure_pct": 23.975097732071347,
+            "cpu_max_measure_pct": 76.27118644067797,
+            "proc_cpu_avg_measure_pct": 4.465222596956461,
+            "rss_peak_mb": 270.35546875,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "21 of 120 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 2085 ms late"
+            ],
+            "active_vus_at_window_start": 10000,
+            "tcp_connects": 10000
+          },
+          "native_result_missing": false,
+          "source": {
+            "log": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/01-warmup-10000/box0.log",
+            "log_sha256": "676607ac7505b31a427c90e7e45eca891eef57831d24db914e81df722202b67e",
+            "box_json": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/01-warmup-10000/box0.json",
+            "box_json_sha256": "e7f72976ee34a9e73f6e99922c6cd0ff270180d33e6c288d6f37389f9b83b23e"
+          },
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "all_process_gc": {
+            "cycles": 36,
+            "max_individual_stw_phase_ms": 13.0,
+            "max_combined_stw_ms_per_cycle": 13.014,
+            "max_stw_cycle": 20,
+            "max_concurrent_mark_wall_ms": 1240.0,
+            "max_concurrent_mark_cycle": 8,
+            "sum_stw_clock_ms": 43.418,
+            "sum_concurrent_mark_wall_ms": 5789.8,
+            "sum_gc_cpu_ms_printed": 3973.748,
+            "sum_mark_assist_cpu_ms": 1627.09,
+            "max_heap_before_mb": 146,
+            "max_heap_after_mark_mb": 147,
+            "max_heap_live_mb": 72,
+            "max_heap_goal_mb": 153,
+            "max_stack_scan_mb": 15,
+            "last_runtime_gc_fraction_percent": 1,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              8,
+              16
+            ]
+          },
+          "definitely_measurement_gc": {
+            "cycles": 16,
+            "max_individual_stw_phase_ms": 13.0,
+            "max_combined_stw_ms_per_cycle": 13.014,
+            "max_stw_cycle": 20,
+            "max_concurrent_mark_wall_ms": 1139.0,
+            "max_concurrent_mark_cycle": 16,
+            "sum_stw_clock_ms": 29.936,
+            "sum_concurrent_mark_wall_ms": 3243.0,
+            "sum_gc_cpu_ms_printed": 2210.366,
+            "sum_mark_assist_cpu_ms": 786.43,
+            "max_heap_before_mb": 146,
+            "max_heap_after_mark_mb": 147,
+            "max_heap_live_mb": 72,
+            "max_heap_goal_mb": 153,
+            "max_stack_scan_mb": 15,
+            "last_runtime_gc_fraction_percent": 1,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              16
+            ]
+          },
+          "possibly_measurement_gc": {
+            "cycles": 17,
+            "max_individual_stw_phase_ms": 13.0,
+            "max_combined_stw_ms_per_cycle": 13.014,
+            "max_stw_cycle": 20,
+            "max_concurrent_mark_wall_ms": 1139.0,
+            "max_concurrent_mark_cycle": 16,
+            "sum_stw_clock_ms": 30.017,
+            "sum_concurrent_mark_wall_ms": 3304.0,
+            "sum_gc_cpu_ms_printed": 2263.7870000000003,
+            "sum_mark_assist_cpu_ms": 786.77,
+            "max_heap_before_mb": 146,
+            "max_heap_after_mark_mb": 147,
+            "max_heap_live_mb": 72,
+            "max_heap_goal_mb": 153,
+            "max_stack_scan_mb": 15,
+            "last_runtime_gc_fraction_percent": 1,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              16
+            ]
+          },
+          "unparsed_gc_lines": [],
+          "definite_between_completed_collection_phase_intervals": [
+            {
+              "phase_interval_s": [
+                0.055136,
+                2.9080000000000004
+              ],
+              "after_cycle": 4,
+              "before_cycle": 5
+            },
+            {
+              "phase_interval_s": [
+                7.930045000000001,
+                11.623000000000001
+              ],
+              "after_cycle": 5,
+              "before_cycle": 6
+            },
+            {
+              "phase_interval_s": [
+                16.752206,
+                19.271
+              ],
+              "after_cycle": 6,
+              "before_cycle": 7
+            },
+            {
+              "phase_interval_s": [
+                24.305051000000002,
+                27.738999999999997
+              ],
+              "after_cycle": 7,
+              "before_cycle": 8
+            },
+            {
+              "phase_interval_s": [
+                33.983219999999996,
+                34.151
+              ],
+              "after_cycle": 8,
+              "before_cycle": 9
+            },
+            {
+              "phase_interval_s": [
+                39.217107000000006,
+                42.937
+              ],
+              "after_cycle": 9,
+              "before_cycle": 10
+            },
+            {
+              "phase_interval_s": [
+                52.461451000000004,
+                53.95
+              ],
+              "after_cycle": 11,
+              "before_cycle": 12
+            },
+            {
+              "phase_interval_s": [
+                59.103111000000006,
+                60.087999999999994
+              ],
+              "after_cycle": 12,
+              "before_cycle": 13
+            },
+            {
+              "phase_interval_s": [
+                65.16907599999999,
+                66.293
+              ],
+              "after_cycle": 13,
+              "before_cycle": 14
+            },
+            {
+              "phase_interval_s": [
+                71.343061,
+                72.076
+              ],
+              "after_cycle": 14,
+              "before_cycle": 15
+            },
+            {
+              "phase_interval_s": [
+                83.221114,
+                86.144
+              ],
+              "after_cycle": 16,
+              "before_cycle": 17
+            },
+            {
+              "phase_interval_s": [
+                91.48951100000001,
+                94.381
+              ],
+              "after_cycle": 17,
+              "before_cycle": 18
+            },
+            {
+              "phase_interval_s": [
+                99.499159,
+                105.052
+              ],
+              "after_cycle": 18,
+              "before_cycle": 19
+            },
+            {
+              "phase_interval_s": [
+                110.205188,
+                111.26
+              ],
+              "after_cycle": 19,
+              "before_cycle": 20
+            },
+            {
+              "phase_interval_s": [
+                116.473014,
+                118.537
+              ],
+              "after_cycle": 20,
+              "before_cycle": 21
+            },
+            {
+              "phase_interval_s": [
+                123.608106,
+                123.78399999999999
+              ],
+              "after_cycle": 21,
+              "before_cycle": 22
+            },
+            {
+              "phase_interval_s": [
+                128.915328,
+                130.283
+              ],
+              "after_cycle": 22,
+              "before_cycle": 23
+            },
+            {
+              "phase_interval_s": [
+                135.47610899999998,
+                138.169
+              ],
+              "after_cycle": 23,
+              "before_cycle": 24
+            },
+            {
+              "phase_interval_s": [
+                143.302661,
+                147.997
+              ],
+              "after_cycle": 24,
+              "before_cycle": 25
+            },
+            {
+              "phase_interval_s": [
+                153.182206,
+                153.212
+              ],
+              "after_cycle": 25,
+              "before_cycle": 26
+            },
+            {
+              "phase_interval_s": [
+                158.477052,
+                159.905
+              ],
+              "after_cycle": 26,
+              "before_cycle": 27
+            },
+            {
+              "phase_interval_s": [
+                164.954033,
+                169.443
+              ],
+              "after_cycle": 27,
+              "before_cycle": 28
+            },
+            {
+              "phase_interval_s": [
+                174.50309000000001,
+                175.625
+              ],
+              "after_cycle": 28,
+              "before_cycle": 29
+            },
+            {
+              "phase_interval_s": [
+                180.686081,
+                181.857
+              ],
+              "after_cycle": 29,
+              "before_cycle": 30
+            },
+            {
+              "phase_interval_s": [
+                186.917037,
+                188.247
+              ],
+              "after_cycle": 30,
+              "before_cycle": 31
+            },
+            {
+              "phase_interval_s": [
+                193.38818400000002,
+                194.301
+              ],
+              "after_cycle": 31,
+              "before_cycle": 32
+            }
+          ],
+          "longest_actual_sampler_intervals": [
+            {
+              "previous_nominal_t": 148,
+              "next_nominal_t": 149,
+              "previous_actual_phase_s": 149.0003,
+              "next_actual_phase_s": 152.084623,
+              "elapsed_s": 3.0843229999999835,
+              "next_tick_lag_ms": 2084.623,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 76,
+              "next_nominal_t": 77,
+              "previous_actual_phase_s": 77.021065,
+              "next_actual_phase_s": 80.004949,
+              "elapsed_s": 2.9838840000000033,
+              "next_tick_lag_ms": 2004.949,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 26,
+              "next_nominal_t": 27,
+              "previous_actual_phase_s": 27.241746,
+              "next_actual_phase_s": 29.553374,
+              "elapsed_s": 2.3116280000000025,
+              "next_tick_lag_ms": 1553.374,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 126,
+              "next_nominal_t": 127,
+              "previous_actual_phase_s": 127.08931,
+              "next_actual_phase_s": 129.232309,
+              "elapsed_s": 2.142998999999989,
+              "next_tick_lag_ms": 1232.309,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 192,
+              "next_nominal_t": 193,
+              "previous_actual_phase_s": 193.000279,
+              "next_actual_phase_s": 194.751739,
+              "elapsed_s": 1.7514599999999803,
+              "next_tick_lag_ms": 751.739,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 6,
+              "next_nominal_t": 7,
+              "previous_actual_phase_s": 7.092989,
+              "next_actual_phase_s": 8.659842,
+              "elapsed_s": 1.5668529999999992,
+              "next_tick_lag_ms": 659.842,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 21,
+              "next_nominal_t": 22,
+              "previous_actual_phase_s": 22.139931,
+              "next_actual_phase_s": 23.68835,
+              "elapsed_s": 1.548418999999999,
+              "next_tick_lag_ms": 688.35,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 7,
+              "next_nominal_t": 8,
+              "previous_actual_phase_s": 8.659842,
+              "next_actual_phase_s": 10.163879,
+              "elapsed_s": 1.5040370000000003,
+              "next_tick_lag_ms": 1163.879,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  7.930045000000001,
+                  11.623000000000001
+                ],
+                "after_cycle": 5,
+                "before_cycle": 6
+              }
+            },
+            {
+              "previous_nominal_t": 73,
+              "next_nominal_t": 74,
+              "previous_actual_phase_s": 74.000258,
+              "next_actual_phase_s": 75.32246,
+              "elapsed_s": 1.3222020000000043,
+              "next_tick_lag_ms": 322.46,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 24,
+              "next_nominal_t": 25,
+              "previous_actual_phase_s": 25.000065,
+              "next_actual_phase_s": 26.305296,
+              "elapsed_s": 1.3052309999999991,
+              "next_tick_lag_ms": 305.296,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  24.305051000000002,
+                  27.738999999999997
+                ],
+                "after_cycle": 7,
+                "before_cycle": 8
+              }
+            },
+            {
+              "previous_nominal_t": 9,
+              "next_nominal_t": 10,
+              "previous_actual_phase_s": 10.16461,
+              "next_actual_phase_s": 11.359774,
+              "elapsed_s": 1.1951640000000001,
+              "next_tick_lag_ms": 359.774,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  7.930045000000001,
+                  11.623000000000001
+                ],
+                "after_cycle": 5,
+                "before_cycle": 6
+              }
+            },
+            {
+              "previous_nominal_t": 43,
+              "next_nominal_t": 44,
+              "previous_actual_phase_s": 44.003133,
+              "next_actual_phase_s": 45.191738,
+              "elapsed_s": 1.1886050000000026,
+              "next_tick_lag_ms": 191.738,
+              "wholly_inside_definite_between_collections_gap": null
+            }
+          ],
+          "top_sampler_lag_seconds": [
+            {
+              "t": 149,
+              "completed": 753,
+              "errors": 0,
+              "active_vus": 10000,
+              "tick_lag_ms": 2084.623,
+              "wake_lag_mean_ms": 22.303624103299857,
+              "wake_lag_max_ms": 195.06,
+              "p50_ms": 41.855,
+              "p95_ms": 2680.831,
+              "p99_ms": 2715.647,
+              "proc_cpu_pct": 3.3179594838573245,
+              "rss_mb": 251.3359375,
+              "goroutines": 10002
+            },
+            {
+              "t": 77,
+              "completed": 453,
+              "errors": 0,
+              "active_vus": 10000,
+              "tick_lag_ms": 2004.949,
+              "wake_lag_mean_ms": 59.410871396895786,
+              "wake_lag_max_ms": 255.576,
+              "p50_ms": 1987.583,
+              "p95_ms": 3037.183,
+              "p99_ms": 4222.975,
+              "proc_cpu_pct": 10.65779090916178,
+              "rss_mb": 175.65625,
+              "goroutines": 10002
+            },
+            {
+              "t": 27,
+              "completed": 253,
+              "errors": 0,
+              "active_vus": 4841,
+              "tick_lag_ms": 1553.374,
+              "wake_lag_mean_ms": 619.7172003284072,
+              "wake_lag_max_ms": 2331.14,
+              "p50_ms": 4366.335,
+              "p95_ms": 5562.367,
+              "p99_ms": 6455.295,
+              "proc_cpu_pct": 0.004663381183402277,
+              "rss_mb": 117.45703125,
+              "goroutines": 10002
+            },
+            {
+              "t": 127,
+              "completed": 961,
+              "errors": 0,
+              "active_vus": 10000,
+              "tick_lag_ms": 1232.309,
+              "wake_lag_mean_ms": 154.7482191780822,
+              "wake_lag_max_ms": 598.079,
+              "p50_ms": 1601.535,
+              "p95_ms": 2191.359,
+              "p99_ms": 2738.175,
+              "proc_cpu_pct": 9.610474284164908,
+              "rss_mb": 206.3828125,
+              "goroutines": 10002
+            },
+            {
+              "t": 8,
+              "completed": 3,
+              "errors": 0,
+              "active_vus": 1692,
+              "tick_lag_ms": 1163.879,
+              "wake_lag_mean_ms": 449.11651226993865,
+              "wake_lag_max_ms": 848.705,
+              "p50_ms": 2957.311,
+              "p95_ms": 3022.847,
+              "p99_ms": 3022.847,
+              "proc_cpu_pct": 0.004853603861670314,
+              "rss_mb": 74.72265625,
+              "goroutines": 10002
+            },
+            {
+              "t": 150,
+              "completed": 0,
+              "errors": 0,
+              "active_vus": 10000,
+              "tick_lag_ms": 1086.968,
+              "wake_lag_mean_ms": 0,
+              "wake_lag_max_ms": 0,
+              "p50_ms": 0,
+              "p95_ms": 0,
+              "p99_ms": 0,
+              "proc_cpu_pct": 0.4307954787801237,
+              "rss_mb": 251.3359375,
+              "goroutines": 10002
+            },
+            {
+              "t": 78,
+              "completed": 1272,
+              "errors": 0,
+              "active_vus": 10000,
+              "tick_lag_ms": 1006.773,
+              "wake_lag_mean_ms": 271.9312033368092,
+              "wake_lag_max_ms": 1861.018,
+              "p50_ms": 0,
+              "p95_ms": 0,
+              "p99_ms": 0,
+              "proc_cpu_pct": 0.5920374255362187,
+              "rss_mb": 176.1640625,
+              "goroutines": 10002
+            },
+            {
+              "t": 193,
+              "completed": 352,
+              "errors": 0,
+              "active_vus": 10000,
+              "tick_lag_ms": 751.739,
+              "wake_lag_mean_ms": 26.038989429175476,
+              "wake_lag_max_ms": 374.671,
+              "p50_ms": 94.655,
+              "p95_ms": 1153.023,
+              "p99_ms": 1549.311,
+              "proc_cpu_pct": 8.792826537456131,
+              "rss_mb": 195.83203125,
+              "goroutines": 10002
+            },
+            {
+              "t": 22,
+              "completed": 385,
+              "errors": 0,
+              "active_vus": 3904,
+              "tick_lag_ms": 688.35,
+              "wake_lag_mean_ms": 46.255572301425666,
+              "wake_lag_max_ms": 171.631,
+              "p50_ms": 169.343,
+              "p95_ms": 402.175,
+              "p99_ms": 1157.119,
+              "proc_cpu_pct": 4.216094756576594,
+              "rss_mb": 108.6484375,
+              "goroutines": 10002
+            },
+            {
+              "t": 7,
+              "completed": 35,
+              "errors": 0,
+              "active_vus": 1283,
+              "tick_lag_ms": 659.842,
+              "wake_lag_mean_ms": 128.9437627118644,
+              "wake_lag_max_ms": 596.057,
+              "p50_ms": 272.895,
+              "p95_ms": 428.287,
+              "p99_ms": 1472.511,
+              "proc_cpu_pct": 15.222769700407364,
+              "rss_mb": 68.5078125,
+              "goroutines": 10002
+            },
+            {
+              "t": 28,
+              "completed": 67,
+              "errors": 0,
+              "active_vus": 4841,
+              "tick_lag_ms": 554.447,
+              "wake_lag_mean_ms": 243.76401162790697,
+              "wake_lag_max_ms": 467.554,
+              "p50_ms": 0,
+              "p95_ms": 0,
+              "p99_ms": 0,
+              "proc_cpu_pct": 0.5401423554490585,
+              "rss_mb": 119.45703125,
+              "goroutines": 10002
+            },
+            {
+              "t": 10,
+              "completed": 523,
+              "errors": 0,
+              "active_vus": 1842,
+              "tick_lag_ms": 359.774,
+              "wake_lag_mean_ms": 683.0747376760563,
+              "wake_lag_max_ms": 2870.516,
+              "p50_ms": 909.311,
+              "p95_ms": 3135.487,
+              "p99_ms": 3338.239,
+              "proc_cpu_pct": 9.508351331538467,
+              "rss_mb": 80.91796875,
+              "goroutines": 10002
+            }
+          ],
+          "first_timeline_error": null,
+          "last_timeline_sample": {
+            "t": 195,
+            "completed": 2283,
+            "errors": 0,
+            "active_vus": 0,
+            "tick_lag_ms": 0,
+            "wake_lag_mean_ms": 135.345,
+            "wake_lag_max_ms": 270.043,
+            "p50_ms": 373.247,
+            "p95_ms": 614.911,
+            "p99_ms": 626.687,
+            "proc_cpu_pct": 10.529217756205009,
+            "rss_mb": 195.953125,
+            "goroutines": 1
+          },
+          "gc_events": [
+            {
+              "line": 1,
+              "cycle": 1,
+              "runtime_start_s": 0.008,
+              "runtime_gc_fraction_percent": 2,
+              "sweep_termination_ms": 0.007,
+              "concurrent_mark_ms": 1.5,
+              "mark_termination_ms": 0.013,
+              "stw_sum_ms": 0.02,
+              "stw_sweep_cpu_ms": 0.007,
+              "assist_cpu_ms": 0.23,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.013,
+              "cpu_total_ms": 0.25,
+              "heap_before_mb": 3,
+              "heap_after_mark_mb": 4,
+              "heap_live_mb": 0,
+              "heap_goal_mb": 4,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.00952,
+              "phase_start_time_range_s": [
+                -4.992,
+                0.008
+              ],
+              "phase_end_time_range_s": [
+                -4.99048,
+                0.00952
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 2,
+              "cycle": 2,
+              "runtime_start_s": 0.011,
+              "runtime_gc_fraction_percent": 3,
+              "sweep_termination_ms": 0.003,
+              "concurrent_mark_ms": 0.2,
+              "mark_termination_ms": 0.001,
+              "stw_sum_ms": 0.004,
+              "stw_sweep_cpu_ms": 0.003,
+              "assist_cpu_ms": 0.18,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.001,
+              "cpu_total_ms": 0.184,
+              "heap_before_mb": 3,
+              "heap_after_mark_mb": 3,
+              "heap_live_mb": 3,
+              "heap_goal_mb": 4,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.011203999999999999,
+              "phase_start_time_range_s": [
+                -4.989,
+                0.011
+              ],
+              "phase_end_time_range_s": [
+                -4.988796,
+                0.011203999999999999
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 3,
+              "cycle": 3,
+              "runtime_start_s": 0.012,
+              "runtime_gc_fraction_percent": 2,
+              "sweep_termination_ms": 0.004,
+              "concurrent_mark_ms": 15.0,
+              "mark_termination_ms": 0.002,
+              "stw_sum_ms": 0.006,
+              "stw_sweep_cpu_ms": 0.004,
+              "assist_cpu_ms": 0.0,
+              "dedicated_mark_cpu_ms": 0.16,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.002,
+              "cpu_total_ms": 0.166,
+              "heap_before_mb": 7,
+              "heap_after_mark_mb": 7,
+              "heap_live_mb": 7,
+              "heap_goal_mb": 7,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.027006000000000002,
+              "phase_start_time_range_s": [
+                -4.988,
+                0.012
+              ],
+              "phase_end_time_range_s": [
+                -4.972994,
+                0.027006000000000002
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 5,
+              "cycle": 4,
+              "runtime_start_s": 0.051,
+              "runtime_gc_fraction_percent": 8,
+              "sweep_termination_ms": 0.028,
+              "concurrent_mark_ms": 4.1,
+              "mark_termination_ms": 0.008,
+              "stw_sum_ms": 0.036000000000000004,
+              "stw_sweep_cpu_ms": 0.028,
+              "assist_cpu_ms": 2.7,
+              "dedicated_mark_cpu_ms": 1.1,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.008,
+              "cpu_total_ms": 3.8360000000000003,
+              "heap_before_mb": 15,
+              "heap_after_mark_mb": 15,
+              "heap_live_mb": 14,
+              "heap_goal_mb": 15,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.055136,
+              "phase_start_time_range_s": [
+                -4.949,
+                0.051
+              ],
+              "phase_end_time_range_s": [
+                -4.944864,
+                0.055136
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 6,
+              "cycle": 5,
+              "runtime_start_s": 7.908,
+              "runtime_gc_fraction_percent": 0,
+              "sweep_termination_ms": 0.033,
+              "concurrent_mark_ms": 22.0,
+              "mark_termination_ms": 0.012,
+              "stw_sum_ms": 0.045,
+              "stw_sweep_cpu_ms": 0.033,
+              "assist_cpu_ms": 0.9,
+              "dedicated_mark_cpu_ms": 5.2,
+              "idle_mark_cpu_ms": 15.0,
+              "stw_mark_cpu_ms": 0.012,
+              "cpu_total_ms": 21.145,
+              "heap_before_mb": 25,
+              "heap_after_mark_mb": 25,
+              "heap_live_mb": 20,
+              "heap_goal_mb": 29,
+              "stacks_scan_mb": 7,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 7.930045000000001,
+              "phase_start_time_range_s": [
+                2.9080000000000004,
+                7.908
+              ],
+              "phase_end_time_range_s": [
+                2.9300450000000007,
+                7.930045000000001
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 7,
+              "cycle": 6,
+              "runtime_start_s": 16.623,
+              "runtime_gc_fraction_percent": 0,
+              "sweep_termination_ms": 0.19,
+              "concurrent_mark_ms": 129.0,
+              "mark_termination_ms": 0.016,
+              "stw_sum_ms": 0.20600000000000002,
+              "stw_sweep_cpu_ms": 0.19,
+              "assist_cpu_ms": 40.0,
+              "dedicated_mark_cpu_ms": 34.0,
+              "idle_mark_cpu_ms": 14.0,
+              "stw_mark_cpu_ms": 0.016,
+              "cpu_total_ms": 88.206,
+              "heap_before_mb": 40,
+              "heap_after_mark_mb": 41,
+              "heap_live_mb": 25,
+              "heap_goal_mb": 49,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 16.752206,
+              "phase_start_time_range_s": [
+                11.623000000000001,
+                16.623
+              ],
+              "phase_end_time_range_s": [
+                11.752206000000001,
+                16.752206
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 8,
+              "cycle": 7,
+              "runtime_start_s": 24.271,
+              "runtime_gc_fraction_percent": 0,
+              "sweep_termination_ms": 0.045,
+              "concurrent_mark_ms": 34.0,
+              "mark_termination_ms": 0.006,
+              "stw_sum_ms": 0.051,
+              "stw_sweep_cpu_ms": 0.045,
+              "assist_cpu_ms": 0.34,
+              "dedicated_mark_cpu_ms": 9.1,
+              "idle_mark_cpu_ms": 22.0,
+              "stw_mark_cpu_ms": 0.006,
+              "cpu_total_ms": 31.491,
+              "heap_before_mb": 48,
+              "heap_after_mark_mb": 48,
+              "heap_live_mb": 24,
+              "heap_goal_mb": 58,
+              "stacks_scan_mb": 7,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 24.305051000000002,
+              "phase_start_time_range_s": [
+                19.271,
+                24.271
+              ],
+              "phase_end_time_range_s": [
+                19.305051000000002,
+                24.305051000000002
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 9,
+              "cycle": 8,
+              "runtime_start_s": 32.739,
+              "runtime_gc_fraction_percent": 2,
+              "sweep_termination_ms": 4.2,
+              "concurrent_mark_ms": 1240.0,
+              "mark_termination_ms": 0.02,
+              "stw_sum_ms": 4.22,
+              "stw_sweep_cpu_ms": 4.2,
+              "assist_cpu_ms": 465.0,
+              "dedicated_mark_cpu_ms": 311.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.02,
+              "cpu_total_ms": 780.22,
+              "heap_before_mb": 53,
+              "heap_after_mark_mb": 54,
+              "heap_live_mb": 34,
+              "heap_goal_mb": 57,
+              "stacks_scan_mb": 12,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 33.983219999999996,
+              "phase_start_time_range_s": [
+                27.738999999999997,
+                32.739
+              ],
+              "phase_end_time_range_s": [
+                28.983219999999996,
+                33.983219999999996
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 10,
+              "cycle": 9,
+              "runtime_start_s": 39.151,
+              "runtime_gc_fraction_percent": 2,
+              "sweep_termination_ms": 0.1,
+              "concurrent_mark_ms": 66.0,
+              "mark_termination_ms": 0.007,
+              "stw_sum_ms": 0.10700000000000001,
+              "stw_sweep_cpu_ms": 0.1,
+              "assist_cpu_ms": 0.91,
+              "dedicated_mark_cpu_ms": 16.0,
+              "idle_mark_cpu_ms": 41.0,
+              "stw_mark_cpu_ms": 0.007,
+              "cpu_total_ms": 58.017,
+              "heap_before_mb": 76,
+              "heap_after_mark_mb": 76,
+              "heap_live_mb": 41,
+              "heap_goal_mb": 82,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 39.217107000000006,
+              "phase_start_time_range_s": [
+                34.151,
+                39.151
+              ],
+              "phase_end_time_range_s": [
+                34.217107000000006,
+                39.217107000000006
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 11,
+              "cycle": 10,
+              "runtime_start_s": 47.937,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.034,
+              "concurrent_mark_ms": 66.0,
+              "mark_termination_ms": 0.022,
+              "stw_sum_ms": 0.056,
+              "stw_sweep_cpu_ms": 0.034,
+              "assist_cpu_ms": 1.1,
+              "dedicated_mark_cpu_ms": 19.0,
+              "idle_mark_cpu_ms": 34.0,
+              "stw_mark_cpu_ms": 0.022,
+              "cpu_total_ms": 54.156,
+              "heap_before_mb": 86,
+              "heap_after_mark_mb": 87,
+              "heap_live_mb": 29,
+              "heap_goal_mb": 91,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 48.003056,
+              "phase_start_time_range_s": [
+                42.937,
+                47.937
+              ],
+              "phase_end_time_range_s": [
+                43.003056,
+                48.003056
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 12,
+              "cycle": 11,
+              "runtime_start_s": 52.28,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.44,
+              "concurrent_mark_ms": 181.0,
+              "mark_termination_ms": 0.011,
+              "stw_sum_ms": 0.451,
+              "stw_sweep_cpu_ms": 0.44,
+              "assist_cpu_ms": 66.0,
+              "dedicated_mark_cpu_ms": 48.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.011,
+              "cpu_total_ms": 114.451,
+              "heap_before_mb": 62,
+              "heap_after_mark_mb": 64,
+              "heap_live_mb": 39,
+              "heap_goal_mb": 68,
+              "stacks_scan_mb": 9,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 52.461451000000004,
+              "phase_start_time_range_s": [
+                47.28,
+                52.28
+              ],
+              "phase_end_time_range_s": [
+                47.461451000000004,
+                52.461451000000004
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 13,
+              "cycle": 12,
+              "runtime_start_s": 58.95,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 1.1,
+              "concurrent_mark_ms": 152.0,
+              "mark_termination_ms": 0.011,
+              "stw_sum_ms": 1.111,
+              "stw_sweep_cpu_ms": 1.1,
+              "assist_cpu_ms": 68.0,
+              "dedicated_mark_cpu_ms": 42.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.011,
+              "cpu_total_ms": 111.111,
+              "heap_before_mb": 83,
+              "heap_after_mark_mb": 84,
+              "heap_live_mb": 39,
+              "heap_goal_mb": 89,
+              "stacks_scan_mb": 9,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 59.103111000000006,
+              "phase_start_time_range_s": [
+                53.95,
+                58.95
+              ],
+              "phase_end_time_range_s": [
+                54.103111000000006,
+                59.103111000000006
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 14,
+              "cycle": 13,
+              "runtime_start_s": 65.088,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.071,
+              "concurrent_mark_ms": 81.0,
+              "mark_termination_ms": 0.005,
+              "stw_sum_ms": 0.076,
+              "stw_sweep_cpu_ms": 0.071,
+              "assist_cpu_ms": 1.3,
+              "dedicated_mark_cpu_ms": 23.0,
+              "idle_mark_cpu_ms": 41.0,
+              "stw_mark_cpu_ms": 0.005,
+              "cpu_total_ms": 65.376,
+              "heap_before_mb": 83,
+              "heap_after_mark_mb": 83,
+              "heap_live_mb": 39,
+              "heap_goal_mb": 88,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 65.16907599999999,
+              "phase_start_time_range_s": [
+                60.087999999999994,
+                65.088
+              ],
+              "phase_end_time_range_s": [
+                60.16907599999999,
+                65.16907599999999
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 15,
+              "cycle": 14,
+              "runtime_start_s": 71.293,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.054,
+              "concurrent_mark_ms": 50.0,
+              "mark_termination_ms": 0.007,
+              "stw_sum_ms": 0.061,
+              "stw_sweep_cpu_ms": 0.054,
+              "assist_cpu_ms": 0.59,
+              "dedicated_mark_cpu_ms": 13.0,
+              "idle_mark_cpu_ms": 29.0,
+              "stw_mark_cpu_ms": 0.007,
+              "cpu_total_ms": 42.651,
+              "heap_before_mb": 81,
+              "heap_after_mark_mb": 81,
+              "heap_live_mb": 36,
+              "heap_goal_mb": 87,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 71.343061,
+              "phase_start_time_range_s": [
+                66.293,
+                71.293
+              ],
+              "phase_end_time_range_s": [
+                66.343061,
+                71.343061
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 16,
+              "cycle": 15,
+              "runtime_start_s": 77.076,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.22,
+              "concurrent_mark_ms": 82.0,
+              "mark_termination_ms": 0.008,
+              "stw_sum_ms": 0.228,
+              "stw_sweep_cpu_ms": 0.22,
+              "assist_cpu_ms": 0.5,
+              "dedicated_mark_cpu_ms": 24.0,
+              "idle_mark_cpu_ms": 44.0,
+              "stw_mark_cpu_ms": 0.008,
+              "cpu_total_ms": 68.728,
+              "heap_before_mb": 75,
+              "heap_after_mark_mb": 76,
+              "heap_live_mb": 37,
+              "heap_goal_mb": 81,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 77.158228,
+              "phase_start_time_range_s": [
+                72.076,
+                77.076
+              ],
+              "phase_end_time_range_s": [
+                72.158228,
+                77.158228
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 17,
+              "cycle": 16,
+              "runtime_start_s": 82.08,
+              "runtime_gc_fraction_percent": 2,
+              "sweep_termination_ms": 2.1,
+              "concurrent_mark_ms": 1139.0,
+              "mark_termination_ms": 0.014,
+              "stw_sum_ms": 2.114,
+              "stw_sweep_cpu_ms": 2.1,
+              "assist_cpu_ms": 342.0,
+              "dedicated_mark_cpu_ms": 286.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.014,
+              "cpu_total_ms": 630.114,
+              "heap_before_mb": 77,
+              "heap_after_mark_mb": 79,
+              "heap_live_mb": 50,
+              "heap_goal_mb": 83,
+              "stacks_scan_mb": 12,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 83.221114,
+              "phase_start_time_range_s": [
+                77.08,
+                82.08
+              ],
+              "phase_end_time_range_s": [
+                78.221114,
+                83.221114
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 18,
+              "cycle": 17,
+              "runtime_start_s": 91.144,
+              "runtime_gc_fraction_percent": 2,
+              "sweep_termination_ms": 1.5,
+              "concurrent_mark_ms": 344.0,
+              "mark_termination_ms": 0.011,
+              "stw_sum_ms": 1.511,
+              "stw_sweep_cpu_ms": 1.5,
+              "assist_cpu_ms": 151.0,
+              "dedicated_mark_cpu_ms": 97.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.011,
+              "cpu_total_ms": 249.511,
+              "heap_before_mb": 106,
+              "heap_after_mark_mb": 107,
+              "heap_live_mb": 67,
+              "heap_goal_mb": 114,
+              "stacks_scan_mb": 15,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 91.48951100000001,
+              "phase_start_time_range_s": [
+                86.144,
+                91.144
+              ],
+              "phase_end_time_range_s": [
+                86.48951100000001,
+                91.48951100000001
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 19,
+              "cycle": 18,
+              "runtime_start_s": 99.381,
+              "runtime_gc_fraction_percent": 2,
+              "sweep_termination_ms": 0.15,
+              "concurrent_mark_ms": 118.0,
+              "mark_termination_ms": 0.009,
+              "stw_sum_ms": 0.159,
+              "stw_sweep_cpu_ms": 0.15,
+              "assist_cpu_ms": 1.7,
+              "dedicated_mark_cpu_ms": 30.0,
+              "idle_mark_cpu_ms": 61.0,
+              "stw_mark_cpu_ms": 0.009,
+              "cpu_total_ms": 92.859,
+              "heap_before_mb": 141,
+              "heap_after_mark_mb": 142,
+              "heap_live_mb": 72,
+              "heap_goal_mb": 150,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 99.499159,
+              "phase_start_time_range_s": [
+                94.381,
+                99.381
+              ],
+              "phase_end_time_range_s": [
+                94.499159,
+                99.499159
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 20,
+              "cycle": 19,
+              "runtime_start_s": 110.052,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.18,
+              "concurrent_mark_ms": 153.0,
+              "mark_termination_ms": 0.008,
+              "stw_sum_ms": 0.188,
+              "stw_sweep_cpu_ms": 0.18,
+              "assist_cpu_ms": 0.96,
+              "dedicated_mark_cpu_ms": 44.0,
+              "idle_mark_cpu_ms": 70.0,
+              "stw_mark_cpu_ms": 0.008,
+              "cpu_total_ms": 115.148,
+              "heap_before_mb": 146,
+              "heap_after_mark_mb": 147,
+              "heap_live_mb": 42,
+              "heap_goal_mb": 153,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 110.205188,
+              "phase_start_time_range_s": [
+                105.052,
+                110.052
+              ],
+              "phase_end_time_range_s": [
+                105.205188,
+                110.205188
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 21,
+              "cycle": 20,
+              "runtime_start_s": 116.26,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 13.0,
+              "concurrent_mark_ms": 200.0,
+              "mark_termination_ms": 0.014,
+              "stw_sum_ms": 13.014,
+              "stw_sweep_cpu_ms": 13.0,
+              "assist_cpu_ms": 88.0,
+              "dedicated_mark_cpu_ms": 61.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.014,
+              "cpu_total_ms": 162.014,
+              "heap_before_mb": 86,
+              "heap_after_mark_mb": 87,
+              "heap_live_mb": 46,
+              "heap_goal_mb": 93,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 116.473014,
+              "phase_start_time_range_s": [
+                111.26,
+                116.26
+              ],
+              "phase_end_time_range_s": [
+                111.473014,
+                116.473014
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 22,
+              "cycle": 21,
+              "runtime_start_s": 123.537,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.1,
+              "concurrent_mark_ms": 71.0,
+              "mark_termination_ms": 0.006,
+              "stw_sum_ms": 0.10600000000000001,
+              "stw_sweep_cpu_ms": 0.1,
+              "assist_cpu_ms": 0.5,
+              "dedicated_mark_cpu_ms": 18.0,
+              "idle_mark_cpu_ms": 42.0,
+              "stw_mark_cpu_ms": 0.006,
+              "cpu_total_ms": 60.606,
+              "heap_before_mb": 94,
+              "heap_after_mark_mb": 94,
+              "heap_live_mb": 40,
+              "heap_goal_mb": 101,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 123.608106,
+              "phase_start_time_range_s": [
+                118.537,
+                123.537
+              ],
+              "phase_end_time_range_s": [
+                118.608106,
+                123.608106
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 23,
+              "cycle": 22,
+              "runtime_start_s": 128.784,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.32,
+              "concurrent_mark_ms": 131.0,
+              "mark_termination_ms": 0.008,
+              "stw_sum_ms": 0.328,
+              "stw_sweep_cpu_ms": 0.32,
+              "assist_cpu_ms": 2.8,
+              "dedicated_mark_cpu_ms": 33.0,
+              "idle_mark_cpu_ms": 62.0,
+              "stw_mark_cpu_ms": 0.008,
+              "cpu_total_ms": 98.128,
+              "heap_before_mb": 82,
+              "heap_after_mark_mb": 84,
+              "heap_live_mb": 47,
+              "heap_goal_mb": 89,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 128.915328,
+              "phase_start_time_range_s": [
+                123.78399999999999,
+                128.784
+              ],
+              "phase_end_time_range_s": [
+                123.91532799999999,
+                128.915328
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 24,
+              "cycle": 23,
+              "runtime_start_s": 135.283,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 1.1,
+              "concurrent_mark_ms": 192.0,
+              "mark_termination_ms": 0.009,
+              "stw_sum_ms": 1.109,
+              "stw_sweep_cpu_ms": 1.1,
+              "assist_cpu_ms": 83.0,
+              "dedicated_mark_cpu_ms": 54.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.009,
+              "cpu_total_ms": 138.109,
+              "heap_before_mb": 97,
+              "heap_after_mark_mb": 98,
+              "heap_live_mb": 61,
+              "heap_goal_mb": 104,
+              "stacks_scan_mb": 11,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 135.47610899999998,
+              "phase_start_time_range_s": [
+                130.283,
+                135.283
+              ],
+              "phase_end_time_range_s": [
+                130.47610899999998,
+                135.47610899999998
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 25,
+              "cycle": 24,
+              "runtime_start_s": 143.169,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.65,
+              "concurrent_mark_ms": 133.0,
+              "mark_termination_ms": 0.011,
+              "stw_sum_ms": 0.661,
+              "stw_sweep_cpu_ms": 0.65,
+              "assist_cpu_ms": 2.0,
+              "dedicated_mark_cpu_ms": 37.0,
+              "idle_mark_cpu_ms": 63.0,
+              "stw_mark_cpu_ms": 0.011,
+              "cpu_total_ms": 102.661,
+              "heap_before_mb": 124,
+              "heap_after_mark_mb": 125,
+              "heap_live_mb": 65,
+              "heap_goal_mb": 135,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 143.302661,
+              "phase_start_time_range_s": [
+                138.169,
+                143.169
+              ],
+              "phase_end_time_range_s": [
+                138.302661,
+                143.302661
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 26,
+              "cycle": 25,
+              "runtime_start_s": 152.997,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 1.2,
+              "concurrent_mark_ms": 184.0,
+              "mark_termination_ms": 0.006,
+              "stw_sum_ms": 1.206,
+              "stw_sweep_cpu_ms": 1.2,
+              "assist_cpu_ms": 23.0,
+              "dedicated_mark_cpu_ms": 50.0,
+              "idle_mark_cpu_ms": 46.0,
+              "stw_mark_cpu_ms": 0.006,
+              "cpu_total_ms": 120.206,
+              "heap_before_mb": 129,
+              "heap_after_mark_mb": 130,
+              "heap_live_mb": 39,
+              "heap_goal_mb": 139,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 153.182206,
+              "phase_start_time_range_s": [
+                147.997,
+                152.997
+              ],
+              "phase_end_time_range_s": [
+                148.182206,
+                153.182206
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 27,
+              "cycle": 26,
+              "runtime_start_s": 158.212,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 9.0,
+              "concurrent_mark_ms": 256.0,
+              "mark_termination_ms": 0.052,
+              "stw_sum_ms": 9.052,
+              "stw_sweep_cpu_ms": 9.0,
+              "assist_cpu_ms": 88.0,
+              "dedicated_mark_cpu_ms": 70.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.052,
+              "cpu_total_ms": 167.052,
+              "heap_before_mb": 78,
+              "heap_after_mark_mb": 80,
+              "heap_live_mb": 60,
+              "heap_goal_mb": 88,
+              "stacks_scan_mb": 15,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 158.477052,
+              "phase_start_time_range_s": [
+                153.212,
+                158.212
+              ],
+              "phase_end_time_range_s": [
+                153.477052,
+                158.477052
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 28,
+              "cycle": 27,
+              "runtime_start_s": 164.905,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.027,
+              "concurrent_mark_ms": 49.0,
+              "mark_termination_ms": 0.006,
+              "stw_sum_ms": 0.033,
+              "stw_sweep_cpu_ms": 0.027,
+              "assist_cpu_ms": 0.22,
+              "dedicated_mark_cpu_ms": 13.0,
+              "idle_mark_cpu_ms": 32.0,
+              "stw_mark_cpu_ms": 0.006,
+              "cpu_total_ms": 45.253,
+              "heap_before_mb": 123,
+              "heap_after_mark_mb": 124,
+              "heap_live_mb": 64,
+              "heap_goal_mb": 136,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 164.954033,
+              "phase_start_time_range_s": [
+                159.905,
+                164.905
+              ],
+              "phase_end_time_range_s": [
+                159.954033,
+                164.954033
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 29,
+              "cycle": 28,
+              "runtime_start_s": 174.443,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.084,
+              "concurrent_mark_ms": 60.0,
+              "mark_termination_ms": 0.006,
+              "stw_sum_ms": 0.09000000000000001,
+              "stw_sweep_cpu_ms": 0.084,
+              "assist_cpu_ms": 0.86,
+              "dedicated_mark_cpu_ms": 17.0,
+              "idle_mark_cpu_ms": 34.0,
+              "stw_mark_cpu_ms": 0.006,
+              "cpu_total_ms": 51.95,
+              "heap_before_mb": 127,
+              "heap_after_mark_mb": 127,
+              "heap_live_mb": 38,
+              "heap_goal_mb": 137,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 174.50309000000001,
+              "phase_start_time_range_s": [
+                169.443,
+                174.443
+              ],
+              "phase_end_time_range_s": [
+                169.50309000000001,
+                174.50309000000001
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            },
+            {
+              "line": 30,
+              "cycle": 29,
+              "runtime_start_s": 180.625,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.075,
+              "concurrent_mark_ms": 61.0,
+              "mark_termination_ms": 0.006,
+              "stw_sum_ms": 0.081,
+              "stw_sweep_cpu_ms": 0.075,
+              "assist_cpu_ms": 0.34,
+              "dedicated_mark_cpu_ms": 16.0,
+              "idle_mark_cpu_ms": 37.0,
+              "stw_mark_cpu_ms": 0.006,
+              "cpu_total_ms": 53.421,
+              "heap_before_mb": 79,
+              "heap_after_mark_mb": 79,
+              "heap_live_mb": 38,
+              "heap_goal_mb": 86,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 180.686081,
+              "phase_start_time_range_s": [
+                175.625,
+                180.625
+              ],
+              "phase_end_time_range_s": [
+                175.686081,
+                180.686081
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 31,
+              "cycle": 30,
+              "runtime_start_s": 186.857,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.033,
+              "concurrent_mark_ms": 60.0,
+              "mark_termination_ms": 0.004,
+              "stw_sum_ms": 0.037000000000000005,
+              "stw_sweep_cpu_ms": 0.033,
+              "assist_cpu_ms": 0.26,
+              "dedicated_mark_cpu_ms": 15.0,
+              "idle_mark_cpu_ms": 35.0,
+              "stw_mark_cpu_ms": 0.004,
+              "cpu_total_ms": 50.297,
+              "heap_before_mb": 79,
+              "heap_after_mark_mb": 80,
+              "heap_live_mb": 39,
+              "heap_goal_mb": 86,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 186.917037,
+              "phase_start_time_range_s": [
+                181.857,
+                186.857
+              ],
+              "phase_end_time_range_s": [
+                181.917037,
+                186.917037
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 32,
+              "cycle": 31,
+              "runtime_start_s": 193.247,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.17,
+              "concurrent_mark_ms": 141.0,
+              "mark_termination_ms": 0.014,
+              "stw_sum_ms": 0.18400000000000002,
+              "stw_sweep_cpu_ms": 0.17,
+              "assist_cpu_ms": 2.9,
+              "dedicated_mark_cpu_ms": 35.0,
+              "idle_mark_cpu_ms": 67.0,
+              "stw_mark_cpu_ms": 0.014,
+              "cpu_total_ms": 105.084,
+              "heap_before_mb": 81,
+              "heap_after_mark_mb": 82,
+              "heap_live_mb": 39,
+              "heap_goal_mb": 88,
+              "stacks_scan_mb": 8,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 193.38818400000002,
+              "phase_start_time_range_s": [
+                188.247,
+                193.247
+              ],
+              "phase_end_time_range_s": [
+                188.38818400000002,
+                193.38818400000002
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 33,
+              "cycle": 32,
+              "runtime_start_s": 199.301,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 1.2,
+              "concurrent_mark_ms": 323.0,
+              "mark_termination_ms": 0.013,
+              "stw_sum_ms": 1.2129999999999999,
+              "stw_sweep_cpu_ms": 1.2,
+              "assist_cpu_ms": 180.0,
+              "dedicated_mark_cpu_ms": 81.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.013,
+              "cpu_total_ms": 262.213,
+              "heap_before_mb": 82,
+              "heap_after_mark_mb": 84,
+              "heap_live_mb": 48,
+              "heap_goal_mb": 87,
+              "stacks_scan_mb": 11,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 199.62521299999997,
+              "phase_start_time_range_s": [
+                194.301,
+                199.301
+              ],
+              "phase_end_time_range_s": [
+                194.62521299999997,
+                199.62521299999997
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 34,
+              "cycle": 33,
+              "runtime_start_s": 200.604,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 5.5,
+              "concurrent_mark_ms": 22.0,
+              "mark_termination_ms": 0.006,
+              "stw_sum_ms": 5.506,
+              "stw_sweep_cpu_ms": 5.5,
+              "assist_cpu_ms": 1.5,
+              "dedicated_mark_cpu_ms": 8.2,
+              "idle_mark_cpu_ms": 0.58,
+              "stw_mark_cpu_ms": 0.006,
+              "cpu_total_ms": 15.786,
+              "heap_before_mb": 90,
+              "heap_after_mark_mb": 92,
+              "heap_live_mb": 22,
+              "heap_goal_mb": 108,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 200.631506,
+              "phase_start_time_range_s": [
+                195.604,
+                200.604
+              ],
+              "phase_end_time_range_s": [
+                195.631506,
+                200.631506
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 35,
+              "cycle": 34,
+              "runtime_start_s": 200.671,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.055,
+              "concurrent_mark_ms": 8.0,
+              "mark_termination_ms": 0.007,
+              "stw_sum_ms": 0.062,
+              "stw_sweep_cpu_ms": 0.055,
+              "assist_cpu_ms": 4.7,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.007,
+              "cpu_total_ms": 4.7620000000000005,
+              "heap_before_mb": 40,
+              "heap_after_mark_mb": 44,
+              "heap_live_mb": 17,
+              "heap_goal_mb": 44,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 200.679062,
+              "phase_start_time_range_s": [
+                195.671,
+                200.671
+              ],
+              "phase_end_time_range_s": [
+                195.679062,
+                200.679062
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 36,
+              "cycle": 35,
+              "runtime_start_s": 200.696,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.027,
+              "concurrent_mark_ms": 11.0,
+              "mark_termination_ms": 0.008,
+              "stw_sum_ms": 0.035,
+              "stw_sweep_cpu_ms": 0.027,
+              "assist_cpu_ms": 4.2,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.008,
+              "cpu_total_ms": 4.235,
+              "heap_before_mb": 30,
+              "heap_after_mark_mb": 36,
+              "heap_live_mb": 26,
+              "heap_goal_mb": 36,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 200.707035,
+              "phase_start_time_range_s": [
+                195.696,
+                200.696
+              ],
+              "phase_end_time_range_s": [
+                195.707035,
+                200.707035
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 37,
+              "cycle": 36,
+              "runtime_start_s": 200.731,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.046,
+              "concurrent_mark_ms": 10.0,
+              "mark_termination_ms": 0.005,
+              "stw_sum_ms": 0.051,
+              "stw_sweep_cpu_ms": 0.046,
+              "assist_cpu_ms": 1.4,
+              "dedicated_mark_cpu_ms": 2.9,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.005,
+              "cpu_total_ms": 4.351,
+              "heap_before_mb": 44,
+              "heap_after_mark_mb": 50,
+              "heap_live_mb": 36,
+              "heap_goal_mb": 52,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 200.741051,
+              "phase_start_time_range_s": [
+                195.731,
+                200.731
+              ],
+              "phase_end_time_range_s": [
+                195.741051,
+                200.741051
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-probe-100000",
+      "users": 100000,
+      "assessment_path": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/assessment.json",
+      "assessment_sha256": "5ba427fb220b3c1289392d2b44eeef0a8b303705a0a7303a212d497566f64679",
+      "classification": "INCOMPLETE",
+      "phase_error": "TimeoutError: owned native generators exceeded phase deadline",
+      "all_classifications": null,
+      "native_verdict": null,
+      "overall": null,
+      "diagnostic_only": true,
+      "capacity_score": null,
+      "boxes": [
+        {
+          "box": 0,
+          "meta": {
+            "start_at_ms": 1792774353076,
+            "ramp_s": 60.0,
+            "measure_s": 60.0,
+            "tail_s": 15.0,
+            "window_start_ms": 1792774413076.0,
+            "window_end_ms": 1792774473076.0,
+            "box_index": 0,
+            "inferred_from_frozen_command_because_box_json_missing": true
+          },
+          "native_box_summary": null,
+          "native_result_missing": true,
+          "source": {
+            "log": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/box0.log",
+            "log_sha256": "c3eefd5ce194dfe81dd5563c080b43834179d996dedf559c26457f19832d149f",
+            "box_json": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/box0.json",
+            "box_json_sha256": null
+          },
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "all_process_gc": {
+            "cycles": 11,
+            "max_individual_stw_phase_ms": 26.0,
+            "max_combined_stw_ms_per_cycle": 26.008,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 8243.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 33.438,
+            "sum_concurrent_mark_wall_ms": 11726.315,
+            "sum_gc_cpu_ms_printed": 5909.3279999999995,
+            "sum_mark_assist_cpu_ms": 2877.298,
+            "max_heap_before_mb": 172,
+            "max_heap_after_mark_mb": 175,
+            "max_heap_live_mb": 119,
+            "max_heap_goal_mb": 207,
+            "max_stack_scan_mb": 57,
+            "last_runtime_gc_fraction_percent": 6,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              10,
+              11
+            ]
+          },
+          "definitely_measurement_gc": {
+            "cycles": 1,
+            "max_individual_stw_phase_ms": 26.0,
+            "max_combined_stw_ms_per_cycle": 26.008,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 8243.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 26.008,
+            "sum_concurrent_mark_wall_ms": 8243.0,
+            "sum_gc_cpu_ms_printed": 3505.008,
+            "sum_mark_assist_cpu_ms": 1402.0,
+            "max_heap_before_mb": 172,
+            "max_heap_after_mark_mb": 175,
+            "max_heap_live_mb": 119,
+            "max_heap_goal_mb": 207,
+            "max_stack_scan_mb": 57,
+            "last_runtime_gc_fraction_percent": 6,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              11
+            ]
+          },
+          "possibly_measurement_gc": {
+            "cycles": 1,
+            "max_individual_stw_phase_ms": 26.0,
+            "max_combined_stw_ms_per_cycle": 26.008,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 8243.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 26.008,
+            "sum_concurrent_mark_wall_ms": 8243.0,
+            "sum_gc_cpu_ms_printed": 3505.008,
+            "sum_mark_assist_cpu_ms": 1402.0,
+            "max_heap_before_mb": 172,
+            "max_heap_after_mark_mb": 175,
+            "max_heap_live_mb": 119,
+            "max_heap_goal_mb": 207,
+            "max_stack_scan_mb": 57,
+            "last_runtime_gc_fraction_percent": 6,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              11
+            ]
+          },
+          "unparsed_gc_lines": [],
+          "definite_between_completed_collection_phase_intervals": [
+            {
+              "phase_interval_s": [
+                0.078013,
+                7.734
+              ],
+              "after_cycle": 5,
+              "before_cycle": 6
+            },
+            {
+              "phase_interval_s": [
+                12.756028,
+                15.517
+              ],
+              "after_cycle": 6,
+              "before_cycle": 7
+            },
+            {
+              "phase_interval_s": [
+                21.14122,
+                22.907
+              ],
+              "after_cycle": 7,
+              "before_cycle": 8
+            },
+            {
+              "phase_interval_s": [
+                28.282507,
+                30.328000000000003
+              ],
+              "after_cycle": 8,
+              "before_cycle": 9
+            },
+            {
+              "phase_interval_s": [
+                36.018918000000006,
+                38.96
+              ],
+              "after_cycle": 9,
+              "before_cycle": 10
+            },
+            {
+              "phase_interval_s": [
+                45.703714,
+                83.52
+              ],
+              "after_cycle": 10,
+              "before_cycle": 11
+            }
+          ],
+          "longest_actual_sampler_intervals": [],
+          "top_sampler_lag_seconds": [],
+          "first_timeline_error": null,
+          "last_timeline_sample": null,
+          "gc_events": [
+            {
+              "line": 1,
+              "cycle": 1,
+              "runtime_start_s": 0.005,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.005,
+              "concurrent_mark_ms": 0.82,
+              "mark_termination_ms": 0.003,
+              "stw_sum_ms": 0.008,
+              "stw_sweep_cpu_ms": 0.005,
+              "assist_cpu_ms": 0.11,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.003,
+              "cpu_total_ms": 0.118,
+              "heap_before_mb": 3,
+              "heap_after_mark_mb": 4,
+              "heap_live_mb": 0,
+              "heap_goal_mb": 4,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.005828,
+              "phase_start_time_range_s": [
+                -4.995,
+                0.005
+              ],
+              "phase_end_time_range_s": [
+                -4.994172,
+                0.005828
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 2,
+              "cycle": 2,
+              "runtime_start_s": 0.006,
+              "runtime_gc_fraction_percent": 3,
+              "sweep_termination_ms": 0.002,
+              "concurrent_mark_ms": 0.095,
+              "mark_termination_ms": 0.0,
+              "stw_sum_ms": 0.002,
+              "stw_sweep_cpu_ms": 0.002,
+              "assist_cpu_ms": 0.088,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.0,
+              "cpu_total_ms": 0.09,
+              "heap_before_mb": 3,
+              "heap_after_mark_mb": 3,
+              "heap_live_mb": 3,
+              "heap_goal_mb": 4,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.006097,
+              "phase_start_time_range_s": [
+                -4.994,
+                0.006
+              ],
+              "phase_end_time_range_s": [
+                -4.993903,
+                0.006097
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 3,
+              "cycle": 3,
+              "runtime_start_s": 0.007,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.007,
+              "concurrent_mark_ms": 9.1,
+              "mark_termination_ms": 0.001,
+              "stw_sum_ms": 0.008,
+              "stw_sweep_cpu_ms": 0.007,
+              "assist_cpu_ms": 0.0,
+              "dedicated_mark_cpu_ms": 0.092,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.001,
+              "cpu_total_ms": 0.1,
+              "heap_before_mb": 7,
+              "heap_after_mark_mb": 7,
+              "heap_live_mb": 7,
+              "heap_goal_mb": 7,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.016107999999999997,
+              "phase_start_time_range_s": [
+                -4.993,
+                0.007
+              ],
+              "phase_end_time_range_s": [
+                -4.983892,
+                0.016107999999999997
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 5,
+              "cycle": 4,
+              "runtime_start_s": 0.034,
+              "runtime_gc_fraction_percent": 7,
+              "sweep_termination_ms": 0.009,
+              "concurrent_mark_ms": 6.3,
+              "mark_termination_ms": 0.003,
+              "stw_sum_ms": 0.012,
+              "stw_sweep_cpu_ms": 0.009,
+              "assist_cpu_ms": 1.1,
+              "dedicated_mark_cpu_ms": 1.6,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.003,
+              "cpu_total_ms": 2.712,
+              "heap_before_mb": 14,
+              "heap_after_mark_mb": 15,
+              "heap_live_mb": 14,
+              "heap_goal_mb": 15,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.040312,
+              "phase_start_time_range_s": [
+                -4.966,
+                0.034
+              ],
+              "phase_end_time_range_s": [
+                -4.959688,
+                0.040312
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 6,
+              "cycle": 5,
+              "runtime_start_s": 0.06,
+              "runtime_gc_fraction_percent": 17,
+              "sweep_termination_ms": 0.008,
+              "concurrent_mark_ms": 18.0,
+              "mark_termination_ms": 0.005,
+              "stw_sum_ms": 0.013000000000000001,
+              "stw_sweep_cpu_ms": 0.008,
+              "assist_cpu_ms": 5.7,
+              "dedicated_mark_cpu_ms": 4.7,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.005,
+              "cpu_total_ms": 10.413,
+              "heap_before_mb": 25,
+              "heap_after_mark_mb": 28,
+              "heap_live_mb": 26,
+              "heap_goal_mb": 30,
+              "stacks_scan_mb": 7,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.078013,
+              "phase_start_time_range_s": [
+                -4.94,
+                0.06
+              ],
+              "phase_end_time_range_s": [
+                -4.921987,
+                0.078013
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 7,
+              "cycle": 6,
+              "runtime_start_s": 12.734,
+              "runtime_gc_fraction_percent": 0,
+              "sweep_termination_ms": 0.025,
+              "concurrent_mark_ms": 22.0,
+              "mark_termination_ms": 0.003,
+              "stw_sum_ms": 0.028,
+              "stw_sweep_cpu_ms": 0.025,
+              "assist_cpu_ms": 0.3,
+              "dedicated_mark_cpu_ms": 3.2,
+              "idle_mark_cpu_ms": 19.0,
+              "stw_mark_cpu_ms": 0.003,
+              "cpu_total_ms": 22.528,
+              "heap_before_mb": 51,
+              "heap_after_mark_mb": 51,
+              "heap_live_mb": 32,
+              "heap_goal_mb": 61,
+              "stacks_scan_mb": 15,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 12.756028,
+              "phase_start_time_range_s": [
+                7.734,
+                12.734
+              ],
+              "phase_end_time_range_s": [
+                7.756028000000001,
+                12.756028
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 8,
+              "cycle": 7,
+              "runtime_start_s": 20.517,
+              "runtime_gc_fraction_percent": 2,
+              "sweep_termination_ms": 0.92,
+              "concurrent_mark_ms": 621.0,
+              "mark_termination_ms": 2.3,
+              "stw_sum_ms": 3.2199999999999998,
+              "stw_sweep_cpu_ms": 0.92,
+              "assist_cpu_ms": 308.0,
+              "dedicated_mark_cpu_ms": 167.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 2.3,
+              "cpu_total_ms": 478.22,
+              "heap_before_mb": 67,
+              "heap_after_mark_mb": 70,
+              "heap_live_mb": 44,
+              "heap_goal_mb": 81,
+              "stacks_scan_mb": 18,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 21.14122,
+              "phase_start_time_range_s": [
+                15.517,
+                20.517
+              ],
+              "phase_end_time_range_s": [
+                16.14122,
+                21.14122
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 9,
+              "cycle": 8,
+              "runtime_start_s": 27.907,
+              "runtime_gc_fraction_percent": 2,
+              "sweep_termination_ms": 0.5,
+              "concurrent_mark_ms": 375.0,
+              "mark_termination_ms": 0.007,
+              "stw_sum_ms": 0.507,
+              "stw_sweep_cpu_ms": 0.5,
+              "assist_cpu_ms": 207.0,
+              "dedicated_mark_cpu_ms": 96.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.007,
+              "cpu_total_ms": 303.507,
+              "heap_before_mb": 89,
+              "heap_after_mark_mb": 91,
+              "heap_live_mb": 53,
+              "heap_goal_mb": 108,
+              "stacks_scan_mb": 18,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 28.282507,
+              "phase_start_time_range_s": [
+                22.907,
+                27.907
+              ],
+              "phase_end_time_range_s": [
+                23.282507,
+                28.282507
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 10,
+              "cycle": 9,
+              "runtime_start_s": 35.328,
+              "runtime_gc_fraction_percent": 3,
+              "sweep_termination_ms": 0.91,
+              "concurrent_mark_ms": 690.0,
+              "mark_termination_ms": 0.008,
+              "stw_sum_ms": 0.918,
+              "stw_sweep_cpu_ms": 0.91,
+              "assist_cpu_ms": 312.0,
+              "dedicated_mark_cpu_ms": 173.0,
+              "idle_mark_cpu_ms": 39.0,
+              "stw_mark_cpu_ms": 0.008,
+              "cpu_total_ms": 524.918,
+              "heap_before_mb": 104,
+              "heap_after_mark_mb": 107,
+              "heap_live_mb": 67,
+              "heap_goal_mb": 126,
+              "stacks_scan_mb": 22,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 36.018918000000006,
+              "phase_start_time_range_s": [
+                30.328000000000003,
+                35.328
+              ],
+              "phase_end_time_range_s": [
+                31.018918000000006,
+                36.018918000000006
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 11,
+              "cycle": 10,
+              "runtime_start_s": 43.96,
+              "runtime_gc_fraction_percent": 5,
+              "sweep_termination_ms": 2.7,
+              "concurrent_mark_ms": 1741.0,
+              "mark_termination_ms": 0.014,
+              "stw_sum_ms": 2.714,
+              "stw_sweep_cpu_ms": 2.7,
+              "assist_cpu_ms": 641.0,
+              "dedicated_mark_cpu_ms": 418.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.014,
+              "cpu_total_ms": 1061.714,
+              "heap_before_mb": 131,
+              "heap_after_mark_mb": 133,
+              "heap_live_mb": 89,
+              "heap_goal_mb": 158,
+              "stacks_scan_mb": 27,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 45.703714,
+              "phase_start_time_range_s": [
+                38.96,
+                43.96
+              ],
+              "phase_end_time_range_s": [
+                40.703714,
+                45.703714
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 12,
+              "cycle": 11,
+              "runtime_start_s": 88.52,
+              "runtime_gc_fraction_percent": 6,
+              "sweep_termination_ms": 26.0,
+              "concurrent_mark_ms": 8243.0,
+              "mark_termination_ms": 0.008,
+              "stw_sum_ms": 26.008,
+              "stw_sweep_cpu_ms": 26.0,
+              "assist_cpu_ms": 1402.0,
+              "dedicated_mark_cpu_ms": 2077.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.008,
+              "cpu_total_ms": 3505.008,
+              "heap_before_mb": 172,
+              "heap_after_mark_mb": 175,
+              "heap_live_mb": 119,
+              "heap_goal_mb": 207,
+              "stacks_scan_mb": 57,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 96.789008,
+              "phase_start_time_range_s": [
+                83.52,
+                88.52
+              ],
+              "phase_end_time_range_s": [
+                91.789008,
+                96.789008
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            }
+          ]
+        },
+        {
+          "box": 1,
+          "meta": {
+            "version": "loadgen/1",
+            "run_id": "diagnosticgoose110_20261023t164733_2f2b88-probe-100000",
+            "target": "http://127.0.0.2:3000",
+            "host": "831ef5b57bce",
+            "box_index": 1,
+            "users": 20000,
+            "id_offset": 20000,
+            "start_at_ms": 1792774353076,
+            "ramp_s": 60,
+            "measure_s": 60,
+            "tail_s": 15,
+            "think_scale": 1,
+            "articles": 500000,
+            "ncpu": 10,
+            "gomaxprocs": 1,
+            "window_start_ms": 1792774413076,
+            "window_end_ms": 1792774473076,
+            "finished_at_ms": 1792774522123
+          },
+          "native_box_summary": {
+            "cpu_avg_measure_pct": 89.71131481019172,
+            "cpu_max_measure_pct": 100,
+            "proc_cpu_avg_measure_pct": 14.587690289796067,
+            "rss_peak_mb": 397.56640625,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "55 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 41474 ms late"
+            ],
+            "active_vus_at_window_start": 19995,
+            "tcp_connects": 43813
+          },
+          "native_result_missing": false,
+          "source": {
+            "log": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/box1.log",
+            "log_sha256": "5a7d6cfe7859c454efb7d7e8d2a50473c2806234cdd7be8b0ff3073a68fe33a3",
+            "box_json": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/box1.json",
+            "box_json_sha256": "a53856828153977a1f29ac66130b4968c871bab827845eab11fcdc089dea1794"
+          },
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "all_process_gc": {
+            "cycles": 11,
+            "max_individual_stw_phase_ms": 27.0,
+            "max_combined_stw_ms_per_cycle": 27.011,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 4265.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 33.829,
+            "sum_concurrent_mark_wall_ms": 8499.3,
+            "sum_gc_cpu_ms_printed": 5249.068,
+            "sum_mark_assist_cpu_ms": 2884.039,
+            "max_heap_before_mb": 189,
+            "max_heap_after_mark_mb": 192,
+            "max_heap_live_mb": 117,
+            "max_heap_goal_mb": 228,
+            "max_stack_scan_mb": 50,
+            "last_runtime_gc_fraction_percent": 4,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              10,
+              11
+            ]
+          },
+          "definitely_measurement_gc": {
+            "cycles": 0
+          },
+          "possibly_measurement_gc": {
+            "cycles": 1,
+            "max_individual_stw_phase_ms": 27.0,
+            "max_combined_stw_ms_per_cycle": 27.011,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 4265.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 27.011,
+            "sum_concurrent_mark_wall_ms": 4265.0,
+            "sum_gc_cpu_ms_printed": 2452.011,
+            "sum_mark_assist_cpu_ms": 1350.0,
+            "max_heap_before_mb": 189,
+            "max_heap_after_mark_mb": 192,
+            "max_heap_live_mb": 117,
+            "max_heap_goal_mb": 228,
+            "max_stack_scan_mb": 50,
+            "last_runtime_gc_fraction_percent": 4,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              11
+            ]
+          },
+          "unparsed_gc_lines": [],
+          "definite_between_completed_collection_phase_intervals": [
+            {
+              "phase_interval_s": [
+                0.093025,
+                11.049
+              ],
+              "after_cycle": 5,
+              "before_cycle": 6
+            },
+            {
+              "phase_interval_s": [
+                16.121106,
+                17.683
+              ],
+              "after_cycle": 6,
+              "before_cycle": 7
+            },
+            {
+              "phase_interval_s": [
+                23.161777999999998,
+                25.043
+              ],
+              "after_cycle": 7,
+              "before_cycle": 8
+            },
+            {
+              "phase_interval_s": [
+                30.40576,
+                32.31
+              ],
+              "after_cycle": 8,
+              "before_cycle": 9
+            },
+            {
+              "phase_interval_s": [
+                38.238216,
+                41.713
+              ],
+              "after_cycle": 9,
+              "before_cycle": 10
+            },
+            {
+              "phase_interval_s": [
+                49.06791,
+                112.574
+              ],
+              "after_cycle": 10,
+              "before_cycle": 11
+            }
+          ],
+          "longest_actual_sampler_intervals": [
+            {
+              "previous_nominal_t": 56,
+              "next_nominal_t": 57,
+              "previous_actual_phase_s": 57.090623,
+              "next_actual_phase_s": 97.262906,
+              "elapsed_s": 40.172283,
+              "next_tick_lag_ms": 39262.906,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  49.06791,
+                  112.574
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            },
+            {
+              "previous_nominal_t": 120,
+              "next_nominal_t": 121,
+              "previous_actual_phase_s": 121.02109,
+              "next_actual_phase_s": 150.93995999999999,
+              "elapsed_s": 29.918869999999984,
+              "next_tick_lag_ms": 28939.96,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 102,
+              "next_nominal_t": 103,
+              "previous_actual_phase_s": 103.001615,
+              "next_actual_phase_s": 116.57971,
+              "elapsed_s": 13.578095000000005,
+              "next_tick_lag_ms": 12579.71,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 42,
+              "next_nominal_t": 43,
+              "previous_actual_phase_s": 43.153681,
+              "next_actual_phase_s": 54.10239,
+              "elapsed_s": 10.948709000000001,
+              "next_tick_lag_ms": 10102.39,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 57,
+              "next_nominal_t": 58,
+              "previous_actual_phase_s": 97.262906,
+              "next_actual_phase_s": 102.473976,
+              "elapsed_s": 5.211069999999992,
+              "next_tick_lag_ms": 43473.976,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  49.06791,
+                  112.574
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            },
+            {
+              "previous_nominal_t": 103,
+              "next_nominal_t": 104,
+              "previous_actual_phase_s": 116.57971,
+              "next_actual_phase_s": 120.748424,
+              "elapsed_s": 4.168713999999994,
+              "next_tick_lag_ms": 15748.424,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 11,
+              "next_nominal_t": 12,
+              "previous_actual_phase_s": 12.002609,
+              "next_actual_phase_s": 14.231794,
+              "elapsed_s": 2.229185000000001,
+              "next_tick_lag_ms": 1231.794,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 31,
+              "next_nominal_t": 32,
+              "previous_actual_phase_s": 32.000016,
+              "next_actual_phase_s": 33.430117,
+              "elapsed_s": 1.4301010000000005,
+              "next_tick_lag_ms": 430.117,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 27,
+              "next_nominal_t": 28,
+              "previous_actual_phase_s": 28.083412,
+              "next_actual_phase_s": 29.385707,
+              "elapsed_s": 1.3022950000000009,
+              "next_tick_lag_ms": 385.707,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 54,
+              "next_nominal_t": 55,
+              "previous_actual_phase_s": 55.006939,
+              "next_actual_phase_s": 56.117476,
+              "elapsed_s": 1.1105370000000008,
+              "next_tick_lag_ms": 117.476,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  49.06791,
+                  112.574
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            },
+            {
+              "previous_nominal_t": 19,
+              "next_nominal_t": 20,
+              "previous_actual_phase_s": 20.003298,
+              "next_actual_phase_s": 21.109941,
+              "elapsed_s": 1.1066429999999983,
+              "next_tick_lag_ms": 109.941,
+              "wholly_inside_definite_between_collections_gap": null
+            }
+          ],
+          "top_sampler_lag_seconds": [
+            {
+              "t": 58,
+              "completed": 128,
+              "errors": 123,
+              "active_vus": 19995,
+              "tick_lag_ms": 43473.976,
+              "wake_lag_mean_ms": 108.99460029498526,
+              "wake_lag_max_ms": 9223.01,
+              "p50_ms": 0,
+              "p95_ms": 0,
+              "p99_ms": 0,
+              "proc_cpu_pct": 0.000218765046717483,
+              "rss_mb": 376.03125,
+              "goroutines": 20043
+            },
+            {
+              "t": 59,
+              "completed": 162,
+              "errors": 80,
+              "active_vus": 19995,
+              "tick_lag_ms": 42474.077,
+              "wake_lag_mean_ms": 623.8714759358289,
+              "wake_lag_max_ms": 10940.972,
+              "p50_ms": 0,
+              "p95_ms": 0,
+              "p99_ms": 0,
+              "proc_cpu_pct": 12.710013107201018,
+              "rss_mb": 376.0390625,
+              "goroutines": 20043
+            },
+            {
+              "t": 60,
+              "completed": 11,
+              "errors": 10,
+              "active_vus": 19995,
+              "tick_lag_ms": 41474.204,
+              "wake_lag_mean_ms": 369.85644516129037,
+              "wake_lag_max_ms": 11772.703,
+              "p50_ms": 0,
+              "p95_ms": 0,
+              "p99_ms": 0,
+              "proc_cpu_pct": 4.571428571428571,
+              "rss_mb": 376.0390625,
+              "goroutines": 20043
+            },
+            {
+              "t": 61,
+              "completed": 0,
+              "errors": 0,
+              "active_vus": 19995,
+              "tick_lag_ms": 40474.261,
+              "wake_lag_mean_ms": 69.19861999999999,
+              "wake_lag_max_ms": 341.746,
+              "p50_ms": 0,
+              "p95_ms": 0,
+              "p99_ms": 0,
+              "proc_cpu_pct": 7.917935002551334,
+              "rss_mb": 376.05078125,
+              "goroutines": 20043
+            },
+            {
+              "t": 62,
+              "completed": 0,
+              "errors": 0,
+              "active_vus": 19995,
+              "tick_lag_ms": 39474.305,
+              "wake_lag_mean_ms": 638.431,
+              "wake_lag_max_ms": 13488.576,
+              "p50_ms": 0,
+              "p95_ms": 0,
+              "p99_ms": 0,
+              "proc_cpu_pct": 11.740269123092206,
+              "rss_mb": 376.05078125,
+              "goroutines": 20043
+            },
+            {
+              "t": 57,
+              "completed": 578,
+              "errors": 543,
+              "active_vus": 19995,
+              "tick_lag_ms": 39262.906,
+              "wake_lag_mean_ms": 2189.8518097395245,
+              "wake_lag_max_ms": 8977.62,
+              "p50_ms": 40599.551,
+              "p95_ms": 50462.719,
+              "p99_ms": 51019.775,
+              "proc_cpu_pct": 0.784731726947171,
+              "rss_mb": 375.4921875,
+              "goroutines": 20043
+            },
+            {
+              "t": 63,
+              "completed": 5,
+              "errors": 4,
+              "active_vus": 19995,
+              "tick_lag_ms": 38474.357,
+              "wake_lag_mean_ms": 433.9884791666667,
+              "wake_lag_max_ms": 14723.565,
+              "p50_ms": 0,
+              "p95_ms": 0,
+              "p99_ms": 0,
+              "proc_cpu_pct": 8.171021377672208,
+              "rss_mb": 376.0625,
+              "goroutines": 20043
+            },
+            {
+              "t": 64,
+              "completed": 12,
+              "errors": 11,
+              "active_vus": 19995,
+              "tick_lag_ms": 37474.401,
+              "wake_lag_mean_ms": 796.2711517857143,
+              "wake_lag_max_ms": 15858.207,
+              "p50_ms": 0,
+              "p95_ms": 0,
+              "p99_ms": 0,
+              "proc_cpu_pct": 21.60919540229885,
+              "rss_mb": 376.0625,
+              "goroutines": 20043
+            },
+            {
+              "t": 65,
+              "completed": 10,
+              "errors": 5,
+              "active_vus": 19995,
+              "tick_lag_ms": 36474.496,
+              "wake_lag_mean_ms": 117.8642767857143,
+              "wake_lag_max_ms": 408.302,
+              "p50_ms": 0,
+              "p95_ms": 0,
+              "p99_ms": 0,
+              "proc_cpu_pct": 5.366048694261485,
+              "rss_mb": 376.07421875,
+              "goroutines": 20043
+            },
+            {
+              "t": 66,
+              "completed": 5,
+              "errors": 4,
+              "active_vus": 19995,
+              "tick_lag_ms": 35474.548,
+              "wake_lag_mean_ms": 324.3207954545455,
+              "wake_lag_max_ms": 17805.768,
+              "p50_ms": 0,
+              "p95_ms": 0,
+              "p99_ms": 0,
+              "proc_cpu_pct": 11.866028708133971,
+              "rss_mb": 376.078125,
+              "goroutines": 20043
+            },
+            {
+              "t": 67,
+              "completed": 36,
+              "errors": 27,
+              "active_vus": 19995,
+              "tick_lag_ms": 34474.607,
+              "wake_lag_mean_ms": 6718.920527918782,
+              "wake_lag_max_ms": 18904.186,
+              "p50_ms": 0,
+              "p95_ms": 0,
+              "p99_ms": 0,
+              "proc_cpu_pct": 10.746268656716419,
+              "rss_mb": 376.078125,
+              "goroutines": 20043
+            },
+            {
+              "t": 68,
+              "completed": 149,
+              "errors": 86,
+              "active_vus": 19995,
+              "tick_lag_ms": 33474.672,
+              "wake_lag_mean_ms": 6065.242052325581,
+              "wake_lag_max_ms": 19832.442,
+              "p50_ms": 0,
+              "p95_ms": 0,
+              "p99_ms": 0,
+              "proc_cpu_pct": 9.426964208444087,
+              "rss_mb": 376.08984375,
+              "goroutines": 20043
+            }
+          ],
+          "first_timeline_error": {
+            "t": 32,
+            "completed": 1041,
+            "errors": 2,
+            "active_vus": 11126,
+            "tick_lag_ms": 430.117,
+            "wake_lag_mean_ms": 18.398649298597192,
+            "wake_lag_max_ms": 172.771,
+            "p50_ms": 2260.991,
+            "p95_ms": 3282.943,
+            "p99_ms": 10002.431,
+            "proc_cpu_pct": 8.097822257870314,
+            "rss_mb": 240.67578125,
+            "goroutines": 20002
+          },
+          "last_timeline_sample": {
+            "t": 121,
+            "completed": 1010,
+            "errors": 240,
+            "active_vus": 10142,
+            "tick_lag_ms": 28939.96,
+            "wake_lag_mean_ms": 26.878625,
+            "wake_lag_max_ms": 113.704,
+            "p50_ms": 24248.319,
+            "p95_ms": 35618.815,
+            "p99_ms": 46465.023,
+            "proc_cpu_pct": 5.10710139569335,
+            "rss_mb": 397.56640625,
+            "goroutines": 10145
+          },
+          "gc_events": [
+            {
+              "line": 1,
+              "cycle": 1,
+              "runtime_start_s": 0.006,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.003,
+              "concurrent_mark_ms": 0.2,
+              "mark_termination_ms": 0.002,
+              "stw_sum_ms": 0.005,
+              "stw_sweep_cpu_ms": 0.003,
+              "assist_cpu_ms": 0.1,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.002,
+              "cpu_total_ms": 0.10500000000000001,
+              "heap_before_mb": 3,
+              "heap_after_mark_mb": 4,
+              "heap_live_mb": 0,
+              "heap_goal_mb": 4,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.0062050000000000004,
+              "phase_start_time_range_s": [
+                -4.994,
+                0.006
+              ],
+              "phase_end_time_range_s": [
+                -4.993795,
+                0.0062050000000000004
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 2,
+              "cycle": 2,
+              "runtime_start_s": 0.006,
+              "runtime_gc_fraction_percent": 2,
+              "sweep_termination_ms": 0.001,
+              "concurrent_mark_ms": 0.1,
+              "mark_termination_ms": 0.0,
+              "stw_sum_ms": 0.001,
+              "stw_sweep_cpu_ms": 0.001,
+              "assist_cpu_ms": 0.089,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.0,
+              "cpu_total_ms": 0.09,
+              "heap_before_mb": 3,
+              "heap_after_mark_mb": 3,
+              "heap_live_mb": 3,
+              "heap_goal_mb": 4,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.0061010000000000005,
+              "phase_start_time_range_s": [
+                -4.994,
+                0.006
+              ],
+              "phase_end_time_range_s": [
+                -4.993899,
+                0.0061010000000000005
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 4,
+              "cycle": 3,
+              "runtime_start_s": 0.006,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.003,
+              "concurrent_mark_ms": 16.0,
+              "mark_termination_ms": 0.001,
+              "stw_sum_ms": 0.004,
+              "stw_sweep_cpu_ms": 0.003,
+              "assist_cpu_ms": 0.1,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.001,
+              "cpu_total_ms": 0.10400000000000001,
+              "heap_before_mb": 7,
+              "heap_after_mark_mb": 8,
+              "heap_live_mb": 8,
+              "heap_goal_mb": 7,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.022004000000000003,
+              "phase_start_time_range_s": [
+                -4.994,
+                0.006
+              ],
+              "phase_end_time_range_s": [
+                -4.977996,
+                0.022004000000000003
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 5,
+              "cycle": 4,
+              "runtime_start_s": 0.037,
+              "runtime_gc_fraction_percent": 7,
+              "sweep_termination_ms": 0.012,
+              "concurrent_mark_ms": 11.0,
+              "mark_termination_ms": 0.001,
+              "stw_sum_ms": 0.013000000000000001,
+              "stw_sweep_cpu_ms": 0.012,
+              "assist_cpu_ms": 1.0,
+              "dedicated_mark_cpu_ms": 2.3,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.001,
+              "cpu_total_ms": 3.3129999999999997,
+              "heap_before_mb": 14,
+              "heap_after_mark_mb": 19,
+              "heap_live_mb": 17,
+              "heap_goal_mb": 16,
+              "stacks_scan_mb": 2,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.048013,
+              "phase_start_time_range_s": [
+                -4.963,
+                0.037
+              ],
+              "phase_end_time_range_s": [
+                -4.951987,
+                0.048013
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 6,
+              "cycle": 5,
+              "runtime_start_s": 0.076,
+              "runtime_gc_fraction_percent": 20,
+              "sweep_termination_ms": 0.019,
+              "concurrent_mark_ms": 17.0,
+              "mark_termination_ms": 0.006,
+              "stw_sum_ms": 0.025,
+              "stw_sweep_cpu_ms": 0.019,
+              "assist_cpu_ms": 10.0,
+              "dedicated_mark_cpu_ms": 4.9,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.006,
+              "cpu_total_ms": 14.925,
+              "heap_before_mb": 32,
+              "heap_after_mark_mb": 33,
+              "heap_live_mb": 30,
+              "heap_goal_mb": 38,
+              "stacks_scan_mb": 14,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.093025,
+              "phase_start_time_range_s": [
+                -4.924,
+                0.076
+              ],
+              "phase_end_time_range_s": [
+                -4.906975,
+                0.093025
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 7,
+              "cycle": 6,
+              "runtime_start_s": 16.049,
+              "runtime_gc_fraction_percent": 0,
+              "sweep_termination_ms": 0.099,
+              "concurrent_mark_ms": 72.0,
+              "mark_termination_ms": 0.007,
+              "stw_sum_ms": 0.10600000000000001,
+              "stw_sweep_cpu_ms": 0.099,
+              "assist_cpu_ms": 0.75,
+              "dedicated_mark_cpu_ms": 21.0,
+              "idle_mark_cpu_ms": 42.0,
+              "stw_mark_cpu_ms": 0.007,
+              "cpu_total_ms": 63.856,
+              "heap_before_mb": 62,
+              "heap_after_mark_mb": 62,
+              "heap_live_mb": 34,
+              "heap_goal_mb": 76,
+              "stacks_scan_mb": 15,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 16.121106,
+              "phase_start_time_range_s": [
+                11.049,
+                16.049
+              ],
+              "phase_end_time_range_s": [
+                11.121106000000001,
+                16.121106
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 8,
+              "cycle": 7,
+              "runtime_start_s": 22.683,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.77,
+              "concurrent_mark_ms": 478.0,
+              "mark_termination_ms": 0.008,
+              "stw_sum_ms": 0.778,
+              "stw_sweep_cpu_ms": 0.77,
+              "assist_cpu_ms": 145.0,
+              "dedicated_mark_cpu_ms": 122.0,
+              "idle_mark_cpu_ms": 72.0,
+              "stw_mark_cpu_ms": 0.008,
+              "cpu_total_ms": 339.778,
+              "heap_before_mb": 69,
+              "heap_after_mark_mb": 70,
+              "heap_live_mb": 46,
+              "heap_goal_mb": 84,
+              "stacks_scan_mb": 18,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 23.161777999999998,
+              "phase_start_time_range_s": [
+                17.683,
+                22.683
+              ],
+              "phase_end_time_range_s": [
+                18.161777999999998,
+                23.161777999999998
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 9,
+              "cycle": 8,
+              "runtime_start_s": 30.043,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.75,
+              "concurrent_mark_ms": 362.0,
+              "mark_termination_ms": 0.01,
+              "stw_sum_ms": 0.76,
+              "stw_sweep_cpu_ms": 0.75,
+              "assist_cpu_ms": 190.0,
+              "dedicated_mark_cpu_ms": 105.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.01,
+              "cpu_total_ms": 295.76,
+              "heap_before_mb": 92,
+              "heap_after_mark_mb": 95,
+              "heap_live_mb": 57,
+              "heap_goal_mb": 111,
+              "stacks_scan_mb": 19,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 30.40576,
+              "phase_start_time_range_s": [
+                25.043,
+                30.043
+              ],
+              "phase_end_time_range_s": [
+                25.40576,
+                30.40576
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 10,
+              "cycle": 9,
+              "runtime_start_s": 37.31,
+              "runtime_gc_fraction_percent": 2,
+              "sweep_termination_ms": 2.2,
+              "concurrent_mark_ms": 926.0,
+              "mark_termination_ms": 0.016,
+              "stw_sum_ms": 2.216,
+              "stw_sweep_cpu_ms": 2.2,
+              "assist_cpu_ms": 237.0,
+              "dedicated_mark_cpu_ms": 274.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.016,
+              "cpu_total_ms": 513.216,
+              "heap_before_mb": 111,
+              "heap_after_mark_mb": 113,
+              "heap_live_mb": 73,
+              "heap_goal_mb": 134,
+              "stacks_scan_mb": 23,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 38.238216,
+              "phase_start_time_range_s": [
+                32.31,
+                37.31
+              ],
+              "phase_end_time_range_s": [
+                33.238216,
+                38.238216
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 11,
+              "cycle": 10,
+              "runtime_start_s": 46.713,
+              "runtime_gc_fraction_percent": 5,
+              "sweep_termination_ms": 2.9,
+              "concurrent_mark_ms": 2352.0,
+              "mark_termination_ms": 0.01,
+              "stw_sum_ms": 2.9099999999999997,
+              "stw_sweep_cpu_ms": 2.9,
+              "assist_cpu_ms": 950.0,
+              "dedicated_mark_cpu_ms": 613.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.01,
+              "cpu_total_ms": 1565.91,
+              "heap_before_mb": 141,
+              "heap_after_mark_mb": 146,
+              "heap_live_mb": 99,
+              "heap_goal_mb": 170,
+              "stacks_scan_mb": 29,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 49.06791,
+              "phase_start_time_range_s": [
+                41.713,
+                46.713
+              ],
+              "phase_end_time_range_s": [
+                44.06791,
+                49.06791
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 12,
+              "cycle": 11,
+              "runtime_start_s": 117.574,
+              "runtime_gc_fraction_percent": 4,
+              "sweep_termination_ms": 27.0,
+              "concurrent_mark_ms": 4265.0,
+              "mark_termination_ms": 0.011,
+              "stw_sum_ms": 27.011,
+              "stw_sweep_cpu_ms": 27.0,
+              "assist_cpu_ms": 1350.0,
+              "dedicated_mark_cpu_ms": 1075.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.011,
+              "cpu_total_ms": 2452.011,
+              "heap_before_mb": 189,
+              "heap_after_mark_mb": 192,
+              "heap_live_mb": 117,
+              "heap_goal_mb": 228,
+              "stacks_scan_mb": 50,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 121.866011,
+              "phase_start_time_range_s": [
+                112.574,
+                117.574
+              ],
+              "phase_end_time_range_s": [
+                116.866011,
+                121.866011
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": false
+            }
+          ]
+        },
+        {
+          "box": 2,
+          "meta": {
+            "start_at_ms": 1792774353076,
+            "ramp_s": 60.0,
+            "measure_s": 60.0,
+            "tail_s": 15.0,
+            "window_start_ms": 1792774413076.0,
+            "window_end_ms": 1792774473076.0,
+            "box_index": 2,
+            "inferred_from_frozen_command_because_box_json_missing": true
+          },
+          "native_box_summary": null,
+          "native_result_missing": true,
+          "source": {
+            "log": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/box2.log",
+            "log_sha256": "11a28bb14151428b3d0ab15c234bc50986a416a62c3443a412dca174b0a77f66",
+            "box_json": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/box2.json",
+            "box_json_sha256": null
+          },
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "all_process_gc": {
+            "cycles": 11,
+            "max_individual_stw_phase_ms": 91.0,
+            "max_combined_stw_ms_per_cycle": 91.006,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 2701.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 94.657,
+            "sum_concurrent_mark_wall_ms": 5980.743,
+            "sum_gc_cpu_ms_printed": 3487.851,
+            "sum_mark_assist_cpu_ms": 1747.594,
+            "max_heap_before_mb": 191,
+            "max_heap_after_mark_mb": 194,
+            "max_heap_live_mb": 125,
+            "max_heap_goal_mb": 206,
+            "max_stack_scan_mb": 59,
+            "last_runtime_gc_fraction_percent": 3,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              10,
+              11
+            ]
+          },
+          "definitely_measurement_gc": {
+            "cycles": 1,
+            "max_individual_stw_phase_ms": 91.0,
+            "max_combined_stw_ms_per_cycle": 91.006,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 2701.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 91.006,
+            "sum_concurrent_mark_wall_ms": 2701.0,
+            "sum_gc_cpu_ms_printed": 1629.006,
+            "sum_mark_assist_cpu_ms": 827.0,
+            "max_heap_before_mb": 191,
+            "max_heap_after_mark_mb": 194,
+            "max_heap_live_mb": 125,
+            "max_heap_goal_mb": 206,
+            "max_stack_scan_mb": 59,
+            "last_runtime_gc_fraction_percent": 3,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              11
+            ]
+          },
+          "possibly_measurement_gc": {
+            "cycles": 1,
+            "max_individual_stw_phase_ms": 91.0,
+            "max_combined_stw_ms_per_cycle": 91.006,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 2701.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 91.006,
+            "sum_concurrent_mark_wall_ms": 2701.0,
+            "sum_gc_cpu_ms_printed": 1629.006,
+            "sum_mark_assist_cpu_ms": 827.0,
+            "max_heap_before_mb": 191,
+            "max_heap_after_mark_mb": 194,
+            "max_heap_live_mb": 125,
+            "max_heap_goal_mb": 206,
+            "max_stack_scan_mb": 59,
+            "last_runtime_gc_fraction_percent": 3,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              11
+            ]
+          },
+          "unparsed_gc_lines": [],
+          "definite_between_completed_collection_phase_intervals": [
+            {
+              "phase_interval_s": [
+                0.073017,
+                7.859999999999999
+              ],
+              "after_cycle": 5,
+              "before_cycle": 6
+            },
+            {
+              "phase_interval_s": [
+                12.886023,
+                15.312999999999999
+              ],
+              "after_cycle": 6,
+              "before_cycle": 7
+            },
+            {
+              "phase_interval_s": [
+                20.84078,
+                22.956
+              ],
+              "after_cycle": 7,
+              "before_cycle": 8
+            },
+            {
+              "phase_interval_s": [
+                28.564729,
+                29.997
+              ],
+              "after_cycle": 8,
+              "before_cycle": 9
+            },
+            {
+              "phase_interval_s": [
+                35.72176,
+                38.517
+              ],
+              "after_cycle": 9,
+              "before_cycle": 10
+            },
+            {
+              "phase_interval_s": [
+                44.882308,
+                102.147
+              ],
+              "after_cycle": 10,
+              "before_cycle": 11
+            }
+          ],
+          "longest_actual_sampler_intervals": [],
+          "top_sampler_lag_seconds": [],
+          "first_timeline_error": null,
+          "last_timeline_sample": null,
+          "gc_events": [
+            {
+              "line": 1,
+              "cycle": 1,
+              "runtime_start_s": 0.005,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.005,
+              "concurrent_mark_ms": 0.85,
+              "mark_termination_ms": 0.003,
+              "stw_sum_ms": 0.008,
+              "stw_sweep_cpu_ms": 0.005,
+              "assist_cpu_ms": 0.1,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.003,
+              "cpu_total_ms": 0.10800000000000001,
+              "heap_before_mb": 3,
+              "heap_after_mark_mb": 4,
+              "heap_live_mb": 0,
+              "heap_goal_mb": 4,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.005858,
+              "phase_start_time_range_s": [
+                -4.995,
+                0.005
+              ],
+              "phase_end_time_range_s": [
+                -4.994142,
+                0.005858
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 2,
+              "cycle": 2,
+              "runtime_start_s": 0.006,
+              "runtime_gc_fraction_percent": 2,
+              "sweep_termination_ms": 0.001,
+              "concurrent_mark_ms": 0.093,
+              "mark_termination_ms": 0.0,
+              "stw_sum_ms": 0.001,
+              "stw_sweep_cpu_ms": 0.001,
+              "assist_cpu_ms": 0.084,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.0,
+              "cpu_total_ms": 0.085,
+              "heap_before_mb": 3,
+              "heap_after_mark_mb": 3,
+              "heap_live_mb": 3,
+              "heap_goal_mb": 4,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.0060940000000000005,
+              "phase_start_time_range_s": [
+                -4.994,
+                0.006
+              ],
+              "phase_end_time_range_s": [
+                -4.993906,
+                0.0060940000000000005
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 3,
+              "cycle": 3,
+              "runtime_start_s": 0.007,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.003,
+              "concurrent_mark_ms": 8.8,
+              "mark_termination_ms": 0.001,
+              "stw_sum_ms": 0.004,
+              "stw_sweep_cpu_ms": 0.003,
+              "assist_cpu_ms": 0.0,
+              "dedicated_mark_cpu_ms": 0.1,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.001,
+              "cpu_total_ms": 0.10400000000000001,
+              "heap_before_mb": 7,
+              "heap_after_mark_mb": 7,
+              "heap_live_mb": 7,
+              "heap_goal_mb": 7,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.015804000000000002,
+              "phase_start_time_range_s": [
+                -4.993,
+                0.007
+              ],
+              "phase_end_time_range_s": [
+                -4.984196,
+                0.015804000000000002
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 5,
+              "cycle": 4,
+              "runtime_start_s": 0.033,
+              "runtime_gc_fraction_percent": 6,
+              "sweep_termination_ms": 0.012,
+              "concurrent_mark_ms": 6.0,
+              "mark_termination_ms": 0.009,
+              "stw_sum_ms": 0.020999999999999998,
+              "stw_sweep_cpu_ms": 0.012,
+              "assist_cpu_ms": 0.79,
+              "dedicated_mark_cpu_ms": 1.6,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.009,
+              "cpu_total_ms": 2.411,
+              "heap_before_mb": 15,
+              "heap_after_mark_mb": 15,
+              "heap_live_mb": 15,
+              "heap_goal_mb": 15,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.039021,
+              "phase_start_time_range_s": [
+                -4.967,
+                0.033
+              ],
+              "phase_end_time_range_s": [
+                -4.960979,
+                0.039021
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 6,
+              "cycle": 5,
+              "runtime_start_s": 0.058,
+              "runtime_gc_fraction_percent": 16,
+              "sweep_termination_ms": 0.015,
+              "concurrent_mark_ms": 15.0,
+              "mark_termination_ms": 0.002,
+              "stw_sum_ms": 0.017,
+              "stw_sweep_cpu_ms": 0.015,
+              "assist_cpu_ms": 5.3,
+              "dedicated_mark_cpu_ms": 4.3,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.002,
+              "cpu_total_ms": 9.616999999999999,
+              "heap_before_mb": 25,
+              "heap_after_mark_mb": 28,
+              "heap_live_mb": 26,
+              "heap_goal_mb": 30,
+              "stacks_scan_mb": 7,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.073017,
+              "phase_start_time_range_s": [
+                -4.942,
+                0.058
+              ],
+              "phase_end_time_range_s": [
+                -4.926983,
+                0.073017
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 7,
+              "cycle": 6,
+              "runtime_start_s": 12.86,
+              "runtime_gc_fraction_percent": 0,
+              "sweep_termination_ms": 0.02,
+              "concurrent_mark_ms": 26.0,
+              "mark_termination_ms": 0.003,
+              "stw_sum_ms": 0.023,
+              "stw_sweep_cpu_ms": 0.02,
+              "assist_cpu_ms": 0.32,
+              "dedicated_mark_cpu_ms": 6.6,
+              "idle_mark_cpu_ms": 18.0,
+              "stw_mark_cpu_ms": 0.003,
+              "cpu_total_ms": 24.943,
+              "heap_before_mb": 51,
+              "heap_after_mark_mb": 51,
+              "heap_live_mb": 32,
+              "heap_goal_mb": 62,
+              "stacks_scan_mb": 15,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 12.886023,
+              "phase_start_time_range_s": [
+                7.859999999999999,
+                12.86
+              ],
+              "phase_end_time_range_s": [
+                7.886023,
+                12.886023
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 8,
+              "cycle": 7,
+              "runtime_start_s": 20.313,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.77,
+              "concurrent_mark_ms": 527.0,
+              "mark_termination_ms": 0.01,
+              "stw_sum_ms": 0.78,
+              "stw_sweep_cpu_ms": 0.77,
+              "assist_cpu_ms": 233.0,
+              "dedicated_mark_cpu_ms": 142.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.01,
+              "cpu_total_ms": 375.78,
+              "heap_before_mb": 67,
+              "heap_after_mark_mb": 68,
+              "heap_live_mb": 43,
+              "heap_goal_mb": 81,
+              "stacks_scan_mb": 18,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 20.84078,
+              "phase_start_time_range_s": [
+                15.312999999999999,
+                20.313
+              ],
+              "phase_end_time_range_s": [
+                15.840779999999999,
+                20.84078
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 9,
+              "cycle": 8,
+              "runtime_start_s": 27.956,
+              "runtime_gc_fraction_percent": 3,
+              "sweep_termination_ms": 0.71,
+              "concurrent_mark_ms": 608.0,
+              "mark_termination_ms": 0.019,
+              "stw_sum_ms": 0.729,
+              "stw_sweep_cpu_ms": 0.71,
+              "assist_cpu_ms": 266.0,
+              "dedicated_mark_cpu_ms": 224.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.019,
+              "cpu_total_ms": 490.729,
+              "heap_before_mb": 87,
+              "heap_after_mark_mb": 88,
+              "heap_live_mb": 52,
+              "heap_goal_mb": 105,
+              "stacks_scan_mb": 19,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 28.564729,
+              "phase_start_time_range_s": [
+                22.956,
+                27.956
+              ],
+              "phase_end_time_range_s": [
+                23.564729,
+                28.564729
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 10,
+              "cycle": 9,
+              "runtime_start_s": 34.997,
+              "runtime_gc_fraction_percent": 3,
+              "sweep_termination_ms": 0.73,
+              "concurrent_mark_ms": 724.0,
+              "mark_termination_ms": 0.03,
+              "stw_sum_ms": 0.76,
+              "stw_sweep_cpu_ms": 0.73,
+              "assist_cpu_ms": 253.0,
+              "dedicated_mark_cpu_ms": 186.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.03,
+              "cpu_total_ms": 439.76,
+              "heap_before_mb": 103,
+              "heap_after_mark_mb": 106,
+              "heap_live_mb": 68,
+              "heap_goal_mb": 124,
+              "stacks_scan_mb": 21,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 35.72176,
+              "phase_start_time_range_s": [
+                29.997,
+                34.997
+              ],
+              "phase_end_time_range_s": [
+                30.721760000000003,
+                35.72176
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 11,
+              "cycle": 10,
+              "runtime_start_s": 43.517,
+              "runtime_gc_fraction_percent": 4,
+              "sweep_termination_ms": 1.3,
+              "concurrent_mark_ms": 1364.0,
+              "mark_termination_ms": 0.008,
+              "stw_sum_ms": 1.308,
+              "stw_sweep_cpu_ms": 1.3,
+              "assist_cpu_ms": 162.0,
+              "dedicated_mark_cpu_ms": 352.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.008,
+              "cpu_total_ms": 515.308,
+              "heap_before_mb": 132,
+              "heap_after_mark_mb": 134,
+              "heap_live_mb": 89,
+              "heap_goal_mb": 159,
+              "stacks_scan_mb": 27,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 44.882308,
+              "phase_start_time_range_s": [
+                38.517,
+                43.517
+              ],
+              "phase_end_time_range_s": [
+                39.882308,
+                44.882308
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 12,
+              "cycle": 11,
+              "runtime_start_s": 107.147,
+              "runtime_gc_fraction_percent": 3,
+              "sweep_termination_ms": 91.0,
+              "concurrent_mark_ms": 2701.0,
+              "mark_termination_ms": 0.006,
+              "stw_sum_ms": 91.006,
+              "stw_sweep_cpu_ms": 91.0,
+              "assist_cpu_ms": 827.0,
+              "dedicated_mark_cpu_ms": 711.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.006,
+              "cpu_total_ms": 1629.006,
+              "heap_before_mb": 191,
+              "heap_after_mark_mb": 194,
+              "heap_live_mb": 125,
+              "heap_goal_mb": 206,
+              "stacks_scan_mb": 59,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 109.939006,
+              "phase_start_time_range_s": [
+                102.147,
+                107.147
+              ],
+              "phase_end_time_range_s": [
+                104.939006,
+                109.939006
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            }
+          ]
+        },
+        {
+          "box": 3,
+          "meta": {
+            "start_at_ms": 1792774353076,
+            "ramp_s": 60.0,
+            "measure_s": 60.0,
+            "tail_s": 15.0,
+            "window_start_ms": 1792774413076.0,
+            "window_end_ms": 1792774473076.0,
+            "box_index": 3,
+            "inferred_from_frozen_command_because_box_json_missing": true
+          },
+          "native_box_summary": null,
+          "native_result_missing": true,
+          "source": {
+            "log": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/box3.log",
+            "log_sha256": "fe36171efa1693dbed5349fafd6ac68f75bf016bcb9ad38cd9a01998e5a9fa97",
+            "box_json": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/box3.json",
+            "box_json_sha256": null
+          },
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "all_process_gc": {
+            "cycles": 11,
+            "max_individual_stw_phase_ms": 2.8,
+            "max_combined_stw_ms_per_cycle": 2.807,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 2351.0,
+            "max_concurrent_mark_cycle": 10,
+            "sum_stw_clock_ms": 8.991,
+            "sum_concurrent_mark_wall_ms": 6335.3,
+            "sum_gc_cpu_ms_printed": 4124.308,
+            "sum_mark_assist_cpu_ms": 2348.017,
+            "max_heap_before_mb": 200,
+            "max_heap_after_mark_mb": 202,
+            "max_heap_live_mb": 120,
+            "max_heap_goal_mb": 227,
+            "max_stack_scan_mb": 44,
+            "last_runtime_gc_fraction_percent": 3,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              10,
+              11
+            ]
+          },
+          "definitely_measurement_gc": {
+            "cycles": 1,
+            "max_individual_stw_phase_ms": 2.8,
+            "max_combined_stw_ms_per_cycle": 2.807,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 2278.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 2.807,
+            "sum_concurrent_mark_wall_ms": 2278.0,
+            "sum_gc_cpu_ms_printed": 1417.807,
+            "sum_mark_assist_cpu_ms": 826.0,
+            "max_heap_before_mb": 200,
+            "max_heap_after_mark_mb": 202,
+            "max_heap_live_mb": 120,
+            "max_heap_goal_mb": 227,
+            "max_stack_scan_mb": 44,
+            "last_runtime_gc_fraction_percent": 3,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              11
+            ]
+          },
+          "possibly_measurement_gc": {
+            "cycles": 1,
+            "max_individual_stw_phase_ms": 2.8,
+            "max_combined_stw_ms_per_cycle": 2.807,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 2278.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 2.807,
+            "sum_concurrent_mark_wall_ms": 2278.0,
+            "sum_gc_cpu_ms_printed": 1417.807,
+            "sum_mark_assist_cpu_ms": 826.0,
+            "max_heap_before_mb": 200,
+            "max_heap_after_mark_mb": 202,
+            "max_heap_live_mb": 120,
+            "max_heap_goal_mb": 227,
+            "max_stack_scan_mb": 44,
+            "last_runtime_gc_fraction_percent": 3,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              11
+            ]
+          },
+          "unparsed_gc_lines": [],
+          "definite_between_completed_collection_phase_intervals": [
+            {
+              "phase_interval_s": [
+                0.091016,
+                10.2
+              ],
+              "after_cycle": 5,
+              "before_cycle": 6
+            },
+            {
+              "phase_interval_s": [
+                15.247143999999999,
+                16.997
+              ],
+              "after_cycle": 6,
+              "before_cycle": 7
+            },
+            {
+              "phase_interval_s": [
+                22.235115,
+                24.413
+              ],
+              "after_cycle": 7,
+              "before_cycle": 8
+            },
+            {
+              "phase_interval_s": [
+                30.083557,
+                31.911
+              ],
+              "after_cycle": 8,
+              "before_cycle": 9
+            },
+            {
+              "phase_interval_s": [
+                37.624613000000004,
+                42.09
+              ],
+              "after_cycle": 9,
+              "before_cycle": 10
+            },
+            {
+              "phase_interval_s": [
+                49.443711,
+                103.318
+              ],
+              "after_cycle": 10,
+              "before_cycle": 11
+            }
+          ],
+          "longest_actual_sampler_intervals": [],
+          "top_sampler_lag_seconds": [],
+          "first_timeline_error": null,
+          "last_timeline_sample": null,
+          "gc_events": [
+            {
+              "line": 1,
+              "cycle": 1,
+              "runtime_start_s": 0.005,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.004,
+              "concurrent_mark_ms": 0.8,
+              "mark_termination_ms": 0.003,
+              "stw_sum_ms": 0.007,
+              "stw_sweep_cpu_ms": 0.004,
+              "assist_cpu_ms": 0.11,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.003,
+              "cpu_total_ms": 0.117,
+              "heap_before_mb": 3,
+              "heap_after_mark_mb": 4,
+              "heap_live_mb": 0,
+              "heap_goal_mb": 4,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.0058070000000000005,
+              "phase_start_time_range_s": [
+                -4.995,
+                0.005
+              ],
+              "phase_end_time_range_s": [
+                -4.994193,
+                0.0058070000000000005
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 2,
+              "cycle": 2,
+              "runtime_start_s": 0.006,
+              "runtime_gc_fraction_percent": 3,
+              "sweep_termination_ms": 0.002,
+              "concurrent_mark_ms": 0.1,
+              "mark_termination_ms": 0.0,
+              "stw_sum_ms": 0.002,
+              "stw_sweep_cpu_ms": 0.002,
+              "assist_cpu_ms": 0.092,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.0,
+              "cpu_total_ms": 0.094,
+              "heap_before_mb": 3,
+              "heap_after_mark_mb": 3,
+              "heap_live_mb": 3,
+              "heap_goal_mb": 4,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.006102,
+              "phase_start_time_range_s": [
+                -4.994,
+                0.006
+              ],
+              "phase_end_time_range_s": [
+                -4.993898,
+                0.006102
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 4,
+              "cycle": 3,
+              "runtime_start_s": 0.007,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.002,
+              "concurrent_mark_ms": 16.0,
+              "mark_termination_ms": 0.001,
+              "stw_sum_ms": 0.003,
+              "stw_sweep_cpu_ms": 0.002,
+              "assist_cpu_ms": 0.085,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.001,
+              "cpu_total_ms": 0.08800000000000001,
+              "heap_before_mb": 7,
+              "heap_after_mark_mb": 8,
+              "heap_live_mb": 8,
+              "heap_goal_mb": 7,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.023003,
+              "phase_start_time_range_s": [
+                -4.993,
+                0.007
+              ],
+              "phase_end_time_range_s": [
+                -4.976997,
+                0.023003
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 5,
+              "cycle": 4,
+              "runtime_start_s": 0.04,
+              "runtime_gc_fraction_percent": 8,
+              "sweep_termination_ms": 0.014,
+              "concurrent_mark_ms": 8.4,
+              "mark_termination_ms": 0.002,
+              "stw_sum_ms": 0.016,
+              "stw_sweep_cpu_ms": 0.014,
+              "assist_cpu_ms": 1.2,
+              "dedicated_mark_cpu_ms": 2.4,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.002,
+              "cpu_total_ms": 3.6159999999999997,
+              "heap_before_mb": 15,
+              "heap_after_mark_mb": 18,
+              "heap_live_mb": 17,
+              "heap_goal_mb": 16,
+              "stacks_scan_mb": 2,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.048416,
+              "phase_start_time_range_s": [
+                -4.96,
+                0.04
+              ],
+              "phase_end_time_range_s": [
+                -4.951584,
+                0.048416
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 6,
+              "cycle": 5,
+              "runtime_start_s": 0.076,
+              "runtime_gc_fraction_percent": 20,
+              "sweep_termination_ms": 0.013,
+              "concurrent_mark_ms": 15.0,
+              "mark_termination_ms": 0.003,
+              "stw_sum_ms": 0.016,
+              "stw_sweep_cpu_ms": 0.013,
+              "assist_cpu_ms": 10.0,
+              "dedicated_mark_cpu_ms": 3.9,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.003,
+              "cpu_total_ms": 13.916,
+              "heap_before_mb": 31,
+              "heap_after_mark_mb": 32,
+              "heap_live_mb": 29,
+              "heap_goal_mb": 37,
+              "stacks_scan_mb": 13,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.091016,
+              "phase_start_time_range_s": [
+                -4.924,
+                0.076
+              ],
+              "phase_end_time_range_s": [
+                -4.908984,
+                0.091016
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 7,
+              "cycle": 6,
+              "runtime_start_s": 15.2,
+              "runtime_gc_fraction_percent": 0,
+              "sweep_termination_ms": 0.14,
+              "concurrent_mark_ms": 47.0,
+              "mark_termination_ms": 0.004,
+              "stw_sum_ms": 0.14400000000000002,
+              "stw_sweep_cpu_ms": 0.14,
+              "assist_cpu_ms": 0.53,
+              "dedicated_mark_cpu_ms": 12.0,
+              "idle_mark_cpu_ms": 31.0,
+              "stw_mark_cpu_ms": 0.004,
+              "cpu_total_ms": 43.674,
+              "heap_before_mb": 59,
+              "heap_after_mark_mb": 59,
+              "heap_live_mb": 33,
+              "heap_goal_mb": 72,
+              "stacks_scan_mb": 15,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 15.247143999999999,
+              "phase_start_time_range_s": [
+                10.2,
+                15.2
+              ],
+              "phase_end_time_range_s": [
+                10.247143999999999,
+                15.247143999999999
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 8,
+              "cycle": 7,
+              "runtime_start_s": 21.997,
+              "runtime_gc_fraction_percent": 0,
+              "sweep_termination_ms": 1.1,
+              "concurrent_mark_ms": 237.0,
+              "mark_termination_ms": 0.015,
+              "stw_sum_ms": 1.115,
+              "stw_sweep_cpu_ms": 1.1,
+              "assist_cpu_ms": 61.0,
+              "dedicated_mark_cpu_ms": 70.0,
+              "idle_mark_cpu_ms": 41.0,
+              "stw_mark_cpu_ms": 0.015,
+              "cpu_total_ms": 173.115,
+              "heap_before_mb": 68,
+              "heap_after_mark_mb": 70,
+              "heap_live_mb": 47,
+              "heap_goal_mb": 83,
+              "stacks_scan_mb": 18,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 22.235115,
+              "phase_start_time_range_s": [
+                16.997,
+                21.997
+              ],
+              "phase_end_time_range_s": [
+                17.235115,
+                22.235115
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 9,
+              "cycle": 8,
+              "runtime_start_s": 29.413,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.55,
+              "concurrent_mark_ms": 670.0,
+              "mark_termination_ms": 0.007,
+              "stw_sum_ms": 0.557,
+              "stw_sweep_cpu_ms": 0.55,
+              "assist_cpu_ms": 242.0,
+              "dedicated_mark_cpu_ms": 170.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.007,
+              "cpu_total_ms": 412.557,
+              "heap_before_mb": 93,
+              "heap_after_mark_mb": 95,
+              "heap_live_mb": 55,
+              "heap_goal_mb": 112,
+              "stacks_scan_mb": 19,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 30.083557,
+              "phase_start_time_range_s": [
+                24.413,
+                29.413
+              ],
+              "phase_end_time_range_s": [
+                25.083557,
+                30.083557
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 10,
+              "cycle": 9,
+              "runtime_start_s": 36.911,
+              "runtime_gc_fraction_percent": 3,
+              "sweep_termination_ms": 1.6,
+              "concurrent_mark_ms": 712.0,
+              "mark_termination_ms": 0.013,
+              "stw_sum_ms": 1.613,
+              "stw_sweep_cpu_ms": 1.6,
+              "assist_cpu_ms": 369.0,
+              "dedicated_mark_cpu_ms": 181.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.013,
+              "cpu_total_ms": 551.613,
+              "heap_before_mb": 108,
+              "heap_after_mark_mb": 111,
+              "heap_live_mb": 72,
+              "heap_goal_mb": 131,
+              "stacks_scan_mb": 24,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 37.624613000000004,
+              "phase_start_time_range_s": [
+                31.911,
+                36.911
+              ],
+              "phase_end_time_range_s": [
+                32.624613000000004,
+                37.624613000000004
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 11,
+              "cycle": 10,
+              "runtime_start_s": 47.09,
+              "runtime_gc_fraction_percent": 5,
+              "sweep_termination_ms": 2.7,
+              "concurrent_mark_ms": 2351.0,
+              "mark_termination_ms": 0.011,
+              "stw_sum_ms": 2.7110000000000003,
+              "stw_sweep_cpu_ms": 2.7,
+              "assist_cpu_ms": 838.0,
+              "dedicated_mark_cpu_ms": 667.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.011,
+              "cpu_total_ms": 1507.711,
+              "heap_before_mb": 146,
+              "heap_after_mark_mb": 148,
+              "heap_live_mb": 98,
+              "heap_goal_mb": 169,
+              "stacks_scan_mb": 30,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 49.443711,
+              "phase_start_time_range_s": [
+                42.09,
+                47.09
+              ],
+              "phase_end_time_range_s": [
+                44.443711,
+                49.443711
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 12,
+              "cycle": 11,
+              "runtime_start_s": 108.318,
+              "runtime_gc_fraction_percent": 3,
+              "sweep_termination_ms": 2.8,
+              "concurrent_mark_ms": 2278.0,
+              "mark_termination_ms": 0.007,
+              "stw_sum_ms": 2.807,
+              "stw_sweep_cpu_ms": 2.8,
+              "assist_cpu_ms": 826.0,
+              "dedicated_mark_cpu_ms": 589.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.007,
+              "cpu_total_ms": 1417.807,
+              "heap_before_mb": 200,
+              "heap_after_mark_mb": 202,
+              "heap_live_mb": 120,
+              "heap_goal_mb": 227,
+              "stacks_scan_mb": 44,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 110.598807,
+              "phase_start_time_range_s": [
+                103.318,
+                108.318
+              ],
+              "phase_end_time_range_s": [
+                105.598807,
+                110.598807
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": true
+            }
+          ]
+        },
+        {
+          "box": 4,
+          "meta": {
+            "start_at_ms": 1792774353076,
+            "ramp_s": 60.0,
+            "measure_s": 60.0,
+            "tail_s": 15.0,
+            "window_start_ms": 1792774413076.0,
+            "window_end_ms": 1792774473076.0,
+            "box_index": 4,
+            "inferred_from_frozen_command_because_box_json_missing": true
+          },
+          "native_box_summary": null,
+          "native_result_missing": true,
+          "source": {
+            "log": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/box4.log",
+            "log_sha256": "fb8e8299b72dddf60d5445a543dc6b5cae0f96f131f13bfbe77bcb5b51dd1b6a",
+            "box_json": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/box4.json",
+            "box_json_sha256": null
+          },
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "all_process_gc": {
+            "cycles": 11,
+            "max_individual_stw_phase_ms": 67.0,
+            "max_combined_stw_ms_per_cycle": 67.006,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 11193.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 81.153,
+            "sum_concurrent_mark_wall_ms": 13596.5,
+            "sum_gc_cpu_ms_printed": 5789.043000000001,
+            "sum_mark_assist_cpu_ms": 2237.09,
+            "max_heap_before_mb": 193,
+            "max_heap_after_mark_mb": 195,
+            "max_heap_live_mb": 124,
+            "max_heap_goal_mb": 215,
+            "max_stack_scan_mb": 66,
+            "last_runtime_gc_fraction_percent": 4,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              11
+            ]
+          },
+          "definitely_measurement_gc": {
+            "cycles": 0
+          },
+          "possibly_measurement_gc": {
+            "cycles": 1,
+            "max_individual_stw_phase_ms": 67.0,
+            "max_combined_stw_ms_per_cycle": 67.006,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 11193.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 67.006,
+            "sum_concurrent_mark_wall_ms": 11193.0,
+            "sum_gc_cpu_ms_printed": 4303.006,
+            "sum_mark_assist_cpu_ms": 1419.0,
+            "max_heap_before_mb": 193,
+            "max_heap_after_mark_mb": 195,
+            "max_heap_live_mb": 124,
+            "max_heap_goal_mb": 215,
+            "max_stack_scan_mb": 66,
+            "last_runtime_gc_fraction_percent": 4,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              11
+            ]
+          },
+          "unparsed_gc_lines": [],
+          "definite_between_completed_collection_phase_intervals": [
+            {
+              "phase_interval_s": [
+                0.076019,
+                7.066000000000001
+              ],
+              "after_cycle": 5,
+              "before_cycle": 6
+            },
+            {
+              "phase_interval_s": [
+                12.088021000000001,
+                15.155000000000001
+              ],
+              "after_cycle": 6,
+              "before_cycle": 7
+            },
+            {
+              "phase_interval_s": [
+                20.798997,
+                22.643
+              ],
+              "after_cycle": 7,
+              "before_cycle": 8
+            },
+            {
+              "phase_interval_s": [
+                28.076663,
+                30.037999999999997
+              ],
+              "after_cycle": 8,
+              "before_cycle": 9
+            },
+            {
+              "phase_interval_s": [
+                35.753007,
+                39.756
+              ],
+              "after_cycle": 9,
+              "before_cycle": 10
+            },
+            {
+              "phase_interval_s": [
+                45.326413,
+                111.39
+              ],
+              "after_cycle": 10,
+              "before_cycle": 11
+            }
+          ],
+          "longest_actual_sampler_intervals": [],
+          "top_sampler_lag_seconds": [],
+          "first_timeline_error": null,
+          "last_timeline_sample": null,
+          "gc_events": [
+            {
+              "line": 1,
+              "cycle": 1,
+              "runtime_start_s": 0.005,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.003,
+              "concurrent_mark_ms": 0.79,
+              "mark_termination_ms": 0.003,
+              "stw_sum_ms": 0.006,
+              "stw_sweep_cpu_ms": 0.003,
+              "assist_cpu_ms": 0.1,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.003,
+              "cpu_total_ms": 0.10600000000000001,
+              "heap_before_mb": 3,
+              "heap_after_mark_mb": 4,
+              "heap_live_mb": 0,
+              "heap_goal_mb": 4,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.005796,
+              "phase_start_time_range_s": [
+                -4.995,
+                0.005
+              ],
+              "phase_end_time_range_s": [
+                -4.994204,
+                0.005796
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 2,
+              "cycle": 2,
+              "runtime_start_s": 0.006,
+              "runtime_gc_fraction_percent": 3,
+              "sweep_termination_ms": 0.005,
+              "concurrent_mark_ms": 0.11,
+              "mark_termination_ms": 0.0,
+              "stw_sum_ms": 0.005,
+              "stw_sweep_cpu_ms": 0.005,
+              "assist_cpu_ms": 0.1,
+              "dedicated_mark_cpu_ms": 0.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.0,
+              "cpu_total_ms": 0.10500000000000001,
+              "heap_before_mb": 3,
+              "heap_after_mark_mb": 3,
+              "heap_live_mb": 3,
+              "heap_goal_mb": 4,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.006115,
+              "phase_start_time_range_s": [
+                -4.994,
+                0.006
+              ],
+              "phase_end_time_range_s": [
+                -4.993885,
+                0.006115
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 3,
+              "cycle": 3,
+              "runtime_start_s": 0.007,
+              "runtime_gc_fraction_percent": 1,
+              "sweep_termination_ms": 0.002,
+              "concurrent_mark_ms": 10.0,
+              "mark_termination_ms": 0.001,
+              "stw_sum_ms": 0.003,
+              "stw_sweep_cpu_ms": 0.002,
+              "assist_cpu_ms": 0.0,
+              "dedicated_mark_cpu_ms": 0.1,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.001,
+              "cpu_total_ms": 0.10300000000000001,
+              "heap_before_mb": 7,
+              "heap_after_mark_mb": 7,
+              "heap_live_mb": 7,
+              "heap_goal_mb": 7,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.017003,
+              "phase_start_time_range_s": [
+                -4.993,
+                0.007
+              ],
+              "phase_end_time_range_s": [
+                -4.982997,
+                0.017003
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 5,
+              "cycle": 4,
+              "runtime_start_s": 0.035,
+              "runtime_gc_fraction_percent": 7,
+              "sweep_termination_ms": 0.009,
+              "concurrent_mark_ms": 4.6,
+              "mark_termination_ms": 0.004,
+              "stw_sum_ms": 0.013,
+              "stw_sweep_cpu_ms": 0.009,
+              "assist_cpu_ms": 1.3,
+              "dedicated_mark_cpu_ms": 1.1,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.004,
+              "cpu_total_ms": 2.4130000000000003,
+              "heap_before_mb": 14,
+              "heap_after_mark_mb": 15,
+              "heap_live_mb": 14,
+              "heap_goal_mb": 15,
+              "stacks_scan_mb": 0,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.039613,
+              "phase_start_time_range_s": [
+                -4.965,
+                0.035
+              ],
+              "phase_end_time_range_s": [
+                -4.960387,
+                0.039613
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 6,
+              "cycle": 5,
+              "runtime_start_s": 0.059,
+              "runtime_gc_fraction_percent": 15,
+              "sweep_termination_ms": 0.011,
+              "concurrent_mark_ms": 17.0,
+              "mark_termination_ms": 0.008,
+              "stw_sum_ms": 0.019,
+              "stw_sweep_cpu_ms": 0.011,
+              "assist_cpu_ms": 4.3,
+              "dedicated_mark_cpu_ms": 4.8,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.008,
+              "cpu_total_ms": 9.119,
+              "heap_before_mb": 24,
+              "heap_after_mark_mb": 28,
+              "heap_live_mb": 26,
+              "heap_goal_mb": 29,
+              "stacks_scan_mb": 7,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 0.076019,
+              "phase_start_time_range_s": [
+                -4.941,
+                0.059
+              ],
+              "phase_end_time_range_s": [
+                -4.923981,
+                0.076019
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 7,
+              "cycle": 6,
+              "runtime_start_s": 12.066,
+              "runtime_gc_fraction_percent": 0,
+              "sweep_termination_ms": 0.019,
+              "concurrent_mark_ms": 22.0,
+              "mark_termination_ms": 0.002,
+              "stw_sum_ms": 0.020999999999999998,
+              "stw_sweep_cpu_ms": 0.019,
+              "assist_cpu_ms": 0.29,
+              "dedicated_mark_cpu_ms": 5.8,
+              "idle_mark_cpu_ms": 15.0,
+              "stw_mark_cpu_ms": 0.002,
+              "cpu_total_ms": 21.111,
+              "heap_before_mb": 50,
+              "heap_after_mark_mb": 50,
+              "heap_live_mb": 32,
+              "heap_goal_mb": 60,
+              "stacks_scan_mb": 15,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 12.088021000000001,
+              "phase_start_time_range_s": [
+                7.066000000000001,
+                12.066
+              ],
+              "phase_end_time_range_s": [
+                7.088021000000001,
+                12.088021000000001
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 8,
+              "cycle": 7,
+              "runtime_start_s": 20.155,
+              "runtime_gc_fraction_percent": 2,
+              "sweep_termination_ms": 0.99,
+              "concurrent_mark_ms": 643.0,
+              "mark_termination_ms": 0.007,
+              "stw_sum_ms": 0.997,
+              "stw_sweep_cpu_ms": 0.99,
+              "assist_cpu_ms": 296.0,
+              "dedicated_mark_cpu_ms": 174.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.007,
+              "cpu_total_ms": 470.997,
+              "heap_before_mb": 67,
+              "heap_after_mark_mb": 68,
+              "heap_live_mb": 43,
+              "heap_goal_mb": 81,
+              "stacks_scan_mb": 18,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 20.798997,
+              "phase_start_time_range_s": [
+                15.155000000000001,
+                20.155
+              ],
+              "phase_end_time_range_s": [
+                15.798997,
+                20.798997
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 9,
+              "cycle": 8,
+              "runtime_start_s": 27.643,
+              "runtime_gc_fraction_percent": 2,
+              "sweep_termination_ms": 0.65,
+              "concurrent_mark_ms": 433.0,
+              "mark_termination_ms": 0.013,
+              "stw_sum_ms": 0.663,
+              "stw_sweep_cpu_ms": 0.65,
+              "assist_cpu_ms": 99.0,
+              "dedicated_mark_cpu_ms": 115.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.013,
+              "cpu_total_ms": 214.663,
+              "heap_before_mb": 87,
+              "heap_after_mark_mb": 89,
+              "heap_live_mb": 52,
+              "heap_goal_mb": 105,
+              "stacks_scan_mb": 18,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 28.076663,
+              "phase_start_time_range_s": [
+                22.643,
+                27.643
+              ],
+              "phase_end_time_range_s": [
+                23.076663,
+                28.076663
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 10,
+              "cycle": 9,
+              "runtime_start_s": 35.038,
+              "runtime_gc_fraction_percent": 3,
+              "sweep_termination_ms": 10.0,
+              "concurrent_mark_ms": 705.0,
+              "mark_termination_ms": 0.007,
+              "stw_sum_ms": 10.007,
+              "stw_sweep_cpu_ms": 10.0,
+              "assist_cpu_ms": 194.0,
+              "dedicated_mark_cpu_ms": 183.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.007,
+              "cpu_total_ms": 387.007,
+              "heap_before_mb": 105,
+              "heap_after_mark_mb": 108,
+              "heap_live_mb": 68,
+              "heap_goal_mb": 124,
+              "stacks_scan_mb": 22,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 35.753007,
+              "phase_start_time_range_s": [
+                30.037999999999997,
+                35.038
+              ],
+              "phase_end_time_range_s": [
+                30.753006999999997,
+                35.753007
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 11,
+              "cycle": 10,
+              "runtime_start_s": 44.756,
+              "runtime_gc_fraction_percent": 3,
+              "sweep_termination_ms": 2.4,
+              "concurrent_mark_ms": 568.0,
+              "mark_termination_ms": 0.013,
+              "stw_sum_ms": 2.413,
+              "stw_sweep_cpu_ms": 2.4,
+              "assist_cpu_ms": 223.0,
+              "dedicated_mark_cpu_ms": 155.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.013,
+              "cpu_total_ms": 380.413,
+              "heap_before_mb": 137,
+              "heap_after_mark_mb": 142,
+              "heap_live_mb": 93,
+              "heap_goal_mb": 160,
+              "stacks_scan_mb": 28,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 45.326413,
+              "phase_start_time_range_s": [
+                39.756,
+                44.756
+              ],
+              "phase_end_time_range_s": [
+                40.326413,
+                45.326413
+              ],
+              "possibly_in_measurement": false,
+              "definitely_in_measurement": false
+            },
+            {
+              "line": 12,
+              "cycle": 11,
+              "runtime_start_s": 116.39,
+              "runtime_gc_fraction_percent": 4,
+              "sweep_termination_ms": 67.0,
+              "concurrent_mark_ms": 11193.0,
+              "mark_termination_ms": 0.006,
+              "stw_sum_ms": 67.006,
+              "stw_sweep_cpu_ms": 67.0,
+              "assist_cpu_ms": 1419.0,
+              "dedicated_mark_cpu_ms": 2817.0,
+              "idle_mark_cpu_ms": 0.0,
+              "stw_mark_cpu_ms": 0.006,
+              "cpu_total_ms": 4303.006,
+              "heap_before_mb": 193,
+              "heap_after_mark_mb": 195,
+              "heap_live_mb": 124,
+              "heap_goal_mb": 215,
+              "stacks_scan_mb": 66,
+              "globals_scan_mb": 0,
+              "gomaxprocs": 1,
+              "runtime_end_s": 127.650006,
+              "phase_start_time_range_s": [
+                111.39,
+                116.39
+              ],
+              "phase_end_time_range_s": [
+                122.650006,
+                127.650006
+              ],
+              "possibly_in_measurement": true,
+              "definitely_in_measurement": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

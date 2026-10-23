@@ -1,0 +1,319 @@
+{
+  "schema": "powered-local-capacity-v3-preflight-v1",
+  "created_utc": "2026-10-23T15:43:20.997802+00:00",
+  "status": "PASS",
+  "checks_passed": 19,
+  "checks_total": 19,
+  "run": "/private/tmp/multicore-optimize-20261023/capacity_20261023t154047_9e1fee",
+  "current_study_outcome": "ACTIVE_NOT_ASSESSED",
+  "checks": [
+    {
+      "check": "frozen_powered_plan_and_receipts_match",
+      "pass": true,
+      "evidence": {
+        "path": "/private/tmp/multicore-optimize-20261023/profiles/capacity-v3-powered-plan.json",
+        "sha256": "5fc24c6c92b412a06e48bbb48ebc3211b4113d4f936937a11f199b86889ec3fb",
+        "run_plan": "/private/tmp/multicore-optimize-20261023/capacity_20261023t154047_9e1fee/plan.json"
+      }
+    },
+    {
+      "check": "source_config_receipt_exact",
+      "pass": true,
+      "evidence": {
+        "path": "/private/tmp/multicore-optimize-20261023/profiles/capacity-v3-powered-config.json",
+        "sha256": "114a4affdf06984271343445e6dcfdc00efdd67472655d23525fe629c82b7178"
+      }
+    },
+    {
+      "check": "entire_protocol_and_both_source_binary_env_cases_identical_to_prior_v3",
+      "pass": true,
+      "evidence": {
+        "prior_plan": "/private/tmp/multicore-optimize-20261023/capacity_20261023t103504_b674c2/plan.json",
+        "prior_plan_sha256": "54eca1e9452f8d8cfb4f08aee8e99b5bc0389b08a8e2a2d410b62a3672f17a4a"
+      }
+    },
+    {
+      "check": "configuration_diff_is_only_declared_study_note_and_keepawake_wrapper",
+      "pass": true,
+      "evidence": {
+        "study_note": "Fresh complete balanced replication after userconnectedACpowerandkeepsMacawake; previous3studiesretainedunchanged. Same100kstart/growth1.1/130kceiling,budgets,SLO,alltimingguards and sources. No earlier phases reused or replaced. Usecaffeinate-is temporarypowerassertion.",
+        "keepawake_wrapper": "caffeinate -is",
+        "changed_configuration_fields": [
+          "keepawake_wrapper",
+          "study_note"
+        ]
+      }
+    },
+    {
+      "check": "common_local_policy_budgets_and_growth_exact",
+      "pass": true,
+      "evidence": {
+        "server_cpus": 8,
+        "server_memory_bytes": 17179869184,
+        "client_cpus": 8,
+        "client_memory_bytes": 8589934592,
+        "CPU_scope": "dedicated_client_cgroup_v1",
+        "growth_factor": 1.1
+      }
+    },
+    {
+      "check": "warmup_search_and_300s_hold_original_predeclared",
+      "pass": true,
+      "evidence": {
+        "warmup_users": 10000,
+        "start_users": 100000,
+        "max_users": 130000,
+        "warmup": {
+          "ramp_s": 60,
+          "measure_s": 120,
+          "tail_s": 15
+        },
+        "probe": {
+          "ramp_s": 60,
+          "measure_s": 60,
+          "tail_s": 15
+        },
+        "hold": {
+          "ramp_s": 60,
+          "measure_s": 300,
+          "tail_s": 15
+        }
+      }
+    },
+    {
+      "check": "frozen_tool_hashes_exact_to_receipts_reviewed_v3_and_prior_v3",
+      "pass": true,
+      "evidence": {
+        "manifest": "/private/tmp/multicore-optimize-20261023/capacity_20261023t154047_9e1fee/tool-sha256.json",
+        "sha256": "1e0e0c69e421a05a64ea3351a447ad39b999a31bc910702dbb9e403020fd6717",
+        "tools": {
+          "target_helper.py": "a079f25c5c1381392c4824267722c8ba74214ca6f73c98f4a6edfe6ec20b0581",
+          "monitor.py": "c33fa617d1758269adb44d71372b457257c92e1ec877d23a7673a688f590a4b4",
+          "capacity_controller.py": "8d371868b88e345d258c461a44befd8d98f387241efd0d9fa648ed696253d478",
+          "search_policy.py": "33aa0281a09e4f1e3b50dcf63c98e419694735969b481963be971c146195ac5c",
+          "audit/aggregate.py": "e8510cc57870532450be39dd01049d81c1b7877158b93e2c228c75af30b65452",
+          "audit/primitives.py": "8908b204b243ad5ad20e725d3284d115b5f9ccc8719931cd5018fcaf73104423",
+          "audit/test_capacity.py": "33476c5babbbcbf177269b1db3b960a2319eace06966db7e0326909f02846cb8",
+          "audit/evidence.py": "33a17c583571b42d040fc9e475256302281635fc58fd2171fc59f3d47f16e115"
+        }
+      }
+    },
+    {
+      "check": "actual_server8CPU16GiB_client8CPU8GiB_no_swap_no_affinity",
+      "pass": true,
+      "evidence": [
+        {
+          "kind": "target",
+          "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t154047_9e1fee/target-inspect.json",
+          "sha256": "8760d6636e5105b2b8db576a9bd1a850ff3922284ceece8e28d99714082eac4a",
+          "id": "831ef5b57bcecd513ceac155a926f17cc9c2930bc6bc558ff898b5750a4723e8",
+          "valid": true,
+          "host_config": {
+            "NanoCpus": 8000000000,
+            "Memory": 17179869184,
+            "MemorySwap": 17179869184,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "NetworkMode": "bridge"
+          }
+        },
+        {
+          "kind": "load",
+          "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t154047_9e1fee/load-inspect.json",
+          "sha256": "5267d18c7a4a4bfa926fead3b8921ebddd972a22466c2aa647de803333d00eb6",
+          "id": "059dcf03b4232b9b8af12c78c6d1f08260a30a94a239afb6da7362581c43c1f3",
+          "valid": true,
+          "host_config": {
+            "NanoCpus": 8000000000,
+            "Memory": 8589934592,
+            "MemorySwap": 8589934592,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "NetworkMode": "container:831ef5b57bcecd513ceac155a926f17cc9c2930bc6bc558ff898b5750a4723e8"
+          }
+        }
+      ]
+    },
+    {
+      "check": "unchanged_native_binary",
+      "pass": true,
+      "evidence": {
+        "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t154047_9e1fee/native-sha256.txt",
+        "receipt_sha256": "8372dc1d757c1522160eeaeecad40465afde4c361c2573207734c0f22d58f2b9",
+        "binary_sha256": "886eaa564c6cdab1a791534d6931d1b8eb9b5c21d1e1ebaaa2824616c4562cdb"
+      }
+    },
+    {
+      "check": "rust7:full197_conformance_tied_to_declared_binary",
+      "pass": true,
+      "evidence": {
+        "path": "/private/tmp/multicore-optimize-20261023/builds/rust7-full/output.log",
+        "sha256": "cf6dfe613fabf1936d051d8b95e3705a4f1c097801ae2be886f6c5f5aa9eba95",
+        "binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+        "source_revision": "PR7 dc7c249229bd43d8752e7ffb28ce81ee4401d8ae; canonical merged submission tree f542997eb07942e25fa44b7f288c8e1d508c176c; all66 canonical files verified byte-identical"
+      }
+    },
+    {
+      "check": "goose32:full197_conformance_tied_to_declared_binary",
+      "pass": true,
+      "evidence": {
+        "path": "/private/tmp/multicore-optimize-20261023/builds/leader1-full/output.log",
+        "sha256": "5134e8354b07c4b7a7105dd870aeafa45cbaeab5274363273b402b4013216d36",
+        "binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+        "source_revision": "23a14e8cbf32113509cd0ad941320ef947508981"
+      }
+    },
+    {
+      "check": "rust_source_manifest_and_binary_frozen_exact",
+      "pass": true,
+      "evidence": {
+        "metadata": "/private/tmp/multicore-optimize-20261023/capacity_20261023t154047_9e1fee/cases/rust7/frozen/metadata.json",
+        "metadata_sha256": "02dcd9e447e4760172b94a52d1300af38c3bb1b1083035acd210383ded72f214",
+        "source_files": 65,
+        "source_manifest_sha256": "75df8e5d5c8e45aaa1a763fa93d4052684e6cd0df54a7993d542318b73cc5b99",
+        "binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241"
+      }
+    },
+    {
+      "check": "new_full_seed_clone_not_any_prior_study_database",
+      "pass": true,
+      "evidence": {
+        "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t154047_9e1fee/cases/rust7/database.json",
+        "sha256": "546658f6fdeeaafa2115df79ebe7a63ffd53561a8cda85e1b632e2344af238f5",
+        "database": "mc_pair_20261023_154047_9e1fee_1",
+        "counts": {
+          "users": 100000,
+          "articles": 500000,
+          "size_bytes": 2428491455
+        },
+        "prior_databases": [
+          "mc_pair_20261023_095453_5574c0_1",
+          "mc_pair_20261023_101818_7e4229_1",
+          "mc_pair_20261023_103504_b674c2_1"
+        ],
+        "scope": "Per-clone users/articles count witness; full-template seven-table fingerprints inherited from unchanged original seed script."
+      }
+    },
+    {
+      "check": "raw_normal_UID_NOFILE_and_process_identity_reparsed",
+      "pass": true,
+      "evidence": {
+        "app_json": "/private/tmp/multicore-optimize-20261023/capacity_20261023t154047_9e1fee/cases/rust7/app.json",
+        "sha256": "bfdabbc2ed6cb951d5e037680f27e8ad4e9f48a86bc3fd31b5b00a1819197e31",
+        "process_checks": [
+          {
+            "check": "startup:normal_expected_uid",
+            "pass": true
+          },
+          {
+            "check": "startup:exactly_one_expected_process",
+            "pass": true
+          },
+          {
+            "check": "startup:raw_all_four_uids_match_normal_user",
+            "pass": true
+          },
+          {
+            "check": "startup:raw_actual_pid_matches",
+            "pass": true
+          },
+          {
+            "check": "startup:actual_process_identity_stable",
+            "pass": true
+          },
+          {
+            "check": "startup:raw_soft_hard_nofile_at_least_200000",
+            "pass": true,
+            "detail": [
+              200000,
+              200000
+            ]
+          },
+          {
+            "check": "startup:helper_validity_agrees_with_raw",
+            "pass": true
+          }
+        ],
+        "processes": [
+          {
+            "pid": 104,
+            "uid": 501,
+            "nofile_soft": 200000,
+            "nofile_hard": 200000,
+            "exe": "/comparison/optimization/capacity_20261023t154047_9e1fee/cases/rust7/frozen/app",
+            "start_ticks": 8919232
+          }
+        ]
+      }
+    },
+    {
+      "check": "postgres18_durable_with_100_connection_limit",
+      "pass": true,
+      "evidence": {
+        "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t154047_9e1fee/target-initial.json",
+        "sha256": "e094308f99529b047dea1af61f6de66c4c3d5f1a69b97ad582abdb7d6a02e1e7",
+        "settings": {
+          "server_version_num": "180006",
+          "max_connections": "100",
+          "fsync": "on",
+          "synchronous_commit": "on",
+          "full_page_writes": "on"
+        }
+      }
+    },
+    {
+      "check": "plan_timestamp_precedes_first_session_event",
+      "pass": true,
+      "evidence": {
+        "created_utc": "2026-10-23T15:40:23Z",
+        "first_event_wall_ns": 1792770048275892000,
+        "lead_seconds": 25.27589201927185
+      }
+    },
+    {
+      "check": "host_power_is_AC_and_battery_charging_at_observation",
+      "pass": true,
+      "evidence": {
+        "observed_utc": "2026-10-23T15:43:20.974589+00:00",
+        "argv": [
+          "pmset",
+          "-g",
+          "batt"
+        ],
+        "exit": 0,
+        "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t8%; charging; 5:03 remaining present: true"
+      }
+    },
+    {
+      "check": "caffeinate_PreventSystemSleep_and_idle_assertions_active",
+      "pass": true,
+      "evidence": {
+        "observed_utc": "2026-10-23T15:43:20.974589+00:00",
+        "argv": [
+          "pmset",
+          "-g",
+          "assertions"
+        ],
+        "exit": 0,
+        "only_scoped_lines": [
+          "PreventSystemSleep             1",
+          "pid 45616(caffeinate): [0x0001623c00019971] 00:02:33 PreventUserIdleSystemSleep named: \"caffeinate command-line tool\"",
+          "Details: caffeinate asserting on behalf of 'python3' (pid 45615)",
+          "pid 45616(caffeinate): [0x0001623c00079972] 00:02:33 PreventSystemSleep named: \"caffeinate command-line tool\"",
+          "Details: caffeinate asserting on behalf of 'python3' (pid 45615)"
+        ]
+      }
+    },
+    {
+      "check": "previous_three_study_review_preserved_and_not_current_outcome",
+      "pass": true,
+      "evidence": {
+        "path": "/private/tmp/multicore-optimize-20261023/audit/independent-final-capacity-review.json",
+        "sha256": "b66bcc794cf8d2d58366fee4a3029139e6af042d6317e1e664fe36a9eeecc514",
+        "current_study_not_assessed": true
+      }
+    }
+  ],
+  "scope": "Static preflight and one current host-power assertion observation only. No current performance/capacity/native qualification inferred. Goose later-session frozen-source/fresh-clone/process witnesses remain to be audited after launch. Earlier three-study review remains historical only.",
+  "execution": "Saved-file reads plus normal read-only pmset battery/assertion CLI. This derived output is outside active run. No Docker, API/DB query, build, benchmark, source/tool or active-raw changes."
+}

@@ -1,0 +1,8 @@
+{
+  "old_probe_preserved_sha256": "ab53331ebf8a4232162b9d4328c94a2702585982fa81d8359b90def4603815ea",
+  "new_probe_sha256": "9a45f2178c9422180b329ed1fcfc7e6412427a5269a89b8708ff1ce12f15308d",
+  "runtime1_failure_artifacts_unchanged": true,
+  "runtime_source_or_binary_changes": false,
+  "new_probe_executed": false,
+  "rationale": "PG18 backend-local stats may wait for a10s idle callback; old5s polling did not prove rollback counters absent. V2 preserves registration evidence before assertions, wakes the sole writer after1.1s with a benign committed update and permits12s idle-flush observation; counter delta remains required."
+}

@@ -1,0 +1,673 @@
+{
+  "case": "goose32",
+  "status": "DIAGNOSTIC_ABORTED_INFRASTRUCTURE_OR_UNHEALTHY_APP",
+  "phases": [
+    {
+      "id": "01-warmup-10000",
+      "case": "goose32",
+      "stage": "warmup",
+      "users": 10000,
+      "run_id": "diagnosticgoose110_20261023t164733_2f2b88-warmup-10000",
+      "database": "mc_pair_20261023_164733_2f2b88_1",
+      "session_id": "goose32",
+      "recorded_classification": null,
+      "checks": [
+        {
+          "check": "complete_saved_phase",
+          "pass": true,
+          "detail": []
+        },
+        {
+          "check": "predeclared_balanced_shards_and_limits",
+          "pass": true
+        },
+        {
+          "check": "single_database_and_continuous_app_session",
+          "pass": true
+        },
+        {
+          "check": "declared_binary_env_and_common_runtime",
+          "pass": true
+        },
+        {
+          "check": "before:fixed_target_budget",
+          "pass": true
+        },
+        {
+          "check": "before:official_sources_and_pg_settings_fixed",
+          "pass": true
+        },
+        {
+          "check": "after:fixed_target_budget",
+          "pass": true
+        },
+        {
+          "check": "after:official_sources_and_pg_settings_fixed",
+          "pass": true
+        },
+        {
+          "check": "startup:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "startup:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "startup:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "startup:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "before:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "before:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "before:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "before:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "before:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "before:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "before:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "after:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "after:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "after:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "after:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "after:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "after:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "after:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "app_healthy_before_load",
+          "pass": true
+        },
+        {
+          "check": "after_health_witness_present",
+          "pass": true
+        },
+        {
+          "check": "all_native_processes_exited_normally",
+          "pass": true
+        },
+        {
+          "check": "synchronized_raw_windows",
+          "pass": true
+        },
+        {
+          "check": "native_metadata_exact_stage_protocol",
+          "pass": true
+        },
+        {
+          "check": "one_saved_command_per_shard",
+          "pass": true
+        },
+        {
+          "check": "shard0:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard0:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard0:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "all_histogram_configurations_match",
+          "pass": true
+        },
+        {
+          "check": "merged_histogram_equals_exact_bin_sum",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:p50_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:p95_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:p99_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:max_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_count_equals_raw_counts",
+          "pass": true
+        },
+        {
+          "check": "merged_statuses_equal_raw_counts",
+          "pass": true
+        },
+        {
+          "check": "merged_errors_equal_raw_counts",
+          "pass": true
+        },
+        {
+          "check": "all_endpoints_retained",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "merged_all_shards_and_users",
+          "pass": true
+        },
+        {
+          "check": "native_verdict_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard0:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard0:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard0:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard0:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "native_generator_reasons_reproduced_exactly",
+          "pass": true
+        },
+        {
+          "check": "request_rate_and_errors_reproduced",
+          "pass": true
+        },
+        {
+          "check": "target:entire_phase_clock_drift_under100ms",
+          "pass": true,
+          "detail": 0.028883934020996094
+        },
+        {
+          "check": "load:entire_phase_clock_drift_under100ms",
+          "pass": true,
+          "detail": 0.028882503509521484
+        }
+      ],
+      "classification": "INVALID_GENERATOR",
+      "eligible": false,
+      "valid_server_failure": false,
+      "overall": {
+        "count": 296612,
+        "rps": 2471.766666666667,
+        "p50_ms": 6.495,
+        "p90_ms": 721.407,
+        "p95_ms": 1552.383,
+        "p99_ms": 2912.255,
+        "max_ms": 8462.335,
+        "mean_ms": 218.9572576564675,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 291172,
+          "201": 5334,
+          "204": 106
+        }
+      },
+      "native_verdict": {
+        "pass": false,
+        "fail_reasons": [
+          "p95 1552 ms >= 500",
+          "p99 2912 ms >= 1000"
+        ],
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 fell behind: 21 of 120 seconds had mean timer wake-up lag > 50 ms; sampler tick 2085 ms late"
+        ]
+      },
+      "target_monitor": {
+        "checks": [
+          {
+            "check": "monitor_has_samples",
+            "pass": true
+          },
+          {
+            "check": "strict_wall_and_monotonic_order",
+            "pass": true
+          },
+          {
+            "check": "full_measurement_window_bracketed",
+            "pass": true,
+            "detail": {
+              "first_ms": 1792774076464.5603,
+              "start_ms": 1792774141876.0,
+              "last_ms": 1792774278890.0928,
+              "end_ms": 1792774261876.0
+            }
+          },
+          {
+            "check": "max_sample_gap_at_most_3s",
+            "pass": false,
+            "detail": 3.419010168
+          },
+          {
+            "check": "cgroup_budget_continuous",
+            "pass": true
+          },
+          {
+            "check": "total_cpu_counter_nondecreasing",
+            "pass": true
+          },
+          {
+            "check": "no_measurement_oom",
+            "pass": true,
+            "detail": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            }
+          },
+          {
+            "check": "wall_to_monotonic_drift_below_100ms",
+            "pass": true,
+            "detail": 0.019861936569213867
+          }
+        ],
+        "warnings": [
+          "pg: live-PID CPU sum changed population or decreased; component CPU withheld"
+        ],
+        "eligible": false,
+        "samples": 113,
+        "max_gap_s": 3.419010168,
+        "window_s": 120.0,
+        "cgroup_cpu_seconds_estimate": 285.6615617112584,
+        "cgroup_quota_utilization_pct": 29.756412678256083,
+        "max_sample_interval_quota_utilization_pct": 87.81321782115776,
+        "memory_peak_sampled_bytes": 6909325312,
+        "memory_counter_peak_bytes": 7919366144,
+        "swap_peak_sampled_bytes": 0,
+        "oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "app_cpu_seconds_estimate": 78.97995211055196,
+        "app_counter_valid": true,
+        "app_pids_stable": true,
+        "app_process_count_max": 2,
+        "app_whole_target_cpu_pct": 8.227078344849163,
+        "pg_cpu_seconds_estimate": null,
+        "pg_counter_valid": false,
+        "pg_pids_stable": false,
+        "pg_process_count_max": 18,
+        "pg_whole_target_cpu_pct": null
+      },
+      "load_monitor": {
+        "checks": [
+          {
+            "check": "monitor_has_samples",
+            "pass": true
+          },
+          {
+            "check": "strict_wall_and_monotonic_order",
+            "pass": true
+          },
+          {
+            "check": "full_measurement_window_bracketed",
+            "pass": true,
+            "detail": {
+              "first_ms": 1792774076544.1216,
+              "start_ms": 1792774141876.0,
+              "last_ms": 1792774278997.4478,
+              "end_ms": 1792774261876.0
+            }
+          },
+          {
+            "check": "max_sample_gap_at_most_3s",
+            "pass": true,
+            "detail": 2.819453793
+          },
+          {
+            "check": "cgroup_budget_continuous",
+            "pass": true
+          },
+          {
+            "check": "total_cpu_counter_nondecreasing",
+            "pass": true
+          },
+          {
+            "check": "no_measurement_oom",
+            "pass": true,
+            "detail": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            }
+          },
+          {
+            "check": "wall_to_monotonic_drift_below_100ms",
+            "pass": true,
+            "detail": 0.019846200942993164
+          }
+        ],
+        "warnings": [],
+        "eligible": true,
+        "samples": 115,
+        "max_gap_s": 2.819453793,
+        "window_s": 120.0,
+        "cgroup_cpu_seconds_estimate": 56.42654004882607,
+        "cgroup_quota_utilization_pct": 5.8777645884193825,
+        "max_sample_interval_quota_utilization_pct": 16.223364421604913,
+        "memory_peak_sampled_bytes": 414744576,
+        "memory_counter_peak_bytes": 424038400,
+        "swap_peak_sampled_bytes": 0,
+        "oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "app_cpu_seconds_estimate": 0.0,
+        "app_counter_valid": true,
+        "app_pids_stable": true,
+        "app_process_count_max": 0,
+        "app_whole_target_cpu_pct": 0.0,
+        "pg_cpu_seconds_estimate": 0.0,
+        "pg_counter_valid": true,
+        "pg_pids_stable": true,
+        "pg_process_count_max": 0,
+        "pg_whole_target_cpu_pct": 0.0
+      },
+      "declared_load_memory_bytes": 8589934592,
+      "declared_load_cpus": 8,
+      "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+      "classification_scope": "independent_local",
+      "native_qualified": false,
+      "native_whole_vm_CPU_flagged_shards": [],
+      "native_whole_vm_CPU_flag_count": 0,
+      "target_oom_delta": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "post_load_healthy": true,
+      "zero_measured_errors": true,
+      "observed_timeline_errors": 0,
+      "conformance_197_full_seed_proven": true,
+      "cpu_ms_per_successful_request_sampled_estimate": null,
+      "local_whole_vm_CPU_scope_exception": false,
+      "all_classifications": [
+        "INVALID_GENERATOR",
+        "INVALID_MONITOR",
+        "FAIL_SLO"
+      ],
+      "local_qualified": false,
+      "diagnostic_only": true,
+      "capacity_score": null
+    },
+    {
+      "id": "02-probe-100000",
+      "case": "goose32",
+      "stage": "probe",
+      "users": 100000,
+      "run_id": "diagnosticgoose110_20261023t164733_2f2b88-probe-100000",
+      "database": "mc_pair_20261023_164733_2f2b88_1",
+      "session_id": "goose32",
+      "recorded_classification": null,
+      "checks": [
+        {
+          "check": "complete_saved_phase",
+          "pass": false,
+          "detail": [
+            "merged.json",
+            "box0.json",
+            "box2.json",
+            "box3.json",
+            "box4.json"
+          ]
+        }
+      ],
+      "classification": "INCOMPLETE",
+      "eligible": false,
+      "valid_server_failure": false,
+      "diagnostic_only": true,
+      "capacity_score": null
+    }
+  ],
+  "diagnostic_only": true,
+  "capacity_score": null,
+  "official_rank_proven": false
+}

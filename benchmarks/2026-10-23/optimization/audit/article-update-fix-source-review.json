@@ -1,0 +1,35 @@
+{
+  "created_utc": "2026-10-23T09:23:54Z",
+  "scope": "Independent read-only source review of isolated correctness fixes before final binary validation.",
+  "blocking_findings": [],
+  "reviewed_files_sha256": {
+    "sql.goose": "0ef1fe3a90c869e845fcd2531143c2f2788fe8d63213f41a5fd3fd6af0066c1b",
+    "routes.goose": "7c5149922643a06f3a278a7d3bcbca0403240b3382864469e650502106a21bf4",
+    "http.goose": "95d854464a79f5fd6ce1c9ae71c0dc80d609b50b4d43814ae189a4db056eed25",
+    "bcrypt.goose": "8b77f52c7422385402c7ca1b7a66aa3e573cda552feaa4365fc1a7ca7530e9bc",
+    "server.goose": "a396aa2f76894016f53615ef7595f1a06ad3c4b9a7e9c596ad5bd2588f1b3734",
+    "main.goose": "2bcdffa164642e2627b7815748242a161548885b10958d10e7b2ccb8870974fc"
+  },
+  "patch_sha256": "f64f5ea0a650ca78485529361436fdbba8f69a17f17bd0f3c7ba8cafa7699097",
+  "invariants": [
+    "UPDATE mutation response metadata is read in a separate statement after writer ReadyForQuery; owner/id result preserves404/403 distinction.",
+    "Read retry cannot replay a committed UPDATE or favorite because the saved mutation is replaced with ST_ARTICLE_BY_ID.",
+    "Favorite reread uses the article id returned by its mutation, so concurrent slug changes do not redirect or lose the selected identity.",
+    "ST_ARTICLE_BY_ID has two bigint parameters; statement count and preparation include its id36.",
+    "Password-only validation accepts embeddedNUL in validUTF8 counted byte slices; other text fields retain NUL rejection.",
+    "Registration/update72-byte rejection and login72-byte failure remain; bcrypt HASH_COST10 and lane computations are unchanged."
+  ],
+  "validation_needed": [
+    "Final rebuilt binary full197 dev/full suite.",
+    "Blocked UPDATE plus concurrent favorite metadata test and favorite/rename identity test.",
+    "EmbeddedNUL registration/login plus trustedGo bcrypt interop in both directions; prefix must not authenticate.",
+    "Fresh final-binary capacity run; calibrationa34 metrics are not transferred to new binary."
+  ],
+  "test_source_sha256": {
+    "article-update-race.py": "b3b99d37055eaa6ff0cd2a0c8b30a7757d6dc4703416c14274c61e06b6c1e603",
+    "password-nul-probe.py": "6e9a12d113ef0004fe14d303b54ede281c5e55852fd88926b3442db139de6bd7",
+    "bcrypt-passwords.go": "87984b7e44da519b8fb180c55bbba56b1610d6d62f0a0dade144939e66dc7fc6"
+  },
+  "app_or_compiler_build_executed": false,
+  "db_api_docker_executed": false
+}

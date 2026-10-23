@@ -1,0 +1,59 @@
+{
+  "launcher_pid": 8585,
+  "pgid": 8585,
+  "frozen_binary": "/comparison/optimization/builds/read4/stock/frozen/app",
+  "binary_sha256": "6ab318a0ab9389dc2e77ec6122ff077a93adbcc183c6285c347104e0f734b6c3",
+  "app_user": "challenge",
+  "app_uid": 501,
+  "launch_wrapper": [
+    "runuser",
+    "-u",
+    "challenge",
+    "--",
+    "prlimit",
+    "--nofile=200000:200000",
+    "--"
+  ],
+  "database": "mc_pair_reads_085515",
+  "port": 3031,
+  "env": {
+    "DATABASE_URL": "postgres://conduit:conduit@127.0.0.1:5432/mc_pair_reads_085515",
+    "JWT_SECRET": "multicore-server-challenge",
+    "HOST": "0.0.0.0",
+    "PORT": "3031",
+    "WORKERS": "1",
+    "PG_READERS": "3",
+    "HASHERS": "1",
+    "ARTICLE_BATCH": "0"
+  },
+  "start_wall_ns": 1792745723028290002,
+  "start_monotonic_ns": 81355010089355,
+  "launcher_start_ticks": 8135500,
+  "actual_app": {
+    "valid": true,
+    "expected_uid": 501,
+    "minimum_nofile": 200000,
+    "processes": [
+      {
+        "pid": 8586,
+        "pgid": 8585,
+        "start_ticks": 8135501,
+        "exe": "/comparison/optimization/builds/read4/stock/frozen/app",
+        "uid": 501,
+        "uids": [
+          501,
+          501,
+          501,
+          501
+        ],
+        "nofile_soft": 200000,
+        "nofile_hard": 200000,
+        "proc_limits": "Limit                     Soft Limit           Hard Limit           Units     \nMax cpu time              unlimited            unlimited            seconds   \nMax file size             unlimited            unlimited            bytes     \nMax data size             unlimited            unlimited            bytes     \nMax stack size            8388608              unlimited            bytes     \nMax core file size        0                    unlimited            bytes     \nMax resident set          unlimited            unlimited            bytes     \nMax processes             unlimited            unlimited            processes \nMax open files            200000               200000               files     \nMax locked memory         unlimited            unlimited            bytes     \nMax address space         unlimited            unlimited            bytes     \nMax file locks            unlimited            unlimited            locks     \nMax pending signals       64023                64023                signals   \nMax msgqueue size         819200               819200               bytes     \nMax nice priority         0                    0                    \nMax realtime priority     0                    0                    \nMax realtime timeout      unlimited            unlimited            us        \n",
+        "proc_status": "Name:\tapp\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t8586\nNgid:\t0\nPid:\t8586\nPPid:\t8585\nTracerPid:\t0\nUid:\t501\t501\t501\t501\nGid:\t501\t501\t501\t501\nFDSize:\t64\nGroups:\t501 \nNStgid:\t8586\nNSpid:\t8586\nNSpgid:\t8585\nNSsid:\t8585\nKthread:\t0\nVmPeak:\t90376984 kB\nVmSize:\t90376984 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t    3668 kB\nVmRSS:\t    3668 kB\nRssAnon:\t    1064 kB\nRssFile:\t    2604 kB\nRssShmem:\t       0 kB\nVmData:\t90194444 kB\nVmStk:\t     132 kB\nVmExe:\t     272 kB\nVmLib:\t    6536 kB\nVmPTE:\t     304 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t3\nSigQ:\t14/64023\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000000000\nSigCgt:\t0000000100000440\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tvulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t3ff\nCpus_allowed_list:\t0-9\nMems_allowed:\t1\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t7\nnonvoluntary_ctxt_switches:\t1\n"
+      }
+    ],
+    "reasons": []
+  },
+  "actual_app_pid": 8586,
+  "actual_app_start_ticks": 8135501
+}

@@ -1,0 +1,178 @@
+{
+  "controller": "paired-multi-load-v3",
+  "scope": "Finite exploratory five-arm80k calibration block: unchanged Rust, one shared-feed candidate binary with2loops/read0,1ms,5ms and1loop/6readers/5ms. Same native randomstream perblock, fresh fullseed eacharm. Select configuration only; no capacity/stablegain/officialrank claim.",
+  "configuration": {
+    "target_container": "multicore-comparison-target-20261023",
+    "host_evidence": "/private/tmp/multicore-research-20261022",
+    "users": 80000,
+    "port": 3000,
+    "jwt_secret": "multicore-server-challenge",
+    "cases": [
+      {
+        "name": "rust7",
+        "binary": "/work/submissions/rust-tokio-Scooter1337/target/release/conduit",
+        "source_dir": "/work/submissions/rust-tokio-Scooter1337",
+        "env": {
+          "APP_THREADS": "2",
+          "DB_CONNS": "6",
+          "DB_WRITE_CONNS": "2",
+          "BCRYPT_THREADS": "1",
+          "WRITE_BATCH_US": "1000",
+          "BCRYPT_BATCH_MS": "160",
+          "READ_BATCH_SIZE": "32",
+          "READ_BATCH_US": "0",
+          "READ_SQL_BATCH": "1",
+          "READ_ROUTE_SLACK": "8",
+          "READ_TAG_ROUTE": "1",
+          "READ_COMMENT_SET": "1",
+          "READ_TAG_BATCH": "1"
+        },
+        "expected_binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241"
+      },
+      {
+        "binary": "/comparison/optimization/candidates/sharetimer/bin/conduit",
+        "source_dir": "/comparison/optimization/candidates/sharetimer",
+        "expected_binary_sha256": "a34ee531dc6925021507cd2984606537d872b9c6f9b4fe6dd48b0a84a721899f",
+        "name": "share2r0",
+        "env": {
+          "WORKERS": "2",
+          "PG_READERS": "3",
+          "HASHERS": "2",
+          "BCRYPT_BATCH_MS": "250",
+          "READ_BATCH": "32",
+          "READ_HOLD": "1",
+          "ARTICLE_BATCH": "1",
+          "WRITE_BATCH_US": "1000",
+          "READ_BATCH_US": "0"
+        }
+      },
+      {
+        "binary": "/comparison/optimization/candidates/sharetimer/bin/conduit",
+        "source_dir": "/comparison/optimization/candidates/sharetimer",
+        "expected_binary_sha256": "a34ee531dc6925021507cd2984606537d872b9c6f9b4fe6dd48b0a84a721899f",
+        "name": "share2r1k",
+        "env": {
+          "WORKERS": "2",
+          "PG_READERS": "3",
+          "HASHERS": "2",
+          "BCRYPT_BATCH_MS": "250",
+          "READ_BATCH": "32",
+          "READ_HOLD": "1",
+          "ARTICLE_BATCH": "1",
+          "WRITE_BATCH_US": "1000",
+          "READ_BATCH_US": "1000"
+        }
+      },
+      {
+        "binary": "/comparison/optimization/candidates/sharetimer/bin/conduit",
+        "source_dir": "/comparison/optimization/candidates/sharetimer",
+        "expected_binary_sha256": "a34ee531dc6925021507cd2984606537d872b9c6f9b4fe6dd48b0a84a721899f",
+        "name": "share2r5k",
+        "env": {
+          "WORKERS": "2",
+          "PG_READERS": "3",
+          "HASHERS": "2",
+          "BCRYPT_BATCH_MS": "250",
+          "READ_BATCH": "32",
+          "READ_HOLD": "1",
+          "ARTICLE_BATCH": "1",
+          "WRITE_BATCH_US": "1000",
+          "READ_BATCH_US": "5000"
+        }
+      },
+      {
+        "binary": "/comparison/optimization/candidates/sharetimer/bin/conduit",
+        "source_dir": "/comparison/optimization/candidates/sharetimer",
+        "expected_binary_sha256": "a34ee531dc6925021507cd2984606537d872b9c6f9b4fe6dd48b0a84a721899f",
+        "name": "share1r6",
+        "env": {
+          "WORKERS": "1",
+          "PG_READERS": "6",
+          "HASHERS": "2",
+          "BCRYPT_BATCH_MS": "250",
+          "READ_BATCH": "32",
+          "READ_HOLD": "1",
+          "ARTICLE_BATCH": "1",
+          "WRITE_BATCH_US": "1000",
+          "READ_BATCH_US": "5000"
+        }
+      }
+    ]
+  },
+  "configuration_sha256": "724a145f6eda3581012b89df6a2b04cebe4c4e9b7565abf10ff0aeffcbef8de4",
+  "protocol": {
+    "users": 80000,
+    "articles": 500000,
+    "think_scale": 1.0,
+    "ramp_s": 60,
+    "measure_s": 60,
+    "tail_s": 15,
+    "pairs": 1,
+    "order": [
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    ],
+    "fresh_full_seed_per_attempt": true,
+    "shards": [
+      {
+        "box_index": 0,
+        "users": 20000,
+        "id_offset": 0,
+        "host": "127.0.0.1"
+      },
+      {
+        "box_index": 1,
+        "users": 20000,
+        "id_offset": 20000,
+        "host": "127.0.0.2"
+      },
+      {
+        "box_index": 2,
+        "users": 20000,
+        "id_offset": 40000,
+        "host": "127.0.0.3"
+      },
+      {
+        "box_index": 3,
+        "users": 20000,
+        "id_offset": 60000,
+        "host": "127.0.0.4"
+      }
+    ],
+    "gomaxprocs_per_shard": 1,
+    "synchronized_start_at": true,
+    "load_cgroup_cpus": 4,
+    "app_nofile_minimum": 200000,
+    "actual_app_uid_and_limits_required": true,
+    "launch_wrapper": "runuser -u challenge -- prlimit --nofile=200000:200000 -- binary",
+    "load_cgroup_cpu_limit_pct": 75.0,
+    "paired_random_stream": "same native run-id and VU ids within each pair; fresh DBs prevent name collisions",
+    "warmup": "none; this is a fixed-load diagnostic, not the official warmup/search/hold protocol",
+    "invalid_policy": "native lg_limited or failed infrastructure is INVALID; retain, never replace",
+    "interpretation": "at fixed unsaturated load, compare latency/CPU; similar req/s cannot establish capacity"
+  },
+  "created_utc": "2026-10-23T08:56:50.066783+00:00",
+  "diagnostic_only": true,
+  "new_plan_note": "Corrected configuration-input hash and current creation timestamp before any execution. Exactfive-arm configuration and selection policy unchanged; prior draft retained and not executed.",
+  "selection_policy": {
+    "purpose": "Select at most2 candidate configurations for independent300s capacity search against Rust",
+    "rank_metric": "CPU milliseconds per successful request among eligible zero-error arms; report p50/p95/p99 tradeoff and app CPU; W1 also requires high-load confirmation because single-loop saturation cannot be inferred from80k",
+    "invalid_arms": "Retain all; do not replace; no comparative proof if infrastructure invalid",
+    "repeats": 1,
+    "calibration_is_not_confirmation": true,
+    "preconditions": [
+      "sharetimer full197passed",
+      "read4 all1664oraclePASS beforeexecute",
+      "readtimerstress500ms and disabled0 PASS",
+      "native/primitives293966 and JWT4000, bcrypt252 PASS unchangedcode",
+      "Rustbinary844full197PASS"
+    ]
+  },
+  "configuration_file": "/private/tmp/multicore-optimize-20261023/profiles/calibration-share-timer-80k-config.json",
+  "supersedes_unexecuted_draft": "/private/tmp/multicore-optimize-20261023/profiles/calibration-share-timer-80k-plan.json"
+}

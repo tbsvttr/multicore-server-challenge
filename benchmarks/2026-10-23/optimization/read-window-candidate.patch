@@ -1,0 +1,100 @@
+--- a/main.goose
++++ b/main.goose
+@@ -4,7 +4,8 @@
+ // Environment: DATABASE_URL, JWT_SECRET, HOST, PORT; WORKERS (event loops, 4), PG_READERS (read connections per
+ // loop, 3; each loop also has one writer), HASHERS (bcrypt threads, 2), BCRYPT_BATCH_MS (250), READ_BATCH (most
+ // list reads one execution answers, 32; 0 off), READ_HOLD (batches in flight before reads wait, 1),
+-// WRITE_BATCH_US (writer collection, 1000; 0 disables it), and ARTICLE_BATCH (0 by default; 1 lets queued article reads share metadata within one execution).
++// WRITE_BATCH_US (writer collection, 1000; 0 disables it), READ_BATCH_US (pending read collection, 0 by default),
++// and ARTICLE_BATCH (0 by default; 1 lets queued article reads share metadata within one execution).
+ 
+ import bcrypt;
+ import crypto;
+@@ -91,6 +92,8 @@
+     batch_ms = env_int("BCRYPT_BATCH_MS", 250);
+     write_batch_us = if env_or("WRITE_BATCH_US", "") == "0" { 0 } else { env_int("WRITE_BATCH_US", 1000) };
+     if write_batch_us > 1000000 { abort("WRITE_BATCH_US must be at most 1000000"); }
++    read_batch_us = if env_or("READ_BATCH_US", "0") == "0" { 0 } else { env_int("READ_BATCH_US", 0) };
++    if read_batch_us > 1000000 { abort("READ_BATCH_US must be at most 1000000"); }
+     batch_max = if env_or("READ_BATCH", "") == "0" { 0 } else { env_int("READ_BATCH", 32) };
+     batch_hold = env_int("READ_HOLD", 1);
+     let article = env_or("ARTICLE_BATCH", "0");
+--- a/server.goose
++++ b/server.goose
+@@ -28,6 +28,7 @@
+ var readers = 3;
+ var batch_max = 32;             // the most reads one batched execution answers; 0 sends every read on its own
+ var batch_hold = 1;             // reads wait in the pool while this many batched executions are in flight
++var read_batch_us = 0;          // optional collection window for pending HTTP reads; 0 preserves immediate dispatch
+ var write_batch_us = 1000;     // 0 restores immediate writer Sync; collection never delays read groups
+ var article_batch = false;     // optional live article reads share enrichment only within one SQL execution
+ 
+@@ -112,6 +113,7 @@
+ var ready: u64[>..] = [];       // connections with input left once their answer went out
+ var scratch: u8[>..] = [];      // the receive buffer
+ var pool: i64[>..] = [];        // list, tags, and optionally article reads waiting to be batched
++var pool_open_ns: i64 = 0;     // first pending request in this pool; no query result is retained here
+ var in_flight = 0;              // executions sent from the pool and not answered
+ 
+ let GROUP_MAX = 64;
+@@ -291,10 +293,29 @@
+ fn writer_wait_ms() -> i32 {
+     if pgs[writer].open == 0 { return -1; }
+     let left = pgs[writer].opened_ns + write_batch_us * 1000 - mono_ns();
++    if left <= 0 { return 0; }
++    return ((left + 999999) / 1000000) as! i32;
++}
++
++// A gated pool waits for a PG reply, not a repeatedly expired collection timer.
++// A full pool may bypass the in-flight gate, exactly as pool_flush already does.
++fn pool_wait_ms() -> i32 {
++    if read_batch_us == 0 || batch_max == 0 || pool.len == 0 { return -1; }
++    if pool.len >= batch_max { return 0; }
++    if in_flight >= batch_hold { return -1; }
++    let left = pool_open_ns + read_batch_us * 1000 - mono_ns();
+     if left <= 0 { return 0; }
+     return ((left + 999999) / 1000000) as! i32;
+ }
+ 
++fn poll_wait_ms() -> i32 {
++    let write_ms = writer_wait_ms();
++    let read_ms = pool_wait_ms();
++    if write_ms < 0 { return read_ms; }
++    if read_ms < 0 { return write_ms; }
++    return min(write_ms, read_ms);
++}
++
+ fn least_busy_reader() -> i64 {
+     var p = 0;
+     for i in 1..readers { if pgs[i].waiting < pgs[p].waiting { p = i; } }
+@@ -343,11 +364,13 @@
+     if batch_max == 0 { send_kept(slot); return; }
+     c.fam = fam;
+     c.busy = true;
++    if read_batch_us > 0 && pool.len == 0 { pool_open_ns = mono_ns(); }
+     pool.push(slot);
+ }
+ 
+ fn pool_flush() {
+     if pool.len == 0 || (in_flight >= batch_hold && pool.len < batch_max) { return; }
++    if read_batch_us > 0 && pool.len < batch_max && mono_ns() - pool_open_ns < read_batch_us * 1000 { return; }
+     var group: i64[>..] = [];
+     for f in 8 {
+         let fam = if f < 4 { ST_LIST_ALL + f } else if f == 4 { ST_TAGS } else if f == 5 { ST_ARTICLE } else if f == 6 { ST_FEED } else { ST_COMMENTS };
+@@ -363,6 +386,7 @@
+         if group.len > 0 { dispatch(group, fam); }
+     }
+     pool.clear();
++    pool_open_ns = 0;
+ }
+ 
+ // One execution for the group, answered to its first member, which hands each member its rows.
+@@ -693,7 +717,7 @@
+ 
+     var evs: EpollEvent[256] = [EpollEvent { events: 0, data: 0 }; 256];
+     loop {
+-        let n = sys_epoll_wait(epfd, evs, writer_wait_ms());
++        let n = sys_epoll_wait(epfd, evs, poll_wait_ms());
+         now_ms = wall_ns() / 1000000;
+         for i in n as i64 {
+             let e = evs[i];

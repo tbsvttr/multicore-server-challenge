@@ -1,0 +1,42 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "original_p1_plan_sha256": "5890c6dcdaff1e453038e96f236173444d96d4a5eabccddbe0258bc292023405",
+  "original_p1_source_unchanged": true,
+  "application_case_identical_to_p1": true,
+  "app_binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+  "native_binary_sha256": "886eaa564c6cdab1a791534d6931d1b8eb9b5c21d1e1ebaaa2824616c4562cdb",
+  "client_gomaxprocs": 2,
+  "godebug": "gctrace=1",
+  "fixed_sequence": [
+    10000,
+    100000,
+    110000
+  ],
+  "same_target8cpu16g_client8cpu8g": true,
+  "original_guards_unchanged": true,
+  "no_capacity_or_rank_claim": true,
+  "observer_delta": "Blocker identity/lock metadata; P1/P2 is not pure causal isolation.",
+  "independent_read_only_review": "GO: client_stall_review; no execution",
+  "static_checks": [
+    "All Python AST parse",
+    "Generated owned-cleanup/env-witness snippets parse",
+    "Protocol+env+witness+raw-meta/command audit declare2",
+    "Goose case byte-data equalP1",
+    "Search/primitives hashes equalP1",
+    "OriginalP1 source/plan hashes unchanged"
+  ],
+  "root_will_prepare_plan_and_execute": true,
+  "files_sha256": {
+    "p1-origin-receipt.json": "0ae4874d08a90d8200825a39123ec870509fc2f9106e5e1065d7658c5d86e8f8",
+    "pg_collect.py": "76d449b16ef18b9a56c8d31f41d74b84847b90c300b97bebc7830ad090ea2ee6",
+    "capacity_controller.py.patch": "a743f2a91dc6c3fe18b3d0a75d3f6f70d56d644622f36e522d27e7e5977f27c7",
+    "config.json": "5cf753cbf3cd21ff63bec1c706c3cd423f91ff733abb0f377bd7fdc806afc2ad",
+    "capacity_controller.py": "254b0173e0f53173860c2fd1dafb898424256d472b4ab132342f9e18dc6f8894",
+    "search_policy.py": "33aa0281a09e4f1e3b50dcf63c98e419694735969b481963be971c146195ac5c",
+    "README.txt": "249f3dad513b0ea63088f823f792d75ba06a3d8b2a4e945dc7b2e1018d68b4f9",
+    "audit-evidence.py.patch": "365ee4007c063ee382b47b2c7da492aef1ec12015b5af0137a63766a700bf3eb",
+    "pg_collect.py.patch": "a8887f80ddce92754a49d52127fa2675d5bb229424e7bb35083db99cdce5175a",
+    "audit/primitives.py": "8908b204b243ad5ad20e725d3284d115b5f9ccc8719931cd5018fcaf73104423",
+    "audit/evidence.py": "60aa5aa7b1ea8cc1efcc477fbd5973604b45aea4b1faa6907eb201184542bce3"
+  }
+}

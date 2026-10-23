@@ -1,0 +1,20 @@
+{
+  "created_utc": "2026-10-23T08:13:09Z",
+  "scope": "Read-only semantic review; no DB/API/Docker execution or candidate edits.",
+  "blocking_findings": [],
+  "sql_sha256": "bc9e291a6893f25a03dca9c2b2bef987531309e807b742f378a337a83c4240d0",
+  "harness_sha256": "fdabaf479787374f72a502cdef3d9b5486349f3f9846443a31840225a501512e",
+  "invariants": [
+    "Feed page keys contain p1viewer,p2limit,p3offset,p4perauthorbound.",
+    "Feed count deduplicates byviewer only and remainsmin(total,1000).",
+    "LEFTLATERAL retains NULL-id emptypage; original request ordinals retained after joins.",
+    "Enrichment shared only after each vieweractualpage ids are derived; DISTINCTids excludesNULL.",
+    "following=true justified by sameSQLsnapshot feedmembership, favoriteflags remainperviewer.",
+    "No crossrequest result cache introduced; singleton feed remainsunchanged."
+  ],
+  "harness_witness_limit": [
+    "Current per-family waves fully await previousresponses, so broadquerypatterns cannotmatchanother ownwave underisolated scheduling.",
+    "Feedordinality and queriesMATERIALIZED patterns are not uniquelyvariant-specific; strongerfragmentchecks would make evidence moreexplicit.",
+    "A blockedquery witness proves attemptedexecution, not successfulcompletion before fallback; distinguish those claims."
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "status": "DRAFT_UNEXECUTED",
+  "purpose": "Finite runtime calibration after combined-source correctness; diagnostic selection only, notcapacity/#1proof.",
+  "binary_policy": "Same frozen candidatebinary acrossall3arms, filledonlyafterfull197andgroupedread/writerprobes pass.",
+  "cases": [
+    {
+      "name": "workers1",
+      "env": {
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "BCRYPT_BATCH_MS": "250",
+        "READ_BATCH": "32",
+        "READ_HOLD": "1",
+        "WRITE_BATCH_US": "1000",
+        "ARTICLE_BATCH": "1",
+        "WORKERS": "1"
+      },
+      "postgres_connections": 4
+    },
+    {
+      "name": "workers2",
+      "env": {
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "BCRYPT_BATCH_MS": "250",
+        "READ_BATCH": "32",
+        "READ_HOLD": "1",
+        "WRITE_BATCH_US": "1000",
+        "ARTICLE_BATCH": "1",
+        "WORKERS": "2"
+      },
+      "postgres_connections": 8
+    },
+    {
+      "name": "workers4",
+      "env": {
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "BCRYPT_BATCH_MS": "250",
+        "READ_BATCH": "32",
+        "READ_HOLD": "1",
+        "WRITE_BATCH_US": "1000",
+        "ARTICLE_BATCH": "1",
+        "WORKERS": "4"
+      },
+      "postgres_connections": 16
+    }
+  ],
+  "protocol": {
+    "users": 80000,
+    "ramp_s": 60,
+    "measure_s": 60,
+    "tail_s": 15,
+    "client_cpus": 4,
+    "target_app_plus_pg_cpus": 8,
+    "target_memory_gib": 16,
+    "client_memory_gib": 4,
+    "fresh_fullseed_eachdiagnostic": true,
+    "sampler_policy": "Use identical read-onlyPGsampler acrossallarms, or none acrossallarms; do notcompareinstrumentedanduninstrumentedCPUasifmatched."
+  },
+  "budget": {
+    "initial_profiles": 3,
+    "maximum_additional_reverseorder_best_vs_workers4_profiles": 2,
+    "maximum_total_profiles": 5,
+    "replacement_of_invalid_attempts": false
+  },
+  "selection": {
+    "eligible": "Allnative/resource/clock/sourcewitnessesvalid,0measuredandtimelineerrors,SLOpass. Invalidsamples retained and excludedfromselection, notinterpretedassourcefailure.",
+    "primary": "LowestcombinedtargetCPU/successamongvalidarms; inspectp95/p99alongsideit, neversubstituteapp-onlyCPU.",
+    "confirmation": "IfscreenselectsW1/W2,onefinite reverse-order comparisonagainstW4cancheckdirection; allattemptsretained. Thisisnotstable3pairacceptanceor defaultpromotion.",
+    "next": "Rustcontrolandchosenconfigurationcapacitysearchwithlow10kwarmup,declared80kprobebegin,300sholds. A passing80kprofilealone isnotcapacity."
+  }
+}

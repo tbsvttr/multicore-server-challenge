@@ -1,0 +1,38 @@
+{
+  "reason": "repeatedactualMacsleep/battery8pct invalidatesclocks; stopownedbenchmarkinfrastructurewhilepowerpreconditionpending",
+  "wall_ns": 1792769588436065000,
+  "operations": [
+    {
+      "argv": [
+        "docker",
+        "exec",
+        "--user",
+        "root",
+        "multicore-comparison-target-20261023",
+        "pg_ctlcluster",
+        "18",
+        "main",
+        "stop",
+        "--mode",
+        "fast"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "stop",
+        "--time",
+        "10",
+        "multicore-comparison-target-20261023"
+      ],
+      "exit": 0,
+      "stdout": "Flag --time has been deprecated, use --timeout instead\nmulticore-comparison-target-20261023\n",
+      "stderr": ""
+    }
+  ],
+  "owned_container_states": "multicore-capacity-client-20261023t103504-ad8d3b\texited\nmulticore-capacity-client-20261023t101818-b418c5\texited\nmulticore-capacity-client-20261023t095453-41ddb8\texited\nmulticore-multi-load-v3-multi-pair-20261023t085723-2a0df8\texited\nmulticore-multi-load-v3-multi-pair-20261023t081359-b8a826\texited\nmulticore-multi-load-v3-multi-pair-20261023t080108-74f69d\texited\nmulticore-multi-load-v3-multi-pair-20261023t074213-8ce7a0\texited\nmulticore-comparison-target-20261023\texited\nmulticore-multi-load-v3-multi-pair-20261022t200445-706372\texited\nmulticore-multi-load-v3-multi-pair-20261022t193438-99f820\texited\nmulticore-multi-load-v2-multi-pair-20261022t192010-1e24f0\texited\nmulticore-multi-load-multi-pair-20261022t190313-9c13b1\texited\nmulticore-load-pair-20261022t184101-5d7ef2\texited\nmulticore-load-pair-20261022t173322-6500cd\texited\nmulticore-goose-dev-20261022\texited\n",
+  "all_owned_containers_stopped": true
+}

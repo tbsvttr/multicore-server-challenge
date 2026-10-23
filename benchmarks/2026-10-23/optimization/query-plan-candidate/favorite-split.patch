@@ -1,0 +1,32 @@
+--- a/sql.goose
++++ b/sql.goose
+@@ -69,18 +69,14 @@
+ 
+ fn plain_columns(out: u8[>..]&, body: bool) { columns(out, body, FAVORITED, FAVORITES_COUNT, ""); }
+ 
+-// One scan of the article's favorites gives both its count and whether the viewer is among them.
+-let FAV_LATERAL = " LEFT JOIN LATERAL (SELECT count(*) AS fc, COALESCE(bool_or(f.user_id = $1), false) AS fav FROM favorites f WHERE f.article_id = a.id) fv ON true";
+-
+ // A page and its capped count in one statement: the count row with the page joined to it (an empty page leaves one
+ // row whose page columns are NULL). The inner LIMIT is the constant 100 and $2 applies outside it, so the generic
+ // plan is the right plan. Columns: the article columns, a.id, then the count. $2 limit, $3 offset, $4 filter.
+ fn page_with_count(out: u8[>..]&, i: i64) {
+     format(out, "WITH c AS (", list_count(i), ") SELECT p.*, c.n FROM c LEFT JOIN LATERAL (SELECT ");
+-    let one_scan = i == ST_LIST_ALL || i == ST_LIST_TAG;
+-    if one_scan {
+-        columns(out, false, "fv.fav", "fv.fc", "");
+-    } else if i == ST_LIST_FAVORITED {
++    // The article_id index can count without reading every favorite's user_id.
++    // Viewer membership is an independent exact primary-key existence probe.
++    if i == ST_LIST_FAVORITED {
+         // The viewer's favorites and followees are read once for the page, not probed per article.
+         columns(out, false, "a.id = ANY(ARRAY(SELECT vf.article_id FROM favorites vf WHERE vf.user_id = $1))", FAVORITES_COUNT,
+                 "a.author_id = ANY(ARRAY(SELECT vo.followee_id FROM follows vo WHERE vo.follower_id = $1))");
+@@ -88,7 +84,6 @@
+         columns(out, false, FAVORITED, FAVORITES_COUNT, if i == ST_FEED { "true" } else { "" });
+     }
+     format(out, ", a.id FROM (", list_page_rows(i), ") a JOIN users u ON u.id = a.author_id");
+-    if one_scan { out.append(FAV_LATERAL); }
+     out.append(" ORDER BY a.id DESC) p ON true ORDER BY p.id DESC");
+ }
+ 

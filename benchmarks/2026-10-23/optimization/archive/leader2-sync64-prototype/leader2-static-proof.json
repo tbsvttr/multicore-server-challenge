@@ -1,0 +1,32 @@
+{
+  "status": "STATIC_SCOPE_PASS_ONLY",
+  "candidate": "/private/tmp/multicore-optimize-20261023/candidates/leader2",
+  "baseline": "/private/tmp/multicore-optimize-20261023/candidates/leader1",
+  "execution_performed": false,
+  "changed_files": {
+    "main.goose": {
+      "baseline_sha256": "277eea03b5c037a795f29a42ae2464556efef38ff9fcd984339a56b0705308c9",
+      "candidate_sha256": "61bae831b5cded1a70eed08ea08ab2d22c5d3c02a8d2ea1695a62fec11365369"
+    },
+    "server.goose": {
+      "baseline_sha256": "4126e0647c1923430e4b4c4a4f918bb77b582a4dcc02a19e775682f4322bc999",
+      "candidate_sha256": "d621d31270c00f713afe036601f2b738713a8c196f8185608bef7d169fa34bf5"
+    }
+  },
+  "unchanged_text_source_files": 34,
+  "candidate_extra_files": [],
+  "patch_sha256": "cb9f77b68a09bbdbdf4c21f0fc72b855d2d565b0926fc7dbad8cb5c647abafda",
+  "copied_build_cache_or_binary_paths": [],
+  "protocol_configuration": {
+    "PG_READ_GROUPS_default": 4,
+    "PG_READ_GROUPS_zero": "original unbounded reader admission",
+    "GROUP_MAX_unchanged": 64,
+    "READ_HOLD_unchanged": true
+  },
+  "limitations": [
+    "No compilation or runtime validation yet.",
+    "No timing or throughput improvement established.",
+    "The 110k stall cause remains unresolved.",
+    "Four Sync groups can contain up to 256 batched/direct executions per reader; this is not a four-query or four-HTTP-request cap."
+  ]
+}

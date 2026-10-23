@@ -1,0 +1,23 @@
+{
+  "eligible_all_five_arms": true,
+  "minimum_full_window_cpu_candidate": "share2r5k",
+  "minimum_sampled_inner_cpu_candidate": "share2r5k",
+  "both_cpu_estimates_agree": true,
+  "selected_case": "share2r5k",
+  "purpose": "Choose a configuration for independent warmup/search/300s capacity testing; no promotion or capacity/rank proof.",
+  "repeats": 1,
+  "new_correctness_binary_limit": "Calibration metrics belong to the frozen a34 candidate. Any later correctness fixes create a new binary requiring its own validation and capacity run; these metrics are not silently transferred.",
+  "env": {
+    "WORKERS": "2",
+    "PG_READERS": "3",
+    "HASHERS": "2",
+    "BCRYPT_BATCH_MS": "250",
+    "READ_BATCH": "32",
+    "READ_HOLD": "1",
+    "ARTICLE_BATCH": "1",
+    "WRITE_BATCH_US": "1000",
+    "READ_BATCH_US": "5000"
+  },
+  "calibration_binary_sha256": "a34ee531dc6925021507cd2984606537d872b9c6f9b4fe6dd48b0a84a721899f",
+  "whole_target_cpu_cost_ms_per_success": 0.15135371310317988
+}

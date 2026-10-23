@@ -1,0 +1,30 @@
+run capacity_20261023t161428_b18310-probe-110000: box 3, 18333 users -> http://127.0.0.4:3000, start 16:19:18.422, ramp 1m0s + measure 1m0s + tail 15s
+
+18333 users on 1 box(es), http://127.0.0.4:3000, measured 60 s after a 60 s ramp
+endpoint                                      count    req/s      p50      p90      p95      p99      max    err%
+GET /api/articles/:slug                        5623     93.7  33243.1  46104.6  48267.3  51642.4    59900   68.04
+GET /api/articles/:slug/comments               4999     83.3  24281.1  47611.9  48267.3  49479.7    60031   45.95
+GET /api/tags                                  4475     74.6  32555.0  47251.5  48857.1  51740.7    58851   63.28
+GET /api/articles                              2170     36.2  23969.8  47382.5  48431.1  49381.4    59048   90.78
+GET /api/articles/feed                         1430     23.8  24133.6  47644.7  48431.1  49479.7    51642   90.77
+GET /api/articles?tag                           932     15.5  32866.3  48005.1  49479.7  53575.7    58851   96.03
+GET /api/profiles/:username                     854     14.2  31981.6  48857.1  50004.0  51970.0    54460   34.43
+GET /api/articles?author                        552      9.2  30310.4  49020.9  49446.9  49774.6    57049   19.93
+GET /api/user                                   380      6.3  24920.1  46858.2  48398.3  49348.6    51642   48.68
+POST /api/articles/:slug/favorite               317      5.3  32030.7  48824.3  49578.0  52068.4    54133   34.07
+POST /api/articles/:slug/comments               207      3.5  32899.1  44433.4  44597.2  44761.1    45023   33.82
+GET /api/articles?favorited                     145      2.4  31014.9  48234.5  48857.1  49381.4    49775   12.41
+POST /api/profiles/:username/follow             131      2.2  31457.3  44531.7  44695.6  44793.9    45023   38.17
+POST /api/users/login                           119      2.0  21069.8  44073.0  48136.2  50135.0    52756   61.34
+POST /api/articles                               82      1.4  32358.4  44302.3  44597.2  44793.9    44794   67.07
+PUT /api/user                                    36      0.6  18759.7  44204.0  44498.9  44761.1    44761   16.67
+DELETE /api/articles/:slug/favorite              15      0.2  23871.5  48234.5  48234.5  49512.4    49512   20.00
+DELETE /api/profiles/:username/follow            14      0.2  38731.8  44695.6  44695.6  44793.9    44794   35.71
+POST /api/users                                   2      0.0  18432.0  33505.3  33505.3  33505.3    33505   50.00
+DELETE /api/articles/:slug/comments/:id           1      0.0  29507.6  29507.6  29507.6  29507.6    29508    0.00
+ALL                                           22484    374.7  30408.7  47382.5  48496.6  51576.8    60031   62.69
+errors: timeout=14096  (e.g. "request timeout")
+mix: 1.77 calls/page, 0.020 req/s per user, 3.6% writes, 12686 page views
+box 3 (831ef5b57bce): 18333 users, CPU avg 100% max 100%, loadgen proc 13%, RSS peak 432 MB, 39010 TCP connects, behind=true
+verdict: FAIL (p95 48497 ms >= 500, p99 51577 ms >= 1000, errors 62.69% >= 1%)   [p95 < 500 ms, p99 < 1000 ms, errors < 1%]
+LG-LIMITED: box 3 CPU 100% > 75%; box 3 fell behind: 58 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 70154 ms late

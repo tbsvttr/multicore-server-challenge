@@ -1,0 +1,114 @@
+--- p1/pg_collect.py
++++ p2/pg_collect.py
+@@ -24,13 +24,47 @@
+ WITH stamp AS MATERIALIZED (SELECT clock_timestamp() AS ts),
+ app AS MATERIALIZED (
+     SELECT pid, backend_type, state, wait_event_type, wait_event,
+-           query_start, xact_start, query
++           query_start, xact_start, query, pg_blocking_pids(pid) AS blocking_pids
+     FROM pg_stat_activity
+     WHERE datname = current_database()
+       AND usename = 'conduit'
+       AND backend_type = 'client backend'
+       AND pid <> pg_backend_pid()
+       AND application_name IS DISTINCT FROM current_setting('application_name')
++),
++blocked_app AS MATERIALIZED (
++    SELECT pid FROM app WHERE cardinality(blocking_pids) > 0
++),
++blocker_ids AS MATERIALIZED (
++    SELECT DISTINCT b.pid
++    FROM app CROSS JOIN LATERAL unnest(app.blocking_pids) AS b(pid)
++),
++blockers AS MATERIALIZED (
++    SELECT b.pid, a.pid IS NOT NULL AS identity_available,
++           a.backend_type, a.backend_start, a.datname AS database,
++           a.application_name, a.state, a.wait_event_type, a.wait_event,
++           a.query_start, a.xact_start,
++           CASE WHEN a.pid IS NOT NULL THEN md5(COALESCE(a.query, '')) END AS query_md5
++    FROM (SELECT pid FROM blocker_ids ORDER BY pid LIMIT 100) b
++    LEFT JOIN pg_stat_activity a ON a.pid = b.pid
++),
++lock_target_ids AS MATERIALIZED (
++    SELECT pid FROM blocked_app
++    UNION SELECT pid FROM blocker_ids WHERE pid > 0
++),
++lock_targets AS MATERIALIZED (
++    SELECT pid FROM lock_target_ids ORDER BY pid LIMIT 100
++),
++lock_modes AS MATERIALIZED (
++    SELECT l.pid, l.locktype, l.mode, l.granted, l.database AS database_oid,
++           l.relation AS relation_oid, n.nspname AS relation_schema,
++           c.relname AS relation_name, count(*) AS count
++    FROM pg_locks l JOIN lock_targets t ON t.pid = l.pid
++    LEFT JOIN pg_class c ON c.oid = l.relation
++      AND l.database = (SELECT oid FROM pg_database WHERE datname = current_database())
++    LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
++    GROUP BY l.pid, l.locktype, l.mode, l.granted, l.database,
++             l.relation, n.nspname, c.relname
+ )
+ SELECT jsonb_build_object(
+     'database', current_database(),
+@@ -50,7 +84,7 @@
+                 EXTRACT(EPOCH FROM ((SELECT ts FROM stamp) - query_start)) END,
+             'xact_age_s', CASE WHEN xact_start IS NULL THEN NULL ELSE
+                 EXTRACT(EPOCH FROM ((SELECT ts FROM stamp) - xact_start)) END,
+-            'blocking_pids', pg_blocking_pids(pid),
++            'blocking_pids', blocking_pids,
+             'query_md5', md5(COALESCE(query, '')),
+             'family', CASE
+                 WHEN state <> 'active' THEN 'idle'
+@@ -73,6 +107,45 @@
+             END
+         ) ORDER BY pid) FROM app
+     ), '[]'::jsonb),
++    'blocking_observation', CASE WHEN EXISTS (SELECT 1 FROM blocked_app) THEN
++        jsonb_build_object(
++            'blocked_application_pids', (SELECT jsonb_agg(pid ORDER BY pid) FROM blocked_app),
++            'blocker_pid_count', (SELECT count(*) FROM blocker_ids),
++            'blocker_identity_limit', 100,
++            'blocker_identities_truncated', (SELECT count(*) > 100 FROM blocker_ids),
++            'blocker_identities', COALESCE((
++                SELECT jsonb_agg(jsonb_build_object(
++                    'pid', pid, 'identity_available', identity_available,
++                    'backend_type', backend_type, 'backend_start', backend_start,
++                    'database', database, 'application_name', application_name,
++                    'state', state, 'wait_event_type', wait_event_type,
++                    'wait_event', wait_event,
++                    'query_age_s', CASE WHEN query_start IS NULL THEN NULL ELSE
++                        EXTRACT(EPOCH FROM ((SELECT ts FROM stamp) - query_start)) END,
++                    'xact_age_s', CASE WHEN xact_start IS NULL THEN NULL ELSE
++                        EXTRACT(EPOCH FROM ((SELECT ts FROM stamp) - xact_start)) END,
++                    'query_md5', query_md5
++                ) ORDER BY pid) FROM blockers
++            ), '[]'::jsonb),
++            'lock_target_pid_count', (SELECT count(*) FROM lock_target_ids),
++            'lock_target_limit', 100,
++            'lock_targets_truncated', (SELECT count(*) > 100 FROM lock_target_ids),
++            'lock_mode_group_count', (SELECT count(*) FROM lock_modes),
++            'lock_mode_group_limit', 1024,
++            'lock_modes_truncated', (SELECT count(*) > 1024 FROM lock_modes),
++            'lock_modes', COALESCE((
++                SELECT jsonb_agg(to_jsonb(l) ORDER BY pid, locktype, mode,
++                    granted, database_oid NULLS FIRST, relation_oid NULLS FIRST)
++                FROM (SELECT * FROM lock_modes
++                      ORDER BY pid, locktype, mode, granted,
++                          database_oid NULLS FIRST, relation_oid NULLS FIRST
++                      LIMIT 1024) l
++            ), '[]'::jsonb)
++        ) ELSE jsonb_build_object(
++            'blocked_application_pids', '[]'::jsonb,
++            'blocker_pid_count', 0, 'blocker_identities', '[]'::jsonb,
++            'lock_target_pid_count', 0, 'lock_modes', '[]'::jsonb
++        ) END,
+     'pg_stat_database', (
+         SELECT to_jsonb(d) FROM pg_stat_database d
+         WHERE d.datname = current_database()
+@@ -179,6 +252,7 @@
+         'observer_subprocess_policy': 'Each short psql has a fresh owned process group; timeout uses bounded TERM then KILL.',
+         'observer_stats_effect': 'Each sample adds its own connection/transaction to database-wide counters; activity excludes that observer.',
+         'family_label_kind': 'Heuristic SQL shape only; query_md5 preserves exact grouping without SQL text.',
++        'blocking_observability_delta': 'P2 only: pg_blocking_pids cached once per app PID; when blockers occur, include identities and aggregated lock modes for up to100 involved PIDs, capped1024 groups with explicit truncation flags. No application SQL text or lock tuple/object identifiers are emitted.',
+         'scope': 'Read-only diagnostic observer; no capacity qualification.'
+     }
+     command = ['psql', '-X', '-A', '-t', '-q', '-v', 'ON_ERROR_STOP=1',

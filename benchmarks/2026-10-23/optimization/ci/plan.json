@@ -1,0 +1,142 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "created_utc": "2026-10-23T09:09:41Z",
+  "scope": "Fork-only native x86 source-build/correctness. No capacity or official-rank claim.",
+  "validation_branch": "validation/goose-native-optimized-2026-10-23",
+  "pr_source_ref_parameter": "source_ref; defaults to submissions/goose-native-tbsvttr and resolves to a full source commit before building",
+  "submission_parameter": "validate.sh --submission submissions/<folder>",
+  "submission_tree_equality_required": true,
+  "validation_branch_additions_only": true,
+  "allowed_added_paths": [
+    ".github/workflows/goose-optimized-validation.yml",
+    ".github/validation-goose/*"
+  ],
+  "pr_source_changes": "None from this package. Optimized PR changes stay inside the submission folder; this validation package is added only on the separate fork validation branch.",
+  "goose_commit": "f605b5a07dd2aa3a5cb3f4c9b14002bd3c9d3d1a",
+  "goose_archive_sha256": "86482df9e11ff9472d2214e93a71cd7f22b05d31260f66d7e760d5df784a7e92",
+  "postgres_image": "postgres:18@sha256:edb0c08dc33befd0262ab3b5cf1c4f3f8cfd8b09e88c05b45adee29d6761ddb6",
+  "postgres_pin_provenance": "Previous successful native x86 GitHub run39834209847 pull digest, PostgreSQL18.6",
+  "go_version": "1.27.1",
+  "clean_compiler_build_normal_user": true,
+  "build_jobs": 2,
+  "stock_baseline_commit": "3e9087473da5c56d5800ae9ee00ac1e84c44a135",
+  "baseline_uses_same_compiler": true,
+  "checks": [
+    "Original dev/full seed count/content fingerprints",
+    "Unchanged197 dev default",
+    "Unchanged197 full default",
+    "Unchanged197 full READ_BATCH_US5000 ARTICLE_BATCH1",
+    "293966 native assertions and4000 Goose JWT assertions",
+    "252 exact-lane bcrypt comparisons at costs4/5/10",
+    "1664-request baseline/candidate full-DB read oracle with12 actual SQL witnesses",
+    "Quiet500000us read timer and independent writer",
+    "Zero read-window liveness (not a strict immediate-dispatch latency guarantee)",
+    "Deferred commit/no early headers and grouped rollback probe",
+    "Concurrent favorite fresh-after-commit response",
+    "Unchanged197 full selected W2/R3/ARTICLE1/READ5000us/WRITE1000us",
+    "Fresh article-update and concurrent favorite/rename race responses",
+    "Embedded-NUL passwords: trusted Go/x-crypto0.58.0 bcrypt cost10 interoperability in both directions; existing nonpassword text/length guards remain422"
+  ],
+  "probes": {
+    "read-batches.py": {
+      "source": "/private/tmp/multicore-optimize-20261023/tests/read-batches.py",
+      "sha256": "fdabaf479787374f72a502cdef3d9b5486349f3f9846443a31840225a501512e",
+      "copied_sha256": "fdabaf479787374f72a502cdef3d9b5486349f3f9846443a31840225a501512e"
+    },
+    "quiet-read-timer.py": {
+      "source": "/private/tmp/multicore-optimize-20261023/tests/quiet-read-timer.py",
+      "sha256": "3f84fda6494deee29633ecc42fcd86419de6ee0751d5818ad4add53ebc957aa5",
+      "copied_sha256": "3f84fda6494deee29633ecc42fcd86419de6ee0751d5818ad4add53ebc957aa5"
+    },
+    "runtime-write-probe-v2.py": {
+      "source": "/private/tmp/multicore-optimize-20261023/tests/runtime-write-probe-v2.py",
+      "sha256": "9a45f2178c9422180b329ed1fcfc7e6412427a5269a89b8708ff1ce12f15308d",
+      "copied_sha256": "9a45f2178c9422180b329ed1fcfc7e6412427a5269a89b8708ff1ce12f15308d"
+    },
+    "favorite-race-probe.py": {
+      "source": "/private/tmp/multicore-research-20261022/favorite-race-probe.py",
+      "sha256": "b42bfd6922c07e9d707e56bcfb61692875e935e5e7fb2cd105440f93222a8fc8",
+      "copied_sha256": "b42bfd6922c07e9d707e56bcfb61692875e935e5e7fb2cd105440f93222a8fc8"
+    },
+    "article-update-race.py": {
+      "source": "/private/tmp/multicore-optimize-20261023/tests/article-update-race.py",
+      "sha256": "b3b99d37055eaa6ff0cd2a0c8b30a7757d6dc4703416c14274c61e06b6c1e603",
+      "copied_sha256": "b3b99d37055eaa6ff0cd2a0c8b30a7757d6dc4703416c14274c61e06b6c1e603"
+    },
+    "password-nul-probe.py": {
+      "source": "/private/tmp/multicore-optimize-20261023/tests/password-nul-probe.py",
+      "sha256": "6e9a12d113ef0004fe14d303b54ede281c5e55852fd88926b3442db139de6bd7",
+      "copied_sha256": "6e9a12d113ef0004fe14d303b54ede281c5e55852fd88926b3442db139de6bd7"
+    },
+    "bcrypt-passwords.go": {
+      "source": "/private/tmp/multicore-optimize-20261023/tests/bcrypt-passwords.go",
+      "sha256": "87984b7e44da519b8fb180c55bbba56b1610d6d62f0a0dade144939e66dc7fc6",
+      "copied_sha256": "87984b7e44da519b8fb180c55bbba56b1610d6d62f0a0dade144939e66dc7fc6"
+    }
+  },
+  "package_files": {
+    "validation-only.patch": "7e651f1949c30cb5d89efecffc452ea71ad68cb03320078b801057ad099c5130",
+    "validate.sh": "5658209a12ddca62050c248b32c28ffe56b3c861334d5dc18deefb87c275f643",
+    "static-checks.json": "d1837a65dbc784d56506c8f507642a4ef71546a4e95b0c63102796fdaae07346",
+    "README.txt": "fb54afe806dbbc5b8f51cd1cccc614186dab745eb1034a4ceebdc64d2ea5fcc0",
+    "goose-optimized-validation.yml": "ce3916bee07230c99a6e4e72e8d8a63edc65a7b3df829fea7538832c2f8fa515",
+    "probes/runtime-write-probe-v2.py": "9a45f2178c9422180b329ed1fcfc7e6412427a5269a89b8708ff1ce12f15308d",
+    "probes/read-batches.py": "fdabaf479787374f72a502cdef3d9b5486349f3f9846443a31840225a501512e",
+    "probes/quiet-read-timer.py": "3f84fda6494deee29633ecc42fcd86419de6ee0751d5818ad4add53ebc957aa5",
+    "probes/password-nul-probe.py": "6e9a12d113ef0004fe14d303b54ede281c5e55852fd88926b3442db139de6bd7",
+    "probes/bcrypt-passwords.go": "87984b7e44da519b8fb180c55bbba56b1610d6d62f0a0dade144939e66dc7fc6",
+    "probes/favorite-race-probe.py": "b42bfd6922c07e9d707e56bcfb61692875e935e5e7fb2cd105440f93222a8fc8",
+    "probes/article-update-race.py": "b3b99d37055eaa6ff0cd2a0c8b30a7757d6dc4703416c14274c61e06b6c1e603"
+  },
+  "local_execution_during_calibration": {
+    "docker": false,
+    "build": false,
+    "database_query": false,
+    "github_write": false,
+    "application_api_request": false,
+    "github_read_only_metadata": true
+  },
+  "validation_patch_sha256": "7e651f1949c30cb5d89efecffc452ea71ad68cb03320078b801057ad099c5130",
+  "validation_added_paths": [
+    ".github/validation-goose/article-update-race.py",
+    ".github/validation-goose/bcrypt-passwords.go",
+    ".github/validation-goose/favorite-race-probe.py",
+    ".github/validation-goose/password-nul-probe.py",
+    ".github/validation-goose/quiet-read-timer.py",
+    ".github/validation-goose/read-batches.py",
+    ".github/validation-goose/runtime-write-probe-v2.py",
+    ".github/validation-goose/validate.sh",
+    ".github/workflows/goose-optimized-validation.yml"
+  ],
+  "action_pins": {
+    "actions/checkout": "11d5960a326750d5838078e36cf38b85af677262",
+    "actions/setup-go": "40f1582b2485089dde7abd97c1529aa768e1baff",
+    "actions/upload-artifact": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+  },
+  "selected_config": {
+    "WORKERS": 2,
+    "PG_READERS": 3,
+    "HASHERS": 2,
+    "ARTICLE_BATCH": 1,
+    "READ_BATCH": 32,
+    "READ_HOLD": 1,
+    "READ_BATCH_US": 5000,
+    "WRITE_BATCH_US": 1000
+  },
+  "private_clone_prefix": "mc_pair_ci_",
+  "shutdown_policy": "Owned process groups: TERM with3s poll bound, then KILL with2s poll bound; zombies reaped; no unbounded live-process wait. Clone cleanup has20s command bounds.",
+  "trusted_bcrypt": {
+    "go_module": "golang.org/x/crypto",
+    "version": "v0.58.0",
+    "module_sha": "h1:COkYLr4k7nDI4r6QtMML2AfzeIswWHAJthLS6K/M/54=",
+    "go_mod_sha": "h1:Xh+kl5A+M0gMiWDytH2Hhr5Z7WbNCpv/eB/EFgfSk+w=",
+    "pin_origin": "Original repository examples/go/go.sum",
+    "working_directory": "$repo/bench",
+    "temporary_modfile": "$out/trusted-bcrypt/go.mod",
+    "original_bench_module_files_modified": false,
+    "helper_cli": "password-nul-probe.py --out RESULT --go-helper bash $out/trusted-bcrypt/run-helper.sh",
+    "expectation": "fixed accepted-full-bcrypt; baseline rejection mode is not used",
+    "minimum_go_version_verified": "1.26.0",
+    "minimum_go_version_primary_source": "https://github.com/golang/crypto/blob/v0.58.0/go.mod"
+  }
+}

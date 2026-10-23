@@ -1,0 +1,40 @@
+{
+  "status": "STATIC_SCOPE_PASS_ONLY",
+  "candidate": "/private/tmp/multicore-optimize-20261023/candidates/leader2",
+  "baseline": "/private/tmp/multicore-optimize-20261023/candidates/leader1",
+  "execution_performed": false,
+  "changed_files": {
+    "main.goose": {
+      "baseline_sha256": "277eea03b5c037a795f29a42ae2464556efef38ff9fcd984339a56b0705308c9",
+      "candidate_sha256": "61bae831b5cded1a70eed08ea08ab2d22c5d3c02a8d2ea1695a62fec11365369"
+    },
+    "server.goose": {
+      "baseline_sha256": "4126e0647c1923430e4b4c4a4f918bb77b582a4dcc02a19e775682f4322bc999",
+      "candidate_sha256": "ded0b83e2c75be8abe7bc880b175fd6b5cd55a8a4f924444ba1877dbcd44a8f1"
+    }
+  },
+  "unchanged_text_source_files": 34,
+  "candidate_extra_files": [],
+  "patch_sha256": "abad4e93ecb3155f063340922f4a19b371bfd20a679dc7461e055abedfc24328",
+  "copied_build_cache_or_binary_paths": [],
+  "protocol_configuration": {
+    "PG_READ_GROUPS_default": 4,
+    "PG_READ_GROUPS_zero": "unbounded reader group admission; reader Sync size remains4",
+    "READ_GROUP_MAX": 4,
+    "writer_GROUP_MAX_unchanged": 64,
+    "READ_HOLD_unchanged": true,
+    "default_executions_per_reader_bound": 16,
+    "default_READ_BATCH": 32,
+    "default_HTTP_per_reader_upper_bound": 512,
+    "default_six_reader_HTTP_upper_bound": 3072,
+    "direct_FIFO_budget_when_pool_waits": 1
+  },
+  "prior_prototype_archive": "archive/leader2-sync64-prototype",
+  "limitations": [
+    "No compilation or runtime validation yet.",
+    "No timing or throughput improvement established.",
+    "The110k stall cause remains unresolved.",
+    "Limits bound submitted reader executions, not local HTTP waiting queues.",
+    "Independent reviewer requested on the latest Sync4/fairness version."
+  ]
+}

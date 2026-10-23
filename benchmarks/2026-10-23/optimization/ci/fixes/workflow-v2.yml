@@ -1,0 +1,58 @@
+name: Optimized Goose native x86 correctness
+
+on:
+  push:
+    branches: [validation/goose-native-optimized-2026-10-23]
+  workflow_dispatch:
+    inputs:
+      source_ref:
+        description: PR32 source commit or branch whose submission tree must match
+        required: true
+        default: submissions/goose-native-tbsvttr
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: 'Native x86 correctness: W2/R3/article1/read5ms'
+    if: github.repository == 'tbsvttr/multicore-server-challenge'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    services:
+      postgres:
+        # Exact PostgreSQL18 image from the previous successful native x86 job.
+        image: postgres:18@sha256:edb0c08dc33befd0262ab3b5cf1c4f3f8cfd8b09e88c05b45adee29d6761ddb6
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: --health-cmd pg_isready --health-interval 2s --health-timeout 5s --health-retries 30
+    env:
+      PGHOST: 127.0.0.1
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      BUILD_JOBS: 2
+      SOURCE_REF: ${{ inputs.source_ref || 'submissions/goose-native-tbsvttr' }}
+      VALIDATION_OUT: /tmp/goose-optimized-validation
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, prior successful job
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5, prior successful job
+        with:
+          go-version: '1.27.1'
+          cache: false
+      - name: Install correctness harness tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client curl jq python3
+      - name: Clean native source build and complete correctness checks
+        run: bash .github/validation-goose/validate.sh --submission submissions/goose-native-tbsvttr --source-ref "$SOURCE_REF" --out "$VALIDATION_OUT"
+      - name: Preserve validation evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: goose-native-x86-correctness-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.VALIDATION_OUT }}
+          if-no-files-found: warn
+          retention-days: 30

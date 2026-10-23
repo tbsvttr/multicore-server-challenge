@@ -1,0 +1,4521 @@
+{
+  "run": "/private/tmp/multicore-optimize-20261023/capacity_20261023t101818_7e4229",
+  "checks": [
+    {
+      "check": "plan_hash_fixed",
+      "pass": true
+    },
+    {
+      "check": "explicit_external_client_memory_and_cpu_declared",
+      "pass": true
+    },
+    {
+      "check": "client_CPU_scope_policy_explicitly_preregistered",
+      "pass": true
+    },
+    {
+      "check": "fixed_server_budget_and_local_rounding_policy",
+      "pass": true
+    },
+    {
+      "check": "durable_fixed_postgres18",
+      "pass": true
+    },
+    {
+      "check": "target:actual_budget_identity_and_no_affinity",
+      "pass": true
+    },
+    {
+      "check": "load:actual_budget_identity_and_no_affinity",
+      "pass": true
+    },
+    {
+      "check": "external_client_cgroup_shared_network_only",
+      "pass": true
+    },
+    {
+      "check": "all_run_tools_frozen",
+      "pass": true
+    },
+    {
+      "check": "native_binary_matches_pinned_hash",
+      "pass": true
+    },
+    {
+      "check": "original_full_seed_fingerprint_validated",
+      "pass": true
+    },
+    {
+      "check": "final_resource_check_valid",
+      "pass": true
+    }
+  ],
+  "rows": [
+    {
+      "case": "rust7",
+      "checks": [
+        {
+          "check": "source_archive_and_manifest_frozen",
+          "pass": true
+        },
+        {
+          "check": "exact_predeclared_case_and_binary",
+          "pass": true
+        },
+        {
+          "check": "owned_app_stopped",
+          "pass": true
+        },
+        {
+          "check": "owned_fresh_database_dropped",
+          "pass": true
+        },
+        {
+          "check": "01-warmup-10000:predeclared_search_decision",
+          "pass": true
+        },
+        {
+          "check": "02-probe-160000:predeclared_search_decision",
+          "pass": true
+        },
+        {
+          "check": "all_started_phases_preserved_once",
+          "pass": true
+        }
+      ],
+      "phases": [
+        {
+          "id": "01-warmup-10000",
+          "case": "rust7",
+          "stage": "warmup",
+          "users": 10000,
+          "run_id": "capacity_20261023t101818_7e4229-warmup-10000",
+          "database": "mc_pair_20261023_101818_7e4229_1",
+          "session_id": "rust7",
+          "recorded_classification": "PASS",
+          "checks": [
+            {
+              "check": "complete_saved_phase",
+              "pass": true,
+              "detail": []
+            },
+            {
+              "check": "predeclared_balanced_shards_and_limits",
+              "pass": true
+            },
+            {
+              "check": "single_database_and_continuous_app_session",
+              "pass": true
+            },
+            {
+              "check": "declared_binary_env_and_common_runtime",
+              "pass": true
+            },
+            {
+              "check": "before:fixed_target_budget",
+              "pass": true
+            },
+            {
+              "check": "before:official_sources_and_pg_settings_fixed",
+              "pass": true
+            },
+            {
+              "check": "after:fixed_target_budget",
+              "pass": true
+            },
+            {
+              "check": "after:official_sources_and_pg_settings_fixed",
+              "pass": true
+            },
+            {
+              "check": "startup:normal_expected_uid",
+              "pass": true
+            },
+            {
+              "check": "startup:exactly_one_expected_process",
+              "pass": true
+            },
+            {
+              "check": "startup:raw_all_four_uids_match_normal_user",
+              "pass": true
+            },
+            {
+              "check": "startup:raw_actual_pid_matches",
+              "pass": true
+            },
+            {
+              "check": "startup:actual_process_identity_stable",
+              "pass": true
+            },
+            {
+              "check": "startup:raw_soft_hard_nofile_at_least_200000",
+              "pass": true,
+              "detail": [
+                200000,
+                200000
+              ]
+            },
+            {
+              "check": "startup:helper_validity_agrees_with_raw",
+              "pass": true
+            },
+            {
+              "check": "before:normal_expected_uid",
+              "pass": true
+            },
+            {
+              "check": "before:exactly_one_expected_process",
+              "pass": true
+            },
+            {
+              "check": "before:raw_all_four_uids_match_normal_user",
+              "pass": true
+            },
+            {
+              "check": "before:raw_actual_pid_matches",
+              "pass": true
+            },
+            {
+              "check": "before:actual_process_identity_stable",
+              "pass": true
+            },
+            {
+              "check": "before:raw_soft_hard_nofile_at_least_200000",
+              "pass": true,
+              "detail": [
+                200000,
+                200000
+              ]
+            },
+            {
+              "check": "before:helper_validity_agrees_with_raw",
+              "pass": true
+            },
+            {
+              "check": "after:normal_expected_uid",
+              "pass": true
+            },
+            {
+              "check": "after:exactly_one_expected_process",
+              "pass": true
+            },
+            {
+              "check": "after:raw_all_four_uids_match_normal_user",
+              "pass": true
+            },
+            {
+              "check": "after:raw_actual_pid_matches",
+              "pass": true
+            },
+            {
+              "check": "after:actual_process_identity_stable",
+              "pass": true
+            },
+            {
+              "check": "after:raw_soft_hard_nofile_at_least_200000",
+              "pass": true,
+              "detail": [
+                200000,
+                200000
+              ]
+            },
+            {
+              "check": "after:helper_validity_agrees_with_raw",
+              "pass": true
+            },
+            {
+              "check": "app_healthy_before_load",
+              "pass": true
+            },
+            {
+              "check": "after_health_witness_present",
+              "pass": true
+            },
+            {
+              "check": "all_native_processes_exited_normally",
+              "pass": true
+            },
+            {
+              "check": "synchronized_raw_windows",
+              "pass": true
+            },
+            {
+              "check": "native_metadata_exact_stage_protocol",
+              "pass": true
+            },
+            {
+              "check": "one_saved_command_per_shard",
+              "pass": true
+            },
+            {
+              "check": "shard0:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard0:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "all_histogram_configurations_match",
+              "pass": true
+            },
+            {
+              "check": "merged_histogram_equals_exact_bin_sum",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p50_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p95_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p99_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:max_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_count_equals_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "merged_statuses_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "merged_errors_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "all_endpoints_retained",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "merged_all_shards_and_users",
+              "pass": true
+            },
+            {
+              "check": "native_verdict_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard0:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard0:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard0:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard0:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "native_generator_reasons_reproduced_exactly",
+              "pass": true
+            },
+            {
+              "check": "request_rate_and_errors_reproduced",
+              "pass": true
+            },
+            {
+              "check": "target:entire_phase_clock_drift_under100ms",
+              "pass": true,
+              "detail": 0.0005133152008056641
+            },
+            {
+              "check": "load:entire_phase_clock_drift_under100ms",
+              "pass": true,
+              "detail": 0.0005304813385009766
+            }
+          ],
+          "classification": "PASS",
+          "eligible": true,
+          "valid_server_failure": false,
+          "overall": {
+            "count": 316711,
+            "rps": 2639.258333333333,
+            "p50_ms": 0.183,
+            "p90_ms": 0.502,
+            "p95_ms": 1.648,
+            "p99_ms": 2.931,
+            "max_ms": 231.935,
+            "mean_ms": 0.539871760058855,
+            "errors": 0,
+            "error_rate": 0,
+            "statuses": {
+              "200": 310879,
+              "201": 5688,
+              "204": 144
+            }
+          },
+          "native_verdict": {
+            "pass": true,
+            "lg_limited": false
+          },
+          "target_monitor": {
+            "checks": [
+              {
+                "check": "monitor_has_samples",
+                "pass": true
+              },
+              {
+                "check": "strict_wall_and_monotonic_order",
+                "pass": true
+              },
+              {
+                "check": "full_measurement_window_bracketed",
+                "pass": true,
+                "detail": {
+                  "first_ms": 1792750713505.398,
+                  "start_ms": 1792750778532.0,
+                  "last_ms": 1792750913650.4146,
+                  "end_ms": 1792750898532.0
+                }
+              },
+              {
+                "check": "max_sample_gap_at_most_3s",
+                "pass": true,
+                "detail": 1.00137375
+              },
+              {
+                "check": "cgroup_budget_continuous",
+                "pass": true
+              },
+              {
+                "check": "total_cpu_counter_nondecreasing",
+                "pass": true
+              },
+              {
+                "check": "no_measurement_oom",
+                "pass": true,
+                "detail": {
+                  "oom": 0,
+                  "oom_kill": 0,
+                  "oom_group_kill": 0
+                }
+              },
+              {
+                "check": "wall_to_monotonic_drift_below_100ms",
+                "pass": true,
+                "detail": 0.0003974437713623047
+              }
+            ],
+            "warnings": [],
+            "eligible": true,
+            "samples": 122,
+            "max_gap_s": 1.00137375,
+            "window_s": 120.0,
+            "cgroup_cpu_seconds_estimate": 65.12978562108401,
+            "cgroup_quota_utilization_pct": 6.784352668862918,
+            "max_sample_interval_quota_utilization_pct": 9.764607831223127,
+            "memory_peak_sampled_bytes": 7481393152,
+            "memory_counter_peak_bytes": 8603140096,
+            "swap_peak_sampled_bytes": 0,
+            "oom_delta": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            },
+            "app_cpu_seconds_estimate": 26.0303481004115,
+            "app_counter_valid": true,
+            "app_pids_stable": true,
+            "app_process_count_max": 2,
+            "app_whole_target_cpu_pct": 2.7114945937928647,
+            "pg_cpu_seconds_estimate": 38.525977295998175,
+            "pg_counter_valid": true,
+            "pg_pids_stable": true,
+            "pg_process_count_max": 17,
+            "pg_whole_target_cpu_pct": 4.01312263499981
+          },
+          "load_monitor": {
+            "checks": [
+              {
+                "check": "monitor_has_samples",
+                "pass": true
+              },
+              {
+                "check": "strict_wall_and_monotonic_order",
+                "pass": true
+              },
+              {
+                "check": "full_measurement_window_bracketed",
+                "pass": true,
+                "detail": {
+                  "first_ms": 1792750713553.6082,
+                  "start_ms": 1792750778532.0,
+                  "last_ms": 1792750913713.3718,
+                  "end_ms": 1792750898532.0
+                }
+              },
+              {
+                "check": "max_sample_gap_at_most_3s",
+                "pass": true,
+                "detail": 1.004990958
+              },
+              {
+                "check": "cgroup_budget_continuous",
+                "pass": true
+              },
+              {
+                "check": "total_cpu_counter_nondecreasing",
+                "pass": true
+              },
+              {
+                "check": "no_measurement_oom",
+                "pass": true,
+                "detail": {
+                  "oom": 0,
+                  "oom_kill": 0,
+                  "oom_group_kill": 0
+                }
+              },
+              {
+                "check": "wall_to_monotonic_drift_below_100ms",
+                "pass": true,
+                "detail": 0.0003974437713623047
+              }
+            ],
+            "warnings": [],
+            "eligible": true,
+            "samples": 122,
+            "max_gap_s": 1.004990958,
+            "window_s": 120.0,
+            "cgroup_cpu_seconds_estimate": 14.684970995558391,
+            "cgroup_quota_utilization_pct": 1.5296844787039992,
+            "max_sample_interval_quota_utilization_pct": 2.1162785334301617,
+            "memory_peak_sampled_bytes": 251699200,
+            "memory_counter_peak_bytes": 251805696,
+            "swap_peak_sampled_bytes": 0,
+            "oom_delta": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            },
+            "app_cpu_seconds_estimate": 0.0,
+            "app_counter_valid": true,
+            "app_pids_stable": true,
+            "app_process_count_max": 0,
+            "app_whole_target_cpu_pct": 0.0,
+            "pg_cpu_seconds_estimate": 0.0,
+            "pg_counter_valid": true,
+            "pg_pids_stable": true,
+            "pg_process_count_max": 0,
+            "pg_whole_target_cpu_pct": 0.0
+          },
+          "declared_load_memory_bytes": 8589934592,
+          "declared_load_cpus": 8,
+          "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+          "classification_scope": "independent_local",
+          "native_qualified": true,
+          "native_whole_vm_CPU_flagged_shards": [],
+          "native_whole_vm_CPU_flag_count": 0,
+          "target_oom_delta": {
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "post_load_healthy": true,
+          "zero_measured_errors": true,
+          "observed_timeline_errors": 0,
+          "conformance_197_full_seed_proven": true,
+          "cpu_ms_per_successful_request_sampled_estimate": 0.20564421703409105,
+          "local_whole_vm_CPU_scope_exception": false,
+          "all_classifications": [
+            "PASS"
+          ],
+          "local_qualified": true
+        },
+        {
+          "id": "02-probe-160000",
+          "case": "rust7",
+          "stage": "probe",
+          "users": 160000,
+          "run_id": "capacity_20261023t101818_7e4229-probe-160000",
+          "database": "mc_pair_20261023_101818_7e4229_1",
+          "session_id": "rust7",
+          "recorded_classification": "INVALID_GENERATOR",
+          "checks": [
+            {
+              "check": "complete_saved_phase",
+              "pass": true,
+              "detail": []
+            },
+            {
+              "check": "predeclared_balanced_shards_and_limits",
+              "pass": true
+            },
+            {
+              "check": "single_database_and_continuous_app_session",
+              "pass": true
+            },
+            {
+              "check": "declared_binary_env_and_common_runtime",
+              "pass": true
+            },
+            {
+              "check": "before:fixed_target_budget",
+              "pass": true
+            },
+            {
+              "check": "before:official_sources_and_pg_settings_fixed",
+              "pass": true
+            },
+            {
+              "check": "after:fixed_target_budget",
+              "pass": true
+            },
+            {
+              "check": "after:official_sources_and_pg_settings_fixed",
+              "pass": true
+            },
+            {
+              "check": "startup:normal_expected_uid",
+              "pass": true
+            },
+            {
+              "check": "startup:exactly_one_expected_process",
+              "pass": true
+            },
+            {
+              "check": "startup:raw_all_four_uids_match_normal_user",
+              "pass": true
+            },
+            {
+              "check": "startup:raw_actual_pid_matches",
+              "pass": true
+            },
+            {
+              "check": "startup:actual_process_identity_stable",
+              "pass": true
+            },
+            {
+              "check": "startup:raw_soft_hard_nofile_at_least_200000",
+              "pass": true,
+              "detail": [
+                200000,
+                200000
+              ]
+            },
+            {
+              "check": "startup:helper_validity_agrees_with_raw",
+              "pass": true
+            },
+            {
+              "check": "before:normal_expected_uid",
+              "pass": true
+            },
+            {
+              "check": "before:exactly_one_expected_process",
+              "pass": true
+            },
+            {
+              "check": "before:raw_all_four_uids_match_normal_user",
+              "pass": true
+            },
+            {
+              "check": "before:raw_actual_pid_matches",
+              "pass": true
+            },
+            {
+              "check": "before:actual_process_identity_stable",
+              "pass": true
+            },
+            {
+              "check": "before:raw_soft_hard_nofile_at_least_200000",
+              "pass": true,
+              "detail": [
+                200000,
+                200000
+              ]
+            },
+            {
+              "check": "before:helper_validity_agrees_with_raw",
+              "pass": true
+            },
+            {
+              "check": "after:normal_expected_uid",
+              "pass": true
+            },
+            {
+              "check": "after:exactly_one_expected_process",
+              "pass": true
+            },
+            {
+              "check": "after:raw_all_four_uids_match_normal_user",
+              "pass": true
+            },
+            {
+              "check": "after:raw_actual_pid_matches",
+              "pass": true
+            },
+            {
+              "check": "after:actual_process_identity_stable",
+              "pass": true
+            },
+            {
+              "check": "after:raw_soft_hard_nofile_at_least_200000",
+              "pass": true,
+              "detail": [
+                200000,
+                200000
+              ]
+            },
+            {
+              "check": "after:helper_validity_agrees_with_raw",
+              "pass": true
+            },
+            {
+              "check": "app_healthy_before_load",
+              "pass": true
+            },
+            {
+              "check": "after_health_witness_present",
+              "pass": true
+            },
+            {
+              "check": "all_native_processes_exited_normally",
+              "pass": true
+            },
+            {
+              "check": "synchronized_raw_windows",
+              "pass": true
+            },
+            {
+              "check": "native_metadata_exact_stage_protocol",
+              "pass": true
+            },
+            {
+              "check": "one_saved_command_per_shard",
+              "pass": true
+            },
+            {
+              "check": "shard0:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard0:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "shard1:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard1:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "shard2:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard2:at_least99pct_vus_active",
+              "pass": false,
+              "detail": null
+            },
+            {
+              "check": "shard3:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard3:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "shard4:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard4:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard4:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "shard5:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard5:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard5:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "shard6:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard6:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard6:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "shard7:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard7:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard7:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "all_histogram_configurations_match",
+              "pass": true
+            },
+            {
+              "check": "merged_histogram_equals_exact_bin_sum",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p50_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p95_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p99_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:max_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_count_equals_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "merged_statuses_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "merged_errors_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "all_endpoints_retained",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "merged_all_shards_and_users",
+              "pass": true
+            },
+            {
+              "check": "native_verdict_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard0:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard0:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard0:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard0:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard1:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard1:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard1:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard1:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard2:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard2:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard2:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard2:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard3:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard3:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard3:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard3:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard4:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard4:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard4:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard4:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard5:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard5:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard5:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard5:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard6:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard6:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard6:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard6:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard7:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard7:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard7:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard7:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "native_generator_reasons_reproduced_exactly",
+              "pass": true
+            },
+            {
+              "check": "request_rate_and_errors_reproduced",
+              "pass": true
+            },
+            {
+              "check": "target:entire_phase_clock_drift_under100ms",
+              "pass": true,
+              "detail": 0.0014410018920898438
+            },
+            {
+              "check": "load:entire_phase_clock_drift_under100ms",
+              "pass": true,
+              "detail": 0.0014503002166748047
+            }
+          ],
+          "classification": "INVALID_GENERATOR",
+          "eligible": false,
+          "valid_server_failure": false,
+          "overall": {
+            "count": 1487926,
+            "rps": 24798.766666666666,
+            "p50_ms": 1352.703,
+            "p90_ms": 5865.471,
+            "p95_ms": 7450.623,
+            "p99_ms": 12468.223,
+            "max_ms": 18464.767,
+            "mean_ms": 2473.5309302230116,
+            "errors": 14683,
+            "error_rate": 0.009868098279081083,
+            "statuses": {
+              "200": 1447426,
+              "201": 25508,
+              "204": 309
+            },
+            "error_classes": {
+              "timeout": 14683
+            },
+            "error_example": "request timeout"
+          },
+          "native_verdict": {
+            "pass": false,
+            "fail_reasons": [
+              "p95 7451 ms >= 500",
+              "p99 12468 ms >= 1000"
+            ],
+            "lg_limited": true,
+            "lg_reasons": [
+              "box 0 CPU 84% > 75%",
+              "box 0 fell behind: 11 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 8527 ms late",
+              "box 1 CPU 86% > 75%",
+              "box 1 fell behind: 10 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 3918 ms late",
+              "box 2 CPU 85% > 75%",
+              "box 2 fell behind: 13 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 5070 ms late; only 19754 of 20000 users active at window start",
+              "box 3 CPU 84% > 75%",
+              "box 3 fell behind: 12 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 8886 ms late",
+              "box 4 CPU 83% > 75%",
+              "box 4 fell behind: 8 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 14792 ms late",
+              "box 5 CPU 84% > 75%",
+              "box 5 fell behind: 14 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 8244 ms late",
+              "box 6 CPU 85% > 75%",
+              "box 6 fell behind: 8 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 4897 ms late",
+              "box 7 CPU 85% > 75%",
+              "box 7 fell behind: 15 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 1624 ms late"
+            ]
+          },
+          "target_monitor": {
+            "checks": [
+              {
+                "check": "monitor_has_samples",
+                "pass": true
+              },
+              {
+                "check": "strict_wall_and_monotonic_order",
+                "pass": true
+              },
+              {
+                "check": "full_measurement_window_bracketed",
+                "pass": true,
+                "detail": {
+                  "first_ms": 1792750982295.7927,
+                  "start_ms": 1792751047317.0,
+                  "last_ms": 1792751129135.8884,
+                  "end_ms": 1792751107317.0
+                }
+              },
+              {
+                "check": "max_sample_gap_at_most_3s",
+                "pass": true,
+                "detail": 1.291249626
+              },
+              {
+                "check": "cgroup_budget_continuous",
+                "pass": true
+              },
+              {
+                "check": "total_cpu_counter_nondecreasing",
+                "pass": true
+              },
+              {
+                "check": "no_measurement_oom",
+                "pass": true,
+                "detail": {
+                  "oom": 0,
+                  "oom_kill": 0,
+                  "oom_group_kill": 0
+                }
+              },
+              {
+                "check": "wall_to_monotonic_drift_below_100ms",
+                "pass": true,
+                "detail": 0.0008835792541503906
+              }
+            ],
+            "warnings": [
+              "pg: live-PID CPU sum changed population or decreased; component CPU withheld"
+            ],
+            "eligible": true,
+            "samples": 62,
+            "max_gap_s": 1.291249626,
+            "window_s": 60.0,
+            "cgroup_cpu_seconds_estimate": 295.6091960057047,
+            "cgroup_quota_utilization_pct": 61.58524916785514,
+            "max_sample_interval_quota_utilization_pct": 76.14468422582978,
+            "memory_peak_sampled_bytes": 7968837632,
+            "memory_counter_peak_bytes": 8603140096,
+            "swap_peak_sampled_bytes": 0,
+            "oom_delta": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            },
+            "app_cpu_seconds_estimate": 97.02489860897664,
+            "app_counter_valid": true,
+            "app_pids_stable": true,
+            "app_process_count_max": 2,
+            "app_whole_target_cpu_pct": 20.213520543536802,
+            "pg_cpu_seconds_estimate": null,
+            "pg_counter_valid": false,
+            "pg_pids_stable": false,
+            "pg_process_count_max": 18,
+            "pg_whole_target_cpu_pct": null
+          },
+          "load_monitor": {
+            "checks": [
+              {
+                "check": "monitor_has_samples",
+                "pass": true
+              },
+              {
+                "check": "strict_wall_and_monotonic_order",
+                "pass": true
+              },
+              {
+                "check": "full_measurement_window_bracketed",
+                "pass": true,
+                "detail": {
+                  "first_ms": 1792750982338.0374,
+                  "start_ms": 1792751047317.0,
+                  "last_ms": 1792751129122.8267,
+                  "end_ms": 1792751107317.0
+                }
+              },
+              {
+                "check": "max_sample_gap_at_most_3s",
+                "pass": true,
+                "detail": 1.218567584
+              },
+              {
+                "check": "cgroup_budget_continuous",
+                "pass": true
+              },
+              {
+                "check": "total_cpu_counter_nondecreasing",
+                "pass": true
+              },
+              {
+                "check": "no_measurement_oom",
+                "pass": true,
+                "detail": {
+                  "oom": 0,
+                  "oom_kill": 0,
+                  "oom_group_kill": 0
+                }
+              },
+              {
+                "check": "wall_to_monotonic_drift_below_100ms",
+                "pass": true,
+                "detail": 0.0008924007415771484
+              }
+            ],
+            "warnings": [],
+            "eligible": true,
+            "samples": 62,
+            "max_gap_s": 1.218567584,
+            "window_s": 60.0,
+            "cgroup_cpu_seconds_estimate": 215.24402910852484,
+            "cgroup_quota_utilization_pct": 44.84250606427601,
+            "max_sample_interval_quota_utilization_pct": 86.95490954021736,
+            "memory_peak_sampled_bytes": 5954170880,
+            "memory_counter_peak_bytes": 5954945024,
+            "swap_peak_sampled_bytes": 0,
+            "oom_delta": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            },
+            "app_cpu_seconds_estimate": 0.0,
+            "app_counter_valid": true,
+            "app_pids_stable": true,
+            "app_process_count_max": 0,
+            "app_whole_target_cpu_pct": 0.0,
+            "pg_cpu_seconds_estimate": 0.0,
+            "pg_counter_valid": true,
+            "pg_pids_stable": true,
+            "pg_process_count_max": 0,
+            "pg_whole_target_cpu_pct": 0.0
+          },
+          "declared_load_memory_bytes": 8589934592,
+          "declared_load_cpus": 8,
+          "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+          "classification_scope": "independent_local",
+          "native_qualified": false,
+          "native_whole_vm_CPU_flagged_shards": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "native_whole_vm_CPU_flag_count": 8,
+          "target_oom_delta": {
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "post_load_healthy": true,
+          "zero_measured_errors": false,
+          "observed_timeline_errors": 26578,
+          "conformance_197_full_seed_proven": true,
+          "cpu_ms_per_successful_request_sampled_estimate": 0.20065202821646172,
+          "local_whole_vm_CPU_scope_exception": false,
+          "all_classifications": [
+            "INVALID_GENERATOR",
+            "INVALID_EVIDENCE",
+            "FAIL_SLO"
+          ],
+          "local_qualified": false
+        }
+      ],
+      "capacity_users": null,
+      "highest_passing_probe_users": null,
+      "highest_passing_hold_users": null,
+      "source_revision": "PR7 dc7c249229bd43d8752e7ffb28ce81ee4401d8ae; canonical merged submission tree f542997eb07942e25fa44b7f288c8e1d508c176c; all66 canonical files verified byte-identical",
+      "binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+      "conformance_197_full_seed_proven": true,
+      "status": "INVALID_GENERATOR"
+    },
+    {
+      "case": "goose32",
+      "checks": [
+        {
+          "check": "source_archive_and_manifest_frozen",
+          "pass": true
+        },
+        {
+          "check": "exact_predeclared_case_and_binary",
+          "pass": true
+        },
+        {
+          "check": "owned_app_stopped",
+          "pass": true
+        },
+        {
+          "check": "owned_fresh_database_dropped",
+          "pass": true
+        },
+        {
+          "check": "01-warmup-10000:predeclared_search_decision",
+          "pass": true
+        },
+        {
+          "check": "02-probe-160000:predeclared_search_decision",
+          "pass": true
+        },
+        {
+          "check": "all_started_phases_preserved_once",
+          "pass": true
+        }
+      ],
+      "phases": [
+        {
+          "id": "01-warmup-10000",
+          "case": "goose32",
+          "stage": "warmup",
+          "users": 10000,
+          "run_id": "capacity_20261023t101818_7e4229-warmup-10000",
+          "database": "mc_pair_20261023_101818_7e4229_2",
+          "session_id": "goose32",
+          "recorded_classification": "PASS",
+          "checks": [
+            {
+              "check": "complete_saved_phase",
+              "pass": true,
+              "detail": []
+            },
+            {
+              "check": "predeclared_balanced_shards_and_limits",
+              "pass": true
+            },
+            {
+              "check": "single_database_and_continuous_app_session",
+              "pass": true
+            },
+            {
+              "check": "declared_binary_env_and_common_runtime",
+              "pass": true
+            },
+            {
+              "check": "before:fixed_target_budget",
+              "pass": true
+            },
+            {
+              "check": "before:official_sources_and_pg_settings_fixed",
+              "pass": true
+            },
+            {
+              "check": "after:fixed_target_budget",
+              "pass": true
+            },
+            {
+              "check": "after:official_sources_and_pg_settings_fixed",
+              "pass": true
+            },
+            {
+              "check": "startup:normal_expected_uid",
+              "pass": true
+            },
+            {
+              "check": "startup:exactly_one_expected_process",
+              "pass": true
+            },
+            {
+              "check": "startup:raw_all_four_uids_match_normal_user",
+              "pass": true
+            },
+            {
+              "check": "startup:raw_actual_pid_matches",
+              "pass": true
+            },
+            {
+              "check": "startup:actual_process_identity_stable",
+              "pass": true
+            },
+            {
+              "check": "startup:raw_soft_hard_nofile_at_least_200000",
+              "pass": true,
+              "detail": [
+                200000,
+                200000
+              ]
+            },
+            {
+              "check": "startup:helper_validity_agrees_with_raw",
+              "pass": true
+            },
+            {
+              "check": "before:normal_expected_uid",
+              "pass": true
+            },
+            {
+              "check": "before:exactly_one_expected_process",
+              "pass": true
+            },
+            {
+              "check": "before:raw_all_four_uids_match_normal_user",
+              "pass": true
+            },
+            {
+              "check": "before:raw_actual_pid_matches",
+              "pass": true
+            },
+            {
+              "check": "before:actual_process_identity_stable",
+              "pass": true
+            },
+            {
+              "check": "before:raw_soft_hard_nofile_at_least_200000",
+              "pass": true,
+              "detail": [
+                200000,
+                200000
+              ]
+            },
+            {
+              "check": "before:helper_validity_agrees_with_raw",
+              "pass": true
+            },
+            {
+              "check": "after:normal_expected_uid",
+              "pass": true
+            },
+            {
+              "check": "after:exactly_one_expected_process",
+              "pass": true
+            },
+            {
+              "check": "after:raw_all_four_uids_match_normal_user",
+              "pass": true
+            },
+            {
+              "check": "after:raw_actual_pid_matches",
+              "pass": true
+            },
+            {
+              "check": "after:actual_process_identity_stable",
+              "pass": true
+            },
+            {
+              "check": "after:raw_soft_hard_nofile_at_least_200000",
+              "pass": true,
+              "detail": [
+                200000,
+                200000
+              ]
+            },
+            {
+              "check": "after:helper_validity_agrees_with_raw",
+              "pass": true
+            },
+            {
+              "check": "app_healthy_before_load",
+              "pass": true
+            },
+            {
+              "check": "after_health_witness_present",
+              "pass": true
+            },
+            {
+              "check": "all_native_processes_exited_normally",
+              "pass": true
+            },
+            {
+              "check": "synchronized_raw_windows",
+              "pass": true
+            },
+            {
+              "check": "native_metadata_exact_stage_protocol",
+              "pass": true
+            },
+            {
+              "check": "one_saved_command_per_shard",
+              "pass": true
+            },
+            {
+              "check": "shard0:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard0:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "all_histogram_configurations_match",
+              "pass": true
+            },
+            {
+              "check": "merged_histogram_equals_exact_bin_sum",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p50_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p95_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p99_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:max_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_count_equals_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "merged_statuses_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "merged_errors_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "all_endpoints_retained",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "merged_all_shards_and_users",
+              "pass": true
+            },
+            {
+              "check": "native_verdict_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard0:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard0:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard0:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard0:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "native_generator_reasons_reproduced_exactly",
+              "pass": true
+            },
+            {
+              "check": "request_rate_and_errors_reproduced",
+              "pass": true
+            },
+            {
+              "check": "target:entire_phase_clock_drift_under100ms",
+              "pass": true,
+              "detail": 0.0009446144104003906
+            },
+            {
+              "check": "load:entire_phase_clock_drift_under100ms",
+              "pass": true,
+              "detail": 0.0009458065032958984
+            }
+          ],
+          "classification": "PASS",
+          "eligible": true,
+          "valid_server_failure": false,
+          "overall": {
+            "count": 316316,
+            "rps": 2635.9666666666667,
+            "p50_ms": 5.251,
+            "p90_ms": 6.475,
+            "p95_ms": 6.747,
+            "p99_ms": 7.435,
+            "max_ms": 327.423,
+            "mean_ms": 4.5242279619115155,
+            "errors": 0,
+            "error_rate": 0,
+            "statuses": {
+              "200": 310496,
+              "201": 5676,
+              "204": 144
+            }
+          },
+          "native_verdict": {
+            "pass": true,
+            "lg_limited": false
+          },
+          "target_monitor": {
+            "checks": [
+              {
+                "check": "monitor_has_samples",
+                "pass": true
+              },
+              {
+                "check": "strict_wall_and_monotonic_order",
+                "pass": true
+              },
+              {
+                "check": "full_measurement_window_bracketed",
+                "pass": true,
+                "detail": {
+                  "first_ms": 1792751213574.8406,
+                  "start_ms": 1792751278603.0,
+                  "last_ms": 1792751413759.1455,
+                  "end_ms": 1792751398603.0
+                }
+              },
+              {
+                "check": "max_sample_gap_at_most_3s",
+                "pass": true,
+                "detail": 1.002742875
+              },
+              {
+                "check": "cgroup_budget_continuous",
+                "pass": true
+              },
+              {
+                "check": "total_cpu_counter_nondecreasing",
+                "pass": true
+              },
+              {
+                "check": "no_measurement_oom",
+                "pass": true,
+                "detail": {
+                  "oom": 0,
+                  "oom_kill": 0,
+                  "oom_group_kill": 0
+                }
+              },
+              {
+                "check": "wall_to_monotonic_drift_below_100ms",
+                "pass": true,
+                "detail": 0.0004124641418457031
+              }
+            ],
+            "warnings": [],
+            "eligible": true,
+            "samples": 122,
+            "max_gap_s": 1.002742875,
+            "window_s": 120.0,
+            "cgroup_cpu_seconds_estimate": 61.31199915286379,
+            "cgroup_quota_utilization_pct": 6.386666578423311,
+            "max_sample_interval_quota_utilization_pct": 8.067478587275634,
+            "memory_peak_sampled_bytes": 7842205696,
+            "memory_counter_peak_bytes": 8603140096,
+            "swap_peak_sampled_bytes": 0,
+            "oom_delta": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            },
+            "app_cpu_seconds_estimate": 22.323872501578066,
+            "app_counter_valid": true,
+            "app_pids_stable": true,
+            "app_process_count_max": 2,
+            "app_whole_target_cpu_pct": 2.3254033855810485,
+            "pg_cpu_seconds_estimate": 38.327541071222534,
+            "pg_counter_valid": true,
+            "pg_pids_stable": true,
+            "pg_process_count_max": 17,
+            "pg_whole_target_cpu_pct": 3.992452194919014
+          },
+          "load_monitor": {
+            "checks": [
+              {
+                "check": "monitor_has_samples",
+                "pass": true
+              },
+              {
+                "check": "strict_wall_and_monotonic_order",
+                "pass": true
+              },
+              {
+                "check": "full_measurement_window_bracketed",
+                "pass": true,
+                "detail": {
+                  "first_ms": 1792751213618.5005,
+                  "start_ms": 1792751278603.0,
+                  "last_ms": 1792751413759.5923,
+                  "end_ms": 1792751398603.0
+                }
+              },
+              {
+                "check": "max_sample_gap_at_most_3s",
+                "pass": true,
+                "detail": 1.004206167
+              },
+              {
+                "check": "cgroup_budget_continuous",
+                "pass": true
+              },
+              {
+                "check": "total_cpu_counter_nondecreasing",
+                "pass": true
+              },
+              {
+                "check": "no_measurement_oom",
+                "pass": true,
+                "detail": {
+                  "oom": 0,
+                  "oom_kill": 0,
+                  "oom_group_kill": 0
+                }
+              },
+              {
+                "check": "wall_to_monotonic_drift_below_100ms",
+                "pass": true,
+                "detail": 0.0004124641418457031
+              }
+            ],
+            "warnings": [],
+            "eligible": true,
+            "samples": 122,
+            "max_gap_s": 1.004206167,
+            "window_s": 120.0,
+            "cgroup_cpu_seconds_estimate": 14.129772460283334,
+            "cgroup_quota_utilization_pct": 1.4718512979461806,
+            "max_sample_interval_quota_utilization_pct": 2.076287529977697,
+            "memory_peak_sampled_bytes": 261963776,
+            "memory_counter_peak_bytes": 5976756224,
+            "swap_peak_sampled_bytes": 0,
+            "oom_delta": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            },
+            "app_cpu_seconds_estimate": 0.0,
+            "app_counter_valid": true,
+            "app_pids_stable": true,
+            "app_process_count_max": 0,
+            "app_whole_target_cpu_pct": 0.0,
+            "pg_cpu_seconds_estimate": 0.0,
+            "pg_counter_valid": true,
+            "pg_pids_stable": true,
+            "pg_process_count_max": 0,
+            "pg_whole_target_cpu_pct": 0.0
+          },
+          "declared_load_memory_bytes": 8589934592,
+          "declared_load_cpus": 8,
+          "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+          "classification_scope": "independent_local",
+          "native_qualified": true,
+          "native_whole_vm_CPU_flagged_shards": [],
+          "native_whole_vm_CPU_flag_count": 0,
+          "target_oom_delta": {
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "post_load_healthy": true,
+          "zero_measured_errors": true,
+          "observed_timeline_errors": 0,
+          "conformance_197_full_seed_proven": true,
+          "cpu_ms_per_successful_request_sampled_estimate": 0.1938314822925928,
+          "local_whole_vm_CPU_scope_exception": false,
+          "all_classifications": [
+            "PASS"
+          ],
+          "local_qualified": true
+        },
+        {
+          "id": "02-probe-160000",
+          "case": "goose32",
+          "stage": "probe",
+          "users": 160000,
+          "run_id": "capacity_20261023t101818_7e4229-probe-160000",
+          "database": "mc_pair_20261023_101818_7e4229_2",
+          "session_id": "goose32",
+          "recorded_classification": "INVALID_GENERATOR",
+          "checks": [
+            {
+              "check": "complete_saved_phase",
+              "pass": true,
+              "detail": []
+            },
+            {
+              "check": "predeclared_balanced_shards_and_limits",
+              "pass": true
+            },
+            {
+              "check": "single_database_and_continuous_app_session",
+              "pass": true
+            },
+            {
+              "check": "declared_binary_env_and_common_runtime",
+              "pass": true
+            },
+            {
+              "check": "before:fixed_target_budget",
+              "pass": true
+            },
+            {
+              "check": "before:official_sources_and_pg_settings_fixed",
+              "pass": true
+            },
+            {
+              "check": "after:fixed_target_budget",
+              "pass": true
+            },
+            {
+              "check": "after:official_sources_and_pg_settings_fixed",
+              "pass": true
+            },
+            {
+              "check": "startup:normal_expected_uid",
+              "pass": true
+            },
+            {
+              "check": "startup:exactly_one_expected_process",
+              "pass": true
+            },
+            {
+              "check": "startup:raw_all_four_uids_match_normal_user",
+              "pass": true
+            },
+            {
+              "check": "startup:raw_actual_pid_matches",
+              "pass": true
+            },
+            {
+              "check": "startup:actual_process_identity_stable",
+              "pass": true
+            },
+            {
+              "check": "startup:raw_soft_hard_nofile_at_least_200000",
+              "pass": true,
+              "detail": [
+                200000,
+                200000
+              ]
+            },
+            {
+              "check": "startup:helper_validity_agrees_with_raw",
+              "pass": true
+            },
+            {
+              "check": "before:normal_expected_uid",
+              "pass": true
+            },
+            {
+              "check": "before:exactly_one_expected_process",
+              "pass": true
+            },
+            {
+              "check": "before:raw_all_four_uids_match_normal_user",
+              "pass": true
+            },
+            {
+              "check": "before:raw_actual_pid_matches",
+              "pass": true
+            },
+            {
+              "check": "before:actual_process_identity_stable",
+              "pass": true
+            },
+            {
+              "check": "before:raw_soft_hard_nofile_at_least_200000",
+              "pass": true,
+              "detail": [
+                200000,
+                200000
+              ]
+            },
+            {
+              "check": "before:helper_validity_agrees_with_raw",
+              "pass": true
+            },
+            {
+              "check": "after:normal_expected_uid",
+              "pass": true
+            },
+            {
+              "check": "after:exactly_one_expected_process",
+              "pass": true
+            },
+            {
+              "check": "after:raw_all_four_uids_match_normal_user",
+              "pass": true
+            },
+            {
+              "check": "after:raw_actual_pid_matches",
+              "pass": true
+            },
+            {
+              "check": "after:actual_process_identity_stable",
+              "pass": true
+            },
+            {
+              "check": "after:raw_soft_hard_nofile_at_least_200000",
+              "pass": true,
+              "detail": [
+                200000,
+                200000
+              ]
+            },
+            {
+              "check": "after:helper_validity_agrees_with_raw",
+              "pass": true
+            },
+            {
+              "check": "app_healthy_before_load",
+              "pass": true
+            },
+            {
+              "check": "after_health_witness_present",
+              "pass": true
+            },
+            {
+              "check": "all_native_processes_exited_normally",
+              "pass": true
+            },
+            {
+              "check": "synchronized_raw_windows",
+              "pass": true
+            },
+            {
+              "check": "native_metadata_exact_stage_protocol",
+              "pass": true
+            },
+            {
+              "check": "one_saved_command_per_shard",
+              "pass": true
+            },
+            {
+              "check": "shard0:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard0:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard0:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "shard1:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard1:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard1:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "shard2:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard2:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard2:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "shard3:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard3:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard3:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "shard4:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard4:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard4:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "shard5:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard5:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard5:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "shard6:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard6:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard6:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "shard7:exact_users_ids_destination",
+              "pass": true
+            },
+            {
+              "check": "shard7:raw_command_agrees",
+              "pass": true
+            },
+            {
+              "check": "shard7:at_least99pct_vus_active",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:0:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:1:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:2:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:3:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:4:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:5:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:6:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "raw_hist_count:7:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "all_histogram_configurations_match",
+              "pass": true
+            },
+            {
+              "check": "merged_histogram_equals_exact_bin_sum",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p50_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p95_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:p99_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_quantile_from_exact_histogram:max_ms",
+              "pass": true
+            },
+            {
+              "check": "merged_count_equals_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "merged_statuses_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "merged_errors_equal_raw_counts",
+              "pass": true
+            },
+            {
+              "check": "all_endpoints_retained",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/articles/:slug/comments/:id",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:DELETE /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles/feed",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?author",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?favorited",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/articles?tag",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/profiles/:username",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/tags",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:GET /api/user",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles/:slug/comments",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/articles/:slug/favorite",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/profiles/:username/follow",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/users",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:POST /api/users/login",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:PUT /api/articles/:slug",
+              "pass": true
+            },
+            {
+              "check": "endpoint_count:PUT /api/user",
+              "pass": true
+            },
+            {
+              "check": "merged_all_shards_and_users",
+              "pass": true
+            },
+            {
+              "check": "native_verdict_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard0:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard0:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard0:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard0:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard1:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard1:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard1:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard1:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard2:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard2:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard2:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard2:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard3:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard3:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard3:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard3:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard4:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard4:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard4:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard4:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard5:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard5:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard5:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard5:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard6:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard6:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard6:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard6:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "shard7:native_box_CPU_reproduced_from_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard7:native_timing_summary_reproduced",
+              "pass": true
+            },
+            {
+              "check": "shard7:complete_measurement_timeline",
+              "pass": true
+            },
+            {
+              "check": "shard7:merged_generator_summary_matches_raw",
+              "pass": true
+            },
+            {
+              "check": "native_generator_reasons_reproduced_exactly",
+              "pass": true
+            },
+            {
+              "check": "request_rate_and_errors_reproduced",
+              "pass": true
+            },
+            {
+              "check": "target:entire_phase_clock_drift_under100ms",
+              "pass": true,
+              "detail": 0.002863168716430664
+            },
+            {
+              "check": "load:entire_phase_clock_drift_under100ms",
+              "pass": true,
+              "detail": 0.0028438568115234375
+            }
+          ],
+          "classification": "INVALID_GENERATOR",
+          "eligible": false,
+          "valid_server_failure": false,
+          "overall": {
+            "count": 2482505,
+            "rps": 41375.083333333336,
+            "p50_ms": 4.795,
+            "p90_ms": 393.727,
+            "p95_ms": 755.199,
+            "p99_ms": 1588.223,
+            "max_ms": 6541.311,
+            "mean_ms": 113.3450495809676,
+            "errors": 0,
+            "error_rate": 0,
+            "statuses": {
+              "200": 2437993,
+              "201": 43829,
+              "204": 683
+            }
+          },
+          "native_verdict": {
+            "pass": false,
+            "fail_reasons": [
+              "p95 755 ms >= 500",
+              "p99 1588 ms >= 1000"
+            ],
+            "lg_limited": true,
+            "lg_reasons": [
+              "box 0 CPU 82% > 75%",
+              "box 0 fell behind: sampler tick 1436 ms late",
+              "box 1 CPU 82% > 75%",
+              "box 2 CPU 82% > 75%",
+              "box 3 CPU 82% > 75%",
+              "box 3 fell behind: 6 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "box 4 CPU 82% > 75%",
+              "box 4 fell behind: 4 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 1439 ms late",
+              "box 5 CPU 82% > 75%",
+              "box 6 CPU 82% > 75%",
+              "box 7 CPU 82% > 75%"
+            ]
+          },
+          "target_monitor": {
+            "checks": [
+              {
+                "check": "monitor_has_samples",
+                "pass": true
+              },
+              {
+                "check": "strict_wall_and_monotonic_order",
+                "pass": true
+              },
+              {
+                "check": "full_measurement_window_bracketed",
+                "pass": true,
+                "detail": {
+                  "first_ms": 1792751482422.7996,
+                  "start_ms": 1792751547451.0,
+                  "last_ms": 1792751623667.6816,
+                  "end_ms": 1792751607451.0
+                }
+              },
+              {
+                "check": "max_sample_gap_at_most_3s",
+                "pass": true,
+                "detail": 1.005337459
+              },
+              {
+                "check": "cgroup_budget_continuous",
+                "pass": true
+              },
+              {
+                "check": "total_cpu_counter_nondecreasing",
+                "pass": true
+              },
+              {
+                "check": "no_measurement_oom",
+                "pass": true,
+                "detail": {
+                  "oom": 0,
+                  "oom_kill": 0,
+                  "oom_group_kill": 0
+                }
+              },
+              {
+                "check": "wall_to_monotonic_drift_below_100ms",
+                "pass": true,
+                "detail": 0.0004668235778808594
+              }
+            ],
+            "warnings": [
+              "pg: live-PID CPU sum changed population or decreased; component CPU withheld"
+            ],
+            "eligible": true,
+            "samples": 62,
+            "max_gap_s": 1.005337459,
+            "window_s": 60.0,
+            "cgroup_cpu_seconds_estimate": 337.50469858702127,
+            "cgroup_quota_utilization_pct": 70.3134788722961,
+            "max_sample_interval_quota_utilization_pct": 83.7812569333798,
+            "memory_peak_sampled_bytes": 9028390912,
+            "memory_counter_peak_bytes": 9054949376,
+            "swap_peak_sampled_bytes": 0,
+            "oom_delta": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            },
+            "app_cpu_seconds_estimate": 79.22791418674602,
+            "app_counter_valid": true,
+            "app_pids_stable": true,
+            "app_process_count_max": 2,
+            "app_whole_target_cpu_pct": 16.505815455572087,
+            "pg_cpu_seconds_estimate": null,
+            "pg_counter_valid": false,
+            "pg_pids_stable": false,
+            "pg_process_count_max": 18,
+            "pg_whole_target_cpu_pct": null
+          },
+          "load_monitor": {
+            "checks": [
+              {
+                "check": "monitor_has_samples",
+                "pass": true
+              },
+              {
+                "check": "strict_wall_and_monotonic_order",
+                "pass": true
+              },
+              {
+                "check": "full_measurement_window_bracketed",
+                "pass": true,
+                "detail": {
+                  "first_ms": 1792751482466.631,
+                  "start_ms": 1792751547451.0,
+                  "last_ms": 1792751623751.5234,
+                  "end_ms": 1792751607451.0
+                }
+              },
+              {
+                "check": "max_sample_gap_at_most_3s",
+                "pass": true,
+                "detail": 1.035077334
+              },
+              {
+                "check": "cgroup_budget_continuous",
+                "pass": true
+              },
+              {
+                "check": "total_cpu_counter_nondecreasing",
+                "pass": true
+              },
+              {
+                "check": "no_measurement_oom",
+                "pass": true,
+                "detail": {
+                  "oom": 0,
+                  "oom_kill": 0,
+                  "oom_group_kill": 0
+                }
+              },
+              {
+                "check": "wall_to_monotonic_drift_below_100ms",
+                "pass": true,
+                "detail": 0.0004534721374511719
+              }
+            ],
+            "warnings": [],
+            "eligible": true,
+            "samples": 62,
+            "max_gap_s": 1.035077334,
+            "window_s": 60.0,
+            "cgroup_cpu_seconds_estimate": 146.5635094865794,
+            "cgroup_quota_utilization_pct": 30.53406447637071,
+            "max_sample_interval_quota_utilization_pct": 79.82633897981424,
+            "memory_peak_sampled_bytes": 4774719488,
+            "memory_counter_peak_bytes": 5976756224,
+            "swap_peak_sampled_bytes": 0,
+            "oom_delta": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            },
+            "app_cpu_seconds_estimate": 0.0,
+            "app_counter_valid": true,
+            "app_pids_stable": true,
+            "app_process_count_max": 0,
+            "app_whole_target_cpu_pct": 0.0,
+            "pg_cpu_seconds_estimate": 0.0,
+            "pg_counter_valid": true,
+            "pg_pids_stable": true,
+            "pg_process_count_max": 0,
+            "pg_whole_target_cpu_pct": 0.0
+          },
+          "declared_load_memory_bytes": 8589934592,
+          "declared_load_cpus": 8,
+          "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+          "classification_scope": "independent_local",
+          "native_qualified": false,
+          "native_whole_vm_CPU_flagged_shards": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "native_whole_vm_CPU_flag_count": 8,
+          "target_oom_delta": {
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "post_load_healthy": true,
+          "zero_measured_errors": true,
+          "observed_timeline_errors": 12,
+          "conformance_197_full_seed_proven": true,
+          "cpu_ms_per_successful_request_sampled_estimate": 0.13595328049168934,
+          "local_whole_vm_CPU_scope_exception": false,
+          "all_classifications": [
+            "INVALID_GENERATOR",
+            "FAIL_SLO"
+          ],
+          "local_qualified": false
+        }
+      ],
+      "capacity_users": null,
+      "highest_passing_probe_users": null,
+      "highest_passing_hold_users": null,
+      "source_revision": "23a14e8cbf32113509cd0ad941320ef947508981",
+      "binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+      "conformance_197_full_seed_proven": true,
+      "status": "INVALID_GENERATOR"
+    }
+  ],
+  "official_rank_proven": false,
+  "all_competitors_beaten": false,
+  "scope": "Local shared ARM64 Mac/Docker capacity search; no official x86 rank or all-competitor claim.",
+  "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+  "declared_resources": {
+    "target_cpus": 8,
+    "target_memory_bytes": 17179869184,
+    "load_cpus": 8,
+    "load_memory_bytes": 8589934592
+  },
+  "study_complete": true,
+  "status": "AUDITED_COMPLETED_LOCAL_SEARCH",
+  "interpretation": "Only a qualified300s hold yields a local held-user score. Ceiling/budget bounds are censored lower bounds, not proved maxima. Invalid generator/clock phases never become server failures or capacity scores. Native SLO permits<1% measured errors; zero errors and recorded ramp/tail errors are separate. This ARM Mac study cannot establish the official x86 leaderboard rank. Preregistered local qualification substitutes measured external-client cgroup CPU\u226475% for the native whole-VM /proc/stat CPU flag only. All native timing/active-user gates remain. Native verdicts are preserved separately; a local score may remain native LG-limited and is not an official/native-qualified score.",
+  "created_utc": "2026-10-23T15:36:53Z",
+  "auditor_sha256": {
+    "aggregate.py": "017d50cc0265fd8804d7abfcd2bd7f514a1fb257d586f6f36172b607d1281558",
+    "evidence.py": "2b3f5338b8053b5eba3b01135dea76f595e575daa85fe421009a1c2795f04dca",
+    "primitives.py": "8908b204b243ad5ad20e725d3284d115b5f9ccc8719931cd5018fcaf73104423"
+  },
+  "raw_input_sha256": {
+    "sessions.json": "0de9aa81bdab5dddb44cedcb004e44df616c639fff94a4e2472b2181529c0d9b",
+    "target-final-inspect.json": "e9c8b47a028d6d9b7f0dd6c185764f8f1b07efa9d5854eb9e51cb0f080fdec8f",
+    "plan.json": "f27b3fe7021bd2c38edcd795c7b4ca19a044a5936e5cbeb22b31a309c70b3530",
+    "target-inspect.json": "e9c8b47a028d6d9b7f0dd6c185764f8f1b07efa9d5854eb9e51cb0f080fdec8f",
+    "native-sha256.txt": "8372dc1d757c1522160eeaeecad40465afde4c361c2573207734c0f22d58f2b9",
+    "target-initial.json": "c48aca2434f0f2a258a19ed2a2671c113af52131b80bd823adc252fd5dcce8b7",
+    "controller-result.json": "eb57e52af0e18037ae92fe24c0aff5ca91758c94edffc76f171c2af0c40bd0bb",
+    "load-final-inspect.json": "0bb60112c4d3b4d203a435ea349157041ba81b67ee70d6cabc47f5c8e5f9e2e6",
+    "final-resource-check.json": "2a6fae0f9e785f39feff3f19ea14c5af57ae02c594477f5ee788645d9e50a53f",
+    "events.jsonl": "a8545bcc13c8f0cef722ca479bee9677015e7b7a879fbc37acaae01de363fa64",
+    "plan.sha256": "ed4a92fc2ae5488795c77d205c9d909c9e11633674115e36660322da22e42145",
+    "load-inspect.json": "0f1fe445c84f1c27e223fd1128436c0ccc266c6338ebeaa978b5eb8cfe0720e7",
+    "runuser-prlimit-probe.json": "9f7537ffad952a40b2f92b03553679f9ec14bb730623e5872f48d0ac339832a2",
+    "tool-sha256.json": "ed5ebd80750e41a892e8be0492a706c6297b51e7ede8e6eae7fc2982007b59ce",
+    "host-memory.jsonl": "f16e5cea81ba1a5e56c6b0389b270612198b192e532d99095d08f157b6f49ffe",
+    "tools/target_helper.py": "a079f25c5c1381392c4824267722c8ba74214ca6f73c98f4a6edfe6ec20b0581",
+    "tools/monitor.py": "c33fa617d1758269adb44d71372b457257c92e1ec877d23a7673a688f590a4b4",
+    "tools/capacity_controller.py": "144ef5c5e963427bb424193777220dddc51238635fcfdf95ca801aed54040528",
+    "tools/search_policy.py": "49a427b137ec0893db213b229cc301a06903fac95ba2bfef2c8bbc7e8ae1ae19",
+    "cases/goose32/app-process-limits.txt": "0924f8a4ad25b5b45c9a0eb88bdc44d663d981f450855dd83372543ee801564f",
+    "cases/goose32/app-process-status.txt": "ca3811ccfc958794a44493cbebc83e67181acd6e73c96d313dc145fde97fae5b",
+    "cases/goose32/session.json": "6b1b2df3df8c4908940d95e9f277be3a25c595f6a7c0b6ba80252561d0de1f92",
+    "cases/goose32/app.json": "2f02a54af4bf2f35622df2ed809d3216642e6b64f97edafd0e10bbceb0073cfb",
+    "cases/goose32/before-session.json": "d38910dd876a5ffb68f5057e252cc122841e1d8875f264f4fb96c1cf5747237d",
+    "cases/goose32/after-session.json": "cd8ec4ce7e458ca3222cc73cbd618639158c8459d665aae55b2f23bf8ba4d7f8",
+    "cases/goose32/stopped.json": "5f3218d93ac51ad33766c13124c7ae865640080f07b84227cfa2416f52d669e4",
+    "cases/goose32/database.json": "2834f5767bb400dadd6cad8e0bba8c84d13241483ecf4180266e94d948d88541",
+    "cases/goose32/conformance.log": "5134e8354b07c4b7a7105dd870aeafa45cbaeab5274363273b402b4013216d36",
+    "cases/goose32/server.log": "8af2e9af8579d724f984f8dcc4962ee27e0fab3275fda8ddcdba1b11e4c9e280",
+    "cases/goose32/case.json": "3e1964417927e5d9c2901bca9bfcc40ea07c8c8b11c4e1c1f7e1de637378739a",
+    "cases/goose32/dropped.json": "6d260810cd965e506e08a2c8d1563132728aeafbabb441f44fc4e770fa0cf710",
+    "cases/rust7/app-process-limits.txt": "0924f8a4ad25b5b45c9a0eb88bdc44d663d981f450855dd83372543ee801564f",
+    "cases/rust7/app-process-status.txt": "263740a05b5c9002a7e92c902fbc23995e6ba1bebdfcbd6f62a295a3e24ee299",
+    "cases/rust7/session.json": "5f0bbd7455ce14af26e11bbc1309894d8acea36b300bb80f2552500aad221704",
+    "cases/rust7/app.json": "4e75c341386f9295ea3d44fa4231fe4267ec26ce4004249d048ea908352abfa7",
+    "cases/rust7/before-session.json": "b44f618c0a7158a1360e0d94d20ad96dc1f445bb6edb974268269245c31580e1",
+    "cases/rust7/after-session.json": "af911904d96d352762400527e658d95f8d5bd548775bf51c223b4c5dc867e95f",
+    "cases/rust7/stopped.json": "e2b6528ca2c0591667cf02023fa96bafc0de14d8d48195035caf02e0a266575c",
+    "cases/rust7/database.json": "07679dfb3ee5843cb3b8a902e53d73ec7d353164ff768da9a30c8d740bd3b2d4",
+    "cases/rust7/conformance.log": "cf6dfe613fabf1936d051d8b95e3705a4f1c097801ae2be886f6c5f5aa9eba95",
+    "cases/rust7/server.log": "bae2b8fb216e8d327ddc88c628c4dcdd67cfff326a616062c62c19e2da079d48",
+    "cases/rust7/case.json": "1da134a3afb5314551dfcf5b91242cc0c3855c57dab4b70957287f925f418976",
+    "cases/rust7/dropped.json": "77d9d7aa44cc45a4919ab9ffb7426861a05aa0c0aad5ee1416ed47336851ce4f",
+    "cases/rust7/frozen/app": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+    "cases/rust7/frozen/metadata.json": "9656f108af7992def42ce0080d0e86815f2c028bae89e22afb4910e6a18ed858",
+    "cases/rust7/phases/02-probe-160000/box5.json": "8e868c145a752cd202c59c12d8031561f84aa4f0ac8c33f20c583d730434cbbe",
+    "cases/rust7/phases/02-probe-160000/merged.json": "ac25f123f1038a622e8ec2432bf949050243bde16a49ca28c3cd95d612b0c428",
+    "cases/rust7/phases/02-probe-160000/assessment.json": "f517718713ab2e202cff89d034cadbdbdba1b48ee32eee2899d161acff9135a8",
+    "cases/rust7/phases/02-probe-160000/before-load.json": "2fa49adfbde5c4cc1bdffa1dd7ec6be226decb0844b138ebf33babf5a1dbd660",
+    "cases/rust7/phases/02-probe-160000/box4.json": "06e7d29f057b47e039b6b7acc63dc8f0807519f746504e619b90c6622238148c",
+    "cases/rust7/phases/02-probe-160000/box3.json": "0b5ef807a9a0e2bab3470e3ff9c275512d9b0b24d694e9552c0eb8c508a01059",
+    "cases/rust7/phases/02-probe-160000/target-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/rust7/phases/02-probe-160000/load-monitor.jsonl": "98bd4e3b97d59b7a402acdcd81d0941bc6e50ca261b00f264a1eada757aad379",
+    "cases/rust7/phases/02-probe-160000/box2.json": "46d78dd3cc19160a379cfef55b56e62034fd4f6a73a1686f15011d47e086620a",
+    "cases/rust7/phases/02-probe-160000/merged.txt": "79ab919283866a9603f1b2bb94dc0b8da8a01203c3eb297436ebe58e630e8132",
+    "cases/rust7/phases/02-probe-160000/after-load.json": "e5c59fab14bfd7ba9a4d4e984a077a23d8cfd4729332f15d13893c8cf523a5d3",
+    "cases/rust7/phases/02-probe-160000/box1.json": "6d6ae2332db1202a140d5894f917512acd4796c417a0f66760d095aef505dc72",
+    "cases/rust7/phases/02-probe-160000/box0.json": "6275ccfdf8cc82a451c567e73a121962a9256e653d44209ddef3e8e136ba5b70",
+    "cases/rust7/phases/02-probe-160000/load-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/rust7/phases/02-probe-160000/load-commands.json": "74032e1490a7f2fdee012c0ab828efde5e3e62d46bcdd4a936c5e408485a4217",
+    "cases/rust7/phases/02-probe-160000/box6.log": "08af19e9b613b7b25a566447fdf3c17da21892a779992e648f0600fafff82199",
+    "cases/rust7/phases/02-probe-160000/box7.log": "42e29e223900944f2f2dfefeed8888a0aa1d4ff83592006a220f54c1c9d77a82",
+    "cases/rust7/phases/02-probe-160000/box7.json": "809388faf773178cf9a1eb777cdd275681cdb0b594b29dfe71c872ae8a590a7f",
+    "cases/rust7/phases/02-probe-160000/box5.log": "d1b6e85654779cc1695b2c021238aec5ea2818b884a0c5d84699e7b12a1b3914",
+    "cases/rust7/phases/02-probe-160000/box4.log": "a29f57e26ef89c263e03585b9ee3a508a7ac47655f0f1bf8c370740673976236",
+    "cases/rust7/phases/02-probe-160000/box0.log": "31d934dd6e9b90b19026c2edb0aecccc849bb442c49a629782c28c1d4d37e074",
+    "cases/rust7/phases/02-probe-160000/target-monitor.jsonl": "c0c6438beb54a31ea5169f9c85ec48905e4b57dda1c64956cac800fe01f77443",
+    "cases/rust7/phases/02-probe-160000/box1.log": "58aab90c211c4bdd5387018e0b18ce1835ee034e54044e713607e82063d46be8",
+    "cases/rust7/phases/02-probe-160000/box6.json": "290ee1e82d9a47fbfc85ea2afd8b5172fcd96621755cf736a3675dbcb482d5fa",
+    "cases/rust7/phases/02-probe-160000/box3.log": "271d8e3aeb012ec650d2c5ece21cbc6af74c02c907ac7b7daba9c49cb78db437",
+    "cases/rust7/phases/02-probe-160000/phase.json": "358c4d12315f9b9d7a5f88fce7e9ef8c54dc8515caa08aa1cd7a03bb2782bc44",
+    "cases/rust7/phases/02-probe-160000/box2.log": "a5b3e0e2aa26ec542d43e400238712aba16af30f0a1920a7f68e03b5a1291f1e",
+    "cases/rust7/phases/01-warmup-10000/merged.json": "7cc8094882d37de4d82f05b513f144e70f2b7c3339a4105e8646fb987395006d",
+    "cases/rust7/phases/01-warmup-10000/assessment.json": "938c9d5d814b1f028478a92a6540361b44c01de068cacf020f685cd08b1d4629",
+    "cases/rust7/phases/01-warmup-10000/before-load.json": "3fb71b2cc931648fe20b6a7556b1e289e2094c032e4188f88717b2af01689550",
+    "cases/rust7/phases/01-warmup-10000/target-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/rust7/phases/01-warmup-10000/load-monitor.jsonl": "f303d70fcfa847714f4bbe749e3802ca1835b0f6fa29253a33772e626f5cecf1",
+    "cases/rust7/phases/01-warmup-10000/merged.txt": "42251b2e8444502890e13703fecc02e67d8597a5f1b9f0d6c9a62631c69c67fe",
+    "cases/rust7/phases/01-warmup-10000/after-load.json": "2300363e3be590b3a8f94a43a8d21fa878f14f2404f8d66bd326393a3c61341e",
+    "cases/rust7/phases/01-warmup-10000/box0.json": "69731bb5f5cd7ce2080ff4efb7b99bfd8eb835ee8b5d9a56c8de480970d36632",
+    "cases/rust7/phases/01-warmup-10000/load-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/rust7/phases/01-warmup-10000/load-commands.json": "64be8f8d7a3f1605a5566cd4dc773eea89c244826251296c2bfe2d04afd41227",
+    "cases/rust7/phases/01-warmup-10000/box0.log": "7057ef4266d6d171725ec524e9b80bdf5e0fb2bd353c57751084af6cfd6ef1d4",
+    "cases/rust7/phases/01-warmup-10000/target-monitor.jsonl": "a1036028194554967aaa5f06a10b73ef9c68c5181c328d1073c187da289d61e0",
+    "cases/rust7/phases/01-warmup-10000/phase.json": "d3886236e3c4ec8188a8c591693962d670d14a9557be800d71f7a305e1463e5a",
+    "cases/rust7/frozen/source/Cargo.toml": "ab86173bb85ba27044f08fb9a567f78e3d500e1f94df535d1f0f63bfc2db6123",
+    "cases/rust7/frozen/source/LICENSE": "1c809f52dd742570746a8ac00694ad4ddd9229e12accc7d5c598075861b478a0",
+    "cases/rust7/frozen/source/install.sh": "0b5b878fce647ad19be4af31950416fc8bf06afca54b02602febcb10da70c1f9",
+    "cases/rust7/frozen/source/Cargo.lock": "b5130487b2c982bc757c39bac0f299039ec343ff73ca255d1cef5571b6e52f17",
+    "cases/rust7/frozen/source/build.rs": "544b5019a774744eea0062e8516f4b84dfef28858851728e3d7e5543365e4f23",
+    "cases/rust7/frozen/source/README.md": "5e87e74195db33cde05eca81f839ab3752688f31287429f09c27642836b9e6d3",
+    "cases/rust7/frozen/source/build.sh": "abb71fe1b2e2d8e5a7d4272aa069dc451a5bcd55267624a05f7332aded9efa48",
+    "cases/rust7/frozen/source/.gitignore": "b53ee26e6ff1da219b0563333a76d2c9ec19eec713d6ee54e11a1edacb0e9f3d",
+    "cases/rust7/frozen/source/start.sh": "1a729bf89b8aae10ba9e5cc1fb3f63ed4f5ab9500f44f30a9dd48411880f8d3c",
+    "cases/rust7/frozen/source/native/crypt-port.h": "b58abb9c42e8a5902aa20bc7cbe516260f54a831d1b43261b5228f8325622d4e",
+    "cases/rust7/frozen/source/native/byteorder.h": "cdfa3a3ae45955ad5da880053522b123f2e2d4e2a9dd74adb1f7a206d6ca6dfa",
+    "cases/rust7/frozen/source/native/bcrypt-batch.c": "be69f39655a6e8680d756aeade92d37a060ef08d3e75a875f13c953508c0aff7",
+    "cases/rust7/frozen/source/native/README.md": "4340724fec97fc5a5eb9526338d2c32f5312c71abc8942e98a676afda6475e1e",
+    "cases/rust7/frozen/source/native/bcrypt-batch-impl.h": "554687a11fcc46da412c76a40f46a198a1a2462005cc992091eeb2a38ac637c5",
+    "cases/rust7/frozen/source/native/crypt-bcrypt.c": "c6166e3d3d42d23bdc8c151e22e6aa60f33a4b4eeb008de54cf0243881fa1413",
+    "cases/rust7/frozen/source/src/password_batch.rs": "9b3df6f737115863224f9e74116209a8e4a1963720a433b83bcf5ba5646b63a6",
+    "cases/rust7/frozen/source/src/read_batch.rs": "8cc6c0d086f459e3424aadc61c9bdaf313331f741408c92145a7092469d083ab",
+    "cases/rust7/frozen/source/src/auth.rs": "79e2f21ec84c7fd22ce948da8c7e18540d4df566681a90a8f185819b7afba9f4",
+    "cases/rust7/frozen/source/src/db.rs": "5d90731241e2d68bbce670a2c58525e86a51a516aa053af04a9eaabb2e08ac5e",
+    "cases/rust7/frozen/source/src/json.rs": "95096ea3af69a87995781f439c11f953244379eaf4b72989ea781ba22767b11e",
+    "cases/rust7/frozen/source/src/sql.rs": "287dffe546b9c06b99d905b57f8069ced06fdbfd7290c9d8a74003e87e0d29be",
+    "cases/rust7/frozen/source/src/main.rs": "c447e56d6e0158e9df40b2f02fb01a3f55520f11abd9cf3b4a68ac0b6e451bc3",
+    "cases/rust7/frozen/source/src/password.rs": "69959c617f2aa1d7a7dac163123ee6cd387bbed78adbcff27625a39f3f2afcfb",
+    "cases/rust7/frozen/source/src/http.rs": "6fc2d2605e5f6d9510e487f8dfefdfc8353a68b7b58a9240399d7e9716c8a5e1",
+    "cases/rust7/frozen/source/src/writer.rs": "9f9367a0056602d97d4ffa7c666118f5c6233433eb1064ddc31a33a84f0fa7f2",
+    "cases/rust7/frozen/source/src/security_tests.rs": "e900d2d0eb971adffd7d4406e81e398f4f04bd6b0b45fb0c0c83cb2a167f3a22",
+    "cases/rust7/frozen/source/src/api.rs": "8b90d5ec2061f2e16c45e213051b9488df3685e0b3ea2e9b45dbb364157c163c",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/Cargo.toml": "02bd134a85a0aa1cec2e5f8152ab94dc34f2345922a9ef0cb0ce51f63d8bfe90",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/LICENSE-APACHE": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/README.md": "e4e7c2898f072a85c14db07fc4ee2d32cc5916215e7ed1b180653173ae389a0c",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/MODIFICATIONS.md": "f0540b4746140c3274cbcb271acb4785483f67b4b0a739022e7ffa729698f8ab",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/LICENSE-MIT": "ae3ead0b640a2ee59f9789a9af84e65e631cfa3b13254f3f99a9ed73e0472239",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/binary_copy.rs": "ac29f50281c1285640e7887352911958eaf9e0872ad2eb1b1fcfa49d2a949e28",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/types.rs": "86688c4b5f9811b43854d8302c30080489eb147a63dd3e6189ca61259ed75aa7",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/transaction.rs": "a2c0261a3ca426e9046d73b2b330720918f4d4a6010d0a143707f17f0333d62e",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/generic_client.rs": "1f733c86857f08a6e4dfc124340d572e9212f70bb5204e9c426832ebc77dadc7",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/keepalive.rs": "f7def5d0362d178d9a9b644200404a907187269f7b9e83c6b4b93018497bc298",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/copy_out.rs": "298ee2abd795f685bdb3d7073a4532d80d3fcdb2625babe7e8bbfd281d359bf2",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/client.rs": "4e439a9434b56c8d150bfd741cb06ba28011433cb9614d4207c48ad28d54477e",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/statement.rs": "fe832bf51b576b931c7cb33b25826f7a3b5bc8c8f77cbe4c5ed948d3daff33f6",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/connect_socket.rs": "9acb06f2f4a71c8b5e6e9d781fad6e09bfcc42730b7486903e274c3005e55efb",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/config.rs": "d06bffc37f9aa290ca72961508dcbcfdcab6d05e76fbf52fe450a268a0043b89",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/portal.rs": "db23661d8cfa9d4054bd6ff1780404ceae29be28b86c8fb8f189ca800394cfff",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/connect_tls.rs": "d407bd286a40348570c887139eb149340f835ae96f624668c6b04a99ccc95b00",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/lib.rs": "adee98d0271bf2427700499383f1ca0725495f30fe1a89e7b09115af9f6568c1",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/connect.rs": "ac6506a445aa5f89a2567788fd04a98421ee028cd57c0d9c2aa9a604de92d322",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/to_statement.rs": "41961c2d7608a8199693be35d0598597925f24ed9ba802f032c20f96f52838f7",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/query.rs": "820248e2f9406b2a7ab95a26d9f5cfb2218da3115769f3d685edca5c641cff91",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/maybe_tls_stream.rs": "d3a324ba2fbb9c8a1853a36ebb5102f140e41b2d0a7320ffdee3a7a631b83cb3",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/prepare.rs": "f143d9ff55a1e52da02fb47026ec7badaa4fb3305de90bd87479aae18526e2fa",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/socket.rs": "1bd0fbfde1fbb086a81b91ee8b334a312364116a3b45dbb32c015fe4a5f76827",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/codec.rs": "84419b83f836e3dfeecc4f48b338376e310266ba0c995f59f3abe6ef57450de6",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/row.rs": "699579818c8b23e47d5257d99a4244ade57b3b80f58ef00a200594218c7a021d",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/transaction_builder.rs": "c9767f9593c86e4432ba3f7551345e1673490b8b51a98ed6c5edead444d0028b",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/cancel_query_raw.rs": "e84be160e7785a9dc6672de482e25d34c1008a8340ca0c7017daa59611e8a782",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/connection.rs": "c7dd2c8259d306144ba60e0acabd210eada65cd88631aaa9e8e350620d880e4d",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/tls.rs": "43369e9b11cf26b59c04c17cc4238c1ca53340b9f0b639e5c65288f4349981a4",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/cancel_query.rs": "acb4b26aaa846b3f6095d2b5e531c8ab542548acb04c449077de1b8ee1028ec8",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/bind.rs": "9ba6d6ad5929bbee776cce58519fc34676a851104ddc2954e08203a0c572442e",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/copy_in.rs": "f0652721e158d800b843d38204c7faec88cbe869953161d4d4832150ecc2b9a9",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/connect_raw.rs": "2acee488ed3f4da7aac9cbbed0d584535080c3a8e1a11cfb68f4a6f9953c50a2",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/simple_query.rs": "9d64246d0ab386fd909b096730eb3f763145cf628bbb6c6a274e42ab7cd9111a",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/cancel_token.rs": "ed5b966eaea244ddcd01583dd20164dacb63fcc9b781dbb2847ebeeea72f5400",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/error/sqlstate.rs": "ef35424d3e762487c0ec2dfb13c1c404e8593885a4e1c1887ba88067844bd387",
+    "cases/rust7/frozen/source/vendor/tokio-postgres/src/error/mod.rs": "f06b3055ddee536e766ef0c580855f9422368465218519de22417d55f398d378",
+    "cases/goose32/frozen/app": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+    "cases/goose32/frozen/metadata.json": "26e4242bfaab6b99e4d80b0c5102db082398654947cefe5d7be9d210708b3bf1",
+    "cases/goose32/phases/02-probe-160000/box5.json": "56bdd4cd0036e6deefcc6c52ceee7bb0979b25e395bde4fdaa0779bd964073f7",
+    "cases/goose32/phases/02-probe-160000/merged.json": "39f2ad87891db388c7d19297a9826e277d2bf287c0e49219bf947a55f585964c",
+    "cases/goose32/phases/02-probe-160000/assessment.json": "0a01aaa42478468091c706ccc8bdb0502bb5cc83bd1b37fd2eb27a8b0374a701",
+    "cases/goose32/phases/02-probe-160000/before-load.json": "3c60529c2836f1cc46410bcf2016795f318d8a90cf94e627c56fe4051cd919d4",
+    "cases/goose32/phases/02-probe-160000/box4.json": "d5269da69f09ee6985e2310634596f81a2136d431181b8e74cc15ebea9f11a06",
+    "cases/goose32/phases/02-probe-160000/box3.json": "1703613b905f617993d83cc5dc43fb1766abff5f88b2db51d5d143091fcbadd7",
+    "cases/goose32/phases/02-probe-160000/target-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/goose32/phases/02-probe-160000/load-monitor.jsonl": "dc8da39578bd6adaf00180cf36132e9d27e5b59e43c4c0804d022dda7f7e5a60",
+    "cases/goose32/phases/02-probe-160000/box2.json": "168fef68c9724276e804be5f456135f9ba52f8189045cd6d7c8ff4f4784578a3",
+    "cases/goose32/phases/02-probe-160000/merged.txt": "4acf2cdedef2d1a7cc70abba2a2831420efa28b04e3773f9d27dbf5184bbd577",
+    "cases/goose32/phases/02-probe-160000/after-load.json": "da9e06f0ad493c1655aaddb0f592749d9de3e9e6a4966f0f527dea22bd77d843",
+    "cases/goose32/phases/02-probe-160000/box1.json": "a4d98544401abfd1a126fb508606f22647038f0d0f140fd1b5f7c7ea240f97c3",
+    "cases/goose32/phases/02-probe-160000/box0.json": "ea717c6e3b3a0e38b77f8819fa09009bb91cd5f88375e8160570951ba3969059",
+    "cases/goose32/phases/02-probe-160000/load-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/goose32/phases/02-probe-160000/load-commands.json": "2d079fef9e3753ad6f39306ff695c86465d912d11a52681d311b8a96fe8a1149",
+    "cases/goose32/phases/02-probe-160000/box6.log": "600636dbc9bf53af3cf13dda5c5b99ea94cc71daccf28a5162f1045954239f1b",
+    "cases/goose32/phases/02-probe-160000/box7.log": "1881e55bff5fa9852f8973bd5078c9a2091fb95b339f79e42d014bfe84141511",
+    "cases/goose32/phases/02-probe-160000/box7.json": "46518804c4616d167446b649ccf8de550eadcab478c235fbd2449884caf99024",
+    "cases/goose32/phases/02-probe-160000/box5.log": "60b2982a5b88f2273a756e985c57bd563bfce5e7f6feb3cb5ab7ee10922892a1",
+    "cases/goose32/phases/02-probe-160000/box4.log": "82008c5868dc84443ac9da755a922cb18c8508c780ab4cbf0720828b2d8a8a8a",
+    "cases/goose32/phases/02-probe-160000/box0.log": "e8da9ffa9851f0e5e74d1c0573029d1a6b36cb3552790b3404cf4dcca5647c42",
+    "cases/goose32/phases/02-probe-160000/target-monitor.jsonl": "cdbc3ba1347840f0ca40d195418b3aed03f4c5c8912eb5fc0896a5d7ba61426b",
+    "cases/goose32/phases/02-probe-160000/box1.log": "3883204cfbc1a9e13ca7da959e63f5446403911a1afb7aaf62c95c5c8cd4fd1a",
+    "cases/goose32/phases/02-probe-160000/box6.json": "a4281b40120e4e6613472d63e95aa009721e76e9bd1c9c31c15b4d1899e60c33",
+    "cases/goose32/phases/02-probe-160000/box3.log": "3da4f2fbc7c3a1668b2970510dabcbb608366f9dc68f3964c3af8f27beebb429",
+    "cases/goose32/phases/02-probe-160000/phase.json": "1bb328386b948f7b5c24b8b47768a600c0c4c975fc2d2eef87544e60aae5dc6b",
+    "cases/goose32/phases/02-probe-160000/box2.log": "7fbcd56df1d5fcbdaa88310bae62a75239e865fe1bdc4e959f113def38f1eed3",
+    "cases/goose32/phases/01-warmup-10000/merged.json": "964015b9c981d00d44ce7c71339610925a945e007d0079758065b85cc5678b09",
+    "cases/goose32/phases/01-warmup-10000/assessment.json": "daba2fd9c734b1b54e8d6d3e9665f1ac5ba1a51f56b2b7bd65b541a0f38198d8",
+    "cases/goose32/phases/01-warmup-10000/before-load.json": "b04b321c12e9fe5825d2d387d00a052e72f3a85578b1b982b39b931d15ef7d72",
+    "cases/goose32/phases/01-warmup-10000/target-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/goose32/phases/01-warmup-10000/load-monitor.jsonl": "c507e784122e61609c24f5d6ad24694b2ce227c9e0eb34ea132b4e175e905265",
+    "cases/goose32/phases/01-warmup-10000/merged.txt": "8953d6a10284160dd68e1598ce005de433c0716424c3a6cd04c82328a8f50f18",
+    "cases/goose32/phases/01-warmup-10000/after-load.json": "89414ca2624ad6fbc602f21ed8a2c0d86deac6ad87a8981011d8db5deb4c808e",
+    "cases/goose32/phases/01-warmup-10000/box0.json": "a3fe2634bcbb75282290645ce5a97f5444c70d23960f5d5e4b45d2d4a0f33dbc",
+    "cases/goose32/phases/01-warmup-10000/load-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/goose32/phases/01-warmup-10000/load-commands.json": "6a0a4ba9d48be56b62b00828f718a88e0a9eda7ac19034f5e7740758e9426dca",
+    "cases/goose32/phases/01-warmup-10000/box0.log": "d0839ffbfffd2d7cbc95d91a60b1ac9abae90021635761df25f1b9910d48f1de",
+    "cases/goose32/phases/01-warmup-10000/target-monitor.jsonl": "9bad89532c9d26f3700c753615409265d51b66ce3262898c57acbcbd7c512140",
+    "cases/goose32/phases/01-warmup-10000/phase.json": "0a5c351b03434c0bf800d28f262771e3ae6c5d232395e6aa56339a835edd55f3",
+    "cases/goose32/frozen/source/jwt.goose": "8d0693dc64751fb3ff58a2f78b64c4625c2cb65a55cc07fb81bd160180f76104",
+    "cases/goose32/frozen/source/native_sys.c": "30e7eb19e455929e6ee68b868fd086131f9fca668f95679662e3d2be1d603bbd",
+    "cases/goose32/frozen/source/server.goose": "4126e0647c1923430e4b4c4a4f918bb77b582a4dcc02a19e775682f4322bc999",
+    "cases/goose32/frozen/source/LICENSE": "1c809f52dd742570746a8ac00694ad4ddd9229e12accc7d5c598075861b478a0",
+    "cases/goose32/frozen/source/crypto.goose": "d703a1468b88d5f3485423e7edc35e87fa9eb6a05fab4a73aec7d5b5d16705a1",
+    "cases/goose32/frozen/source/install.sh": "6efc40cc66a6aa3aca9af24c89d287e579bd4527d43bb2a8f9176f6ad44f9fcd",
+    "cases/goose32/frozen/source/json_fast.c": "538bb9c0a25005fb4d14b6d86231b4a8430e4986d20ef24356de5b8b595901ec",
+    "cases/goose32/frozen/source/bcrypt.goose": "8b77f52c7422385402c7ca1b7a66aa3e573cda552feaa4365fc1a7ca7530e9bc",
+    "cases/goose32/frozen/source/bcrypt_tables.goose": "e53976f8b58571ea33620baac93a42dedb9f30b4c72c32cfc27c65cde26f8d38",
+    "cases/goose32/frozen/source/buf.goose": "e74b4bc8f83a9598c4971d4635179314940ea4198789c02fc5a30b904926e22c",
+    "cases/goose32/frozen/source/README.md": "22e795794309b7d172550bc9538b68272f5130b3fd2f1b933300fbdf8d1b2f45",
+    "cases/goose32/frozen/source/main.goose": "277eea03b5c037a795f29a42ae2464556efef38ff9fcd984339a56b0705308c9",
+    "cases/goose32/frozen/source/build.sh": "12e965a6977c1369a73a9ad21498ee8247e8c4a1feddc931fe929674a2b2ffe6",
+    "cases/goose32/frozen/source/pg.goose": "f2b9ee09d94f07336eaacdd2309c075ed153781d4b94f0f8699413eb416575b5",
+    "cases/goose32/frozen/source/.gitignore": "357df9f5de9d2aca77bc01dc1fb6b3ff6bb1a63790ae73d42c0ca85be99cf10d",
+    "cases/goose32/frozen/source/routes.goose": "7c5149922643a06f3a278a7d3bcbca0403240b3382864469e650502106a21bf4",
+    "cases/goose32/frozen/source/sys.goose": "76e673330dfcf2ed611f11509367ac8fc0577a3942e8a4ff7b3fb46df003db8e",
+    "cases/goose32/frozen/source/json_fast.h": "63f94824a5ded4af32c1d66b17bdb584b43b57f0bff945b37d2579b8b545fe18",
+    "cases/goose32/frozen/source/native_crypto.c": "173c4113c2f331f47972c8298055eee21b003d0380f34707049484ddd36ece06",
+    "cases/goose32/frozen/source/http.goose": "95d854464a79f5fd6ce1c9ae71c0dc80d609b50b4d43814ae189a4db056eed25",
+    "cases/goose32/frozen/source/NOTICE.md": "cb4366f7db68518a1f1c0de537c05d834610783ae510348afc1469bfa65f0dbe",
+    "cases/goose32/frozen/source/start.sh": "fa9abf9763b7e832e447c5f156f90a60823bdd10fcb688b3404a637a9da9fe2f",
+    "cases/goose32/frozen/source/sql.goose": "0ef1fe3a90c869e845fcd2531143c2f2788fe8d63213f41a5fd3fd6af0066c1b",
+    "cases/goose32/frozen/source/tests/bcrypt-lanes.goose": "b7253f84d5a2610f0f258ee0048c7cce8107da6f32fcf4d73a79440d5375e5fb",
+    "cases/goose32/frozen/source/tests/runtime-write-probe-v2.py": "9a45f2178c9422180b329ed1fcfc7e6412427a5269a89b8708ff1ce12f15308d",
+    "cases/goose32/frozen/source/tests/read-batches.py": "fdabaf479787374f72a502cdef3d9b5486349f3f9846443a31840225a501512e",
+    "cases/goose32/frozen/source/tests/bcrypt-lanes.sh": "9494e178ae321948893d75b2839218a69713b4dd51d21d2c6e97cb48b916698d",
+    "cases/goose32/frozen/source/tests/quiet-read-timer.py": "3f84fda6494deee29633ecc42fcd86419de6ee0751d5818ad4add53ebc957aa5",
+    "cases/goose32/frozen/source/tests/pipe-reply.c": "89d4327f7b88c93e0f2aa891e874045d9e9481bca0100b2feaeb4fed70075f60",
+    "cases/goose32/frozen/source/tests/password-nul-probe.py": "6e9a12d113ef0004fe14d303b54ede281c5e55852fd88926b3442db139de6bd7",
+    "cases/goose32/frozen/source/tests/bcrypt-passwords.go": "fd6dbfbca79cb200a34f1e9c053f96a95690648ec235695c958863ea2a48d1a1",
+    "cases/goose32/frozen/source/tests/native.c": "33493e945a23f2b205349d4fd6993db30711012ce06d304c1ac29f9cc3e27fdf",
+    "cases/goose32/frozen/source/tests/favorite-race-probe.py": "b42bfd6922c07e9d707e56bcfb61692875e935e5e7fb2cd105440f93222a8fc8",
+    "cases/goose32/frozen/source/tests/jwt-ffi.goose": "7ac98e344d8141604d4fa7854f92962750c835b91884ce0f2ea5e2446634cea8",
+    "cases/goose32/frozen/source/tests/article-update-race.py": "6cdc3420d7c5553ebb2c38cedfdb7b006751d5d5fb451bc313d55f4da2775d05",
+    "cases/goose32/frozen/source/tests/native.sh": "5ab68f7c0464291b1dc3018b1c7d0d91107cd131c1c1429d4630101c94fe3b75",
+    "tools/audit/aggregate.py": "017d50cc0265fd8804d7abfcd2bd7f514a1fb257d586f6f36172b607d1281558",
+    "tools/audit/primitives.py": "8908b204b243ad5ad20e725d3284d115b5f9ccc8719931cd5018fcaf73104423",
+    "tools/audit/test_capacity.py": "7e8e2ea5f0ab29fd7a7dc443c110bfd685663bb0339ab7169dfd080443e9cc73",
+    "tools/audit/evidence.py": "2b3f5338b8053b5eba3b01135dea76f595e575daa85fe421009a1c2795f04dca"
+  }
+}

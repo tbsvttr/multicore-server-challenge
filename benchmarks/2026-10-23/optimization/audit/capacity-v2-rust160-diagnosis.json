@@ -1,0 +1,109 @@
+{
+  "schema": "multicore-local-v2-rust160-diagnosis-v1",
+  "phase": "/private/tmp/multicore-optimize-20261023/capacity_20261023t101818_7e4229/cases/rust7/phases/02-probe-160000",
+  "classification": "INVALID_GENERATOR",
+  "all_classifications": [
+    "INVALID_GENERATOR",
+    "INVALID_EVIDENCE",
+    "FAIL_SLO"
+  ],
+  "native_verdict": {
+    "pass": false,
+    "fail_reasons": [
+      "p95 7451 ms >= 500",
+      "p99 12468 ms >= 1000"
+    ],
+    "lg_limited": true,
+    "lg_reasons": [
+      "box 0 CPU 84% > 75%",
+      "box 0 fell behind: 11 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 8527 ms late",
+      "box 1 CPU 86% > 75%",
+      "box 1 fell behind: 10 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 3918 ms late",
+      "box 2 CPU 85% > 75%",
+      "box 2 fell behind: 13 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 5070 ms late; only 19754 of 20000 users active at window start",
+      "box 3 CPU 84% > 75%",
+      "box 3 fell behind: 12 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 8886 ms late",
+      "box 4 CPU 83% > 75%",
+      "box 4 fell behind: 8 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 14792 ms late",
+      "box 5 CPU 84% > 75%",
+      "box 5 fell behind: 14 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 8244 ms late",
+      "box 6 CPU 85% > 75%",
+      "box 6 fell behind: 8 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 4897 ms late",
+      "box 7 CPU 85% > 75%",
+      "box 7 fell behind: 15 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 1624 ms late"
+    ]
+  },
+  "native_qualified": false,
+  "local_qualified": false,
+  "local_CPU_exception": false,
+  "target_cpu_pct_of8": 61.58524916785514,
+  "client_cpu_pct_of8": 44.84250606427601,
+  "target_sampled_memory_peak_bytes": 7968837632,
+  "client_sampled_memory_peak_bytes": 5954170880,
+  "nearest_sample_sum_peak": {
+    "target_wall_ns": 1792751107063139128,
+    "load_wall_ns": 1792751107040202670,
+    "sum_bytes": 12635832320
+  },
+  "sum_pair_count": 60,
+  "nearest_sample_tolerance_s": 1,
+  "target_healthy": true,
+  "target_oom_delta": {
+    "oom": 0,
+    "oom_kill": 0,
+    "oom_group_kill": 0
+  },
+  "client_oom_delta": {
+    "oom": 0,
+    "oom_kill": 0,
+    "oom_group_kill": 0
+  },
+  "Mac_host_measurement_samples": 60,
+  "Mac_host_swap_used_MiB_range": [
+    1922.81,
+    1946.81
+  ],
+  "Mac_host_memory_pressure_free_pct_sampled_range": [
+    59,
+    62
+  ],
+  "Mac_host_vm_stat_counter_deltas": {
+    "Compressions": 439197,
+    "Decompressions": 382284,
+    "Pageins": 23276,
+    "Pageouts": 653,
+    "Swapins": 1960,
+    "Swapouts": 0
+  },
+  "interpretation": "The wholeVM CPU-only exception correctly does not apply: all8shards have independent timing failures and one starts below99%active. This phase is invalid for a server boundary despite native SLO failure. Cgroup and host memory observations are descriptive; there is no Go GC/heap profile or isolated causal experiment, and these data do not prove pending-request GC or memory pressure caused the scheduling stalls. More gradual fresh probes may avoid overshoot, but must pass the same validity gates.",
+  "raw_sha256": {
+    "box5.json": "8e868c145a752cd202c59c12d8031561f84aa4f0ac8c33f20c583d730434cbbe",
+    "merged.json": "ac25f123f1038a622e8ec2432bf949050243bde16a49ca28c3cd95d612b0c428",
+    "assessment.json": "f517718713ab2e202cff89d034cadbdbdba1b48ee32eee2899d161acff9135a8",
+    "before-load.json": "2fa49adfbde5c4cc1bdffa1dd7ec6be226decb0844b138ebf33babf5a1dbd660",
+    "box4.json": "06e7d29f057b47e039b6b7acc63dc8f0807519f746504e619b90c6622238148c",
+    "box3.json": "0b5ef807a9a0e2bab3470e3ff9c275512d9b0b24d694e9552c0eb8c508a01059",
+    "target-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "load-monitor.jsonl": "98bd4e3b97d59b7a402acdcd81d0941bc6e50ca261b00f264a1eada757aad379",
+    "box2.json": "46d78dd3cc19160a379cfef55b56e62034fd4f6a73a1686f15011d47e086620a",
+    "merged.txt": "79ab919283866a9603f1b2bb94dc0b8da8a01203c3eb297436ebe58e630e8132",
+    "after-load.json": "e5c59fab14bfd7ba9a4d4e984a077a23d8cfd4729332f15d13893c8cf523a5d3",
+    "box1.json": "6d6ae2332db1202a140d5894f917512acd4796c417a0f66760d095aef505dc72",
+    "box0.json": "6275ccfdf8cc82a451c567e73a121962a9256e653d44209ddef3e8e136ba5b70",
+    "load-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "load-commands.json": "74032e1490a7f2fdee012c0ab828efde5e3e62d46bcdd4a936c5e408485a4217",
+    "box6.log": "08af19e9b613b7b25a566447fdf3c17da21892a779992e648f0600fafff82199",
+    "box7.log": "42e29e223900944f2f2dfefeed8888a0aa1d4ff83592006a220f54c1c9d77a82",
+    "box7.json": "809388faf773178cf9a1eb777cdd275681cdb0b594b29dfe71c872ae8a590a7f",
+    "box5.log": "d1b6e85654779cc1695b2c021238aec5ea2818b884a0c5d84699e7b12a1b3914",
+    "box4.log": "a29f57e26ef89c263e03585b9ee3a508a7ac47655f0f1bf8c370740673976236",
+    "box0.log": "31d934dd6e9b90b19026c2edb0aecccc849bb442c49a629782c28c1d4d37e074",
+    "target-monitor.jsonl": "c0c6438beb54a31ea5169f9c85ec48905e4b57dda1c64956cac800fe01f77443",
+    "box1.log": "58aab90c211c4bdd5387018e0b18ce1835ee034e54044e713607e82063d46be8",
+    "box6.json": "290ee1e82d9a47fbfc85ea2afd8b5172fcd96621755cf736a3675dbcb482d5fa",
+    "box3.log": "271d8e3aeb012ec650d2c5ece21cbc6af74c02c907ac7b7daba9c49cb78db437",
+    "phase.json": "358c4d12315f9b9d7a5f88fce7e9ef8c54dc8515caa08aa1cd7a03bb2782bc44",
+    "box2.log": "a5b3e0e2aa26ec542d43e400238712aba16af30f0a1920a7f68e03b5a1291f1e"
+  },
+  "execution": "Saved-file reads only; no active-run changes."
+}

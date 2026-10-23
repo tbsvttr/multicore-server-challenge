@@ -1,0 +1,166 @@
+{
+  "scope": "Disposable correctness fixtures only; no schema/config changes",
+  "database": "mc_pair_ci_39937895836_1_writes",
+  "base": "http://127.0.0.1:3104",
+  "expectation": "fresh",
+  "started_unix_s": 1792751454.628831,
+  "cases": [
+    {
+      "case": "update",
+      "nonce": "article_race_8b928eeb70aa40aab44a7a7793a941b5",
+      "events": [
+        {
+          "event": "API blocked on uncommitted transaction",
+          "witness": [
+            {
+              "pid": 3721,
+              "wait_type": "Lock",
+              "wait": "transactionid",
+              "query": "WITH t AS (SELECT id, author_id FROM articles WHERE slug = $2), a AS (UPDATE articles SET title = COALESCE($3, title), description = COALESCE($4, description), body = COALESCE($5, body), slug = CASE WHEN $3::text IS NULL THEN slug ELSE trim(both '-' from lower(regexp_replace($3, '[^A-Za-z0-9]+', '-', 'g'))) || '-' || id END, updated_at = now() WHERE id = (SELECT id FROM t WHERE author_id = $1) RETURNING id) SELECT t.author_id, COALESCE(a.id,t.id) AS id FROM t LEFT JOIN a ON true"
+            }
+          ]
+        },
+        {
+          "event": "fixture favorite/rename committed",
+          "monotonic": 903.489362999
+        }
+      ],
+      "pass": true,
+      "response": {
+        "status": 200,
+        "body": {
+          "article": {
+            "slug": "article-race-8b928eeb70aa40aab44a7a7793a941b5-updated-10003",
+            "title": "article_race_8b928eeb70aa40aab44a7a7793a941b5 updated",
+            "description": "fixture",
+            "body": "updated body \u2014 Unicode",
+            "createdAt": "2026-10-23T10:30:54.660Z",
+            "updatedAt": "2026-10-23T10:30:54.730Z",
+            "tagList": [],
+            "favoritesCount": 1,
+            "favorited": true,
+            "author": {
+              "username": "article_race_8b928eeb70aa40aab44a7a7793a941b5",
+              "bio": null,
+              "image": null,
+              "following": false
+            }
+          }
+        },
+        "start_monotonic": 903.453932557,
+        "complete_monotonic": 903.491294209
+      },
+      "committed_count": 1,
+      "current_slug": "article-race-8b928eeb70aa40aab44a7a7793a941b5-updated-10003",
+      "immediate_get": {
+        "status": 200,
+        "body": {
+          "article": {
+            "slug": "article-race-8b928eeb70aa40aab44a7a7793a941b5-updated-10003",
+            "title": "article_race_8b928eeb70aa40aab44a7a7793a941b5 updated",
+            "description": "fixture",
+            "body": "updated body \u2014 Unicode",
+            "createdAt": "2026-10-23T10:30:54.660Z",
+            "updatedAt": "2026-10-23T10:30:54.730Z",
+            "tagList": [],
+            "favoritesCount": 1,
+            "favorited": true,
+            "author": {
+              "username": "article_race_8b928eeb70aa40aab44a7a7793a941b5",
+              "bio": null,
+              "image": null,
+              "following": false
+            }
+          }
+        },
+        "start_monotonic": 903.557160179,
+        "complete_monotonic": 903.563498382
+      },
+      "implementation_correct": true,
+      "baseline_bug_observed": false,
+      "pass_expected_behavior": true,
+      "transaction_stderr": "WARNING:  there is no transaction in progress\n",
+      "fixture_cleaned": true
+    },
+    {
+      "case": "favorite-rename",
+      "nonce": "article_race_b3392f4152a64799a9c49c7b5652d527",
+      "events": [
+        {
+          "event": "API blocked on uncommitted transaction",
+          "witness": [
+            {
+              "pid": 3721,
+              "wait_type": "Lock",
+              "wait": "transactionid",
+              "query": "WITH t AS (SELECT id FROM articles WHERE slug = $2), w AS (INSERT INTO favorites (user_id, article_id) SELECT $1, id FROM t ON CONFLICT DO NOTHING) SELECT id FROM t"
+            }
+          ]
+        },
+        {
+          "event": "fixture favorite/rename committed",
+          "monotonic": 903.7860778
+        }
+      ],
+      "pass": true,
+      "response": {
+        "status": 200,
+        "body": {
+          "article": {
+            "slug": "article_race_b3392f4152a64799a9c49c7b5652d527-renamed",
+            "title": "renamed concurrently",
+            "description": "fixture",
+            "body": "before body",
+            "createdAt": "2026-10-23T10:30:54.971Z",
+            "updatedAt": "2026-10-23T10:30:55.020Z",
+            "tagList": [],
+            "favoritesCount": 1,
+            "favorited": true,
+            "author": {
+              "username": "article_race_b3392f4152a64799a9c49c7b5652d527",
+              "bio": null,
+              "image": null,
+              "following": false
+            }
+          }
+        },
+        "start_monotonic": 903.748639564,
+        "complete_monotonic": 903.786601634
+      },
+      "committed_count": 1,
+      "current_slug": "article_race_b3392f4152a64799a9c49c7b5652d527-renamed",
+      "immediate_get": {
+        "status": 200,
+        "body": {
+          "article": {
+            "slug": "article_race_b3392f4152a64799a9c49c7b5652d527-renamed",
+            "title": "renamed concurrently",
+            "description": "fixture",
+            "body": "before body",
+            "createdAt": "2026-10-23T10:30:54.971Z",
+            "updatedAt": "2026-10-23T10:30:55.020Z",
+            "tagList": [],
+            "favoritesCount": 1,
+            "favorited": true,
+            "author": {
+              "username": "article_race_b3392f4152a64799a9c49c7b5652d527",
+              "bio": null,
+              "image": null,
+              "following": false
+            }
+          }
+        },
+        "start_monotonic": 903.853892705,
+        "complete_monotonic": 903.859821369
+      },
+      "implementation_correct": true,
+      "baseline_bug_observed": false,
+      "pass_expected_behavior": true,
+      "transaction_stderr": "WARNING:  there is no transaction in progress\n",
+      "fixture_cleaned": true
+    }
+  ],
+  "pass": true,
+  "implementation_correct": true,
+  "finished_unix_s": 1792751455.2411022
+}

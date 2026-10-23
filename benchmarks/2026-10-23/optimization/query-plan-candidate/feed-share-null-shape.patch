@@ -1,0 +1,13 @@
+--- a/sql.goose
++++ b/sql.goose
+@@ -228,8 +228,8 @@
+            TAG_LIST, " AS tags, ", FAVORITES_COUNT, " AS fc,u.username,u.bio,u.image ",
+            "FROM ids JOIN articles a ON a.id=ids.id JOIN users u ON u.id=a.author_id) ",
+            "SELECT e.slug,e.title,e.description,e.created_at,e.updated_at,e.tags,e.fc, ",
+-           "(p.viewer <> 0 AND EXISTS (SELECT 1 FROM favorites f WHERE f.article_id=e.id AND f.user_id=p.viewer)), ",
+-           "e.username,e.bio,e.image,true,e.id,p.n,p.ord ",
++           "CASE WHEN e.id IS NULL THEN NULL::boolean ELSE (p.viewer <> 0 AND EXISTS (SELECT 1 FROM favorites f WHERE f.article_id=e.id AND f.user_id=p.viewer)) END, ",
++           "e.username,e.bio,e.image,CASE WHEN e.id IS NULL THEN NULL::boolean ELSE true END,e.id,p.n,p.ord ",
+            "FROM members p LEFT JOIN e ON e.id=p.id ORDER BY p.ord,e.id DESC");
+ }
+ 

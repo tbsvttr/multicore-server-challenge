@@ -1,0 +1,130 @@
+{
+  "schema": "unexecuted-rust110-115-plan-review-v1",
+  "created_utc": "2026-10-23T16:00:51.569102+00:00",
+  "status": "PASS",
+  "checks_passed": 16,
+  "checks_total": 16,
+  "config": {
+    "path": "/private/tmp/multicore-optimize-20261023/profiles/capacity-rust110-115-config.json",
+    "sha256": "b77fd727b89873761dedc8565f2ea8c893dbc5cb831656bc8b392df7d2d4b2c1"
+  },
+  "plan": {
+    "path": "/private/tmp/multicore-optimize-20261023/profiles/capacity-rust110-115-plan.json",
+    "sha256": "f69ae626f26de48c8443525214d5261a7545218c83e109f207fb7deaaf51ba74"
+  },
+  "checks": [
+    {
+      "check": "v3_schema_and_frozen_receipt",
+      "pass": true
+    },
+    {
+      "check": "exact_saved_source_configuration_receipt",
+      "pass": true
+    },
+    {
+      "check": "only_same_pinned_Rust_case",
+      "pass": true
+    },
+    {
+      "check": "same_configuration_except_cases_note_search_inputs",
+      "pass": true
+    },
+    {
+      "check": "only_declared_start_and_ceiling_change_in_protocol",
+      "pass": true
+    },
+    {
+      "check": "exact_start_ceiling_and_budgets",
+      "pass": true
+    },
+    {
+      "check": "original_warmup_and_300second_holds",
+      "pass": true
+    },
+    {
+      "check": "target_and_client_budgets_unchanged",
+      "pass": true
+    },
+    {
+      "check": "strict_local_vs_native_policy_unchanged",
+      "pass": true
+    },
+    {
+      "check": "fresh_warmup_instead_of_inheriting_previous_probe",
+      "pass": true
+    },
+    {
+      "check": "fresh_first_probe110k",
+      "pass": true
+    },
+    {
+      "check": "passing110k_expands_and_clamps115k",
+      "pass": true
+    },
+    {
+      "check": "passing115k_holds_ceiling_as_lower_bound",
+      "pass": true
+    },
+    {
+      "check": "valid_SLO_failure115k_holds110k_with_valid_upper",
+      "pass": true
+    },
+    {
+      "check": "generator_invalid115k_stops_without_server_bound",
+      "pass": true
+    },
+    {
+      "check": "reviewed_v3_modules_unchanged_from_active_powered_run",
+      "pass": true
+    }
+  ],
+  "binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+  "protocol": {
+    "warmup_users": 10000,
+    "start_users": 110000,
+    "max_users": 115000,
+    "resolution": 0.05,
+    "growth_factor": 1.1,
+    "max_probes": 16,
+    "max_holds": 4,
+    "minimum_users": 10,
+    "warmup": {
+      "ramp_s": 60,
+      "measure_s": 120,
+      "tail_s": 15
+    },
+    "probe": {
+      "ramp_s": 60,
+      "measure_s": 60,
+      "tail_s": 15
+    },
+    "hold": {
+      "ramp_s": 60,
+      "measure_s": 300,
+      "tail_s": 15
+    },
+    "articles": 500000,
+    "think_scale": 1.0,
+    "max_users_per_shard": 20000,
+    "max_shards": 8,
+    "gomaxprocs_per_shard": 1,
+    "target_cpus": 8,
+    "target_memory_bytes": 17179869184,
+    "load_cpus": 8,
+    "load_memory_bytes": 8589934592,
+    "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+    "load_cpu_limit_pct": 75.0,
+    "actual_nofile_minimum": 200000,
+    "between_phase_minimum_s": 65,
+    "idle_cpu_pct": 15.0,
+    "idle_max_s": 90,
+    "clock_drift_limit_s": 0.1,
+    "monitor_gap_limit_s": 3.0,
+    "rounding_policy": "local search: two significant digits; bisection uses strict integer midpoint if rounded midpoint hits either bound",
+    "database_policy": "one fresh full-seed clone and one continuous app session per implementation; no reset between warmup/probes/holds",
+    "invalid_policy": "retain and stop that implementation; invalid phases never enter pass/fail brackets or receive a score; no selective retry"
+  },
+  "study_note": "Separate, unexecuted fresh Rust-only follow-up after the complete powered comparison. Its saved Rust 120,000-user attempt was generator-invalid from actual sampler/wake delays and remains invalid; the earlier 110,000-user local PASS is a short diagnostic only and is not reused as a new phase or rescued into a capacity score. The 110,000 start and 115,000 ceiling are selected before new data to keep the native generator near that observed headroom boundary. Use the unchanged v3 controller, Rust binary/source/env, 8 CPU/16 GiB target, separate 8 CPU/8 GiB client, dedicated_client_cgroup_v1 policy and all native timing/SLO/clock/identity guards. Start one new full-seed clone and one fresh continuous session with the original 10,000-user 60+120-second warmup; perform fresh probes and 60+300-second holds only. A valid 115,000 PASS goes to a five-minute hold at the ceiling and establishes only a held-user LOWER BOUND, never a maximum. A valid 115,000 SLO failure may bracket a 110,000 hold, but any generator/clock invalidity stops without a failed server bound. Prior raw/results stay unchanged. A censored Rust lower bound alone cannot establish a Goose or first-place advantage. Execute only after the powered balanced comparison has finished, under the same powered/awake condition.",
+  "executed": false,
+  "scope": "New Rust-only control experiment; no comparison/rank claim and no old-result reuse. Run only after current powered balanced study completes. Reaching115k ceiling with a qualified300s hold is a censored lower bound. No Docker/build/API/DB query or source/raw modification."
+}

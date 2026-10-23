@@ -1,0 +1,311 @@
+--- capacity-v3/capacity_controller.py
++++ diagnostics/goose110-gc-pg/capacity_controller.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""Prepare or explicitly execute a finite local ARM capacity search.
++"""Prepare or explicitly execute a DIAGNOSTIC ONLY fixed Goose reproduction.
+ 
+ Preparing a plan performs no Docker/network operations. Execution creates one
+ owned client container and one fresh full-seed app session per declared case.
+@@ -15,7 +15,7 @@
+ import threading
+ import time
+ 
+-from search_policy import DEFAULT_PROTOCOL, client_cpu_scope_policy, growth_factor, load_cpus, load_memory_bytes, next_action, shards
++from search_policy import DEFAULT_PROTOCOL, client_cpu_scope_policy, growth_factor, load_cpus, load_memory_bytes, shards
+ from audit.evidence import audit_phase
+ from audit.primitives import inspect_budget, read, sha
+ 
+@@ -56,7 +56,12 @@
+         assert not {'DATABASE_URL', 'JWT_SECRET', 'HOST', 'PORT'} & set(case.get('env', {}))
+         case.setdefault('env', {})
+         names.append(name)
+-    assert names and len(names) == len(set(names))
++    assert names == ['goose32'], 'diagnostic has exactly one unchanged Goose case'
++    assert cfg['cases'][0]['expected_binary_sha256'] == '7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21'
++    assert cfg['expected_native_sha256'] == '886eaa564c6cdab1a791534d6931d1b8eb9b5c21d1e1ebaaa2824616c4562cdb'
++    assert cfg['load_cpus'] == 8 and cfg['load_memory_bytes'] == 8 * 1024**3
++    assert cfg['client_env'] == {'GOMAXPROCS': '1', 'GODEBUG': 'gctrace=1'}
++    assert cfg['collector_interval_s'] == 1.0
+     protocol = json.loads(json.dumps(DEFAULT_PROTOCOL))
+     protocol['load_memory_bytes'] = cfg['load_memory_bytes']
+     protocol['load_cpus'] = cfg['load_cpus']
+@@ -70,11 +75,17 @@
+         protocol[key] = int(value)
+     assert 10 <= protocol['start_users'] <= protocol['max_users'] <= 160000
+     assert 1 <= protocol['max_probes'] <= 20 and 1 <= protocol['max_holds'] <= 8
+-    plan = {'schema': 'multicore-local-capacity-v3',
+-            'scope': 'Local shared ARM64 Mac/Docker capacity search; no official x86 rank or all-competitor claim.',
++    plan = {'schema': 'multicore-fixed-goose110-diagnostic-v1',
++            'scope': 'DIAGNOSTIC ONLY: fixed warmup10k, probe100k, probe110k; GC/PG instrumentation. No hold, capacity score, performance comparison or rank claim.',
+             'configuration': cfg, 'protocol': protocol,
++            'fixed_sequence': [{'stage': 'warmup', 'users': 10000}, {'stage': 'probe', 'users': 100000}, {'stage': 'probe', 'users': 110000}],
++            'capacity_search_disabled': True, 'holds_disabled': True,
+             'created_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+-            'source_config_sha256': sha(config_path)}
++            'source_config_sha256': sha(config_path), 'source_config_path': str(config_path.resolve()),
++            'prepared_tool_sha256': {str(path.resolve()): sha(path) for path in [
++                Path(__file__), Path(__file__).with_name('pg_collect.py'), Path(__file__).with_name('search_policy.py'),
++                Path(__file__).parent / 'audit' / 'evidence.py', Path(__file__).parent / 'audit' / 'primitives.py',
++                Path(cfg['lifecycle_helper']), Path(cfg['monitor_helper'])]}}
+     plan_path.parent.mkdir(parents=True, exist_ok=True)
+     write(plan_path, plan)
+     plan_path.with_suffix(plan_path.suffix + '.sha256').write_text(sha(plan_path) + '\n')
+@@ -85,8 +96,13 @@
+ class Controller:
+     def __init__(self, plan_path):
+         self.plan_path, self.plan = plan_path, read(plan_path)
+-        assert self.plan['schema'] == 'multicore-local-capacity-v3'
++        assert self.plan['schema'] == 'multicore-fixed-goose110-diagnostic-v1'
++        assert self.plan['capacity_search_disabled'] is True and self.plan['holds_disabled'] is True
++        assert self.plan['fixed_sequence'] == [{'stage': 'warmup', 'users': 10000}, {'stage': 'probe', 'users': 100000}, {'stage': 'probe', 'users': 110000}]
++        assert self.plan['configuration']['client_env'] == {'GOMAXPROCS': '1', 'GODEBUG': 'gctrace=1'}
+         assert sha(plan_path) == plan_path.with_suffix(plan_path.suffix + '.sha256').read_text().strip()
++        assert all(sha(Path(name)) == value for name, value in self.plan['prepared_tool_sha256'].items()), 'prepared diagnostic tools changed'
++        assert sha(Path(self.plan['source_config_path'])) == self.plan['source_config_sha256'], 'prepared config changed'
+         self.cfg, self.protocol = self.plan['configuration'], self.plan['protocol']
+         for name in ['warmup_users', 'warmup', 'probe', 'hold', 'target_cpus', 'target_memory_bytes',
+                      'max_users_per_shard', 'max_shards', 'gomaxprocs_per_shard', 'resolution', 'load_cpu_limit_pct', 'rounding_policy']:
+@@ -97,17 +113,20 @@
+         growth_factor(self.protocol, self.cfg)
+         self.target = self.cfg['target_container']
+         stamp = time.strftime('%Y%m%dT%H%M%S', time.gmtime()).lower()
+-        self.name = 'capacity_' + stamp + '_' + os.urandom(3).hex()
++        self.name = 'diagnosticgoose110_' + stamp + '_' + os.urandom(3).hex()
+         self.host_base = Path(self.cfg['host_evidence'])
+         self.root = self.host_base / 'optimization' / self.name
+         self.root.mkdir(parents=True, exist_ok=False)
+         self.croot = self.cfg['container_evidence'].rstrip('/') + '/optimization/' + self.name
+-        self.client = 'multicore-capacity-client-' + stamp + '-' + os.urandom(3).hex()
++        self.client = 'multicore-diagnostic-client-' + stamp + '-' + os.urandom(3).hex()
+         self.events = (self.root / 'events.jsonl').open('x')
+         self.load_created = False
+         self.stop_host = threading.Event()
+         self.current_generators = []
++        self.current_collectors = []
+         self.case_records = []
++        shutil.copy2(self.plan['source_config_path'], self.root / 'configuration-source.json')
++        assert sha(self.root / 'configuration-source.json') == self.plan['source_config_sha256']
+         write(self.root / 'plan.json', self.plan)
+         (self.root / 'plan.sha256').write_text(sha(plan_path) + '\n')
+         tools = self.root / 'tools'
+@@ -115,6 +134,7 @@
+         here = Path(__file__).resolve().parent
+         for source, destination in [(here / 'capacity_controller.py', tools / 'capacity_controller.py'),
+                                     (here / 'search_policy.py', tools / 'search_policy.py'),
++                                    (here / 'pg_collect.py', tools / 'pg_collect.py'),
+                                     (Path(self.cfg['lifecycle_helper']), tools / 'target_helper.py'),
+                                     (Path(self.cfg['monitor_helper']), tools / 'monitor.py')]:
+             shutil.copy2(source, destination)
+@@ -123,6 +143,7 @@
+         write(self.root / 'tool-sha256.json', {str(p.relative_to(tools)): sha(p) for p in tools.rglob('*') if p.is_file()})
+         self.helper = self.croot + '/tools/target_helper.py'
+         self.monitor_helper = self.croot + '/tools/monitor.py'
++        self.pg_collector = self.croot + '/tools/pg_collect.py'
+ 
+     def event(self, name, **data):
+         row = {'event': name, 'wall_ns': time.time_ns(), 'monotonic_ns': time.monotonic_ns(), **data}
+@@ -192,6 +213,84 @@
+         code = "import pathlib,os,signal,contextlib;[(os.kill(int(p.parent.name),signal.SIGTERM)) for p in pathlib.Path('/proc').glob('[0-9]*/exe') if p.exists() and os.path.realpath(p)==" + repr(self.cfg['native_binary']) + ']'
+         with contextlib.suppress(Exception):
+             self.docker('exec', '--user', 'root', self.client, 'python3', '-c', code)
++
++    def pg_snapshot(self, directory, cdir, database, label):
++        self.docker('exec', '--user', 'root', self.target, 'python3', self.pg_collector,
++                    '--database', database, '--peer-postgres', '--out', cdir + '/pg-' + label + '.jsonl',
++                    '--once', '--max-seconds', '5', timeout=12,
++                    save=directory / ('pg-' + label + '.log'))
++        rows = [json.loads(line) for line in (directory / ('pg-' + label + '.jsonl')).read_text().splitlines() if line.strip()]
++        assert len(rows) == 1 and rows[0].get('ok') is True, 'observer snapshot failed'
++        observed = rows[0]['postgres']
++        assert observed.get('database') == database and str(observed.get('server_version_num', '')).startswith('18'), 'observer snapshot database/version mismatch'
++
++    def start_pg_collector(self, directory, cdir, database, max_seconds):
++        argv = ['docker', 'exec', '--user', 'root', self.target, 'setsid', '--wait', 'python3', self.pg_collector,
++                '--database', database, '--peer-postgres', '--out', cdir + '/pg-samples.jsonl',
++                '--stop', cdir + '/pg-collector.stop', '--interval', '1',
++                '--max-seconds', str(max_seconds)]
++        log = (directory / 'pg-collector.log').open('x')
++        proc = subprocess.Popen(argv, stdout=log, stderr=subprocess.STDOUT)
++        self.current_collectors.append((proc, log, directory, cdir))
++        write(directory / 'pg-collector-command.json', argv)
++        deadline = time.monotonic() + 8
++        while True:
++            output = directory / 'pg-samples.jsonl'
++            rows = output.read_text().splitlines() if output.exists() else []
++            if rows:
++                try:
++                    first = json.loads(rows[0])
++                except json.JSONDecodeError:
++                    first = None
++                if first is not None:
++                    assert first.get('ok') is True, 'first continuous PG observer sample failed'
++                    observed = first['postgres']
++                    assert observed.get('database') == database and str(observed.get('server_version_num', '')).startswith('18'), 'continuous PG observer database/version mismatch'
++                    write(directory / 'pg-collector-ready.json', {'ready': True, 'first_sample': first})
++                    return
++            if proc.poll() is not None or time.monotonic() >= deadline:
++                raise RuntimeError('continuous PG observer did not become ready before traffic')
++            time.sleep(.05)
++
++    def stop_pg_collectors(self):
++        workers, self.current_collectors = self.current_collectors, []
++        for proc, log, directory, cdir in workers:
++            (directory / 'pg-collector.stop').touch()
++            try:
++                rc = proc.wait(timeout=8)
++            except subprocess.TimeoutExpired:
++                # Only a collector with this exact frozen script/output pair may
++                # be signalled inside the shared target; never kill by name.
++                code = "import pathlib,os,signal;script=" + repr(self.pg_collector) + ";out=" + repr(cdir + '/pg-samples.jsonl') + ";matches=[]\nfor p in pathlib.Path('/proc').glob('[0-9]*/cmdline'):\n try:\n  a=p.read_bytes().split(bytes([0]));\n  if script.encode() in a and out.encode() in a: matches.append(int(p.parent.name))\n except OSError: pass\nfor pid in matches:\n if os.getpgid(pid)==pid: os.killpg(pid,signal.SIGTERM)\n else: os.kill(pid,signal.SIGTERM)\nprint(matches)"
++                with contextlib.suppress(Exception):
++                    self.docker('exec', '--user', 'root', self.target, 'python3', '-c', code, timeout=8,
++                                save=directory / 'pg-collector-stop.log')
++                try:
++                    rc = proc.wait(timeout=5)
++                except subprocess.TimeoutExpired:
++                    with contextlib.suppress(Exception):
++                        self.docker('exec', '--user', 'root', self.target, 'python3', '-c', code.replace('SIGTERM', 'SIGKILL'), timeout=8,
++                                    save=directory / 'pg-collector-kill.log')
++                    proc.kill(); proc.wait(timeout=3); rc = -9
++            finally:
++                log.close()
++            done = read(directory / 'pg-samples.jsonl.done.json', {})
++            write(directory / 'pg-collector-exit.json', {'exit': rc, 'diagnostic_only': True, 'completion_receipt': done, 'instrumentation_valid': rc == 0 and done.get('pass') is True})
++
++    def client_environment_witness(self, directory, run_id, count):
++        code = "import pathlib,os,json;binary=" + repr(self.cfg['native_binary']) + ";run=" + repr(run_id) + ";rows=[]\nfor p in pathlib.Path('/proc').glob('[0-9]*/cmdline'):\n try:\n  a=p.read_bytes().split(bytes([0]));\n  if os.path.realpath(p.parent/'exe')==binary and run.encode() in a:\n   env=dict(x.split(bytes([61]),1) for x in (p.parent/'environ').read_bytes().split(bytes([0])) if bytes([61]) in x);rows.append({'pid':int(p.parent.name),'env':{k:env.get(k.encode(),b'').decode() for k in ['GOMAXPROCS','GODEBUG']}})\n except OSError: pass\nprint(json.dumps(rows))"
++        # Native processes wait for the common start five seconds ahead; allow
++        # their Docker exec handshakes to complete before reading /proc.
++        deadline = time.monotonic() + 3
++        while True:
++            rows = json.loads(self.docker('exec', '--user', 'root', self.client, 'python3', '-c', code, timeout=5).stdout)
++            if len(rows) == count:
++                break
++            if time.monotonic() >= deadline:
++                raise RuntimeError('missing native process environment witnesses')
++            time.sleep(.1)
++        assert all(row['env'] == self.cfg['client_env'] for row in rows)
++        write(directory / 'client-env-witness.json', rows)
+ 
+     def phase(self, case_dir, ccase, case, action, serial):
+         stage, users = action['stage'], action['users']
+@@ -215,12 +314,15 @@
+             for container, label, pgid in [(self.target, 'target', app['pgid']), (self.client, 'load', -1)]:
+                 self.docker('exec', '--user', 'root', '-d', container, 'python3', self.monitor_helper,
+                             '--out', cdir + '/' + label + '-monitor.jsonl', '--stop', cdir + '/' + label + '-monitor.stop', '--app-pgid', str(pgid))
++            durations = self.protocol[stage]
++            self.pg_snapshot(directory, cdir, state['database'], 'before')
++            self.start_pg_collector(directory, cdir, state['database'], sum(durations.values()) + 90)
+             start_ms = time.time_ns() // 1000000 + 5000
+-            durations = self.protocol[stage]
+             commands = []
++            self.current_generators = processes
+             for shard in allocation:
+                 i = shard['box_index']
+-                argv = ['docker', 'exec', '--user', 'root', '--env', 'GOMAXPROCS=1', self.client, self.cfg['native_binary'], 'run',
++                argv = ['docker', 'exec', '--user', 'root', '--env', 'GOMAXPROCS=1', '--env', 'GODEBUG=gctrace=1', self.client, self.cfg['native_binary'], 'run',
+                         '-target', f"http://{shard['host']}:{self.cfg['port']}", '-users', str(shard['users']),
+                         '-ramp', str(durations['ramp_s']) + 's', '-measure', str(durations['measure_s']) + 's',
+                         '-tail', str(durations['tail_s']) + 's', '-articles', '500000', '-think-scale', '1',
+@@ -231,6 +333,7 @@
+                 processes.append(subprocess.Popen(argv, stdout=log, stderr=subprocess.STDOUT))
+             self.current_generators = processes
+             write(directory / 'load-commands.json', commands)
++            self.client_environment_witness(directory, state['run_id'], len(allocation))
+             deadline = time.monotonic() + sum(durations.values()) + 45
+             heartbeat = time.monotonic() + 15
+             while any(proc.poll() is None for proc in processes):
+@@ -255,6 +358,11 @@
+             self.kill_generators()
+             raise
+         finally:
++            self.stop_pg_collectors()
++            try:
++                self.pg_snapshot(directory, cdir, state['database'], 'after')
++            except Exception as error:
++                state['pg_after_snapshot_error'] = str(error)
+             for log in logs:
+                 log.close()
+             for label in ['target', 'load']:
+@@ -266,6 +374,8 @@
+                 state['after_snapshot_error'] = str(error)
+             write(directory / 'phase.json', state)
+             result = audit_phase(directory, case_dir, self.plan, case, self.initial)
++            result['diagnostic_only'] = True
++            result['capacity_score'] = None
+             write(directory / 'assessment.json', result)
+             self.event('phase_complete', case=case['name'], id=name, classification=result['classification'],
+                        native_qualified=result.get('native_qualified'), native_lg_limited=result.get('native_verdict', {}).get('lg_limited'),
+@@ -304,16 +414,19 @@
+                          '--port', str(self.cfg['port']), '--secret', self.cfg['jwt_secret'], timeout=80)
+             app_started = True
+             self.idle(5)
+-            while True:
+-                action = next_action(record['phases'], self.protocol)
+-                if action['stage'] == 'stop':
+-                    record['status'], record['stop_action'] = action['reason'], action
+-                    break
++            for serial, action in enumerate(self.plan['fixed_sequence'], 1):
+                 if record['phases']:
+                     self.idle(self.protocol['between_phase_minimum_s'])
+-                result = self.phase(directory, cdir, case, action, len(record['phases']) + 1)
++                result = self.phase(directory, cdir, case, action, serial)
+                 record['phases'].append(result)
+                 write(directory / 'session.json', record)
++                state = read(directory / 'phases' / result['id'] / 'phase.json')
++                if state.get('error') or result.get('post_load_healthy') is False:
++                    record['status'] = 'DIAGNOSTIC_ABORTED_INFRASTRUCTURE_OR_UNHEALTHY_APP'
++                    break
++            else:
++                record['status'] = 'DIAGNOSTIC_FIXED_SEQUENCE_COMPLETED'
++            record.update(diagnostic_only=True, capacity_score=None, official_rank_proven=False)
+         except Exception as error:
+             record.update(status='INVALID_SESSION', error=type(error).__name__ + ': ' + str(error))
+         finally:
+@@ -342,8 +455,13 @@
+         failure = None
+         hostthread = None
+         try:
++            power = self.command(['pmset', '-g', 'batt'], save=self.root / 'host-power-start.txt')
++            assert 'AC Power' in power.stdout, 'diagnostic requires AC power before any runtime action'
++            self.command(['pmset', '-g', 'assertions'], save=self.root / 'host-awake-assertions.txt')
+             target = self.inspect(self.target, self.root / 'target-inspect.json', 8, 16 * 1024**3)
+             assert target['State']['Running']
++            check = "import socket,sys;sys.exit(1 if any(socket.socket().connect_ex(('127.0.0.'+str(i),int(sys.argv[1])))==0 for i in range(1,9)) else 0)"
++            self.docker('exec', '--user', 'root', self.target, 'python3', '-c', check, str(self.cfg['port']))
+             self.control('probe-limits', self.croot + '/runuser-prlimit-probe.json')
+             self.control('snapshot', self.croot + '/target-initial.json')
+             self.initial = read(self.root / 'target-initial.json')
+@@ -352,13 +470,12 @@
+             assert all(settings[k] == 'on' for k in ['fsync', 'synchronous_commit', 'full_page_writes']), 'PostgreSQL durability differs'
+             low, high = map(int, self.initial['ip_local_port_range'].split())
+             assert 20000 < high - low - 1024, 'too few ephemeral ports per destination'
+-            check = "import socket,sys;sys.exit(1 if any(socket.socket().connect_ex(('127.0.0.'+str(i),int(sys.argv[1])))==0 for i in range(1,9)) else 0)"
+-            self.docker('exec', '--user', 'root', self.target, 'python3', '-c', check, str(self.cfg['port']))
+             self.docker('run', '-d', '--user', 'root', '--name', self.client, '--label', 'multicore.local.owner=' + self.name,
+                         '--cpus', str(self.load_cpus), '--memory', str(self.load_memory), '--memory-swap', str(self.load_memory), '--ulimit', 'nofile=200000:200000',
+                         '--network', 'container:' + self.target,
+                         '--volume', str(self.host_base) + ':' + self.cfg['container_evidence'] + ':rw',
+                         '--volume', self.cfg['old_host_evidence'] + ':/evidence:ro',
++                        '--env', 'GOMAXPROCS=1', '--env', 'GODEBUG=gctrace=1',
+                         '--entrypoint', '/bin/sh', self.cfg.get('load_image') or target['Image'], '-c', 'exec sleep infinity')
+             self.load_created = True
+             self.inspect(self.client, self.root / 'load-inspect.json', self.load_cpus, self.load_memory)
+@@ -374,6 +491,7 @@
+             self.event('controller_error', error=failure)
+             self.kill_generators()
+         finally:
++            self.stop_pg_collectors()
+             self.stop_host.set()
+             if hostthread:
+                 hostthread.join(timeout=10)
+@@ -392,7 +510,7 @@
+             write(self.root / 'final-resource-check.json', {'valid': not resource_errors, 'errors': resource_errors,
+                   'target_cpus': 8, 'target_memory_bytes': 16 * 1024**3,
+                   'load_cpus': self.load_cpus, 'load_memory_bytes': self.load_memory})
+-            write(self.root / 'controller-result.json', {'error': failure, 'cases': self.case_records, 'resource_errors': resource_errors})
++            write(self.root / 'diagnostic-result.json', {'diagnostic_only': True, 'capacity_score': None, 'official_rank_proven': False, 'error': failure, 'cases': self.case_records, 'resource_errors': resource_errors})
+             self.event('controller_finished', error=failure, output=str(self.root))
+             self.events.close()
+         return 1 if failure or resource_errors else 0

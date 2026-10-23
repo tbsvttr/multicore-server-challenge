@@ -1,0 +1,28 @@
+{
+  "scope": "Correctness only: quiet writer deadline, grouped rollback and commit-before-response",
+  "base": "http://127.0.0.1:3030",
+  "database": "mc_pair_runtime_075648",
+  "nonce": "rtprobe_885428d25d9f4aeaa8190622a2b8e3dd",
+  "started_utc": "2026-10-23T07:56:54Z",
+  "pass": false,
+  "events": [
+    {
+      "event": "quiet write completed and immediately committed",
+      "monotonic_s": 77846.520592593,
+      "elapsed_s": 0.07323733299563173,
+      "slug": "rtprobe-885428d25d9f4aeaa8190622a2b8e3dd-quiet-500001"
+    }
+  ],
+  "cleanup": {
+    "fixture_users_and_cascaded_data_removed": true,
+    "verified": true
+  },
+  "pg_context": "postgres|mc_pair_runtime_075648|f",
+  "quiet_write": {
+    "status": 201,
+    "elapsed_s": 0.07323733299563173,
+    "committed_read_after_response": true
+  },
+  "error": "AssertionError: no PostgreSQL rollback counter increase observed",
+  "finished_utc": "2026-10-23T07:57:00Z"
+}

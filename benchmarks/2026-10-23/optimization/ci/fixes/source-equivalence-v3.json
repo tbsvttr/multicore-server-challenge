@@ -1,0 +1,23 @@
+{
+  "source_commit": "23a14e8cbf32113509cd0ad941320ef947508981",
+  "validation_commit": "9457487d48641b2caa16895174f2c3ffb37b781e",
+  "source_tree": "334be131b9c0297e78a2377656e207a11a0bada6",
+  "submission_tree_equal": true,
+  "only_added_validation_paths": [
+    "A\t.github/validation-goose/article-update-race.py",
+    "A\t.github/validation-goose/bcrypt-passwords.go",
+    "A\t.github/validation-goose/favorite-race-probe.py",
+    "A\t.github/validation-goose/password-nul-probe.py",
+    "A\t.github/validation-goose/quiet-read-timer.py",
+    "A\t.github/validation-goose/read-batches.py",
+    "A\t.github/validation-goose/runtime-write-probe-v2.py",
+    "A\t.github/validation-goose/validate.sh",
+    "A\t.github/workflows/goose-optimized-validation.yml"
+  ],
+  "patch_sha256": "5a5193a21b388dc049eb6f600a26345c41636c11117d02e8c201be1a6a6d55e2",
+  "prior_attempts": {
+    "39935260552": "Workflow validation failed before jobs; fixed job env context.",
+    "39935669049": "All four197 suites/native/JWT/lane checks passed; harness stock launch failed at unprivileged fd-limit raise."
+  },
+  "correction": "Raise existing normal-user harness shell inherited fd limit via scoped sudo prlimit; preserve normal-user app process launch and PID tracking."
+}

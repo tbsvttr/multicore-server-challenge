@@ -1,0 +1,165 @@
+{
+  "schema": "multicore-local-capacity-preflight-v1",
+  "created_utc": "2026-10-23T09:57:12.652203+00:00",
+  "status": "PASS",
+  "checks_passed": 9,
+  "checks_total": 9,
+  "run": "/private/tmp/multicore-optimize-20261023/capacity_20261023t095453_5574c0",
+  "checks": [
+    {
+      "check": "run_plan_matches_frozen_plan",
+      "pass": true,
+      "evidence": {
+        "frozen_plan": "/private/tmp/multicore-optimize-20261023/profiles/capacity-final-plan.json",
+        "run_plan": "/private/tmp/multicore-optimize-20261023/capacity_20261023t095453_5574c0/plan.json",
+        "sha256": "7c9b107a439a7235969d85f89cc21679c165ee2da27b584f37cbf5aaf1c84c62"
+      }
+    },
+    {
+      "check": "source_configuration_receipt_matches_saved_file",
+      "pass": true,
+      "evidence": {
+        "source_config": "/private/tmp/multicore-optimize-20261023/profiles/capacity-final-config.json",
+        "sha256": "604242c667fd1abc84fcf8613c92527cf5b4f73a320a39b7ce4521522eb37315"
+      }
+    },
+    {
+      "check": "all_frozen_tool_hashes_match",
+      "pass": true,
+      "evidence": {
+        "manifest": "/private/tmp/multicore-optimize-20261023/capacity_20261023t095453_5574c0/tool-sha256.json",
+        "manifest_sha256": "e3c50e8d8182a0a338770b2a77c62a4672b58dc538d368860af91e80dafdb7eb",
+        "tool_sha256": {
+          "target_helper.py": "a079f25c5c1381392c4824267722c8ba74214ca6f73c98f4a6edfe6ec20b0581",
+          "monitor.py": "c33fa617d1758269adb44d71372b457257c92e1ec877d23a7673a688f590a4b4",
+          "capacity_controller.py": "11b903a74d1075596fc6e2bdcf40b85ff15402800dcf17794151eb932ebe81e3",
+          "search_policy.py": "39853555e86511866d8fceb98d03bb21a731be09e20170029de70e73910f93a0",
+          "audit/aggregate.py": "c237a3266542e6fe6bc4c9917d0db0abb489ce826596ad1fc6e67ff0aae31e71",
+          "audit/profile_one_arm.py": "ce9bbc4cf5f7281bfc5150eb0572ceb3e663e4ced2e6f86b16faf626ecba631b",
+          "audit/primitives.py": "9b021899e5f82cce7fc32281e8c6d0e36f1438a71d971cf8fd113b71ae371011",
+          "audit/test_capacity.py": "a4afb71667b3c10af1aa08525ef6831571981a9d6878ab9993b13c11682f4f6b",
+          "audit/audit_calibration.py": "dbae414f6b3bb47dc53d059eb132558203e6c3a099990f38558b49d6666278ed",
+          "audit/evidence.py": "d139f24d837525eff80c7894b82e8ebbe74d968317dd95ecc116f6f99f91ac87"
+        }
+      }
+    },
+    {
+      "check": "rust7:full197_log_receipt",
+      "pass": true,
+      "evidence": {
+        "path": "/private/tmp/multicore-optimize-20261023/builds/rust7-full/output.log",
+        "sha256": "cf6dfe613fabf1936d051d8b95e3705a4f1c097801ae2be886f6c5f5aa9eba95",
+        "binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241"
+      }
+    },
+    {
+      "check": "goose32:full197_log_receipt",
+      "pass": true,
+      "evidence": {
+        "path": "/private/tmp/multicore-optimize-20261023/builds/leader1-full/output.log",
+        "sha256": "5134e8354b07c4b7a7105dd870aeafa45cbaeab5274363273b402b4013216d36",
+        "binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21"
+      }
+    },
+    {
+      "check": "rust_frozen_binary_sha",
+      "pass": true,
+      "evidence": {
+        "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t095453_5574c0/cases/rust7/frozen/app",
+        "sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+        "source_manifest_sha256": "75df8e5d5c8e45aaa1a763fa93d4052684e6cd0df54a7993d542318b73cc5b99"
+      }
+    },
+    {
+      "check": "fresh_full_clone_counts",
+      "pass": true,
+      "evidence": {
+        "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t095453_5574c0/cases/rust7/database.json",
+        "sha256": "0236bc664cd53115a4d03fcdf9abb620f256b3c1ef0136000814c86d38ce7b27",
+        "database": "mc_pair_20261023_095453_5574c0_1",
+        "template": "conduit_seed",
+        "counts": {
+          "users": 100000,
+          "articles": 500000,
+          "size_bytes": 2428491455
+        },
+        "scope": "Per-clone users/articles count witness. All-seven-table full template count+fingerprint validation is inherited from original seed script, not newly queried here."
+      }
+    },
+    {
+      "check": "app_healthy_normal_uid_nofile",
+      "pass": true,
+      "evidence": {
+        "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t095453_5574c0/cases/rust7/app.json",
+        "sha256": "cdc812121b357852c039655b1ad8e50593b867604f2e48b9555b132b82f427d7",
+        "processes": [
+          {
+            "pid": 14173,
+            "uid": 501,
+            "nofile_soft": 200000,
+            "nofile_hard": 200000,
+            "exe": "/comparison/optimization/capacity_20261023t095453_5574c0/cases/rust7/frozen/app",
+            "start_ticks": 8489161
+          }
+        ]
+      }
+    },
+    {
+      "check": "pg18_fixed_durable",
+      "pass": true,
+      "evidence": {
+        "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t095453_5574c0/target-initial.json",
+        "sha256": "3de6017c694e924957c59ceaa6c6b9946a67c3390fbaf760b4964c64a78c1536",
+        "settings": {
+          "server_version_num": "180006",
+          "max_connections": "100",
+          "fsync": "on",
+          "synchronous_commit": "on",
+          "full_page_writes": "on"
+        }
+      }
+    }
+  ],
+  "resource_witnesses": [
+    {
+      "kind": "target",
+      "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t095453_5574c0/target-inspect.json",
+      "sha256": "e9c8b47a028d6d9b7f0dd6c185764f8f1b07efa9d5854eb9e51cb0f080fdec8f",
+      "valid": true,
+      "id": "831ef5b57bcecd513ceac155a926f17cc9c2930bc6bc558ff898b5750a4723e8",
+      "name": "/multicore-comparison-target-20261023",
+      "host_config": {
+        "NanoCpus": 8000000000,
+        "Memory": 17179869184,
+        "MemorySwap": 17179869184,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "NetworkMode": "bridge"
+      }
+    },
+    {
+      "kind": "load",
+      "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t095453_5574c0/load-inspect.json",
+      "sha256": "95cb9409f56645556c518e1bfe83464639a56abc08075b495042cdc3acdd71e4",
+      "valid": true,
+      "id": "6e71c4c6fbd0ba7103262dd9a002d551ef956cc43c5de3c24c2dde234cf5bd1c",
+      "name": "/multicore-capacity-client-20261023t095453-41ddb8",
+      "host_config": {
+        "NanoCpus": 4000000000,
+        "Memory": 8589934592,
+        "MemorySwap": 8589934592,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "NetworkMode": "container:831ef5b57bcecd513ceac155a926f17cc9c2930bc6bc558ff898b5750a4723e8"
+      }
+    }
+  ],
+  "native_generator": {
+    "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t095453_5574c0/native-sha256.txt",
+    "receipt_sha256": "8372dc1d757c1522160eeaeecad40465afde4c361c2573207734c0f22d58f2b9",
+    "binary_sha256": "886eaa564c6cdab1a791534d6931d1b8eb9b5c21d1e1ebaaa2824616c4562cdb",
+    "matches_declared": true
+  },
+  "scope": "Read-only preflight receipts from the active run; no completed-phase/performance/capacity claim. Goose session is not launched at this preflight and remains separately checked by the completed-run audit.",
+  "execution": "No Docker, database/API requests, build, benchmark, controller/source edits or changes inside the active run directory."
+}

@@ -1,0 +1,60 @@
+--- a/sql.goose
++++ b/sql.goose
+@@ -209,6 +209,48 @@
+            "e.id, p.n, p.ord FROM members p LEFT JOIN e ON e.id = p.id ORDER BY p.ord, e.id DESC");
+ }
+ 
++// A bounded recent window can avoid many separate author-index walks for a
++// dense current feed. It is only used when it supplies ALL limit+offset ids.
++// Every article outside that window is older, so that successful prefix is
++// exact. Sparse, empty, deep-offset and inconsistent raw parameter cases retain
++// the existing indexed page query. All intermediate rows live in this statement.
++fn window_feed(out: u8[>..]&) {
++    out.append("WITH r AS MATERIALIZED (SELECT * FROM ");
++    requests(out, 4, 4);
++    out.append("), counts AS MATERIALIZED (SELECT r.p1,c.n FROM (SELECT DISTINCT p1 FROM r) r CROSS JOIN LATERAL (");
++    lateral(out, list_count(ST_FEED));
++    out.append(") c), queries AS MATERIALIZED (SELECT DISTINCT p1,p2,p3,p4 FROM r), ");
++    // Numeric equality stays safe regardless of PostgreSQL predicate evaluation order.
++    out.append("eligible AS MATERIALIZED (SELECT q.* FROM queries q JOIN counts c USING (p1) ");
++    out.append("WHERE q.p2 BETWEEN 1 AND 100 AND q.p3>=0 AND q.p4 BETWEEN 1 AND 512 ");
++    out.append("AND q.p4::numeric=q.p2::numeric+q.p3::numeric AND c.n>=q.p4), ");
++    out.append("followees AS MATERIALIZED (SELECT v.p1,ARRAY(SELECT fo.followee_id FROM follows fo ");
++    out.append("WHERE fo.follower_id=v.p1) AS ids FROM (SELECT DISTINCT p1 FROM eligible) v), ");
++    out.append("recent AS MATERIALIZED (SELECT a.id,a.author_id FROM articles a ORDER BY a.id DESC ");
++    out.append("LIMIT (SELECT COALESCE(max(LEAST(512,GREATEST(128,4*p4))),0) FROM eligible)), ");
++    out.append("fast AS MATERIALIZED (SELECT q.*,ARRAY(SELECT a.id FROM recent a ");
++    out.append("WHERE a.author_id=ANY(v.ids) ORDER BY a.id DESC LIMIT q.p4) AS ids ");
++    out.append("FROM eligible q JOIN followees v USING (p1)), ");
++    out.append("pages AS MATERIALIZED (SELECT r.p1,r.p2,r.p3,r.p4,p.id FROM queries r ");
++    out.append("LEFT JOIN fast f USING (p1,p2,p3,p4) LEFT JOIN LATERAL (");
++    out.append("SELECT x.id FROM (SELECT i.id FROM unnest(f.ids) AS i(id) ");
++    out.append("WHERE cardinality(f.ids)=r.p4 ORDER BY i.id DESC LIMIT r.p2 OFFSET r.p3) x ");
++    out.append("UNION ALL SELECT x.id FROM (");
++    lateral(out, list_page(ST_FEED));
++    out.append(") x WHERE f.ids IS NULL OR cardinality(f.ids)<>r.p4) p ON true), ");
++    out.append("members AS MATERIALIZED (SELECT r.ord,r.p1 AS viewer,c.n,p.id ");
++    out.append("FROM r JOIN pages p USING (p1,p2,p3,p4) JOIN counts c USING (p1)), ");
++    out.append("ids AS (SELECT DISTINCT id FROM pages WHERE id IS NOT NULL), ");
++    format(out, "e AS MATERIALIZED (SELECT a.id,a.slug,a.title,a.description,a.created_at,a.updated_at,a.author_id, ",
++           TAG_LIST, " AS tags, ", FAVORITES_COUNT, " AS fc,u.username,u.bio,u.image ",
++           "FROM ids JOIN articles a ON a.id=ids.id JOIN users u ON u.id=a.author_id) ",
++           "SELECT e.slug,e.title,e.description,e.created_at,e.updated_at,e.tags,e.fc, ",
++           "CASE WHEN e.id IS NULL THEN NULL::boolean ELSE ",
++           "(p.viewer <> 0 AND EXISTS (SELECT 1 FROM favorites f WHERE f.article_id=e.id AND f.user_id=p.viewer)) END, ",
++           "e.username,e.bio,e.image,CASE WHEN e.id IS NULL THEN NULL::boolean ELSE true END,e.id,p.n,p.ord ",
++           "FROM members p LEFT JOIN e ON e.id=p.id ORDER BY p.ord,e.id DESC");
++}
++
+ // Only currently queued article requests participate. The shared metadata is materialized inside this statement,
+ // never retained for another request. Unknown slugs emit no row; ordinality lets the caller route each 404.
+ fn batch_article(out: u8[>..]&) {
+@@ -260,7 +302,7 @@
+         ST_BATCH_ALL, ST_BATCH_TAG, ST_BATCH_AUTHOR, ST_BATCH_FAVORITED => batch_list(out, ST_LIST_ALL + i - ST_BATCH_ALL),
+         ST_SHARE_ALL, ST_SHARE_TAG, ST_SHARE_AUTHOR, ST_SHARE_FAVORITED => shared_list(out, ST_LIST_ALL + i - ST_SHARE_ALL),
+         ST_BATCH_ARTICLE => batch_article(out),
+-        ST_BATCH_FEED => batch_list(out, ST_FEED),
++        ST_BATCH_FEED => window_feed(out),
+         ST_BATCH_COMMENTS => batch_comments(out),
+         ST_ARTICLE => {
+             out.append("SELECT ");

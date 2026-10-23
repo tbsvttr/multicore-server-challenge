@@ -1,0 +1,22 @@
+[
+  "docker",
+  "exec",
+  "--user",
+  "root",
+  "multicore-comparison-target-20261023",
+  "setsid",
+  "--wait",
+  "python3",
+  "/comparison/optimization/diagnosticgoose110_20261023t164733_2f2b88/tools/pg_collect.py",
+  "--database",
+  "mc_pair_20261023_164733_2f2b88_1",
+  "--peer-postgres",
+  "--out",
+  "/comparison/optimization/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/pg-samples.jsonl",
+  "--stop",
+  "/comparison/optimization/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/pg-collector.stop",
+  "--interval",
+  "1",
+  "--max-seconds",
+  "225"
+]

@@ -1,0 +1,73 @@
+--- p1/capacity_controller.py
++++ p2/capacity_controller.py
+@@ -60,9 +60,10 @@
+     assert cfg['cases'][0]['expected_binary_sha256'] == '7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21'
+     assert cfg['expected_native_sha256'] == '886eaa564c6cdab1a791534d6931d1b8eb9b5c21d1e1ebaaa2824616c4562cdb'
+     assert cfg['load_cpus'] == 8 and cfg['load_memory_bytes'] == 8 * 1024**3
+-    assert cfg['client_env'] == {'GOMAXPROCS': '1', 'GODEBUG': 'gctrace=1'}
++    assert cfg['client_env'] == {'GOMAXPROCS': '2', 'GODEBUG': 'gctrace=1'}
+     assert cfg['collector_interval_s'] == 1.0
+     protocol = json.loads(json.dumps(DEFAULT_PROTOCOL))
++    protocol['gomaxprocs_per_shard'] = 2
+     protocol['load_memory_bytes'] = cfg['load_memory_bytes']
+     protocol['load_cpus'] = cfg['load_cpus']
+     protocol['client_cpu_scope_policy'] = cfg['client_cpu_scope_policy']
+@@ -75,8 +76,8 @@
+         protocol[key] = int(value)
+     assert 10 <= protocol['start_users'] <= protocol['max_users'] <= 160000
+     assert 1 <= protocol['max_probes'] <= 20 and 1 <= protocol['max_holds'] <= 8
+-    plan = {'schema': 'multicore-fixed-goose110-diagnostic-v1',
+-            'scope': 'DIAGNOSTIC ONLY: fixed warmup10k, probe100k, probe110k; GC/PG instrumentation. No hold, capacity score, performance comparison or rank claim.',
++    plan = {'schema': 'multicore-fixed-goose110-diagnostic-p2-v1',
++            'scope': 'DIAGNOSTIC ONLY: fixed warmup10k, probe100k, probe110k; explicit GOMAXPROCS2 and enriched blocker observations. No hold, capacity score, performance comparison or rank claim.',
+             'configuration': cfg, 'protocol': protocol,
+             'fixed_sequence': [{'stage': 'warmup', 'users': 10000}, {'stage': 'probe', 'users': 100000}, {'stage': 'probe', 'users': 110000}],
+             'capacity_search_disabled': True, 'holds_disabled': True,
+@@ -96,16 +97,17 @@
+ class Controller:
+     def __init__(self, plan_path):
+         self.plan_path, self.plan = plan_path, read(plan_path)
+-        assert self.plan['schema'] == 'multicore-fixed-goose110-diagnostic-v1'
++        assert self.plan['schema'] == 'multicore-fixed-goose110-diagnostic-p2-v1'
+         assert self.plan['capacity_search_disabled'] is True and self.plan['holds_disabled'] is True
+         assert self.plan['fixed_sequence'] == [{'stage': 'warmup', 'users': 10000}, {'stage': 'probe', 'users': 100000}, {'stage': 'probe', 'users': 110000}]
+-        assert self.plan['configuration']['client_env'] == {'GOMAXPROCS': '1', 'GODEBUG': 'gctrace=1'}
++        assert self.plan['configuration']['client_env'] == {'GOMAXPROCS': '2', 'GODEBUG': 'gctrace=1'}
+         assert sha(plan_path) == plan_path.with_suffix(plan_path.suffix + '.sha256').read_text().strip()
+         assert all(sha(Path(name)) == value for name, value in self.plan['prepared_tool_sha256'].items()), 'prepared diagnostic tools changed'
+         assert sha(Path(self.plan['source_config_path'])) == self.plan['source_config_sha256'], 'prepared config changed'
+         self.cfg, self.protocol = self.plan['configuration'], self.plan['protocol']
++        assert self.protocol['gomaxprocs_per_shard'] == 2
+         for name in ['warmup_users', 'warmup', 'probe', 'hold', 'target_cpus', 'target_memory_bytes',
+-                     'max_users_per_shard', 'max_shards', 'gomaxprocs_per_shard', 'resolution', 'load_cpu_limit_pct', 'rounding_policy']:
++                     'max_users_per_shard', 'max_shards', 'resolution', 'load_cpu_limit_pct', 'rounding_policy']:
+             assert self.protocol[name] == DEFAULT_PROTOCOL[name], 'normal protocol changed: ' + name
+         self.load_memory = load_memory_bytes(self.protocol, self.cfg)
+         self.load_cpus = load_cpus(self.protocol, self.cfg)
+@@ -113,7 +115,7 @@
+         growth_factor(self.protocol, self.cfg)
+         self.target = self.cfg['target_container']
+         stamp = time.strftime('%Y%m%dT%H%M%S', time.gmtime()).lower()
+-        self.name = 'diagnosticgoose110_' + stamp + '_' + os.urandom(3).hex()
++        self.name = 'diagnosticgoose110p2_' + stamp + '_' + os.urandom(3).hex()
+         self.host_base = Path(self.cfg['host_evidence'])
+         self.root = self.host_base / 'optimization' / self.name
+         self.root.mkdir(parents=True, exist_ok=False)
+@@ -322,7 +324,7 @@
+             self.current_generators = processes
+             for shard in allocation:
+                 i = shard['box_index']
+-                argv = ['docker', 'exec', '--user', 'root', '--env', 'GOMAXPROCS=1', '--env', 'GODEBUG=gctrace=1', self.client, self.cfg['native_binary'], 'run',
++                argv = ['docker', 'exec', '--user', 'root', '--env', 'GOMAXPROCS=2', '--env', 'GODEBUG=gctrace=1', self.client, self.cfg['native_binary'], 'run',
+                         '-target', f"http://{shard['host']}:{self.cfg['port']}", '-users', str(shard['users']),
+                         '-ramp', str(durations['ramp_s']) + 's', '-measure', str(durations['measure_s']) + 's',
+                         '-tail', str(durations['tail_s']) + 's', '-articles', '500000', '-think-scale', '1',
+@@ -475,7 +477,7 @@
+                         '--network', 'container:' + self.target,
+                         '--volume', str(self.host_base) + ':' + self.cfg['container_evidence'] + ':rw',
+                         '--volume', self.cfg['old_host_evidence'] + ':/evidence:ro',
+-                        '--env', 'GOMAXPROCS=1', '--env', 'GODEBUG=gctrace=1',
++                        '--env', 'GOMAXPROCS=2', '--env', 'GODEBUG=gctrace=1',
+                         '--entrypoint', '/bin/sh', self.cfg.get('load_image') or target['Image'], '-c', 'exec sleep infinity')
+             self.load_created = True
+             self.inspect(self.client, self.root / 'load-inspect.json', self.load_cpus, self.load_memory)

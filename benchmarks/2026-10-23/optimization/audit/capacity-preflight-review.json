@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "executed": false,
+  "test_command": "python3 /private/tmp/multicore-optimize-20261023/audit/test_capacity.py",
+  "checks_passed": 38,
+  "syntax_parse_files": [
+    "capacity_controller.py",
+    "search_policy.py",
+    "audit/aggregate.py",
+    "audit/evidence.py",
+    "audit/primitives.py",
+    "audit/test_capacity.py"
+  ],
+  "changes": {
+    "external_client": "configuration.load_memory_bytes is copied to protocol; allowed4or8GiB/default4; Docker memory=memory-swap=declared bytes; inspect/continuous monitor/independent aggregate use the same value",
+    "server": "unchanged8CPU/16GiB/no swap; external client unchanged4CPU/no swap",
+    "search": "when two-significant-digit rounded midpoint hits a bound, use integer midpoint strictly between bounds;150000PASS/160000FAIL probes155000; finite probe/hold budgets and5% resolution unchanged"
+  },
+  "history": "No historical plan, result or raw evidence rewritten. No Docker, source app changes, builds or benchmark execution.",
+  "code_sha256": {
+    "capacity_controller.py": "11b903a74d1075596fc6e2bdcf40b85ff15402800dcf17794151eb932ebe81e3",
+    "search_policy.py": "39853555e86511866d8fceb98d03bb21a731be09e20170029de70e73910f93a0",
+    "audit/aggregate.py": "c237a3266542e6fe6bc4c9917d0db0abb489ce826596ad1fc6e67ff0aae31e71",
+    "audit/evidence.py": "d139f24d837525eff80c7894b82e8ebbe74d968317dd95ecc116f6f99f91ac87",
+    "audit/primitives.py": "9b021899e5f82cce7fc32281e8c6d0e36f1438a71d971cf8fd113b71ae371011",
+    "audit/test_capacity.py": "a4afb71667b3c10af1aa08525ef6831571981a9d6878ab9993b13c11682f4f6b",
+    "CAPACITY.md": "0b5d566441f90f1fb6688c14b265e45e1fec3919de90292bd21d0cc07d36424e"
+  }
+}

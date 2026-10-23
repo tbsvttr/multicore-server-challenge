@@ -1,0 +1,69 @@
+--- runtime-write-probe.py
++++ runtime-write-probe-v2.py
+@@ -5,6 +5,8 @@
+ Inputs BASE, DATABASE_URL, JWT_SECRET, normal administrative PG* credentials.
+ No compiler/server/Docker is started. A temporary deferred test trigger blocks
+ one commit on an advisory lock; it and all uniquely named fixtures are removed.
++V2 retains registration evidence before statistics checks and accommodates PG18
++backend-local statistics flushing (10-second idle callback).
+ These fixture conditions are deliberately not performance-measurement conditions.
+ """
+ import argparse
+@@ -113,8 +115,9 @@
+     return int(uid)
+ 
+ def rollback_count():
+-    # Fresh connection avoids a cached statistics snapshot. PG may flush lazily.
+-    return int(sql("SELECT xact_rollback FROM pg_stat_database WHERE datname=current_database()"))
++    # This clears only the observer snapshot; it cannot flush another backend's counters.
++    return int(sql("SET stats_fetch_consistency='none'; SELECT pg_stat_clear_snapshot(); "
++                   "SELECT xact_rollback FROM pg_stat_database WHERE datname=current_database()"))
+ 
+ def session_send(query):
+     lock_process.stdin.write(query + '\n')
+@@ -201,17 +204,37 @@
+     assert sum(r['status'] == 201 for r in collisions) == 1, collisions
+     assert all(r['status'] == 201 for r in peers), peers
+     assert sql('SELECT count(*) FROM users WHERE username=' + quote(shared)) == '1'
+-    after_rollbacks = before_rollbacks
+-    deadline = time.monotonic() + 5
+-    while time.monotonic() < deadline and after_rollbacks <= before_rollbacks:
+-        time.sleep(.1)
+-        after_rollbacks = rollback_count()
+-    assert after_rollbacks > before_rollbacks, 'no PostgreSQL rollback counter increase observed'
+     record['grouped_error_probe'] = {'registrations': registered,
+         'duplicate_successes': 1, 'independent_successes': len(peers),
+-        'xact_rollback_before': before_rollbacks, 'xact_rollback_after': after_rollbacks,
+-        'rollback_delta': after_rollbacks-before_rollbacks,
++        'xact_rollback_before': before_rollbacks,
+         'limitation': 'Concurrent peer outcomes and DB rollback counters verify the error path; exact membership of each Sync group is not instrumented.'}
++    # PG18 pgstat.c: non-forced updates are limited to one per second; its idle
++    # callback is10s. A fresh observer cannot force the application writer to flush.
++    # With the required WORKERS=1, this benign committed update wakes that same sole
++    # writer after the minimum interval. It cannot itself create a rollback.
++    time.sleep(1.1)
++    pulse_bio = nonce + ' statistics flush witness'
++    pulse = api('PUT', '/api/user', {'user': {'bio': pulse_bio}}, auth)
++    assert pulse['status'] == 200, {'statistics_pulse_status': pulse['status']}
++    assert sql('SELECT bio FROM users WHERE id=' + str(uid)) == pulse_bio
++    record['grouped_error_probe']['statistics_flush_assistance'] = {
++        'wait_before_benign_writer_update_s': 1.1, 'update_status': pulse['status'],
++        'update_committed': True, 'observer_consistency': 'none, clear snapshot, fresh connection',
++        'wait_after_update_limit_s': 12,
++        'pg18_source': 'https://raw.githubusercontent.com/postgres/postgres/REL_18_STABLE/src/backend/utils/activity/pgstat.c',
++        'documentation': 'https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-STATS-VIEWS'}
++    after_rollbacks = before_rollbacks
++    deadline = time.monotonic() + 12
++    readings = []
++    while time.monotonic() < deadline:
++        after_rollbacks = rollback_count()
++        readings.append({'monotonic_s': time.monotonic(), 'xact_rollback': after_rollbacks})
++        if after_rollbacks > before_rollbacks:
++            break
++        time.sleep(.2)
++    record['grouped_error_probe'].update(xact_rollback_after=after_rollbacks,
++        rollback_delta=after_rollbacks-before_rollbacks, statistics_readings=readings)
++    assert after_rollbacks > before_rollbacks, 'no PostgreSQL rollback counter increase after writer wake and idle-flush allowance'
+     event('duplicate/independent registration peers passed', successes=len(peers)+1,
+           expected_422=len(collisions)-1, rollback_delta=after_rollbacks-before_rollbacks)
+ 

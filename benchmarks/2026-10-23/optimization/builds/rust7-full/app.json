@@ -1,0 +1,68 @@
+{
+  "launcher_pid": 8229,
+  "pgid": 8229,
+  "frozen_binary": "/comparison/optimization/builds/rust7-full/frozen/app",
+  "binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+  "app_user": "challenge",
+  "app_uid": 501,
+  "launch_wrapper": [
+    "runuser",
+    "-u",
+    "challenge",
+    "--",
+    "prlimit",
+    "--nofile=200000:200000",
+    "--"
+  ],
+  "database": "mc_pair_rustfull_083312",
+  "port": 3034,
+  "env": {
+    "DATABASE_URL": "postgres://conduit:conduit@127.0.0.1:5432/mc_pair_rustfull_083312",
+    "JWT_SECRET": "multicore-server-challenge",
+    "HOST": "0.0.0.0",
+    "PORT": "3034",
+    "APP_THREADS": "2",
+    "DB_CONNS": "6",
+    "DB_WRITE_CONNS": "2",
+    "BCRYPT_THREADS": "1",
+    "WRITE_BATCH_US": "1000",
+    "BCRYPT_BATCH_MS": "160",
+    "READ_BATCH_SIZE": "32",
+    "READ_BATCH_US": "0",
+    "READ_SQL_BATCH": "1",
+    "READ_ROUTE_SLACK": "8",
+    "READ_TAG_ROUTE": "1",
+    "READ_COMMENT_SET": "1",
+    "READ_TAG_BATCH": "1"
+  },
+  "start_wall_ns": 1792744396619610930,
+  "start_monotonic_ns": 80028629747629,
+  "launcher_start_ticks": 8002862,
+  "actual_app": {
+    "valid": true,
+    "expected_uid": 501,
+    "minimum_nofile": 200000,
+    "processes": [
+      {
+        "pid": 8230,
+        "pgid": 8229,
+        "start_ticks": 8002863,
+        "exe": "/comparison/optimization/builds/rust7-full/frozen/app",
+        "uid": 501,
+        "uids": [
+          501,
+          501,
+          501,
+          501
+        ],
+        "nofile_soft": 200000,
+        "nofile_hard": 200000,
+        "proc_limits": "Limit                     Soft Limit           Hard Limit           Units     \nMax cpu time              unlimited            unlimited            seconds   \nMax file size             unlimited            unlimited            bytes     \nMax data size             unlimited            unlimited            bytes     \nMax stack size            8388608              unlimited            bytes     \nMax core file size        0                    unlimited            bytes     \nMax resident set          unlimited            unlimited            bytes     \nMax processes             unlimited            unlimited            processes \nMax open files            200000               200000               files     \nMax locked memory         unlimited            unlimited            bytes     \nMax address space         unlimited            unlimited            bytes     \nMax file locks            unlimited            unlimited            locks     \nMax pending signals       64023                64023                signals   \nMax msgqueue size         819200               819200               bytes     \nMax nice priority         0                    0                    \nMax realtime priority     0                    0                    \nMax realtime timeout      unlimited            unlimited            us        \n",
+        "proc_status": "Name:\tapp\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t8230\nNgid:\t0\nPid:\t8230\nPPid:\t8229\nTracerPid:\t0\nUid:\t501\t501\t501\t501\nGid:\t501\t501\t501\t501\nFDSize:\t64\nGroups:\t501 \nNStgid:\t8230\nNSpid:\t8230\nNSpgid:\t8229\nNSsid:\t8229\nKthread:\t0\nVmPeak:\t 1258736 kB\nVmSize:\t 1193220 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t    9384 kB\nVmRSS:\t    9384 kB\nRssAnon:\t    6456 kB\nRssFile:\t    2928 kB\nRssShmem:\t       0 kB\nVmData:\t 1057672 kB\nVmStk:\t     132 kB\nVmExe:\t    1656 kB\nVmLib:\t    2460 kB\nVmPTE:\t      80 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t3\nSigQ:\t13/64023\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000001000\nSigCgt:\t0000000100000440\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tvulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t3ff\nCpus_allowed_list:\t0-9\nMems_allowed:\t1\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t110\nnonvoluntary_ctxt_switches:\t21\n"
+      }
+    ],
+    "reasons": []
+  },
+  "actual_app_pid": 8230,
+  "actual_app_start_ticks": 8002863
+}

@@ -1,0 +1,79 @@
+{
+  "target_container": "multicore-comparison-target-20261023",
+  "host_evidence": "/private/tmp/multicore-comparison-20261023",
+  "container_evidence": "/comparison",
+  "old_host_evidence": "/private/tmp/multicore-research-20261022",
+  "native_binary": "/evidence/tools/loadgen",
+  "expected_native_sha256": "886eaa564c6cdab1a791534d6931d1b8eb9b5c21d1e1ebaaa2824616c4562cdb",
+  "port": 3000,
+  "jwt_secret": "multicore-server-challenge",
+  "search_overrides": {
+    "start_users": 100000,
+    "max_users": 130000,
+    "max_probes": 16,
+    "max_holds": 4
+  },
+  "load_memory_bytes": 8589934592,
+  "cases": [
+    {
+      "name": "rust7",
+      "binary": "/work/submissions/rust-tokio-Scooter1337/target/release/conduit",
+      "source_dir": "/work/submissions/rust-tokio-Scooter1337",
+      "env": {
+        "APP_THREADS": "2",
+        "DB_CONNS": "6",
+        "DB_WRITE_CONNS": "2",
+        "BCRYPT_THREADS": "1",
+        "WRITE_BATCH_US": "1000",
+        "BCRYPT_BATCH_MS": "160",
+        "READ_BATCH_SIZE": "32",
+        "READ_BATCH_US": "0",
+        "READ_SQL_BATCH": "1",
+        "READ_ROUTE_SLACK": "8",
+        "READ_TAG_ROUTE": "1",
+        "READ_COMMENT_SET": "1",
+        "READ_TAG_BATCH": "1"
+      },
+      "expected_binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+      "source_revision": "PR7 dc7c249229bd43d8752e7ffb28ce81ee4401d8ae; canonical merged submission tree f542997eb07942e25fa44b7f288c8e1d508c176c; all66 canonical files verified byte-identical",
+      "conformance": {
+        "passed": true,
+        "checks_passed": 197,
+        "checks_total": 197,
+        "binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+        "log_host_path": "/private/tmp/multicore-optimize-20261023/builds/rust7-full/output.log",
+        "log_sha256": "cf6dfe613fabf1936d051d8b95e3705a4f1c097801ae2be886f6c5f5aa9eba95"
+      }
+    },
+    {
+      "name": "goose32",
+      "binary": "/comparison/optimization/candidates/leader1/bin/conduit",
+      "source_dir": "/comparison/optimization/candidates/leader1",
+      "expected_binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+      "env": {
+        "WORKERS": "2",
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "BCRYPT_BATCH_MS": "250",
+        "READ_BATCH": "32",
+        "READ_HOLD": "1",
+        "ARTICLE_BATCH": "1",
+        "WRITE_BATCH_US": "1000",
+        "READ_BATCH_US": "5000"
+      },
+      "source_revision": "23a14e8cbf32113509cd0ad941320ef947508981",
+      "conformance": {
+        "passed": true,
+        "checks_passed": 197,
+        "checks_total": 197,
+        "binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+        "log_host_path": "/private/tmp/multicore-optimize-20261023/builds/leader1-full/output.log",
+        "log_sha256": "5134e8354b07c4b7a7105dd870aeafa45cbaeab5274363273b402b4013216d36"
+      }
+    }
+  ],
+  "load_cpus": 8,
+  "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+  "study_note": "New complete balanced LOCAL gradual search after both160k probes invalidated by genuine generator scheduling delays. Start100k, growth1.1, ceiling130k supplies headroom below known invalid160k. Both cases same protocol/fresh fullseeds; no prior result reused. Ceiling pass yields held-user LOWER BOUND, never invented maximum. All native raw/local qualification retained; originalapp+PG8CPU16GiB unchanged.",
+  "growth_factor": 1.1
+}

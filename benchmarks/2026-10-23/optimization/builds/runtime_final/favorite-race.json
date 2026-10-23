@@ -1,0 +1,94 @@
+{
+  "scope": "deterministic two-transaction favorite count correctness probe",
+  "base": "http://127.0.0.1:3030",
+  "database": "mc_pair_runtime_095252",
+  "started_utc": "2026-10-23T09:53:06Z",
+  "pass": true,
+  "events": [
+    {
+      "event": "fresh fixture visible",
+      "at_monotonic": 84779.631800957,
+      "count": 0
+    },
+    {
+      "event": "transaction T1 inserted two favorites without committing",
+      "at_monotonic": 84779.659419332
+    },
+    {
+      "event": "API backend blocked on T1",
+      "at_monotonic": 84779.743853416,
+      "witness": [
+        {
+          "pid": 13874,
+          "wait_event_type": "Lock",
+          "wait_event": "transactionid",
+          "query": "WITH t AS (SELECT id FROM articles WHERE slug = $2), w AS (INSERT INTO favorites (user_id, article_id) SELECT $1, id FROM t ON CONFLICT DO NOTHING) SELECT id FROM t"
+        }
+      ]
+    },
+    {
+      "event": "transaction T1 committed",
+      "at_monotonic": 84779.745493166
+    },
+    {
+      "event": "comparison complete",
+      "at_monotonic": 84779.775928541,
+      "response_count": 2,
+      "committed_count": 2,
+      "passed": true
+    }
+  ],
+  "fixture": {
+    "user_a": 100044,
+    "user_b": 100045,
+    "article": 500002,
+    "slug": "favorite_probe_31644285b7244fbfb3dd3381f96c3a8e"
+  },
+  "favorite_response": {
+    "status": 200,
+    "body": {
+      "article": {
+        "slug": "favorite_probe_31644285b7244fbfb3dd3381f96c3a8e",
+        "title": "race probe",
+        "description": "dedicated test fixture",
+        "body": "probe body",
+        "createdAt": "2026-10-23T09:53:06.530Z",
+        "updatedAt": "2026-10-23T09:53:06.530Z",
+        "tagList": [],
+        "favoritesCount": 2,
+        "favorited": true,
+        "author": {
+          "username": "favorite_probe_31644285b7244fbfb3dd3381f96c3a8e_a",
+          "bio": null,
+          "image": null,
+          "following": false
+        }
+      }
+    }
+  },
+  "committed_count": 2,
+  "immediate_get": {
+    "status": 200,
+    "body": {
+      "article": {
+        "slug": "favorite_probe_31644285b7244fbfb3dd3381f96c3a8e",
+        "title": "race probe",
+        "description": "dedicated test fixture",
+        "body": "probe body",
+        "createdAt": "2026-10-23T09:53:06.530Z",
+        "updatedAt": "2026-10-23T09:53:06.530Z",
+        "tagList": [],
+        "favoritesCount": 2,
+        "favorited": true,
+        "author": {
+          "username": "favorite_probe_31644285b7244fbfb3dd3381f96c3a8e_a",
+          "bio": null,
+          "image": null,
+          "following": false
+        }
+      }
+    }
+  },
+  "transaction_stderr": "WARNING:  there is no transaction in progress\n",
+  "fixture_cleaned": true
+}

@@ -1,0 +1,213 @@
+{
+  "scope": "Correctness only: quiet writer deadline, grouped rollback and commit-before-response",
+  "base": "http://127.0.0.1:3030",
+  "database": "mc_pair_runtime_171410",
+  "nonce": "rtprobe_ba3f2ae2af524288b2400518ac6b5965",
+  "started_utc": "2026-10-23T17:14:18Z",
+  "pass": true,
+  "events": [
+    {
+      "event": "quiet write completed and immediately committed",
+      "monotonic_s": 94588.904879803,
+      "elapsed_s": 0.07226975000230595,
+      "slug": "rtprobe-ba3f2ae2af524288b2400518ac6b5965-quiet-500001"
+    },
+    {
+      "event": "duplicate/independent registration peers passed",
+      "monotonic_s": 94590.80344322,
+      "successes": 9,
+      "expected_422": 7,
+      "rollback_delta": 7
+    },
+    {
+      "event": "commit blocked, no response headers and no committed row",
+      "monotonic_s": 94591.287593471,
+      "pg_lock_witness": "4474|Lock|advisory"
+    }
+  ],
+  "cleanup": {
+    "deferred_trigger_removed": true,
+    "fixture_users_and_cascaded_data_removed": true,
+    "verified": true
+  },
+  "pg_context": "postgres|mc_pair_runtime_171410|f",
+  "quiet_write": {
+    "status": 201,
+    "elapsed_s": 0.07226975000230595,
+    "committed_read_after_response": true
+  },
+  "grouped_error_probe": {
+    "registrations": [
+      {
+        "index": 0,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_shared",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_0@example.com",
+        "status": 422,
+        "elapsed_s": 0.31335979199502617
+      },
+      {
+        "index": 1,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_peer_1",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_1@example.com",
+        "status": 201,
+        "elapsed_s": 0.5311460009979783,
+        "id": 100056,
+        "immediately_committed": true,
+        "authenticated_read_pass": true
+      },
+      {
+        "index": 2,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_shared",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_2@example.com",
+        "status": 422,
+        "elapsed_s": 0.1507898749987362
+      },
+      {
+        "index": 3,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_peer_3",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_3@example.com",
+        "status": 201,
+        "elapsed_s": 0.5342071670020232,
+        "id": 100062,
+        "immediately_committed": true,
+        "authenticated_read_pass": true
+      },
+      {
+        "index": 4,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_shared",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_4@example.com",
+        "status": 422,
+        "elapsed_s": 0.4731045840017032
+      },
+      {
+        "index": 5,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_peer_5",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_5@example.com",
+        "status": 201,
+        "elapsed_s": 0.5315041260037106,
+        "id": 100060,
+        "immediately_committed": true,
+        "authenticated_read_pass": true
+      },
+      {
+        "index": 6,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_shared",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_6@example.com",
+        "status": 422,
+        "elapsed_s": 0.25648633399396203
+      },
+      {
+        "index": 7,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_peer_7",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_7@example.com",
+        "status": 201,
+        "elapsed_s": 0.5320622920116875,
+        "id": 100058,
+        "immediately_committed": true,
+        "authenticated_read_pass": true
+      },
+      {
+        "index": 8,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_shared",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_8@example.com",
+        "status": 422,
+        "elapsed_s": 0.41998141699878033
+      },
+      {
+        "index": 9,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_peer_9",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_9@example.com",
+        "status": 201,
+        "elapsed_s": 0.5308172500081128,
+        "id": 100059,
+        "immediately_committed": true,
+        "authenticated_read_pass": true
+      },
+      {
+        "index": 10,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_shared",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_10@example.com",
+        "status": 422,
+        "elapsed_s": 0.20374162499501836
+      },
+      {
+        "index": 11,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_peer_11",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_11@example.com",
+        "status": 201,
+        "elapsed_s": 0.5315626669907942,
+        "id": 100061,
+        "immediately_committed": true,
+        "authenticated_read_pass": true
+      },
+      {
+        "index": 12,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_shared",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_12@example.com",
+        "status": 422,
+        "elapsed_s": 0.3673419999977341
+      },
+      {
+        "index": 13,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_peer_13",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_13@example.com",
+        "status": 201,
+        "elapsed_s": 0.530620251010987,
+        "id": 100057,
+        "immediately_committed": true,
+        "authenticated_read_pass": true
+      },
+      {
+        "index": 14,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_shared",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_14@example.com",
+        "status": 201,
+        "elapsed_s": 0.5301449999969918,
+        "id": 100055,
+        "immediately_committed": true,
+        "authenticated_read_pass": true
+      },
+      {
+        "index": 15,
+        "username": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_peer_15",
+        "email": "rtprobe_ba3f2ae2af524288b2400518ac6b5965_15@example.com",
+        "status": 201,
+        "elapsed_s": 0.530494999999064,
+        "id": 100054,
+        "immediately_committed": true,
+        "authenticated_read_pass": true
+      }
+    ],
+    "duplicate_successes": 1,
+    "independent_successes": 8,
+    "xact_rollback_before": 0,
+    "limitation": "Concurrent peer outcomes and DB rollback counters verify the error path; exact membership of each Sync group is not instrumented.",
+    "statistics_flush_assistance": {
+      "wait_before_benign_writer_update_s": 1.1,
+      "update_status": 200,
+      "update_committed": true,
+      "observer_consistency": "none, clear snapshot, fresh connection",
+      "wait_after_update_limit_s": 12,
+      "pg18_source": "https://raw.githubusercontent.com/postgres/postgres/REL_18_STABLE/src/backend/utils/activity/pgstat.c",
+      "documentation": "https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-STATS-VIEWS"
+    },
+    "xact_rollback_after": 7,
+    "rollback_delta": 7,
+    "statistics_readings": [
+      {
+        "monotonic_s": 94590.803424345,
+        "xact_rollback": 7
+      }
+    ]
+  },
+  "commit_gate": {
+    "status": 201,
+    "id": 100063,
+    "pg_lock_witness": "4474|Lock|advisory",
+    "row_invisible_while_commit_blocked": true,
+    "no_http_headers_while_commit_blocked": true,
+    "headers_after_release": true,
+    "immediately_committed_after_response": true
+  },
+  "finished_utc": "2026-10-23T17:14:21Z"
+}

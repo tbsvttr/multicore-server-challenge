@@ -1,0 +1,54 @@
+{
+  "target_container": "multicore-comparison-target-20261023",
+  "host_evidence": "/private/tmp/multicore-comparison-20261023",
+  "container_evidence": "/comparison",
+  "old_host_evidence": "/private/tmp/multicore-research-20261022",
+  "native_binary": "/evidence/tools/loadgen",
+  "expected_native_sha256": "886eaa564c6cdab1a791534d6931d1b8eb9b5c21d1e1ebaaa2824616c4562cdb",
+  "port": 3000,
+  "jwt_secret": "multicore-server-challenge",
+  "search_overrides": {
+    "start_users": 110000,
+    "max_users": 115000,
+    "max_probes": 16,
+    "max_holds": 4
+  },
+  "load_memory_bytes": 8589934592,
+  "cases": [
+    {
+      "name": "rust7",
+      "binary": "/work/submissions/rust-tokio-Scooter1337/target/release/conduit",
+      "source_dir": "/work/submissions/rust-tokio-Scooter1337",
+      "env": {
+        "APP_THREADS": "2",
+        "DB_CONNS": "6",
+        "DB_WRITE_CONNS": "2",
+        "BCRYPT_THREADS": "1",
+        "WRITE_BATCH_US": "1000",
+        "BCRYPT_BATCH_MS": "160",
+        "READ_BATCH_SIZE": "32",
+        "READ_BATCH_US": "0",
+        "READ_SQL_BATCH": "1",
+        "READ_ROUTE_SLACK": "8",
+        "READ_TAG_ROUTE": "1",
+        "READ_COMMENT_SET": "1",
+        "READ_TAG_BATCH": "1"
+      },
+      "expected_binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+      "source_revision": "PR7 dc7c249229bd43d8752e7ffb28ce81ee4401d8ae; canonical merged submission tree f542997eb07942e25fa44b7f288c8e1d508c176c; all66 canonical files verified byte-identical",
+      "conformance": {
+        "passed": true,
+        "checks_passed": 197,
+        "checks_total": 197,
+        "binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+        "log_host_path": "/private/tmp/multicore-optimize-20261023/builds/rust7-full/output.log",
+        "log_sha256": "cf6dfe613fabf1936d051d8b95e3705a4f1c097801ae2be886f6c5f5aa9eba95"
+      }
+    }
+  ],
+  "load_cpus": 8,
+  "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+  "study_note": "Separate, unexecuted fresh Rust-only follow-up after the complete powered comparison. Its saved Rust 120,000-user attempt was generator-invalid from actual sampler/wake delays and remains invalid; the earlier 110,000-user local PASS is a short diagnostic only and is not reused as a new phase or rescued into a capacity score. The 110,000 start and 115,000 ceiling are selected before new data to keep the native generator near that observed headroom boundary. Use the unchanged v3 controller, Rust binary/source/env, 8 CPU/16 GiB target, separate 8 CPU/8 GiB client, dedicated_client_cgroup_v1 policy and all native timing/SLO/clock/identity guards. Start one new full-seed clone and one fresh continuous session with the original 10,000-user 60+120-second warmup; perform fresh probes and 60+300-second holds only. A valid 115,000 PASS goes to a five-minute hold at the ceiling and establishes only a held-user LOWER BOUND, never a maximum. A valid 115,000 SLO failure may bracket a 110,000 hold, but any generator/clock invalidity stops without a failed server bound. Prior raw/results stay unchanged. A censored Rust lower bound alone cannot establish a Goose or first-place advantage. Execute only after the powered balanced comparison has finished, under the same powered/awake condition.",
+  "growth_factor": 1.1,
+  "keepawake_wrapper": "caffeinate -is"
+}

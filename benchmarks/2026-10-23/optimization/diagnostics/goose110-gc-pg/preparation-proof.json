@@ -1,0 +1,48 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "application_case_identical_to_powered_plan": true,
+  "application_binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+  "native_binary_sha256": "886eaa564c6cdab1a791534d6931d1b8eb9b5c21d1e1ebaaa2824616c4562cdb",
+  "source_commit": "23a14e8cbf32113509cd0ad941320ef947508981",
+  "fixed_sequence": [
+    {
+      "stage": "warmup",
+      "users": 10000
+    },
+    {
+      "stage": "probe",
+      "users": 100000
+    },
+    {
+      "stage": "probe",
+      "users": 110000
+    }
+  ],
+  "no_hold_or_capacity_score": true,
+  "prepare_and_execute_owned_by_root": true,
+  "client_env": {
+    "GOMAXPROCS": "1",
+    "GODEBUG": "gctrace=1"
+  },
+  "pg_observer_interval_s": 1,
+  "static_checks": [
+    "All Python modules AST parse",
+    "Generated owned-stop and environment-witness Python snippets AST parse",
+    "Copied search/evidence/primitives hashes identical to v3",
+    "Goose case equals powered-plan case",
+    "No next_action call remains",
+    "No plan has been prepared or runtime executed"
+  ],
+  "independent_review": "client_stall_review GO; collector peer socket/user/port forced",
+  "original_v3_controller_sha256": "8d371868b88e345d258c461a44befd8d98f387241efd0d9fa648ed696253d478",
+  "files_sha256": {
+    "pg_collect.py": "6ae394d6a7bf7869e207b4eb0ef7af00d459d6c2d78c5c2216b316219ba0467b",
+    "config.json": "60366b0f479f5e5f4fbc8efca46976280e79ef24087b81cb765dcf3dab87831d",
+    "capacity_controller.py": "b19a6e2a1028b338b2d524d768fdc176b028356cf99e029cf30a7d53ae28d5bd",
+    "diagnostic-delta.patch": "4b553f67ec1d6b09fb2822daeb1de0f2552dec48e9fc00a5103f1d95d3ea44ba",
+    "search_policy.py": "33aa0281a09e4f1e3b50dcf63c98e419694735969b481963be971c146195ac5c",
+    "README.txt": "accd64d6aaca76f0fd4a60fde6ab72475fa240e87a0f53dfb89c864b810bd076",
+    "audit/primitives.py": "8908b204b243ad5ad20e725d3284d115b5f9ccc8719931cd5018fcaf73104423",
+    "audit/evidence.py": "33a17c583571b42d040fc9e475256302281635fc58fd2171fc59f3d47f16e115"
+  }
+}

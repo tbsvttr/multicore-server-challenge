@@ -1,0 +1,43 @@
+--- a/server.goose
++++ b/server.goose
+@@ -334,9 +334,9 @@
+ fn pool_flush() {
+     if pool.len == 0 || (in_flight >= batch_hold && pool.len < batch_max) { return; }
+     var group: i64[>..] = [];
+-    for f in 6 {
+-        let fam = if f < 4 { ST_LIST_ALL + f } else if f == 4 { ST_TAGS } else { ST_ARTICLE };
+-        let limit = if fam == ST_ARTICLE { min(batch_max, 32) } else { batch_max };
++    for f in 8 {
++        let fam = if f < 4 { ST_LIST_ALL + f } else if f == 4 { ST_TAGS } else if f == 5 { ST_ARTICLE } else if f == 6 { ST_FEED } else { ST_COMMENTS };
++        let limit = if fam == ST_ARTICLE || fam == ST_COMMENTS { min(batch_max, 32) } else { batch_max };
+         group.clear();
+         for s in pool {
+             if conns[s].fam != fam { continue; }
+@@ -359,11 +359,25 @@
+     for s, i in group { conns[s].co_next = if i + 1 < group.len { group[i + 1] } else { -1 }; }
+     conns[lead].lead = true;
+     if fam == ST_TAGS { send_kept(lead); return; }      // the same statement answers them all
+-    if fam == ST_ARTICLE {
++    if fam == ST_ARTICLE || fam == ST_COMMENTS {
+         var m: u8[>..] = [];
+-        let b = bind_begin(m, ST_BATCH_ARTICLE, 2);
++        let b = bind_begin(m, if fam == ST_ARTICLE { ST_BATCH_ARTICLE } else { ST_BATCH_COMMENTS }, 2);
+         for k in 2 {
+             let at = param_array_begin(m, if k == 0 { OID_INT8 } else { OID_TEXT }, group.len);
++            for s in group { m.append(bind_param(kept(s), k)); }
++            param_array_end(m, at);
++        }
++        bind_end(m, b);
++        put_request(least_busy_reader(), lead, m);
++        return;
++    }
++    // Feed pages depend on the viewer. Batch their executions without the
++    // non-viewer duplicate heuristic used for public lists; all four args are int8.
++    if fam == ST_FEED {
++        var m: u8[>..] = [];
++        let b = bind_begin(m, ST_BATCH_FEED, 4);
++        for k in 4 {
++            let at = param_array_begin(m, OID_INT8, group.len);
+             for s in group { m.append(bind_param(kept(s), k)); }
+             param_array_end(m, at);
+         }

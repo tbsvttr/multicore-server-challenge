@@ -1,0 +1,29 @@
+2026-10-23 18:47:33 +0200 
+Assertion status system-wide:
+   BackgroundTask                 0
+   ApplePushServiceTask           0
+   UserIsActive                   1
+   PreventUserIdleDisplaySleep    1
+   SoftwareUpdateTask             0
+   PreventSystemSleep             1
+   ExternalMedia                  0
+   InternalPreventDisplaySleep    1
+   PreventUserIdleSystemSleep     1
+   NetworkClientActive            0
+Listed by owning process:
+   pid 871(Caffeine): [0x0001710d00059ef9] 00:00:04 PreventUserIdleDisplaySleep named: "Caffeine is Active"  
+   pid 871(Caffeine): [0x0001710d00099ef8] 00:00:04 UserIsActive named: "Caffeine is Active"  
+	Timeout will fire in 595 secs Action=TimeoutActionRelease
+   pid 86928(caffeinate): [0x0001711200019efa] 00:00:00 PreventUserIdleSystemSleep named: "caffeinate command-line tool"  
+	Details: caffeinate asserting on behalf of 'python3' (pid 86927)
+	Localized=THE CAFFEINATE TOOL IS PREVENTING SLEEP.
+   pid 86928(caffeinate): [0x0001711200079efb] 00:00:00 PreventSystemSleep named: "caffeinate command-line tool"  
+	Details: caffeinate asserting on behalf of 'python3' (pid 86927)
+	Localized=THE CAFFEINATE TOOL IS PREVENTING SLEEP.
+   pid 351(powerd): [0x00016e0500019e05] 00:13:00 PreventUserIdleSystemSleep named: "Powerd - Prevent sleep while display is on"  
+   pid 351(powerd): [0x00015f1f0010823c] 00:00:04 InternalPreventDisplaySleep named: "com.apple.powermanagement.delayDisplayOff"  
+	Timeout will fire in 295 secs Action=TimeoutActionTurnOff
+   pid 410(WindowServer): [0x000161c30009994b] 00:00:01 UserIsActive named: "com.apple.iohideventsystem.queue.tickle serviceID:100000b49 service:AppleHIDKeyboardEventDriverV2 product:Apple Internal Keyboard / Trackpad eventType:3"  
+	Timeout will fire in 599 secs Action=TimeoutActionRelease
+Kernel Assertions: 0x100=MAGICWAKE
+   id=563  level=255 0x100=MAGICWAKE creat=21.10.26, 10:37  mod=23.10.26, 18:32 description=en0 owner=IOSkywalkNetworkBSDClient

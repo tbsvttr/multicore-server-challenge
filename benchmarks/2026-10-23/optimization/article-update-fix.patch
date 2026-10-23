@@ -1,0 +1,197 @@
+--- a/sql.goose
++++ b/sql.goose
+@@ -40,7 +40,8 @@
+ let ST_BATCH_ARTICLE = 33;      // live article reads, shared once per distinct requested slug in this execution
+ let ST_BATCH_FEED = 34;         // viewer-dependent feeds batch execution without assuming shared pages
+ let ST_BATCH_COMMENTS = 35;     // live comment rows shared per requested slug, flags still per viewer
+-let STATEMENTS = 36;
++let ST_ARTICLE_BY_ID = 36;     // immutable-id read after a committed mutation
++let STATEMENTS = 37;
+ 
+ fn slugify(out: u8[>..]&, x: const u8[:]) {
+     format(out, "trim(both '-' from lower(regexp_replace(", x, ", '[^A-Za-z0-9]+', '-', 'g')))");
+@@ -286,10 +287,14 @@
+         ST_BATCH_ARTICLE => batch_article(out),
+         ST_BATCH_FEED => shared_feed(out),
+         ST_BATCH_COMMENTS => batch_comments(out),
+-        ST_ARTICLE => {
++        ST_ARTICLE, ST_ARTICLE_BY_ID => {
+             out.append("SELECT ");
+             plain_columns(out, true);
+-            out.append(" FROM articles a JOIN users u ON u.id = a.author_id WHERE a.slug = $2");
++            out.append(if i == ST_ARTICLE_BY_ID {
++                " FROM articles a JOIN users u ON u.id = a.author_id WHERE a.id = $2"
++            } else {
++                " FROM articles a JOIN users u ON u.id = a.author_id WHERE a.slug = $2"
++            });
+         },
+         // Create runs as one implicit transaction: the article, its tags, their links, then the article as read back.
+         ST_INSERT_ARTICLE => {
+@@ -307,13 +312,13 @@
+             plain_columns(out, true);
+             out.append(" FROM articles a JOIN users u ON u.id = a.author_id WHERE a.id = (SELECT currval(pg_get_serial_sequence('articles', 'id')))");
+         },
+-        // $2 slug, $3 title, $4 description, $5 body: author_id, then the article if the viewer wrote it.
++        // Mutation only: its statement snapshot must not supply response metadata.
++        // The owner/id row distinguishes 404 and 403. Once Sync confirms commit,
++        // ST_ARTICLE_BY_ID reads the current metadata using the immutable id.
+         ST_UPDATE_ARTICLE => {
+             out.append("WITH t AS (SELECT id, author_id FROM articles WHERE slug = $2), a AS (UPDATE articles SET title = COALESCE($3, title), description = COALESCE($4, description), body = COALESCE($5, body), slug = CASE WHEN $3::text IS NULL THEN slug ELSE ");
+             slugify(out, "$3");
+-            out.append(" || '-' || id END, updated_at = now() WHERE id = (SELECT id FROM t WHERE author_id = $1) RETURNING id, slug, title, description, body, created_at, updated_at, author_id) SELECT t.author_id, x.* FROM t LEFT JOIN LATERAL (SELECT ");
+-            plain_columns(out, true);
+-            out.append(" FROM a JOIN users u ON u.id = a.author_id) x ON true");
++            out.append(" || '-' || id END, updated_at = now() WHERE id = (SELECT id FROM t WHERE author_id = $1) RETURNING id) SELECT t.author_id, COALESCE(a.id,t.id) AS id FROM t LEFT JOIN a ON true");
+         },
+         ST_DELETE_ARTICLE => out.append("WITH t AS (SELECT id, author_id FROM articles WHERE slug = $2), d AS (DELETE FROM articles WHERE id = (SELECT id FROM t WHERE author_id = $1)) SELECT author_id FROM t"),
+         // Only establish existence while mutating. A separate ST_ARTICLE after
+@@ -347,6 +352,7 @@
+         ST_LIST_ALL => "iii",
+         ST_LIST_TAG, ST_LIST_AUTHOR, ST_LIST_FAVORITED => "iiit",
+         ST_FEED => "iiii",
++        ST_ARTICLE_BY_ID => "ii",
+         ST_BATCH_ALL, ST_SHARE_ALL => "III",
+         ST_BATCH_TAG, ST_BATCH_AUTHOR, ST_BATCH_FAVORITED, ST_SHARE_TAG, ST_SHARE_AUTHOR, ST_SHARE_FAVORITED => "IIIa",
+         ST_BATCH_ARTICLE, ST_BATCH_COMMENTS => "Ia",
+--- a/routes.goose
++++ b/routes.goose
+@@ -48,6 +48,17 @@
+ fn optional(fbuf: const u8[:], f: Field, nonempty: bool) -> bool {
+     if f.state == F_ABSENT || f.state == F_NULL { return true; }
+     return f.state == F_STRING && valid_text(value(fbuf, f)) && (!nonempty || f.len > 0);
++}
++
++// Passwords are bcrypt byte strings, not PostgreSQL text. JSON U+0000 is
++// valid here; usernames/email/bio/image keep the stricter text-column check.
++fn required_password(fbuf: const u8[:], f: Field) -> bool {
++    return f.state == F_STRING && f.len > 0 && valid_utf8(value(fbuf, f), true);
++}
++
++fn optional_password(fbuf: const u8[:], f: Field) -> bool {
++    if f.state == F_ABSENT || f.state == F_NULL { return true; }
++    return required_password(fbuf, f);
+ }
+ 
+ fn param_opt(m: u8[>..]&, fbuf: const u8[:], f: Field) {
+@@ -189,7 +200,7 @@
+         else { json::skip(jr); }
+     };
+     if !ok { fail(slot, 422, "invalid body"); return; }
+-    if !required(fbuf, username) || !required(fbuf, email) || !required(fbuf, password) {
++    if !required(fbuf, username) || !required(fbuf, email) || !required_password(fbuf, password) {
+         fail(slot, 422, "username, email and password are required");
+         return;
+     }
+@@ -217,7 +228,7 @@
+         else { json::skip(jr); }
+     };
+     if !ok { fail(slot, 422, "invalid body"); return; }
+-    if !required(fbuf, email) || !required(fbuf, password) { fail(slot, 422, "email and password are required"); return; }
++    if !required(fbuf, email) || !required_password(fbuf, password) { fail(slot, 422, "email and password are required"); return; }
+     if password.len > PASSWORD_MAX { fail(slot, 401, "invalid email or password"); return; }
+     begin(slot, K_LOGIN, 0);
+     var msg: u8[>..] = [];
+@@ -258,7 +269,7 @@
+         else { json::skip(jr); }
+     };
+     if !ok { fail(slot, 422, "invalid body"); return; }
+-    if !optional(fbuf, email, true) || !optional(fbuf, username, true) || !optional(fbuf, password, true) || !optional(fbuf, bio, false)
++    if !optional(fbuf, email, true) || !optional(fbuf, username, true) || !optional_password(fbuf, password) || !optional(fbuf, bio, false)
+        || !optional(fbuf, image, false) {
+         fail(slot, 422, "invalid user fields");
+         return;
+@@ -399,7 +410,6 @@
+     param_int(msg, viewer);
+     param_text(msg, pval);
+     bind_end(msg, b);
+-    if kind == K_FAVORITE || kind == K_UNFAVORITE { set_ctx(slot, pval); }
+     if kind == K_COMMENTS { pool_add(slot, msg, ST_COMMENTS); }
+     else if kind == K_ARTICLE && article_batch { pool_add(slot, msg, ST_ARTICLE); }
+     else { submit(slot, msg, auth); }
+@@ -407,14 +417,38 @@
+ 
+ // Called only after the writer's complete Sync group has reached ReadyForQuery.
+ // Replace the saved mutation with a read, so retries can never replay a committed write.
++// The returned id remains valid even if the slug changed while the mutation waited.
+ fn favorite_committed(slot: i64, rows: const u8[:]) {
+-    if first_row(rows).len == 0 { fail(slot, 404, "article not found"); return; }
++    let m = first_row(rows);
++    if m.len == 0 { fail(slot, 404, "article not found"); return; }
++    var r = row(m);
++    let id = col_int(r);
+     let viewer = conns[slot].viewer;
+     begin(slot, K_ARTICLE, viewer);
+     var msg: u8[>..] = [];
+-    let b = stmt(slot, msg, ST_ARTICLE, 2);
+-    param_int(msg, viewer);
+-    param_text(msg, ctx(slot));
++    let b = stmt(slot, msg, ST_ARTICLE_BY_ID, 2);
++    param_int(msg, viewer);
++    param_int(msg, id);
++    bind_end(msg, b);
++    submit(slot, msg, false);
++}
++
++// Called after the UPDATE writer group reaches ReadyForQuery. A separate
++// statement gets a fresh snapshot; replacing the kept mutation with this read
++// also means a later retry cannot replay an already committed UPDATE.
++fn article_update_committed(slot: i64, rows: const u8[:]) {
++    let m = first_row(rows);
++    if m.len == 0 { fail(slot, 404, "article not found"); return; }
++    var r = row(m);
++    let owner = col_int(r);
++    let id = col_int(r);
++    let viewer = conns[slot].viewer;
++    if owner != viewer { fail(slot, 403, "not the author"); return; }
++    begin(slot, K_ARTICLE, viewer);
++    var msg: u8[>..] = [];
++    let b = stmt(slot, msg, ST_ARTICLE_BY_ID, 2);
++    param_int(msg, viewer);
++    param_int(msg, id);
+     bind_end(msg, b);
+     submit(slot, msg, false);
+ }
+@@ -607,6 +641,7 @@
+     var out: u8[>..] = [];
+     match c.kind {
+         K_FAVORITE, K_UNFAVORITE => { favorite_committed(slot, rows); return; },
++        K_UPDATE_ARTICLE => { article_update_committed(slot, rows); return; },
+         K_REGISTER, K_CURRENT, K_UPDATE_USER => {
+             if m.len == 0 { fail(slot, 401, "unauthorized"); return; }
+             var r = row(m);
+@@ -666,13 +701,9 @@
+             out.push('}');
+             end_response(out, at);
+         },
+-        K_ARTICLE, K_CREATE, K_UPDATE_ARTICLE => {
++        K_ARTICLE, K_CREATE => {
+             if m.len == 0 { fail(slot, 404, "article not found"); return; }
+             var r = row(m);
+-            if c.kind == K_UPDATE_ARTICLE {
+-                col_skip(r);                              // author_id; the article follows if the viewer wrote it
+-                if col_null(r) { fail(slot, 403, "not the author"); return; }
+-            }
+             let at = begin_response(out, if c.kind == K_CREATE { 201 } else { 200 }, close);
+             out.append("{\"article\":");
+             write_article(out, r, true);
+--- a/http.goose
++++ b/http.goose
+@@ -158,12 +158,16 @@
+ }
+ 
+ // Well-formed UTF-8 without NUL: what Postgres stores in a text column.
+-fn valid_text(s: const u8[:]) -> bool {
++fn valid_text(s: const u8[:]) -> bool { valid_utf8(s, false) }
++
++// Passwords use the same Unicode validation but may contain an embedded NUL;
++// their plaintext never enters a PostgreSQL text column or a C string API.
++fn valid_utf8(s: const u8[:], allow_nul: bool) -> bool {
+     var i = 0;
+     while i < s.len {
+         let c = s[i];
+         if c < 0x80 {
+-            if c == 0 { return false; }
++            if c == 0 && !allow_nul { return false; }
+             i += 1;
+             continue;
+         }

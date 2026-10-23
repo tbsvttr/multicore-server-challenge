@@ -1,0 +1,1204 @@
+{
+  "created_utc": "2026-10-23T16:22:43.199337+00:00",
+  "run": "capacity_20261023t154047_9e1fee",
+  "status": "REAL_END_TO_END_COLLAPSE_INITIATING_CAUSE_UNRESOLVED",
+  "conclusion": "Goose110k suffered real user-visible timeouts and failed the SLO. Native timing was also invalid. Neither a valid server capacity bound nor application exoneration follows. Shared CPU/client scheduling and retry feedback are observed; the first application/PG/host trigger cannot be isolated from these artifacts.",
+  "identity": {
+    "binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+    "app_restart_observed": false,
+    "same_continuous_full_seed_session": true,
+    "sequence": [
+      "warmup10000",
+      "probe100000",
+      "probe110000"
+    ],
+    "target_cpus": 8,
+    "target_memory_bytes": 17179869184,
+    "client_cpus": 8,
+    "client_memory_bytes": 8589934592,
+    "physical_vm_logical_cpus": 10,
+    "gomaxprocs_per_client_shard": 1,
+    "client_shards100": 5,
+    "client_shards110": 6,
+    "users_per110_shard": [
+      18334,
+      18334,
+      18333,
+      18333,
+      18333,
+      18333
+    ]
+  },
+  "outcomes": {
+    "goose100": {
+      "classification": "PASS",
+      "overall": {
+        "count": 1588450,
+        "rps": 26474.166666666668,
+        "p50_ms": 2.961,
+        "p90_ms": 5.271,
+        "p95_ms": 6.603,
+        "p99_ms": 46.751,
+        "max_ms": 669.695,
+        "mean_ms": 4.4591546727942175,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 1559721,
+          "201": 28269,
+          "204": 460
+        }
+      }
+    },
+    "goose110": {
+      "classification": "INVALID_GENERATOR",
+      "all_classifications": [
+        "INVALID_GENERATOR",
+        "FAIL_SLO"
+      ],
+      "overall": {
+        "count": 1173965,
+        "rps": 19566.083333333332,
+        "p50_ms": 6.043,
+        "p90_ms": 10027.007,
+        "p95_ms": 12460.031,
+        "p99_ms": 22642.687,
+        "max_ms": 40239.103,
+        "mean_ms": 2151.6181148339183,
+        "errors": 127989,
+        "error_rate": 0.10902284139646412,
+        "statuses": {
+          "200": 1026730,
+          "201": 18996,
+          "204": 250
+        },
+        "error_classes": {
+          "timeout": 127989
+        },
+        "error_example": "request timeout"
+      },
+      "all_timeline_timeout_count": 206699,
+      "initial_vus": 110000,
+      "all21_endpoint_families_have_timeouts": true,
+      "http_error_statuses_observed": {},
+      "post_load_healthy": true,
+      "all_phase_tcp_dial_attempts": 247457
+    }
+  },
+  "recorded_onset": {
+    "start_utc": "2026-10-23T16:04:27.906000+00:00",
+    "clean_to_t89": true,
+    "all_shard_latency_rise_t90_utc": "2026-10-23T16:05:57.906000+00:00",
+    "sampler_completion_collapse_t91_to92_utc": [
+      "2026-10-23T16:05:58.906000+00:00",
+      "2026-10-23T16:05:59.906000+00:00"
+    ],
+    "first_recorded_timeout_t102_utc": "2026-10-23T16:06:09.906000+00:00",
+    "timeline_limit": "Sampler lag makes these native per-second records diagnostic; service-side arrival/finish timestamps were not captured. Endpoint-window accounting and timeline error buckets are distinct."
+  },
+  "timeline_excerpt": [
+    {
+      "t": 85,
+      "started": 29067,
+      "completed": 29129,
+      "errors": 0,
+      "active_vus": 110000,
+      "p50_ms": 3.381,
+      "p95_ms": 7.099,
+      "p99_ms": 9.615,
+      "max_box_cpu_pct": 66.94473409801877
+    },
+    {
+      "t": 89,
+      "started": 29118,
+      "completed": 29129,
+      "errors": 0,
+      "active_vus": 110000,
+      "p50_ms": 3.915,
+      "p95_ms": 11.279,
+      "p99_ms": 17.407,
+      "max_box_cpu_pct": 69.65589155370178
+    },
+    {
+      "t": 90,
+      "started": 28779,
+      "completed": 28209,
+      "errors": 0,
+      "active_vus": 110000,
+      "p50_ms": 8.263,
+      "p95_ms": 24.927,
+      "p99_ms": 34.495,
+      "max_box_cpu_pct": 81.89300411522633
+    },
+    {
+      "t": 91,
+      "started": 24518,
+      "completed": 20026,
+      "errors": 0,
+      "active_vus": 110000,
+      "p50_ms": 51.039,
+      "p95_ms": 195.839,
+      "p99_ms": 3274.751,
+      "max_box_cpu_pct": 93.92042914617792
+    },
+    {
+      "t": 92,
+      "started": 6137,
+      "completed": 482,
+      "errors": 0,
+      "active_vus": 110000,
+      "p50_ms": 2641.919,
+      "p95_ms": 5554.175,
+      "p99_ms": 5738.495,
+      "max_box_cpu_pct": 98.23529411764706
+    },
+    {
+      "t": 93,
+      "started": 4566,
+      "completed": 238,
+      "errors": 0,
+      "active_vus": 110000,
+      "p50_ms": 6090.751,
+      "p95_ms": 6963.199,
+      "p99_ms": 7045.119,
+      "max_box_cpu_pct": 100
+    },
+    {
+      "t": 96,
+      "started": 5668,
+      "completed": 875,
+      "errors": 0,
+      "active_vus": 110000,
+      "p50_ms": 4501.503,
+      "p95_ms": 4907.007,
+      "p99_ms": 5054.463,
+      "max_box_cpu_pct": 98.71134020618557
+    },
+    {
+      "t": 100,
+      "started": 25050,
+      "completed": 21418,
+      "errors": 0,
+      "active_vus": 110000,
+      "p50_ms": 3278.847,
+      "p95_ms": 5832.703,
+      "p99_ms": 7720.959,
+      "max_box_cpu_pct": 99.47368421052632
+    },
+    {
+      "t": 101,
+      "started": 11275,
+      "completed": 9470,
+      "errors": 0,
+      "active_vus": 110000,
+      "p50_ms": 3543.039,
+      "p95_ms": 5214.207,
+      "p99_ms": 6733.823,
+      "max_box_cpu_pct": 94.5904173106646
+    },
+    {
+      "t": 102,
+      "started": 6159,
+      "completed": 3576,
+      "errors": 3,
+      "active_vus": 110000,
+      "p50_ms": 4165.631,
+      "p95_ms": 5021.695,
+      "p99_ms": 7716.863,
+      "max_box_cpu_pct": 99.23809523809524
+    },
+    {
+      "t": 108,
+      "started": 6160,
+      "completed": 4672,
+      "errors": 552,
+      "active_vus": 110000,
+      "p50_ms": 8396.799,
+      "p95_ms": 10239.999,
+      "p99_ms": 12296.191,
+      "max_box_cpu_pct": 97.26396917148362
+    },
+    {
+      "t": 110,
+      "started": 3973,
+      "completed": 6440,
+      "errors": 4652,
+      "active_vus": 110000,
+      "p50_ms": 10067.967,
+      "p95_ms": 14794.751,
+      "p99_ms": 16859.135,
+      "max_box_cpu_pct": 98.06641445985709
+    },
+    {
+      "t": 118,
+      "started": 6117,
+      "completed": 7370,
+      "errors": 5871,
+      "active_vus": 106991,
+      "p50_ms": 10387.455,
+      "p95_ms": 25493.503,
+      "p99_ms": 26165.247,
+      "max_box_cpu_pct": 100
+    }
+  ],
+  "per_box_native_flags": [
+    {
+      "box": 0,
+      "stats": {
+        "cpu_avg_measure_pct": 84.0233559658607,
+        "cpu_max_measure_pct": 100,
+        "proc_cpu_avg_measure_pct": 5.103298910403756,
+        "rss_peak_mb": 415.73828125,
+        "fell_behind": true,
+        "fell_behind_reasons": [
+          "20 of 60 seconds had mean timer wake-up lag > 50 ms",
+          "sampler tick 5844 ms late"
+        ],
+        "active_vus_at_window_start": 18334,
+        "tcp_connects": 37886
+      }
+    },
+    {
+      "box": 1,
+      "stats": {
+        "cpu_avg_measure_pct": 83.66804198784295,
+        "cpu_max_measure_pct": 100,
+        "proc_cpu_avg_measure_pct": 5.37927482363432,
+        "rss_peak_mb": 421.21484375,
+        "fell_behind": true,
+        "fell_behind_reasons": [
+          "21 of 60 seconds had mean timer wake-up lag > 50 ms",
+          "sampler tick 16807 ms late"
+        ],
+        "active_vus_at_window_start": 18334,
+        "tcp_connects": 46163
+      }
+    },
+    {
+      "box": 2,
+      "stats": {
+        "cpu_avg_measure_pct": 83.92151904231785,
+        "cpu_max_measure_pct": 100,
+        "proc_cpu_avg_measure_pct": 15.192054209845363,
+        "rss_peak_mb": 448.63671875,
+        "fell_behind": true,
+        "fell_behind_reasons": [
+          "21 of 60 seconds had mean timer wake-up lag > 50 ms",
+          "sampler tick 25009 ms late"
+        ],
+        "active_vus_at_window_start": 18333,
+        "tcp_connects": 40352
+      }
+    },
+    {
+      "box": 3,
+      "stats": {
+        "cpu_avg_measure_pct": 83.42993325629843,
+        "cpu_max_measure_pct": 100,
+        "proc_cpu_avg_measure_pct": 7.853144029288276,
+        "rss_peak_mb": 406.875,
+        "fell_behind": true,
+        "fell_behind_reasons": [
+          "21 of 60 seconds had mean timer wake-up lag > 50 ms",
+          "sampler tick 17627 ms late"
+        ],
+        "active_vus_at_window_start": 18333,
+        "tcp_connects": 40159
+      }
+    },
+    {
+      "box": 4,
+      "stats": {
+        "cpu_avg_measure_pct": 83.72287108252402,
+        "cpu_max_measure_pct": 100,
+        "proc_cpu_avg_measure_pct": 5.674898925222307,
+        "rss_peak_mb": 416.6171875,
+        "fell_behind": true,
+        "fell_behind_reasons": [
+          "21 of 60 seconds had mean timer wake-up lag > 50 ms",
+          "sampler tick 9867 ms late"
+        ],
+        "active_vus_at_window_start": 18333,
+        "tcp_connects": 42516
+      }
+    },
+    {
+      "box": 5,
+      "stats": {
+        "cpu_avg_measure_pct": 83.19078203222215,
+        "cpu_max_measure_pct": 100,
+        "proc_cpu_avg_measure_pct": 5.559718369692362,
+        "rss_peak_mb": 436.359375,
+        "fell_behind": true,
+        "fell_behind_reasons": [
+          "20 of 60 seconds had mean timer wake-up lag > 50 ms",
+          "sampler tick 15610 ms late"
+        ],
+        "active_vus_at_window_start": 18333,
+        "tcp_connects": 40381
+      }
+    }
+  ],
+  "endpoint_spread": [
+    {
+      "name": "GET /api/articles/:slug",
+      "count": 243490,
+      "rps": 4058.1666666666665,
+      "p50_ms": 5.779,
+      "p90_ms": 10027.007,
+      "p95_ms": 10330.111,
+      "p99_ms": 22593.535,
+      "max_ms": 40239.103,
+      "mean_ms": 2176.192372729888,
+      "errors": 23931,
+      "error_rate": 0.09828329705532055,
+      "statuses": {
+        "200": 219559
+      },
+      "error_classes": {
+        "timeout": 23931
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "GET /api/tags",
+      "count": 237195,
+      "rps": 3953.25,
+      "p50_ms": 6.371,
+      "p90_ms": 10027.007,
+      "p95_ms": 10846.207,
+      "p99_ms": 22609.919,
+      "max_ms": 40206.335,
+      "mean_ms": 2225.772170644405,
+      "errors": 23725,
+      "error_rate": 0.10002318767259007,
+      "statuses": {
+        "200": 213470
+      },
+      "error_classes": {
+        "timeout": 23725
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "GET /api/articles/:slug/comments",
+      "count": 226714,
+      "rps": 3778.5666666666666,
+      "p50_ms": 5.439,
+      "p90_ms": 10027.007,
+      "p95_ms": 12812.287,
+      "p99_ms": 23363.583,
+      "max_ms": 40206.335,
+      "mean_ms": 1997.7791535767533,
+      "errors": 22860,
+      "error_rate": 0.10083188510634544,
+      "statuses": {
+        "200": 203854
+      },
+      "error_classes": {
+        "timeout": 22860
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "GET /api/articles",
+      "count": 131126,
+      "rps": 2185.4333333333334,
+      "p50_ms": 5.991,
+      "p90_ms": 10035.199,
+      "p95_ms": 12828.671,
+      "p99_ms": 23642.111,
+      "max_ms": 40206.335,
+      "mean_ms": 2052.0224515656746,
+      "errors": 16766,
+      "error_rate": 0.12786175129264982,
+      "statuses": {
+        "200": 114360
+      },
+      "error_classes": {
+        "timeout": 16766
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "GET /api/articles/feed",
+      "count": 89353,
+      "rps": 1489.2166666666667,
+      "p50_ms": 7.815,
+      "p90_ms": 10035.199,
+      "p95_ms": 12836.863,
+      "p99_ms": 22626.303,
+      "max_ms": 40206.335,
+      "mean_ms": 2063.2484129799786,
+      "errors": 11597,
+      "error_rate": 0.12978859131758308,
+      "statuses": {
+        "200": 77756
+      },
+      "error_classes": {
+        "timeout": 11597
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "GET /api/profiles/:username",
+      "count": 65888,
+      "rps": 1098.1333333333334,
+      "p50_ms": 3.445,
+      "p90_ms": 10027.007,
+      "p95_ms": 10387.455,
+      "p99_ms": 22495.231,
+      "max_ms": 40206.335,
+      "mean_ms": 2175.329574915006,
+      "errors": 6477,
+      "error_rate": 0.09830318115590092,
+      "statuses": {
+        "200": 59411
+      },
+      "error_classes": {
+        "timeout": 6477
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "GET /api/articles?tag",
+      "count": 51248,
+      "rps": 854.1333333333333,
+      "p50_ms": 6.495,
+      "p90_ms": 10027.007,
+      "p95_ms": 10870.783,
+      "p99_ms": 22593.535,
+      "max_ms": 40206.335,
+      "mean_ms": 2228.6980477677184,
+      "errors": 6325,
+      "error_rate": 0.12341945051514205,
+      "statuses": {
+        "200": 44923
+      },
+      "error_classes": {
+        "timeout": 6325
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "GET /api/articles?author",
+      "count": 49065,
+      "rps": 817.75,
+      "p50_ms": 6.071,
+      "p90_ms": 10027.007,
+      "p95_ms": 12763.135,
+      "p99_ms": 22593.535,
+      "max_ms": 40206.335,
+      "mean_ms": 1992.948362478347,
+      "errors": 4698,
+      "error_rate": 0.09575053500458576,
+      "statuses": {
+        "200": 44367
+      },
+      "error_classes": {
+        "timeout": 4698
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "POST /api/articles/:slug/favorite",
+      "count": 24310,
+      "rps": 405.1666666666667,
+      "p50_ms": 6.827,
+      "p90_ms": 10076.159,
+      "p95_ms": 10493.951,
+      "p99_ms": 22511.615,
+      "max_ms": 40206.335,
+      "mean_ms": 2668.598067420812,
+      "errors": 4700,
+      "error_rate": 0.19333607568901687,
+      "statuses": {
+        "200": 19610
+      },
+      "error_classes": {
+        "timeout": 4700
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "POST /api/articles/:slug/comments",
+      "count": 16245,
+      "rps": 270.75,
+      "p50_ms": 4.035,
+      "p90_ms": 10027.007,
+      "p95_ms": 10239.999,
+      "p99_ms": 22560.767,
+      "max_ms": 40206.335,
+      "mean_ms": 2390.6682154509085,
+      "errors": 1809,
+      "error_rate": 0.1113573407202216,
+      "statuses": {
+        "201": 14436
+      },
+      "error_classes": {
+        "timeout": 1809
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "GET /api/articles?favorited",
+      "count": 12260,
+      "rps": 204.33333333333334,
+      "p50_ms": 6.147,
+      "p90_ms": 10035.199,
+      "p95_ms": 12836.863,
+      "p99_ms": 22200.319,
+      "max_ms": 34865.151,
+      "mean_ms": 1998.8313305872753,
+      "errors": 1162,
+      "error_rate": 0.09477977161500815,
+      "statuses": {
+        "200": 11098
+      },
+      "error_classes": {
+        "timeout": 1162
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "POST /api/profiles/:username/follow",
+      "count": 7453,
+      "rps": 124.21666666666667,
+      "p50_ms": 4.099,
+      "p90_ms": 10027.007,
+      "p95_ms": 10199.039,
+      "p99_ms": 22773.759,
+      "max_ms": 39813.119,
+      "mean_ms": 2334.387254528379,
+      "errors": 801,
+      "error_rate": 0.10747350060378372,
+      "statuses": {
+        "200": 6652
+      },
+      "error_classes": {
+        "timeout": 801
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "GET /api/user",
+      "count": 6499,
+      "rps": 108.31666666666666,
+      "p50_ms": 7.611,
+      "p90_ms": 10133.503,
+      "p95_ms": 15458.303,
+      "p99_ms": 26083.327,
+      "max_ms": 39780.351,
+      "mean_ms": 3592.39628527466,
+      "errors": 1126,
+      "error_rate": 0.17325742421911064,
+      "statuses": {
+        "200": 5373
+      },
+      "error_classes": {
+        "timeout": 1126
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "POST /api/articles",
+      "count": 5099,
+      "rps": 84.98333333333333,
+      "p50_ms": 4.707,
+      "p90_ms": 10027.007,
+      "p95_ms": 13033.471,
+      "p99_ms": 22708.223,
+      "max_ms": 39714.815,
+      "mean_ms": 2517.6807860364775,
+      "errors": 562,
+      "error_rate": 0.11021768974308688,
+      "statuses": {
+        "201": 4537
+      },
+      "error_classes": {
+        "timeout": 562
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "DELETE /api/articles/:slug/favorite",
+      "count": 2218,
+      "rps": 36.96666666666667,
+      "p50_ms": 6.607,
+      "p90_ms": 10067.967,
+      "p95_ms": 12001.279,
+      "p99_ms": 21364.735,
+      "max_ms": 36241.407,
+      "mean_ms": 2742.3699535617657,
+      "errors": 443,
+      "error_rate": 0.19972948602344454,
+      "statuses": {
+        "200": 1775
+      },
+      "error_classes": {
+        "timeout": 443
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "DELETE /api/profiles/:username/follow",
+      "count": 2101,
+      "rps": 35.016666666666666,
+      "p50_ms": 4.219,
+      "p90_ms": 10059.775,
+      "p95_ms": 13557.759,
+      "p99_ms": 23887.871,
+      "max_ms": 35815.423,
+      "mean_ms": 2738.998560685386,
+      "errors": 246,
+      "error_rate": 0.1170871013802951,
+      "statuses": {
+        "200": 1855
+      },
+      "error_classes": {
+        "timeout": 246
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "PUT /api/user",
+      "count": 1767,
+      "rps": 29.45,
+      "p50_ms": 3.387,
+      "p90_ms": 10051.583,
+      "p95_ms": 13033.471,
+      "p99_ms": 21741.567,
+      "max_ms": 32325.631,
+      "mean_ms": 2109.648616298811,
+      "errors": 196,
+      "error_rate": 0.11092246745897001,
+      "statuses": {
+        "200": 1571
+      },
+      "error_classes": {
+        "timeout": 196
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "POST /api/users/login",
+      "count": 1516,
+      "rps": 25.266666666666666,
+      "p50_ms": 316.927,
+      "p90_ms": 12402.687,
+      "p95_ms": 16138.239,
+      "p99_ms": 26083.327,
+      "max_ms": 39780.351,
+      "mean_ms": 5030.399620052768,
+      "errors": 482,
+      "error_rate": 0.3179419525065963,
+      "statuses": {
+        "200": 1034
+      },
+      "error_classes": {
+        "timeout": 482
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "DELETE /api/articles/:slug/comments/:id",
+      "count": 301,
+      "rps": 5.016666666666667,
+      "p50_ms": 5.087,
+      "p90_ms": 10133.503,
+      "p95_ms": 13139.967,
+      "p99_ms": 26017.791,
+      "max_ms": 31375.359,
+      "mean_ms": 3379.9886910299024,
+      "errors": 51,
+      "error_rate": 0.16943521594684385,
+      "statuses": {
+        "204": 250
+      },
+      "error_classes": {
+        "timeout": 51
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "PUT /api/articles/:slug",
+      "count": 83,
+      "rps": 1.3833333333333333,
+      "p50_ms": 7.575,
+      "p90_ms": 10149.887,
+      "p95_ms": 12967.935,
+      "p99_ms": 17743.871,
+      "max_ms": 25051.135,
+      "mean_ms": 3045.7484216867465,
+      "errors": 21,
+      "error_rate": 0.25301204819277107,
+      "statuses": {
+        "200": 62
+      },
+      "error_classes": {
+        "timeout": 21
+      },
+      "error_example": "request timeout"
+    },
+    {
+      "name": "POST /api/users",
+      "count": 34,
+      "rps": 0.5666666666666667,
+      "p50_ms": 243.839,
+      "p90_ms": 10207.231,
+      "p95_ms": 20889.599,
+      "p99_ms": 30392.319,
+      "max_ms": 30392.319,
+      "mean_ms": 4636.1007058823525,
+      "errors": 11,
+      "error_rate": 0.3235294117647059,
+      "statuses": {
+        "201": 23
+      },
+      "error_classes": {
+        "timeout": 11
+      },
+      "error_example": "request timeout"
+    }
+  ],
+  "monitor_windows": {
+    "target": [
+      {
+        "from_t": 50,
+        "to_t": 65,
+        "sampled_seconds": 14.03715259,
+        "whole_cgroup_cores": 5.054458982696005,
+        "app_cores": 1.0386721884313443,
+        "pg_component_counter_valid_in_window": false,
+        "pg_cores": null,
+        "memory_peak_bytes": 7833899008,
+        "cpu_some_pressure_avg10_end": 20.62,
+        "cpu_throttled_usec_delta": 0
+      },
+      {
+        "from_t": 65,
+        "to_t": 85,
+        "sampled_seconds": 19.0425318,
+        "whole_cgroup_cores": 5.200985091698784,
+        "app_cores": 1.1941689392373764,
+        "pg_component_counter_valid_in_window": true,
+        "pg_cores": 4.005769863017899,
+        "memory_peak_bytes": 7865180160,
+        "cpu_some_pressure_avg10_end": 12.82,
+        "cpu_throttled_usec_delta": 0
+      },
+      {
+        "from_t": 85,
+        "to_t": 91,
+        "sampled_seconds": 5.010744252,
+        "whole_cgroup_cores": 5.2390973635347295,
+        "app_cores": 1.1914397741647156,
+        "pg_component_counter_valid_in_window": true,
+        "pg_cores": 4.04331152840486,
+        "memory_peak_bytes": 7684141056,
+        "cpu_some_pressure_avg10_end": 11.55,
+        "cpu_throttled_usec_delta": 0
+      },
+      {
+        "from_t": 91,
+        "to_t": 102,
+        "sampled_seconds": 10.113625755,
+        "whole_cgroup_cores": 5.336307601981264,
+        "app_cores": 1.5840016615287524,
+        "pg_component_counter_valid_in_window": true,
+        "pg_cores": 3.7355544801845038,
+        "memory_peak_bytes": 7751380992,
+        "cpu_some_pressure_avg10_end": 34.24,
+        "cpu_throttled_usec_delta": 7878
+      },
+      {
+        "from_t": 102,
+        "to_t": 120,
+        "sampled_seconds": 17.349738257,
+        "whole_cgroup_cores": 5.90723943392341,
+        "app_cores": 1.7838885833054454,
+        "pg_component_counter_valid_in_window": false,
+        "pg_cores": null,
+        "memory_peak_bytes": 7751004160,
+        "cpu_some_pressure_avg10_end": 42.0,
+        "cpu_throttled_usec_delta": 277608
+      },
+      {
+        "from_t": 120,
+        "to_t": 150,
+        "sampled_seconds": 29.095640055,
+        "whole_cgroup_cores": 5.6804404951248975,
+        "app_cores": 1.2290501234000089,
+        "pg_component_counter_valid_in_window": false,
+        "pg_cores": null,
+        "memory_peak_bytes": 7687270400,
+        "cpu_some_pressure_avg10_end": 29.05,
+        "cpu_throttled_usec_delta": 88871
+      }
+    ],
+    "load": [
+      {
+        "from_t": 50,
+        "to_t": 65,
+        "sampled_seconds": 14.049535257,
+        "whole_cgroup_cores": 3.6765500819156385,
+        "app_cores": null,
+        "pg_component_counter_valid_in_window": true,
+        "pg_cores": null,
+        "memory_peak_bytes": 2295566336,
+        "cpu_some_pressure_avg10_end": 19.82,
+        "cpu_throttled_usec_delta": 0
+      },
+      {
+        "from_t": 65,
+        "to_t": 85,
+        "sampled_seconds": 19.0184143,
+        "whole_cgroup_cores": 2.0059432610004713,
+        "app_cores": null,
+        "pg_component_counter_valid_in_window": true,
+        "pg_cores": null,
+        "memory_peak_bytes": 2539233280,
+        "cpu_some_pressure_avg10_end": 16.7,
+        "cpu_throttled_usec_delta": 0
+      },
+      {
+        "from_t": 85,
+        "to_t": 91,
+        "sampled_seconds": 5.003079794,
+        "whole_cgroup_cores": 1.534990708964895,
+        "app_cores": null,
+        "pg_component_counter_valid_in_window": true,
+        "pg_cores": null,
+        "memory_peak_bytes": 2459901952,
+        "cpu_some_pressure_avg10_end": 15.27,
+        "cpu_throttled_usec_delta": 0
+      },
+      {
+        "from_t": 91,
+        "to_t": 102,
+        "sampled_seconds": 10.091174338,
+        "whole_cgroup_cores": 4.265103996660334,
+        "app_cores": null,
+        "pg_component_counter_valid_in_window": true,
+        "pg_cores": null,
+        "memory_peak_bytes": 2573049856,
+        "cpu_some_pressure_avg10_end": 32.99,
+        "cpu_throttled_usec_delta": 55030
+      },
+      {
+        "from_t": 102,
+        "to_t": 120,
+        "sampled_seconds": 17.238859382,
+        "whole_cgroup_cores": 3.63269776800828,
+        "app_cores": null,
+        "pg_component_counter_valid_in_window": true,
+        "pg_cores": null,
+        "memory_peak_bytes": 2786975744,
+        "cpu_some_pressure_avg10_end": 43.55,
+        "cpu_throttled_usec_delta": 0
+      },
+      {
+        "from_t": 120,
+        "to_t": 150,
+        "sampled_seconds": 29.180888805,
+        "whole_cgroup_cores": 3.6520902674403652,
+        "app_cores": null,
+        "pg_component_counter_valid_in_window": true,
+        "pg_cores": null,
+        "memory_peak_bytes": 2959941632,
+        "cpu_some_pressure_avg10_end": 40.56,
+        "cpu_throttled_usec_delta": 0
+      }
+    ]
+  },
+  "monitor_limits": {
+    "target_full_window_pg_cpu_component_valid": false,
+    "target_full_window_pg_cpu_component": null,
+    "app_full_window_component_valid": true,
+    "target_cores_sampled": 5.513305644049031,
+    "app_cores_sampled": 1.4521031151146364,
+    "client_cores_sampled": 2.9840570015367405,
+    "no_target_or_client_oom": true,
+    "no_target_or_client_swap": true,
+    "note": "Independent cgroup quotas do not reserve physical cores; both share the same10-logical-CPU VM. CPU pressure reflects runnable contention even below individual quota saturation."
+  },
+  "host_memory": {
+    "page_size_bytes": 16384,
+    "chronology_t85_to94": [
+      {
+        "t": 85.20800709724426,
+        "wall_utc": "2026-10-23T16:05:53.114007+00:00",
+        "counter_deltas": {
+          "Pageins": 6,
+          "Pageouts": 0,
+          "Compressions": 1675,
+          "Decompressions": 1885,
+          "Swapins": 0,
+          "Swapouts": 0
+        },
+        "compressor_occupied_bytes": 12902744064,
+        "free_pages": 4515,
+        "swapusage": "vm.swapusage: total = 3072.00M  used = 1890.81M  free = 1181.19M  (encrypted)"
+      },
+      {
+        "t": 86.20963215827942,
+        "wall_utc": "2026-10-23T16:05:54.115632+00:00",
+        "counter_deltas": {
+          "Pageins": 35,
+          "Pageouts": 0,
+          "Compressions": 0,
+          "Decompressions": 799,
+          "Swapins": 0,
+          "Swapouts": 0
+        },
+        "compressor_occupied_bytes": 12895436800,
+        "free_pages": 3702,
+        "swapusage": "vm.swapusage: total = 3072.00M  used = 1890.81M  free = 1181.19M  (encrypted)"
+      },
+      {
+        "t": 87.21164894104004,
+        "wall_utc": "2026-10-23T16:05:55.117649+00:00",
+        "counter_deltas": {
+          "Pageins": 4,
+          "Pageouts": 0,
+          "Compressions": 5172,
+          "Decompressions": 714,
+          "Swapins": 0,
+          "Swapouts": 0
+        },
+        "compressor_occupied_bytes": 12925403136,
+        "free_pages": 4667,
+        "swapusage": "vm.swapusage: total = 3072.00M  used = 1890.81M  free = 1181.19M  (encrypted)"
+      },
+      {
+        "t": 88.2146520614624,
+        "wall_utc": "2026-10-23T16:05:56.120652+00:00",
+        "counter_deltas": {
+          "Pageins": 2,
+          "Pageouts": 0,
+          "Compressions": 2540,
+          "Decompressions": 973,
+          "Swapins": 0,
+          "Swapouts": 0
+        },
+        "compressor_occupied_bytes": 12932530176,
+        "free_pages": 4022,
+        "swapusage": "vm.swapusage: total = 3072.00M  used = 1890.81M  free = 1181.19M  (encrypted)"
+      },
+      {
+        "t": 89.21669912338257,
+        "wall_utc": "2026-10-23T16:05:57.122699+00:00",
+        "counter_deltas": {
+          "Pageins": 24,
+          "Pageouts": 1,
+          "Compressions": 2835,
+          "Decompressions": 708,
+          "Swapins": 0,
+          "Swapouts": 0
+        },
+        "compressor_occupied_bytes": 12947423232,
+        "free_pages": 4876,
+        "swapusage": "vm.swapusage: total = 3072.00M  used = 1890.81M  free = 1181.19M  (encrypted)"
+      },
+      {
+        "t": 90.21832323074341,
+        "wall_utc": "2026-10-23T16:05:58.124323+00:00",
+        "counter_deltas": {
+          "Pageins": 7,
+          "Pageouts": 2,
+          "Compressions": 6489,
+          "Decompressions": 8141,
+          "Swapins": 0,
+          "Swapouts": 0
+        },
+        "compressor_occupied_bytes": 12920930304,
+        "free_pages": 4967,
+        "swapusage": "vm.swapusage: total = 3072.00M  used = 1890.81M  free = 1181.19M  (encrypted)"
+      },
+      {
+        "t": 91.21985602378845,
+        "wall_utc": "2026-10-23T16:05:59.125856+00:00",
+        "counter_deltas": {
+          "Pageins": 4,
+          "Pageouts": 0,
+          "Compressions": 0,
+          "Decompressions": 911,
+          "Swapins": 0,
+          "Swapouts": 0
+        },
+        "compressor_occupied_bytes": 12913410048,
+        "free_pages": 4837,
+        "swapusage": "vm.swapusage: total = 3072.00M  used = 1890.81M  free = 1181.19M  (encrypted)"
+      },
+      {
+        "t": 92.22399926185608,
+        "wall_utc": "2026-10-23T16:06:00.129999+00:00",
+        "counter_deltas": {
+          "Pageins": 31,
+          "Pageouts": 1,
+          "Compressions": 3319,
+          "Decompressions": 1547,
+          "Swapins": 0,
+          "Swapouts": 0
+        },
+        "compressor_occupied_bytes": 12929138688,
+        "free_pages": 4658,
+        "swapusage": "vm.swapusage: total = 3072.00M  used = 1890.81M  free = 1181.19M  (encrypted)"
+      },
+      {
+        "t": 93.22693109512329,
+        "wall_utc": "2026-10-23T16:06:01.132931+00:00",
+        "counter_deltas": {
+          "Pageins": 3,
+          "Pageouts": 0,
+          "Compressions": 0,
+          "Decompressions": 683,
+          "Swapins": 0,
+          "Swapouts": 0
+        },
+        "compressor_occupied_bytes": 12924731392,
+        "free_pages": 5470,
+        "swapusage": "vm.swapusage: total = 3072.00M  used = 1890.81M  free = 1181.19M  (encrypted)"
+      },
+      {
+        "t": 94.23213315010071,
+        "wall_utc": "2026-10-23T16:06:02.138133+00:00",
+        "counter_deltas": {
+          "Pageins": 14,
+          "Pageouts": 0,
+          "Compressions": 0,
+          "Decompressions": 1127,
+          "Swapins": 0,
+          "Swapouts": 0
+        },
+        "compressor_occupied_bytes": 12916768768,
+        "free_pages": 4642,
+        "swapusage": "vm.swapusage: total = 3072.00M  used = 1890.81M  free = 1181.19M  (encrypted)"
+      }
+    ],
+    "findings": [
+      "Host swap usage stayed1890.81MiB; Swapouts did not increase during Goose110.",
+      "Host compressor occupied about12GiB near onset. At t90.218 there were6489 compressions and8141 decompressions (~127MiB decompressed) in about1s. This is a correlated host event, not proof that Docker/client/Goose owned those pages.",
+      "No guest memory PSI/OOM/swap was observed. That does not rule out outer macOS compression or CPU competition.",
+      "A coarser90\u2013102 interval average hides the localizedt90 burst; exact second-level counters are retained."
+    ]
+  },
+  "postgres_evidence": {
+    "snapshot_counters_available": false,
+    "missing": [
+      "pg_stat_database xact_commit/xact_rollback/deadlocks/temp_files/temp_bytes",
+      "pg_stat_checkpointer counters",
+      "pg_stat_activity query/wait/transaction age",
+      "table live/dead tuple growth",
+      "per-query durations or queue depth"
+    ],
+    "scoped_log_lines": [
+      "2026-10-23 16:05:46.371 UTC [22] LOG:  checkpoint complete: wrote 25014 buffers (4.8%), wrote 15 SLRU buffers; 0 WAL file(s) added, 11 removed, 0 recycled; write=269.825 s, sync=0.178 s, total=270.169 s; sync files=48, longest=0.075 s, average=0.004 s; distance=186205 kB, estimate=645116 kB; lsn=6/5AC982E0, redo lsn=6/28A82EC8",
+      "2026-10-23 16:06:16.515 UTC [22] LOG:  checkpoint starting: time",
+      "2026-10-23 16:07:02.961 UTC [22] LOG:  checkpoint complete: wrote 18608 buffers (3.5%), wrote 13 SLRU buffers; 0 WAL file(s) added, 0 removed, 52 recycled; write=46.128 s, sync=0.001 s, total=46.447 s; sync files=4, longest=0.001 s, average=0.001 s; distance=856387 kB, estimate=856387 kB; lsn=6/657DEE70, redo lsn=6/5CED3E38",
+      "2026-10-23 16:07:02.961 UTC [22] LOG:  checkpoint starting: immediate force wait",
+      "2026-10-23 16:07:02.975 UTC [22] LOG:  checkpoint complete: wrote 2 buffers (0.0%), wrote 4 SLRU buffers; 0 WAL file(s) added, 0 removed, 9 recycled; write=0.004 s, sync=0.002 s, total=0.014 s; sync files=5, longest=0.001 s, average=0.001 s; distance=140332 kB, estimate=784782 kB; lsn=6/657DEF40, redo lsn=6/657DEEE8"
+    ],
+    "scoped_error_or_deadlock_lines": [],
+    "checkpoint_chronology": "The prior checkpoint finished at16:05:46.371 (~t78.5). Collapse begins near16:05:58.906 (~t91). The next checkpoint begins16:06:16.515 (~t108.6), about17.6s after collapse onset, so it cannot be the initial trigger. Its write duration46.128s is paced elapsed work, not a46s global fsync stall; reported sync was.001s. It could affect an already-collapsed system, but causality is not shown.",
+    "pg_population_transients": [
+      {
+        "t_from": 54.036,
+        "t_to": 56.037,
+        "pid": 591
+      },
+      {
+        "t_from": 114.121,
+        "t_to": 115.276,
+        "pid": 597
+      },
+      {
+        "t_from": 123.978,
+        "t_to": 125.053,
+        "pid": 598
+      }
+    ],
+    "pg_population_limit": "Process roles/commands were not saved. Do not label transient PIDs autovacuum or a source defect."
+  },
+  "application_source_risks": [
+    {
+      "fact": "Read batches can bypass the in-flight gate when the pool is full; put_request appends without a waiting/byte/admission bound.",
+      "lines": [
+        326,
+        371
+      ],
+      "implication": "A slowdown can build a long PostgreSQL pipeline instead of applying bounded backpressure. This is an amplification mechanism, not a proven onset cause."
+    },
+    {
+      "fact": "A closed busy HTTP connection is marked dead, but SQL already submitted stays in the pipeline until its answer is drained. Unsent pooled dead members are skipped.",
+      "lines": [
+        140,
+        382
+      ],
+      "implication": "Timeout/reconnect storms can leave obsolete reads consuming database work. Writes still must retain commit semantics. No queue-depth or obsolete-work counter was captured."
+    }
+  ],
+  "hypotheses": [
+    {
+      "name": "Coupled client/runtime/shared-CPU scheduling collapse",
+      "evidence": "All six client samplers stall, CPU pressure rises on both cgroups, whole VM approaches saturation, and requests keep running beyond the nominal timeout. Rust120k in the same run also shows a sampler/completion stall, though without Goose110s large timeout storm.",
+      "confidence": "Supported mechanism; initiating trigger unresolved."
+    },
+    {
+      "name": "Outer macOS compression/other host competition",
+      "evidence": "Localized t90 compression/decompression burst coincides with early latency rise; host maintains a large compressor. No owner/process/CPU-attribution trace exists.",
+      "confidence": "Plausible trigger; not proved."
+    },
+    {
+      "name": "Application or SQL queue/backlog amplification",
+      "evidence": "Target continues consuming CPU while client completion rate collapses; source queues are unbounded and already-submitted work survives disconnect;247457 total TCP dial attempts show substantial redial activity.",
+      "confidence": "Credible amplifier; no queue/wait trace proves it initiated the event."
+    },
+    {
+      "name": "Checkpoint/deadlock/statement-timeout as initial trigger",
+      "evidence": "Checkpoint starts after onset; no scoped PostgreSQL errors/deadlocks/timeouts logged; required counters/waits were not recorded.",
+      "confidence": "Checkpoint onset contradicted by chronology; other PG contention remains untested."
+    }
+  ],
+  "bounded_next_diagnostic": {
+    "after_current_control_only": true,
+    "application_source_and_binary_unchanged": true,
+    "first_step": "One separately labelled reproduction of the exact warmup10k\u2192100k\u2192110k sequence with client GODEBUG=gctrace=1, original GOMAXPROCS=1, same declared budgets and fresh continuous full-seed database. Retain raw native verdict and all invalidity flags. Record per-process client CPU/GC logs, target/client CPU pressure, and read-only PostgreSQL activity/wait samples plus before/after database/checkpointer counters.",
+    "conditional_second_step": "Only if it reproduces, a new diagnostic with GOMAXPROCS=2 may test client serialization/GC headroom. It changes generator metadata and is not eligible under the frozen GOMAXPROCS=1 capacity protocol; it cannot rescue this run. Keep application/SQL unchanged and use the same fresh-session sequence.",
+    "application_fix_gate": "If service-side queue/wait traces grow while client scheduling remains healthy, design bounded read dispatch/obsolete-read dropping and count batch cost by members. Preserve committed-write responses. Do not change source based only on invalid-client latency.",
+    "preferred_capacity_environment": "For an official-style capacity claim, use an idle external Linux client physically separate from the8CPU/16GiB app+PG target; retain the native workload and guards."
+  },
+  "input_sha256": {
+    "capacity_20261023t154047_9e1fee/cases/goose32/phases/02-probe-100000/merged.json": "4332bf6251513b598ba5b645e00f0dcdd5abc5492a956a06c798306c588d5ff8",
+    "capacity_20261023t154047_9e1fee/cases/goose32/phases/03-probe-110000/merged.json": "2f7cb3019300c2176b5e88211b3c758854bb975e96541d286041b73b9c13cbc9",
+    "capacity_20261023t154047_9e1fee/cases/goose32/phases/03-probe-110000/assessment.json": "db7df6e0bdc34dfa6c0f1f4ff2d8ae1d01e2182b710653ef9035fdf4dab98129",
+    "capacity_20261023t154047_9e1fee/cases/goose32/phases/03-probe-110000/target-monitor.jsonl": "0af8d5b34ec6c21824daeabbd9782b284a7c48ddec0091d0e0fa28330ec299c6",
+    "capacity_20261023t154047_9e1fee/cases/goose32/phases/03-probe-110000/load-monitor.jsonl": "5dbe699db9d90dcc2bbfe1fa7bf9f70f1f87d7dde4214855f6c340252ffa7c5e",
+    "capacity_20261023t154047_9e1fee/host-memory.jsonl": "59f578cfcb7ef1f2f55b00d6897d60d5de342a84e54965cbabe2e1f370e13956",
+    "capacity_20261023t154047_9e1fee/cases/goose32/server.log": "f3e2724ad3e74bc0ac0d7663408baf32aaf7f9db5b309106a11b3721076d980f",
+    "capacity_20261023t154047_9e1fee/cases/goose32/frozen/source/server.goose": "4126e0647c1923430e4b4c4a4f918bb77b582a4dcc02a19e775682f4322bc999",
+    "audit/powered-postgresql-log-excerpt.txt": "626d0f610176bfb2578d2a37797b14af5de48b2c9760b898d175b4520b45c317"
+  },
+  "runtime_or_source_mutations": false,
+  "client_source_findings": {
+    "nominal_timeout": "client.go sets a10-second socket I/O deadline, not a hard wall-duration cap. Request duration includes resumed goroutine scheduling and synchronous response parsing/JSON callbacks.22\u201340second observed durations therefore do not prove equal server service times.",
+    "redial": "A transport error closes that VUs socket; the next request redials. tcp_connects increments before Dial and counts attempts, not established connections. Compound-page components may redial immediately before the next think interval.",
+    "window_accounting": "Endpoint errors/histograms use request START time for measurement-window inclusion; timeline errors count request COMPLETION time.127989 measured endpoint errors versus206699 all-timeline errors is consistent.",
+    "late_sampler": "The sampler advances fixedk against absolute tick deadlines and catches up after a stall. It rotates histograms on actual sampling cadence but labelsT=k-1, so timeline quantiles may be shifted or empty relative to completion counters. Zero quantiles during a stall are not zero-latency service.",
+    "proof_limit": "Source identifies synchronous parsing and one recorder mutex per completion, but no proven seconds-long critical section or GC cause.",
+    "references": [
+      "bench/cmd/loadgen/client.go:42",
+      "bench/cmd/loadgen/client.go:56",
+      "bench/cmd/loadgen/client.go:87",
+      "bench/cmd/loadgen/client.go:102",
+      "bench/cmd/loadgen/client.go:116",
+      "bench/cmd/loadgen/client.go:126",
+      "bench/cmd/loadgen/vu.go:180",
+      "bench/cmd/loadgen/vu.go:327",
+      "bench/cmd/loadgen/metrics.go:227",
+      "bench/cmd/loadgen/metrics.go:233",
+      "bench/cmd/loadgen/run.go:131"
+    ],
+    "unfinished_work_censoring": "All six Goose110k shards reach the sampler hard stop at stopAt+13s, with24232 VUs still active in total at the last native timeline record. Recorded error totals therefore do not establish completion of every started request; outstanding work is censored."
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "status": "STATIC_SCOPE_AND_INDEPENDENT_REVIEW_PASS_ONLY",
+  "candidate": "/private/tmp/multicore-optimize-20261023/candidates/leader2",
+  "baseline": "/private/tmp/multicore-optimize-20261023/candidates/leader1",
+  "execution_performed": false,
+  "changed_files": {
+    "main.goose": {
+      "baseline_sha256": "277eea03b5c037a795f29a42ae2464556efef38ff9fcd984339a56b0705308c9",
+      "candidate_sha256": "61bae831b5cded1a70eed08ea08ab2d22c5d3c02a8d2ea1695a62fec11365369"
+    },
+    "server.goose": {
+      "baseline_sha256": "4126e0647c1923430e4b4c4a4f918bb77b582a4dcc02a19e775682f4322bc999",
+      "candidate_sha256": "eda6edd356e141b532d2db33a14aeed612956aa7a02e3327479f677563fc3c87"
+    }
+  },
+  "unchanged_text_source_files": 34,
+  "candidate_extra_files": [],
+  "patch_sha256": "8b55ea6f0afdf731e2da11825d7d5ccccf7ead429fb257da5a23421d69041808",
+  "copied_build_cache_or_binary_paths": [],
+  "protocol_configuration": {
+    "PG_READ_GROUPS_default": 4,
+    "PG_READ_GROUPS_zero": "unbounded group admission; readonly Sync4 and age-ordered admission remain",
+    "READ_GROUP_MAX": 4,
+    "writer_GROUP_MAX_unchanged": 64,
+    "READ_HOLD_unchanged": true,
+    "default_executions_per_reader_bound": 16,
+    "default_READ_BATCH": 32,
+    "default_HTTP_per_reader_upper_bound": 512,
+    "default_six_reader_HTTP_upper_bound": 3072
+  },
+  "admission_policy": "Oldest eligible direct FIFO head or pooled-family FIFO head by Conn.read_order; one family batch then compare again; O(1) generation-tagged node unlink",
+  "prior_prototype_archives": [
+    "archive/leader2-sync64-prototype",
+    "archive/leader2-sync4-direct-budget-prototype"
+  ],
+  "limitations": [
+    "No compilation or runtime validation yet.",
+    "No timing or throughput improvement established.",
+    "The110k stall cause remains unresolved.",
+    "Limits bound submitted reader executions, not local HTTP waiting queues."
+  ],
+  "independent_review": {
+    "reviewer": "/root/query_plan_optimizer/runtime_gc_diagnostics",
+    "artifact": "audit/leader2-independent-review.md",
+    "sha256": "878c324869b63caf5e381668c31d75d9d99ece39bd7f565f36928ca03f772265",
+    "actionable_findings": 0,
+    "static_only": true
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "target_container": "multicore-comparison-target-20261023",
+  "host_evidence": "/private/tmp/multicore-comparison-20261023",
+  "container_evidence": "/comparison",
+  "old_host_evidence": "/private/tmp/multicore-research-20261022",
+  "native_binary": "/evidence/tools/loadgen",
+  "expected_native_sha256": "886eaa564c6cdab1a791534d6931d1b8eb9b5c21d1e1ebaaa2824616c4562cdb",
+  "port": 3000,
+  "jwt_secret": "multicore-server-challenge",
+  "load_memory_bytes": 8589934592,
+  "load_cpus": 8,
+  "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+  "growth_factor": 1.1,
+  "keepawake_wrapper": "caffeinate -is",
+  "cases": [
+    {
+      "name": "goose32",
+      "binary": "/comparison/optimization/candidates/leader1/bin/conduit",
+      "source_dir": "/comparison/optimization/candidates/leader1",
+      "expected_binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+      "env": {
+        "WORKERS": "2",
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "BCRYPT_BATCH_MS": "250",
+        "READ_BATCH": "32",
+        "READ_HOLD": "1",
+        "ARTICLE_BATCH": "1",
+        "WRITE_BATCH_US": "1000",
+        "READ_BATCH_US": "5000"
+      },
+      "source_revision": "23a14e8cbf32113509cd0ad941320ef947508981",
+      "conformance": {
+        "passed": true,
+        "checks_passed": 197,
+        "checks_total": 197,
+        "binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+        "log_host_path": "/private/tmp/multicore-optimize-20261023/builds/leader1-full/output.log",
+        "log_sha256": "5134e8354b07c4b7a7105dd870aeafa45cbaeab5274363273b402b4013216d36"
+      }
+    }
+  ],
+  "client_env": {
+    "GOMAXPROCS": "1",
+    "GODEBUG": "gctrace=1"
+  },
+  "collector_interval_s": 1.0,
+  "study_note": "DIAGNOSTIC ONLY, not executed during preparation. Fixed original10k warmup then100k and110k probes, same fresh continuous full-seed database and unchanged7a7 app/native886. gctrace and1Hz PostgreSQL observer add declared instrumentation. No holds, adaptive search, capacity score, matched performance comparison or rank inference. Execute only after the current Rust control has stopped and root reviews this frozen package."
+}

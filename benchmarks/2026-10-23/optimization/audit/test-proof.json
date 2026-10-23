@@ -1,0 +1,170 @@
+{
+  "pass": true,
+  "checks": [
+    {
+      "check": "database1:accepted_by_unmodified_lifecycle_guard",
+      "pass": true
+    },
+    {
+      "check": "database3:accepted_by_unmodified_lifecycle_guard",
+      "pass": true
+    },
+    {
+      "check": "database999:accepted_by_unmodified_lifecycle_guard",
+      "pass": true
+    },
+    {
+      "check": "one_phase_complete_event_callsite",
+      "pass": true
+    },
+    {
+      "check": "10:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "10000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "20000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "20001:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "80000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "100001:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "120000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "160000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "capacity_search_brackets_then_holds",
+      "pass": true
+    },
+    {
+      "check": "ceiling_pass_is_a_hold_at_ceiling_without_invented_failure",
+      "pass": true
+    },
+    {
+      "check": "initial_failure_halves_until_low_pass",
+      "pass": true
+    },
+    {
+      "check": "four_failed_holds_stop_finitely",
+      "pass": true
+    },
+    {
+      "check": "generator_invalid_stops_without_failure_bracket_or_hold",
+      "pass": true
+    },
+    {
+      "check": "clock_invalid_never_becomes_server_failure",
+      "pass": true
+    },
+    {
+      "check": "declared80k_probe_start_preserves10k_warmup",
+      "pass": true
+    },
+    {
+      "check": "150k_pass160k_fail_probes_strict155k_midpoint",
+      "pass": true
+    },
+    {
+      "check": "155k_pass160k_fail_then_holds_resolved_interval",
+      "pass": true
+    },
+    {
+      "check": "rounding_fallback_does_not_exceed_finite_probe_budget",
+      "pass": true
+    },
+    {
+      "check": "actual_inspector_accepts_declared8GiB_only",
+      "pass": true
+    },
+    {
+      "check": "actual_inspector_rejects_swap_allowance_above8GiB",
+      "pass": true
+    },
+    {
+      "check": "server_budget_stays8CPU16GiB",
+      "pass": true
+    },
+    {
+      "check": "actual_saved_four_shard_run_independently_passes",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_accepts_observed8GiB_with_matching_explicit_plan",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_rejects_observed8GiB_against4GiB_plan",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_rejects_declared8GiB_with_observed4GiB",
+      "pass": true
+    },
+    {
+      "check": "config_protocol_memory_mismatch_rejected",
+      "pass": true
+    },
+    {
+      "check": "prepare_explicit4GiB_receipt_and_immutable_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_explicit8GiB_receipt_and_immutable_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_rejects_unsupported6GiB_before_writing_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_default4GiB_preserves_historical_budget",
+      "pass": true
+    },
+    {
+      "check": "raw1024_limit_rejected_even_if_helper_valid_true",
+      "pass": true
+    },
+    {
+      "check": "false_merged_rps_rejected",
+      "pass": true
+    },
+    {
+      "check": "native_generator_limit_never_yields_score",
+      "pass": true
+    },
+    {
+      "check": "wall_clock_jump_never_yields_server_failure",
+      "pass": true
+    }
+  ],
+  "prepare_receipts": [
+    {
+      "memory": 4294967296,
+      "source_config_sha256": "88b9d4d3b750d22bd38d2991fe0f8e8f4fcf1e06c1b7993f5e5e8d1e8bac7c0a",
+      "plan_sha256": "aeacaa4ed58c04effea6deb6e65290250a7115e29b4d023ae8773cd297630c74"
+    },
+    {
+      "memory": 8589934592,
+      "source_config_sha256": "ed130510fdc464ad5026ae7442cb539ef4a863644a616b418fbf74408fd5b750",
+      "plan_sha256": "2dbb6fb52daa3d437c17e3ded1ccbd02441203ad3641cdae731d2f4e67247a18"
+    }
+  ],
+  "docker_or_benchmark_execution": false
+}

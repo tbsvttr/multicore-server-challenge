@@ -1,0 +1,20 @@
+--- p1/audit/evidence.py
++++ p2/audit/evidence.py
+@@ -76,7 +76,7 @@
+         check(checks, 'synchronized_raw_windows', all(len({m[k] for m in metas}) == 1 for k in common))
+         check(checks, 'native_metadata_exact_stage_protocol', all(
+               all(m[k] == expected_stage[k] for k in ['ramp_s', 'measure_s', 'tail_s'])
+-              and m['articles'] == 500000 and m['think_scale'] == 1 and m['gomaxprocs'] == 1
++              and m['articles'] == 500000 and m['think_scale'] == 1 and m['gomaxprocs'] == protocol['gomaxprocs_per_shard']
+               and m['run_id'] == state['run_id'] and m['window_start_ms'] == m['start_at_ms'] + expected_stage['ramp_s'] * 1000
+               and m['window_end_ms'] == m['window_start_ms'] + expected_stage['measure_s'] * 1000 for m in metas))
+         check(checks, 'one_saved_command_per_shard', len(commands) == count)
+@@ -91,7 +91,7 @@
+                       '-ramp': str(expected_stage['ramp_s']) + 's', '-measure': str(expected_stage['measure_s']) + 's',
+                       '-tail': str(expected_stage['tail_s']) + 's', '-articles': '500000', '-think-scale': '1',
+                       '-secret': plan['configuration']['jwt_secret']}
+-            check(checks, f'shard{i}:raw_command_agrees', all(flags.get(k) == v for k, v in values.items()) and 'GOMAXPROCS=1' in command)
++            check(checks, f'shard{i}:raw_command_agrees', all(flags.get(k) == v for k, v in values.items()) and ('GOMAXPROCS=' + str(protocol['gomaxprocs_per_shard'])) in command)
+             check(checks, f'shard{i}:at_least99pct_vus_active', raw['box'].get('active_vus_at_window_start', 0) >= .99 * expected['users'])
+         checks.extend(exact_merge(raws, merged))
+         check(checks, 'merged_all_shards_and_users', merged['users'] == state['users'] and len(merged['boxes']) == count

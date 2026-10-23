@@ -1,0 +1,33 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "test": "tests/reader-admission.py",
+  "test_sha256": "f17b402b6c5c13889ab2ab160ce0cd06221707d0aaff365bbb7f2de68331bf65",
+  "usage": "tests/reader-admission-usage.md",
+  "syntax_ast_parse": "PASS",
+  "independent_static_review": {
+    "reviewer": "/root/query_plan_optimizer/runtime_gc_diagnostics",
+    "exact_reviewed_sha256": "f17b402b6c5c13889ab2ab160ce0cd06221707d0aaff365bbb7f2de68331bf65",
+    "actionable_findings": 0,
+    "conclusions": [
+      "Startup Ready/prepare-only Sync/query Sync accounting consistent.",
+      "Scalar and binary-array Bind hashes cover abandoned slug checks.",
+      "Fixture HTTP status/count/viewer/new-slug assertions match selected source/schema.",
+      "Bounded waits and owned-row cleanup consistent.",
+      "Bind absence does not prove every abandoned HTTP request was parsed."
+    ]
+  },
+  "runtime_operations_during_preparation": [],
+  "coverage_planned": [
+    "Gated/full reader pool and wire-observed group cap/Sync4",
+    "Disconnect-before-admission and rapid slot reuse",
+    "All eight pooled families plus direct progress under mixed arrivals",
+    "Writer commits and fresh postcommit metadata under reader backlog",
+    "Exactly-once comment effect and wire-once favorite/UPDATE submissions"
+  ],
+  "limitations": [
+    "Unexecuted: no runtime correctness pass yet.",
+    "Wire-specific claims require observer log and app routed through that observer.",
+    "Fixture requires isolated owned mc_pair_ database and no unrelated HTTP traffic.",
+    "This is correctness evidence only, not capacity or performance."
+  ]
+}

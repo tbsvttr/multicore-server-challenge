@@ -1,0 +1,134 @@
+{
+  "status": "PASS_STATIC_PREPARATION_ONLY",
+  "checks": [
+    {
+      "check": "article-update-race.py:syntax",
+      "pass": true
+    },
+    {
+      "check": "password-nul-probe.py:syntax",
+      "pass": true
+    },
+    {
+      "check": "by_id_statement_appended_without_renumbering",
+      "pass": true
+    },
+    {
+      "check": "update_mutation_returns_only_owner_id",
+      "pass": true
+    },
+    {
+      "check": "favorite_committed:uses_id_and_two_integer_parameters",
+      "pass": true
+    },
+    {
+      "check": "favorite_committed:replaces_committed_mutation_with_read",
+      "pass": true
+    },
+    {
+      "check": "favorite_committed:does_not_pool_id_as_slug",
+      "pass": true
+    },
+    {
+      "check": "article_update_committed:uses_id_and_two_integer_parameters",
+      "pass": true
+    },
+    {
+      "check": "article_update_committed:replaces_committed_mutation_with_read",
+      "pass": true
+    },
+    {
+      "check": "article_update_committed:does_not_pool_id_as_slug",
+      "pass": true
+    },
+    {
+      "check": "required_password_only_relaxes_utf8_nul",
+      "pass": true
+    },
+    {
+      "check": "update_optional_password_only_relaxes_utf8_nul",
+      "pass": true
+    },
+    {
+      "check": "postgres_text_still_rejects_nul",
+      "pass": true
+    },
+    {
+      "check": "all_three_password_byte_length_guards_preserved",
+      "pass": true
+    },
+    {
+      "check": "bcrypt_source_identical",
+      "pass": true
+    },
+    {
+      "check": "jwt_source_identical",
+      "pass": true
+    },
+    {
+      "check": "group_commit_and_retries_identical",
+      "pass": true
+    },
+    {
+      "check": "no_auth_tags_behavior_unchanged",
+      "pass": true
+    },
+    {
+      "check": "base_unchanged:sql.goose",
+      "pass": true
+    },
+    {
+      "check": "base_unchanged:routes.goose",
+      "pass": true
+    },
+    {
+      "check": "base_unchanged:http.goose",
+      "pass": true
+    },
+    {
+      "check": "production_patch_applies_cleanly",
+      "pass": true
+    }
+  ],
+  "count": 22,
+  "not_executed": [
+    "application build",
+    "database query",
+    "HTTP probe",
+    "benchmark"
+  ],
+  "source_manifest": {
+    "base": "/private/tmp/multicore-optimize-20261023/candidates/sharetimer",
+    "candidate": "/private/tmp/multicore-optimize-20261023/article-update-fix",
+    "changed_production_files": [
+      "sql.goose",
+      "routes.goose",
+      "http.goose"
+    ],
+    "base_sha256": {
+      "sql.goose": "3399183bd52619e96dacced74867fc48e2ae13105a4e5f67af08fbd97e5673e9",
+      "routes.goose": "2f7624ac04d1d278873ff8416039d35881df8a487eb7996f30b65aec3a6cc9ee",
+      "http.goose": "3c48b9f1526022748a6e80bd5eed7dfd55c8991360d4ea6d5fd8b109c3797242"
+    },
+    "candidate_sha256": {
+      "sql.goose": "0ef1fe3a90c869e845fcd2531143c2f2788fe8d63213f41a5fd3fd6af0066c1b",
+      "routes.goose": "7c5149922643a06f3a278a7d3bcbca0403240b3382864469e650502106a21bf4",
+      "http.goose": "95d854464a79f5fd6ce1c9ae71c0dc80d609b50b4d43814ae189a4db056eed25"
+    },
+    "patch_sha256": "f64f5ea0a650ca78485529361436fdbba8f69a17f17bd0f3c7ba8cafa7699097",
+    "status": "PREPARED_NOT_BUILT_OR_EXECUTED",
+    "new_statement": {
+      "id": 36,
+      "name": "ST_ARTICLE_BY_ID",
+      "types": "ii"
+    },
+    "application_builds": false,
+    "database_queries": false,
+    "benchmarks": false,
+    "fixes": [
+      "article update metadata after commit by immutable id",
+      "favorite post-commit reread by returned immutable id",
+      "allow NUL in password UTF8 validation only; byte cap and full bcrypt unchanged"
+    ]
+  }
+}

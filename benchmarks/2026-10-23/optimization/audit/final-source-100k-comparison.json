@@ -1,0 +1,2894 @@
+{
+  "schema": "exploratory-final-source-matched100k-v1",
+  "created_utc": "2026-10-23T16:08:45.114666+00:00",
+  "status": "PASS",
+  "checks_passed": 27,
+  "checks_total": 27,
+  "run": "/private/tmp/multicore-optimize-20261023/capacity_20261023t154047_9e1fee",
+  "scope": "One exploratory sequential matched-load point at100,000VUs,60second measurement after60second ramp. This is not capacity, a stable percentage gain, repeated paired confirmation, or official rank. Current global run/final cleanup/resource checks are incomplete and are not inferred from this point. Active110k and other later phases were not read.",
+  "global_run_checks_completed": false,
+  "capacity_proven": false,
+  "stable_gain_proven": false,
+  "official_rank_proven": false,
+  "checks": [
+    {
+      "check": "frozen_plan_matches_powered_pretrial_receipt",
+      "pass": true
+    },
+    {
+      "check": "saved_frozen_tools_unchanged",
+      "pass": true,
+      "evidence": {
+        "target_helper.py": "a079f25c5c1381392c4824267722c8ba74214ca6f73c98f4a6edfe6ec20b0581",
+        "monitor.py": "c33fa617d1758269adb44d71372b457257c92e1ec877d23a7673a688f590a4b4",
+        "capacity_controller.py": "8d371868b88e345d258c461a44befd8d98f387241efd0d9fa648ed696253d478",
+        "search_policy.py": "33aa0281a09e4f1e3b50dcf63c98e419694735969b481963be971c146195ac5c",
+        "audit/aggregate.py": "e8510cc57870532450be39dd01049d81c1b7877158b93e2c228c75af30b65452",
+        "audit/primitives.py": "8908b204b243ad5ad20e725d3284d115b5f9ccc8719931cd5018fcaf73104423",
+        "audit/test_capacity.py": "33476c5babbbcbf177269b1db3b960a2319eace06966db7e0326909f02846cb8",
+        "audit/evidence.py": "33a17c583571b42d040fc9e475256302281635fc58fd2171fc59f3d47f16e115"
+      }
+    },
+    {
+      "check": "initial_target_budget_matches",
+      "pass": true
+    },
+    {
+      "check": "initial_load_budget_matches",
+      "pass": true
+    },
+    {
+      "check": "native_binary_pin_matches",
+      "pass": true
+    },
+    {
+      "check": "rust7:frozen_source_manifest_and_exact_declared_binary",
+      "pass": true,
+      "evidence": {
+        "binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+        "source_manifest_sha256": "75df8e5d5c8e45aaa1a763fa93d4052684e6cd0df54a7993d542318b73cc5b99",
+        "source_revision": "PR7 dc7c249229bd43d8752e7ffb28ce81ee4401d8ae; canonical merged submission tree f542997eb07942e25fa44b7f288c8e1d508c176c; all66 canonical files verified byte-identical"
+      }
+    },
+    {
+      "check": "rust7:completed100k_phase_passes_all_independent_checks",
+      "pass": true,
+      "evidence": {
+        "checks": 212
+      }
+    },
+    {
+      "check": "rust7:native_and_local_qualified_without_scope_exception",
+      "pass": true
+    },
+    {
+      "check": "rust7:zero_measured_and_timeline_errors",
+      "pass": true
+    },
+    {
+      "check": "rust7:full197_proof_pass",
+      "pass": true
+    },
+    {
+      "check": "rust7:page_session_mix_equals_exact_raw_counts",
+      "pass": true
+    },
+    {
+      "check": "rust7:whole_target_CPU_cost_formula_matches",
+      "pass": true
+    },
+    {
+      "check": "goose32:frozen_source_manifest_and_exact_declared_binary",
+      "pass": true,
+      "evidence": {
+        "binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+        "source_manifest_sha256": "1a3d64114696ec40e156761903f4814a7dcb02906be9ded770c3afb189097e86",
+        "source_revision": "23a14e8cbf32113509cd0ad941320ef947508981"
+      }
+    },
+    {
+      "check": "goose32:completed100k_phase_passes_all_independent_checks",
+      "pass": true,
+      "evidence": {
+        "checks": 212
+      }
+    },
+    {
+      "check": "goose32:native_and_local_qualified_without_scope_exception",
+      "pass": true
+    },
+    {
+      "check": "goose32:zero_measured_and_timeline_errors",
+      "pass": true
+    },
+    {
+      "check": "goose32:full197_proof_pass",
+      "pass": true
+    },
+    {
+      "check": "goose32:page_session_mix_equals_exact_raw_counts",
+      "pass": true
+    },
+    {
+      "check": "goose32:whole_target_CPU_cost_formula_matches",
+      "pass": true
+    },
+    {
+      "check": "shard0:same_generator_seed_inputs_users_ID_allocation_schedule_and_destination",
+      "pass": true,
+      "evidence": {
+        "run_id": "capacity_20261023t154047_9e1fee-probe-100000",
+        "box_index": 0,
+        "users": 20000,
+        "id_offset": 0,
+        "ramp_s": 60,
+        "measure_s": 60,
+        "tail_s": 15,
+        "think_scale": 1,
+        "articles": 500000,
+        "gomaxprocs": 1,
+        "target": "http://127.0.0.1:3000"
+      }
+    },
+    {
+      "check": "shard1:same_generator_seed_inputs_users_ID_allocation_schedule_and_destination",
+      "pass": true,
+      "evidence": {
+        "run_id": "capacity_20261023t154047_9e1fee-probe-100000",
+        "box_index": 1,
+        "users": 20000,
+        "id_offset": 20000,
+        "ramp_s": 60,
+        "measure_s": 60,
+        "tail_s": 15,
+        "think_scale": 1,
+        "articles": 500000,
+        "gomaxprocs": 1,
+        "target": "http://127.0.0.2:3000"
+      }
+    },
+    {
+      "check": "shard2:same_generator_seed_inputs_users_ID_allocation_schedule_and_destination",
+      "pass": true,
+      "evidence": {
+        "run_id": "capacity_20261023t154047_9e1fee-probe-100000",
+        "box_index": 2,
+        "users": 20000,
+        "id_offset": 40000,
+        "ramp_s": 60,
+        "measure_s": 60,
+        "tail_s": 15,
+        "think_scale": 1,
+        "articles": 500000,
+        "gomaxprocs": 1,
+        "target": "http://127.0.0.3:3000"
+      }
+    },
+    {
+      "check": "shard3:same_generator_seed_inputs_users_ID_allocation_schedule_and_destination",
+      "pass": true,
+      "evidence": {
+        "run_id": "capacity_20261023t154047_9e1fee-probe-100000",
+        "box_index": 3,
+        "users": 20000,
+        "id_offset": 60000,
+        "ramp_s": 60,
+        "measure_s": 60,
+        "tail_s": 15,
+        "think_scale": 1,
+        "articles": 500000,
+        "gomaxprocs": 1,
+        "target": "http://127.0.0.4:3000"
+      }
+    },
+    {
+      "check": "shard4:same_generator_seed_inputs_users_ID_allocation_schedule_and_destination",
+      "pass": true,
+      "evidence": {
+        "run_id": "capacity_20261023t154047_9e1fee-probe-100000",
+        "box_index": 4,
+        "users": 20000,
+        "id_offset": 80000,
+        "ramp_s": 60,
+        "measure_s": 60,
+        "tail_s": 15,
+        "think_scale": 1,
+        "articles": 500000,
+        "gomaxprocs": 1,
+        "target": "http://127.0.0.5:3000"
+      }
+    },
+    {
+      "check": "exactly_five_shards_each20k_and100k_total",
+      "pass": true
+    },
+    {
+      "check": "separate_fresh_full_seed_databases",
+      "pass": true
+    },
+    {
+      "check": "primary_generator_seed_and_closed_loop_source_matches_frozen_source_witness",
+      "pass": true,
+      "evidence": {
+        "bench/cmd/loadgen/run.go": "61d7850d6b48a65d2ed603ef2e38bf03921b9ae2eeadf8502f47bc0678b79d6c",
+        "bench/cmd/loadgen/vu.go": "df12e335dad8ca45a90283e955c369365b9e8413afc1499cff243a1c40a5cd20",
+        "bench/cmd/loadgen/metrics.go": "889e75e32a6c060a16ae75f56a8b2e116560f89f9a7d3d447d29b43de4242b06"
+      }
+    }
+  ],
+  "arms": [
+    {
+      "case": "rust7",
+      "binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+      "source_revision": "PR7 dc7c249229bd43d8752e7ffb28ce81ee4401d8ae; canonical merged submission tree f542997eb07942e25fa44b7f288c8e1d508c176c; all66 canonical files verified byte-identical",
+      "env": {
+        "APP_THREADS": "2",
+        "DB_CONNS": "6",
+        "DB_WRITE_CONNS": "2",
+        "BCRYPT_THREADS": "1",
+        "WRITE_BATCH_US": "1000",
+        "BCRYPT_BATCH_MS": "160",
+        "READ_BATCH_SIZE": "32",
+        "READ_BATCH_US": "0",
+        "READ_SQL_BATCH": "1",
+        "READ_ROUTE_SLACK": "8",
+        "READ_TAG_ROUTE": "1",
+        "READ_COMMENT_SET": "1",
+        "READ_TAG_BATCH": "1"
+      },
+      "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t154047_9e1fee/cases/rust7/phases/02-probe-100000",
+      "measured_seconds": 60,
+      "overall": {
+        "count": 1588900,
+        "rps": 26481.666666666668,
+        "p50_ms": 0.812,
+        "p90_ms": 5.811,
+        "p95_ms": 15.703,
+        "p99_ms": 78.463,
+        "max_ms": 332.287,
+        "mean_ms": 4.147805658631758,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 1560170,
+          "201": 28270,
+          "204": 460
+        }
+      },
+      "cpu_ms_per_success": 0.19117154353591326,
+      "combined_target_CPU_seconds_estimate": 303.7524655242126,
+      "target_CPU_quota_utilization_pct": 63.28176365087762,
+      "client_CPU_quota_utilization_pct": 20.287075926495046,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "page_counts": {
+        "article": 310625,
+        "comment": 21484,
+        "delete_own_comment": 460,
+        "edit_own_article": 157,
+        "favorite_toggle": 34367,
+        "follow_toggle": 12680,
+        "home": 185981,
+        "profile": 69246,
+        "profile_favorited": 17219,
+        "publish": 6758,
+        "settings": 2548,
+        "tag": 67762,
+        "your_feed": 126778
+      },
+      "session_counts": {
+        "login": 1510,
+        "returning": 4745,
+        "signup": 28
+      },
+      "endpoint_counts": {
+        "GET /api/articles/:slug/comments": 317620,
+        "GET /api/articles/:slug": 317541,
+        "GET /api/tags": 312759,
+        "GET /api/articles": 186112,
+        "GET /api/articles/feed": 126844,
+        "GET /api/profiles/:username": 86465,
+        "GET /api/articles?author": 69278,
+        "GET /api/articles?tag": 67762,
+        "POST /api/articles/:slug/favorite": 31359,
+        "POST /api/articles/:slug/comments": 21484,
+        "GET /api/articles?favorited": 17232,
+        "POST /api/profiles/:username/follow": 9651,
+        "GET /api/user": 7293,
+        "POST /api/articles": 6758,
+        "DELETE /api/profiles/:username/follow": 3029,
+        "DELETE /api/articles/:slug/favorite": 3008,
+        "PUT /api/user": 2550,
+        "POST /api/users/login": 1510,
+        "DELETE /api/articles/:slug/comments/:id": 460,
+        "PUT /api/articles/:slug": 157,
+        "POST /api/users": 28
+      },
+      "mix": {
+        "page_views": 856065,
+        "calls_per_page": 1.8560506503594938,
+        "req_per_user_s": 0.2648166666666667,
+        "write_pct": 4.9395179054691924,
+        "page_pct": {
+          "article": 36.2852119874075,
+          "comment": 2.5096225169817714,
+          "delete_own_comment": 0.05373423747028555,
+          "edit_own_article": 0.018339728875727896,
+          "favorite_toggle": 4.01453160682892,
+          "follow_toggle": 1.481195937224393,
+          "home": 21.725102649915602,
+          "profile": 8.088871756233464,
+          "profile_favorited": 2.0114126847844496,
+          "publish": 0.7894260365743255,
+          "settings": 0.2976409501614947,
+          "tag": 7.915520433611934,
+          "your_feed": 14.809389473930134
+        },
+        "session_starts": {
+          "login": 1510,
+          "returning": 4745,
+          "signup": 28
+        }
+      },
+      "independent_phase_audit": {
+        "id": "02-probe-100000",
+        "case": "rust7",
+        "stage": "probe",
+        "users": 100000,
+        "run_id": "capacity_20261023t154047_9e1fee-probe-100000",
+        "database": "mc_pair_20261023_154047_9e1fee_1",
+        "session_id": "rust7",
+        "recorded_classification": "PASS",
+        "checks": [
+          {
+            "check": "complete_saved_phase",
+            "pass": true,
+            "detail": []
+          },
+          {
+            "check": "predeclared_balanced_shards_and_limits",
+            "pass": true
+          },
+          {
+            "check": "single_database_and_continuous_app_session",
+            "pass": true
+          },
+          {
+            "check": "declared_binary_env_and_common_runtime",
+            "pass": true
+          },
+          {
+            "check": "before:fixed_target_budget",
+            "pass": true
+          },
+          {
+            "check": "before:official_sources_and_pg_settings_fixed",
+            "pass": true
+          },
+          {
+            "check": "after:fixed_target_budget",
+            "pass": true
+          },
+          {
+            "check": "after:official_sources_and_pg_settings_fixed",
+            "pass": true
+          },
+          {
+            "check": "startup:normal_expected_uid",
+            "pass": true
+          },
+          {
+            "check": "startup:exactly_one_expected_process",
+            "pass": true
+          },
+          {
+            "check": "startup:raw_all_four_uids_match_normal_user",
+            "pass": true
+          },
+          {
+            "check": "startup:raw_actual_pid_matches",
+            "pass": true
+          },
+          {
+            "check": "startup:actual_process_identity_stable",
+            "pass": true
+          },
+          {
+            "check": "startup:raw_soft_hard_nofile_at_least_200000",
+            "pass": true,
+            "detail": [
+              200000,
+              200000
+            ]
+          },
+          {
+            "check": "startup:helper_validity_agrees_with_raw",
+            "pass": true
+          },
+          {
+            "check": "before:normal_expected_uid",
+            "pass": true
+          },
+          {
+            "check": "before:exactly_one_expected_process",
+            "pass": true
+          },
+          {
+            "check": "before:raw_all_four_uids_match_normal_user",
+            "pass": true
+          },
+          {
+            "check": "before:raw_actual_pid_matches",
+            "pass": true
+          },
+          {
+            "check": "before:actual_process_identity_stable",
+            "pass": true
+          },
+          {
+            "check": "before:raw_soft_hard_nofile_at_least_200000",
+            "pass": true,
+            "detail": [
+              200000,
+              200000
+            ]
+          },
+          {
+            "check": "before:helper_validity_agrees_with_raw",
+            "pass": true
+          },
+          {
+            "check": "after:normal_expected_uid",
+            "pass": true
+          },
+          {
+            "check": "after:exactly_one_expected_process",
+            "pass": true
+          },
+          {
+            "check": "after:raw_all_four_uids_match_normal_user",
+            "pass": true
+          },
+          {
+            "check": "after:raw_actual_pid_matches",
+            "pass": true
+          },
+          {
+            "check": "after:actual_process_identity_stable",
+            "pass": true
+          },
+          {
+            "check": "after:raw_soft_hard_nofile_at_least_200000",
+            "pass": true,
+            "detail": [
+              200000,
+              200000
+            ]
+          },
+          {
+            "check": "after:helper_validity_agrees_with_raw",
+            "pass": true
+          },
+          {
+            "check": "app_healthy_before_load",
+            "pass": true
+          },
+          {
+            "check": "after_health_witness_present",
+            "pass": true
+          },
+          {
+            "check": "all_native_processes_exited_normally",
+            "pass": true
+          },
+          {
+            "check": "synchronized_raw_windows",
+            "pass": true
+          },
+          {
+            "check": "native_metadata_exact_stage_protocol",
+            "pass": true
+          },
+          {
+            "check": "one_saved_command_per_shard",
+            "pass": true
+          },
+          {
+            "check": "shard0:exact_users_ids_destination",
+            "pass": true
+          },
+          {
+            "check": "shard0:raw_command_agrees",
+            "pass": true
+          },
+          {
+            "check": "shard0:at_least99pct_vus_active",
+            "pass": true
+          },
+          {
+            "check": "shard1:exact_users_ids_destination",
+            "pass": true
+          },
+          {
+            "check": "shard1:raw_command_agrees",
+            "pass": true
+          },
+          {
+            "check": "shard1:at_least99pct_vus_active",
+            "pass": true
+          },
+          {
+            "check": "shard2:exact_users_ids_destination",
+            "pass": true
+          },
+          {
+            "check": "shard2:raw_command_agrees",
+            "pass": true
+          },
+          {
+            "check": "shard2:at_least99pct_vus_active",
+            "pass": true
+          },
+          {
+            "check": "shard3:exact_users_ids_destination",
+            "pass": true
+          },
+          {
+            "check": "shard3:raw_command_agrees",
+            "pass": true
+          },
+          {
+            "check": "shard3:at_least99pct_vus_active",
+            "pass": true
+          },
+          {
+            "check": "shard4:exact_users_ids_destination",
+            "pass": true
+          },
+          {
+            "check": "shard4:raw_command_agrees",
+            "pass": true
+          },
+          {
+            "check": "shard4:at_least99pct_vus_active",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:DELETE /api/articles/:slug/comments/:id",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:DELETE /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:DELETE /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/articles/feed",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/articles?author",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/articles?favorited",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/articles?tag",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/profiles/:username",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/tags",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:POST /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:POST /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:POST /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:POST /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:POST /api/users",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:POST /api/users/login",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:PUT /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:PUT /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:DELETE /api/articles/:slug/comments/:id",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:DELETE /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:DELETE /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/articles/feed",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/articles?author",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/articles?favorited",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/articles?tag",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/profiles/:username",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/tags",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:POST /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:POST /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:POST /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:POST /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:POST /api/users",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:POST /api/users/login",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:PUT /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:PUT /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:DELETE /api/articles/:slug/comments/:id",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:DELETE /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:DELETE /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/articles/feed",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/articles?author",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/articles?favorited",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/articles?tag",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/profiles/:username",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/tags",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:POST /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:POST /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:POST /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:POST /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:POST /api/users",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:POST /api/users/login",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:PUT /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:PUT /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:DELETE /api/articles/:slug/comments/:id",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:DELETE /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:DELETE /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/articles/feed",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/articles?author",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/articles?favorited",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/articles?tag",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/profiles/:username",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/tags",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:POST /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:POST /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:POST /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:POST /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:POST /api/users",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:POST /api/users/login",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:PUT /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:PUT /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:DELETE /api/articles/:slug/comments/:id",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:DELETE /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:DELETE /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/articles/feed",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/articles?author",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/articles?favorited",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/articles?tag",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/profiles/:username",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/tags",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:POST /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:POST /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:POST /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:POST /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:POST /api/users",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:POST /api/users/login",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:PUT /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:PUT /api/user",
+            "pass": true
+          },
+          {
+            "check": "all_histogram_configurations_match",
+            "pass": true
+          },
+          {
+            "check": "merged_histogram_equals_exact_bin_sum",
+            "pass": true
+          },
+          {
+            "check": "merged_quantile_from_exact_histogram:p50_ms",
+            "pass": true
+          },
+          {
+            "check": "merged_quantile_from_exact_histogram:p95_ms",
+            "pass": true
+          },
+          {
+            "check": "merged_quantile_from_exact_histogram:p99_ms",
+            "pass": true
+          },
+          {
+            "check": "merged_quantile_from_exact_histogram:max_ms",
+            "pass": true
+          },
+          {
+            "check": "merged_count_equals_raw_counts",
+            "pass": true
+          },
+          {
+            "check": "merged_statuses_equal_raw_counts",
+            "pass": true
+          },
+          {
+            "check": "merged_errors_equal_raw_counts",
+            "pass": true
+          },
+          {
+            "check": "all_endpoints_retained",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:DELETE /api/articles/:slug/comments/:id",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:DELETE /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:DELETE /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/articles",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/articles/feed",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/articles?author",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/articles?favorited",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/articles?tag",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/profiles/:username",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/tags",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/user",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:POST /api/articles",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:POST /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:POST /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:POST /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:POST /api/users",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:POST /api/users/login",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:PUT /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:PUT /api/user",
+            "pass": true
+          },
+          {
+            "check": "merged_all_shards_and_users",
+            "pass": true
+          },
+          {
+            "check": "native_verdict_reproduced",
+            "pass": true
+          },
+          {
+            "check": "shard0:native_box_CPU_reproduced_from_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard0:native_timing_summary_reproduced",
+            "pass": true
+          },
+          {
+            "check": "shard0:complete_measurement_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard0:merged_generator_summary_matches_raw",
+            "pass": true
+          },
+          {
+            "check": "shard1:native_box_CPU_reproduced_from_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard1:native_timing_summary_reproduced",
+            "pass": true
+          },
+          {
+            "check": "shard1:complete_measurement_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard1:merged_generator_summary_matches_raw",
+            "pass": true
+          },
+          {
+            "check": "shard2:native_box_CPU_reproduced_from_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard2:native_timing_summary_reproduced",
+            "pass": true
+          },
+          {
+            "check": "shard2:complete_measurement_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard2:merged_generator_summary_matches_raw",
+            "pass": true
+          },
+          {
+            "check": "shard3:native_box_CPU_reproduced_from_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard3:native_timing_summary_reproduced",
+            "pass": true
+          },
+          {
+            "check": "shard3:complete_measurement_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard3:merged_generator_summary_matches_raw",
+            "pass": true
+          },
+          {
+            "check": "shard4:native_box_CPU_reproduced_from_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard4:native_timing_summary_reproduced",
+            "pass": true
+          },
+          {
+            "check": "shard4:complete_measurement_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard4:merged_generator_summary_matches_raw",
+            "pass": true
+          },
+          {
+            "check": "native_generator_reasons_reproduced_exactly",
+            "pass": true
+          },
+          {
+            "check": "request_rate_and_errors_reproduced",
+            "pass": true
+          },
+          {
+            "check": "target:entire_phase_clock_drift_under100ms",
+            "pass": true,
+            "detail": 0.005354404449462891
+          },
+          {
+            "check": "load:entire_phase_clock_drift_under100ms",
+            "pass": true,
+            "detail": 0.005354404449462891
+          }
+        ],
+        "classification": "PASS",
+        "eligible": true,
+        "valid_server_failure": false,
+        "overall": {
+          "count": 1588900,
+          "rps": 26481.666666666668,
+          "p50_ms": 0.812,
+          "p90_ms": 5.811,
+          "p95_ms": 15.703,
+          "p99_ms": 78.463,
+          "max_ms": 332.287,
+          "mean_ms": 4.147805658631758,
+          "errors": 0,
+          "error_rate": 0,
+          "statuses": {
+            "200": 1560170,
+            "201": 28270,
+            "204": 460
+          }
+        },
+        "native_verdict": {
+          "pass": true,
+          "lg_limited": false
+        },
+        "target_monitor": {
+          "checks": [
+            {
+              "check": "monitor_has_samples",
+              "pass": true
+            },
+            {
+              "check": "strict_wall_and_monotonic_order",
+              "pass": true
+            },
+            {
+              "check": "full_measurement_window_bracketed",
+              "pass": true,
+              "detail": {
+                "first_ms": 1792770330445.6543,
+                "start_ms": 1792770395475.0,
+                "last_ms": 1792770471597.0571,
+                "end_ms": 1792770455475.0
+              }
+            },
+            {
+              "check": "max_sample_gap_at_most_3s",
+              "pass": true,
+              "detail": 1.005301292
+            },
+            {
+              "check": "cgroup_budget_continuous",
+              "pass": true
+            },
+            {
+              "check": "total_cpu_counter_nondecreasing",
+              "pass": true
+            },
+            {
+              "check": "no_measurement_oom",
+              "pass": true,
+              "detail": {
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              }
+            },
+            {
+              "check": "wall_to_monotonic_drift_below_100ms",
+              "pass": true,
+              "detail": 0.005354404449462891
+            }
+          ],
+          "warnings": [
+            "pg: live-PID CPU sum changed population or decreased; component CPU withheld"
+          ],
+          "eligible": true,
+          "samples": 62,
+          "max_gap_s": 1.005301292,
+          "window_s": 60.0,
+          "cgroup_cpu_seconds_estimate": 303.7524655242126,
+          "cgroup_quota_utilization_pct": 63.28176365087762,
+          "max_sample_interval_quota_utilization_pct": 80.95744862029647,
+          "memory_peak_sampled_bytes": 5197033472,
+          "memory_counter_peak_bytes": 5198561280,
+          "swap_peak_sampled_bytes": 0,
+          "oom_delta": {
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "app_cpu_seconds_estimate": 89.02470323884617,
+          "app_counter_valid": true,
+          "app_pids_stable": true,
+          "app_process_count_max": 2,
+          "app_whole_target_cpu_pct": 18.54681317475962,
+          "pg_cpu_seconds_estimate": null,
+          "pg_counter_valid": false,
+          "pg_pids_stable": false,
+          "pg_process_count_max": 18,
+          "pg_whole_target_cpu_pct": null
+        },
+        "load_monitor": {
+          "checks": [
+            {
+              "check": "monitor_has_samples",
+              "pass": true
+            },
+            {
+              "check": "strict_wall_and_monotonic_order",
+              "pass": true
+            },
+            {
+              "check": "full_measurement_window_bracketed",
+              "pass": true,
+              "detail": {
+                "first_ms": 1792770330490.6077,
+                "start_ms": 1792770395475.0,
+                "last_ms": 1792770471689.9382,
+                "end_ms": 1792770455475.0
+              }
+            },
+            {
+              "check": "max_sample_gap_at_most_3s",
+              "pass": true,
+              "detail": 1.010083209
+            },
+            {
+              "check": "cgroup_budget_continuous",
+              "pass": true
+            },
+            {
+              "check": "total_cpu_counter_nondecreasing",
+              "pass": true
+            },
+            {
+              "check": "no_measurement_oom",
+              "pass": true,
+              "detail": {
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              }
+            },
+            {
+              "check": "wall_to_monotonic_drift_below_100ms",
+              "pass": true,
+              "detail": 0.005354404449462891
+            }
+          ],
+          "warnings": [],
+          "eligible": true,
+          "samples": 62,
+          "max_gap_s": 1.010083209,
+          "window_s": 60.0,
+          "cgroup_cpu_seconds_estimate": 97.37796444717623,
+          "cgroup_quota_utilization_pct": 20.287075926495046,
+          "max_sample_interval_quota_utilization_pct": 55.1167834530353,
+          "memory_peak_sampled_bytes": 2278776832,
+          "memory_counter_peak_bytes": 2281320448,
+          "swap_peak_sampled_bytes": 0,
+          "oom_delta": {
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "app_cpu_seconds_estimate": 0.0,
+          "app_counter_valid": true,
+          "app_pids_stable": true,
+          "app_process_count_max": 0,
+          "app_whole_target_cpu_pct": 0.0,
+          "pg_cpu_seconds_estimate": 0.0,
+          "pg_counter_valid": true,
+          "pg_pids_stable": true,
+          "pg_process_count_max": 0,
+          "pg_whole_target_cpu_pct": 0.0
+        },
+        "declared_load_memory_bytes": 8589934592,
+        "declared_load_cpus": 8,
+        "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+        "classification_scope": "independent_local",
+        "native_qualified": true,
+        "native_whole_vm_CPU_flagged_shards": [],
+        "native_whole_vm_CPU_flag_count": 0,
+        "target_oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "post_load_healthy": true,
+        "zero_measured_errors": true,
+        "observed_timeline_errors": 0,
+        "conformance_197_full_seed_proven": true,
+        "cpu_ms_per_successful_request_sampled_estimate": 0.19117154353591326,
+        "local_whole_vm_CPU_scope_exception": false,
+        "all_classifications": [
+          "PASS"
+        ],
+        "local_qualified": true
+      }
+    },
+    {
+      "case": "goose32",
+      "binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+      "source_revision": "23a14e8cbf32113509cd0ad941320ef947508981",
+      "env": {
+        "WORKERS": "2",
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "BCRYPT_BATCH_MS": "250",
+        "READ_BATCH": "32",
+        "READ_HOLD": "1",
+        "ARTICLE_BATCH": "1",
+        "WRITE_BATCH_US": "1000",
+        "READ_BATCH_US": "5000"
+      },
+      "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t154047_9e1fee/cases/goose32/phases/02-probe-100000",
+      "measured_seconds": 60,
+      "overall": {
+        "count": 1588450,
+        "rps": 26474.166666666668,
+        "p50_ms": 2.961,
+        "p90_ms": 5.271,
+        "p95_ms": 6.603,
+        "p99_ms": 46.751,
+        "max_ms": 669.695,
+        "mean_ms": 4.4591546727942175,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 1559721,
+          "201": 28269,
+          "204": 460
+        }
+      },
+      "cpu_ms_per_success": 0.1604109381892472,
+      "combined_target_CPU_seconds_estimate": 254.80475476670972,
+      "target_CPU_quota_utilization_pct": 53.08432390973119,
+      "client_CPU_quota_utilization_pct": 20.529964425730636,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "page_counts": {
+        "article": 310575,
+        "comment": 21482,
+        "delete_own_comment": 460,
+        "edit_own_article": 157,
+        "favorite_toggle": 34357,
+        "follow_toggle": 12682,
+        "home": 185978,
+        "profile": 69253,
+        "profile_favorited": 17220,
+        "publish": 6759,
+        "settings": 2542,
+        "tag": 67745,
+        "your_feed": 126771
+      },
+      "session_counts": {
+        "login": 1510,
+        "returning": 4752,
+        "signup": 28
+      },
+      "endpoint_counts": {
+        "GET /api/articles/:slug": 317493,
+        "GET /api/articles/:slug/comments": 317427,
+        "GET /api/tags": 312749,
+        "GET /api/articles": 186004,
+        "GET /api/articles/feed": 126800,
+        "GET /api/profiles/:username": 86473,
+        "GET /api/articles?author": 69263,
+        "GET /api/articles?tag": 67745,
+        "POST /api/articles/:slug/favorite": 31343,
+        "POST /api/articles/:slug/comments": 21482,
+        "GET /api/articles?favorited": 17225,
+        "POST /api/profiles/:username/follow": 9647,
+        "GET /api/user": 7294,
+        "POST /api/articles": 6759,
+        "DELETE /api/profiles/:username/follow": 3035,
+        "DELETE /api/articles/:slug/favorite": 3014,
+        "PUT /api/user": 2542,
+        "POST /api/users/login": 1510,
+        "DELETE /api/articles/:slug/comments/:id": 460,
+        "PUT /api/articles/:slug": 157,
+        "POST /api/users": 28
+      },
+      "mix": {
+        "page_views": 855981,
+        "calls_per_page": 1.8557070776103675,
+        "req_per_user_s": 0.26474166666666665,
+        "write_pct": 4.939847020680538,
+        "page_pct": {
+          "article": 36.282931513666774,
+          "comment": 2.5096351437707147,
+          "delete_own_comment": 0.0537395105732487,
+          "edit_own_article": 0.018341528608695753,
+          "favorite_toggle": 4.013757314706751,
+          "follow_toggle": 1.4815749414998698,
+          "home": 21.726884124764453,
+          "profile": 8.090483316802592,
+          "profile_favorited": 2.011726895807267,
+          "publish": 0.7896203303578,
+          "settings": 0.29696920842869173,
+          "tag": 7.914311182140725,
+          "your_feed": 14.810024988872417
+        },
+        "session_starts": {
+          "login": 1510,
+          "returning": 4752,
+          "signup": 28
+        }
+      },
+      "independent_phase_audit": {
+        "id": "02-probe-100000",
+        "case": "goose32",
+        "stage": "probe",
+        "users": 100000,
+        "run_id": "capacity_20261023t154047_9e1fee-probe-100000",
+        "database": "mc_pair_20261023_154047_9e1fee_2",
+        "session_id": "goose32",
+        "recorded_classification": "PASS",
+        "checks": [
+          {
+            "check": "complete_saved_phase",
+            "pass": true,
+            "detail": []
+          },
+          {
+            "check": "predeclared_balanced_shards_and_limits",
+            "pass": true
+          },
+          {
+            "check": "single_database_and_continuous_app_session",
+            "pass": true
+          },
+          {
+            "check": "declared_binary_env_and_common_runtime",
+            "pass": true
+          },
+          {
+            "check": "before:fixed_target_budget",
+            "pass": true
+          },
+          {
+            "check": "before:official_sources_and_pg_settings_fixed",
+            "pass": true
+          },
+          {
+            "check": "after:fixed_target_budget",
+            "pass": true
+          },
+          {
+            "check": "after:official_sources_and_pg_settings_fixed",
+            "pass": true
+          },
+          {
+            "check": "startup:normal_expected_uid",
+            "pass": true
+          },
+          {
+            "check": "startup:exactly_one_expected_process",
+            "pass": true
+          },
+          {
+            "check": "startup:raw_all_four_uids_match_normal_user",
+            "pass": true
+          },
+          {
+            "check": "startup:raw_actual_pid_matches",
+            "pass": true
+          },
+          {
+            "check": "startup:actual_process_identity_stable",
+            "pass": true
+          },
+          {
+            "check": "startup:raw_soft_hard_nofile_at_least_200000",
+            "pass": true,
+            "detail": [
+              200000,
+              200000
+            ]
+          },
+          {
+            "check": "startup:helper_validity_agrees_with_raw",
+            "pass": true
+          },
+          {
+            "check": "before:normal_expected_uid",
+            "pass": true
+          },
+          {
+            "check": "before:exactly_one_expected_process",
+            "pass": true
+          },
+          {
+            "check": "before:raw_all_four_uids_match_normal_user",
+            "pass": true
+          },
+          {
+            "check": "before:raw_actual_pid_matches",
+            "pass": true
+          },
+          {
+            "check": "before:actual_process_identity_stable",
+            "pass": true
+          },
+          {
+            "check": "before:raw_soft_hard_nofile_at_least_200000",
+            "pass": true,
+            "detail": [
+              200000,
+              200000
+            ]
+          },
+          {
+            "check": "before:helper_validity_agrees_with_raw",
+            "pass": true
+          },
+          {
+            "check": "after:normal_expected_uid",
+            "pass": true
+          },
+          {
+            "check": "after:exactly_one_expected_process",
+            "pass": true
+          },
+          {
+            "check": "after:raw_all_four_uids_match_normal_user",
+            "pass": true
+          },
+          {
+            "check": "after:raw_actual_pid_matches",
+            "pass": true
+          },
+          {
+            "check": "after:actual_process_identity_stable",
+            "pass": true
+          },
+          {
+            "check": "after:raw_soft_hard_nofile_at_least_200000",
+            "pass": true,
+            "detail": [
+              200000,
+              200000
+            ]
+          },
+          {
+            "check": "after:helper_validity_agrees_with_raw",
+            "pass": true
+          },
+          {
+            "check": "app_healthy_before_load",
+            "pass": true
+          },
+          {
+            "check": "after_health_witness_present",
+            "pass": true
+          },
+          {
+            "check": "all_native_processes_exited_normally",
+            "pass": true
+          },
+          {
+            "check": "synchronized_raw_windows",
+            "pass": true
+          },
+          {
+            "check": "native_metadata_exact_stage_protocol",
+            "pass": true
+          },
+          {
+            "check": "one_saved_command_per_shard",
+            "pass": true
+          },
+          {
+            "check": "shard0:exact_users_ids_destination",
+            "pass": true
+          },
+          {
+            "check": "shard0:raw_command_agrees",
+            "pass": true
+          },
+          {
+            "check": "shard0:at_least99pct_vus_active",
+            "pass": true
+          },
+          {
+            "check": "shard1:exact_users_ids_destination",
+            "pass": true
+          },
+          {
+            "check": "shard1:raw_command_agrees",
+            "pass": true
+          },
+          {
+            "check": "shard1:at_least99pct_vus_active",
+            "pass": true
+          },
+          {
+            "check": "shard2:exact_users_ids_destination",
+            "pass": true
+          },
+          {
+            "check": "shard2:raw_command_agrees",
+            "pass": true
+          },
+          {
+            "check": "shard2:at_least99pct_vus_active",
+            "pass": true
+          },
+          {
+            "check": "shard3:exact_users_ids_destination",
+            "pass": true
+          },
+          {
+            "check": "shard3:raw_command_agrees",
+            "pass": true
+          },
+          {
+            "check": "shard3:at_least99pct_vus_active",
+            "pass": true
+          },
+          {
+            "check": "shard4:exact_users_ids_destination",
+            "pass": true
+          },
+          {
+            "check": "shard4:raw_command_agrees",
+            "pass": true
+          },
+          {
+            "check": "shard4:at_least99pct_vus_active",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:DELETE /api/articles/:slug/comments/:id",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:DELETE /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:DELETE /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/articles/feed",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/articles?author",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/articles?favorited",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/articles?tag",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/profiles/:username",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/tags",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:GET /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:POST /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:POST /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:POST /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:POST /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:POST /api/users",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:POST /api/users/login",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:PUT /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:0:PUT /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:DELETE /api/articles/:slug/comments/:id",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:DELETE /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:DELETE /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/articles/feed",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/articles?author",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/articles?favorited",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/articles?tag",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/profiles/:username",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/tags",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:GET /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:POST /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:POST /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:POST /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:POST /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:POST /api/users",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:POST /api/users/login",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:PUT /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:1:PUT /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:DELETE /api/articles/:slug/comments/:id",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:DELETE /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:DELETE /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/articles/feed",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/articles?author",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/articles?favorited",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/articles?tag",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/profiles/:username",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/tags",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:GET /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:POST /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:POST /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:POST /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:POST /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:POST /api/users",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:POST /api/users/login",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:PUT /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:2:PUT /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:DELETE /api/articles/:slug/comments/:id",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:DELETE /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:DELETE /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/articles/feed",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/articles?author",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/articles?favorited",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/articles?tag",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/profiles/:username",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/tags",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:GET /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:POST /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:POST /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:POST /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:POST /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:POST /api/users",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:POST /api/users/login",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:PUT /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:3:PUT /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:DELETE /api/articles/:slug/comments/:id",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:DELETE /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:DELETE /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/articles/feed",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/articles?author",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/articles?favorited",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/articles?tag",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/profiles/:username",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/tags",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:GET /api/user",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:POST /api/articles",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:POST /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:POST /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:POST /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:POST /api/users",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:POST /api/users/login",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:PUT /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "raw_hist_count:4:PUT /api/user",
+            "pass": true
+          },
+          {
+            "check": "all_histogram_configurations_match",
+            "pass": true
+          },
+          {
+            "check": "merged_histogram_equals_exact_bin_sum",
+            "pass": true
+          },
+          {
+            "check": "merged_quantile_from_exact_histogram:p50_ms",
+            "pass": true
+          },
+          {
+            "check": "merged_quantile_from_exact_histogram:p95_ms",
+            "pass": true
+          },
+          {
+            "check": "merged_quantile_from_exact_histogram:p99_ms",
+            "pass": true
+          },
+          {
+            "check": "merged_quantile_from_exact_histogram:max_ms",
+            "pass": true
+          },
+          {
+            "check": "merged_count_equals_raw_counts",
+            "pass": true
+          },
+          {
+            "check": "merged_statuses_equal_raw_counts",
+            "pass": true
+          },
+          {
+            "check": "merged_errors_equal_raw_counts",
+            "pass": true
+          },
+          {
+            "check": "all_endpoints_retained",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:DELETE /api/articles/:slug/comments/:id",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:DELETE /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:DELETE /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/articles",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/articles/feed",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/articles?author",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/articles?favorited",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/articles?tag",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/profiles/:username",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/tags",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:GET /api/user",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:POST /api/articles",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:POST /api/articles/:slug/comments",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:POST /api/articles/:slug/favorite",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:POST /api/profiles/:username/follow",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:POST /api/users",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:POST /api/users/login",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:PUT /api/articles/:slug",
+            "pass": true
+          },
+          {
+            "check": "endpoint_count:PUT /api/user",
+            "pass": true
+          },
+          {
+            "check": "merged_all_shards_and_users",
+            "pass": true
+          },
+          {
+            "check": "native_verdict_reproduced",
+            "pass": true
+          },
+          {
+            "check": "shard0:native_box_CPU_reproduced_from_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard0:native_timing_summary_reproduced",
+            "pass": true
+          },
+          {
+            "check": "shard0:complete_measurement_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard0:merged_generator_summary_matches_raw",
+            "pass": true
+          },
+          {
+            "check": "shard1:native_box_CPU_reproduced_from_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard1:native_timing_summary_reproduced",
+            "pass": true
+          },
+          {
+            "check": "shard1:complete_measurement_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard1:merged_generator_summary_matches_raw",
+            "pass": true
+          },
+          {
+            "check": "shard2:native_box_CPU_reproduced_from_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard2:native_timing_summary_reproduced",
+            "pass": true
+          },
+          {
+            "check": "shard2:complete_measurement_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard2:merged_generator_summary_matches_raw",
+            "pass": true
+          },
+          {
+            "check": "shard3:native_box_CPU_reproduced_from_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard3:native_timing_summary_reproduced",
+            "pass": true
+          },
+          {
+            "check": "shard3:complete_measurement_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard3:merged_generator_summary_matches_raw",
+            "pass": true
+          },
+          {
+            "check": "shard4:native_box_CPU_reproduced_from_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard4:native_timing_summary_reproduced",
+            "pass": true
+          },
+          {
+            "check": "shard4:complete_measurement_timeline",
+            "pass": true
+          },
+          {
+            "check": "shard4:merged_generator_summary_matches_raw",
+            "pass": true
+          },
+          {
+            "check": "native_generator_reasons_reproduced_exactly",
+            "pass": true
+          },
+          {
+            "check": "request_rate_and_errors_reproduced",
+            "pass": true
+          },
+          {
+            "check": "target:entire_phase_clock_drift_under100ms",
+            "pass": true,
+            "detail": 0.0019164085388183594
+          },
+          {
+            "check": "load:entire_phase_clock_drift_under100ms",
+            "pass": true,
+            "detail": 0.0019159317016601562
+          }
+        ],
+        "classification": "PASS",
+        "eligible": true,
+        "valid_server_failure": false,
+        "overall": {
+          "count": 1588450,
+          "rps": 26474.166666666668,
+          "p50_ms": 2.961,
+          "p90_ms": 5.271,
+          "p95_ms": 6.603,
+          "p99_ms": 46.751,
+          "max_ms": 669.695,
+          "mean_ms": 4.4591546727942175,
+          "errors": 0,
+          "error_rate": 0,
+          "statuses": {
+            "200": 1559721,
+            "201": 28269,
+            "204": 460
+          }
+        },
+        "native_verdict": {
+          "pass": true,
+          "lg_limited": false
+        },
+        "target_monitor": {
+          "checks": [
+            {
+              "check": "monitor_has_samples",
+              "pass": true
+            },
+            {
+              "check": "strict_wall_and_monotonic_order",
+              "pass": true
+            },
+            {
+              "check": "full_measurement_window_bracketed",
+              "pass": true,
+              "detail": {
+                "first_ms": 1792771252904.4258,
+                "start_ms": 1792771317929.0,
+                "last_ms": 1792771394054.8025,
+                "end_ms": 1792771377929.0
+              }
+            },
+            {
+              "check": "max_sample_gap_at_most_3s",
+              "pass": true,
+              "detail": 1.003304125
+            },
+            {
+              "check": "cgroup_budget_continuous",
+              "pass": true
+            },
+            {
+              "check": "total_cpu_counter_nondecreasing",
+              "pass": true
+            },
+            {
+              "check": "no_measurement_oom",
+              "pass": true,
+              "detail": {
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              }
+            },
+            {
+              "check": "wall_to_monotonic_drift_below_100ms",
+              "pass": true,
+              "detail": 0.0016798973083496094
+            }
+          ],
+          "warnings": [
+            "pg: live-PID CPU sum changed population or decreased; component CPU withheld"
+          ],
+          "eligible": true,
+          "samples": 62,
+          "max_gap_s": 1.003304125,
+          "window_s": 60.0,
+          "cgroup_cpu_seconds_estimate": 254.80475476670972,
+          "cgroup_quota_utilization_pct": 53.08432390973119,
+          "max_sample_interval_quota_utilization_pct": 63.12069295317434,
+          "memory_peak_sampled_bytes": 7756304384,
+          "memory_counter_peak_bytes": 7757574144,
+          "swap_peak_sampled_bytes": 0,
+          "oom_delta": {
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "app_cpu_seconds_estimate": 64.69339396689284,
+          "app_counter_valid": true,
+          "app_pids_stable": true,
+          "app_process_count_max": 2,
+          "app_whole_target_cpu_pct": 13.47779040976934,
+          "pg_cpu_seconds_estimate": null,
+          "pg_counter_valid": false,
+          "pg_pids_stable": false,
+          "pg_process_count_max": 18,
+          "pg_whole_target_cpu_pct": null
+        },
+        "load_monitor": {
+          "checks": [
+            {
+              "check": "monitor_has_samples",
+              "pass": true
+            },
+            {
+              "check": "strict_wall_and_monotonic_order",
+              "pass": true
+            },
+            {
+              "check": "full_measurement_window_bracketed",
+              "pass": true,
+              "detail": {
+                "first_ms": 1792771252952.31,
+                "start_ms": 1792771317929.0,
+                "last_ms": 1792771394061.188,
+                "end_ms": 1792771377929.0
+              }
+            },
+            {
+              "check": "max_sample_gap_at_most_3s",
+              "pass": true,
+              "detail": 1.003277167
+            },
+            {
+              "check": "cgroup_budget_continuous",
+              "pass": true
+            },
+            {
+              "check": "total_cpu_counter_nondecreasing",
+              "pass": true
+            },
+            {
+              "check": "no_measurement_oom",
+              "pass": true,
+              "detail": {
+                "oom": 0,
+                "oom_kill": 0,
+                "oom_group_kill": 0
+              }
+            },
+            {
+              "check": "wall_to_monotonic_drift_below_100ms",
+              "pass": true,
+              "detail": 0.0016794204711914062
+            }
+          ],
+          "warnings": [],
+          "eligible": true,
+          "samples": 62,
+          "max_gap_s": 1.003277167,
+          "window_s": 60.0,
+          "cgroup_cpu_seconds_estimate": 98.54382924350705,
+          "cgroup_quota_utilization_pct": 20.529964425730636,
+          "max_sample_interval_quota_utilization_pct": 50.83942996498584,
+          "memory_peak_sampled_bytes": 2255167488,
+          "memory_counter_peak_bytes": 3783495680,
+          "swap_peak_sampled_bytes": 0,
+          "oom_delta": {
+            "oom": 0,
+            "oom_kill": 0,
+            "oom_group_kill": 0
+          },
+          "app_cpu_seconds_estimate": 0.0,
+          "app_counter_valid": true,
+          "app_pids_stable": true,
+          "app_process_count_max": 0,
+          "app_whole_target_cpu_pct": 0.0,
+          "pg_cpu_seconds_estimate": 0.0,
+          "pg_counter_valid": true,
+          "pg_pids_stable": true,
+          "pg_process_count_max": 0,
+          "pg_whole_target_cpu_pct": 0.0
+        },
+        "declared_load_memory_bytes": 8589934592,
+        "declared_load_cpus": 8,
+        "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+        "classification_scope": "independent_local",
+        "native_qualified": true,
+        "native_whole_vm_CPU_flagged_shards": [],
+        "native_whole_vm_CPU_flag_count": 0,
+        "target_oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "post_load_healthy": true,
+        "zero_measured_errors": true,
+        "observed_timeline_errors": 0,
+        "conformance_197_full_seed_proven": true,
+        "cpu_ms_per_successful_request_sampled_estimate": 0.1604109381892472,
+        "local_whole_vm_CPU_scope_exception": false,
+        "all_classifications": [
+          "PASS"
+        ],
+        "local_qualified": true
+      }
+    }
+  ],
+  "goose_to_rust_ratios": {
+    "cpu_ms_per_success": {
+      "goose_over_rust": 0.8390942251251562,
+      "change_pct": -16.09057748748438
+    },
+    "rps": {
+      "goose_over_rust": 0.9997167851973063,
+      "change_pct": -0.02832148026936654
+    },
+    "count": {
+      "goose_over_rust": 0.9997167851973063,
+      "change_pct": -0.02832148026936654
+    },
+    "p50_ms": {
+      "goose_over_rust": 3.6465517241379306,
+      "change_pct": 264.6551724137931
+    },
+    "p95_ms": {
+      "goose_over_rust": 0.42049289944596574,
+      "change_pct": -57.95071005540342
+    },
+    "p99_ms": {
+      "goose_over_rust": 0.5958349795444987,
+      "change_pct": -40.41650204555013
+    },
+    "mean_ms": {
+      "goose_over_rust": 1.0750635492081286,
+      "change_pct": 7.506354920812863
+    },
+    "max_ms": {
+      "goose_over_rust": 2.015411376310238,
+      "change_pct": 101.54113763102379
+    }
+  },
+  "observed_work_count_differences": {
+    "requests": {
+      "rust": 1588900,
+      "goose": 1588450,
+      "goose_minus_rust": -450
+    },
+    "pages": {
+      "article": {
+        "rust": 310625,
+        "goose": 310575,
+        "goose_minus_rust": -50
+      },
+      "comment": {
+        "rust": 21484,
+        "goose": 21482,
+        "goose_minus_rust": -2
+      },
+      "delete_own_comment": {
+        "rust": 460,
+        "goose": 460,
+        "goose_minus_rust": 0
+      },
+      "edit_own_article": {
+        "rust": 157,
+        "goose": 157,
+        "goose_minus_rust": 0
+      },
+      "favorite_toggle": {
+        "rust": 34367,
+        "goose": 34357,
+        "goose_minus_rust": -10
+      },
+      "follow_toggle": {
+        "rust": 12680,
+        "goose": 12682,
+        "goose_minus_rust": 2
+      },
+      "home": {
+        "rust": 185981,
+        "goose": 185978,
+        "goose_minus_rust": -3
+      },
+      "profile": {
+        "rust": 69246,
+        "goose": 69253,
+        "goose_minus_rust": 7
+      },
+      "profile_favorited": {
+        "rust": 17219,
+        "goose": 17220,
+        "goose_minus_rust": 1
+      },
+      "publish": {
+        "rust": 6758,
+        "goose": 6759,
+        "goose_minus_rust": 1
+      },
+      "settings": {
+        "rust": 2548,
+        "goose": 2542,
+        "goose_minus_rust": -6
+      },
+      "tag": {
+        "rust": 67762,
+        "goose": 67745,
+        "goose_minus_rust": -17
+      },
+      "your_feed": {
+        "rust": 126778,
+        "goose": 126771,
+        "goose_minus_rust": -7
+      }
+    },
+    "sessions": {
+      "login": {
+        "rust": 1510,
+        "goose": 1510,
+        "goose_minus_rust": 0
+      },
+      "returning": {
+        "rust": 4745,
+        "goose": 4752,
+        "goose_minus_rust": 7
+      },
+      "signup": {
+        "rust": 28,
+        "goose": 28,
+        "goose_minus_rust": 0
+      }
+    },
+    "endpoints": {
+      "DELETE /api/articles/:slug/comments/:id": {
+        "rust": 460,
+        "goose": 460,
+        "goose_minus_rust": 0
+      },
+      "DELETE /api/articles/:slug/favorite": {
+        "rust": 3008,
+        "goose": 3014,
+        "goose_minus_rust": 6
+      },
+      "DELETE /api/profiles/:username/follow": {
+        "rust": 3029,
+        "goose": 3035,
+        "goose_minus_rust": 6
+      },
+      "GET /api/articles": {
+        "rust": 186112,
+        "goose": 186004,
+        "goose_minus_rust": -108
+      },
+      "GET /api/articles/:slug": {
+        "rust": 317541,
+        "goose": 317493,
+        "goose_minus_rust": -48
+      },
+      "GET /api/articles/:slug/comments": {
+        "rust": 317620,
+        "goose": 317427,
+        "goose_minus_rust": -193
+      },
+      "GET /api/articles/feed": {
+        "rust": 126844,
+        "goose": 126800,
+        "goose_minus_rust": -44
+      },
+      "GET /api/articles?author": {
+        "rust": 69278,
+        "goose": 69263,
+        "goose_minus_rust": -15
+      },
+      "GET /api/articles?favorited": {
+        "rust": 17232,
+        "goose": 17225,
+        "goose_minus_rust": -7
+      },
+      "GET /api/articles?tag": {
+        "rust": 67762,
+        "goose": 67745,
+        "goose_minus_rust": -17
+      },
+      "GET /api/profiles/:username": {
+        "rust": 86465,
+        "goose": 86473,
+        "goose_minus_rust": 8
+      },
+      "GET /api/tags": {
+        "rust": 312759,
+        "goose": 312749,
+        "goose_minus_rust": -10
+      },
+      "GET /api/user": {
+        "rust": 7293,
+        "goose": 7294,
+        "goose_minus_rust": 1
+      },
+      "POST /api/articles": {
+        "rust": 6758,
+        "goose": 6759,
+        "goose_minus_rust": 1
+      },
+      "POST /api/articles/:slug/comments": {
+        "rust": 21484,
+        "goose": 21482,
+        "goose_minus_rust": -2
+      },
+      "POST /api/articles/:slug/favorite": {
+        "rust": 31359,
+        "goose": 31343,
+        "goose_minus_rust": -16
+      },
+      "POST /api/profiles/:username/follow": {
+        "rust": 9651,
+        "goose": 9647,
+        "goose_minus_rust": -4
+      },
+      "POST /api/users": {
+        "rust": 28,
+        "goose": 28,
+        "goose_minus_rust": 0
+      },
+      "POST /api/users/login": {
+        "rust": 1510,
+        "goose": 1510,
+        "goose_minus_rust": 0
+      },
+      "PUT /api/articles/:slug": {
+        "rust": 157,
+        "goose": 157,
+        "goose_minus_rust": 0
+      },
+      "PUT /api/user": {
+        "rust": 2550,
+        "goose": 2542,
+        "goose_minus_rust": -8
+      }
+    }
+  },
+  "workload_trace_interpretation": "Both arms share identical run_id, box indexes, ID offsets, users per shard, native binary, ramp/measurement/tail, think scale and article universe. Pinned run.go derives each shard PCG seed from FNV64a(run_id/box); VU PCG uses that seed plus global user ID. This proves matching generator seed inputs, not an identical request-by-request execution trace. Pinned VU code performs request/page work before timed thinking, so response-dependent schedules and finite-window completion counts can differ. Only aggregate page/session/endpoint counts and per-second summaries are recorded; no full request sequence equality is claimed.",
+  "CPU_formula": "target cgroup CPU seconds interpolated at the exact full60second wall window boundaries *1000/(measured count-measured errors). This sampled estimate combines app+PostgreSQL and target monitoring overhead, excluding the separate external client. Live-PID PostgreSQL component estimates are withheld where population/counter changes make them invalid.",
+  "source_identity_note": "This point uses final Goose7a7c31fb... source23a14e8..., not earlier a34... timer calibration. Rust844afb23... is the unchanged pinned control.",
+  "raw_input_sha256": {
+    "cases/rust7/phases/02-probe-100000/merged.json": "525d6c9ce71d959f04fd911e4cadb80aef8711c23b98234fbec7354c8c75e10d",
+    "cases/rust7/phases/02-probe-100000/assessment.json": "e92c9a13f58a984c859ab751f3cfc72b8e505ee99989402a66e835acd1e90770",
+    "cases/rust7/phases/02-probe-100000/before-load.json": "bfbc654e4a3230033759add287080cbcf31bdca175415ccc0874dadd61055b0f",
+    "cases/rust7/phases/02-probe-100000/box4.json": "af0d3488906cda2bfbe496859ef74c7becf8da636b6a7d8b16ae56846874df6e",
+    "cases/rust7/phases/02-probe-100000/box3.json": "65ef96cf661fec8fe3c7fdf70e18d26bf5cfdd126985526732955c4c65c99e6c",
+    "cases/rust7/phases/02-probe-100000/target-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/rust7/phases/02-probe-100000/load-monitor.jsonl": "fff35a4f323c81f79d7a033f13b819929af1944d458cbf6b0a7609ba0c92fa0e",
+    "cases/rust7/phases/02-probe-100000/box2.json": "c47d8871c6ba496061004d553b609a4585b9a09fa4519f53a14340c8deca75ec",
+    "cases/rust7/phases/02-probe-100000/merged.txt": "df9efd8e70e51752a259f9864a7efb555138830879d6222122d90c060ae4a570",
+    "cases/rust7/phases/02-probe-100000/after-load.json": "491e4162273847d4d5b7f80c8e095b4bdea2293efd4899921f5559de730a0568",
+    "cases/rust7/phases/02-probe-100000/box1.json": "4d1ecfededdfe22ab93d85f004dc1c227caf011056d052377d5ec23568e538cd",
+    "cases/rust7/phases/02-probe-100000/box0.json": "e98844afec54d4af8c0ee7c341da555d6fa8fb73b89ebd4d430f403d7e6c3f78",
+    "cases/rust7/phases/02-probe-100000/load-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/rust7/phases/02-probe-100000/load-commands.json": "b85064169ff3f5d7c82e0bac1cf612d22f4dd858c5c258eed9c1ce59ef5563dc",
+    "cases/rust7/phases/02-probe-100000/box4.log": "62fe08e12216367578858e4eb3ea60572b71e1d45aa3e2bc545e186a70418f1f",
+    "cases/rust7/phases/02-probe-100000/box0.log": "3f6bacce69b8011b68b5463d9b7d2addb2bbb205043085776e19675465f9b47e",
+    "cases/rust7/phases/02-probe-100000/target-monitor.jsonl": "9be1a504d6a33d89d10d0fc0269389047c3ec6f55d78c0d7fd2e603a5e3cd3d5",
+    "cases/rust7/phases/02-probe-100000/box1.log": "156219802ce4299e768731b08e0d190527f0f8ba1203e32ae727df37634fed6f",
+    "cases/rust7/phases/02-probe-100000/box3.log": "b6fd1bed3171ea686ce07b856a3f826180589c5ca3035cf4989ee7a05e1b5d0b",
+    "cases/rust7/phases/02-probe-100000/phase.json": "27e4580ea05b533ce40ffb3729e5762ecd53816c4108d4b92161f3af25663b22",
+    "cases/rust7/phases/02-probe-100000/box2.log": "3e5e2d75c4f9948eb1cbee52962f776f9ec8ba5f0015401e079fc18d63f1c341",
+    "cases/rust7/app.json": "bfdabbc2ed6cb951d5e037680f27e8ad4e9f48a86bc3fd31b5b00a1819197e31",
+    "cases/rust7/database.json": "546658f6fdeeaafa2115df79ebe7a63ffd53561a8cda85e1b632e2344af238f5",
+    "cases/rust7/frozen/metadata.json": "02dcd9e447e4760172b94a52d1300af38c3bb1b1083035acd210383ded72f214",
+    "cases/rust7/conformance.log": "cf6dfe613fabf1936d051d8b95e3705a4f1c097801ae2be886f6c5f5aa9eba95",
+    "cases/goose32/phases/02-probe-100000/merged.json": "4332bf6251513b598ba5b645e00f0dcdd5abc5492a956a06c798306c588d5ff8",
+    "cases/goose32/phases/02-probe-100000/assessment.json": "51937c195522acb0b5e08412bdc1e006c0273213462dd2f45b143368047627a4",
+    "cases/goose32/phases/02-probe-100000/before-load.json": "9fddf390181c90eae804536f608093c8f71beb91f55d50da5825a37d35040a06",
+    "cases/goose32/phases/02-probe-100000/box4.json": "c05e9ab96d1a969042141c3bf94f516d103837ad24b80507eb3e559b279f8793",
+    "cases/goose32/phases/02-probe-100000/box3.json": "0070d63c19c8a88811124987e6c205b68ecbc9b54e4aba15825bf810040e2de1",
+    "cases/goose32/phases/02-probe-100000/target-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/goose32/phases/02-probe-100000/load-monitor.jsonl": "6513bba5bd43cf772b039eb1ce80fedc452f0d656172a8ee954a7680ba937113",
+    "cases/goose32/phases/02-probe-100000/box2.json": "9c0408cc352ad03f5980da3f3d17e83aff3232223f70b54ab587970429b23bf4",
+    "cases/goose32/phases/02-probe-100000/merged.txt": "5d6a576711d933143af9d6cf14572b93c7c7be981a9ed923800b05b97d5892c2",
+    "cases/goose32/phases/02-probe-100000/after-load.json": "cb0829442ffbff350835bcfe0d79ea014b2b7cc44557ded4e925cf533c1f7d40",
+    "cases/goose32/phases/02-probe-100000/box1.json": "5b019422b73b85f60723521dd6930a17671491b8c4ffb802e6c59d7e9eb583e1",
+    "cases/goose32/phases/02-probe-100000/box0.json": "9c52d77a1098cb29cac59979fca98d785aca7f6b42c3d39a8a5c2e9fe70555d6",
+    "cases/goose32/phases/02-probe-100000/load-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cases/goose32/phases/02-probe-100000/load-commands.json": "33eb5d83636d5fba5c1aa3ac2805135f718c88b106a70f746a6fdfd4ae519415",
+    "cases/goose32/phases/02-probe-100000/box4.log": "a75687db9634a89b2a26d8d15417efe447591a3ec72c8948331562af2c08db28",
+    "cases/goose32/phases/02-probe-100000/box0.log": "0b4f35c85e5c1acff34d8b201f64359678fe1c85f9e70c1e24ba84b87c75d873",
+    "cases/goose32/phases/02-probe-100000/target-monitor.jsonl": "ca2d946230775270ad7294ae68bd2ef88b1679970faab62e614a29693e64a9d5",
+    "cases/goose32/phases/02-probe-100000/box1.log": "a5b645c9529bf7c8a78885a5af0cac5d63df1344a83de07c16cecb166fe1f19d",
+    "cases/goose32/phases/02-probe-100000/box3.log": "81f1f1002f5c541e54d4a6b37a9f7323d078145d38a2721d83e8050eb86b8dd9",
+    "cases/goose32/phases/02-probe-100000/phase.json": "8c1ac1fa421c7d2c63ab5e2f95280da7a28726dd0430cedb359b9d222b8f997e",
+    "cases/goose32/phases/02-probe-100000/box2.log": "21ad43c039c8e9a6234cc038074709facf93258e9bfd968ac312bdacdbcdb0e9",
+    "cases/goose32/app.json": "b338a7bd348b78307aeb0e153720be4844923f3bb2814c96e585d32209558843",
+    "cases/goose32/database.json": "283f7644343566317db2581e759ab913351de30e415c4181a7947864666d73c5",
+    "cases/goose32/frozen/metadata.json": "01a19182885200122f431e013f8eb7ea5c3d1727f9e5a69f3622cd4e53797663",
+    "cases/goose32/conformance.log": "5134e8354b07c4b7a7105dd870aeafa45cbaeab5274363273b402b4013216d36",
+    "plan.json": "5fc24c6c92b412a06e48bbb48ebc3211b4113d4f936937a11f199b86889ec3fb",
+    "tool-sha256.json": "1e0e0c69e421a05a64ea3351a447ad39b999a31bc910702dbb9e403020fd6717",
+    "target-initial.json": "e094308f99529b047dea1af61f6de66c4c3d5f1a69b97ad582abdb7d6a02e1e7",
+    "target-inspect.json": "8760d6636e5105b2b8db576a9bd1a850ff3922284ceece8e28d99714082eac4a",
+    "load-inspect.json": "5267d18c7a4a4bfa926fead3b8921ebddd972a22466c2aa647de803333d00eb6",
+    "native-sha256.txt": "8372dc1d757c1522160eeaeecad40465afde4c361c2573207734c0f22d58f2b9"
+  },
+  "auditor_source_sha256": {
+    "audit/evidence.py": "33a17c583571b42d040fc9e475256302281635fc58fd2171fc59f3d47f16e115",
+    "audit/primitives.py": "8908b204b243ad5ad20e725d3284d115b5f9ccc8719931cd5018fcaf73104423",
+    "search_policy.py": "33aa0281a09e4f1e3b50dcf63c98e419694735969b481963be971c146195ac5c"
+  },
+  "execution": "Saved-file reads only, python3 -B. Output outside active run. No Docker/build/query/source/active-raw changes."
+}

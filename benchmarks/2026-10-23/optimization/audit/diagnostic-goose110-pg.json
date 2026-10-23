@@ -1,0 +1,807 @@
+{
+  "created_utc": "2026-10-23T17:00:38.492368+00:00",
+  "run": "diagnosticgoose110_20261023t164733_2f2b88",
+  "scope": "DIAGNOSTIC ONLY; completed saved-file analysis, no performance/capacity/rank interpretation.",
+  "finished": true,
+  "phases": [
+    {
+      "phase": "01-warmup-10000",
+      "native_start_utc": "2026-10-23T16:48:01.876000+00:00",
+      "classification": "INVALID_GENERATOR",
+      "native_verdict": {
+        "pass": false,
+        "fail_reasons": [
+          "p95 1552 ms >= 500",
+          "p99 2912 ms >= 1000"
+        ],
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 fell behind: 21 of 120 seconds had mean timer wake-up lag > 50 ms; sampler tick 2085 ms late"
+        ]
+      },
+      "phase_error": null,
+      "shard_json_present": [
+        "box0.json"
+      ],
+      "collector_completion": {
+        "schema": "mc-pg-diagnostic-completed-v1",
+        "pid": 1132,
+        "start_ticks": 9300701,
+        "database": "mc_pair_20261023_164733_2f2b88_1",
+        "out": "/comparison/optimization/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/01-warmup-10000/pg-samples.jsonl",
+        "owner_receipt": "/comparison/optimization/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/01-warmup-10000/pg-samples.jsonl.owner.json",
+        "observer_application_name": "mc_diag_1132_c961347fd519",
+        "completed": true,
+        "reason": "stop_file",
+        "signals": [],
+        "samples": 188,
+        "sample_errors": 2,
+        "pass": false,
+        "exception": null,
+        "finished_wall_ns": 1792774279362790918,
+        "finished_monotonic_ns": 93209615377253,
+        "elapsed_s": 202.572994926,
+        "scope": "Read-only diagnostic collection; never a capacity score."
+      },
+      "pg_snapshot_deltas": {
+        "pg_stat_database": {
+          "blks_hit": 30917781,
+          "sessions": 188,
+          "blks_read": 88196,
+          "conflicts": 0,
+          "deadlocks": 0,
+          "temp_bytes": 0,
+          "temp_files": 0,
+          "active_time": 296356.93200000003,
+          "tup_deleted": 1627,
+          "tup_fetched": 10890396,
+          "tup_updated": 722,
+          "xact_commit": 159804,
+          "session_time": 1667061.825,
+          "tup_inserted": 21102,
+          "tup_returned": 113514916,
+          "blk_read_time": 0,
+          "xact_rollback": 0,
+          "blk_write_time": 0,
+          "sessions_fatal": 0,
+          "sessions_killed": 0,
+          "checksum_failures": 0,
+          "sessions_abandoned": 0,
+          "idle_in_transaction_time": 0,
+          "parallel_workers_launched": 0,
+          "parallel_workers_to_launch": 0
+        },
+        "pg_stat_checkpointer": {
+          "num_done": 0,
+          "num_timed": 0,
+          "sync_time": 0,
+          "write_time": 0,
+          "slru_written": 0,
+          "num_requested": 0,
+          "buffers_written": 0,
+          "restartpoints_req": 0,
+          "restartpoints_done": 0,
+          "restartpoints_timed": 0
+        }
+      },
+      "sampled_backend_states": {
+        "idle/Client/ClientRead": 1130,
+        "active/None/None": 188,
+        "active/IO/DataFileRead": 11,
+        "active/IO/WalSync": 62,
+        "active/Client/ClientRead": 10,
+        "active/LWLock/WALWrite": 44,
+        "active/IO/WalWrite": 2,
+        "idle/None/None": 33,
+        "active/Lock/relation": 8
+      },
+      "active_family_samples": {
+        "tags_or_tagged_read": 66,
+        "shared_list": 18,
+        "shared_feed": 50,
+        "batch_article": 22,
+        "write": 107,
+        "batch_comments": 16,
+        "comments_read": 5,
+        "user_or_profile_read": 5,
+        "batch_other": 36
+      },
+      "longest_active_sample": {
+        "t": 25.97626256942749,
+        "pid": 1089,
+        "state": "active",
+        "family": "write",
+        "query_md5": "8ff9d6ff6bee28407b2d90d7320326cd",
+        "wait_event": "WALWrite",
+        "xact_age_s": 1.679949,
+        "query_age_s": 1.679886,
+        "backend_type": "client backend",
+        "blocking_pids": [],
+        "wait_event_type": "LWLock"
+      },
+      "blocking_samples": [
+        {
+          "t": 110.85844945907593,
+          "pid": 1082,
+          "state": "active",
+          "family": "comments_read",
+          "query_md5": "64428f6bb602093379f0aaf532601fbd",
+          "wait_event": "relation",
+          "xact_age_s": 0.486822,
+          "query_age_s": 0.483783,
+          "backend_type": "client backend",
+          "blocking_pids": [
+            1456
+          ],
+          "wait_event_type": "Lock"
+        },
+        {
+          "t": 110.85844945907593,
+          "pid": 1083,
+          "state": "active",
+          "family": "batch_comments",
+          "query_md5": "0a8f8e8b3bb6c3fc6fd24aead7d8e877",
+          "wait_event": "relation",
+          "xact_age_s": 0.34442,
+          "query_age_s": 0.343234,
+          "backend_type": "client backend",
+          "blocking_pids": [
+            1456
+          ],
+          "wait_event_type": "Lock"
+        },
+        {
+          "t": 110.85844945907593,
+          "pid": 1084,
+          "state": "active",
+          "family": "batch_comments",
+          "query_md5": "0a8f8e8b3bb6c3fc6fd24aead7d8e877",
+          "wait_event": "relation",
+          "xact_age_s": 0.497161,
+          "query_age_s": 0.49644,
+          "backend_type": "client backend",
+          "blocking_pids": [
+            1456
+          ],
+          "wait_event_type": "Lock"
+        },
+        {
+          "t": 110.85844945907593,
+          "pid": 1085,
+          "state": "active",
+          "family": "comments_read",
+          "query_md5": "64428f6bb602093379f0aaf532601fbd",
+          "wait_event": "relation",
+          "xact_age_s": 0.426567,
+          "query_age_s": 0.387969,
+          "backend_type": "client backend",
+          "blocking_pids": [
+            1456
+          ],
+          "wait_event_type": "Lock"
+        },
+        {
+          "t": 110.85844945907593,
+          "pid": 1086,
+          "state": "active",
+          "family": "batch_comments",
+          "query_md5": "0a8f8e8b3bb6c3fc6fd24aead7d8e877",
+          "wait_event": "relation",
+          "xact_age_s": 0.31686,
+          "query_age_s": 0.315677,
+          "backend_type": "client backend",
+          "blocking_pids": [
+            1456
+          ],
+          "wait_event_type": "Lock"
+        },
+        {
+          "t": 110.85844945907593,
+          "pid": 1087,
+          "state": "active",
+          "family": "batch_comments",
+          "query_md5": "0a8f8e8b3bb6c3fc6fd24aead7d8e877",
+          "wait_event": "relation",
+          "xact_age_s": 0.306731,
+          "query_age_s": 0.296802,
+          "backend_type": "client backend",
+          "blocking_pids": [
+            1456
+          ],
+          "wait_event_type": "Lock"
+        },
+        {
+          "t": 110.85844945907593,
+          "pid": 1088,
+          "state": "active",
+          "family": "write",
+          "query_md5": "d86739500c39b3cc92e468d90c0afa45",
+          "wait_event": "relation",
+          "xact_age_s": 0.41066,
+          "query_age_s": 0.41066,
+          "backend_type": "client backend",
+          "blocking_pids": [
+            1456
+          ],
+          "wait_event_type": "Lock"
+        },
+        {
+          "t": 110.85844945907593,
+          "pid": 1089,
+          "state": "active",
+          "family": "write",
+          "query_md5": "d86739500c39b3cc92e468d90c0afa45",
+          "wait_event": "relation",
+          "xact_age_s": 0.462839,
+          "query_age_s": 0.462839,
+          "backend_type": "client backend",
+          "blocking_pids": [
+            1456
+          ],
+          "wait_event_type": "Lock"
+        }
+      ],
+      "sample_errors": [
+        {
+          "t": 22.1505925655365,
+          "sample": 24,
+          "wall_ns": 1792774104026592629,
+          "monotonic_ns": 93034254803465,
+          "psql_process": {
+            "pid": 1208,
+            "pgid": 1208
+          },
+          "ok": false,
+          "error": "psql_timeout",
+          "timeout_s": 3.0,
+          "finished_wall_ns": 1792774107450489714,
+          "finished_monotonic_ns": 93037678701300
+        },
+        {
+          "t": 126.05884861946106,
+          "sample": 121,
+          "wall_ns": 1792774207934848469,
+          "monotonic_ns": 93138164270054,
+          "psql_process": {
+            "pid": 1509,
+            "pgid": 1509
+          },
+          "ok": false,
+          "error": "psql_timeout",
+          "timeout_s": 3.0,
+          "finished_wall_ns": 1792774211351517095,
+          "finished_monotonic_ns": 93141580942597
+        }
+      ],
+      "windows": [
+        {
+          "from_t": 0,
+          "to_t": 30,
+          "successful_samples": 21,
+          "sample_errors": 1,
+          "backend_observations": {
+            "idle/Client/ClientRead": 135,
+            "active/None/None": 19,
+            "active/IO/DataFileRead": 3,
+            "active/IO/WalSync": 7,
+            "active/Client/ClientRead": 1,
+            "active/LWLock/WALWrite": 3
+          },
+          "max_active_query_age_s": 1.679886,
+          "max_active_transaction_age_s": 1.679949
+        },
+        {
+          "from_t": 30,
+          "to_t": 60,
+          "successful_samples": 30,
+          "sample_errors": 0,
+          "backend_observations": {
+            "active/None/None": 23,
+            "idle/Client/ClientRead": 184,
+            "active/IO/DataFileRead": 6,
+            "active/LWLock/WALWrite": 7,
+            "active/IO/WalWrite": 1,
+            "active/IO/WalSync": 10,
+            "idle/None/None": 8,
+            "active/Client/ClientRead": 1
+          },
+          "max_active_query_age_s": 0.306093,
+          "max_active_transaction_age_s": 0.310359
+        },
+        {
+          "from_t": 60,
+          "to_t": 90,
+          "successful_samples": 28,
+          "sample_errors": 0,
+          "backend_observations": {
+            "idle/Client/ClientRead": 143,
+            "active/IO/DataFileRead": 1,
+            "idle/None/None": 5,
+            "active/None/None": 50,
+            "active/IO/WalSync": 14,
+            "active/LWLock/WALWrite": 10,
+            "active/IO/WalWrite": 1
+          },
+          "max_active_query_age_s": 1.215655,
+          "max_active_transaction_age_s": 1.215695
+        },
+        {
+          "from_t": 90,
+          "to_t": 120,
+          "successful_samples": 30,
+          "sample_errors": 0,
+          "backend_observations": {
+            "idle/Client/ClientRead": 168,
+            "idle/None/None": 10,
+            "active/None/None": 31,
+            "active/Client/ClientRead": 4,
+            "active/IO/WalSync": 12,
+            "active/LWLock/WALWrite": 7,
+            "active/Lock/relation": 8
+          },
+          "max_active_query_age_s": 0.49644,
+          "max_active_transaction_age_s": 0.497161
+        },
+        {
+          "from_t": 120,
+          "to_t": 180,
+          "successful_samples": 54,
+          "sample_errors": 1,
+          "backend_observations": {
+            "active/None/None": 59,
+            "idle/Client/ClientRead": 333,
+            "idle/None/None": 9,
+            "active/LWLock/WALWrite": 13,
+            "active/IO/WalSync": 14,
+            "active/Client/ClientRead": 3,
+            "active/IO/DataFileRead": 1
+          },
+          "max_active_query_age_s": 0.145173,
+          "max_active_transaction_age_s": 0.233734
+        }
+      ],
+      "cpu_monitor": {
+        "target": {
+          "windows": [
+            {
+              "from_t": 0,
+              "to_t": 30,
+              "cgroup_cores": 2.4329597844949835,
+              "app_cores": 0.4650197560106498,
+              "cpu_pressure_some_avg10_end": 16.08
+            },
+            {
+              "from_t": 30,
+              "to_t": 60,
+              "cgroup_cores": 1.8229194943662839,
+              "app_cores": 0.43458201761792536,
+              "cpu_pressure_some_avg10_end": 3.63
+            },
+            {
+              "from_t": 60,
+              "to_t": 90,
+              "cgroup_cores": 2.952640713204915,
+              "app_cores": 0.8341393758253763,
+              "cpu_pressure_some_avg10_end": 14.63
+            },
+            {
+              "from_t": 90,
+              "to_t": 120,
+              "cgroup_cores": 2.194029576907945,
+              "app_cores": 0.5495492508701922,
+              "cpu_pressure_some_avg10_end": 2.0
+            },
+            {
+              "from_t": 120,
+              "to_t": 180,
+              "cgroup_cores": 2.252812925480666,
+              "app_cores": 0.6342169853978883,
+              "cpu_pressure_some_avg10_end": 1.59
+            }
+          ],
+          "memory_peak_sampled_bytes": 6913765376,
+          "last_memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0"
+        },
+        "load": {
+          "windows": [
+            {
+              "from_t": 0,
+              "to_t": 30,
+              "cgroup_cores": 0.49027241898098545,
+              "app_cores": null,
+              "cpu_pressure_some_avg10_end": 4.32
+            },
+            {
+              "from_t": 30,
+              "to_t": 60,
+              "cgroup_cores": 0.4523623769652185,
+              "app_cores": null,
+              "cpu_pressure_some_avg10_end": 0.78
+            },
+            {
+              "from_t": 60,
+              "to_t": 90,
+              "cgroup_cores": 0.5887409305290472,
+              "app_cores": null,
+              "cpu_pressure_some_avg10_end": 5.72
+            },
+            {
+              "from_t": 90,
+              "to_t": 120,
+              "cgroup_cores": 0.4423150814802506,
+              "app_cores": null,
+              "cpu_pressure_some_avg10_end": 0.47
+            },
+            {
+              "from_t": 120,
+              "to_t": 180,
+              "cgroup_cores": 0.435968966356759,
+              "app_cores": null,
+              "cpu_pressure_some_avg10_end": 1.03
+            }
+          ],
+          "memory_peak_sampled_bytes": 414744576,
+          "last_memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0"
+        }
+      },
+      "stats_limit": "Observer1Hz read transactions contribute to per-DB transaction stats. State counts are sampled backend observations, not wall-time percentages. Failed samples are excluded; no exact attribution is possible inside gaps."
+    },
+    {
+      "phase": "02-probe-100000",
+      "native_start_utc": "2026-10-23T16:52:33.076000+00:00",
+      "classification": "INCOMPLETE",
+      "native_verdict": null,
+      "phase_error": "TimeoutError: owned native generators exceeded phase deadline",
+      "shard_json_present": [
+        "box1.json"
+      ],
+      "collector_completion": {
+        "schema": "mc-pg-diagnostic-completed-v1",
+        "pid": 1783,
+        "start_ticks": 9327822,
+        "database": "mc_pair_20261023_164733_2f2b88_1",
+        "out": "/comparison/optimization/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/pg-samples.jsonl",
+        "owner_receipt": "/comparison/optimization/diagnosticgoose110_20261023t164733_2f2b88/cases/goose32/phases/02-probe-100000/pg-samples.jsonl.owner.json",
+        "observer_application_name": "mc_diag_1783_0dceca410d6f",
+        "completed": true,
+        "reason": "stop_file",
+        "signals": [],
+        "samples": 168,
+        "sample_errors": 4,
+        "pass": false,
+        "exception": null,
+        "finished_wall_ns": 1792774541012358428,
+        "finished_monotonic_ns": 93471250800416,
+        "elapsed_s": 193.004444048,
+        "scope": "Read-only diagnostic collection; never a capacity score."
+      },
+      "pg_snapshot_deltas": {
+        "pg_stat_database": {
+          "blks_hit": 24496516,
+          "sessions": 167,
+          "blks_read": 64011,
+          "conflicts": 0,
+          "deadlocks": 0,
+          "temp_bytes": 0,
+          "temp_files": 0,
+          "active_time": 444716.536,
+          "tup_deleted": 399,
+          "tup_fetched": 8574143,
+          "tup_updated": 488,
+          "xact_commit": 30895,
+          "session_time": 1952765.5729999999,
+          "tup_inserted": 15700,
+          "tup_returned": 69912430,
+          "blk_read_time": 0,
+          "xact_rollback": 0,
+          "blk_write_time": 0,
+          "sessions_fatal": 1,
+          "sessions_killed": 0,
+          "checksum_failures": 0,
+          "sessions_abandoned": 0,
+          "idle_in_transaction_time": 0,
+          "parallel_workers_launched": 0,
+          "parallel_workers_to_launch": 0
+        },
+        "pg_stat_checkpointer": {
+          "num_done": 0,
+          "num_timed": 1,
+          "sync_time": 0,
+          "write_time": 0,
+          "slru_written": 12,
+          "num_requested": 0,
+          "buffers_written": 14395,
+          "restartpoints_req": 0,
+          "restartpoints_done": 0,
+          "restartpoints_timed": 0
+        }
+      },
+      "sampled_backend_states": {
+        "idle/Client/ClientRead": 667,
+        "active/None/None": 407,
+        "active/IO/DataFileRead": 22,
+        "idle/None/None": 12,
+        "active/LWLock/WALWrite": 90,
+        "active/IO/WalSync": 97,
+        "active/LWLock/BufferMapping": 5,
+        "active/Timeout/SpinDelay": 5,
+        "active/IO/WalWrite": 4,
+        "active/LWLock/BufferContent": 1,
+        "active/Client/ClientRead": 2
+      },
+      "active_family_samples": {
+        "tags_or_tagged_read": 65,
+        "batch_comments": 98,
+        "batch_article": 50,
+        "shared_list": 37,
+        "write": 193,
+        "shared_feed": 112,
+        "batch_other": 73,
+        "login_read": 1,
+        "user_or_profile_read": 2,
+        "comments_read": 2
+      },
+      "longest_active_sample": {
+        "t": 53.36821889877319,
+        "pid": 1084,
+        "state": "active",
+        "family": "shared_feed",
+        "query_md5": "312af8d39de80b4aa325b6039d6005c5",
+        "wait_event": null,
+        "xact_age_s": 1.634199,
+        "query_age_s": 1.073092,
+        "backend_type": "client backend",
+        "blocking_pids": [],
+        "wait_event_type": null
+      },
+      "blocking_samples": [],
+      "sample_errors": [
+        {
+          "t": 144.0180151462555,
+          "sample": 142,
+          "wall_ns": 1792774497094015129,
+          "monotonic_ns": 93427584213937,
+          "psql_process": {
+            "pid": 2225,
+            "pgid": 2225
+          },
+          "ok": false,
+          "error": "psql_timeout",
+          "timeout_s": 3.0,
+          "finished_wall_ns": 1792774500733929131,
+          "finished_monotonic_ns": 93431224126939
+        },
+        {
+          "t": 169.05924773216248,
+          "sample": 161,
+          "wall_ns": 1792774522135247502,
+          "monotonic_ns": 93452373687407,
+          "psql_process": {
+            "pid": 2285,
+            "pgid": 2285
+          },
+          "ok": false,
+          "error": "psql_timeout",
+          "timeout_s": 3.0,
+          "finished_wall_ns": 1792774525383348920,
+          "finished_monotonic_ns": 93455621788992
+        },
+        {
+          "t": 172.35431790351868,
+          "sample": 162,
+          "wall_ns": 1792774525430317712,
+          "monotonic_ns": 93455668758242,
+          "psql_process": {
+            "pid": 2288,
+            "pgid": 2288
+          },
+          "ok": false,
+          "error": "psql_timeout",
+          "timeout_s": 3.0,
+          "finished_wall_ns": 1792774528894841422,
+          "finished_monotonic_ns": 93459133280493
+        },
+        {
+          "t": 176.05321884155273,
+          "sample": 163,
+          "wall_ns": 1792774529129218880,
+          "monotonic_ns": 93459367658827,
+          "psql_process": {
+            "pid": 2290,
+            "pgid": 2290
+          },
+          "ok": false,
+          "error": "psql_timeout",
+          "timeout_s": 3.0,
+          "finished_wall_ns": 1792774532680070215,
+          "finished_monotonic_ns": 93462918509912
+        }
+      ],
+      "windows": [
+        {
+          "from_t": 0,
+          "to_t": 30,
+          "successful_samples": 30,
+          "sample_errors": 0,
+          "backend_observations": {
+            "idle/Client/ClientRead": 93,
+            "active/None/None": 99,
+            "active/IO/DataFileRead": 7,
+            "idle/None/None": 3,
+            "active/LWLock/WALWrite": 17,
+            "active/IO/WalSync": 18,
+            "active/LWLock/BufferMapping": 2,
+            "active/Timeout/SpinDelay": 1
+          },
+          "max_active_query_age_s": 0.61073,
+          "max_active_transaction_age_s": 0.777615
+        },
+        {
+          "from_t": 30,
+          "to_t": 60,
+          "successful_samples": 26,
+          "sample_errors": 0,
+          "backend_observations": {
+            "active/None/None": 158,
+            "active/LWLock/WALWrite": 18,
+            "active/IO/WalSync": 18,
+            "active/IO/DataFileRead": 5,
+            "active/Timeout/SpinDelay": 4,
+            "active/LWLock/BufferMapping": 3,
+            "active/IO/WalWrite": 1,
+            "active/LWLock/BufferContent": 1
+          },
+          "max_active_query_age_s": 1.073092,
+          "max_active_transaction_age_s": 1.634199
+        },
+        {
+          "from_t": 60,
+          "to_t": 90,
+          "successful_samples": 28,
+          "sample_errors": 0,
+          "backend_observations": {
+            "active/None/None": 53,
+            "active/LWLock/WALWrite": 22,
+            "active/IO/WalSync": 23,
+            "idle/Client/ClientRead": 118,
+            "active/IO/WalWrite": 3,
+            "idle/None/None": 1,
+            "active/Client/ClientRead": 1,
+            "active/IO/DataFileRead": 3
+          },
+          "max_active_query_age_s": 0.19716,
+          "max_active_transaction_age_s": 0.302896
+        },
+        {
+          "from_t": 90,
+          "to_t": 120,
+          "successful_samples": 30,
+          "sample_errors": 0,
+          "backend_observations": {
+            "active/None/None": 41,
+            "idle/Client/ClientRead": 139,
+            "active/LWLock/WALWrite": 26,
+            "active/IO/WalSync": 27,
+            "active/IO/DataFileRead": 4,
+            "idle/None/None": 2,
+            "active/Client/ClientRead": 1
+          },
+          "max_active_query_age_s": 0.218206,
+          "max_active_transaction_age_s": 0.313188
+        },
+        {
+          "from_t": 120,
+          "to_t": 180,
+          "successful_samples": 41,
+          "sample_errors": 4,
+          "backend_observations": {
+            "idle/Client/ClientRead": 246,
+            "active/None/None": 56,
+            "active/LWLock/WALWrite": 7,
+            "active/IO/WalSync": 11,
+            "idle/None/None": 6,
+            "active/IO/DataFileRead": 2
+          },
+          "max_active_query_age_s": 0.358159,
+          "max_active_transaction_age_s": 0.705907
+        }
+      ],
+      "cpu_monitor": {
+        "target": {
+          "windows": [
+            {
+              "from_t": 0,
+              "to_t": 30,
+              "cgroup_cores": 3.601749518549028,
+              "app_cores": 0.8358203673571801,
+              "cpu_pressure_some_avg10_end": 26.15
+            },
+            {
+              "from_t": 30,
+              "to_t": 60,
+              "cgroup_cores": 5.596056875495856,
+              "app_cores": 1.477802365669221,
+              "cpu_pressure_some_avg10_end": 49.62
+            },
+            {
+              "from_t": 60,
+              "to_t": 90,
+              "cgroup_cores": 2.9109769266377237,
+              "app_cores": 1.0210543414909692,
+              "cpu_pressure_some_avg10_end": 34.72
+            },
+            {
+              "from_t": 90,
+              "to_t": 120,
+              "cgroup_cores": 2.2860386860979114,
+              "app_cores": 0.9256103901164092,
+              "cpu_pressure_some_avg10_end": 25.77
+            },
+            {
+              "from_t": 120,
+              "to_t": 180,
+              "cgroup_cores": 2.8371517937108917,
+              "app_cores": 0.9426567518086931,
+              "cpu_pressure_some_avg10_end": 37.78
+            }
+          ],
+          "memory_peak_sampled_bytes": 7267553280,
+          "last_memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0"
+        },
+        "load": {
+          "windows": [
+            {
+              "from_t": 0,
+              "to_t": 30,
+              "cgroup_cores": 1.9731377514575192,
+              "app_cores": null,
+              "cpu_pressure_some_avg10_end": 18.99
+            },
+            {
+              "from_t": 30,
+              "to_t": 60,
+              "cgroup_cores": 3.5058726014100263,
+              "app_cores": null,
+              "cpu_pressure_some_avg10_end": 38.24
+            },
+            {
+              "from_t": 60,
+              "to_t": 90,
+              "cgroup_cores": 5.85334764611649,
+              "app_cores": null,
+              "cpu_pressure_some_avg10_end": 55.93
+            },
+            {
+              "from_t": 90,
+              "to_t": 120,
+              "cgroup_cores": 6.151974714803208,
+              "app_cores": null,
+              "cpu_pressure_some_avg10_end": 58.51
+            },
+            {
+              "from_t": 120,
+              "to_t": 180,
+              "cgroup_cores": 5.093443871524707,
+              "app_cores": null,
+              "cpu_pressure_some_avg10_end": 38.45
+            }
+          ],
+          "memory_peak_sampled_bytes": 2581671936,
+          "last_memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0"
+        }
+      },
+      "stats_limit": "Observer1Hz read transactions contribute to per-DB transaction stats. State counts are sampled backend observations, not wall-time percentages. Failed samples are excluded; no exact attribution is possible inside gaps."
+    }
+  ],
+  "conclusions": [
+    "Warmup10k was already invalid; a genuine relation-lock episode blocked all8 app backends behind PID1456 for sampled ages0.30\u20130.50s. Blocker role/query was not captured, so autovacuum is not proved.",
+    "The100k phase is INCOMPLETE after the native phase deadline, with only shard1 JSON present.110k was never reached.",
+    "At100k t60\u2013120 client cgroup use rises to roughly5.85\u20136.15 cores while target falls to2.91\u20132.29, and most sampled app backend observations are idle/ClientRead. Max active query age is~0.20\u20130.22s in those windows, with no sampled blockers. This is evidence of client/host scheduling or work starvation in this diagnostic, not a sustained database query/lock stall. Front-end or subsecond server effects are not excluded.",
+    "No PG deadlock, rollback or temp-file counter increments were recorded in either phase. WAL waits appear, particularly in warmup and ramp.",
+    "GC report records no STW longer than91ms; long concurrent marks exist but shard1s40.17s sampler gap lies between collections. A simple multi-second GC-stop explanation is contradicted.",
+    "Original powered Goose110k remains a real end-to-end collapse whose initiating trigger is unresolved. This instrumented run does not rescue its score or isolate a source-code defect."
+  ],
+  "next_step": "Use wire-response timestamps and per-thread OS scheduling/wait samples, or an independent external native Linux client, before attributing the observed long client stalls to application code or GC. Do not promote capacity/rank from this incomplete instrumented run.",
+  "related_gc_analysis": "diagnostic-goose110-gc.json",
+  "runtime_or_frozen_source_mutations": false
+}

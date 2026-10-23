@@ -1,0 +1,318 @@
+{
+  "created_utc": "2026-10-23T09:01:44.894483+00:00",
+  "status": "GO_METADATA_AND_SOURCE",
+  "plan_sha256": "18a2b775f205d0c13869b946a868c37232c8022ca8997231afb5bb148d31c3c3",
+  "configuration_sha256": "724a145f6eda3581012b89df6a2b04cebe4c4e9b7565abf10ff0aeffcbef8de4",
+  "created_utc_in_plan": "2026-10-23T08:56:50.066783+00:00",
+  "checks": [
+    {
+      "check": "actual_new_configuration_file_hash",
+      "pass": true
+    },
+    {
+      "check": "embedded_configuration_matches_input",
+      "pass": true
+    },
+    {
+      "check": "configuration_file_field_matches",
+      "pass": true
+    },
+    {
+      "check": "new_plan_sidecar_hash_matches",
+      "pass": true
+    },
+    {
+      "check": "new_timestamp_is_timezone_aware_today_and_not_inherited",
+      "pass": true
+    },
+    {
+      "check": "configuration_protocol_selection_unchanged_from_unexecuted_draft",
+      "pass": true
+    },
+    {
+      "check": "five_unique_arms_and_exact_order",
+      "pass": true
+    },
+    {
+      "check": "rust7:actual_binary_matches_pin",
+      "pass": true
+    },
+    {
+      "check": "rust_control_known_binary_unchanged",
+      "pass": true
+    },
+    {
+      "check": "share2r0:actual_binary_matches_pin",
+      "pass": true
+    },
+    {
+      "check": "share2r0:all_source_files_match_built_sharetimer_manifest",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "share2r0:pg_connection_budget_le95",
+      "pass": true
+    },
+    {
+      "check": "share2r1k:actual_binary_matches_pin",
+      "pass": true
+    },
+    {
+      "check": "share2r1k:all_source_files_match_built_sharetimer_manifest",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "share2r1k:pg_connection_budget_le95",
+      "pass": true
+    },
+    {
+      "check": "share2r5k:actual_binary_matches_pin",
+      "pass": true
+    },
+    {
+      "check": "share2r5k:all_source_files_match_built_sharetimer_manifest",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "share2r5k:pg_connection_budget_le95",
+      "pass": true
+    },
+    {
+      "check": "share1r6:actual_binary_matches_pin",
+      "pass": true
+    },
+    {
+      "check": "share1r6:all_source_files_match_built_sharetimer_manifest",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "share1r6:pg_connection_budget_le95",
+      "pass": true
+    },
+    {
+      "check": "four_candidate_arms_share_exact_same_binary_and_source",
+      "pass": true
+    },
+    {
+      "check": "candidate_runtime_variants_exactly_declared",
+      "pass": true
+    },
+    {
+      "check": "draft_v1_sidecar_unchanged",
+      "pass": true
+    },
+    {
+      "check": "sharetimer_uses_independently_reviewed_read_window_main_and_server",
+      "pass": true
+    },
+    {
+      "check": "existing_run_plan_copy_identical_and_fresh_timestamp_precedes_first_event",
+      "pass": true,
+      "detail": [
+        {
+          "run": "/private/tmp/multicore-research-20261022/paired-multi-load-v3/v3_multi_pair_20261023t085723_2a0df8",
+          "frozen_plan_sha256_matches": true,
+          "first_recorded_event_wall_ns": 1792745844310567000,
+          "first_event_after_plan_created_seconds": 34.243783950805664,
+          "fresh_timestamp_precedes_first_event": true
+        }
+      ]
+    },
+    {
+      "check": "rust_control_source_matches_previous_frozen_control",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "arms": [
+    {
+      "name": "rust7",
+      "binary_host_path": "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/target/release/conduit",
+      "actual_binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+      "source_host_path": "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337",
+      "env": {
+        "APP_THREADS": "2",
+        "DB_CONNS": "6",
+        "DB_WRITE_CONNS": "2",
+        "BCRYPT_THREADS": "1",
+        "WRITE_BATCH_US": "1000",
+        "BCRYPT_BATCH_MS": "160",
+        "READ_BATCH_SIZE": "32",
+        "READ_BATCH_US": "0",
+        "READ_SQL_BATCH": "1",
+        "READ_ROUTE_SLACK": "8",
+        "READ_TAG_ROUTE": "1",
+        "READ_COMMENT_SET": "1",
+        "READ_TAG_BATCH": "1"
+      },
+      "source_file_sha256": {
+        "Cargo.toml": "ab86173bb85ba27044f08fb9a567f78e3d500e1f94df535d1f0f63bfc2db6123",
+        "LICENSE": "1c809f52dd742570746a8ac00694ad4ddd9229e12accc7d5c598075861b478a0",
+        "install.sh": "0b5b878fce647ad19be4af31950416fc8bf06afca54b02602febcb10da70c1f9",
+        "Cargo.lock": "b5130487b2c982bc757c39bac0f299039ec343ff73ca255d1cef5571b6e52f17",
+        "build.rs": "544b5019a774744eea0062e8516f4b84dfef28858851728e3d7e5543365e4f23",
+        "README.md": "5e87e74195db33cde05eca81f839ab3752688f31287429f09c27642836b9e6d3",
+        "build.sh": "abb71fe1b2e2d8e5a7d4272aa069dc451a5bcd55267624a05f7332aded9efa48",
+        ".gitignore": "b53ee26e6ff1da219b0563333a76d2c9ec19eec713d6ee54e11a1edacb0e9f3d",
+        "start.sh": "1a729bf89b8aae10ba9e5cc1fb3f63ed4f5ab9500f44f30a9dd48411880f8d3c",
+        "native/crypt-port.h": "b58abb9c42e8a5902aa20bc7cbe516260f54a831d1b43261b5228f8325622d4e",
+        "native/byteorder.h": "cdfa3a3ae45955ad5da880053522b123f2e2d4e2a9dd74adb1f7a206d6ca6dfa",
+        "native/bcrypt-batch.c": "be69f39655a6e8680d756aeade92d37a060ef08d3e75a875f13c953508c0aff7",
+        "native/README.md": "4340724fec97fc5a5eb9526338d2c32f5312c71abc8942e98a676afda6475e1e",
+        "native/bcrypt-batch-impl.h": "554687a11fcc46da412c76a40f46a198a1a2462005cc992091eeb2a38ac637c5",
+        "native/crypt-bcrypt.c": "c6166e3d3d42d23bdc8c151e22e6aa60f33a4b4eeb008de54cf0243881fa1413",
+        "src/password_batch.rs": "9b3df6f737115863224f9e74116209a8e4a1963720a433b83bcf5ba5646b63a6",
+        "src/read_batch.rs": "8cc6c0d086f459e3424aadc61c9bdaf313331f741408c92145a7092469d083ab",
+        "src/auth.rs": "79e2f21ec84c7fd22ce948da8c7e18540d4df566681a90a8f185819b7afba9f4",
+        "src/db.rs": "5d90731241e2d68bbce670a2c58525e86a51a516aa053af04a9eaabb2e08ac5e",
+        "src/json.rs": "95096ea3af69a87995781f439c11f953244379eaf4b72989ea781ba22767b11e",
+        "src/sql.rs": "287dffe546b9c06b99d905b57f8069ced06fdbfd7290c9d8a74003e87e0d29be",
+        "src/main.rs": "c447e56d6e0158e9df40b2f02fb01a3f55520f11abd9cf3b4a68ac0b6e451bc3",
+        "src/password.rs": "69959c617f2aa1d7a7dac163123ee6cd387bbed78adbcff27625a39f3f2afcfb",
+        "src/http.rs": "6fc2d2605e5f6d9510e487f8dfefdfc8353a68b7b58a9240399d7e9716c8a5e1",
+        "src/writer.rs": "9f9367a0056602d97d4ffa7c666118f5c6233433eb1064ddc31a33a84f0fa7f2",
+        "src/security_tests.rs": "e900d2d0eb971adffd7d4406e81e398f4f04bd6b0b45fb0c0c83cb2a167f3a22",
+        "src/api.rs": "8b90d5ec2061f2e16c45e213051b9488df3685e0b3ea2e9b45dbb364157c163c",
+        "src/bin/group-check.rs": "df72c302f5809b1d6b2e75700e739f4fa05cdbd1019a67d5561b6338f5533a27",
+        "vendor/tokio-postgres/Cargo.toml": "02bd134a85a0aa1cec2e5f8152ab94dc34f2345922a9ef0cb0ce51f63d8bfe90",
+        "vendor/tokio-postgres/LICENSE-APACHE": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+        "vendor/tokio-postgres/README.md": "e4e7c2898f072a85c14db07fc4ee2d32cc5916215e7ed1b180653173ae389a0c",
+        "vendor/tokio-postgres/MODIFICATIONS.md": "f0540b4746140c3274cbcb271acb4785483f67b4b0a739022e7ffa729698f8ab",
+        "vendor/tokio-postgres/LICENSE-MIT": "ae3ead0b640a2ee59f9789a9af84e65e631cfa3b13254f3f99a9ed73e0472239",
+        "vendor/tokio-postgres/src/binary_copy.rs": "ac29f50281c1285640e7887352911958eaf9e0872ad2eb1b1fcfa49d2a949e28",
+        "vendor/tokio-postgres/src/types.rs": "86688c4b5f9811b43854d8302c30080489eb147a63dd3e6189ca61259ed75aa7",
+        "vendor/tokio-postgres/src/transaction.rs": "a2c0261a3ca426e9046d73b2b330720918f4d4a6010d0a143707f17f0333d62e",
+        "vendor/tokio-postgres/src/generic_client.rs": "1f733c86857f08a6e4dfc124340d572e9212f70bb5204e9c426832ebc77dadc7",
+        "vendor/tokio-postgres/src/keepalive.rs": "f7def5d0362d178d9a9b644200404a907187269f7b9e83c6b4b93018497bc298",
+        "vendor/tokio-postgres/src/copy_out.rs": "298ee2abd795f685bdb3d7073a4532d80d3fcdb2625babe7e8bbfd281d359bf2",
+        "vendor/tokio-postgres/src/client.rs": "4e439a9434b56c8d150bfd741cb06ba28011433cb9614d4207c48ad28d54477e",
+        "vendor/tokio-postgres/src/statement.rs": "fe832bf51b576b931c7cb33b25826f7a3b5bc8c8f77cbe4c5ed948d3daff33f6",
+        "vendor/tokio-postgres/src/connect_socket.rs": "9acb06f2f4a71c8b5e6e9d781fad6e09bfcc42730b7486903e274c3005e55efb",
+        "vendor/tokio-postgres/src/config.rs": "d06bffc37f9aa290ca72961508dcbcfdcab6d05e76fbf52fe450a268a0043b89",
+        "vendor/tokio-postgres/src/portal.rs": "db23661d8cfa9d4054bd6ff1780404ceae29be28b86c8fb8f189ca800394cfff",
+        "vendor/tokio-postgres/src/connect_tls.rs": "d407bd286a40348570c887139eb149340f835ae96f624668c6b04a99ccc95b00",
+        "vendor/tokio-postgres/src/lib.rs": "adee98d0271bf2427700499383f1ca0725495f30fe1a89e7b09115af9f6568c1",
+        "vendor/tokio-postgres/src/connect.rs": "ac6506a445aa5f89a2567788fd04a98421ee028cd57c0d9c2aa9a604de92d322",
+        "vendor/tokio-postgres/src/to_statement.rs": "41961c2d7608a8199693be35d0598597925f24ed9ba802f032c20f96f52838f7",
+        "vendor/tokio-postgres/src/query.rs": "820248e2f9406b2a7ab95a26d9f5cfb2218da3115769f3d685edca5c641cff91",
+        "vendor/tokio-postgres/src/maybe_tls_stream.rs": "d3a324ba2fbb9c8a1853a36ebb5102f140e41b2d0a7320ffdee3a7a631b83cb3",
+        "vendor/tokio-postgres/src/prepare.rs": "f143d9ff55a1e52da02fb47026ec7badaa4fb3305de90bd87479aae18526e2fa",
+        "vendor/tokio-postgres/src/socket.rs": "1bd0fbfde1fbb086a81b91ee8b334a312364116a3b45dbb32c015fe4a5f76827",
+        "vendor/tokio-postgres/src/codec.rs": "84419b83f836e3dfeecc4f48b338376e310266ba0c995f59f3abe6ef57450de6",
+        "vendor/tokio-postgres/src/row.rs": "699579818c8b23e47d5257d99a4244ade57b3b80f58ef00a200594218c7a021d",
+        "vendor/tokio-postgres/src/transaction_builder.rs": "c9767f9593c86e4432ba3f7551345e1673490b8b51a98ed6c5edead444d0028b",
+        "vendor/tokio-postgres/src/cancel_query_raw.rs": "e84be160e7785a9dc6672de482e25d34c1008a8340ca0c7017daa59611e8a782",
+        "vendor/tokio-postgres/src/connection.rs": "c7dd2c8259d306144ba60e0acabd210eada65cd88631aaa9e8e350620d880e4d",
+        "vendor/tokio-postgres/src/tls.rs": "43369e9b11cf26b59c04c17cc4238c1ca53340b9f0b639e5c65288f4349981a4",
+        "vendor/tokio-postgres/src/cancel_query.rs": "acb4b26aaa846b3f6095d2b5e531c8ab542548acb04c449077de1b8ee1028ec8",
+        "vendor/tokio-postgres/src/bind.rs": "9ba6d6ad5929bbee776cce58519fc34676a851104ddc2954e08203a0c572442e",
+        "vendor/tokio-postgres/src/copy_in.rs": "f0652721e158d800b843d38204c7faec88cbe869953161d4d4832150ecc2b9a9",
+        "vendor/tokio-postgres/src/connect_raw.rs": "2acee488ed3f4da7aac9cbbed0d584535080c3a8e1a11cfb68f4a6f9953c50a2",
+        "vendor/tokio-postgres/src/simple_query.rs": "9d64246d0ab386fd909b096730eb3f763145cf628bbb6c6a274e42ab7cd9111a",
+        "vendor/tokio-postgres/src/cancel_token.rs": "ed5b966eaea244ddcd01583dd20164dacb63fcc9b781dbb2847ebeeea72f5400",
+        "vendor/tokio-postgres/src/error/sqlstate.rs": "ef35424d3e762487c0ec2dfb13c1c404e8593885a4e1c1887ba88067844bd387",
+        "vendor/tokio-postgres/src/error/mod.rs": "f06b3055ddee536e766ef0c580855f9422368465218519de22417d55f398d378"
+      },
+      "compared_prior_frozen_source_files": 65
+    },
+    {
+      "name": "share2r0",
+      "binary_host_path": "/private/tmp/multicore-comparison-20261023/optimization/candidates/sharetimer/bin/conduit",
+      "actual_binary_sha256": "a34ee531dc6925021507cd2984606537d872b9c6f9b4fe6dd48b0a84a721899f",
+      "source_host_path": "/private/tmp/multicore-comparison-20261023/optimization/candidates/sharetimer",
+      "env": {
+        "WORKERS": "2",
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "BCRYPT_BATCH_MS": "250",
+        "READ_BATCH": "32",
+        "READ_HOLD": "1",
+        "ARTICLE_BATCH": "1",
+        "WRITE_BATCH_US": "1000",
+        "READ_BATCH_US": "0"
+      },
+      "source_manifest_sha256": "fe2f8c77dccb0386980906dccfb29cb763ff2079c93f8162ea4b6d94ddb0d4be",
+      "postgres_connections": 8
+    },
+    {
+      "name": "share2r1k",
+      "binary_host_path": "/private/tmp/multicore-comparison-20261023/optimization/candidates/sharetimer/bin/conduit",
+      "actual_binary_sha256": "a34ee531dc6925021507cd2984606537d872b9c6f9b4fe6dd48b0a84a721899f",
+      "source_host_path": "/private/tmp/multicore-comparison-20261023/optimization/candidates/sharetimer",
+      "env": {
+        "WORKERS": "2",
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "BCRYPT_BATCH_MS": "250",
+        "READ_BATCH": "32",
+        "READ_HOLD": "1",
+        "ARTICLE_BATCH": "1",
+        "WRITE_BATCH_US": "1000",
+        "READ_BATCH_US": "1000"
+      },
+      "source_manifest_sha256": "fe2f8c77dccb0386980906dccfb29cb763ff2079c93f8162ea4b6d94ddb0d4be",
+      "postgres_connections": 8
+    },
+    {
+      "name": "share2r5k",
+      "binary_host_path": "/private/tmp/multicore-comparison-20261023/optimization/candidates/sharetimer/bin/conduit",
+      "actual_binary_sha256": "a34ee531dc6925021507cd2984606537d872b9c6f9b4fe6dd48b0a84a721899f",
+      "source_host_path": "/private/tmp/multicore-comparison-20261023/optimization/candidates/sharetimer",
+      "env": {
+        "WORKERS": "2",
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "BCRYPT_BATCH_MS": "250",
+        "READ_BATCH": "32",
+        "READ_HOLD": "1",
+        "ARTICLE_BATCH": "1",
+        "WRITE_BATCH_US": "1000",
+        "READ_BATCH_US": "5000"
+      },
+      "source_manifest_sha256": "fe2f8c77dccb0386980906dccfb29cb763ff2079c93f8162ea4b6d94ddb0d4be",
+      "postgres_connections": 8
+    },
+    {
+      "name": "share1r6",
+      "binary_host_path": "/private/tmp/multicore-comparison-20261023/optimization/candidates/sharetimer/bin/conduit",
+      "actual_binary_sha256": "a34ee531dc6925021507cd2984606537d872b9c6f9b4fe6dd48b0a84a721899f",
+      "source_host_path": "/private/tmp/multicore-comparison-20261023/optimization/candidates/sharetimer",
+      "env": {
+        "WORKERS": "1",
+        "PG_READERS": "6",
+        "HASHERS": "2",
+        "BCRYPT_BATCH_MS": "250",
+        "READ_BATCH": "32",
+        "READ_HOLD": "1",
+        "ARTICLE_BATCH": "1",
+        "WRITE_BATCH_US": "1000",
+        "READ_BATCH_US": "5000"
+      },
+      "source_manifest_sha256": "fe2f8c77dccb0386980906dccfb29cb763ff2079c93f8162ea4b6d94ddb0d4be",
+      "postgres_connections": 7
+    }
+  ],
+  "source_note": "Current sharetimer SQL3399183b differs from initially reviewed feed-share SQLbc9e291a only by preserving NULL booleans on the empty-page marker row. That normalization preserves API behavior and now matches the singleton wire-row shape; other source files match the saved build manifest.",
+  "immutable_historical_plan_hashes": {
+    "/private/tmp/multicore-research-20261022/paired-multi-load-v3/v3_multi_pair_20261023t074213_8ce7a0/plan.json": "bc6df6a80fc5d5630abee397aae672f0b426771413a702498ee6ee740ec6fa65",
+    "/private/tmp/multicore-research-20261022/paired-multi-load-v3/v3_multi_pair_20261023t080108_74f69d/plan.json": "3c43e658b394049a102484e30339d0dca39d9751289432b966ede72676ff43e8",
+    "/private/tmp/multicore-research-20261022/paired-multi-load-v3/v3_multi_pair_20261023t081359_b8a826/plan.json": "756c57f7762e1bd421b7e348b346514eff36777eed4d9631862e104f81486150"
+  },
+  "preserved_draft_v1_sha256": "0460e4335953010b0dd7940f6c7fb3cb911e1561489c48661fea8fe4d712d724",
+  "capacity_or_rank_proven": false,
+  "no_docker_or_measurement_execution": true,
+  "observed_existing_runs": [
+    {
+      "run": "/private/tmp/multicore-research-20261022/paired-multi-load-v3/v3_multi_pair_20261023t085723_2a0df8",
+      "frozen_plan_sha256_matches": true,
+      "first_recorded_event_wall_ns": 1792745844310567000,
+      "first_event_after_plan_created_seconds": 34.243783950805664,
+      "fresh_timestamp_precedes_first_event": true
+    }
+  ],
+  "review_chronology_note": "The v2 study had already started when this independent review completed. Its recorded plan creation time predates the first recorded event. This note is derived evidence, not an independent proof of public preregistration, and changes no plan or measurement."
+}

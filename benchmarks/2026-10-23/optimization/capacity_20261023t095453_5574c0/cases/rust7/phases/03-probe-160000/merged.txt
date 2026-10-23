@@ -1,0 +1,37 @@
+
+160000 users on 8 box(es), http://127.0.0.1:3000, measured 60 s after a 60 s ramp
+endpoint                                      count    req/s      p50      p90      p95      p99      max    err%
+GET /api/articles/:slug                       21799    363.3  55902.2  60031.0  60031.0  60031.0    60031   45.37
+GET /api/tags                                 18606    310.1  56197.1  60031.0  60031.0  60031.0    60031   39.30
+GET /api/articles/:slug/comments              17855    297.6  51740.7  60031.0  60031.0  60031.0    60031   46.31
+GET /api/articles                              9368    156.1  51642.4  60031.0  60031.0  60031.0    60031   99.64
+GET /api/articles/feed                         6520    108.7  51839.0  60031.0  60031.0  60031.0    60031   99.05
+GET /api/articles?tag                          4031     67.2  56033.3  60031.0  60031.0  60031.0    60031   99.65
+GET /api/profiles/:username                    3942     65.7  56262.7  60031.0  60031.0  60031.0    60031   10.91
+GET /api/articles?author                       3144     52.4  51904.5  60031.0  60031.0  60031.0    60031    1.43
+POST /api/articles/:slug/favorite              1434     23.9  57180.2  60031.0  60031.0  60031.0    60031   10.53
+GET /api/user                                  1297     21.6  51740.7  60031.0  60031.0  60031.0    60031   16.42
+POST /api/articles/:slug/comments              1007     16.8  57409.5  60031.0  60031.0  60031.0    60031   10.43
+GET /api/articles?favorited                     800     13.3  52199.4  60031.0  60031.0  60031.0    60031    1.38
+POST /api/profiles/:username/follow             484      8.1  55312.4  60031.0  60031.0  60031.0    60031   10.12
+POST /api/articles                              397      6.6  55509.0  60031.0  60031.0  60031.0    60031   41.56
+POST /api/users/login                           392      6.5  53018.6  60031.0  60031.0  60031.0    60031   16.58
+DELETE /api/articles/:slug/favorite             139      2.3  53379.1  60031.0  60031.0  60031.0    60031   17.27
+PUT /api/user                                   132      2.2  51871.7  60031.0  60031.0  60031.0    60031   21.97
+DELETE /api/profiles/:username/follow           102      1.7  55509.0  60031.0  60031.0  60031.0    60031    7.84
+DELETE /api/articles/:slug/comments/:id          10      0.2  55443.5  60031.0  60031.0  60031.0    60031   20.00
+POST /api/users                                   3      0.1  44138.5  49741.8  49741.8  49741.8    49742   33.33
+PUT /api/articles/:slug                           1      0.0  44367.9  44367.9  44367.9  44367.9    44368    0.00
+ALL                                           91463   1524.4  54493.2  60031.0  60031.0  60031.0    60031   50.93
+errors: timeout=46578  (e.g. "request timeout")
+mix: 1.76 calls/page, 0.010 req/s per user, 4.1% writes, 51965 page views
+box 0 (831ef5b57bce): 20000 users, CPU avg 67% max 100%, loadgen proc 11%, RSS peak 315 MB, 23086 TCP connects, behind=true
+box 1 (831ef5b57bce): 20000 users, CPU avg N/A max N/A, loadgen proc 0%, RSS peak 334 MB, 23452 TCP connects, behind=true
+box 2 (831ef5b57bce): 20000 users, CPU avg 79% max 100%, loadgen proc 31%, RSS peak 336 MB, 23254 TCP connects, behind=true
+box 3 (831ef5b57bce): 20000 users, CPU avg N/A max N/A, loadgen proc 0%, RSS peak 356 MB, 25540 TCP connects, behind=true
+box 4 (831ef5b57bce): 20000 users, CPU avg 100% max 100%, loadgen proc 11%, RSS peak 328 MB, 23131 TCP connects, behind=true
+box 5 (831ef5b57bce): 20000 users, CPU avg 68% max 100%, loadgen proc 27%, RSS peak 327 MB, 23005 TCP connects, behind=true
+box 6 (831ef5b57bce): 20000 users, CPU avg 67% max 100%, loadgen proc 12%, RSS peak 353 MB, 25074 TCP connects, behind=true
+box 7 (831ef5b57bce): 20000 users, CPU avg 69% max 100%, loadgen proc 125373%, RSS peak 334 MB, 23242 TCP connects, behind=true
+verdict: FAIL (p95 60031 ms >= 500, p99 60031 ms >= 1000, errors 50.93% >= 1%)   [p95 < 500 ms, p99 < 1000 ms, errors < 1%]
+LG-LIMITED: box 0 fell behind: 60 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 86140 ms late; only 6266 of 20000 users active at window start; box 1 fell behind: no samples in the measure window; box 2 CPU 79% > 75%; box 2 fell behind: 59 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 68586 ms late; only 19147 of 20000 users active at window start; box 3 fell behind: no samples in the measure window; box 4 CPU 100% > 75%; box 4 fell behind: 60 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 80352 ms late; only 11240 of 20000 users active at window start; box 5 fell behind: 58 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 57864 ms late; only 19197 of 20000 users active at window start; box 6 fell behind: 59 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 83477 ms late; only 9972 of 20000 users active at window start; box 7 fell behind: 58 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 74070 ms late; only 19100 of 20000 users active at window start

@@ -1,0 +1,392 @@
+--- a/bcrypt.goose
++++ b/bcrypt.goose
+@@ -158,6 +158,163 @@
+         expand0_5(st, salt);
+     }
+     const for <K> in [0, 1, 2, 3, 4] { finish(st[K], ct[K]); }
++}
++
++// Exact lane counts avoid computing repeated hashes for unused slots.
++inline fn encipher2(st: Lane[2]&, l: u32[2]&, r: u32[2]&) {
++    const for <K> in [0, 1] { l[K] ^= st[K].p[0]; }
++    const for <J> in [1, 3, 5, 7, 9, 11, 13, 15] {
++        const for <K> in [0, 1] { r[K] ^= st[K].p[J]; r[K] ^= f(st[K], l[K]); }
++        const for <K> in [0, 1] { l[K] ^= st[K].p[J + 1]; l[K] ^= f(st[K], r[K]); }
++    }
++    const for <K> in [0, 1] {
++        let t = r[K] ^ st[K].p[17];
++        r[K] = l[K];
++        l[K] = t;
++    }
++}
++
++fn expand0_2(st: Lane[2]&, w: u32[18][5]&) {
++    for i in 18 { const for <K> in [0, 1] { st[K].p[i] ^= w[K][i]; } }
++    var l: u32[2] = [0; 2];
++    var r: u32[2] = [0; 2];
++    for h in 9 {
++        encipher2(st, l, r);
++        const for <K> in [0, 1] { st[K].p[2 * h] = l[K]; st[K].p[2 * h + 1] = r[K]; }
++    }
++    for h in 128 {
++        encipher2(st, l, r);
++        const for <K> in [0, 1] { st[K].s0[2 * h] = l[K]; st[K].s0[2 * h + 1] = r[K]; }
++    }
++    for h in 128 {
++        encipher2(st, l, r);
++        const for <K> in [0, 1] { st[K].s1[2 * h] = l[K]; st[K].s1[2 * h + 1] = r[K]; }
++    }
++    for h in 128 {
++        encipher2(st, l, r);
++        const for <K> in [0, 1] { st[K].s2[2 * h] = l[K]; st[K].s2[2 * h + 1] = r[K]; }
++    }
++    for h in 128 {
++        encipher2(st, l, r);
++        const for <K> in [0, 1] { st[K].s3[2 * h] = l[K]; st[K].s3[2 * h + 1] = r[K]; }
++    }
++}
++
++fn hash2(key: u32[18][5]&, salt: u32[18][5]&, cost: i64, ct: u32[6][5]&) {
++    var st: Lane[2] = default<Lane[2]>();
++    const for <K> in [0, 1] {
++        init(st[K]);
++        expand_state(st[K], key[K], salt[K]);
++    }
++    for n in 1 << cost {
++        expand0_2(st, key);
++        expand0_2(st, salt);
++    }
++    const for <K> in [0, 1] { finish(st[K], ct[K]); }
++}
++
++inline fn encipher3(st: Lane[3]&, l: u32[3]&, r: u32[3]&) {
++    const for <K> in [0, 1, 2] { l[K] ^= st[K].p[0]; }
++    const for <J> in [1, 3, 5, 7, 9, 11, 13, 15] {
++        const for <K> in [0, 1, 2] { r[K] ^= st[K].p[J]; r[K] ^= f(st[K], l[K]); }
++        const for <K> in [0, 1, 2] { l[K] ^= st[K].p[J + 1]; l[K] ^= f(st[K], r[K]); }
++    }
++    const for <K> in [0, 1, 2] {
++        let t = r[K] ^ st[K].p[17];
++        r[K] = l[K];
++        l[K] = t;
++    }
++}
++
++fn expand0_3(st: Lane[3]&, w: u32[18][5]&) {
++    for i in 18 { const for <K> in [0, 1, 2] { st[K].p[i] ^= w[K][i]; } }
++    var l: u32[3] = [0; 3];
++    var r: u32[3] = [0; 3];
++    for h in 9 {
++        encipher3(st, l, r);
++        const for <K> in [0, 1, 2] { st[K].p[2 * h] = l[K]; st[K].p[2 * h + 1] = r[K]; }
++    }
++    for h in 128 {
++        encipher3(st, l, r);
++        const for <K> in [0, 1, 2] { st[K].s0[2 * h] = l[K]; st[K].s0[2 * h + 1] = r[K]; }
++    }
++    for h in 128 {
++        encipher3(st, l, r);
++        const for <K> in [0, 1, 2] { st[K].s1[2 * h] = l[K]; st[K].s1[2 * h + 1] = r[K]; }
++    }
++    for h in 128 {
++        encipher3(st, l, r);
++        const for <K> in [0, 1, 2] { st[K].s2[2 * h] = l[K]; st[K].s2[2 * h + 1] = r[K]; }
++    }
++    for h in 128 {
++        encipher3(st, l, r);
++        const for <K> in [0, 1, 2] { st[K].s3[2 * h] = l[K]; st[K].s3[2 * h + 1] = r[K]; }
++    }
++}
++
++fn hash3(key: u32[18][5]&, salt: u32[18][5]&, cost: i64, ct: u32[6][5]&) {
++    var st: Lane[3] = default<Lane[3]>();
++    const for <K> in [0, 1, 2] {
++        init(st[K]);
++        expand_state(st[K], key[K], salt[K]);
++    }
++    for n in 1 << cost {
++        expand0_3(st, key);
++        expand0_3(st, salt);
++    }
++    const for <K> in [0, 1, 2] { finish(st[K], ct[K]); }
++}
++
++inline fn encipher4(st: Lane[4]&, l: u32[4]&, r: u32[4]&) {
++    const for <K> in [0, 1, 2, 3] { l[K] ^= st[K].p[0]; }
++    const for <J> in [1, 3, 5, 7, 9, 11, 13, 15] {
++        const for <K> in [0, 1, 2, 3] { r[K] ^= st[K].p[J]; r[K] ^= f(st[K], l[K]); }
++        const for <K> in [0, 1, 2, 3] { l[K] ^= st[K].p[J + 1]; l[K] ^= f(st[K], r[K]); }
++    }
++    const for <K> in [0, 1, 2, 3] {
++        let t = r[K] ^ st[K].p[17];
++        r[K] = l[K];
++        l[K] = t;
++    }
++}
++
++fn expand0_4(st: Lane[4]&, w: u32[18][5]&) {
++    for i in 18 { const for <K> in [0, 1, 2, 3] { st[K].p[i] ^= w[K][i]; } }
++    var l: u32[4] = [0; 4];
++    var r: u32[4] = [0; 4];
++    for h in 9 {
++        encipher4(st, l, r);
++        const for <K> in [0, 1, 2, 3] { st[K].p[2 * h] = l[K]; st[K].p[2 * h + 1] = r[K]; }
++    }
++    for h in 128 {
++        encipher4(st, l, r);
++        const for <K> in [0, 1, 2, 3] { st[K].s0[2 * h] = l[K]; st[K].s0[2 * h + 1] = r[K]; }
++    }
++    for h in 128 {
++        encipher4(st, l, r);
++        const for <K> in [0, 1, 2, 3] { st[K].s1[2 * h] = l[K]; st[K].s1[2 * h + 1] = r[K]; }
++    }
++    for h in 128 {
++        encipher4(st, l, r);
++        const for <K> in [0, 1, 2, 3] { st[K].s2[2 * h] = l[K]; st[K].s2[2 * h + 1] = r[K]; }
++    }
++    for h in 128 {
++        encipher4(st, l, r);
++        const for <K> in [0, 1, 2, 3] { st[K].s3[2 * h] = l[K]; st[K].s3[2 * h + 1] = r[K]; }
++    }
++}
++
++fn hash4(key: u32[18][5]&, salt: u32[18][5]&, cost: i64, ct: u32[6][5]&) {
++    var st: Lane[4] = default<Lane[4]>();
++    const for <K> in [0, 1, 2, 3] {
++        init(st[K]);
++        expand_state(st[K], key[K], salt[K]);
++    }
++    for n in 1 << cost {
++        expand0_4(st, key);
++        expand0_4(st, salt);
++    }
++    const for <K> in [0, 1, 2, 3] { finish(st[K], ct[K]); }
+ }
+ 
+ // ---------- bcrypt's base64: its own alphabet, no padding ----------
+@@ -229,7 +386,7 @@
+ let LANES = 5;
+ 
+ // verify: does password match hash? Otherwise: hash password with a fresh salt at HASH_COST.
+-struct BJob { tag: u64, reply_fd: i32, verify: bool, password: u8[..72], hash: u8[..60] }
++struct BJob { tag: u64, enqueued_ns: i64, reply_fd: i32, verify: bool, password: u8[..72], hash: u8[..60] }
+ 
+ // What goes back down the reply pipe: a fixed-size record, so a pipe write (atomic under 4 KiB) is never split.
+ let REPLY_SIZE = 72;
+@@ -317,8 +474,8 @@
+     if native_write_atomic_reply(job.reply_fd, bytes) != REPLY_SIZE { abort("bcrypt reply delivery failed"); }
+ }
+ 
+-// How long the first job of a batch waits for company: five hashes interleaved cost about 1.3 times one hash,
+-// and sign-ins are about one request in a thousand, so the wait never shows in the p95.
++// Collection wait is bounded from enqueue time, including time waiting for a hashing worker.
++// Already queued jobs are drained first; each batch computes only its actual number of lanes.
+ var batch_ms = 250;
+ 
+ // Runs at a lower priority than the event loops, so a burst of sign-ins slows itself, not every other request.
+@@ -329,11 +486,13 @@
+     loop {
+         jobs.clear();
+         jobs.push(qget<BJob>());
+-        let deadline = mono_ns() + batch_ms * 1000000;
++        let deadline = jobs[0].enqueued_ns + batch_ms * 1000000;
+         while jobs.len < LANES {
+-            let left = (deadline - mono_ns()) / 1000000;
+-            if left <= 0 { break; }
+-            let j, got = qget<BJob>(left);
++            let queued, ready = qpoll<BJob>();
++            if ready { jobs.push(queued); continue; }
++            let remaining = deadline - mono_ns();
++            if remaining <= 0 { break; }
++            let j, got = qget<BJob>((remaining + 999999) / 1000000);
+             if !got { break; }
+             jobs.push(j);
+         }
+@@ -362,9 +521,11 @@
+             hash1(keys[0], salts[0], cost, ct);
+             answer(jobs[lane_of[0]], slots[lane_of[0]], ct);
+         } else if lanes > 1 {
+-            for k in lanes..LANES { keys[k] = keys[0]; salts[k] = salts[0]; }   // idle lanes repeat lane 0
+             var cts: u32[6][5] = [[0; 6]; 5];
+-            hash5(keys, salts, cost, cts);
++            if lanes == 2 { hash2(keys, salts, cost, cts); }
++            else if lanes == 3 { hash3(keys, salts, cost, cts); }
++            else if lanes == 4 { hash4(keys, salts, cost, cts); }
++            else { hash5(keys, salts, cost, cts); }
+             for k in lanes { answer(jobs[lane_of[k]], slots[lane_of[k]], cts[k]); }
+         }
+     }
+--- a/main.goose
++++ b/main.goose
+@@ -4,7 +4,7 @@
+ // Environment: DATABASE_URL, JWT_SECRET, HOST, PORT; WORKERS (event loops, 4), PG_READERS (read connections per
+ // loop, 3; each loop also has one writer), HASHERS (bcrypt threads, 2), BCRYPT_BATCH_MS (250), READ_BATCH (most
+ // list reads one execution answers, 32; 0 off), READ_HOLD (batches in flight before reads wait, 1),
+-// and ARTICLE_BATCH (0 by default; 1 lets queued article reads share metadata within one execution).
++// WRITE_BATCH_US (writer collection, 1000; 0 disables it), and ARTICLE_BATCH (0 by default; 1 lets queued article reads share metadata within one execution).
+ 
+ import bcrypt;
+ import crypto;
+@@ -89,6 +89,8 @@
+     if workers > 95 / (readers + 1) { abort("WORKERS * (PG_READERS + 1) must be at most 95"); }
+     let hashers = env_int("HASHERS", 2);
+     batch_ms = env_int("BCRYPT_BATCH_MS", 250);
++    write_batch_us = if env_or("WRITE_BATCH_US", "") == "0" { 0 } else { env_int("WRITE_BATCH_US", 1000) };
++    if write_batch_us > 1000000 { abort("WRITE_BATCH_US must be at most 1000000"); }
+     batch_max = if env_or("READ_BATCH", "") == "0" { 0 } else { env_int("READ_BATCH", 32) };
+     batch_hold = env_int("READ_HOLD", 1);
+     let article = env_or("ARTICLE_BATCH", "0");
+--- a/server.goose
++++ b/server.goose
+@@ -1,7 +1,8 @@
+ // One event loop: its own listener (SO_REUSEPORT spreads connections over the loops), its own epoll, its own
+ // Postgres connections and its own bcrypt reply pipe. A client connection runs one request at a time; requests that
+ // need the database are Bind/Execute messages appended to a Postgres connection's output, and every request
+-// appended in one turn of the loop shares one Sync, so a turn's writes commit together.
++// shares a Sync with a bounded writer collection interval. Only closed groups are sent;
++// every successful write is answered after its ReadyForQuery confirms commit.
+ 
+ import bcrypt;
+ import buf;
+@@ -27,6 +28,7 @@
+ var readers = 3;
+ var batch_max = 32;             // the most reads one batched execution answers; 0 sends every read on its own
+ var batch_hold = 1;             // reads wait in the pool while this many batched executions are in flight
++var write_batch_us = 1000;     // 0 restores immediate writer Sync; collection never delays read groups
+ var article_batch = false;     // optional live article reads share enrichment only within one SQL execution
+ 
+ // ---------- state ----------
+@@ -96,6 +98,8 @@
+     tail: i64 = -1,
+     open: i64 = 0,              // requests appended since the last Sync
+     waiting: i64 = 0,
++    sendable: i64 = 0,          // output bytes covered by a Sync; unclosed writer tail stays local
++    opened_ns: i64 = 0,         // monotonic first request time of the current open group
+     scan: i64 = 0,              // where in inb the search for the next ReadyForQuery goes on
+ }
+ 
+@@ -279,6 +283,16 @@
+     put(pgs[p].out, SYNC_MSG);
+     conns[pgs[p].tail].group_end = true;
+     pgs[p].open = 0;
++    pgs[p].opened_ns = 0;
++    pgs[p].sendable = pending(pgs[p].out);
++}
++
++// Ceiling milliseconds make the poll wake for the writer deadline even on an otherwise idle loop.
++fn writer_wait_ms() -> i32 {
++    if pgs[writer].open == 0 { return -1; }
++    let left = pgs[writer].opened_ns + write_batch_us * 1000 - mono_ns();
++    if left <= 0 { return 0; }
++    return ((left + 999999) / 1000000) as! i32;
+ }
+ 
+ fn least_busy_reader() -> i64 {
+@@ -292,6 +306,7 @@
+     put(pgs[p].out, m);
+     enqueue(p, slot);
+     pgs[p].waiting += 1;
++    if pgs[p].open == 0 { pgs[p].opened_ns = mono_ns(); }
+     pgs[p].open += 1;
+     if pgs[p].open >= GROUP_MAX { close_group(p); }
+     conns[slot].busy = true;
+@@ -495,11 +510,15 @@
+ fn pg_flush() {
+     pool_flush();
+     for p in pgs.len {
+-        if pgs[p].open > 0 { close_group(p); }
+-        while pending(pgs[p].out) > 0 {
+-            let n = sys_send(pgs[p].fd, waiting(pgs[p].out), MSG_DONTWAIT | MSG_NOSIGNAL);
++        if pgs[p].open > 0 && (p != writer || write_batch_us == 0 ||
++                mono_ns() - pgs[p].opened_ns >= write_batch_us * 1000) {
++            close_group(p);
++        }
++        while pgs[p].sendable > 0 {
++            let n = sys_send(pgs[p].fd, waiting(pgs[p].out)[..pgs[p].sendable], MSG_DONTWAIT | MSG_NOSIGNAL);
+             if n <= 0 { break; }
+             consume(pgs[p].out, n);
++            pgs[p].sendable -= n;
+         }
+     }
+ }
+@@ -587,7 +606,7 @@
+ // ---------- bcrypt ----------
+ 
+ fn hash_job(slot: i64, verify: bool, password: const u8[:], hash: const u8[:]) {
+-    var j = BJob { tag: tag_of(slot), reply_fd: reply_write, verify: verify, password: "", hash: "" };
++    var j = BJob { tag: tag_of(slot), enqueued_ns: mono_ns(), reply_fd: reply_write, verify: verify, password: "", hash: "" };
+     j.password.append(password);
+     j.hash.append(hash[..min(hash.len, 60)]);
+     conns[slot].busy = true;
+@@ -660,7 +679,7 @@
+ 
+     var evs: EpollEvent[256] = [EpollEvent { events: 0, data: 0 }; 256];
+     loop {
+-        let n = sys_epoll_wait(epfd, evs, -1);
++        let n = sys_epoll_wait(epfd, evs, writer_wait_ms());
+         now_ms = wall_ns() / 1000000;
+         for i in n as i64 {
+             let e = evs[i];
+--- /dev/null
++++ b/tests/bcrypt-lanes.goose
+@@ -0,0 +1,32 @@
++// Independent single-lane reference versus each newly interleaved lane count.
++// Different keys and salts catch cross-lane state reuse; cost10 is the real workload.
++import std;
++import bcrypt;
++
++fn main() {
++    let passwords: const u8[:][5] = ["", "password", "één 🙂", "different password", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"];
++    var keys: u32[18][5] = [[0; 18]; 5];
++    var salts: u32[18][5] = [[0; 18]; 5];
++    for i in 5 {
++        key_words(passwords[i], keys[i]);
++        var salt: u8[16] = [0; 16];
++        for j in 16 { salt[j] = (i * 31 + j * 7) as! u8; }
++        stream_words(salt, salts[i]);
++    }
++    var checks = 0;
++    for cost in [4, 5, 10] {
++        var expected: u32[6][5] = [[0; 6]; 5];
++        for i in 5 { hash1(keys[i], salts[i], cost, expected[i]); }
++        for lanes in [2, 3, 4, 5] {
++            var actual: u32[6][5] = [[0; 6]; 5];
++            if lanes == 2 { hash2(keys, salts, cost, actual); }
++            else if lanes == 3 { hash3(keys, salts, cost, actual); }
++            else if lanes == 4 { hash4(keys, salts, cost, actual); }
++            else { hash5(keys, salts, cost, actual); }
++            for i in lanes {
++                for j in 6 { assert(actual[i][j] == expected[i][j]); checks += 1; }
++            }
++        }
++    }
++    print("PASS: ", checks, " exact-lane bcrypt comparisons, independent keys/salts, costs4/5/10");
++}
+--- /dev/null
++++ b/tests/bcrypt-lanes.sh
+@@ -0,0 +1,25 @@
++#!/usr/bin/env bash
++# After build.sh: real Goose bcrypt lane differential, no database or server.
++set -euo pipefail
++cd "$(dirname "$0")/.."
++[[ -f .build/goose.h && -x bin/conduit ]] || {
++    echo 'Run build.sh before tests/bcrypt-lanes.sh.' >&2
++    exit 1
++}
++goose_bin=${GOOSE_BIN:-"$PWD/.goose/build/goose"}
++[[ -x $goose_bin ]] || { echo 'Set GOOSE_BIN to the compiler used by build.sh.' >&2; exit 1; }
++goose_bin=$(readlink -f "$goose_bin")
++goose_source=$(cd "$(dirname "$goose_bin")/.." && pwd)
++[[ $("$goose_bin" version) == 'goose runtime df5f78ce88d4' ]] || {
++    echo 'Expected the pinned Goose runtime df5f78ce88d4.' >&2; exit 1;
++}
++cmp "$goose_source/src/runtime/goose.h" .build/goose.h || {
++    echo 'The test compiler runtime header must match build.sh output.' >&2; exit 1;
++}
++cc=${CC:-gcc}
++out="$PWD/.build/bcrypt-lane-checks"
++mkdir -p "$out"
++cp tests/bcrypt-lanes.goose bcrypt.goose bcrypt_tables.goose sys.goose "$out/"
++"$goose_bin" -O2 --standalone -o "$out/bcrypt-lanes.c" "$out/bcrypt-lanes.goose"
++"$cc" -O3 -std=gnu11 -I.build -pthread "$out/bcrypt-lanes.c" native_sys.c -lm -pthread -o "$out/bcrypt-lanes"
++"$out/bcrypt-lanes" | tee "$out/bcrypt-lanes.log"

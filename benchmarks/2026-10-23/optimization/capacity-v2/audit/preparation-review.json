@@ -1,0 +1,453 @@
+{
+  "schema": "multicore-capacity-v2-preparation-review",
+  "created_utc": "2026-10-23T10:10:49.981979+00:00",
+  "status": "PASS",
+  "execution": false,
+  "new_controller": "/private/tmp/multicore-optimize-20261023/capacity-v2/capacity_controller.py",
+  "test_command": "python3 /private/tmp/multicore-optimize-20261023/capacity-v2/audit/test_capacity.py",
+  "checks_passed": 62,
+  "changes": {
+    "schema": "multicore-local-capacity-v2",
+    "client_cpu": "config and protocol load_cpus allowed4/8; default4; intended fresh complete study8; drives Docker quota and initial/final inspections, continuous monitor and independent aggregate CPU normalization",
+    "unchanged": "server8CPU16GiB/noSwap; native workload+binary+SLO+75%generator headroom; GOMAXPROCS1/shard; NOFILE/normalUID/clock/source/fullseed gates; finite search/300secondhold",
+    "cpu_scope_policy": {
+      "default": "native_whole_vm_v1",
+      "opt_in_literal": "dedicated_client_cgroup_v1",
+      "qualification": "local only; measured external-client cgroup\u226475% can substitute ONLY for native wholeVM CPU>75%; exact native verdict retained with native_qualified separately",
+      "mandatory": "complete native timelines; independently recomputed raw CPU/timing/active summaries and exact merged reasons; no unknown reasons, hidden stalls, histogram tampering, client over75%, OOM, clock/coverage/source failures",
+      "public_output": "phase classification_scope/local_qualified/native_qualified/full native verdict and CPUflagcounts; scored-hold table exposes local/native qualification and wholeVMCPUflagcount"
+    }
+  },
+  "code_sha256": {
+    "capacity_controller.py": "144ef5c5e963427bb424193777220dddc51238635fcfdf95ca801aed54040528",
+    "search_policy.py": "49a427b137ec0893db213b229cc301a06903fac95ba2bfef2c8bbc7e8ae1ae19",
+    "audit/aggregate.py": "017d50cc0265fd8804d7abfcd2bd7f514a1fb257d586f6f36172b607d1281558",
+    "audit/evidence.py": "2b3f5338b8053b5eba3b01135dea76f595e575daa85fe421009a1c2795f04dca",
+    "audit/primitives.py": "8908b204b243ad5ad20e725d3284d115b5f9ccc8719931cd5018fcaf73104423",
+    "audit/test_capacity.py": "7e8e2ea5f0ab29fd7a7dc443c110bfd685663bb0339ab7169dfd080443e9cc73",
+    "CAPACITY.md": "77d29b02183a597454ba3af4c0b3f0eb381ae646c743e5bc146261340f3e1506"
+  },
+  "protected_original_modules": {
+    "capacity_controller.py": {
+      "current_sha256": "11b903a74d1075596fc6e2bdcf40b85ff15402800dcf17794151eb932ebe81e3",
+      "frozen_sha256": "11b903a74d1075596fc6e2bdcf40b85ff15402800dcf17794151eb932ebe81e3",
+      "unchanged": true
+    },
+    "search_policy.py": {
+      "current_sha256": "39853555e86511866d8fceb98d03bb21a731be09e20170029de70e73910f93a0",
+      "frozen_sha256": "39853555e86511866d8fceb98d03bb21a731be09e20170029de70e73910f93a0",
+      "unchanged": true
+    },
+    "audit/aggregate.py": {
+      "current_sha256": "c237a3266542e6fe6bc4c9917d0db0abb489ce826596ad1fc6e67ff0aae31e71",
+      "frozen_sha256": "c237a3266542e6fe6bc4c9917d0db0abb489ce826596ad1fc6e67ff0aae31e71",
+      "unchanged": true
+    },
+    "audit/evidence.py": {
+      "current_sha256": "d139f24d837525eff80c7894b82e8ebbe74d968317dd95ecc116f6f99f91ac87",
+      "frozen_sha256": "d139f24d837525eff80c7894b82e8ebbe74d968317dd95ecc116f6f99f91ac87",
+      "unchanged": true
+    },
+    "audit/primitives.py": {
+      "current_sha256": "9b021899e5f82cce7fc32281e8c6d0e36f1438a71d971cf8fd113b71ae371011",
+      "frozen_sha256": "9b021899e5f82cce7fc32281e8c6d0e36f1438a71d971cf8fd113b71ae371011",
+      "unchanged": true
+    },
+    "audit/test_capacity.py": {
+      "current_sha256": "a4afb71667b3c10af1aa08525ef6831571981a9d6878ab9993b13c11682f4f6b",
+      "frozen_sha256": "a4afb71667b3c10af1aa08525ef6831571981a9d6878ab9993b13c11682f4f6b",
+      "unchanged": true
+    }
+  },
+  "invalid_prior_attempt": {
+    "path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t095453_5574c0/cases/rust7/phases/03-probe-160000",
+    "assessment_sha256": "e2c2baf7eabcfb47914c031f017779c10dde114b2eb676009de75e28b697fd64",
+    "classification": "INVALID_GENERATOR",
+    "all_classifications": [
+      "INVALID_GENERATOR",
+      "INVALID_GENERATOR_CGROUP",
+      "INVALID_EVIDENCE",
+      "FAIL_SLO"
+    ],
+    "valid_server_failure": false,
+    "native_verdict": {
+      "pass": false,
+      "fail_reasons": [
+        "p95 60031 ms >= 500",
+        "p99 60031 ms >= 1000",
+        "errors 50.93% >= 1%"
+      ],
+      "lg_limited": true,
+      "lg_reasons": [
+        "box 0 fell behind: 60 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 86140 ms late; only 6266 of 20000 users active at window start",
+        "box 1 fell behind: no samples in the measure window",
+        "box 2 CPU 79% > 75%",
+        "box 2 fell behind: 59 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 68586 ms late; only 19147 of 20000 users active at window start",
+        "box 3 fell behind: no samples in the measure window",
+        "box 4 CPU 100% > 75%",
+        "box 4 fell behind: 60 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 80352 ms late; only 11240 of 20000 users active at window start",
+        "box 5 fell behind: 58 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 57864 ms late; only 19197 of 20000 users active at window start",
+        "box 6 fell behind: 59 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 83477 ms late; only 9972 of 20000 users active at window start",
+        "box 7 fell behind: 58 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 74070 ms late; only 19100 of 20000 users active at window start"
+      ]
+    },
+    "target_cpu_pct_of8": 18.64143080690913,
+    "load_cpu_pct_of4": 99.80818118005118,
+    "load_memory_peak_bytes": 3549605888,
+    "target_oom_delta": {
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0
+    },
+    "load_oom_delta": {
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0
+    },
+    "target_healthy": true,
+    "sampled_inner_client_cpu_counter_delta": {
+      "usage_usec": 238476218,
+      "nr_periods": 597,
+      "nr_throttled": 597,
+      "throttled_usec": 327563221
+    },
+    "sampled_inner_interval_s": 59.740618444,
+    "interpretation": "Generator invalidity means no server failure bracket or sustainable-capacity claim. CPU-quota saturation and wake/sampler stalls are observed; eight Go shards sharing four CPU is a plausible contributor, not a separately established causal mechanism. Client memory and target OOM are not observed limiting events. A new8CPUclient experiment may still be limited by physical shared-host resources and must satisfy unchanged native/cgroup gates.",
+    "box_witnesses": [
+      {
+        "index": 0,
+        "meta": {
+          "version": "loadgen/1",
+          "run_id": "capacity_20261023t095453_5574c0-probe-160000",
+          "target": "http://127.0.0.1:3000",
+          "host": "831ef5b57bce",
+          "box_index": 0,
+          "users": 20000,
+          "id_offset": 0,
+          "start_at_ms": 1792749789506,
+          "ramp_s": 60,
+          "measure_s": 60,
+          "tail_s": 15,
+          "think_scale": 1,
+          "articles": 500000,
+          "ncpu": 10,
+          "gomaxprocs": 1,
+          "window_start_ms": 1792749849506,
+          "window_end_ms": 1792749909506,
+          "finished_at_ms": 1792749937543
+        },
+        "box": {
+          "cpu_avg_measure_pct": 66.66666666666667,
+          "cpu_max_measure_pct": 100,
+          "proc_cpu_avg_measure_pct": 10.664157312975302,
+          "rss_peak_mb": 315.28515625,
+          "fell_behind": true,
+          "fell_behind_reasons": [
+            "60 of 60 seconds had mean timer wake-up lag > 50 ms",
+            "sampler tick 86140 ms late",
+            "only 6266 of 20000 users active at window start"
+          ],
+          "active_vus_at_window_start": 6266,
+          "tcp_connects": 23086
+        }
+      },
+      {
+        "index": 1,
+        "meta": {
+          "version": "loadgen/1",
+          "run_id": "capacity_20261023t095453_5574c0-probe-160000",
+          "target": "http://127.0.0.2:3000",
+          "host": "831ef5b57bce",
+          "box_index": 1,
+          "users": 20000,
+          "id_offset": 20000,
+          "start_at_ms": 1792749789506,
+          "ramp_s": 60,
+          "measure_s": 60,
+          "tail_s": 15,
+          "think_scale": 1,
+          "articles": 500000,
+          "ncpu": 10,
+          "gomaxprocs": 1,
+          "window_start_ms": 1792749849506,
+          "window_end_ms": 1792749909506,
+          "finished_at_ms": 1792749937585
+        },
+        "box": {
+          "cpu_avg_measure_pct": null,
+          "cpu_max_measure_pct": null,
+          "proc_cpu_avg_measure_pct": 0,
+          "rss_peak_mb": 334.30859375,
+          "fell_behind": true,
+          "fell_behind_reasons": [
+            "no samples in the measure window"
+          ],
+          "active_vus_at_window_start": 0,
+          "tcp_connects": 23452,
+          "note": "box CPU N/A (no /proc/stat)"
+        }
+      },
+      {
+        "index": 2,
+        "meta": {
+          "version": "loadgen/1",
+          "run_id": "capacity_20261023t095453_5574c0-probe-160000",
+          "target": "http://127.0.0.3:3000",
+          "host": "831ef5b57bce",
+          "box_index": 2,
+          "users": 20000,
+          "id_offset": 40000,
+          "start_at_ms": 1792749789506,
+          "ramp_s": 60,
+          "measure_s": 60,
+          "tail_s": 15,
+          "think_scale": 1,
+          "articles": 500000,
+          "ncpu": 10,
+          "gomaxprocs": 1,
+          "window_start_ms": 1792749849506,
+          "window_end_ms": 1792749909506,
+          "finished_at_ms": 1792749937543
+        },
+        "box": {
+          "cpu_avg_measure_pct": 78.75953108729972,
+          "cpu_max_measure_pct": 100,
+          "proc_cpu_avg_measure_pct": 30.86488163614667,
+          "rss_peak_mb": 336.41015625,
+          "fell_behind": true,
+          "fell_behind_reasons": [
+            "59 of 60 seconds had mean timer wake-up lag > 50 ms",
+            "sampler tick 68586 ms late",
+            "only 19147 of 20000 users active at window start"
+          ],
+          "active_vus_at_window_start": 19147,
+          "tcp_connects": 23254
+        }
+      },
+      {
+        "index": 3,
+        "meta": {
+          "version": "loadgen/1",
+          "run_id": "capacity_20261023t095453_5574c0-probe-160000",
+          "target": "http://127.0.0.4:3000",
+          "host": "831ef5b57bce",
+          "box_index": 3,
+          "users": 20000,
+          "id_offset": 60000,
+          "start_at_ms": 1792749789506,
+          "ramp_s": 60,
+          "measure_s": 60,
+          "tail_s": 15,
+          "think_scale": 1,
+          "articles": 500000,
+          "ncpu": 10,
+          "gomaxprocs": 1,
+          "window_start_ms": 1792749849506,
+          "window_end_ms": 1792749909506,
+          "finished_at_ms": 1792749938103
+        },
+        "box": {
+          "cpu_avg_measure_pct": null,
+          "cpu_max_measure_pct": null,
+          "proc_cpu_avg_measure_pct": 0,
+          "rss_peak_mb": 355.87109375,
+          "fell_behind": true,
+          "fell_behind_reasons": [
+            "no samples in the measure window"
+          ],
+          "active_vus_at_window_start": 0,
+          "tcp_connects": 25540,
+          "note": "box CPU N/A (no /proc/stat)"
+        }
+      },
+      {
+        "index": 4,
+        "meta": {
+          "version": "loadgen/1",
+          "run_id": "capacity_20261023t095453_5574c0-probe-160000",
+          "target": "http://127.0.0.5:3000",
+          "host": "831ef5b57bce",
+          "box_index": 4,
+          "users": 20000,
+          "id_offset": 80000,
+          "start_at_ms": 1792749789506,
+          "ramp_s": 60,
+          "measure_s": 60,
+          "tail_s": 15,
+          "think_scale": 1,
+          "articles": 500000,
+          "ncpu": 10,
+          "gomaxprocs": 1,
+          "window_start_ms": 1792749849506,
+          "window_end_ms": 1792749909506,
+          "finished_at_ms": 1792749937548
+        },
+        "box": {
+          "cpu_avg_measure_pct": 100,
+          "cpu_max_measure_pct": 100,
+          "proc_cpu_avg_measure_pct": 10.88110501630121,
+          "rss_peak_mb": 328.09765625,
+          "fell_behind": true,
+          "fell_behind_reasons": [
+            "60 of 60 seconds had mean timer wake-up lag > 50 ms",
+            "sampler tick 80352 ms late",
+            "only 11240 of 20000 users active at window start"
+          ],
+          "active_vus_at_window_start": 11240,
+          "tcp_connects": 23131
+        }
+      },
+      {
+        "index": 5,
+        "meta": {
+          "version": "loadgen/1",
+          "run_id": "capacity_20261023t095453_5574c0-probe-160000",
+          "target": "http://127.0.0.6:3000",
+          "host": "831ef5b57bce",
+          "box_index": 5,
+          "users": 20000,
+          "id_offset": 100000,
+          "start_at_ms": 1792749789506,
+          "ramp_s": 60,
+          "measure_s": 60,
+          "tail_s": 15,
+          "think_scale": 1,
+          "articles": 500000,
+          "ncpu": 10,
+          "gomaxprocs": 1,
+          "window_start_ms": 1792749849506,
+          "window_end_ms": 1792749909506,
+          "finished_at_ms": 1792749937513
+        },
+        "box": {
+          "cpu_avg_measure_pct": 68.09801191889578,
+          "cpu_max_measure_pct": 100,
+          "proc_cpu_avg_measure_pct": 26.792195153167036,
+          "rss_peak_mb": 327.12890625,
+          "fell_behind": true,
+          "fell_behind_reasons": [
+            "58 of 60 seconds had mean timer wake-up lag > 50 ms",
+            "sampler tick 57864 ms late",
+            "only 19197 of 20000 users active at window start"
+          ],
+          "active_vus_at_window_start": 19197,
+          "tcp_connects": 23005
+        }
+      },
+      {
+        "index": 6,
+        "meta": {
+          "version": "loadgen/1",
+          "run_id": "capacity_20261023t095453_5574c0-probe-160000",
+          "target": "http://127.0.0.7:3000",
+          "host": "831ef5b57bce",
+          "box_index": 6,
+          "users": 20000,
+          "id_offset": 120000,
+          "start_at_ms": 1792749789506,
+          "ramp_s": 60,
+          "measure_s": 60,
+          "tail_s": 15,
+          "think_scale": 1,
+          "articles": 500000,
+          "ncpu": 10,
+          "gomaxprocs": 1,
+          "window_start_ms": 1792749849506,
+          "window_end_ms": 1792749909506,
+          "finished_at_ms": 1792749937543
+        },
+        "box": {
+          "cpu_avg_measure_pct": 66.66666666666667,
+          "cpu_max_measure_pct": 100,
+          "proc_cpu_avg_measure_pct": 12.279181322224519,
+          "rss_peak_mb": 353.3203125,
+          "fell_behind": true,
+          "fell_behind_reasons": [
+            "59 of 60 seconds had mean timer wake-up lag > 50 ms",
+            "sampler tick 83477 ms late",
+            "only 9972 of 20000 users active at window start"
+          ],
+          "active_vus_at_window_start": 9972,
+          "tcp_connects": 25074
+        }
+      },
+      {
+        "index": 7,
+        "meta": {
+          "version": "loadgen/1",
+          "run_id": "capacity_20261023t095453_5574c0-probe-160000",
+          "target": "http://127.0.0.8:3000",
+          "host": "831ef5b57bce",
+          "box_index": 7,
+          "users": 20000,
+          "id_offset": 140000,
+          "start_at_ms": 1792749789506,
+          "ramp_s": 60,
+          "measure_s": 60,
+          "tail_s": 15,
+          "think_scale": 1,
+          "articles": 500000,
+          "ncpu": 10,
+          "gomaxprocs": 1,
+          "window_start_ms": 1792749849506,
+          "window_end_ms": 1792749909506,
+          "finished_at_ms": 1792749937767
+        },
+        "box": {
+          "cpu_avg_measure_pct": 68.62864831365174,
+          "cpu_max_measure_pct": 100,
+          "proc_cpu_avg_measure_pct": 125372.88970966195,
+          "rss_peak_mb": 333.72265625,
+          "fell_behind": true,
+          "fell_behind_reasons": [
+            "58 of 60 seconds had mean timer wake-up lag > 50 ms",
+            "sampler tick 74070 ms late",
+            "only 19100 of 20000 users active at window start"
+          ],
+          "active_vus_at_window_start": 19100,
+          "tcp_connects": 23242
+        }
+      }
+    ],
+    "raw_sha256": {
+      "box5.json": "1ae2a1e6364496fc93d13695a84ee21997f0efd2fd4d0414bf949a7e4383cfd6",
+      "merged.json": "3fbba58012fd9ee6546620eff1f97e7252ae6b6690a87449f886cf010c91c547",
+      "assessment.json": "e2c2baf7eabcfb47914c031f017779c10dde114b2eb676009de75e28b697fd64",
+      "before-load.json": "f67a0d35241bf5e2e292991aa29fb812c4864acacee2a4e09e7b971b50dffb76",
+      "box4.json": "ec126ad60366b7470dd218ead833293e00bb4076a2f4adb9e9decab4fd326b53",
+      "box3.json": "33beb518f2044d628e4fc41447db085e64cd6b457462896fd2319e73e93e86ed",
+      "target-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "load-monitor.jsonl": "f100b85fa6863f03f4233b3aaac8cb70e991d4199c73dad55a70b061f08c523e",
+      "box2.json": "14a74239a227e9f4ce240dff1f7d8298c152b823d0e77b52a49bbf67e8d39082",
+      "merged.txt": "35e99cad9a156963231fb0f1ae2eaf01380b6362dbeb672a961c2bc60e5534b8",
+      "after-load.json": "c599412f22dd63158b5ec341ca63633a1130be04d3e5ecbca47b235f72827524",
+      "box1.json": "17d1e77a0f5b593f26c66b10d739bf40fd0474c7591367e335c9dcb83ef72c84",
+      "box0.json": "85b3f487f7f6f9e4558c37abfbd4263c1e5c4090c69fb7ea2baf3dc5f7b0bf3c",
+      "load-monitor.stop": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "load-commands.json": "4f1bca0bce7f1c6389989b4a3cb301cfcbae3327309633a72c115985ede6833b",
+      "box6.log": "9233b2144e5a866afc716a7fc56e8a48c84416f47deb6d0f0e1d42496f411369",
+      "box7.log": "10e5f4300489748d13f6631ce51ebeb4a3880ed11ba351776f0c6649453afae2",
+      "box7.json": "7a220730924292be3b098babebc6db8bad55f9847ff7e608136fd1fbd569bafd",
+      "box5.log": "1984036df42e2affa980e25dc634280a70280b255c93e195c7c4d172b6f5f7a2",
+      "box4.log": "7252865e32fa3884ed479ccbdfdf30d1c471368bf5df2f2d15c5ba5a8a9035b7",
+      "box0.log": "43d74ca8c96e262dc208d6bac5dcf38655fe4b31b657625bbe7ba1dd6ed671c5",
+      "target-monitor.jsonl": "7911ba4a150f06c7803a39000efe262c7524c5dcfa6d760c77dd52ff482f4a08",
+      "box1.log": "24feb623e4befe9b1d67a2b2149a2b16f051dab313771a8b54267db3acd29cef",
+      "box6.json": "7c79afdd5e5826740f01709a937152c35ac16e8ed971e9f77d84e48a4a441df0",
+      "box3.log": "290db7c8571231fc3b4f7e578c3e5e75020a6097699d797b0adb78c5029769b4",
+      "phase.json": "edfd298bc3461d8a1df03dbf82c9271f16581d6b659147d7e5605d794cf111cf",
+      "box2.log": "097f30c143387af914ef9ec05142cb27bfc9249aa1082077d3164dd7c660615a"
+    }
+  },
+  "history": "Original frozen modules verified byte-identical; prior raw data not modified. Version2 preparation itself starts no Docker, DB/API request, compilation or workload.",
+  "updated_utc": "2026-10-23T10:17:20.824424+00:00",
+  "intended_preregistered_new_config": {
+    "load_cpus": 8,
+    "load_memory_bytes": 8589934592,
+    "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+    "search_overrides": {
+      "start_users": 160000
+    }
+  },
+  "files_stable_for_root_review": true
+}

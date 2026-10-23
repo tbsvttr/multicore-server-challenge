@@ -1,0 +1,25 @@
+SQL candidate, stage2. Isolated source only; no Docker, build, server execution, database change or benchmark was performed by the preparing agent.
+
+Source: stock PR32 commit3e908747. Only sql.goose/routes.goose/server.goose change. candidate.patch applies to the stock submission directory with patch -p1. Root separately froze the earlier SQL-only stage1 at sql SHA5eb0ae579b40965d564ed56b651aeb9e0e09c26d53142339d865606ed913c144; that copy is untouched here.
+
+Expected cost reductions (hypotheses until EXPLAIN and measurements):
+1. Feed count follows the viewer's follows PK and bounded articles_author_idx probes, with a global1000 cap. This avoids a possible expensive generic semijoin/full article scan. Unique follows prove no article can be counted twice, and limiting each author1000 cannot change min(total,1000).
+2. Global/author singleton and nonsharing batched pages carry article row fields out of their first scan instead of re-fetching every returned ID by PK. Test both first pages and nonzero offsets: offset scans carry row data now, so large offsets could trade extra heap access against the eliminated re-fetches.
+3. Shared-list mode deduplicates page arguments before pagination and computes each distinct filter's count once, then restores all member ordinals. Every member retains its own favorited/following flags. Existing sharing heuristic stays unchanged.
+4. JSON tags use binary text instead of binary bytea after convert_to. On the fixed UTF8 challenge database both wire payloads are identical; the native column reader consumes bytes without OID-dependent logic. Verify Unicode/control-character tags via HTTP and unchanged conformance. The statement output type changes, not the emitted response bytes.
+5. Feeds join the existing read pool and use ST_BATCH_FEED34/IIII for groups; every request retains its own count, page, viewer and ordinal. No assumed viewer-independent feed overlap.
+6. Comments join the pool with a32-member bound and ST_BATCH_COMMENTS35/Ia. Distinct slugs materialize at most100 correctly ordered comments/author rows once; unique nonanonymous viewers read their followee arrays once. Unknown slugs produce no row (404), while existing empty articles emit one NULL-comment row ([]). Final rows order by member ordinal then created_at/id descending. Metadata and followee arrays exist only within the active SQL execution; no result is retained for another execution.
+
+No schema/index/PG-setting change. JWT signature/expiry checks, bcrypt cost10, mutations/commit handling and the committed-favorite correction are unchanged. FAV_LATERAL is unchanged: compare its bool_or heap fetches against separate COUNT index-only + viewer PK EXISTS before deciding whether another candidate is justified.
+
+Integration with the runtime candidate: retain its scheduling/fairness changes and merge only pool_flush family additions and the dispatch article/comments and feed branches from this patch. routes feed now uses pool_add; by_slug comments use pool_add, while article pooling remains gated by ARTICLE_BATCH. Existing statement IDs0..33 are unchanged;34 is feed batching and35 is comments batching (STATEMENTS36).
+
+export-sql.goose emits the actual generated statements as PREPARE sN(...) AS ...; for pg18 EXPLAIN and plan/result inspection. It is a review helper, not an app entry point. Compile it using the same pinned Goose/runtime source and generated-C native bridge procedure as the app; its main is independent of main.goose.
+
+Required validation before any promotion:
+- Build candidate and prepare all36 statements; unchanged dev/full197 suites.
+- Compare feed counts with the reference for no followees, follows with no articles, and totals below/at/above1000; multiple authors, offsets0/10/40/large and limit1/10/100.
+- Force concurrent batches of duplicate/mixed public-list pages and filters with anonymous, distinct and duplicate viewers; check empty-page count preservation, favorite/follow flags, sorting and Unicode tags.
+- Force comments batches with known/missing/empty slugs, duplicate/mixed viewers, more than100 comments and equal timestamps, and flags toggled by committed follow/unfollow. Compare every response byte/semantic field to singleton behavior.
+- Preserve blocked-transaction favorite concurrency test; SQL mutation statements and replay behavior are unchanged but batching must not alter response after-commit semantics.
+- Collect EXPLAIN(ANALYZE,BUFFERS) for representative actual prepared statements, then native-rule load/capacity evidence; no performance claim follows from these edits or static checks.
