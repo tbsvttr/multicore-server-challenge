@@ -138,6 +138,33 @@ PY
 }
 trap cleanup EXIT
 
+ensure_inherited_nofile() {
+    # Change this normal user's existing harness shell, so every later child
+    # inherits the limit without a privileged app-launch wrapper or extra PID.
+    local runner_uid soft hard
+    runner_uid=$(id -u)
+    [[ $runner_uid != 0 ]]
+    printf 'before uid=%s soft=%s hard=%s\n' "$runner_uid" "$(ulimit -Sn)" "$(ulimit -Hn)"
+    hard=$(ulimit -Hn)
+    if [[ $hard != unlimited ]] && ((hard < 200000)); then
+        sudo -n prlimit --pid "$$" --nofile=200000:200000
+    else
+        soft=$(ulimit -Sn)
+        if [[ $soft != unlimited ]] && ((soft < 200000)); then
+            ulimit -S -n 200000
+        fi
+    fi
+    soft=$(ulimit -Sn)
+    hard=$(ulimit -Hn)
+    [[ $soft == unlimited || ( $soft =~ ^[0-9]+$ && $soft -ge 200000 ) ]]
+    [[ $hard == unlimited || ( $hard =~ ^[0-9]+$ && $hard -ge 200000 ) ]]
+    [[ $(id -u) == "$runner_uid" ]]
+    printf 'after uid=%s soft=%s hard=%s\n' "$runner_uid" "$soft" "$hard"
+    cat "/proc/$$/limits"
+}
+# Do not use stage's pipeline here: limits must apply to the main shell.
+ensure_inherited_nofile > "$out/harness-limits.txt" 2>&1
+
 make_db() {
     local suffix=$1 template=${2:-conduit_seed}
     db_name="mc_pair_ci_${GITHUB_RUN_ID:-local}_${GITHUB_RUN_ATTEMPT:-1}_$suffix"
@@ -151,7 +178,7 @@ start_server() {
     local dbhost=${PGHOST:-127.0.0.1}
     if [[ $dbhost == /* ]]; then dbhost=127.0.0.1; fi
     local app_url="postgres://conduit:conduit@$dbhost:${PGPORT:-5432}/$db"
-    (ulimit -n 200000; exec setsid env DATABASE_URL="$app_url" JWT_SECRET="$JWT_SECRET" HOST=127.0.0.1 PORT="$port" "$@" bash "$dir/start.sh") > "$out/$name-server.log" 2>&1 &
+    (ulimit -S -n 200000; exec setsid env DATABASE_URL="$app_url" JWT_SECRET="$JWT_SECRET" HOST=127.0.0.1 PORT="$port" "$@" bash "$dir/start.sh") > "$out/$name-server.log" 2>&1 &
     server_pid=$!
     server_pids+=("$server_pid")
     for _ in {1..60}; do
