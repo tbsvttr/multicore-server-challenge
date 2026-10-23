@@ -35,7 +35,7 @@ jobs:
       PGPASSWORD: postgres
       BUILD_JOBS: 2
       SOURCE_REF: ${{ inputs.source_ref || 'submissions/goose-native-tbsvttr' }}
-      VALIDATION_OUT: ${{ runner.temp }}/goose-optimized-validation
+      VALIDATION_OUT: /tmp/goose-optimized-validation
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, prior successful job
         with:
