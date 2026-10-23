@@ -1,0 +1,23 @@
+{
+  "status": "PREPARED_FUTURE_ONLY_STATIC_GO",
+  "driver": "run-diagnostic-v2.py",
+  "driver_sha256": "c74657fca0b0b23e18d02c2d6d07d8aabd4c8eba02c2e2028a2f605358a71d06",
+  "baseline": "run-diagnostic.py",
+  "baseline_sha256": "06a7853f104a4b8a477fe80dc0ce2d3e866a92cf781dc9237af56d9fc3876aab",
+  "baseline_unchanged": true,
+  "review_receipt": "run-diagnostic-v2-static-review-c74657fc.json",
+  "syntax_and_embedded_launchers": "PASS",
+  "runtime_executed": false,
+  "changes": [
+    "Clone Docker CLI is separately sessioned; SIGINT/TERM/HUP deferred until bounded helper returns.",
+    "Pending signals raise into cleanup after helper completion.",
+    "Unique PGAPPNAME identifies owned clone backend; cleanup waits/cancels tagged backend before drop/absence.",
+    "Helper failure/timeout forces owned target stopped after cleanup even if charging persists.",
+    "Every settlement observation uses a unique preserved log."
+  ],
+  "limitations": [
+    "Future diagnostic harness only, no workload/application/benchmark-source change.",
+    "Current completed06a run and its provenance remain intact.",
+    "No capacity, controlled causal or client headroom qualification is established."
+  ]
+}

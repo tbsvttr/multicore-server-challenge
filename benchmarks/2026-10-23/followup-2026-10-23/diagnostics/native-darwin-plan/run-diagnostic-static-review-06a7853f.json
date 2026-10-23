@@ -1,0 +1,100 @@
+{
+  "schema": "native-darwin-driver-independent-static-review-v1",
+  "created_utc": "2026-10-23T18:53:23.131097+00:00",
+  "source_path": "/private/tmp/multicore-optimize-20261023/diagnostics/native-darwin-plan/run-diagnostic.py",
+  "source_sha256": "06a7853f104a4b8a477fe80dc0ce2d3e866a92cf781dc9237af56d9fc3876aab",
+  "status": "NORMAL_PATH_GO_WITH_CANCELLATION_CLEANUP_CAVEAT",
+  "scope": "Static source/AST review only. No driver, launcher, Docker, SQL, sockets, network, build or runtime checks executed. No capacity/performance/ranking claim.",
+  "syntax": {
+    "driver_ast": true,
+    "embedded_launcher_asts": [
+      "client_launcher",
+      "monitor_launcher"
+    ]
+  },
+  "reviewed_fixes": [
+    {
+      "item": "Target monitor startup requires state, complete first row and live PID/start-tick witness before startAt selection",
+      "lines": [
+        186,
+        201
+      ]
+    },
+    {
+      "item": "Host monitor catches command/timeout errors, early thread death aborts, and final host/target observer receipts gate completion",
+      "lines": [
+        137,
+        158,
+        235,
+        236,
+        290,
+        294
+      ]
+    },
+    {
+      "item": "Actual client PID is witnessed across exec with proc_pidpath and fixed soft/hard32768 limits; GOMAX2 is checked in raw output",
+      "lines": [
+        117,
+        124,
+        215,
+        231,
+        245,
+        249
+      ]
+    },
+    {
+      "item": "SourceA/app and client hashes plus original197-step receipt are pinned",
+      "lines": [
+        26,
+        27,
+        70,
+        86
+      ]
+    },
+    {
+      "item": "Generated clone name cleanup is attempted even when the success receipt is absent",
+      "lines": [
+        174,
+        175,
+        275,
+        284
+      ]
+    },
+    {
+      "item": "SIGTERM/SIGHUP route into driver cleanup and client group has bounded termination",
+      "lines": [
+        44,
+        45,
+        254,
+        260
+      ]
+    },
+    {
+      "item": "Hard client CPU/memory quota and native75percent CPU headroom remain unproven and no capacity score is produced",
+      "lines": [
+        56,
+        59,
+        88,
+        93
+      ]
+    }
+  ],
+  "remaining_findings": [
+    {
+      "severity": "medium",
+      "area": "interrupted clone cleanup",
+      "lines": [
+        97,
+        174,
+        175,
+        275,
+        284
+      ],
+      "finding": "A signal can interrupt the host Docker CLI while its helper CREATE DATABASE remains in flight inside the container. DROP may see database absent and the catalog query may return0 before CREATE subsequently commits. clone_requested protects missing receipts but does not synchronize with the in-flight clone operation.",
+      "impact": "Normal successful10k path is unaffected; cleanup on cancellation during CREATE is not guaranteed.",
+      "resolution_options": "Defer cancellation until a bounded separately sessioned clone helper finishes, or explicitly own/stop its helper group before final drop/catalog verification.",
+      "communicated_to_root": true
+    }
+  ],
+  "source_changes_by_reviewer": false
+}

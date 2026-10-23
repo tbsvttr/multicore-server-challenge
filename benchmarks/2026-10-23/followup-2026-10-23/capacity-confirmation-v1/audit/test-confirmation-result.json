@@ -1,0 +1,64 @@
+{
+  "schema": "confirmation-orchestration-synthetic-test-proof-v1",
+  "created_utc": "2026-10-23T20:25:40.835194+00:00",
+  "status": "PASS",
+  "tests_passed": 11,
+  "tests_failed": 0,
+  "test_methods": [
+    "test_PASS_without_exact_true_eligibility_cannot_confirm",
+    "test_actions_are_fixed_independent_and_boundary_validated",
+    "test_actual_outer_run_keeps_B_then_Rust_order_after_B_stops",
+    "test_cleanup_failure_prevents_starting_next_case",
+    "test_each_stage_stops_on_SLO_or_invalid_without_retry_or_stepdown",
+    "test_local_PASS_retains_native_flags_and_raw_errors_verbatim",
+    "test_phase_exception_still_cleans_single_session_and_retains_failed_artifacts",
+    "test_placeholder_cannot_prepare_or_create_a_runtime_directory",
+    "test_reference_hash_and_selected_order_cannot_be_silently_changed",
+    "test_reference_requires_completed_exact_binary_qualified300second_points",
+    "test_success_uses_one_continuous_session_and_exact300second_hold"
+  ],
+  "runtime_seconds_reported_by_unittest": 0.107,
+  "test_source_sha256": "b2914131e67a17d66aa41804f86c5c81823550838c468bf4e25d750c59d5d191",
+  "controller_source_sha256_after_test": "95bfbc24b83d892512e418c4a90c86d6c1c4a26e167976696066fda8e2fbf486",
+  "command": [
+    "python3",
+    "-B",
+    "/private/tmp/multicore-optimize-20261023/capacity-confirmation-v1/audit/test_confirmation.py"
+  ],
+  "scope": "Actual confirmation Controller.run_case/run driven only through synthetic TemporaryDirectory fixtures and fake lifecycle/phase callbacks. subprocess.run/Popen guarded to fail on any external escape. No Docker, SQL, network, build, real benchmark, active V4 data, real prior study reference, or actual confirmation plan used.",
+  "synthetic_selected_counts_are_not_observed_results": true,
+  "coverage": [
+    "exact fixed warmup10k/probe selected/hold selected with original60/120/15,60/60/15,60/300/15 phase durations",
+    "one freeze/clone/app per case, same fake DB/PID/mutation state through all phases,65-second idle callbacks between phases",
+    "stop at each of3stages for SLO/invalid/clock/crash without step-down or retry",
+    "PASS requires eligibility exactlyTrue; native CPU flags, native unqualification, raw error sentinels and failed artifact bytes remain unchanged",
+    "phase exception and cleanup failures retain artifacts and prevent unsafe next-case launch",
+    "actual outer run preserves BthenRust order even when B confirmation stops",
+    "draftNone cannot prepare plan or create runtime directory; valid counts require exactint10..160000",
+    "completed selected300s prior point binding requires pinned binaries, row counts, local qualification/full197, unchanged audit hash,8CPU/8GiB client budget and BthenRust order"
+  ],
+  "attempt_history": [
+    {
+      "tests": 9,
+      "status": "PASS",
+      "reported_seconds": 0.123
+    },
+    {
+      "tests": 11,
+      "status": "FIXTURE_ERROR",
+      "errors": 1,
+      "reason": "Expanded valid-prior fixture omitted newly required load_cpus/load_memory_bytes; controller correctly rejected it. Only test fixtures were corrected."
+    },
+    {
+      "tests": 11,
+      "status": "PASS",
+      "errors": 0,
+      "reported_seconds": 0.107
+    }
+  ],
+  "implementation_files_changed_by_test_author": [],
+  "owned_files_changed_by_author": [
+    "audit/test_confirmation.py",
+    "audit/test-confirmation-result.json"
+  ]
+}

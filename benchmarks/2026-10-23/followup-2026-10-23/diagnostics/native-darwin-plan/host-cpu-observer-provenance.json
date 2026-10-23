@@ -1,0 +1,51 @@
+{
+  "schema": "darwin-host-cpu-observer-preparation-v1",
+  "created_utc": "2026-10-23T18:54:12.829067+00:00",
+  "status": "PREPARED_NOT_EXECUTED",
+  "source_sha256": "611c03c73bb083ff9331074df4a265c62ae52d1e49bca3273a563580974c345e",
+  "source_lines": 73,
+  "documentation_sha256": "bc2ebba7ae5884111f9f0e7f2f9393879f77bdab4222b9e9b6589629b67a5dd1",
+  "SDK_headers_sha256": {
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/mach/host_info.h": "4b0d40d08ea62da23ed80a6cce3f0cc45bd595a81b17c86348a289342983e1b0",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/mach/machine.h": "00d57dcf5a8332ba5a759b447f8305b3ef8bf15a9025c142af04e13c2a5b14f5",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/mach/mach_host.h": "1010c5961ad1d787373cad00b9666917c8c9f48c37220e972a3c6e1c98830634",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/mach/mach_init.h": "2949d3efe703ff1d0111d1158e2af328d3828c5403441467c5199506576aa3fe",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/mach/arm/vm_types.h": "4256065e3413a8a506492ff4e4c46596076a56e44db7c850efbc832c8b12fbb1",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/arm/_types.h": "4f0bde85f9a41cc7d30fff22ebd7e8f4eb206a55a926eda012a2e7481e3524fa",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/mach/message.h": "86e9e87ba2a736236613f2c0a8563dbacaeec1a761654b12812eaf8599b55e67",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/mach/port.h": "959cc098bb307ccc44a2193a9ff7b8ec8bbcedc335933512cdbe13d3c9088185"
+  },
+  "checks": [
+    {
+      "check": "delta_busy30pct_not_boot_average",
+      "pass": true
+    },
+    {
+      "check": "unsigned32_single_wrap_exact",
+      "pass": true
+    },
+    {
+      "check": "late_gap_invalid_and_no_CPU_percentage",
+      "pass": true
+    },
+    {
+      "check": "wall_jump_invalid_and_no_CPU_percentage",
+      "pass": true
+    },
+    {
+      "check": "ambiguous_reset_invalid_and_no_CPU_percentage",
+      "pass": true
+    },
+    {
+      "check": "zero_delta_invalid_and_no_CPU_percentage",
+      "pass": true
+    },
+    {
+      "check": "failed_Mach_read_invalid",
+      "pass": true
+    }
+  ],
+  "checks_scope": "AST/synthetic interval arithmetic only; no Mach library load or counter call, build, Docker, SQL, load or settings change",
+  "actual_counter_reads": 0,
+  "headroom_result": null
+}

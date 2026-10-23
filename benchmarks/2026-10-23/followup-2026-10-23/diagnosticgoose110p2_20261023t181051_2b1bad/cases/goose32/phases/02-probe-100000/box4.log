@@ -1,0 +1,45 @@
+gc 1 @0.005s 3%: 0.14+0.67+0.067 ms clock, 0.29+0/0.22/0.057+0.13 ms cpu, 3->3->0 MB, 4 MB goal, 0 MB stacks, 0 MB globals, 2 P
+gc 2 @0.007s 4%: 0.12+0.070+0.001 ms clock, 0.25+0.042/0.055/0+0.002 ms cpu, 3->3->3 MB, 4 MB goal, 0 MB stacks, 0 MB globals, 2 P
+gc 3 @0.008s 6%: 0.16+0.20+0.033 ms clock, 0.32+0/0.12/0.014+0.067 ms cpu, 7->7->7 MB, 7 MB goal, 0 MB stacks, 0 MB globals, 2 P
+run diagnosticgoose110p2_20261023t181051_2b1bad-probe-100000: box 4, 20000 users -> http://127.0.0.5:3000, start 18:15:37.250, ramp 1m0s + measure 1m0s + tail 15s
+gc 4 @0.026s 7%: 0.031+2.5+0.13 ms clock, 0.062+2.2/0.64/0+0.26 ms cpu, 15->16->15 MB, 15 MB goal, 0 MB stacks, 0 MB globals, 2 P
+gc 5 @0.080s 15%: 0.053+15+0.039 ms clock, 0.10+17/8.2/0+0.078 ms cpu, 27->31->28 MB, 32 MB goal, 11 MB stacks, 0 MB globals, 2 P
+gc 6 @14.441s 0%: 0.021+20+0.003 ms clock, 0.042+0.48/10/27+0.007 ms cpu, 57->57->33 MB, 69 MB goal, 15 MB stacks, 0 MB globals, 2 P
+gc 7 @22.145s 0%: 0.034+29+0.016 ms clock, 0.069+0.26/15/40+0.032 ms cpu, 68->68->37 MB, 83 MB goal, 15 MB stacks, 0 MB globals, 2 P
+gc 8 @28.612s 0%: 0.042+26+0.024 ms clock, 0.084+0/15/35+0.048 ms cpu, 74->74->40 MB, 90 MB goal, 16 MB stacks, 0 MB globals, 2 P
+gc 9 @34.314s 0%: 0.16+26+0.005 ms clock, 0.33+0.29/15/35+0.011 ms cpu, 80->80->43 MB, 96 MB goal, 16 MB stacks, 0 MB globals, 2 P
+gc 10 @39.533s 0%: 0.048+22+0.003 ms clock, 0.096+0.48/12/29+0.007 ms cpu, 85->85->46 MB, 103 MB goal, 16 MB stacks, 0 MB globals, 2 P
+gc 11 @46.178s 0%: 3.3+112+0.10 ms clock, 6.7+29/60/85+0.21 ms cpu, 106->107->51 MB, 109 MB goal, 16 MB stacks, 0 MB globals, 2 P
+gc 12 @51.989s 0%: 3.3+484+0.089 ms clock, 6.7+402/291/0+0.17 ms cpu, 115->118->89 MB, 119 MB goal, 30 MB stacks, 0 MB globals, 2 P
+gc 13 @78.603s 1%: 66+2212+18 ms clock, 132+156/1153/0+36 ms cpu, 192->195->129 MB, 209 MB goal, 56 MB stacks, 0 MB globals, 2 P
+gc 14 @152.865s 0%: 31+80+0.006 ms clock, 62+42/52/40+0.013 ms cpu, 290->293->102 MB, 315 MB goal, 0 MB stacks, 0 MB globals, 2 P
+
+20000 users on 1 box(es), http://127.0.0.5:3000, measured 60 s after a 60 s ramp
+endpoint                                      count    req/s      p50      p90      p95      p99      max    err%
+GET /api/articles/:slug/comments              10748    179.1  17154.0  27263.0  27754.5  28639.2    35848   36.16
+GET /api/articles/:slug                        9762    162.7  17039.4  22970.4  26656.8  29212.7    39748   32.80
+GET /api/tags                                  7844    130.7  16760.8  23134.2  26624.0  29556.7    36798   30.63
+GET /api/articles                              5291     88.2  17121.3  27164.7  27689.0  28475.4    45515   85.71
+GET /api/articles/feed                         3678     61.3  17104.9  27279.4  27721.7  28098.6    45482   85.15
+GET /api/profiles/:username                    1779     29.6  13590.5  23019.5  26673.2  27820.0    35422   18.27
+GET /api/articles?tag                          1750     29.2  16973.8  23167.0  26935.3  29261.8    37192   77.26
+GET /api/articles?author                       1570     26.2  17072.1  26968.1  27246.6  28082.2    40305    6.88
+GET /api/user                                   721     12.0  15261.7  22528.0  26312.7  28688.4    30196   21.22
+POST /api/articles/:slug/favorite               674     11.2  16121.9  23789.6  27361.3  30588.9    31048   23.00
+POST /api/articles/:slug/comments               478      8.0  15810.6  23380.0  23904.3  24723.5    28459   12.34
+GET /api/articles?favorited                     419      7.0  17137.7  27148.3  27377.7  28049.4    29377    8.83
+POST /api/profiles/:username/follow             202      3.4  14762.0  22839.3  23806.0  25198.6    27738   14.85
+POST /api/users/login                           201      3.4  15949.8  23298.0  26951.7  28246.0    29901   40.80
+POST /api/articles                              175      2.9  16195.6  23298.0  24248.3  25215.0    27116   24.57
+PUT /api/user                                    76      1.3  16187.4  23461.9  24264.7  24412.2    26100   18.42
+DELETE /api/profiles/:username/follow            53      0.9  15573.0  22642.7  23232.5  24150.0    25215   20.75
+DELETE /api/articles/:slug/favorite              44      0.7  11059.2  22052.9  24952.8  27443.2    27443   20.45
+DELETE /api/articles/:slug/comments/:id           2      0.0   4030.5  16425.0  16425.0  16425.0    16425    0.00
+POST /api/users                                   1      0.0  21086.2  21086.2  21086.2  21086.2    21086    0.00
+PUT /api/articles/:slug                           1      0.0  17694.7  17694.7  17694.7  17694.7    17695    0.00
+ALL                                           45469    757.8  17039.4  26460.2  27459.6  29032.4    45515   42.97
+errors: timeout=19536  (e.g. "request timeout")
+mix: 2.00 calls/page, 0.038 req/s per user, 3.8% writes, 22679 page views
+box 4 (831ef5b57bce): 20000 users, CPU avg 91% max 100%, loadgen proc 2662%, RSS peak 447 MB, 39446 TCP connects, behind=true
+verdict: FAIL (p95 27460 ms >= 500, p99 29032 ms >= 1000, errors 42.97% >= 1%)   [p95 < 500 ms, p99 < 1000 ms, errors < 1%]
+LG-LIMITED: box 4 CPU 91% > 75%; box 4 fell behind: 57 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 50965 ms late

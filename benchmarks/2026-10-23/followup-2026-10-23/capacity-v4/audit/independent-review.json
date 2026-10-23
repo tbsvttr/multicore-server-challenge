@@ -1,0 +1,214 @@
+{
+  "schema": "independent_capacity_v4_preparation_review_v1",
+  "generated_utc": "2026-10-23T18:31:57.735226+00:00",
+  "verdict": "GO",
+  "scope": "Static/saved-file review and pure numeric helper calls only. No Docker, SQL, build, load, or final-plan preparation/execution.",
+  "checks": [
+    {
+      "check": "all_preserved_v3_files_match_frozen_hashes",
+      "pass": true,
+      "files": 9
+    },
+    {
+      "check": "unchanged_policy_next_action",
+      "pass": true
+    },
+    {
+      "check": "unchanged_policy_shards",
+      "pass": true
+    },
+    {
+      "check": "unchanged_policy_growth_factor",
+      "pass": true
+    },
+    {
+      "check": "unchanged_policy_load_cpus",
+      "pass": true
+    },
+    {
+      "check": "unchanged_policy_load_memory_bytes",
+      "pass": true
+    },
+    {
+      "check": "unchanged_policy_client_cpu_scope_policy",
+      "pass": true
+    },
+    {
+      "check": "unchanged_verification_native_verdict",
+      "pass": true
+    },
+    {
+      "check": "unchanged_verification_generator_details",
+      "pass": true
+    },
+    {
+      "check": "unchanged_verification_exact_merge",
+      "pass": true
+    },
+    {
+      "check": "unchanged_verification_histogram",
+      "pass": true
+    },
+    {
+      "check": "unchanged_verification_actual_process_checks",
+      "pass": true
+    },
+    {
+      "check": "unchanged_verification_inspect_budget",
+      "pass": true
+    },
+    {
+      "check": "controller_phase_exists",
+      "pass": true
+    },
+    {
+      "check": "controller_run_case_exists",
+      "pass": true
+    },
+    {
+      "check": "controller_run_exists",
+      "pass": true
+    },
+    {
+      "check": "native_classification_and_75pct_local_tail_byte_identical",
+      "pass": true
+    },
+    {
+      "check": "only_default_protocol_change_is_GOMAXPROCS1_to2",
+      "pass": true,
+      "delta": {
+        "gomaxprocs_per_shard": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "check": "original_300s_hold_and_60s_probe_and_120s_warmup",
+      "pass": true
+    },
+    {
+      "check": "all_qualified_protocol_thresholds_unchanged",
+      "pass": true
+    },
+    {
+      "check": "exact_integer_ratio_accepts_equivalent_8CPU",
+      "pass": true,
+      "values": [
+        "800000 100000",
+        "1600000 200000",
+        "4000000 500000",
+        "000800000 0100000",
+        " 800000\t100000\n"
+      ]
+    },
+    {
+      "check": "wrong_unlimited_negative_zero_malformed_ratios_rejected",
+      "pass": true,
+      "values": [
+        "799999 100000",
+        "800001 100000",
+        "900000 100000",
+        "700000 100000",
+        "1600000 100000",
+        "800000 200000",
+        "max 100000",
+        "0 100000",
+        "800000 0",
+        "-800000 -100000",
+        "800000",
+        "800000 100000 extra",
+        "800000.0 100000",
+        "+800000 100000",
+        "800000\n100000",
+        null,
+        8
+      ]
+    },
+    {
+      "check": "declared_cpu_value_must_be_positive_numeric_not_bool",
+      "pass": true
+    },
+    {
+      "check": "CPU_ratio_comparison_uses_integer_cross_product",
+      "pass": true
+    },
+    {
+      "check": "all_raw_quota_period_observations_and_warnings_preserved",
+      "pass": true
+    },
+    {
+      "check": "startup_final_snapshot_ratio_guard_and_period_warning",
+      "pass": true
+    },
+    {
+      "check": "container_initial_final_GOMAX2_checked_by_aggregate",
+      "pass": true
+    },
+    {
+      "check": "required_actual_process_env_witness_with_unique_PIDs_and_runid",
+      "pass": true
+    },
+    {
+      "check": "runtime_actual_witness_called_after_each_shard_launch",
+      "pass": true
+    },
+    {
+      "check": "strict_single_GOMAX2_command_override",
+      "pass": true
+    },
+    {
+      "check": "85_saved_unit_checks_all_pass",
+      "pass": true
+    },
+    {
+      "check": "8_saved_CPU_monitor_tests_all_pass",
+      "pass": true
+    },
+    {
+      "check": "draft_only_no_final_plan",
+      "pass": true
+    },
+    {
+      "check": "draft_resources_original_target_and_separate_client",
+      "pass": true
+    },
+    {
+      "check": "draft_search_100k_1point1_160k16probes4holds",
+      "pass": true
+    },
+    {
+      "check": "draft_cases_only_Rust844_and_unpromoted_B9016",
+      "pass": true
+    },
+    {
+      "check": "rust7:exact197log_hash_and_markers",
+      "pass": true
+    },
+    {
+      "check": "goose32-prototypeB:exact197log_hash_and_markers",
+      "pass": true
+    }
+  ],
+  "input_sha256": {
+    "capacity_controller.py": "56b1c43b5ab1f18f968110fabe10d07a00e40c6054f3a5b46369c3af530af8df",
+    "search_policy.py": "fd5035f23358a512a6698b38853fc6187278050b162a740498d6254d16d9acb9",
+    "audit/primitives.py": "e7db1d4fe11cfc753a0dba8dcb2204716289b7e0d06b7c283f15a32be77f3b12",
+    "audit/evidence.py": "1d4617d3d9374c3643a1341dec23b8573ead1829d84d5da8d4007e4f17bfe653",
+    "audit/aggregate.py": "a9f18ec76eb764b822bf5488ba146210ef1e7f7532509eb4b8f3401968935a5e",
+    "DELTAS.md": "09aa9b2d2b1dbec38720c66bbd2a1f751b55add8a97de6a0bc3357906ef37673",
+    "CAPACITY.md": "c97e5a458297ca377b1016fdf99ccaf607dd2716b20406f93c8d1a7a25d7db00",
+    "cases-DRAFT.json": "231b7234467da8d373ad2d59e930fc36543395ec19b6b9da2ec9259c2de37e34",
+    "v3-baseline-sha256.json": "2631c6e31aaf4db9e0f4a2942726e29031509b5a33533f261984215fa7a78975",
+    "audit/test-proof.json": "4d51bbe8abd7299a96ff00721ca8243107e4769eac94cd8b423a0919db513882",
+    "audit/test-capacity.log": "0b0bb4c6556e16dbb06cf7d971a8b6624cda1e60bad4a02272149d741dae264a",
+    "audit/test-cpu-ratio.log": "c8a448a07ea9cad003237c2e459ee4817571a5f14dce050c5daeeb87aad0a170"
+  },
+  "findings": [],
+  "clarification": "Initial/final container Config.Env is verified by aggregate.py; runtime Controller.inspect is resource-only and each phase additionally enforces actual container/native-process GOMAXPROCS2 witnesses.",
+  "limits": [
+    "V3/P2 raw outcomes and exact source hashes remain preserved; accepting an equivalent8CPU ratio does not rescue actual timing/SLO failures.",
+    "CFS period changes remain explicit latency-policy warnings; ratio equivalence is not identical scheduling behavior.",
+    "No V4 execution or performance/stability/rank claim exists; prototypeB remains unpromoted."
+  ]
+}

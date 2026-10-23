@@ -1,0 +1,88 @@
+{
+  "Architecture": "arm64",
+  "Config": {
+    "Cmd": [
+      "-lc",
+      "exec sleep infinity"
+    ],
+    "Entrypoint": [
+      "/bin/bash"
+    ],
+    "Env": [
+      "PATH=/opt/goose/build:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOOSE_IO_BACKEND=epoll"
+    ],
+    "Labels": {
+      "desktop.docker.io/binds/0/Source": "/Users/tvcc/Code/privat/twelve-dollar-server-challenge/results/goose-2026-10-22/lead5/resource_budget_build.py",
+      "desktop.docker.io/binds/0/SourceKind": "hostFile",
+      "desktop.docker.io/binds/0/Target": "/budget-build.py",
+      "desktop.docker.io/mounts/0/Source": "/private/tmp/multicore-comparison-20261023",
+      "desktop.docker.io/mounts/0/SourceKind": "hostFile",
+      "desktop.docker.io/mounts/0/Target": "/comparison",
+      "desktop.docker.io/mounts/1/Source": "/private/tmp/multicore-challenge-20261022",
+      "desktop.docker.io/mounts/1/SourceKind": "hostFile",
+      "desktop.docker.io/mounts/1/Target": "/work",
+      "desktop.docker.io/mounts/2/Source": "/private/tmp/multicore-research-20261022",
+      "desktop.docker.io/mounts/2/SourceKind": "hostFile",
+      "desktop.docker.io/mounts/2/Target": "/evidence",
+      "desktop.docker.io/ports.scheme": "v2",
+      "multicore.local.native_preparation_owner": "20261023t184640-7c4145f7",
+      "multicore.local.owner": "all-submission-comparison-20261023",
+      "org.opencontainers.image.version": "24.04"
+    },
+    "User": "bench",
+    "WorkingDir": "/work"
+  },
+  "Created": "2026-10-23T18:47:54.997959916Z",
+  "GraphDriver": {
+    "Data": {
+      "LowerDir": "/var/lib/docker/overlay2/cc5977b86246294372fd2132d2be83af511d7f303bc70ac3ab3256df3ce456f2/diff:/var/lib/docker/overlay2/21f5847bdbbee90689e8008ee9c5e5f16eb79734a9413d96c161ef3784a8d892/diff:/var/lib/docker/overlay2/523c0be70381c1c3ef1d77e603e70bd3d3d0b1c17146e71d74b79007b6181756/diff:/var/lib/docker/overlay2/jxb1cto5bvv0e3bjkp5yzygus/diff:/var/lib/docker/overlay2/un46mi3lb90xprnsgt6nf19ep/diff:/var/lib/docker/overlay2/ckq8xpouzc9c1tb2t59o93256/diff:/var/lib/docker/overlay2/17381b276fd8fbefcbd10b3436e638f206278a2180b8a47e6d37bfdcb7052cc2/diff:/var/lib/docker/overlay2/9mrzvq3q90jra0s1z43ghxzd5/diff:/var/lib/docker/overlay2/iw1mbnbb1y7lrg0z7k5fcyy5f/diff:/var/lib/docker/overlay2/iayec8bckxseffmi82v6k1jjt/diff:/var/lib/docker/overlay2/t7lc03s39wy5kr4rho8goms36/diff:/var/lib/docker/overlay2/ql7md7qsr5rgialodce8la1cd/diff:/var/lib/docker/overlay2/x147rubcswa275f41ag311api/diff:/var/lib/docker/overlay2/omp2msezcqr5ca69jaxc9frnz/diff:/var/lib/docker/overlay2/1mwjqtjdpvs3nfga4owlp4lix/diff:/var/lib/docker/overlay2/u4hyvyi0tuimwlu2sxdv7dd41/diff:/var/lib/docker/overlay2/z8mgenqrbshae6oy9pdagx7ci/diff:/var/lib/docker/overlay2/axcptz3c47hgwdfwrh3sazt4l/diff:/var/lib/docker/overlay2/0jcoflasca8na0jp3nszwl8kn/diff:/var/lib/docker/overlay2/8bd0rtxz2ojs9ueq13sa6dqyl/diff:/var/lib/docker/overlay2/pbccsqiaexhj4qa9ne7qwe68q/diff:/var/lib/docker/overlay2/zqjxejbfseh7ohcg84a5jdp48/diff:/var/lib/docker/overlay2/zpfb38dk81mxc2tmosmqqlves/diff:/var/lib/docker/overlay2/e2fd3ea9e88ae61b26964e52fdfa043a1d34db2a27770669909e351194b19d00/diff:/var/lib/docker/overlay2/2384b46cf7fddafea7e6da88f6c88961ccac9f8351644805697a28eed555c106/diff",
+      "MergedDir": "/var/lib/docker/overlay2/53ec0edeecb3d759144336232c5d402bd5cf0d5633c4275b4a44fe9d3a57a6f3/merged",
+      "UpperDir": "/var/lib/docker/overlay2/53ec0edeecb3d759144336232c5d402bd5cf0d5633c4275b4a44fe9d3a57a6f3/diff",
+      "WorkDir": "/var/lib/docker/overlay2/53ec0edeecb3d759144336232c5d402bd5cf0d5633c4275b4a44fe9d3a57a6f3/work"
+    },
+    "Name": "overlay2"
+  },
+  "Id": "sha256:e560eb6a07e1fee1910715f8074b92bbd02a3214be30dad189f2203198c65fae",
+  "Metadata": {
+    "LastTagTime": "2026-10-23T18:47:56.572642292Z"
+  },
+  "Os": "linux",
+  "Parent": "sha256:51eb154d9086388e7833dd3cd6dfa9b397e54d98a3bdb8bddd0249f4c4a47b5e",
+  "RepoDigests": [],
+  "RepoTags": [
+    "multicore-native-checkpoint:20261023"
+  ],
+  "RootFS": {
+    "Layers": [
+      "sha256:1e9178dc90058fa454a60803300219ee8c17e515be8718817ed824b96fa1207b",
+      "sha256:196215630dcced0fe650951d346f78b820a2fc9b0e39da6a96d99eea387045f2",
+      "sha256:0ca1de3ce7645c0e945d6c54f4c37b2ca98adf960faa4e7fe610385ead59a12a",
+      "sha256:d01a6088fce34b39bacb439a8bd1dc0084fdeb9d66b0d2da7fc42ae287b691ad",
+      "sha256:02ed386e00849ef079a8e9a8780b569e1d16113da7f66edbbd03dcb1062812df",
+      "sha256:e598074b41533389efe0308d55fd712ee9cb5c644a1548a1c19a63313a3bc6dc",
+      "sha256:e702719fea9c47293731893840981876a67af092aa535d2a989def2258fd3409",
+      "sha256:7e3515729e70a2de20e2478e28f93c226decf5519be4d6af5f64ecf5a27521cf",
+      "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+      "sha256:9e5bb55363c67aa28647ae719fa923814d815be79abd55fb8a35cc5c0f5a71fc",
+      "sha256:06fcf92a02d2ba672e60dc6e121a9a1bdbe55e71be0468258e10154cbacf51c8",
+      "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+      "sha256:a64a38740303d17ac3dcc9c17978dbac82c719172f2918a69faa3b7a6d81cfa2",
+      "sha256:b8a810895b75099856cf010b168da8413d85a9e69444998ff4849098183bc042",
+      "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+      "sha256:7af9e59bc4968c57324f12fd4003bb4f48bfc1f64e0ea2cf0beac953cc614b26",
+      "sha256:8326c24c1b4f5fd11f6d5c08e06663dc378190f33e0b3413032799c259969712",
+      "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+      "sha256:09ad926953f7828bba4872b2116ce52902e8c0962d29dabdb5b8c7f4394fff82",
+      "sha256:1e0d859aa357e541a6ca2a8606669114b6f291d6858755a460ff1199d3d36d1b",
+      "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+      "sha256:cb7090c91f32c4645a763e0c21eb49eba4e356c022cf384a46441801eed9a5b5",
+      "sha256:292970c6aec585e951a5bcd4dd7ecb1ae5d4cdcdb810a844f01850586487286e",
+      "sha256:74c5553218619a8fe6585bf3c1ffbd27a3d2c7609b5ff317d21c55077c688e80",
+      "sha256:f4176cab487bc223eecc55d0f7d564b86ce12b9a1f8b6df483a2f454db91e097",
+      "sha256:3a0bf506ced6969c24ff425a0a12fac7fbcb207dafd2ec02f3ca17e9a5341610"
+    ],
+    "Type": "layers"
+  },
+  "Size": 14373889030
+}

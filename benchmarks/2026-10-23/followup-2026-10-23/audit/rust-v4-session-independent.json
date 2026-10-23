@@ -1,0 +1,1405 @@
+{
+  "schema": "rust-v4-continuous-session-independent-file-audit-v1",
+  "created_utc": "2026-10-23T20:04:16.757137+00:00",
+  "status": "PASS_SAVED_RUST_SESSION_VERIFICATION",
+  "study": "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f",
+  "case_path": "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7",
+  "scope": "Completed Rust case and static study plan/tools only. No global active events/sessions file, Goose B files, active-phase data, Docker, SQL, network, build, load, process observation/control or histogram decoding was accessed.",
+  "checks": [
+    {
+      "check": "static_plan_hash_unchanged",
+      "pass": true
+    },
+    {
+      "check": "exact_frozen_declared_and_current_Rust_binary",
+      "pass": true,
+      "sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241"
+    },
+    {
+      "check": "all65_archived_source_files_match_exact_manifest",
+      "pass": true,
+      "files": 65
+    },
+    {
+      "check": "frozen_source_manifest_recomputed",
+      "pass": true,
+      "sha256": "75df8e5d5c8e45aaa1a763fa93d4052684e6cd0df54a7993d542318b73cc5b99"
+    },
+    {
+      "check": "current_control_source_files_still_match_archive",
+      "pass": true
+    },
+    {
+      "check": "runtime_case_and_environment_match_predeclared_frozen_case",
+      "pass": true
+    },
+    {
+      "check": "full197_conformance_log_and_binary_receipts_match",
+      "pass": true,
+      "log_sha256": "cf6dfe613fabf1936d051d8b95e3705a4f1c097801ae2be886f6c5f5aa9eba95"
+    },
+    {
+      "check": "one_fresh_full_seed_clone_receipt",
+      "pass": true,
+      "database": "mc_pair_20261023_192322_84394f_1",
+      "initial_counts": {
+        "users": 100000,
+        "articles": 500000,
+        "size_bytes": 2428491455
+      }
+    },
+    {
+      "check": "app_startup_database_and_owner_match",
+      "pass": true
+    },
+    {
+      "check": "frozen_controller_clones_starts_once_outside_phase_loop",
+      "pass": true,
+      "control_calls": [
+        {
+          "line": 311,
+          "action": "freeze"
+        },
+        {
+          "line": 322,
+          "action": "clone"
+        },
+        {
+          "line": 323,
+          "action": "snapshot"
+        },
+        {
+          "line": 324,
+          "action": "start"
+        },
+        {
+          "line": 355,
+          "action": "snapshot"
+        },
+        {
+          "line": 343,
+          "action": "stop"
+        },
+        {
+          "line": 348,
+          "action": "drop"
+        }
+      ],
+      "controller_sha256": "56b1c43b5ab1f18f968110fabe10d07a00e40c6054f3a5b46369c3af530af8df"
+    },
+    {
+      "check": "finite_continuous_session_protocol_preserved",
+      "pass": true
+    },
+    {
+      "check": "only_eight_predeclared_Rust_phases_and_complete_session",
+      "pass": true
+    },
+    {
+      "check": "startup_raw_status_and_limits_files_match",
+      "pass": true
+    },
+    {
+      "check": "all17_start_before_after_actual_identity_UID_and_limits_match",
+      "pass": true,
+      "identity": {
+        "pid": 334,
+        "pgid": 333,
+        "start_ticks": 10050243,
+        "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app"
+      },
+      "observations": [
+        {
+          "observation": "startup",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "01-warmup-10000/before",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "01-warmup-10000/after",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "02-probe-100000/before",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "02-probe-100000/after",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "03-probe-110000/before",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "03-probe-110000/after",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "04-probe-120000/before",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "04-probe-120000/after",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "05-probe-130000/before",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "05-probe-130000/after",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "06-probe-140000/before",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "06-probe-140000/after",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "07-probe-135000/before",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "07-probe-135000/after",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "08-hold-130000/before",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        },
+        {
+          "observation": "08-hold-130000/after",
+          "pid": 334,
+          "pgid": 333,
+          "start_ticks": 10050243,
+          "exe": "/comparison/optimization/capacity_20261023t192322_84394f/cases/rust7/frozen/app",
+          "uid": 501,
+          "nofile_soft": 200000,
+          "nofile_hard": 200000
+        }
+      ]
+    },
+    {
+      "check": "one_database_session_no_app_PID_restart_across_all_phases",
+      "pass": true,
+      "database": "mc_pair_20261023_192322_84394f_1",
+      "app_pid": 334,
+      "pgid": 333,
+      "app_start_ticks": 10050243,
+      "continuous_monitor_samples": 1437
+    },
+    {
+      "check": "all_phase_assessments_match_completed_session_and_original_metadata",
+      "pass": true,
+      "phases": [
+        "01-warmup-10000",
+        "02-probe-100000",
+        "03-probe-110000",
+        "04-probe-120000",
+        "05-probe-130000",
+        "06-probe-140000",
+        "07-probe-135000",
+        "08-hold-130000"
+      ]
+    },
+    {
+      "check": "settings_and_official_sources_unchanged_across_saved_session_snapshots",
+      "pass": true
+    },
+    {
+      "check": "all_seven_between_phase_drains_at_least65seconds",
+      "pass": true,
+      "minimum_observed_seconds": 66.457759919,
+      "observed_seconds": [
+        66.457759919,
+        66.549027128,
+        66.641098461,
+        66.713167961,
+        66.74279817,
+        66.873963962,
+        66.821054794
+      ]
+    },
+    {
+      "check": "predeclared_growth_1point1_and_rounding_explain_probe_sequence",
+      "pass": true
+    },
+    {
+      "check": "strict_midpoint135k_and_resolution_trigger130k_hold",
+      "pass": true
+    },
+    {
+      "check": "recorded_local_boundaries_and_hold_preserved",
+      "pass": true
+    },
+    {
+      "check": "native_CPU_flags_and_local_scope_exception_remain_explicit",
+      "pass": true
+    },
+    {
+      "check": "owned_app_stop_and_full_seed_clone_drop_receipts",
+      "pass": true
+    },
+    {
+      "check": "all_consumed_completed_Rust_and_static_files_unchanged",
+      "pass": true,
+      "files": 197
+    }
+  ],
+  "checks_passed": 24,
+  "summary": {
+    "case": "rust7",
+    "session_status": "HOLD_PASSED",
+    "local_V4_hold_users": 130000,
+    "hold_seconds": 300,
+    "failed_local_probe_upper_users": 135000,
+    "other_failed_local_probe_users": 140000,
+    "binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+    "source_manifest_sha256": "75df8e5d5c8e45aaa1a763fa93d4052684e6cd0df54a7993d542318b73cc5b99",
+    "archived_source_files": 65,
+    "actual_app_pid": 334,
+    "app_pgid": 333,
+    "database": "mc_pair_20261023_192322_84394f_1",
+    "native_hold_lg_limited": true,
+    "native_hold_qualified": false,
+    "official_rank_proven": false,
+    "comparison_to_other_cases": null
+  },
+  "phase_records": [
+    {
+      "id": "01-warmup-10000",
+      "stage": "warmup",
+      "users": 10000,
+      "measure_s": 120,
+      "classification": "PASS",
+      "local_qualified": true,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "native_qualified": true,
+      "native_whole_vm_CPU_flagged_shards": [],
+      "local_whole_vm_CPU_scope_exception": false,
+      "measured_errors": 0,
+      "p95_ms": 1.605,
+      "p99_ms": 2.907,
+      "post_load_healthy": true,
+      "target_monitor_samples": 201
+    },
+    {
+      "id": "02-probe-100000",
+      "stage": "probe",
+      "users": 100000,
+      "measure_s": 60,
+      "classification": "PASS",
+      "local_qualified": true,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "native_qualified": true,
+      "native_whole_vm_CPU_flagged_shards": [],
+      "local_whole_vm_CPU_scope_exception": false,
+      "measured_errors": 0,
+      "p95_ms": 2.789,
+      "p99_ms": 4.491,
+      "post_load_healthy": true,
+      "target_monitor_samples": 142
+    },
+    {
+      "id": "03-probe-110000",
+      "stage": "probe",
+      "users": 110000,
+      "measure_s": 60,
+      "classification": "PASS",
+      "local_qualified": true,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "native_qualified": true,
+      "native_whole_vm_CPU_flagged_shards": [],
+      "local_whole_vm_CPU_scope_exception": false,
+      "measured_errors": 0,
+      "p95_ms": 5.251,
+      "p99_ms": 12.927,
+      "post_load_healthy": true,
+      "target_monitor_samples": 142
+    },
+    {
+      "id": "04-probe-120000",
+      "stage": "probe",
+      "users": 120000,
+      "measure_s": 60,
+      "classification": "PASS",
+      "local_qualified": true,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "native_qualified": true,
+      "native_whole_vm_CPU_flagged_shards": [],
+      "local_whole_vm_CPU_scope_exception": false,
+      "measured_errors": 0,
+      "p95_ms": 81.663,
+      "p99_ms": 143.615,
+      "post_load_healthy": true,
+      "target_monitor_samples": 143
+    },
+    {
+      "id": "05-probe-130000",
+      "stage": "probe",
+      "users": 130000,
+      "measure_s": 60,
+      "classification": "PASS",
+      "local_qualified": true,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 CPU 78% > 75%",
+          "box 1 CPU 78% > 75%",
+          "box 2 CPU 78% > 75%",
+          "box 3 CPU 78% > 75%",
+          "box 4 CPU 78% > 75%",
+          "box 5 CPU 78% > 75%",
+          "box 6 CPU 78% > 75%"
+        ]
+      },
+      "native_qualified": false,
+      "native_whole_vm_CPU_flagged_shards": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "local_whole_vm_CPU_scope_exception": true,
+      "measured_errors": 0,
+      "p95_ms": 322.815,
+      "p99_ms": 466.175,
+      "post_load_healthy": true,
+      "target_monitor_samples": 142
+    },
+    {
+      "id": "06-probe-140000",
+      "stage": "probe",
+      "users": 140000,
+      "measure_s": 60,
+      "classification": "FAIL_SLO",
+      "local_qualified": false,
+      "native_verdict": {
+        "pass": false,
+        "fail_reasons": [
+          "p95 1070 ms >= 500",
+          "p99 1366 ms >= 1000"
+        ],
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 CPU 83% > 75%",
+          "box 1 CPU 83% > 75%",
+          "box 2 CPU 83% > 75%",
+          "box 3 CPU 83% > 75%",
+          "box 4 CPU 83% > 75%",
+          "box 5 CPU 83% > 75%",
+          "box 6 CPU 83% > 75%"
+        ]
+      },
+      "native_qualified": false,
+      "native_whole_vm_CPU_flagged_shards": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "local_whole_vm_CPU_scope_exception": true,
+      "measured_errors": 0,
+      "p95_ms": 1070.079,
+      "p99_ms": 1366.015,
+      "post_load_healthy": true,
+      "target_monitor_samples": 143
+    },
+    {
+      "id": "07-probe-135000",
+      "stage": "probe",
+      "users": 135000,
+      "measure_s": 60,
+      "classification": "FAIL_SLO",
+      "local_qualified": false,
+      "native_verdict": {
+        "pass": false,
+        "fail_reasons": [
+          "p95 742 ms >= 500",
+          "p99 1016 ms >= 1000"
+        ],
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 CPU 81% > 75%",
+          "box 1 CPU 81% > 75%",
+          "box 2 CPU 81% > 75%",
+          "box 3 CPU 81% > 75%",
+          "box 4 CPU 81% > 75%",
+          "box 5 CPU 81% > 75%",
+          "box 6 CPU 81% > 75%"
+        ]
+      },
+      "native_qualified": false,
+      "native_whole_vm_CPU_flagged_shards": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "local_whole_vm_CPU_scope_exception": true,
+      "measured_errors": 0,
+      "p95_ms": 742.399,
+      "p99_ms": 1015.807,
+      "post_load_healthy": true,
+      "target_monitor_samples": 142
+    },
+    {
+      "id": "08-hold-130000",
+      "stage": "hold",
+      "users": 130000,
+      "measure_s": 300,
+      "classification": "PASS",
+      "local_qualified": true,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 CPU 77% > 75%",
+          "box 1 CPU 77% > 75%",
+          "box 2 CPU 77% > 75%",
+          "box 3 CPU 77% > 75%",
+          "box 4 CPU 77% > 75%",
+          "box 5 CPU 77% > 75%",
+          "box 6 CPU 77% > 75%"
+        ]
+      },
+      "native_qualified": false,
+      "native_whole_vm_CPU_flagged_shards": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "local_whole_vm_CPU_scope_exception": true,
+      "measured_errors": 0,
+      "p95_ms": 117.951,
+      "p99_ms": 580.095,
+      "post_load_healthy": true,
+      "target_monitor_samples": 382
+    }
+  ],
+  "input_file_sha256": {
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/plan.json": {
+      "sha256": "47343da43c616eba4099c81cfbd0edc5a17d1abbbe2fe3b5a8c6c9985ce6e8b1",
+      "bytes": 6467
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/plan.sha256": {
+      "sha256": "5bcf88101f30fadfb9ef4b14e4e33c2272dc4626fa808c82cf203193dfe74400",
+      "bytes": 65
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/case.json": {
+      "sha256": "377c48fdfb0c46c5c3f9f23d2fb2c67598d3e120c46f0bc60a837ba9aec29682",
+      "bytes": 1286
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/metadata.json": {
+      "sha256": "d6c39bbc9a054d69a50fbdfc786299282a60c05fd9e0b0f94e3171655c71144d",
+      "bytes": 8292
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/session.json": {
+      "sha256": "1814e341eb202abc0a27e89214882cbf1f950d057c87c2795935e75db4fc6adc",
+      "bytes": 976202
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/database.json": {
+      "sha256": "0772570b47c1db257a442a1416b4d9f3a56799eadac581993255dd3562060e4f",
+      "bytes": 176
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/app.json": {
+      "sha256": "0e8edd0efd2fd892cf2b260d5498641a78b1ef1e0a93d06f2356773f9198c38a",
+      "bytes": 4351
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/app": {
+      "sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+      "bytes": 2270400
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/target/release/conduit": {
+      "sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+      "bytes": 2270400
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/Cargo.toml": {
+      "sha256": "ab86173bb85ba27044f08fb9a567f78e3d500e1f94df535d1f0f63bfc2db6123",
+      "bytes": 1316
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/LICENSE": {
+      "sha256": "1c809f52dd742570746a8ac00694ad4ddd9229e12accc7d5c598075861b478a0",
+      "bytes": 1099
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/install.sh": {
+      "sha256": "0b5b878fce647ad19be4af31950416fc8bf06afca54b02602febcb10da70c1f9",
+      "bytes": 538
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/Cargo.lock": {
+      "sha256": "b5130487b2c982bc757c39bac0f299039ec343ff73ca255d1cef5571b6e52f17",
+      "bytes": 26219
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/build.rs": {
+      "sha256": "544b5019a774744eea0062e8516f4b84dfef28858851728e3d7e5543365e4f23",
+      "bytes": 601
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/README.md": {
+      "sha256": "5e87e74195db33cde05eca81f839ab3752688f31287429f09c27642836b9e6d3",
+      "bytes": 6209
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/build.sh": {
+      "sha256": "abb71fe1b2e2d8e5a7d4272aa069dc451a5bcd55267624a05f7332aded9efa48",
+      "bytes": 591
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/.gitignore": {
+      "sha256": "b53ee26e6ff1da219b0563333a76d2c9ec19eec713d6ee54e11a1edacb0e9f3d",
+      "bytes": 8
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/start.sh": {
+      "sha256": "1a729bf89b8aae10ba9e5cc1fb3f63ed4f5ab9500f44f30a9dd48411880f8d3c",
+      "bytes": 561
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/native/crypt-port.h": {
+      "sha256": "b58abb9c42e8a5902aa20bc7cbe516260f54a831d1b43261b5228f8325622d4e",
+      "bytes": 466
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/native/byteorder.h": {
+      "sha256": "cdfa3a3ae45955ad5da880053522b123f2e2d4e2a9dd74adb1f7a206d6ca6dfa",
+      "bytes": 501
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/native/bcrypt-batch.c": {
+      "sha256": "be69f39655a6e8680d756aeade92d37a060ef08d3e75a875f13c953508c0aff7",
+      "bytes": 1036
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/native/README.md": {
+      "sha256": "4340724fec97fc5a5eb9526338d2c32f5312c71abc8942e98a676afda6475e1e",
+      "bytes": 1142
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/native/bcrypt-batch-impl.h": {
+      "sha256": "554687a11fcc46da412c76a40f46a198a1a2462005cc992091eeb2a38ac637c5",
+      "bytes": 3949
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/native/crypt-bcrypt.c": {
+      "sha256": "c6166e3d3d42d23bdc8c151e22e6aa60f33a4b4eeb008de54cf0243881fa1413",
+      "bytes": 39098
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/src/password_batch.rs": {
+      "sha256": "9b3df6f737115863224f9e74116209a8e4a1963720a433b83bcf5ba5646b63a6",
+      "bytes": 7303
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/src/read_batch.rs": {
+      "sha256": "8cc6c0d086f459e3424aadc61c9bdaf313331f741408c92145a7092469d083ab",
+      "bytes": 14438
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/src/auth.rs": {
+      "sha256": "79e2f21ec84c7fd22ce948da8c7e18540d4df566681a90a8f185819b7afba9f4",
+      "bytes": 3874
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/src/db.rs": {
+      "sha256": "5d90731241e2d68bbce670a2c58525e86a51a516aa053af04a9eaabb2e08ac5e",
+      "bytes": 14934
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/src/json.rs": {
+      "sha256": "95096ea3af69a87995781f439c11f953244379eaf4b72989ea781ba22767b11e",
+      "bytes": 7414
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/src/sql.rs": {
+      "sha256": "287dffe546b9c06b99d905b57f8069ced06fdbfd7290c9d8a74003e87e0d29be",
+      "bytes": 13361
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/src/main.rs": {
+      "sha256": "c447e56d6e0158e9df40b2f02fb01a3f55520f11abd9cf3b4a68ac0b6e451bc3",
+      "bytes": 4835
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/src/password.rs": {
+      "sha256": "69959c617f2aa1d7a7dac163123ee6cd387bbed78adbcff27625a39f3f2afcfb",
+      "bytes": 8154
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/src/http.rs": {
+      "sha256": "6fc2d2605e5f6d9510e487f8dfefdfc8353a68b7b58a9240399d7e9716c8a5e1",
+      "bytes": 16013
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/src/writer.rs": {
+      "sha256": "9f9367a0056602d97d4ffa7c666118f5c6233433eb1064ddc31a33a84f0fa7f2",
+      "bytes": 14267
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/src/security_tests.rs": {
+      "sha256": "e900d2d0eb971adffd7d4406e81e398f4f04bd6b0b45fb0c0c83cb2a167f3a22",
+      "bytes": 2002
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/src/api.rs": {
+      "sha256": "8b90d5ec2061f2e16c45e213051b9488df3685e0b3ea2e9b45dbb364157c163c",
+      "bytes": 24128
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/Cargo.toml": {
+      "sha256": "02bd134a85a0aa1cec2e5f8152ab94dc34f2345922a9ef0cb0ce51f63d8bfe90",
+      "bytes": 4886
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/LICENSE-APACHE": {
+      "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+      "bytes": 10847
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/README.md": {
+      "sha256": "e4e7c2898f072a85c14db07fc4ee2d32cc5916215e7ed1b180653173ae389a0c",
+      "bytes": 1695
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/MODIFICATIONS.md": {
+      "sha256": "f0540b4746140c3274cbcb271acb4785483f67b4b0a739022e7ffa729698f8ab",
+      "bytes": 735
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/LICENSE-MIT": {
+      "sha256": "ae3ead0b640a2ee59f9789a9af84e65e631cfa3b13254f3f99a9ed73e0472239",
+      "bytes": 1081
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/binary_copy.rs": {
+      "sha256": "ac29f50281c1285640e7887352911958eaf9e0872ad2eb1b1fcfa49d2a949e28",
+      "bytes": 8309
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/types.rs": {
+      "sha256": "86688c4b5f9811b43854d8302c30080489eb147a63dd3e6189ca61259ed75aa7",
+      "bytes": 119
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/transaction.rs": {
+      "sha256": "a2c0261a3ca426e9046d73b2b330720918f4d4a6010d0a143707f17f0333d62e",
+      "bytes": 10663
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/generic_client.rs": {
+      "sha256": "1f733c86857f08a6e4dfc124340d572e9212f70bb5204e9c426832ebc77dadc7",
+      "bytes": 10772
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/keepalive.rs": {
+      "sha256": "f7def5d0362d178d9a9b644200404a907187269f7b9e83c6b4b93018497bc298",
+      "bytes": 1073
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/copy_out.rs": {
+      "sha256": "298ee2abd795f685bdb3d7073a4532d80d3fcdb2625babe7e8bbfd281d359bf2",
+      "bytes": 1790
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/client.rs": {
+      "sha256": "4e439a9434b56c8d150bfd741cb06ba28011433cb9614d4207c48ad28d54477e",
+      "bytes": 31079
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/statement.rs": {
+      "sha256": "fe832bf51b576b931c7cb33b25826f7a3b5bc8c8f77cbe4c5ed948d3daff33f6",
+      "bytes": 3178
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/connect_socket.rs": {
+      "sha256": "9acb06f2f4a71c8b5e6e9d781fad6e09bfcc42730b7486903e274c3005e55efb",
+      "bytes": 2297
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/config.rs": {
+      "sha256": "d06bffc37f9aa290ca72961508dcbcfdcab6d05e76fbf52fe450a268a0043b89",
+      "bytes": 41654
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/portal.rs": {
+      "sha256": "db23661d8cfa9d4054bd6ff1780404ceae29be28b86c8fb8f189ca800394cfff",
+      "bytes": 1317
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/connect_tls.rs": {
+      "sha256": "d407bd286a40348570c887139eb149340f835ae96f624668c6b04a99ccc95b00",
+      "bytes": 1856
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/lib.rs": {
+      "sha256": "adee98d0271bf2427700499383f1ca0725495f30fe1a89e7b09115af9f6568c1",
+      "bytes": 10685
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/connect.rs": {
+      "sha256": "ac6506a445aa5f89a2567788fd04a98421ee028cd57c0d9c2aa9a604de92d322",
+      "bytes": 7347
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/to_statement.rs": {
+      "sha256": "41961c2d7608a8199693be35d0598597925f24ed9ba802f032c20f96f52838f7",
+      "bytes": 1519
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/query.rs": {
+      "sha256": "820248e2f9406b2a7ab95a26d9f5cfb2218da3115769f3d685edca5c641cff91",
+      "bytes": 15269
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/maybe_tls_stream.rs": {
+      "sha256": "d3a324ba2fbb9c8a1853a36ebb5102f140e41b2d0a7320ffdee3a7a631b83cb3",
+      "bytes": 1964
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/prepare.rs": {
+      "sha256": "f143d9ff55a1e52da02fb47026ec7badaa4fb3305de90bd87479aae18526e2fa",
+      "bytes": 8239
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/socket.rs": {
+      "sha256": "1bd0fbfde1fbb086a81b91ee8b334a312364116a3b45dbb32c015fe4a5f76827",
+      "bytes": 1961
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/codec.rs": {
+      "sha256": "84419b83f836e3dfeecc4f48b338376e310266ba0c995f59f3abe6ef57450de6",
+      "bytes": 2596
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/row.rs": {
+      "sha256": "699579818c8b23e47d5257d99a4244ade57b3b80f58ef00a200594218c7a021d",
+      "bytes": 9872
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/transaction_builder.rs": {
+      "sha256": "c9767f9593c86e4432ba3f7551345e1673490b8b51a98ed6c5edead444d0028b",
+      "bytes": 4416
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/cancel_query_raw.rs": {
+      "sha256": "e84be160e7785a9dc6672de482e25d34c1008a8340ca0c7017daa59611e8a782",
+      "bytes": 864
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/connection.rs": {
+      "sha256": "c7dd2c8259d306144ba60e0acabd210eada65cd88631aaa9e8e350620d880e4d",
+      "bytes": 13033
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/tls.rs": {
+      "sha256": "43369e9b11cf26b59c04c17cc4238c1ca53340b9f0b639e5c65288f4349981a4",
+      "bytes": 4601
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/cancel_query.rs": {
+      "sha256": "acb4b26aaa846b3f6095d2b5e531c8ab542548acb04c449077de1b8ee1028ec8",
+      "bytes": 1273
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/bind.rs": {
+      "sha256": "9ba6d6ad5929bbee776cce58519fc34676a851104ddc2954e08203a0c572442e",
+      "bytes": 1129
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/copy_in.rs": {
+      "sha256": "f0652721e158d800b843d38204c7faec88cbe869953161d4d4832150ecc2b9a9",
+      "bytes": 7195
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/connect_raw.rs": {
+      "sha256": "2acee488ed3f4da7aac9cbbed0d584535080c3a8e1a11cfb68f4a6f9953c50a2",
+      "bytes": 11932
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/simple_query.rs": {
+      "sha256": "9d64246d0ab386fd909b096730eb3f763145cf628bbb6c6a274e42ab7cd9111a",
+      "bytes": 3805
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/cancel_token.rs": {
+      "sha256": "ed5b966eaea244ddcd01583dd20164dacb63fcc9b781dbb2847ebeeea72f5400",
+      "bytes": 2241
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/error/sqlstate.rs": {
+      "sha256": "ef35424d3e762487c0ec2dfb13c1c404e8593885a4e1c1887ba88067844bd387",
+      "bytes": 53478
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/frozen/source/vendor/tokio-postgres/src/error/mod.rs": {
+      "sha256": "f06b3055ddee536e766ef0c580855f9422368465218519de22417d55f398d378",
+      "bytes": 16997
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/Cargo.toml": {
+      "sha256": "ab86173bb85ba27044f08fb9a567f78e3d500e1f94df535d1f0f63bfc2db6123",
+      "bytes": 1316
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/LICENSE": {
+      "sha256": "1c809f52dd742570746a8ac00694ad4ddd9229e12accc7d5c598075861b478a0",
+      "bytes": 1099
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/install.sh": {
+      "sha256": "0b5b878fce647ad19be4af31950416fc8bf06afca54b02602febcb10da70c1f9",
+      "bytes": 538
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/Cargo.lock": {
+      "sha256": "b5130487b2c982bc757c39bac0f299039ec343ff73ca255d1cef5571b6e52f17",
+      "bytes": 26219
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/build.rs": {
+      "sha256": "544b5019a774744eea0062e8516f4b84dfef28858851728e3d7e5543365e4f23",
+      "bytes": 601
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/README.md": {
+      "sha256": "5e87e74195db33cde05eca81f839ab3752688f31287429f09c27642836b9e6d3",
+      "bytes": 6209
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/build.sh": {
+      "sha256": "abb71fe1b2e2d8e5a7d4272aa069dc451a5bcd55267624a05f7332aded9efa48",
+      "bytes": 591
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/.gitignore": {
+      "sha256": "b53ee26e6ff1da219b0563333a76d2c9ec19eec713d6ee54e11a1edacb0e9f3d",
+      "bytes": 8
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/start.sh": {
+      "sha256": "1a729bf89b8aae10ba9e5cc1fb3f63ed4f5ab9500f44f30a9dd48411880f8d3c",
+      "bytes": 561
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/native/crypt-port.h": {
+      "sha256": "b58abb9c42e8a5902aa20bc7cbe516260f54a831d1b43261b5228f8325622d4e",
+      "bytes": 466
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/native/byteorder.h": {
+      "sha256": "cdfa3a3ae45955ad5da880053522b123f2e2d4e2a9dd74adb1f7a206d6ca6dfa",
+      "bytes": 501
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/native/bcrypt-batch.c": {
+      "sha256": "be69f39655a6e8680d756aeade92d37a060ef08d3e75a875f13c953508c0aff7",
+      "bytes": 1036
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/native/README.md": {
+      "sha256": "4340724fec97fc5a5eb9526338d2c32f5312c71abc8942e98a676afda6475e1e",
+      "bytes": 1142
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/native/bcrypt-batch-impl.h": {
+      "sha256": "554687a11fcc46da412c76a40f46a198a1a2462005cc992091eeb2a38ac637c5",
+      "bytes": 3949
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/native/crypt-bcrypt.c": {
+      "sha256": "c6166e3d3d42d23bdc8c151e22e6aa60f33a4b4eeb008de54cf0243881fa1413",
+      "bytes": 39098
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/src/password_batch.rs": {
+      "sha256": "9b3df6f737115863224f9e74116209a8e4a1963720a433b83bcf5ba5646b63a6",
+      "bytes": 7303
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/src/read_batch.rs": {
+      "sha256": "8cc6c0d086f459e3424aadc61c9bdaf313331f741408c92145a7092469d083ab",
+      "bytes": 14438
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/src/auth.rs": {
+      "sha256": "79e2f21ec84c7fd22ce948da8c7e18540d4df566681a90a8f185819b7afba9f4",
+      "bytes": 3874
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/src/db.rs": {
+      "sha256": "5d90731241e2d68bbce670a2c58525e86a51a516aa053af04a9eaabb2e08ac5e",
+      "bytes": 14934
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/src/json.rs": {
+      "sha256": "95096ea3af69a87995781f439c11f953244379eaf4b72989ea781ba22767b11e",
+      "bytes": 7414
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/src/sql.rs": {
+      "sha256": "287dffe546b9c06b99d905b57f8069ced06fdbfd7290c9d8a74003e87e0d29be",
+      "bytes": 13361
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/src/main.rs": {
+      "sha256": "c447e56d6e0158e9df40b2f02fb01a3f55520f11abd9cf3b4a68ac0b6e451bc3",
+      "bytes": 4835
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/src/password.rs": {
+      "sha256": "69959c617f2aa1d7a7dac163123ee6cd387bbed78adbcff27625a39f3f2afcfb",
+      "bytes": 8154
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/src/http.rs": {
+      "sha256": "6fc2d2605e5f6d9510e487f8dfefdfc8353a68b7b58a9240399d7e9716c8a5e1",
+      "bytes": 16013
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/src/writer.rs": {
+      "sha256": "9f9367a0056602d97d4ffa7c666118f5c6233433eb1064ddc31a33a84f0fa7f2",
+      "bytes": 14267
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/src/security_tests.rs": {
+      "sha256": "e900d2d0eb971adffd7d4406e81e398f4f04bd6b0b45fb0c0c83cb2a167f3a22",
+      "bytes": 2002
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/src/api.rs": {
+      "sha256": "8b90d5ec2061f2e16c45e213051b9488df3685e0b3ea2e9b45dbb364157c163c",
+      "bytes": 24128
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/Cargo.toml": {
+      "sha256": "02bd134a85a0aa1cec2e5f8152ab94dc34f2345922a9ef0cb0ce51f63d8bfe90",
+      "bytes": 4886
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/LICENSE-APACHE": {
+      "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+      "bytes": 10847
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/README.md": {
+      "sha256": "e4e7c2898f072a85c14db07fc4ee2d32cc5916215e7ed1b180653173ae389a0c",
+      "bytes": 1695
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/MODIFICATIONS.md": {
+      "sha256": "f0540b4746140c3274cbcb271acb4785483f67b4b0a739022e7ffa729698f8ab",
+      "bytes": 735
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/LICENSE-MIT": {
+      "sha256": "ae3ead0b640a2ee59f9789a9af84e65e631cfa3b13254f3f99a9ed73e0472239",
+      "bytes": 1081
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/binary_copy.rs": {
+      "sha256": "ac29f50281c1285640e7887352911958eaf9e0872ad2eb1b1fcfa49d2a949e28",
+      "bytes": 8309
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/types.rs": {
+      "sha256": "86688c4b5f9811b43854d8302c30080489eb147a63dd3e6189ca61259ed75aa7",
+      "bytes": 119
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/transaction.rs": {
+      "sha256": "a2c0261a3ca426e9046d73b2b330720918f4d4a6010d0a143707f17f0333d62e",
+      "bytes": 10663
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/generic_client.rs": {
+      "sha256": "1f733c86857f08a6e4dfc124340d572e9212f70bb5204e9c426832ebc77dadc7",
+      "bytes": 10772
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/keepalive.rs": {
+      "sha256": "f7def5d0362d178d9a9b644200404a907187269f7b9e83c6b4b93018497bc298",
+      "bytes": 1073
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/copy_out.rs": {
+      "sha256": "298ee2abd795f685bdb3d7073a4532d80d3fcdb2625babe7e8bbfd281d359bf2",
+      "bytes": 1790
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/client.rs": {
+      "sha256": "4e439a9434b56c8d150bfd741cb06ba28011433cb9614d4207c48ad28d54477e",
+      "bytes": 31079
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/statement.rs": {
+      "sha256": "fe832bf51b576b931c7cb33b25826f7a3b5bc8c8f77cbe4c5ed948d3daff33f6",
+      "bytes": 3178
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/connect_socket.rs": {
+      "sha256": "9acb06f2f4a71c8b5e6e9d781fad6e09bfcc42730b7486903e274c3005e55efb",
+      "bytes": 2297
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/config.rs": {
+      "sha256": "d06bffc37f9aa290ca72961508dcbcfdcab6d05e76fbf52fe450a268a0043b89",
+      "bytes": 41654
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/portal.rs": {
+      "sha256": "db23661d8cfa9d4054bd6ff1780404ceae29be28b86c8fb8f189ca800394cfff",
+      "bytes": 1317
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/connect_tls.rs": {
+      "sha256": "d407bd286a40348570c887139eb149340f835ae96f624668c6b04a99ccc95b00",
+      "bytes": 1856
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/lib.rs": {
+      "sha256": "adee98d0271bf2427700499383f1ca0725495f30fe1a89e7b09115af9f6568c1",
+      "bytes": 10685
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/connect.rs": {
+      "sha256": "ac6506a445aa5f89a2567788fd04a98421ee028cd57c0d9c2aa9a604de92d322",
+      "bytes": 7347
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/to_statement.rs": {
+      "sha256": "41961c2d7608a8199693be35d0598597925f24ed9ba802f032c20f96f52838f7",
+      "bytes": 1519
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/query.rs": {
+      "sha256": "820248e2f9406b2a7ab95a26d9f5cfb2218da3115769f3d685edca5c641cff91",
+      "bytes": 15269
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/maybe_tls_stream.rs": {
+      "sha256": "d3a324ba2fbb9c8a1853a36ebb5102f140e41b2d0a7320ffdee3a7a631b83cb3",
+      "bytes": 1964
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/prepare.rs": {
+      "sha256": "f143d9ff55a1e52da02fb47026ec7badaa4fb3305de90bd87479aae18526e2fa",
+      "bytes": 8239
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/socket.rs": {
+      "sha256": "1bd0fbfde1fbb086a81b91ee8b334a312364116a3b45dbb32c015fe4a5f76827",
+      "bytes": 1961
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/codec.rs": {
+      "sha256": "84419b83f836e3dfeecc4f48b338376e310266ba0c995f59f3abe6ef57450de6",
+      "bytes": 2596
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/row.rs": {
+      "sha256": "699579818c8b23e47d5257d99a4244ade57b3b80f58ef00a200594218c7a021d",
+      "bytes": 9872
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/transaction_builder.rs": {
+      "sha256": "c9767f9593c86e4432ba3f7551345e1673490b8b51a98ed6c5edead444d0028b",
+      "bytes": 4416
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/cancel_query_raw.rs": {
+      "sha256": "e84be160e7785a9dc6672de482e25d34c1008a8340ca0c7017daa59611e8a782",
+      "bytes": 864
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/connection.rs": {
+      "sha256": "c7dd2c8259d306144ba60e0acabd210eada65cd88631aaa9e8e350620d880e4d",
+      "bytes": 13033
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/tls.rs": {
+      "sha256": "43369e9b11cf26b59c04c17cc4238c1ca53340b9f0b639e5c65288f4349981a4",
+      "bytes": 4601
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/cancel_query.rs": {
+      "sha256": "acb4b26aaa846b3f6095d2b5e531c8ab542548acb04c449077de1b8ee1028ec8",
+      "bytes": 1273
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/bind.rs": {
+      "sha256": "9ba6d6ad5929bbee776cce58519fc34676a851104ddc2954e08203a0c572442e",
+      "bytes": 1129
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/copy_in.rs": {
+      "sha256": "f0652721e158d800b843d38204c7faec88cbe869953161d4d4832150ecc2b9a9",
+      "bytes": 7195
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/connect_raw.rs": {
+      "sha256": "2acee488ed3f4da7aac9cbbed0d584535080c3a8e1a11cfb68f4a6f9953c50a2",
+      "bytes": 11932
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/simple_query.rs": {
+      "sha256": "9d64246d0ab386fd909b096730eb3f763145cf628bbb6c6a274e42ab7cd9111a",
+      "bytes": 3805
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/cancel_token.rs": {
+      "sha256": "ed5b966eaea244ddcd01583dd20164dacb63fcc9b781dbb2847ebeeea72f5400",
+      "bytes": 2241
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/error/sqlstate.rs": {
+      "sha256": "ef35424d3e762487c0ec2dfb13c1c404e8593885a4e1c1887ba88067844bd387",
+      "bytes": 53478
+    },
+    "/private/tmp/multicore-challenge-20261022/submissions/rust-tokio-Scooter1337/vendor/tokio-postgres/src/error/mod.rs": {
+      "sha256": "f06b3055ddee536e766ef0c580855f9422368465218519de22417d55f398d378",
+      "bytes": 16997
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/conformance.log": {
+      "sha256": "cf6dfe613fabf1936d051d8b95e3705a4f1c097801ae2be886f6c5f5aa9eba95",
+      "bytes": 53
+    },
+    "/private/tmp/multicore-optimize-20261023/builds/rust7-full/output.log": {
+      "sha256": "cf6dfe613fabf1936d051d8b95e3705a4f1c097801ae2be886f6c5f5aa9eba95",
+      "bytes": 53
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/tools/capacity_controller.py": {
+      "sha256": "56b1c43b5ab1f18f968110fabe10d07a00e40c6054f3a5b46369c3af530af8df",
+      "bytes": 26761
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/tools/search_policy.py": {
+      "sha256": "fd5035f23358a512a6698b38853fc6187278050b162a740498d6254d16d9acb9",
+      "bytes": 6751
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/app-process-status.txt": {
+      "sha256": "ccc71af43ba10837a67ea64d04edb0488e2a6818d0ddb1dcd85e62e409cdf57f",
+      "bytes": 1124
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/app-process-limits.txt": {
+      "sha256": "0924f8a4ad25b5b45c9a0eb88bdc44d663d981f450855dd83372543ee801564f",
+      "bytes": 1323
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/before-session.json": {
+      "sha256": "ea485b638908c823822ca421cbfae7dcac77c36c03e056e42692fcfd2d0953a4",
+      "bytes": 52081
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/after-session.json": {
+      "sha256": "aa89baee3ab98066fc52a4b28b5deb93d73b65fae532cf80d1a0db94176ee521",
+      "bytes": 52086
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/01-warmup-10000/phase.json": {
+      "sha256": "978923280111c04c8234047fb2d5b4bea86ff0b92c639bbb21c0202584cd162f",
+      "bytes": 496
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/01-warmup-10000/assessment.json": {
+      "sha256": "5927f2bc9594ffe02c7c9e3ae5c2be7352f4854705fe5fd14b60f5c1d5c1c2df",
+      "bytes": 102858
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/01-warmup-10000/before-load.json": {
+      "sha256": "35d26c47a7984ec276132d528336d30c96c29b6171c67ed88dc52a97f0789c09",
+      "bytes": 55263
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/01-warmup-10000/after-load.json": {
+      "sha256": "f20d1e679a35c91a303eac9e0416d612b07384f2ac96ba2f7b1160a5a9419574",
+      "bytes": 55270
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/01-warmup-10000/merged.json": {
+      "sha256": "0f5d1286bddfcc95968e72ea3d274330afde184dfa53225a711d14659f5c24a8",
+      "bytes": 51646
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/01-warmup-10000/target-monitor.jsonl": {
+      "sha256": "e603e28e76200bf82eb41edcc7873008c9f67ec6806830d6755a4a3e8b11ca09",
+      "bytes": 184324
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/02-probe-100000/phase.json": {
+      "sha256": "cd1be2b339c54f7fd321a1e9c72f4349e54562b8c501ba1d7bbe70483f579322",
+      "bytes": 960
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/02-probe-100000/assessment.json": {
+      "sha256": "05bf575112b24c7c4344d747b1d1b96eb7c7c0af880173abc0ea68d8b09e8ca5",
+      "bytes": 87048
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/02-probe-100000/before-load.json": {
+      "sha256": "b6ffd53a525298174ce76df187ad3aa10505b599618abaab871a4a7db280093a",
+      "bytes": 55270
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/02-probe-100000/after-load.json": {
+      "sha256": "8ebcc33e0d6045b9a3eb7d9ada56164fdf3f62e8cc1465053a6413a068039d42",
+      "bytes": 55274
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/02-probe-100000/merged.json": {
+      "sha256": "6d35ffa8ebafe5e41ac2a39eb4789b982159806b17fc64d04e9bc6e1c12509c8",
+      "bytes": 47387
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/02-probe-100000/target-monitor.jsonl": {
+      "sha256": "1268318dfd51bff97b7809219d0109cc2cba0a160d42c135a8cd01608a3cb656",
+      "bytes": 130658
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/03-probe-110000/phase.json": {
+      "sha256": "e3e02ddd5f2261966006377309c9749ce06e677c27503c5bf16b6c826bc4b88c",
+      "bytes": 1076
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/03-probe-110000/assessment.json": {
+      "sha256": "183c0ad422f8fe79fa4dd0bb9dd58a8b583072214aae6b7b6e11c6a4c010160d",
+      "bytes": 89835
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/03-probe-110000/before-load.json": {
+      "sha256": "739fade30d2878fdc8ab5d2dd58f30b9f3262592ad68cb4722f8c819050e65f4",
+      "bytes": 55274
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/03-probe-110000/after-load.json": {
+      "sha256": "93954e0814e804c546408dfd1b55ab62e9099a3d9334d0f1d81e223d583952f2",
+      "bytes": 55277
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/03-probe-110000/merged.json": {
+      "sha256": "d6d505b7c4b0dd45776793f6a3650c0883336e64c81ef0e2b332d3a26040a87b",
+      "bytes": 50573
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/03-probe-110000/target-monitor.jsonl": {
+      "sha256": "52b1be4b238f5b1f2d9cb7d4f6be2e119aca156f9a4a63b0b959c012ae5ab874",
+      "bytes": 131426
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/04-probe-120000/phase.json": {
+      "sha256": "d2c527ca6bbc3d438b05e3deccd0b8a6dd2e52dd713fa4975dabcd75f467fc07",
+      "bytes": 1077
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/04-probe-120000/assessment.json": {
+      "sha256": "a91d3065be538b5f0163bedcb769b47b10d5667c10750a88ae4885c14046b1ed",
+      "bytes": 90027
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/04-probe-120000/before-load.json": {
+      "sha256": "0f1f22d4cbd4f73e444014b5b8edf2a50cbeae556b1b48ddb234b8de4ec8af52",
+      "bytes": 55277
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/04-probe-120000/after-load.json": {
+      "sha256": "a5ebbc3a14654552cc33f89dbf9d548f9d1ca6f842902c04d77cf3e431165363",
+      "bytes": 55279
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/04-probe-120000/merged.json": {
+      "sha256": "bb90278f27d86e100f921fe56da589f26201f9374b283c2cd407feb45afc5dd3",
+      "bytes": 54276
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/04-probe-120000/target-monitor.jsonl": {
+      "sha256": "67225c1e98a90e8aba82fa075412046a80a5bdd6400e2e79e16f744296161690",
+      "bytes": 133080
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/05-probe-130000/phase.json": {
+      "sha256": "c46a8d27312891aea0a1c2c0a20b9ad2d54e24806f52cede9bd2cd4ffd88edff",
+      "bytes": 1193
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/05-probe-130000/assessment.json": {
+      "sha256": "0c15d3c2399909aeb80bd4a5041bb39f05650e18f2239eab4956f5c5a4d4e116",
+      "bytes": 92660
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/05-probe-130000/before-load.json": {
+      "sha256": "280aa1acc2d601acd51a97acfa83a84765de2931b554eb7b1c92b8d9597e2877",
+      "bytes": 55279
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/05-probe-130000/after-load.json": {
+      "sha256": "a3624c271da912eec58596473aeeb6d27de7a98c234873ec7c20517c0b941ae7",
+      "bytes": 55279
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/05-probe-130000/merged.json": {
+      "sha256": "c740f96b75c5d470e314035c4f150af1a2621da545724fbc02a75c351b46580d",
+      "bytes": 56582
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/05-probe-130000/target-monitor.jsonl": {
+      "sha256": "f0ec7b204d8c4299cf24a3d4040e1250f2154738b76cb87c9cc26ff4146d6112",
+      "bytes": 132474
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/06-probe-140000/phase.json": {
+      "sha256": "c3f9eff84d0240d891ee4ca335e12d42d599bdcd01c6570b2d70c2a478b9d4b3",
+      "bytes": 1194
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/06-probe-140000/assessment.json": {
+      "sha256": "22edf0ad277960e6a137082fdfc3e196332ac2896b23ba310fae40c023a2afe3",
+      "bytes": 93151
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/06-probe-140000/before-load.json": {
+      "sha256": "4eca5a257c7049bd3811b16ff2a0b97f09096a20d42a8309a195a98e1c4488c8",
+      "bytes": 55279
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/06-probe-140000/after-load.json": {
+      "sha256": "772d22fdcdf22e7c698573781924d3d66c9fa5cbb4f8a3fb91ba7cf30b8a9cf8",
+      "bytes": 55279
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/06-probe-140000/merged.json": {
+      "sha256": "1f8e74b03f9cf149f03bcca74abaf120905c54abf4f1ea5fcc08c8da42c544be",
+      "bytes": 60429
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/06-probe-140000/target-monitor.jsonl": {
+      "sha256": "1abcecd1516840ee11fe88adf415e3b6e19b44de1224e5c7d8e9cf1efa31b300",
+      "bytes": 133359
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/07-probe-135000/phase.json": {
+      "sha256": "ed47b2342221bf52b4836fe97642731a75361db12b65424122168ef9816a429e",
+      "bytes": 1193
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/07-probe-135000/assessment.json": {
+      "sha256": "643230e7d491dd5d18d219bea7a4b9b6536bbeee18bb177d49f56f48a27f02e7",
+      "bytes": 92764
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/07-probe-135000/before-load.json": {
+      "sha256": "a8730338b74c10c9bdc3c9d272e87f20a31b68ef543087113db914abdb6a2d1c",
+      "bytes": 55279
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/07-probe-135000/after-load.json": {
+      "sha256": "958a5315c7c31aae8d1e80983c22bad51dcaddb1a342c9f4114ced8c62ee3bf7",
+      "bytes": 55279
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/07-probe-135000/merged.json": {
+      "sha256": "db301053308ec0dba9052e5b1eba55f641742c46646ea765d503034eb72217b4",
+      "bytes": 58916
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/07-probe-135000/target-monitor.jsonl": {
+      "sha256": "57563daf71e7a96d41341850055e8db3d93a9aac58e51202ab69d05713987328",
+      "bytes": 132534
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/08-hold-130000/phase.json": {
+      "sha256": "30b0b698bb98c92d782ec4c4047eae6e0d825cdd31a8f0571be189b1f81ff5b7",
+      "bytes": 1221
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/08-hold-130000/assessment.json": {
+      "sha256": "3cab61365544a33bf5729b0f06517dd45168d54d4910f8df7be5757730404eb1",
+      "bytes": 197794
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/08-hold-130000/before-load.json": {
+      "sha256": "388d7bb641ea2b2c0df53e8e30d9be07e73374b498a5de6ace96ffd855e1d53b",
+      "bytes": 55279
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/08-hold-130000/after-load.json": {
+      "sha256": "b97ba288d2a9e16f911f6d1999f414c8449752a8e466a258337a8b5f5a6f747c",
+      "bytes": 55279
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/08-hold-130000/merged.json": {
+      "sha256": "ff47467917706511eaa6b649f1f5c6e00ede1bb650b15c0d3071a7ef3d08028a",
+      "bytes": 111987
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/phases/08-hold-130000/target-monitor.jsonl": {
+      "sha256": "3aaa196c60f4f4f92c05f4d6752dbbbf78cc26513c80eae2f7b5167009db6c67",
+      "bytes": 357713
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/stopped.json": {
+      "sha256": "3f601becfbe984bad0b10bcae364747e12cf845a29c58222823141e7ecc116b9",
+      "bytes": 52
+    },
+    "/private/tmp/multicore-optimize-20261023/capacity_20261023t192322_84394f/cases/rust7/dropped.json": {
+      "sha256": "e821741fc0711b0e839c9f60fd8b37f24fb5305730c96ddc12e3c1e510589977",
+      "bytes": 66
+    }
+  },
+  "limitations": [
+    "Phase qualification/histogram reproduction is performed separately by the parent auditor. This review verifies lifecycle, immutable identity, saved actual-process witnesses, protocol/search bookkeeping and cleanup receipts.",
+    "The130k hold is a local V4 result under its predeclared dedicated-client-cgroup CPU policy. Stock native output remains lg_limited=true with all seven whole-VM CPU flags; native_qualified=false is preserved.",
+    "Saved stop/drop receipts and continuous PID/start-time witnesses are checked; no new live process/database observation was performed.",
+    "Other implementations were not read or compared. No whole-study winner, official rank or promotion is claimed.",
+    "Frozen executables were present and hashed during this audit; later binary-free exports can retain these original hashes."
+  ]
+}

@@ -1,0 +1,11 @@
+# Deltas from frozen capacity-v4
+
+Only study orchestration and its report change. The V4 `Controller.phase`, infrastructure commands, client construction/environment witnesses, app/database lifecycle, monitors, audits and cleanup methods retain their original code. `audit/evidence.py`, `audit/primitives.py` and `search_policy.py` remain byte-identical. The copied finite-search policy is retained for provenance and shared protocol validation; no confirmation orchestration calls its `next_action` search.
+
+The controller adds an explicit confirmation schema/mode, fixed B→Rust order, selected-count validation and binding to a completed first-study audit/hash and its audited V4 plan. Every effective source, environment, conformance, native/client and runtime input must match that original plan; only case order, selected counts and the documented confirmation metadata may differ. Its `run_case` replaces adaptive search with exactly warmup→probe→hold, stopping on any failed/ineligible result. Its run/client directory prefixes identify the new block. Source/app/SQL/compiler/crypto files are untouched.
+
+The aggregator checks that fixed three-action sequence and refuses a phase after any failure/invalidity. It reports selected/confirmed counts and the held phase's original native/local verdicts, errors, latency and CPU measurements. It never selects a best phase, emits a new capacity score or infers an upper bound. Reporting `capacity_users` stays null for compatibility and clarity.
+
+The draft configuration copies every V4 case descriptor byte-for-byte at the parsed-JSON value level, reverses order, and adds `confirm_users` (B null, Rust130000). It drops unused search overrides and adds explicit pending first-study reference/mode/scope fields. Runtime budgets, target, source revisions, environment, binaries, conformance logs, native generator and GOMAXPROCS2 are unchanged. No selective first-study phase reuse is permitted. The first-study completed audit must be finalized only after both cases finish.
+
+All test results in `audit/test-confirmation-*` are synthetic local Python fixtures. They are not application correctness, capacity, performance or selected-Goose-count evidence. No Docker, SQL, traffic, build or final-plan preparation forms part of this preparation.

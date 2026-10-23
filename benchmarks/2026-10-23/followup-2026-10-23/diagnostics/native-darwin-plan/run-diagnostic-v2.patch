@@ -1,0 +1,106 @@
+--- a/run-diagnostic.py
++++ b/run-diagnostic-v2.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""One unchanged-workload native-Darwin 10k diagnostic; never a capacity score.
++"""Future-only v2 native-Darwin10k diagnostic: deferred owned-clone cancellation.
+ 
+ Requires an explicitly prepared loopback target and effective charging. Root
+ executes only after review, preferably inside diagnostics/run-with-power-guard.py.
+@@ -93,8 +93,8 @@
+           'capacity_search_disabled':True,'holds_disabled':True,'prior_phase_reuse':False})
+ 
+     def save():write(out/'result.json',result)
+-    def command(argv,name,timeout=120,allowed=(0,)):
+-        p=subprocess.run(argv,text=True,capture_output=True,timeout=timeout)
++    def command(argv,name,timeout=120,allowed=(0,),isolate=False):
++        p=subprocess.run(argv,text=True,capture_output=True,timeout=timeout,start_new_session=isolate)
+         (out/name).write_text(p.stdout+p.stderr)
+         result['commands'].append({'argv':argv,'exit':p.returncode,'log':name});save()
+         if p.returncode not in allowed:raise RuntimeError(name+' exited '+str(p.returncode)+': '+p.stderr[-1000:])
+@@ -112,7 +112,50 @@
+         mappings=h['PortBindings']['3000/tcp']
+         assert {(m['HostIp'],int(m['HostPort'])) for m in mappings}=={('127.0.0.1',n) for n in range(33000,33016)}
+     client=None;client_log=None;monitor_thread=None;monitor_stop=threading.Event();backend_pids=[]
+-    clone_requested=False;target_monitor_requested=False
++    clone_requested=False;target_monitor_requested=False;clone_helper_failed=False
++    clone_tag='clone_'+run_id
++
++    def clone_owned():
++        # The power wrapper signals the driver group. Keep the bounded Docker
++        # CLI in a separate session, and defer these signals until its helper
++        # has returned; cleanup cannot race an interrupted attached CREATE.
++        pending=[]
++        watched=[signal.SIGINT,signal.SIGTERM,signal.SIGHUP]
++        previous={sig:signal.getsignal(sig) for sig in watched}
++        def defer(signum,frame):
++            pending.append(signum)
++            result['clone_deferred_signals']=list(pending);save()
++        for sig in watched:signal.signal(sig,defer)
++        try:
++            command(['docker','exec','--user','root','--env','PGAPPNAME='+clone_tag,target,
++                     'python3',croot+'/tools/target_helper.py','clone','--out',croot+'/database.json',
++                     '--database',database], 'clone-database.json.log', timeout=150, isolate=True)
++        finally:
++            for sig in watched:signal.signal(sig,previous[sig])
++        if pending:raise KeyboardInterrupt('deferred clone signal(s): '+str(pending))
++
++    def settle_clone_backend():
++        # A helper error/timeout must not turn an immediately absent database
++        # into proof that its tagged CREATE backend has finished.
++        deadline=time.monotonic()+60
++        cancelled=False
++        sample=0
++        while True:
++            query="SELECT count(*) FROM pg_stat_activity WHERE application_name='"+clone_tag+"' AND pid<>pg_backend_pid()"
++            observed=dex(['runuser','-u','postgres','--','psql','-XAt','-d','postgres','-c',query],
++                         'clone-backend-observation-'+str(sample)+'.log',timeout=10)
++            sample+=1
++            if observed.stdout.strip()=='0':
++                write(out/'clone-backend-settled.json',{'application_name':clone_tag,'active_sessions':0,
++                                                      'cancel_requested':cancelled,'before_drop':True})
++                return
++            if not cancelled:
++                query="SELECT pg_cancel_backend(pid) FROM pg_stat_activity WHERE application_name='"+clone_tag+"' AND pid<>pg_backend_pid()"
++                dex(['runuser','-u','postgres','--','psql','-XAt','-d','postgres','-c',query],
++                    'clone-backend-cancel.log',timeout=10)
++                cancelled=True
++            if time.monotonic()>deadline:raise TimeoutError('owned clone backend did not settle')
++            time.sleep(.1)
+ 
+     client_launcher='''import hashlib,json,os,pathlib,resource,sys
+ root=pathlib.Path(sys.argv[1]);cfg=json.loads((root/'client-command.json').read_text());soft,hard=resource.getrlimit(resource.RLIMIT_NOFILE)
+@@ -172,7 +215,10 @@
+         meta=json.loads((out/'server-frozen/metadata.json').read_text());assert meta['binary_sha256']==EXPECTED_APP and meta['source_sha256']==before
+         case['metadata']=croot+'/server-frozen/metadata.json';write(out/'case.json',case)
+         clone_requested=True
+-        control('clone','database.json','--database',database)
++        try:clone_owned()
++        except Exception:
++            clone_helper_failed=True
++            raise
+         control('start','app.json','--case',croot+'/case.json','--database',database,'--port','3000')
+         control('snapshot','before-load.json','--case',croot+'/app.json')
+         assert power(),'charging lost before native workload'
+@@ -273,6 +319,10 @@
+             try:control('stop','app-stopped.json','--case',croot+'/app.json')
+             except Exception as error:result['cleanup_errors'].append('app: '+str(error))
+         if clone_requested:
++            try:settle_clone_backend()
++            except Exception as error:
++                clone_helper_failed=True
++                result['cleanup_errors'].append('clone backend settlement: '+str(error))
+             try:control('drop','dropped.json','--database',database)
+             except Exception as error:
+                 if 'database "'+database+'" does not exist' in str(error):
+@@ -293,8 +343,8 @@
+         result['darwin_observer_complete']=host_exit is not None and host_exit.get('complete') is True
+         result['completed']=result['completed'] and all(result[k] for k in ['app_source_unchanged','native_source_unchanged','client_binary_unchanged','app_binary_unchanged','frozen_app_binary_unchanged','target_observer_complete','darwin_observer_complete']) and not result['cleanup_errors']
+         charging=power()
+-        if not charging and (out/'target-before-inspect.json').exists():
+-            try:command(['docker','stop','--time','20',target],'target-stop-low-power.log')
++        if (not charging or clone_helper_failed) and (out/'target-before-inspect.json').exists():
++            try:command(['docker','stop','--time','20',target],'target-stop-power-or-clone-failure.log')
+             except Exception as error:result['cleanup_errors'].append('target: '+str(error))
+         result['finished_unix_s']=time.time();save()
+     print(json.dumps({'output':str(out),'completed':result['completed'],'capacity_score':False,

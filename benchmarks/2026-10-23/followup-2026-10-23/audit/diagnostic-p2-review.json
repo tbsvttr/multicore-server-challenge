@@ -1,0 +1,3918 @@
+{
+  "schema": "independent_completed_P2_diagnostic_review_v1",
+  "generated_utc": "2026-10-23T18:27:33.780073+00:00",
+  "run": "/private/tmp/multicore-optimize-20261023/diagnosticgoose110p2_20261023t181051_2b1bad",
+  "review_pass": true,
+  "scope": "Saved-file diagnostic analysis only. No Docker, SQL, build, load, source promotion, or rank claim.",
+  "source_commit": "23a14e8cbf32113509cd0ad941320ef947508981",
+  "binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+  "capacity_score": null,
+  "first_place_proven": false,
+  "checks": [
+    {
+      "check": "executed_plan_exact_expected_SHA",
+      "pass": true
+    },
+    {
+      "check": "fixed_sequence_no_capacity_or_holds",
+      "pass": true
+    },
+    {
+      "check": "unchanged_A_binary_not_B",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:target:guest_clock_span_reproduced",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:target:cgroup_CPU_integral_reproduced",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:target:numeric_8CPU_memory_noSwap",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:load:guest_clock_span_reproduced",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:load:cgroup_CPU_integral_reproduced",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:load:numeric_8CPU_memory_noSwap",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:all_native_shards_finished",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:explicit_GOMAXPROCS2",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:GC_logs_parse",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:remains_invalid_without_score",
+      "pass": true
+    },
+    {
+      "check": "02-probe-100000:target:guest_clock_span_reproduced",
+      "pass": true
+    },
+    {
+      "check": "02-probe-100000:target:cgroup_CPU_integral_reproduced",
+      "pass": true
+    },
+    {
+      "check": "02-probe-100000:target:numeric_8CPU_memory_noSwap",
+      "pass": true
+    },
+    {
+      "check": "02-probe-100000:load:guest_clock_span_reproduced",
+      "pass": true
+    },
+    {
+      "check": "02-probe-100000:load:cgroup_CPU_integral_reproduced",
+      "pass": true
+    },
+    {
+      "check": "02-probe-100000:load:numeric_8CPU_memory_noSwap",
+      "pass": true
+    },
+    {
+      "check": "02-probe-100000:all_native_shards_finished",
+      "pass": true
+    },
+    {
+      "check": "02-probe-100000:explicit_GOMAXPROCS2",
+      "pass": true
+    },
+    {
+      "check": "02-probe-100000:GC_logs_parse",
+      "pass": true
+    },
+    {
+      "check": "02-probe-100000:remains_invalid_without_score",
+      "pass": true
+    },
+    {
+      "check": "03-probe-110000:target:guest_clock_span_reproduced",
+      "pass": true
+    },
+    {
+      "check": "03-probe-110000:target:cgroup_CPU_integral_reproduced",
+      "pass": true
+    },
+    {
+      "check": "03-probe-110000:target:numeric_8CPU_memory_noSwap",
+      "pass": true
+    },
+    {
+      "check": "03-probe-110000:load:guest_clock_span_reproduced",
+      "pass": true
+    },
+    {
+      "check": "03-probe-110000:load:cgroup_CPU_integral_reproduced",
+      "pass": true
+    },
+    {
+      "check": "03-probe-110000:load:numeric_8CPU_memory_noSwap",
+      "pass": true
+    },
+    {
+      "check": "03-probe-110000:all_native_shards_finished",
+      "pass": true
+    },
+    {
+      "check": "03-probe-110000:explicit_GOMAXPROCS2",
+      "pass": true
+    },
+    {
+      "check": "03-probe-110000:GC_logs_parse",
+      "pass": true
+    },
+    {
+      "check": "03-probe-110000:remains_invalid_without_score",
+      "pass": true
+    },
+    {
+      "check": "charging_guard_completed_without_abort",
+      "pass": true
+    },
+    {
+      "check": "owned_app_group_stopped_and_database_dropped",
+      "pass": true
+    },
+    {
+      "check": "owned_client_stopped_not_OOM",
+      "pass": true
+    },
+    {
+      "check": "final_resource_receipt_valid",
+      "pass": true
+    },
+    {
+      "check": "diagnostic_completed_without_controller_error",
+      "pass": true
+    }
+  ],
+  "phases": [
+    {
+      "id": "01-warmup-10000",
+      "users": 10000,
+      "classification": "INVALID_CLOCK",
+      "all_classifications": [
+        "INVALID_CLOCK",
+        "INVALID_GENERATOR",
+        "INVALID_MONITOR",
+        "INVALID_EVIDENCE",
+        "FAIL_SLO"
+      ],
+      "native_verdict": {
+        "pass": false,
+        "fail_reasons": [
+          "p95 2671 ms >= 500",
+          "p99 9110 ms >= 1000"
+        ],
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 fell behind: 30 of 120 seconds had mean timer wake-up lag > 50 ms; sampler tick 2895 ms late"
+        ]
+      },
+      "overall": {
+        "count": 277456,
+        "rps": 2312.133333333333,
+        "p50_ms": 17.327,
+        "p90_ms": 1201.151,
+        "p95_ms": 2670.591,
+        "p99_ms": 9109.503,
+        "max_ms": 13213.695,
+        "mean_ms": 490.905107220604,
+        "errors": 1956,
+        "error_rate": 0.0070497664494550485,
+        "statuses": {
+          "200": 271241,
+          "201": 4173,
+          "204": 86
+        },
+        "error_classes": {
+          "timeout": 1956
+        },
+        "error_example": "request timeout"
+      },
+      "failed_top_level_checks": [
+        {
+          "check": "after:fixed_target_budget",
+          "pass": false,
+          "detail": null
+        },
+        {
+          "check": "target:entire_phase_clock_drift_under100ms",
+          "pass": false,
+          "detail": 0.11134219169616699
+        },
+        {
+          "check": "load:entire_phase_clock_drift_under100ms",
+          "pass": false,
+          "detail": 0.11134123802185059
+        }
+      ],
+      "PG": {
+        "samples": 187,
+        "successful_samples": 186,
+        "errors": [
+          {
+            "sample": 121,
+            "error": "psql_timeout"
+          }
+        ],
+        "max_successful_observer_duration_s": 2.137051459,
+        "all_phase_backend_observations": 1488,
+        "all_phase_wait_observation_counts": [
+          {
+            "state": "idle",
+            "wait_event_type": "Client",
+            "wait_event": "ClientRead",
+            "count": 1004
+          },
+          {
+            "state": "active",
+            "wait_event_type": null,
+            "wait_event": null,
+            "count": 263
+          },
+          {
+            "state": "active",
+            "wait_event_type": "IO",
+            "wait_event": "WalSync",
+            "count": 93
+          },
+          {
+            "state": "active",
+            "wait_event_type": "LWLock",
+            "wait_event": "WALWrite",
+            "count": 88
+          },
+          {
+            "state": "idle",
+            "wait_event_type": null,
+            "wait_event": null,
+            "count": 20
+          },
+          {
+            "state": "active",
+            "wait_event_type": "Client",
+            "wait_event": "ClientRead",
+            "count": 12
+          },
+          {
+            "state": "active",
+            "wait_event_type": "IO",
+            "wait_event": "WalWrite",
+            "count": 6
+          },
+          {
+            "state": "active",
+            "wait_event_type": "IO",
+            "wait_event": "DataFileRead",
+            "count": 2
+          }
+        ],
+        "all_phase_family_observation_counts": {
+          "idle": 1024,
+          "tags_or_tagged_read": 63,
+          "write": 188,
+          "comments_read": 2,
+          "batch_comments": 34,
+          "batch_other": 56,
+          "batch_article": 25,
+          "shared_feed": 71,
+          "shared_list": 17,
+          "user_or_profile_read": 7,
+          "login_read": 1
+        },
+        "blocking_samples": 0,
+        "blocking_observations": [],
+        "max_sampled_active_query_age_s": 0.482415,
+        "measurement_samples": 107,
+        "measurement_backend_observations": 856,
+        "measurement_idle_observations": 498,
+        "measurement_active_observations": 358,
+        "measurement_WAL_wait_observations": 139,
+        "interpretation": "Sample counts are observations, not independent requests or exact wait durations; unsampled intervals and failed observer samples remain unknown."
+      },
+      "client_boxes": [
+        {
+          "index": 0,
+          "users": 10000,
+          "GOMAXPROCS": 2,
+          "native_summary": {
+            "cpu_avg_measure_pct": 38.10306303584839,
+            "cpu_max_measure_pct": 100,
+            "proc_cpu_avg_measure_pct": 9.861235880960821,
+            "rss_peak_mb": 299.12890625,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "30 of 120 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 2895 ms late"
+            ],
+            "active_vus_at_window_start": 10000,
+            "tcp_connects": 11955
+          },
+          "GC": {
+            "cycles": 38,
+            "max_individual_stw_phase_ms": 28.0,
+            "max_combined_stw_ms_per_cycle": 40.0,
+            "max_stw_cycle": 21,
+            "max_concurrent_mark_wall_ms": 1196.0,
+            "max_concurrent_mark_cycle": 19,
+            "sum_stw_clock_ms": 152.173,
+            "sum_concurrent_mark_wall_ms": 5227.315,
+            "sum_gc_cpu_ms_printed": 7244.182,
+            "sum_mark_assist_cpu_ms": 3282.055,
+            "max_heap_before_mb": 174,
+            "max_heap_after_mark_mb": 176,
+            "max_heap_live_mb": 85,
+            "max_heap_goal_mb": 183,
+            "max_stack_scan_mb": 15,
+            "last_runtime_gc_fraction_percent": 1,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              19
+            ]
+          },
+          "unparsed_GC_lines": [],
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "longest_sampler_intervals": [
+            {
+              "previous_nominal_t": 94,
+              "next_nominal_t": 95,
+              "previous_actual_phase_s": 95.179094,
+              "next_actual_phase_s": 98.895239,
+              "elapsed_s": 3.7161449999999974,
+              "next_tick_lag_ms": 2895.239,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 126,
+              "next_nominal_t": 127,
+              "previous_actual_phase_s": 127.211313,
+              "next_actual_phase_s": 130.222068,
+              "elapsed_s": 3.010755000000003,
+              "next_tick_lag_ms": 2222.068,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  127.1444,
+                  132.904
+                ],
+                "after_cycle": 22,
+                "before_cycle": 23
+              }
+            },
+            {
+              "previous_nominal_t": 91,
+              "next_nominal_t": 92,
+              "previous_actual_phase_s": 92.149829,
+              "next_actual_phase_s": 93.74065,
+              "elapsed_s": 1.5908210000000054,
+              "next_tick_lag_ms": 740.65,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 123,
+              "next_nominal_t": 124,
+              "previous_actual_phase_s": 124.007258,
+              "next_actual_phase_s": 125.334765,
+              "elapsed_s": 1.3275070000000113,
+              "next_tick_lag_ms": 334.765,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 67,
+              "next_nominal_t": 68,
+              "previous_actual_phase_s": 68.000022,
+              "next_actual_phase_s": 69.271958,
+              "elapsed_s": 1.2719359999999966,
+              "next_tick_lag_ms": 271.958,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 86,
+              "next_nominal_t": 87,
+              "previous_actual_phase_s": 87.000109,
+              "next_actual_phase_s": 88.231914,
+              "elapsed_s": 1.2318050000000085,
+              "next_tick_lag_ms": 231.914,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 88,
+              "next_nominal_t": 89,
+              "previous_actual_phase_s": 89.000025,
+              "next_actual_phase_s": 90.188169,
+              "elapsed_s": 1.1881440000000083,
+              "next_tick_lag_ms": 188.169,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 90,
+              "next_nominal_t": 91,
+              "previous_actual_phase_s": 91.000014,
+              "next_actual_phase_s": 92.149829,
+              "elapsed_s": 1.1498150000000038,
+              "next_tick_lag_ms": 149.829,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 34,
+              "next_nominal_t": 35,
+              "previous_actual_phase_s": 35.001793,
+              "next_actual_phase_s": 36.148251,
+              "elapsed_s": 1.1464580000000026,
+              "next_tick_lag_ms": 148.251,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 110,
+              "next_nominal_t": 111,
+              "previous_actual_phase_s": 111.052074,
+              "next_actual_phase_s": 112.173761,
+              "elapsed_s": 1.1216869999999943,
+              "next_tick_lag_ms": 173.761,
+              "wholly_inside_definite_between_collections_gap": null
+            }
+          ],
+          "first_timeline_error": {
+            "t": 98,
+            "completed": 2650,
+            "errors": 41,
+            "active_vus": 10000,
+            "tick_lag_ms": 2.005,
+            "wake_lag_mean_ms": 2061.3582080168776,
+            "wake_lag_max_ms": 5869.271,
+            "p50_ms": 4550.655,
+            "p95_ms": 10092.543,
+            "p99_ms": 10100.735,
+            "proc_cpu_pct": 9.273293753369021,
+            "rss_mb": 204.171875,
+            "goroutines": 10002
+          }
+        }
+      ],
+      "budget_raw_and_numeric": {
+        "target": {
+          "raw_cpu_max_values": [
+            "1600000 200000",
+            "800000 100000"
+          ],
+          "all_numeric_CPU_ratios": [
+            8.0
+          ],
+          "all_memory_max": [
+            "17179869184"
+          ],
+          "all_swap_max": [
+            "0"
+          ],
+          "guest_entire_phase_clock_offset_span_s": 0.111341889,
+          "reproduced_cgroup_measurement_CPU_seconds": 421.5592618886821
+        },
+        "load": {
+          "raw_cpu_max_values": [
+            "800000 100000"
+          ],
+          "all_numeric_CPU_ratios": [
+            8.0
+          ],
+          "all_memory_max": [
+            "8589934592"
+          ],
+          "all_swap_max": [
+            "0"
+          ],
+          "guest_entire_phase_clock_offset_span_s": 0.111341139,
+          "reproduced_cgroup_measurement_CPU_seconds": 122.27327157616419
+        }
+      },
+      "target_monitor": {
+        "checks": [
+          {
+            "check": "monitor_has_samples",
+            "pass": true
+          },
+          {
+            "check": "strict_wall_and_monotonic_order",
+            "pass": true
+          },
+          {
+            "check": "full_measurement_window_bracketed",
+            "pass": true,
+            "detail": {
+              "first_ms": 1792779062635.6477,
+              "start_ms": 1792779127873.9998,
+              "last_ms": 1792779263658.676,
+              "end_ms": 1792779247873.9998
+            }
+          },
+          {
+            "check": "max_sample_gap_at_most_3s",
+            "pass": false,
+            "detail": 4.669861544
+          },
+          {
+            "check": "cgroup_budget_continuous",
+            "pass": false,
+            "detail": null
+          },
+          {
+            "check": "total_cpu_counter_nondecreasing",
+            "pass": true
+          },
+          {
+            "check": "no_measurement_oom",
+            "pass": true,
+            "detail": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            }
+          },
+          {
+            "check": "wall_to_monotonic_drift_below_100ms",
+            "pass": false,
+            "detail": 0.10859131813049316
+          }
+        ],
+        "warnings": [
+          "pg: live-PID CPU sum changed population or decreased; component CPU withheld"
+        ],
+        "eligible": false,
+        "samples": 109,
+        "max_gap_s": 4.669861544,
+        "window_s": 120.0,
+        "cgroup_cpu_seconds_estimate": 421.55926188063995,
+        "cgroup_quota_utilization_pct": 43.912423112566664,
+        "max_sample_interval_quota_utilization_pct": 95.10531970516857,
+        "memory_peak_sampled_bytes": 3459436544,
+        "memory_counter_peak_bytes": 3459518464,
+        "swap_peak_sampled_bytes": 0,
+        "oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "app_cpu_seconds_estimate": 122.17104220255472,
+        "app_counter_valid": true,
+        "app_pids_stable": true,
+        "app_process_count_max": 2,
+        "app_whole_target_cpu_pct": 12.726150229432784,
+        "pg_cpu_seconds_estimate": null,
+        "pg_counter_valid": false,
+        "pg_pids_stable": false,
+        "pg_process_count_max": 18,
+        "pg_whole_target_cpu_pct": null
+      },
+      "load_monitor": {
+        "checks": [
+          {
+            "check": "monitor_has_samples",
+            "pass": true
+          },
+          {
+            "check": "strict_wall_and_monotonic_order",
+            "pass": true
+          },
+          {
+            "check": "full_measurement_window_bracketed",
+            "pass": true,
+            "detail": {
+              "first_ms": 1792779062686.924,
+              "start_ms": 1792779127873.9998,
+              "last_ms": 1792779263656.1912,
+              "end_ms": 1792779247873.9998
+            }
+          },
+          {
+            "check": "max_sample_gap_at_most_3s",
+            "pass": false,
+            "detail": 3.192093252
+          },
+          {
+            "check": "cgroup_budget_continuous",
+            "pass": true
+          },
+          {
+            "check": "total_cpu_counter_nondecreasing",
+            "pass": true
+          },
+          {
+            "check": "no_measurement_oom",
+            "pass": true,
+            "detail": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            }
+          },
+          {
+            "check": "wall_to_monotonic_drift_below_100ms",
+            "pass": false,
+            "detail": 0.10858964920043945
+          }
+        ],
+        "warnings": [],
+        "eligible": false,
+        "samples": 110,
+        "max_gap_s": 3.192093252,
+        "window_s": 120.0,
+        "cgroup_cpu_seconds_estimate": 122.27327156509705,
+        "cgroup_quota_utilization_pct": 12.736799121364276,
+        "max_sample_interval_quota_utilization_pct": 46.489360277836646,
+        "memory_peak_sampled_bytes": 404037632,
+        "memory_counter_peak_bytes": 406097920,
+        "swap_peak_sampled_bytes": 0,
+        "oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "app_cpu_seconds_estimate": 0.0,
+        "app_counter_valid": true,
+        "app_pids_stable": true,
+        "app_process_count_max": 0,
+        "app_whole_target_cpu_pct": 0.0,
+        "pg_cpu_seconds_estimate": 0.0,
+        "pg_counter_valid": true,
+        "pg_pids_stable": true,
+        "pg_process_count_max": 0,
+        "pg_whole_target_cpu_pct": 0.0
+      }
+    },
+    {
+      "id": "02-probe-100000",
+      "users": 100000,
+      "classification": "INVALID_GENERATOR",
+      "all_classifications": [
+        "INVALID_GENERATOR",
+        "INVALID_MONITOR",
+        "INVALID_EVIDENCE",
+        "FAIL_SLO"
+      ],
+      "native_verdict": {
+        "pass": false,
+        "fail_reasons": [
+          "p95 46989 ms >= 500",
+          "p99 49381 ms >= 1000",
+          "errors 48.27% >= 1%"
+        ],
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 CPU 99% > 75%",
+          "box 0 fell behind: 57 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 56435 ms late",
+          "box 1 CPU 99% > 75%",
+          "box 1 fell behind: 56 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 83896 ms late; only 4936 of 20000 users active at window start",
+          "box 2 CPU 100% > 75%",
+          "box 2 fell behind: 56 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 70614 ms late",
+          "box 3 CPU 85% > 75%",
+          "box 3 fell behind: 56 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 69848 ms late",
+          "box 4 CPU 91% > 75%",
+          "box 4 fell behind: 57 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 50965 ms late"
+        ]
+      },
+      "overall": {
+        "count": 173496,
+        "rps": 2891.6,
+        "p50_ms": 18350.079,
+        "p90_ms": 41222.143,
+        "p95_ms": 46989.311,
+        "p99_ms": 49381.375,
+        "max_ms": 60030.975,
+        "mean_ms": 21531.04383918939,
+        "errors": 83745,
+        "error_rate": 0.482691243602158,
+        "statuses": {
+          "200": 87838,
+          "201": 1902,
+          "204": 11
+        },
+        "error_classes": {
+          "timeout": 83745
+        },
+        "error_example": "request timeout"
+      },
+      "failed_top_level_checks": [
+        {
+          "check": "before:fixed_target_budget",
+          "pass": false,
+          "detail": null
+        },
+        {
+          "check": "after:fixed_target_budget",
+          "pass": false,
+          "detail": null
+        },
+        {
+          "check": "shard1:at_least99pct_vus_active",
+          "pass": false,
+          "detail": null
+        }
+      ],
+      "PG": {
+        "samples": 139,
+        "successful_samples": 137,
+        "errors": [
+          {
+            "sample": 96,
+            "error": "psql_timeout"
+          },
+          {
+            "sample": 101,
+            "error": "psql_timeout"
+          }
+        ],
+        "max_successful_observer_duration_s": 2.929287251,
+        "all_phase_backend_observations": 1096,
+        "all_phase_wait_observation_counts": [
+          {
+            "state": "idle",
+            "wait_event_type": "Client",
+            "wait_event": "ClientRead",
+            "count": 561
+          },
+          {
+            "state": "active",
+            "wait_event_type": null,
+            "wait_event": null,
+            "count": 383
+          },
+          {
+            "state": "active",
+            "wait_event_type": "IO",
+            "wait_event": "WalSync",
+            "count": 68
+          },
+          {
+            "state": "active",
+            "wait_event_type": "LWLock",
+            "wait_event": "WALWrite",
+            "count": 52
+          },
+          {
+            "state": "active",
+            "wait_event_type": "IO",
+            "wait_event": "DataFileRead",
+            "count": 11
+          },
+          {
+            "state": "idle",
+            "wait_event_type": null,
+            "wait_event": null,
+            "count": 10
+          },
+          {
+            "state": "active",
+            "wait_event_type": "IO",
+            "wait_event": "WalWrite",
+            "count": 4
+          },
+          {
+            "state": "active",
+            "wait_event_type": "Client",
+            "wait_event": "ClientRead",
+            "count": 3
+          },
+          {
+            "state": "active",
+            "wait_event_type": "LWLock",
+            "wait_event": "BufferMapping",
+            "count": 2
+          },
+          {
+            "state": "active",
+            "wait_event_type": "IO",
+            "wait_event": "DataFileExtend",
+            "count": 1
+          },
+          {
+            "state": "idle",
+            "wait_event_type": "IO",
+            "wait_event": "WalSync",
+            "count": 1
+          }
+        ],
+        "all_phase_family_observation_counts": {
+          "idle": 572,
+          "tags_or_tagged_read": 38,
+          "batch_other": 62,
+          "shared_feed": 128,
+          "batch_article": 52,
+          "batch_comments": 78,
+          "write": 130,
+          "shared_list": 30,
+          "user_or_profile_read": 5,
+          "login_read": 1
+        },
+        "blocking_samples": 0,
+        "blocking_observations": [],
+        "max_sampled_active_query_age_s": 1.83073,
+        "measurement_samples": 45,
+        "measurement_backend_observations": 360,
+        "measurement_idle_observations": 158,
+        "measurement_active_observations": 202,
+        "measurement_WAL_wait_observations": 64,
+        "interpretation": "Sample counts are observations, not independent requests or exact wait durations; unsampled intervals and failed observer samples remain unknown."
+      },
+      "client_boxes": [
+        {
+          "index": 0,
+          "users": 20000,
+          "GOMAXPROCS": 2,
+          "native_summary": {
+            "cpu_avg_measure_pct": 99.34813753581662,
+            "cpu_max_measure_pct": 100,
+            "proc_cpu_avg_measure_pct": 142.9218557654919,
+            "rss_peak_mb": 446.859375,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "57 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 56435 ms late"
+            ],
+            "active_vus_at_window_start": 20000,
+            "tcp_connects": 50034
+          },
+          "GC": {
+            "cycles": 14,
+            "max_individual_stw_phase_ms": 89.0,
+            "max_combined_stw_ms_per_cycle": 90.1,
+            "max_stw_cycle": 12,
+            "max_concurrent_mark_wall_ms": 13939.0,
+            "max_concurrent_mark_cycle": 13,
+            "sum_stw_clock_ms": 161.036,
+            "sum_concurrent_mark_wall_ms": 16902.38,
+            "sum_gc_cpu_ms_printed": 14862.115000000002,
+            "sum_mark_assist_cpu_ms": 5687.015,
+            "max_heap_before_mb": 311,
+            "max_heap_after_mark_mb": 316,
+            "max_heap_live_mb": 137,
+            "max_heap_goal_mb": 335,
+            "max_stack_scan_mb": 63,
+            "last_runtime_gc_fraction_percent": 4,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              11,
+              13
+            ]
+          },
+          "unparsed_GC_lines": [],
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "longest_sampler_intervals": [
+            {
+              "previous_nominal_t": 54,
+              "next_nominal_t": 55,
+              "previous_actual_phase_s": 78.246043,
+              "next_actual_phase_s": 117.430407,
+              "elapsed_s": 39.184364,
+              "next_tick_lag_ms": 61430.407,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 123,
+              "next_nominal_t": 124,
+              "previous_actual_phase_s": 124.001961,
+              "next_actual_phase_s": 144.79366,
+              "elapsed_s": 20.791698999999994,
+              "next_tick_lag_ms": 19793.66,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  108.197037,
+                  148.499
+                ],
+                "after_cycle": 13,
+                "before_cycle": 14
+              }
+            },
+            {
+              "previous_nominal_t": 53,
+              "next_nominal_t": 54,
+              "previous_actual_phase_s": 59.703673,
+              "next_actual_phase_s": 78.246043,
+              "elapsed_s": 18.54237,
+              "next_tick_lag_ms": 23246.043,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  54.951100000000004,
+                  89.243
+                ],
+                "after_cycle": 12,
+                "before_cycle": 13
+              }
+            },
+            {
+              "previous_nominal_t": 48,
+              "next_nominal_t": 49,
+              "previous_actual_phase_s": 49.000263,
+              "next_actual_phase_s": 55.212227999999996,
+              "elapsed_s": 6.211964999999999,
+              "next_tick_lag_ms": 5212.228,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 88,
+              "next_nominal_t": 89,
+              "previous_actual_phase_s": 117.447675,
+              "next_actual_phase_s": 122.1186,
+              "elapsed_s": 4.670924999999997,
+              "next_tick_lag_ms": 32118.6,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  108.197037,
+                  148.499
+                ],
+                "after_cycle": 13,
+                "before_cycle": 14
+              }
+            },
+            {
+              "previous_nominal_t": 51,
+              "next_nominal_t": 52,
+              "previous_actual_phase_s": 55.225474,
+              "next_actual_phase_s": 59.690713,
+              "elapsed_s": 4.465239000000004,
+              "next_tick_lag_ms": 6690.713,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  54.951100000000004,
+                  89.243
+                ],
+                "after_cycle": 12,
+                "before_cycle": 13
+              }
+            },
+            {
+              "previous_nominal_t": 42,
+              "next_nominal_t": 43,
+              "previous_actual_phase_s": 43.221522,
+              "next_actual_phase_s": 45.96691,
+              "elapsed_s": 2.7453879999999984,
+              "next_tick_lag_ms": 1966.91,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 144,
+              "next_nominal_t": 145,
+              "previous_actual_phase_s": 145.078933,
+              "next_actual_phase_s": 147.292108,
+              "elapsed_s": 2.2131750000000068,
+              "next_tick_lag_ms": 1292.108,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  108.197037,
+                  148.499
+                ],
+                "after_cycle": 13,
+                "before_cycle": 14
+              }
+            },
+            {
+              "previous_nominal_t": 145,
+              "next_nominal_t": 146,
+              "previous_actual_phase_s": 147.292108,
+              "next_actual_phase_s": 148.478001,
+              "elapsed_s": 1.185892999999993,
+              "next_tick_lag_ms": 1478.001,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  108.197037,
+                  148.499
+                ],
+                "after_cycle": 13,
+                "before_cycle": 14
+              }
+            },
+            {
+              "previous_nominal_t": 41,
+              "next_nominal_t": 42,
+              "previous_actual_phase_s": 42.062837,
+              "next_actual_phase_s": 43.221522,
+              "elapsed_s": 1.1586849999999984,
+              "next_tick_lag_ms": 221.522,
+              "wholly_inside_definite_between_collections_gap": null
+            }
+          ],
+          "first_timeline_error": {
+            "t": 51,
+            "completed": 1,
+            "errors": 1,
+            "active_vus": 17689,
+            "tick_lag_ms": 3225.474,
+            "wake_lag_mean_ms": 315.54058786936235,
+            "wake_lag_max_ms": 713.227,
+            "p50_ms": 9322.495,
+            "p95_ms": 9363.455,
+            "p99_ms": 12935.167,
+            "proc_cpu_pct": 5357.780320123877,
+            "rss_mb": 264.59375,
+            "goroutines": 20002
+          }
+        },
+        {
+          "index": 1,
+          "users": 20000,
+          "GOMAXPROCS": 2,
+          "native_summary": {
+            "cpu_avg_measure_pct": 99.22485410106678,
+            "cpu_max_measure_pct": 100,
+            "proc_cpu_avg_measure_pct": 26.144242355311018,
+            "rss_peak_mb": 460.62109375,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "56 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 83896 ms late",
+              "only 4936 of 20000 users active at window start"
+            ],
+            "active_vus_at_window_start": 4936,
+            "tcp_connects": 44126
+          },
+          "GC": {
+            "cycles": 14,
+            "max_individual_stw_phase_ms": 56.0,
+            "max_combined_stw_ms_per_cycle": 56.026,
+            "max_stw_cycle": 13,
+            "max_concurrent_mark_wall_ms": 5746.0,
+            "max_concurrent_mark_cycle": 13,
+            "sum_stw_clock_ms": 132.102,
+            "sum_concurrent_mark_wall_ms": 7634.06,
+            "sum_gc_cpu_ms_printed": 5819.968,
+            "sum_mark_assist_cpu_ms": 1267.85,
+            "max_heap_before_mb": 276,
+            "max_heap_after_mark_mb": 283,
+            "max_heap_live_mb": 128,
+            "max_heap_goal_mb": 308,
+            "max_stack_scan_mb": 52,
+            "last_runtime_gc_fraction_percent": 1,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              13
+            ]
+          },
+          "unparsed_GC_lines": [],
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "longest_sampler_intervals": [
+            {
+              "previous_nominal_t": 55,
+              "next_nominal_t": 56,
+              "previous_actual_phase_s": 86.830905,
+              "next_actual_phase_s": 135.25682,
+              "elapsed_s": 48.425915,
+              "next_tick_lag_ms": 78256.82,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  77.89302599999999,
+                  145.011
+                ],
+                "after_cycle": 13,
+                "before_cycle": 14
+              }
+            },
+            {
+              "previous_nominal_t": 53,
+              "next_nominal_t": 54,
+              "previous_actual_phase_s": 59.504044,
+              "next_actual_phase_s": 73.856418,
+              "elapsed_s": 14.352374000000005,
+              "next_tick_lag_ms": 18856.418,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 54,
+              "next_nominal_t": 55,
+              "previous_actual_phase_s": 73.856418,
+              "next_actual_phase_s": 86.830905,
+              "elapsed_s": 12.974486999999996,
+              "next_tick_lag_ms": 30830.905,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 56,
+              "next_nominal_t": 57,
+              "previous_actual_phase_s": 135.25682,
+              "next_actual_phase_s": 144.85145,
+              "elapsed_s": 9.594629999999995,
+              "next_tick_lag_ms": 86851.45,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  77.89302599999999,
+                  145.011
+                ],
+                "after_cycle": 13,
+                "before_cycle": 14
+              }
+            },
+            {
+              "previous_nominal_t": 48,
+              "next_nominal_t": 49,
+              "previous_actual_phase_s": 49.140214,
+              "next_actual_phase_s": 56.589776,
+              "elapsed_s": 7.449562,
+              "next_tick_lag_ms": 6589.776,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 49,
+              "next_nominal_t": 50,
+              "previous_actual_phase_s": 56.589776,
+              "next_actual_phase_s": 59.500856,
+              "elapsed_s": 2.9110799999999983,
+              "next_tick_lag_ms": 8500.856,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  52.79523,
+                  67.091
+                ],
+                "after_cycle": 12,
+                "before_cycle": 13
+              }
+            },
+            {
+              "previous_nominal_t": 41,
+              "next_nominal_t": 42,
+              "previous_actual_phase_s": 42.041754,
+              "next_actual_phase_s": 44.181701,
+              "elapsed_s": 2.1399469999999994,
+              "next_tick_lag_ms": 1181.701,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 42,
+              "next_nominal_t": 43,
+              "previous_actual_phase_s": 44.181701,
+              "next_actual_phase_s": 45.858063,
+              "elapsed_s": 1.6763620000000046,
+              "next_tick_lag_ms": 1858.063,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 43,
+              "next_nominal_t": 44,
+              "previous_actual_phase_s": 45.858063,
+              "next_actual_phase_s": 47.053272,
+              "elapsed_s": 1.1952089999999984,
+              "next_tick_lag_ms": 2053.272,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  45.835151,
+                  47.096
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 47,
+              "next_nominal_t": 48,
+              "previous_actual_phase_s": 48.000202,
+              "next_actual_phase_s": 49.140214,
+              "elapsed_s": 1.1400119999999987,
+              "next_tick_lag_ms": 140.214,
+              "wholly_inside_definite_between_collections_gap": null
+            }
+          ],
+          "first_timeline_error": {
+            "t": 52,
+            "completed": 33,
+            "errors": 24,
+            "active_vus": 19775,
+            "tick_lag_ms": 6503.283,
+            "wake_lag_mean_ms": 287.6922129032258,
+            "wake_lag_max_ms": 571.467,
+            "p50_ms": 3125.247,
+            "p95_ms": 3125.247,
+            "p99_ms": 3125.247,
+            "proc_cpu_pct": 21.10661542567737,
+            "rss_mb": 348.11328125,
+            "goroutines": 20002
+          }
+        },
+        {
+          "index": 2,
+          "users": 20000,
+          "GOMAXPROCS": 2,
+          "native_summary": {
+            "cpu_avg_measure_pct": 100,
+            "cpu_max_measure_pct": 100,
+            "proc_cpu_avg_measure_pct": 12.263727707588064,
+            "rss_peak_mb": 478.05078125,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "56 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 70614 ms late"
+            ],
+            "active_vus_at_window_start": 20000,
+            "tcp_connects": 39498
+          },
+          "GC": {
+            "cycles": 13,
+            "max_individual_stw_phase_ms": 4.9,
+            "max_combined_stw_ms_per_cycle": 7.0,
+            "max_stw_cycle": 13,
+            "max_concurrent_mark_wall_ms": 1885.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 14.524,
+            "sum_concurrent_mark_wall_ms": 3661.27,
+            "sum_gc_cpu_ms_printed": 3338.971,
+            "sum_mark_assist_cpu_ms": 1439.163,
+            "max_heap_before_mb": 256,
+            "max_heap_after_mark_mb": 259,
+            "max_heap_live_mb": 143,
+            "max_heap_goal_mb": 264,
+            "max_stack_scan_mb": 41,
+            "last_runtime_gc_fraction_percent": 1,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              11,
+              13
+            ]
+          },
+          "unparsed_GC_lines": [],
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "longest_sampler_intervals": [
+            {
+              "previous_nominal_t": 51,
+              "next_nominal_t": 52,
+              "previous_actual_phase_s": 60.462312,
+              "next_actual_phase_s": 129.94617,
+              "elapsed_s": 69.483858,
+              "next_tick_lag_ms": 76946.17,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 131,
+              "next_nominal_t": 132,
+              "previous_actual_phase_s": 132.006063,
+              "next_actual_phase_s": 146.327547,
+              "elapsed_s": 14.321483999999998,
+              "next_tick_lag_ms": 13327.547,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  62.591319999999996,
+                  146.478
+                ],
+                "after_cycle": 12,
+                "before_cycle": 13
+              }
+            },
+            {
+              "previous_nominal_t": 50,
+              "next_nominal_t": 51,
+              "previous_actual_phase_s": 51.210672,
+              "next_actual_phase_s": 60.462312,
+              "elapsed_s": 9.251639999999995,
+              "next_tick_lag_ms": 8462.312,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 42,
+              "next_nominal_t": 43,
+              "previous_actual_phase_s": 43.240753,
+              "next_actual_phase_s": 45.705609,
+              "elapsed_s": 2.4648560000000046,
+              "next_tick_lag_ms": 1705.609,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 52,
+              "next_nominal_t": 53,
+              "previous_actual_phase_s": 129.94617,
+              "next_actual_phase_s": 131.51336700000002,
+              "elapsed_s": 1.5671970000000215,
+              "next_tick_lag_ms": 77513.367,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  62.591319999999996,
+                  146.478
+                ],
+                "after_cycle": 12,
+                "before_cycle": 13
+              }
+            },
+            {
+              "previous_nominal_t": 135,
+              "next_nominal_t": 136,
+              "previous_actual_phase_s": 146.338017,
+              "next_actual_phase_s": 147.857614,
+              "elapsed_s": 1.5195970000000045,
+              "next_tick_lag_ms": 10857.614,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 48,
+              "next_nominal_t": 49,
+              "previous_actual_phase_s": 49.049518,
+              "next_actual_phase_s": 50.227785,
+              "elapsed_s": 1.1782669999999982,
+              "next_tick_lag_ms": 227.785,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 41,
+              "next_nominal_t": 42,
+              "previous_actual_phase_s": 42.064241,
+              "next_actual_phase_s": 43.240753,
+              "elapsed_s": 1.1765119999999953,
+              "next_tick_lag_ms": 240.753,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  41.970133000000004,
+                  43.808
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            }
+          ],
+          "first_timeline_error": {
+            "t": 52,
+            "completed": 22,
+            "errors": 11,
+            "active_vus": 20000,
+            "tick_lag_ms": 76946.17,
+            "wake_lag_mean_ms": 270.72680056980056,
+            "wake_lag_max_ms": 818.405,
+            "p50_ms": 25067.519,
+            "p95_ms": 48791.551,
+            "p99_ms": 56983.551,
+            "proc_cpu_pct": 0.17391395941199123,
+            "rss_mb": 429.8828125,
+            "goroutines": 20002
+          }
+        },
+        {
+          "index": 3,
+          "users": 20000,
+          "GOMAXPROCS": 2,
+          "native_summary": {
+            "cpu_avg_measure_pct": 84.86951605652857,
+            "cpu_max_measure_pct": 100,
+            "proc_cpu_avg_measure_pct": 14.533686181981476,
+            "rss_peak_mb": 451.5078125,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "56 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 69848 ms late"
+            ],
+            "active_vus_at_window_start": 19820,
+            "tcp_connects": 32231
+          },
+          "GC": {
+            "cycles": 14,
+            "max_individual_stw_phase_ms": 51.0,
+            "max_combined_stw_ms_per_cycle": 51.097,
+            "max_stw_cycle": 14,
+            "max_concurrent_mark_wall_ms": 2216.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 83.468,
+            "sum_concurrent_mark_wall_ms": 4155.33,
+            "sum_gc_cpu_ms_printed": 5342.11,
+            "sum_mark_assist_cpu_ms": 2632.368,
+            "max_heap_before_mb": 269,
+            "max_heap_after_mark_mb": 275,
+            "max_heap_live_mb": 131,
+            "max_heap_goal_mb": 310,
+            "max_stack_scan_mb": 47,
+            "last_runtime_gc_fraction_percent": 1,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              11
+            ]
+          },
+          "unparsed_GC_lines": [],
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "longest_sampler_intervals": [
+            {
+              "previous_nominal_t": 72,
+              "next_nominal_t": 73,
+              "previous_actual_phase_s": 76.116847,
+              "next_actual_phase_s": 123.417328,
+              "elapsed_s": 47.30048099999999,
+              "next_tick_lag_ms": 49417.328,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 73,
+              "next_nominal_t": 74,
+              "previous_actual_phase_s": 123.417328,
+              "next_actual_phase_s": 141.24909200000002,
+              "elapsed_s": 17.83176400000002,
+              "next_tick_lag_ms": 66249.092,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  80.939046,
+                  146.361
+                ],
+                "after_cycle": 13,
+                "before_cycle": 14
+              }
+            },
+            {
+              "previous_nominal_t": 56,
+              "next_nominal_t": 57,
+              "previous_actual_phase_s": 57.011715,
+              "next_actual_phase_s": 71.718589,
+              "elapsed_s": 14.706873999999992,
+              "next_tick_lag_ms": 13718.589,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  54.490463999999996,
+                  75.394
+                ],
+                "after_cycle": 12,
+                "before_cycle": 13
+              }
+            },
+            {
+              "previous_nominal_t": 48,
+              "next_nominal_t": 49,
+              "previous_actual_phase_s": 49.213542,
+              "next_actual_phase_s": 56.426548,
+              "elapsed_s": 7.213006,
+              "next_tick_lag_ms": 6426.548,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 74,
+              "next_nominal_t": 75,
+              "previous_actual_phase_s": 141.24909200000002,
+              "next_actual_phase_s": 145.847776,
+              "elapsed_s": 4.598683999999992,
+              "next_tick_lag_ms": 69847.776,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  80.939046,
+                  146.361
+                ],
+                "after_cycle": 13,
+                "before_cycle": 14
+              }
+            },
+            {
+              "previous_nominal_t": 71,
+              "next_nominal_t": 72,
+              "previous_actual_phase_s": 72.065202,
+              "next_actual_phase_s": 76.116847,
+              "elapsed_s": 4.051645000000008,
+              "next_tick_lag_ms": 3116.847,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 41,
+              "next_nominal_t": 42,
+              "previous_actual_phase_s": 42.10421,
+              "next_actual_phase_s": 45.962236,
+              "elapsed_s": 3.8580259999999953,
+              "next_tick_lag_ms": 2962.236,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 47,
+              "next_nominal_t": 48,
+              "previous_actual_phase_s": 48.000028,
+              "next_actual_phase_s": 49.213542,
+              "elapsed_s": 1.2135139999999964,
+              "next_tick_lag_ms": 213.542,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 40,
+              "next_nominal_t": 41,
+              "previous_actual_phase_s": 41.000893,
+              "next_actual_phase_s": 42.10421,
+              "elapsed_s": 1.103317000000004,
+              "next_tick_lag_ms": 104.21,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  40.925095,
+                  42.14
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            }
+          ],
+          "first_timeline_error": {
+            "t": 52,
+            "completed": 9,
+            "errors": 4,
+            "active_vus": 18104,
+            "tick_lag_ms": 3427.285,
+            "wake_lag_mean_ms": 365.63412765957446,
+            "wake_lag_max_ms": 966.808,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0,
+            "proc_cpu_pct": 9.359331476323119,
+            "rss_mb": 278.85546875,
+            "goroutines": 20002
+          }
+        },
+        {
+          "index": 4,
+          "users": 20000,
+          "GOMAXPROCS": 2,
+          "native_summary": {
+            "cpu_avg_measure_pct": 91.12999127318794,
+            "cpu_max_measure_pct": 100,
+            "proc_cpu_avg_measure_pct": 2662.098953300214,
+            "rss_peak_mb": 446.703125,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "57 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 50965 ms late"
+            ],
+            "active_vus_at_window_start": 20000,
+            "tcp_connects": 39446
+          },
+          "GC": {
+            "cycles": 14,
+            "max_individual_stw_phase_ms": 66.0,
+            "max_combined_stw_ms_per_cycle": 84.0,
+            "max_stw_cycle": 13,
+            "max_concurrent_mark_wall_ms": 2212.0,
+            "max_concurrent_mark_cycle": 13,
+            "sum_stw_clock_ms": 122.925,
+            "sum_concurrent_mark_wall_ms": 3029.44,
+            "sum_gc_cpu_ms_printed": 2819.136,
+            "sum_mark_assist_cpu_ms": 649.752,
+            "max_heap_before_mb": 290,
+            "max_heap_after_mark_mb": 293,
+            "max_heap_live_mb": 129,
+            "max_heap_goal_mb": 315,
+            "max_stack_scan_mb": 56,
+            "last_runtime_gc_fraction_percent": 0,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              13
+            ]
+          },
+          "unparsed_GC_lines": [],
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "longest_sampler_intervals": [
+            {
+              "previous_nominal_t": 59,
+              "next_nominal_t": 60,
+              "previous_actual_phase_s": 60.019109,
+              "next_actual_phase_s": 88.83464000000001,
+              "elapsed_s": 28.815531000000007,
+              "next_tick_lag_ms": 27834.64,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 85,
+              "next_nominal_t": 86,
+              "previous_actual_phase_s": 89.648452,
+              "next_actual_phase_s": 117.912849,
+              "elapsed_s": 28.26439699999999,
+              "next_tick_lag_ms": 30912.849,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  80.899,
+                  147.865
+                ],
+                "after_cycle": 13,
+                "before_cycle": 14
+              }
+            },
+            {
+              "previous_nominal_t": 86,
+              "next_nominal_t": 87,
+              "previous_actual_phase_s": 117.912849,
+              "next_actual_phase_s": 134.338198,
+              "elapsed_s": 16.42534900000001,
+              "next_tick_lag_ms": 46338.198,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  80.899,
+                  147.865
+                ],
+                "after_cycle": 13,
+                "before_cycle": 14
+              }
+            },
+            {
+              "previous_nominal_t": 48,
+              "next_nominal_t": 49,
+              "previous_actual_phase_s": 49.000051,
+              "next_actual_phase_s": 53.405219,
+              "elapsed_s": 4.405168000000003,
+              "next_tick_lag_ms": 3405.219,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 52,
+              "next_nominal_t": 53,
+              "previous_actual_phase_s": 53.409942,
+              "next_actual_phase_s": 57.719113,
+              "elapsed_s": 4.309170999999999,
+              "next_tick_lag_ms": 3719.113,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  52.476389,
+                  73.603
+                ],
+                "after_cycle": 12,
+                "before_cycle": 13
+              }
+            },
+            {
+              "previous_nominal_t": 87,
+              "next_nominal_t": 88,
+              "previous_actual_phase_s": 134.338198,
+              "next_actual_phase_s": 138.356542,
+              "elapsed_s": 4.018343999999985,
+              "next_tick_lag_ms": 49356.542,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  80.899,
+                  147.865
+                ],
+                "after_cycle": 13,
+                "before_cycle": 14
+              }
+            },
+            {
+              "previous_nominal_t": 89,
+              "next_nominal_t": 90,
+              "previous_actual_phase_s": 139.616269,
+              "next_actual_phase_s": 141.965139,
+              "elapsed_s": 2.348870000000005,
+              "next_tick_lag_ms": 50965.139,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  80.899,
+                  147.865
+                ],
+                "after_cycle": 13,
+                "before_cycle": 14
+              }
+            },
+            {
+              "previous_nominal_t": 43,
+              "next_nominal_t": 44,
+              "previous_actual_phase_s": 44.086421,
+              "next_actual_phase_s": 45.856854,
+              "elapsed_s": 1.770432999999997,
+              "next_tick_lag_ms": 856.854,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 41,
+              "next_nominal_t": 42,
+              "previous_actual_phase_s": 42.046854,
+              "next_actual_phase_s": 43.716242,
+              "elapsed_s": 1.6693879999999979,
+              "next_tick_lag_ms": 716.242,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 88,
+              "next_nominal_t": 89,
+              "previous_actual_phase_s": 138.356542,
+              "next_actual_phase_s": 139.616269,
+              "elapsed_s": 1.259726999999998,
+              "next_tick_lag_ms": 49616.269,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  80.899,
+                  147.865
+                ],
+                "after_cycle": 13,
+                "before_cycle": 14
+              }
+            },
+            {
+              "previous_nominal_t": 142,
+              "next_nominal_t": 143,
+              "previous_actual_phase_s": 143.001966,
+              "next_actual_phase_s": 144.125322,
+              "elapsed_s": 1.1233560000000011,
+              "next_tick_lag_ms": 125.322,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  80.899,
+                  147.865
+                ],
+                "after_cycle": 13,
+                "before_cycle": 14
+              }
+            }
+          ],
+          "first_timeline_error": {
+            "t": 52,
+            "completed": 138,
+            "errors": 18,
+            "active_vus": 17010,
+            "tick_lag_ms": 409.942,
+            "wake_lag_mean_ms": 562.2486945812808,
+            "wake_lag_max_ms": 2945.299,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0,
+            "proc_cpu_pct": 12.444444444444445,
+            "rss_mb": 274.72265625,
+            "goroutines": 20002
+          }
+        }
+      ],
+      "budget_raw_and_numeric": {
+        "target": {
+          "raw_cpu_max_values": [
+            "1600000 200000"
+          ],
+          "all_numeric_CPU_ratios": [
+            8.0
+          ],
+          "all_memory_max": [
+            "17179869184"
+          ],
+          "all_swap_max": [
+            "0"
+          ],
+          "guest_entire_phase_clock_offset_span_s": 0.02826111,
+          "reproduced_cgroup_measurement_CPU_seconds": 196.40621700275446
+        },
+        "load": {
+          "raw_cpu_max_values": [
+            "1600000 200000",
+            "800000 100000"
+          ],
+          "all_numeric_CPU_ratios": [
+            8.0
+          ],
+          "all_memory_max": [
+            "8589934592"
+          ],
+          "all_swap_max": [
+            "0"
+          ],
+          "guest_entire_phase_clock_offset_span_s": 0.028137986,
+          "reproduced_cgroup_measurement_CPU_seconds": 347.93514882006946
+        }
+      },
+      "target_monitor": {
+        "checks": [
+          {
+            "check": "monitor_has_samples",
+            "pass": true
+          },
+          {
+            "check": "strict_wall_and_monotonic_order",
+            "pass": true
+          },
+          {
+            "check": "full_measurement_window_bracketed",
+            "pass": true,
+            "detail": {
+              "first_ms": 1792779332028.791,
+              "start_ms": 1792779397249.9998,
+              "last_ms": 1792779487687.5562,
+              "end_ms": 1792779457249.9998
+            }
+          },
+          {
+            "check": "max_sample_gap_at_most_3s",
+            "pass": true,
+            "detail": 2.078741834
+          },
+          {
+            "check": "cgroup_budget_continuous",
+            "pass": false,
+            "detail": null
+          },
+          {
+            "check": "total_cpu_counter_nondecreasing",
+            "pass": true
+          },
+          {
+            "check": "no_measurement_oom",
+            "pass": true,
+            "detail": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            }
+          },
+          {
+            "check": "wall_to_monotonic_drift_below_100ms",
+            "pass": true,
+            "detail": 0.02826070785522461
+          }
+        ],
+        "warnings": [
+          "pg: live-PID CPU sum changed population or decreased; component CPU withheld"
+        ],
+        "eligible": false,
+        "samples": 55,
+        "max_gap_s": 2.078741834,
+        "window_s": 60.0,
+        "cgroup_cpu_seconds_estimate": 196.40621699142366,
+        "cgroup_quota_utilization_pct": 40.917961873213265,
+        "max_sample_interval_quota_utilization_pct": 68.71109124531525,
+        "memory_peak_sampled_bytes": 4447916032,
+        "memory_counter_peak_bytes": 4453240832,
+        "swap_peak_sampled_bytes": 0,
+        "oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "app_cpu_seconds_estimate": 63.07961894750591,
+        "app_counter_valid": true,
+        "app_pids_stable": true,
+        "app_process_count_max": 2,
+        "app_whole_target_cpu_pct": 13.141587280730397,
+        "pg_cpu_seconds_estimate": null,
+        "pg_counter_valid": false,
+        "pg_pids_stable": false,
+        "pg_process_count_max": 18,
+        "pg_whole_target_cpu_pct": null
+      },
+      "load_monitor": {
+        "checks": [
+          {
+            "check": "monitor_has_samples",
+            "pass": true
+          },
+          {
+            "check": "strict_wall_and_monotonic_order",
+            "pass": true
+          },
+          {
+            "check": "full_measurement_window_bracketed",
+            "pass": true,
+            "detail": {
+              "first_ms": 1792779332066.6077,
+              "start_ms": 1792779397249.9998,
+              "last_ms": 1792779487687.7627,
+              "end_ms": 1792779457249.9998
+            }
+          },
+          {
+            "check": "max_sample_gap_at_most_3s",
+            "pass": true,
+            "detail": 2.350272876
+          },
+          {
+            "check": "cgroup_budget_continuous",
+            "pass": false,
+            "detail": null
+          },
+          {
+            "check": "total_cpu_counter_nondecreasing",
+            "pass": true
+          },
+          {
+            "check": "no_measurement_oom",
+            "pass": true,
+            "detail": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            }
+          },
+          {
+            "check": "wall_to_monotonic_drift_below_100ms",
+            "pass": true,
+            "detail": 0.02810978889465332
+          }
+        ],
+        "warnings": [],
+        "eligible": false,
+        "samples": 54,
+        "max_gap_s": 2.350272876,
+        "window_s": 60.0,
+        "cgroup_cpu_seconds_estimate": 347.9351487846955,
+        "cgroup_quota_utilization_pct": 72.4864893301449,
+        "max_sample_interval_quota_utilization_pct": 94.7831336347557,
+        "memory_peak_sampled_bytes": 2709848064,
+        "memory_counter_peak_bytes": 2716786688,
+        "swap_peak_sampled_bytes": 0,
+        "oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "app_cpu_seconds_estimate": 0.0,
+        "app_counter_valid": true,
+        "app_pids_stable": true,
+        "app_process_count_max": 0,
+        "app_whole_target_cpu_pct": 0.0,
+        "pg_cpu_seconds_estimate": 0.0,
+        "pg_counter_valid": true,
+        "pg_pids_stable": true,
+        "pg_process_count_max": 0,
+        "pg_whole_target_cpu_pct": 0.0
+      }
+    },
+    {
+      "id": "03-probe-110000",
+      "users": 110000,
+      "classification": "INVALID_CLOCK",
+      "all_classifications": [
+        "INVALID_CLOCK",
+        "INVALID_GENERATOR",
+        "INVALID_MONITOR",
+        "INVALID_EVIDENCE",
+        "FAIL_SLO"
+      ],
+      "native_verdict": {
+        "pass": false,
+        "fail_reasons": [
+          "p95 20709 ms >= 500",
+          "p99 28672 ms >= 1000",
+          "errors 23.51% >= 1%"
+        ],
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 CPU 99% > 75%",
+          "box 0 fell behind: 57 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 18439 ms late",
+          "box 1 CPU 100% > 75%",
+          "box 1 fell behind: 57 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 59928 ms late",
+          "box 2 CPU 98% > 75%",
+          "box 2 fell behind: 57 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 17950 ms late; only 17624 of 18333 users active at window start",
+          "box 3 CPU 96% > 75%",
+          "box 3 fell behind: 57 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 62673 ms late",
+          "box 4 CPU 99% > 75%",
+          "box 4 fell behind: 58 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 33314 ms late",
+          "box 5 CPU 98% > 75%",
+          "box 5 fell behind: 57 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 24571 ms late"
+        ]
+      },
+      "overall": {
+        "count": 385873,
+        "rps": 6431.216666666666,
+        "p50_ms": 9994.239,
+        "p90_ms": 19169.279,
+        "p95_ms": 20709.375,
+        "p99_ms": 28671.999,
+        "max_ms": 40927.231,
+        "mean_ms": 10238.129817693902,
+        "errors": 90730,
+        "error_rate": 0.23512917462481178,
+        "statuses": {
+          "200": 289451,
+          "201": 5669,
+          "204": 23
+        },
+        "error_classes": {
+          "timeout": 90730
+        },
+        "error_example": "request timeout"
+      },
+      "failed_top_level_checks": [
+        {
+          "check": "before:fixed_target_budget",
+          "pass": false,
+          "detail": null
+        },
+        {
+          "check": "after:fixed_target_budget",
+          "pass": false,
+          "detail": null
+        },
+        {
+          "check": "shard2:at_least99pct_vus_active",
+          "pass": false,
+          "detail": null
+        },
+        {
+          "check": "target:entire_phase_clock_drift_under100ms",
+          "pass": false,
+          "detail": 0.1455683708190918
+        },
+        {
+          "check": "load:entire_phase_clock_drift_under100ms",
+          "pass": false,
+          "detail": 0.1455860137939453
+        }
+      ],
+      "PG": {
+        "samples": 146,
+        "successful_samples": 145,
+        "errors": [
+          {
+            "sample": 31,
+            "error": "psql_timeout"
+          }
+        ],
+        "max_successful_observer_duration_s": 1.618818251,
+        "all_phase_backend_observations": 1160,
+        "all_phase_wait_observation_counts": [
+          {
+            "state": "active",
+            "wait_event_type": null,
+            "wait_event": null,
+            "count": 560
+          },
+          {
+            "state": "idle",
+            "wait_event_type": "Client",
+            "wait_event": "ClientRead",
+            "count": 405
+          },
+          {
+            "state": "active",
+            "wait_event_type": "IO",
+            "wait_event": "WalSync",
+            "count": 88
+          },
+          {
+            "state": "active",
+            "wait_event_type": "LWLock",
+            "wait_event": "WALWrite",
+            "count": 83
+          },
+          {
+            "state": "idle",
+            "wait_event_type": null,
+            "wait_event": null,
+            "count": 10
+          },
+          {
+            "state": "active",
+            "wait_event_type": "IO",
+            "wait_event": "DataFileRead",
+            "count": 5
+          },
+          {
+            "state": "active",
+            "wait_event_type": "IO",
+            "wait_event": "WalWrite",
+            "count": 4
+          },
+          {
+            "state": "active",
+            "wait_event_type": "LWLock",
+            "wait_event": "BufferContent",
+            "count": 3
+          },
+          {
+            "state": "active",
+            "wait_event_type": "LWLock",
+            "wait_event": "XactSLRU",
+            "count": 1
+          },
+          {
+            "state": "active",
+            "wait_event_type": "Client",
+            "wait_event": "ClientRead",
+            "count": 1
+          }
+        ],
+        "all_phase_family_observation_counts": {
+          "idle": 415,
+          "batch_comments": 126,
+          "write": 177,
+          "batch_article": 61,
+          "tags_or_tagged_read": 57,
+          "shared_list": 37,
+          "shared_feed": 180,
+          "batch_other": 104,
+          "user_or_profile_read": 3
+        },
+        "blocking_samples": 0,
+        "blocking_observations": [],
+        "max_sampled_active_query_age_s": 0.590454,
+        "measurement_samples": 60,
+        "measurement_backend_observations": 480,
+        "measurement_idle_observations": 112,
+        "measurement_active_observations": 368,
+        "measurement_WAL_wait_observations": 105,
+        "interpretation": "Sample counts are observations, not independent requests or exact wait durations; unsampled intervals and failed observer samples remain unknown."
+      },
+      "client_boxes": [
+        {
+          "index": 0,
+          "users": 18334,
+          "GOMAXPROCS": 2,
+          "native_summary": {
+            "cpu_avg_measure_pct": 98.57862902915926,
+            "cpu_max_measure_pct": 100,
+            "proc_cpu_avg_measure_pct": 31.372421033824256,
+            "rss_peak_mb": 523.7890625,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "57 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 18439 ms late"
+            ],
+            "active_vus_at_window_start": 18334,
+            "tcp_connects": 33320
+          },
+          "GC": {
+            "cycles": 12,
+            "max_individual_stw_phase_ms": 25.0,
+            "max_combined_stw_ms_per_cycle": 25.053,
+            "max_stw_cycle": 8,
+            "max_concurrent_mark_wall_ms": 4149.0,
+            "max_concurrent_mark_cycle": 10,
+            "sum_stw_clock_ms": 74.903,
+            "sum_concurrent_mark_wall_ms": 8892.37,
+            "sum_gc_cpu_ms_printed": 8363.471,
+            "sum_mark_assist_cpu_ms": 3928.16,
+            "max_heap_before_mb": 329,
+            "max_heap_after_mark_mb": 331,
+            "max_heap_live_mb": 176,
+            "max_heap_goal_mb": 342,
+            "max_stack_scan_mb": 41,
+            "last_runtime_gc_fraction_percent": 2,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              10,
+              11,
+              12
+            ]
+          },
+          "unparsed_GC_lines": [],
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "longest_sampler_intervals": [
+            {
+              "previous_nominal_t": 110,
+              "next_nominal_t": 111,
+              "previous_actual_phase_s": 116.94032,
+              "next_actual_phase_s": 129.232579,
+              "elapsed_s": 12.292258999999987,
+              "next_tick_lag_ms": 17232.579,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  109.0308,
+                  135.271
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 53,
+              "next_nominal_t": 54,
+              "previous_actual_phase_s": 54.000039,
+              "next_actual_phase_s": 63.606789,
+              "elapsed_s": 9.606749999999998,
+              "next_tick_lag_ms": 8606.789,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 71,
+              "next_nominal_t": 72,
+              "previous_actual_phase_s": 79.559436,
+              "next_actual_phase_s": 88.765389,
+              "elapsed_s": 9.205952999999994,
+              "next_tick_lag_ms": 15765.389,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  69.17195000000001,
+                  101.769
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            },
+            {
+              "previous_nominal_t": 70,
+              "next_nominal_t": 71,
+              "previous_actual_phase_s": 71.543405,
+              "next_actual_phase_s": 79.559436,
+              "elapsed_s": 8.016030999999998,
+              "next_tick_lag_ms": 7559.436,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  69.17195000000001,
+                  101.769
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            },
+            {
+              "previous_nominal_t": 93,
+              "next_nominal_t": 94,
+              "previous_actual_phase_s": 94.016809,
+              "next_actual_phase_s": 100.850506,
+              "elapsed_s": 6.833697000000001,
+              "next_tick_lag_ms": 5850.506,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  69.17195000000001,
+                  101.769
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            },
+            {
+              "previous_nominal_t": 109,
+              "next_nominal_t": 110,
+              "previous_actual_phase_s": 110.198447,
+              "next_actual_phase_s": 116.94032,
+              "elapsed_s": 6.741872999999998,
+              "next_tick_lag_ms": 5940.32,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  109.0308,
+                  135.271
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 24,
+              "next_nominal_t": 25,
+              "previous_actual_phase_s": 25.000807,
+              "next_actual_phase_s": 31.206561,
+              "elapsed_s": 6.205754000000002,
+              "next_tick_lag_ms": 5206.561,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 30,
+              "next_nominal_t": 31,
+              "previous_actual_phase_s": 31.208773,
+              "next_actual_phase_s": 36.87583,
+              "elapsed_s": 5.667057,
+              "next_tick_lag_ms": 4875.83,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 101,
+              "next_nominal_t": 102,
+              "previous_actual_phase_s": 102.336436,
+              "next_actual_phase_s": 106.754293,
+              "elapsed_s": 4.417856999999998,
+              "next_tick_lag_ms": 3754.293,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 72,
+              "next_nominal_t": 73,
+              "previous_actual_phase_s": 88.765389,
+              "next_actual_phase_s": 92.335888,
+              "elapsed_s": 3.570498999999998,
+              "next_tick_lag_ms": 18335.888,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  69.17195000000001,
+                  101.769
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            },
+            {
+              "previous_nominal_t": 54,
+              "next_nominal_t": 55,
+              "previous_actual_phase_s": 63.606789,
+              "next_actual_phase_s": 67.141447,
+              "elapsed_s": 3.5346580000000003,
+              "next_tick_lag_ms": 11141.447,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 55,
+              "next_nominal_t": 56,
+              "previous_actual_phase_s": 67.141447,
+              "next_actual_phase_s": 69.807744,
+              "elapsed_s": 2.666297,
+              "next_tick_lag_ms": 12807.744,
+              "wholly_inside_definite_between_collections_gap": null
+            }
+          ],
+          "first_timeline_error": {
+            "t": 35,
+            "completed": 130,
+            "errors": 25,
+            "active_vus": 10878,
+            "tick_lag_ms": 876.841,
+            "wake_lag_mean_ms": 5360.718492884251,
+            "wake_lag_max_ms": 8785.843,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0,
+            "proc_cpu_pct": 6.479646287543832,
+            "rss_mb": 187.0234375,
+            "goroutines": 18336
+          }
+        },
+        {
+          "index": 1,
+          "users": 18334,
+          "GOMAXPROCS": 2,
+          "native_summary": {
+            "cpu_avg_measure_pct": 99.75395082319139,
+            "cpu_max_measure_pct": 100,
+            "proc_cpu_avg_measure_pct": 15.763349190789295,
+            "rss_peak_mb": 476.17578125,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "57 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 59928 ms late"
+            ],
+            "active_vus_at_window_start": 18334,
+            "tcp_connects": 38408
+          },
+          "GC": {
+            "cycles": 12,
+            "max_individual_stw_phase_ms": 19.0,
+            "max_combined_stw_ms_per_cycle": 19.5,
+            "max_stw_cycle": 10,
+            "max_concurrent_mark_wall_ms": 3543.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 68.455,
+            "sum_concurrent_mark_wall_ms": 8219.16,
+            "sum_gc_cpu_ms_printed": 6023.607,
+            "sum_mark_assist_cpu_ms": 3203.288,
+            "max_heap_before_mb": 285,
+            "max_heap_after_mark_mb": 289,
+            "max_heap_live_mb": 158,
+            "max_heap_goal_mb": 302,
+            "max_stack_scan_mb": 48,
+            "last_runtime_gc_fraction_percent": 2,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              11,
+              12
+            ]
+          },
+          "unparsed_GC_lines": [],
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "longest_sampler_intervals": [
+            {
+              "previous_nominal_t": 54,
+              "next_nominal_t": 55,
+              "previous_actual_phase_s": 70.101248,
+              "next_actual_phase_s": 99.94834399999999,
+              "elapsed_s": 29.847095999999993,
+              "next_tick_lag_ms": 43948.344,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 58,
+              "next_nominal_t": 59,
+              "previous_actual_phase_s": 104.307558,
+              "next_actual_phase_s": 120.227963,
+              "elapsed_s": 15.920405000000002,
+              "next_tick_lag_ms": 60227.963,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  80.03790000000001,
+                  125.096
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 53,
+              "next_nominal_t": 54,
+              "previous_actual_phase_s": 54.230293,
+              "next_actual_phase_s": 70.101248,
+              "elapsed_s": 15.870954999999995,
+              "next_tick_lag_ms": 15101.248,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  49.9855,
+                  71.48
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            },
+            {
+              "previous_nominal_t": 68,
+              "next_nominal_t": 69,
+              "previous_actual_phase_s": 120.230104,
+              "next_actual_phase_s": 129.524136,
+              "elapsed_s": 9.294032000000001,
+              "next_tick_lag_ms": 59524.136,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 24,
+              "next_nominal_t": 25,
+              "previous_actual_phase_s": 25.000916,
+              "next_actual_phase_s": 31.28488,
+              "elapsed_s": 6.283964000000001,
+              "next_tick_lag_ms": 5284.88,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 25,
+              "next_nominal_t": 26,
+              "previous_actual_phase_s": 31.28488,
+              "next_actual_phase_s": 36.64469,
+              "elapsed_s": 5.359809999999996,
+              "next_tick_lag_ms": 9644.69,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 55,
+              "next_nominal_t": 56,
+              "previous_actual_phase_s": 99.94834399999999,
+              "next_actual_phase_s": 103.364927,
+              "elapsed_s": 3.416583000000003,
+              "next_tick_lag_ms": 46364.927,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  80.03790000000001,
+                  125.096
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 132,
+              "next_nominal_t": 133,
+              "previous_actual_phase_s": 133.000061,
+              "next_actual_phase_s": 136.290502,
+              "elapsed_s": 3.2904410000000155,
+              "next_tick_lag_ms": 2290.502,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 134,
+              "next_nominal_t": 135,
+              "previous_actual_phase_s": 136.297444,
+              "next_actual_phase_s": 137.718965,
+              "elapsed_s": 1.4215209999999843,
+              "next_tick_lag_ms": 1718.965,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 69,
+              "next_nominal_t": 70,
+              "previous_actual_phase_s": 129.524136,
+              "next_actual_phase_s": 130.927702,
+              "elapsed_s": 1.403566000000012,
+              "next_tick_lag_ms": 59927.702,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 52,
+              "next_nominal_t": 53,
+              "previous_actual_phase_s": 53.000042,
+              "next_actual_phase_s": 54.230293,
+              "elapsed_s": 1.2302510000000026,
+              "next_tick_lag_ms": 230.293,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  49.9855,
+                  71.48
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            }
+          ],
+          "first_timeline_error": {
+            "t": 35,
+            "completed": 275,
+            "errors": 16,
+            "active_vus": 11239,
+            "tick_lag_ms": 646.102,
+            "wake_lag_mean_ms": 5852.405105953031,
+            "wake_lag_max_ms": 8701.342,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0,
+            "proc_cpu_pct": 7.222222222222223,
+            "rss_mb": 182.76953125,
+            "goroutines": 18336
+          }
+        },
+        {
+          "index": 2,
+          "users": 18333,
+          "GOMAXPROCS": 2,
+          "native_summary": {
+            "cpu_avg_measure_pct": 98.44073805468302,
+            "cpu_max_measure_pct": 100,
+            "proc_cpu_avg_measure_pct": 1065.1232293020787,
+            "rss_peak_mb": 482.24609375,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "57 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 17950 ms late",
+              "only 17624 of 18333 users active at window start"
+            ],
+            "active_vus_at_window_start": 17624,
+            "tcp_connects": 33237
+          },
+          "GC": {
+            "cycles": 12,
+            "max_individual_stw_phase_ms": 81.0,
+            "max_combined_stw_ms_per_cycle": 126.0,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 4009.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 179.043,
+            "sum_concurrent_mark_wall_ms": 7499.88,
+            "sum_gc_cpu_ms_printed": 7170.103,
+            "sum_mark_assist_cpu_ms": 3257.17,
+            "max_heap_before_mb": 282,
+            "max_heap_after_mark_mb": 284,
+            "max_heap_live_mb": 156,
+            "max_heap_goal_mb": 311,
+            "max_stack_scan_mb": 37,
+            "last_runtime_gc_fraction_percent": 2,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              8,
+              11,
+              12
+            ]
+          },
+          "unparsed_GC_lines": [],
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "longest_sampler_intervals": [
+            {
+              "previous_nominal_t": 84,
+              "next_nominal_t": 85,
+              "previous_actual_phase_s": 85.000085,
+              "next_actual_phase_s": 101.249065,
+              "elapsed_s": 16.248980000000003,
+              "next_tick_lag_ms": 15249.065,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 63,
+              "next_nominal_t": 64,
+              "previous_actual_phase_s": 64.349456,
+              "next_actual_phase_s": 80.277132,
+              "elapsed_s": 15.927675999999991,
+              "next_tick_lag_ms": 15277.132,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  58.63034,
+                  91.393
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            },
+            {
+              "previous_nominal_t": 24,
+              "next_nominal_t": 25,
+              "previous_actual_phase_s": 25.001232,
+              "next_actual_phase_s": 36.897127,
+              "elapsed_s": 11.895894999999996,
+              "next_tick_lag_ms": 10897.127,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 119,
+              "next_nominal_t": 120,
+              "previous_actual_phase_s": 120.004647,
+              "next_actual_phase_s": 130.614481,
+              "elapsed_s": 10.609834000000006,
+              "next_tick_lag_ms": 9614.481,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  100.528,
+                  134.24
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 53,
+              "next_nominal_t": 54,
+              "previous_actual_phase_s": 54.001052,
+              "next_actual_phase_s": 62.11609,
+              "elapsed_s": 8.115037999999998,
+              "next_tick_lag_ms": 7116.09,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 101,
+              "next_nominal_t": 102,
+              "previous_actual_phase_s": 102.001596,
+              "next_actual_phase_s": 108.773542,
+              "elapsed_s": 6.771946,
+              "next_tick_lag_ms": 5773.542,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  100.528,
+                  134.24
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 103,
+              "next_nominal_t": 104,
+              "previous_actual_phase_s": 108.774722,
+              "next_actual_phase_s": 114.844831,
+              "elapsed_s": 6.070109000000002,
+              "next_tick_lag_ms": 9844.831,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  100.528,
+                  134.24
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 64,
+              "next_nominal_t": 65,
+              "previous_actual_phase_s": 80.277132,
+              "next_actual_phase_s": 83.949814,
+              "elapsed_s": 3.672682000000009,
+              "next_tick_lag_ms": 17949.814,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  58.63034,
+                  91.393
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            },
+            {
+              "previous_nominal_t": 120,
+              "next_nominal_t": 121,
+              "previous_actual_phase_s": 130.614481,
+              "next_actual_phase_s": 134.102409,
+              "elapsed_s": 3.4879279999999824,
+              "next_tick_lag_ms": 12102.409,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  100.528,
+                  134.24
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 117,
+              "next_nominal_t": 118,
+              "previous_actual_phase_s": 118.013089,
+              "next_actual_phase_s": 119.864829,
+              "elapsed_s": 1.8517400000000066,
+              "next_tick_lag_ms": 864.829,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  100.528,
+                  134.24
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 122,
+              "next_nominal_t": 123,
+              "previous_actual_phase_s": 134.10354999999998,
+              "next_actual_phase_s": 135.81405,
+              "elapsed_s": 1.7105000000000246,
+              "next_tick_lag_ms": 11814.05,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 123,
+              "next_nominal_t": 124,
+              "previous_actual_phase_s": 135.81405,
+              "next_actual_phase_s": 137.207851,
+              "elapsed_s": 1.3938009999999963,
+              "next_tick_lag_ms": 12207.851,
+              "wholly_inside_definite_between_collections_gap": null
+            }
+          ],
+          "first_timeline_error": {
+            "t": 35,
+            "completed": 7,
+            "errors": 1,
+            "active_vus": 11595,
+            "tick_lag_ms": 1916.557,
+            "wake_lag_mean_ms": 6354.786516530533,
+            "wake_lag_max_ms": 9279.245,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0,
+            "proc_cpu_pct": 1.9111525425185047,
+            "rss_mb": 174.7734375,
+            "goroutines": 18335
+          }
+        },
+        {
+          "index": 3,
+          "users": 18333,
+          "GOMAXPROCS": 2,
+          "native_summary": {
+            "cpu_avg_measure_pct": 95.69674213105041,
+            "cpu_max_measure_pct": 100,
+            "proc_cpu_avg_measure_pct": 557.7932037038547,
+            "rss_peak_mb": 483.6328125,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "57 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 62673 ms late"
+            ],
+            "active_vus_at_window_start": 18333,
+            "tcp_connects": 37773
+          },
+          "GC": {
+            "cycles": 12,
+            "max_individual_stw_phase_ms": 13.0,
+            "max_combined_stw_ms_per_cycle": 18.6,
+            "max_stw_cycle": 9,
+            "max_concurrent_mark_wall_ms": 5694.0,
+            "max_concurrent_mark_cycle": 8,
+            "sum_stw_clock_ms": 51.424,
+            "sum_concurrent_mark_wall_ms": 9509.35,
+            "sum_gc_cpu_ms_printed": 7047.459,
+            "sum_mark_assist_cpu_ms": 2979.253,
+            "max_heap_before_mb": 293,
+            "max_heap_after_mark_mb": 299,
+            "max_heap_live_mb": 154,
+            "max_heap_goal_mb": 313,
+            "max_stack_scan_mb": 50,
+            "last_runtime_gc_fraction_percent": 2,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              8,
+              12
+            ]
+          },
+          "unparsed_GC_lines": [],
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "longest_sampler_intervals": [
+            {
+              "previous_nominal_t": 53,
+              "next_nominal_t": 54,
+              "previous_actual_phase_s": 54.163345,
+              "next_actual_phase_s": 88.152356,
+              "elapsed_s": 33.989011,
+              "next_tick_lag_ms": 33152.356,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 61,
+              "next_nominal_t": 62,
+              "previous_actual_phase_s": 106.206271,
+              "next_actual_phase_s": 124.81846,
+              "elapsed_s": 18.612189,
+              "next_tick_lag_ms": 61818.46,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  93.91153,
+                  135.062
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 24,
+              "next_nominal_t": 25,
+              "previous_actual_phase_s": 25.004536,
+              "next_actual_phase_s": 34.877342,
+              "elapsed_s": 9.872805999999997,
+              "next_tick_lag_ms": 8877.342,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 56,
+              "next_nominal_t": 57,
+              "previous_actual_phase_s": 93.615733,
+              "next_actual_phase_s": 101.747683,
+              "elapsed_s": 8.13194999999999,
+              "next_tick_lag_ms": 43747.683,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 129,
+              "next_nominal_t": 130,
+              "previous_actual_phase_s": 130.033835,
+              "next_actual_phase_s": 137.13423,
+              "elapsed_s": 7.100394999999992,
+              "next_tick_lag_ms": 6134.23,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 57,
+              "next_nominal_t": 58,
+              "previous_actual_phase_s": 101.747683,
+              "next_actual_phase_s": 106.193165,
+              "elapsed_s": 4.445481999999998,
+              "next_tick_lag_ms": 47193.165,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  93.91153,
+                  135.062
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 55,
+              "next_nominal_t": 56,
+              "previous_actual_phase_s": 90.828727,
+              "next_actual_phase_s": 93.615733,
+              "elapsed_s": 2.787006000000005,
+              "next_tick_lag_ms": 36615.733,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 54,
+              "next_nominal_t": 55,
+              "previous_actual_phase_s": 88.152356,
+              "next_actual_phase_s": 90.828727,
+              "elapsed_s": 2.676371000000003,
+              "next_tick_lag_ms": 34828.727,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 62,
+              "next_nominal_t": 63,
+              "previous_actual_phase_s": 124.81846,
+              "next_actual_phase_s": 126.672694,
+              "elapsed_s": 1.8542340000000053,
+              "next_tick_lag_ms": 62672.694,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  93.91153,
+                  135.062
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 35,
+              "next_nominal_t": 36,
+              "previous_actual_phase_s": 36.001071,
+              "next_actual_phase_s": 37.779005,
+              "elapsed_s": 1.7779339999999948,
+              "next_tick_lag_ms": 779.005,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 52,
+              "next_nominal_t": 53,
+              "previous_actual_phase_s": 53.003365,
+              "next_actual_phase_s": 54.163345,
+              "elapsed_s": 1.1599799999999973,
+              "next_tick_lag_ms": 163.345,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  52.228528,
+                  88.075
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            }
+          ],
+          "first_timeline_error": {
+            "t": 35,
+            "completed": 189,
+            "errors": 20,
+            "active_vus": 10585,
+            "tick_lag_ms": 1.071,
+            "wake_lag_mean_ms": 6090.004850818946,
+            "wake_lag_max_ms": 8832.135,
+            "p50_ms": 10395.647,
+            "p95_ms": 10723.327,
+            "p99_ms": 10764.287,
+            "proc_cpu_pct": 28.015462721227284,
+            "rss_mb": 195.609375,
+            "goroutines": 18335
+          }
+        },
+        {
+          "index": 4,
+          "users": 18333,
+          "GOMAXPROCS": 2,
+          "native_summary": {
+            "cpu_avg_measure_pct": 98.83599377360898,
+            "cpu_max_measure_pct": 100,
+            "proc_cpu_avg_measure_pct": 14.929457042913818,
+            "rss_peak_mb": 443.77734375,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "58 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 33314 ms late"
+            ],
+            "active_vus_at_window_start": 18333,
+            "tcp_connects": 37427
+          },
+          "GC": {
+            "cycles": 13,
+            "max_individual_stw_phase_ms": 26.0,
+            "max_combined_stw_ms_per_cycle": 26.23,
+            "max_stw_cycle": 11,
+            "max_concurrent_mark_wall_ms": 3700.0,
+            "max_concurrent_mark_cycle": 11,
+            "sum_stw_clock_ms": 58.997,
+            "sum_concurrent_mark_wall_ms": 8299.95,
+            "sum_gc_cpu_ms_printed": 8080.792,
+            "sum_mark_assist_cpu_ms": 3400.587,
+            "max_heap_before_mb": 276,
+            "max_heap_after_mark_mb": 277,
+            "max_heap_live_mb": 140,
+            "max_heap_goal_mb": 321,
+            "max_stack_scan_mb": 40,
+            "last_runtime_gc_fraction_percent": 2,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              11,
+              12
+            ]
+          },
+          "unparsed_GC_lines": [],
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "longest_sampler_intervals": [
+            {
+              "previous_nominal_t": 54,
+              "next_nominal_t": 55,
+              "previous_actual_phase_s": 69.619682,
+              "next_actual_phase_s": 89.804268,
+              "elapsed_s": 20.184585999999996,
+              "next_tick_lag_ms": 33804.268,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  69.33823,
+                  103.801
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 53,
+              "next_nominal_t": 54,
+              "previous_actual_phase_s": 54.436664,
+              "next_actual_phase_s": 69.619682,
+              "elapsed_s": 15.183017999999997,
+              "next_tick_lag_ms": 14619.682,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 24,
+              "next_nominal_t": 25,
+              "previous_actual_phase_s": 25.000021,
+              "next_actual_phase_s": 35.243515,
+              "elapsed_s": 10.243494000000002,
+              "next_tick_lag_ms": 9243.515,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 105,
+              "next_nominal_t": 106,
+              "previous_actual_phase_s": 118.901979,
+              "next_actual_phase_s": 127.159199,
+              "elapsed_s": 8.257220000000004,
+              "next_tick_lag_ms": 20159.199,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  111.9621,
+                  138.753
+                ],
+                "after_cycle": 12,
+                "before_cycle": 13
+              }
+            },
+            {
+              "previous_nominal_t": 103,
+              "next_nominal_t": 104,
+              "previous_actual_phase_s": 110.014247,
+              "next_actual_phase_s": 118.152398,
+              "elapsed_s": 8.138151000000008,
+              "next_tick_lag_ms": 13152.398,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 102,
+              "next_nominal_t": 103,
+              "previous_actual_phase_s": 103.007972,
+              "next_actual_phase_s": 110.014247,
+              "elapsed_s": 7.006275000000002,
+              "next_tick_lag_ms": 6014.247,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 93,
+              "next_nominal_t": 94,
+              "previous_actual_phase_s": 94.318138,
+              "next_actual_phase_s": 101.065567,
+              "elapsed_s": 6.747428999999997,
+              "next_tick_lag_ms": 6065.567,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  69.33823,
+                  103.801
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 132,
+              "next_nominal_t": 133,
+              "previous_actual_phase_s": 133.043221,
+              "next_actual_phase_s": 137.619424,
+              "elapsed_s": 4.576203000000021,
+              "next_tick_lag_ms": 3619.424,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  111.9621,
+                  138.753
+                ],
+                "after_cycle": 12,
+                "before_cycle": 13
+              }
+            },
+            {
+              "previous_nominal_t": 126,
+              "next_nominal_t": 127,
+              "previous_actual_phase_s": 127.170601,
+              "next_actual_phase_s": 130.188436,
+              "elapsed_s": 3.017834999999991,
+              "next_tick_lag_ms": 2188.436,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  111.9621,
+                  138.753
+                ],
+                "after_cycle": 12,
+                "before_cycle": 13
+              }
+            },
+            {
+              "previous_nominal_t": 55,
+              "next_nominal_t": 56,
+              "previous_actual_phase_s": 89.804268,
+              "next_actual_phase_s": 92.256549,
+              "elapsed_s": 2.4522810000000135,
+              "next_tick_lag_ms": 35256.549,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  69.33823,
+                  103.801
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 36,
+              "next_nominal_t": 37,
+              "previous_actual_phase_s": 37.090785,
+              "next_actual_phase_s": 39.227552,
+              "elapsed_s": 2.136767000000006,
+              "next_tick_lag_ms": 1227.552,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 52,
+              "next_nominal_t": 53,
+              "previous_actual_phase_s": 53.00232,
+              "next_actual_phase_s": 54.436664,
+              "elapsed_s": 1.434344000000003,
+              "next_tick_lag_ms": 436.664,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  49.358992,
+                  60.611999999999995
+                ],
+                "after_cycle": 10,
+                "before_cycle": 11
+              }
+            }
+          ],
+          "first_timeline_error": {
+            "t": 41,
+            "completed": 1087,
+            "errors": 49,
+            "active_vus": 12877,
+            "tick_lag_ms": 1.19,
+            "wake_lag_mean_ms": 53.09168181818182,
+            "wake_lag_max_ms": 519.784,
+            "p50_ms": 5971.967,
+            "p95_ms": 10010.623,
+            "p99_ms": 10084.351,
+            "proc_cpu_pct": 3.980621003039821,
+            "rss_mb": 241.30859375,
+            "goroutines": 18335
+          }
+        },
+        {
+          "index": 5,
+          "users": 18333,
+          "GOMAXPROCS": 2,
+          "native_summary": {
+            "cpu_avg_measure_pct": 98.39583782699667,
+            "cpu_max_measure_pct": 100,
+            "proc_cpu_avg_measure_pct": 10895.896322155962,
+            "rss_peak_mb": 465.0546875,
+            "fell_behind": true,
+            "fell_behind_reasons": [
+              "57 of 60 seconds had mean timer wake-up lag > 50 ms",
+              "sampler tick 24571 ms late"
+            ],
+            "active_vus_at_window_start": 18333,
+            "tcp_connects": 37658
+          },
+          "GC": {
+            "cycles": 13,
+            "max_individual_stw_phase_ms": 18.0,
+            "max_combined_stw_ms_per_cycle": 18.019,
+            "max_stw_cycle": 9,
+            "max_concurrent_mark_wall_ms": 1596.0,
+            "max_concurrent_mark_cycle": 12,
+            "sum_stw_clock_ms": 44.023999999999994,
+            "sum_concurrent_mark_wall_ms": 3844.86,
+            "sum_gc_cpu_ms_printed": 4772.552,
+            "sum_mark_assist_cpu_ms": 2555.186,
+            "max_heap_before_mb": 311,
+            "max_heap_after_mark_mb": 313,
+            "max_heap_live_mb": 151,
+            "max_heap_goal_mb": 341,
+            "max_stack_scan_mb": 42,
+            "last_runtime_gc_fraction_percent": 1,
+            "cycles_with_stw_over_1000ms": [],
+            "cycles_with_concurrent_mark_over_1000ms": [
+              12
+            ]
+          },
+          "unparsed_GC_lines": [],
+          "alignment": {
+            "exact_runtime_init_anchor_recorded": false,
+            "native_late_start_warning_absent": true,
+            "runtime_init_relative_to_phase_s_range": [
+              -5,
+              0
+            ],
+            "range_basis": "Frozen controller assigns start_at=now+5000ms before Popen; no native late-start warning. Per-process launch/runtime-init timestamp was not saved. Do not treat @ as phase time."
+          },
+          "longest_sampler_intervals": [
+            {
+              "previous_nominal_t": 102,
+              "next_nominal_t": 103,
+              "previous_actual_phase_s": 103.000386,
+              "next_actual_phase_s": 125.254523,
+              "elapsed_s": 22.254137,
+              "next_tick_lag_ms": 21254.523,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 57,
+              "next_nominal_t": 58,
+              "previous_actual_phase_s": 65.129654,
+              "next_actual_phase_s": 85.554379,
+              "elapsed_s": 20.424724999999995,
+              "next_tick_lag_ms": 26554.379,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 52,
+              "next_nominal_t": 53,
+              "previous_actual_phase_s": 53.000431,
+              "next_actual_phase_s": 65.117374,
+              "elapsed_s": 12.116943,
+              "next_tick_lag_ms": 11117.374,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 24,
+              "next_nominal_t": 25,
+              "previous_actual_phase_s": 25.000013,
+              "next_actual_phase_s": 34.920743,
+              "elapsed_s": 9.920730000000002,
+              "next_tick_lag_ms": 8920.743,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 91,
+              "next_nominal_t": 92,
+              "previous_actual_phase_s": 92.133225,
+              "next_actual_phase_s": 100.04868,
+              "elapsed_s": 7.915455000000009,
+              "next_tick_lag_ms": 7048.68,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  70.8095,
+                  101.327
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 130,
+              "next_nominal_t": 131,
+              "previous_actual_phase_s": 131.03415,
+              "next_actual_phase_s": 136.290033,
+              "elapsed_s": 5.255882999999983,
+              "next_tick_lag_ms": 4290.033,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  107.9349,
+                  145.105
+                ],
+                "after_cycle": 12,
+                "before_cycle": 13
+              }
+            },
+            {
+              "previous_nominal_t": 65,
+              "next_nominal_t": 66,
+              "previous_actual_phase_s": 85.57133999999999,
+              "next_actual_phase_s": 89.46937,
+              "elapsed_s": 3.8980300000000057,
+              "next_tick_lag_ms": 22469.37,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  70.8095,
+                  101.327
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            },
+            {
+              "previous_nominal_t": 103,
+              "next_nominal_t": 104,
+              "previous_actual_phase_s": 125.254523,
+              "next_actual_phase_s": 128.698085,
+              "elapsed_s": 3.443561999999986,
+              "next_tick_lag_ms": 23698.085,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  107.9349,
+                  145.105
+                ],
+                "after_cycle": 12,
+                "before_cycle": 13
+              }
+            },
+            {
+              "previous_nominal_t": 25,
+              "next_nominal_t": 26,
+              "previous_actual_phase_s": 34.920743,
+              "next_actual_phase_s": 37.507785999999996,
+              "elapsed_s": 2.587042999999994,
+              "next_tick_lag_ms": 10507.786,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 26,
+              "next_nominal_t": 27,
+              "previous_actual_phase_s": 37.507785999999996,
+              "next_actual_phase_s": 38.916538,
+              "elapsed_s": 1.4087520000000069,
+              "next_tick_lag_ms": 10916.538,
+              "wholly_inside_definite_between_collections_gap": null
+            },
+            {
+              "previous_nominal_t": 127,
+              "next_nominal_t": 128,
+              "previous_actual_phase_s": 128.705358,
+              "next_actual_phase_s": 129.900789,
+              "elapsed_s": 1.1954310000000135,
+              "next_tick_lag_ms": 900.789,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  107.9349,
+                  145.105
+                ],
+                "after_cycle": 12,
+                "before_cycle": 13
+              }
+            },
+            {
+              "previous_nominal_t": 90,
+              "next_nominal_t": 91,
+              "previous_actual_phase_s": 91.028072,
+              "next_actual_phase_s": 92.133225,
+              "elapsed_s": 1.1051530000000014,
+              "next_tick_lag_ms": 133.225,
+              "wholly_inside_definite_between_collections_gap": {
+                "phase_interval_s": [
+                  70.8095,
+                  101.327
+                ],
+                "after_cycle": 11,
+                "before_cycle": 12
+              }
+            }
+          ],
+          "first_timeline_error": {
+            "t": 35,
+            "completed": 1,
+            "errors": 1,
+            "active_vus": 12110,
+            "tick_lag_ms": 3489.669,
+            "wake_lag_mean_ms": 5862.893511064523,
+            "wake_lag_max_ms": 8887.932,
+            "p50_ms": 0,
+            "p95_ms": 0,
+            "p99_ms": 0,
+            "proc_cpu_pct": 0.6105420643511336,
+            "rss_mb": 214.47265625,
+            "goroutines": 18335
+          }
+        }
+      ],
+      "budget_raw_and_numeric": {
+        "target": {
+          "raw_cpu_max_values": [
+            "1600000 200000"
+          ],
+          "all_numeric_CPU_ratios": [
+            8.0
+          ],
+          "all_memory_max": [
+            "17179869184"
+          ],
+          "all_swap_max": [
+            "0"
+          ],
+          "guest_entire_phase_clock_offset_span_s": 0.14556843,
+          "reproduced_cgroup_measurement_CPU_seconds": 241.23016051484657
+        },
+        "load": {
+          "raw_cpu_max_values": [
+            "1600000 200000"
+          ],
+          "all_numeric_CPU_ratios": [
+            8.0
+          ],
+          "all_memory_max": [
+            "8589934592"
+          ],
+          "all_swap_max": [
+            "0"
+          ],
+          "guest_entire_phase_clock_offset_span_s": 0.145585973,
+          "reproduced_cgroup_measurement_CPU_seconds": 338.0160595504824
+        }
+      },
+      "target_monitor": {
+        "checks": [
+          {
+            "check": "monitor_has_samples",
+            "pass": true
+          },
+          {
+            "check": "strict_wall_and_monotonic_order",
+            "pass": true
+          },
+          {
+            "check": "full_measurement_window_bracketed",
+            "pass": true,
+            "detail": {
+              "first_ms": 1792779556041.215,
+              "start_ms": 1792779621269.0,
+              "last_ms": 1792779708085.319,
+              "end_ms": 1792779681269.0
+            }
+          },
+          {
+            "check": "max_sample_gap_at_most_3s",
+            "pass": true,
+            "detail": 1.299163209
+          },
+          {
+            "check": "cgroup_budget_continuous",
+            "pass": false,
+            "detail": null
+          },
+          {
+            "check": "total_cpu_counter_nondecreasing",
+            "pass": true
+          },
+          {
+            "check": "no_measurement_oom",
+            "pass": true,
+            "detail": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            }
+          },
+          {
+            "check": "wall_to_monotonic_drift_below_100ms",
+            "pass": true,
+            "detail": 0.005553483963012695
+          }
+        ],
+        "warnings": [
+          "pg: live-PID CPU sum changed population or decreased; component CPU withheld"
+        ],
+        "eligible": false,
+        "samples": 59,
+        "max_gap_s": 1.299163209,
+        "window_s": 60.0,
+        "cgroup_cpu_seconds_estimate": 241.23016047482088,
+        "cgroup_quota_utilization_pct": 50.25628343225434,
+        "max_sample_interval_quota_utilization_pct": 71.12512477673779,
+        "memory_peak_sampled_bytes": 4874690560,
+        "memory_counter_peak_bytes": 4876218368,
+        "swap_peak_sampled_bytes": 0,
+        "oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "app_cpu_seconds_estimate": 79.55792853313102,
+        "app_counter_valid": true,
+        "app_pids_stable": true,
+        "app_process_count_max": 2,
+        "app_whole_target_cpu_pct": 16.574568444402296,
+        "pg_cpu_seconds_estimate": null,
+        "pg_counter_valid": false,
+        "pg_pids_stable": false,
+        "pg_process_count_max": 19,
+        "pg_whole_target_cpu_pct": null
+      },
+      "load_monitor": {
+        "checks": [
+          {
+            "check": "monitor_has_samples",
+            "pass": true
+          },
+          {
+            "check": "strict_wall_and_monotonic_order",
+            "pass": true
+          },
+          {
+            "check": "full_measurement_window_bracketed",
+            "pass": true,
+            "detail": {
+              "first_ms": 1792779556078.5173,
+              "start_ms": 1792779621269.0,
+              "last_ms": 1792779707523.8325,
+              "end_ms": 1792779681269.0
+            }
+          },
+          {
+            "check": "max_sample_gap_at_most_3s",
+            "pass": true,
+            "detail": 1.243549501
+          },
+          {
+            "check": "cgroup_budget_continuous",
+            "pass": false,
+            "detail": null
+          },
+          {
+            "check": "total_cpu_counter_nondecreasing",
+            "pass": true
+          },
+          {
+            "check": "no_measurement_oom",
+            "pass": true,
+            "detail": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            }
+          },
+          {
+            "check": "wall_to_monotonic_drift_below_100ms",
+            "pass": true,
+            "detail": 0.005626678466796875
+          }
+        ],
+        "warnings": [],
+        "eligible": false,
+        "samples": 59,
+        "max_gap_s": 1.243549501,
+        "window_s": 60.0,
+        "cgroup_cpu_seconds_estimate": 338.0160595814118,
+        "cgroup_quota_utilization_pct": 70.42001241279414,
+        "max_sample_interval_quota_utilization_pct": 88.0103609215148,
+        "memory_peak_sampled_bytes": 3445796864,
+        "memory_counter_peak_bytes": 3453865984,
+        "swap_peak_sampled_bytes": 0,
+        "oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "app_cpu_seconds_estimate": 0.0,
+        "app_counter_valid": true,
+        "app_pids_stable": true,
+        "app_process_count_max": 0,
+        "app_whole_target_cpu_pct": 0.0,
+        "pg_cpu_seconds_estimate": 0.0,
+        "pg_counter_valid": true,
+        "pg_pids_stable": true,
+        "pg_process_count_max": 0,
+        "pg_whole_target_cpu_pct": 0.0
+      }
+    }
+  ],
+  "client_GC_summary": {
+    "cycles": 181,
+    "max_individual_STW_ms": 89.0,
+    "max_concurrent_mark_wall_ms": 13939.0,
+    "longest_sampler_interval_wholly_between_completed_collections": {
+      "phase": "02-probe-100000",
+      "box": 1,
+      "previous_nominal_t": 55,
+      "next_nominal_t": 56,
+      "previous_actual_phase_s": 86.830905,
+      "next_actual_phase_s": 135.25682,
+      "elapsed_s": 48.425915,
+      "next_tick_lag_ms": 78256.82,
+      "wholly_inside_definite_between_collections_gap": {
+        "phase_interval_s": [
+          77.89302599999999,
+          145.011
+        ],
+        "after_cycle": 13,
+        "before_cycle": 14
+      }
+    },
+    "timing_limits": "GC @ timestamps have no exact runtime-init wall anchor. Definite inter-collection gaps retain the complete -5..0s offset range from the saved launch protocol."
+  },
+  "host_power_and_clock": {
+    "polls": 67,
+    "all_reported_safe": true,
+    "max_poll_gap_s": 11.345736292001675,
+    "max_wall_minus_monotonic_change_s": 0.0012650489807128906,
+    "exit": {
+      "kind": "exit",
+      "utc": "2026-10-23T18:22:08.102333+00:00",
+      "monotonic": 99305.82846525,
+      "returncode": 0,
+      "interrupted": false
+    },
+    "meaning": "Continuous host polls/host clock consistency do not show a sleep recurrence. Guest wall/monotonic failures remain unchanged and are not automatically proof of host sleep."
+  },
+  "host_aggregate_snapshot": {
+    "path": "audit/host-top-p2-20261023t1818.txt",
+    "text": "Processes: 591 total, 3 running, 588 sleeping, 4408 threads \n2026/10/23 20:18:42\nLoad Avg: 13.28, 25.56, 37.98 \nCPU usage: 11.78% user, 13.78% sys, 74.42% idle \nSharedLibs: 690M resident, 165M data, 416M linkedit.\nMemRegions: 941158 total, 5649M resident, 138M private, 9716M shared.\nPhysMem: 31G used (3088M wired, 9694M compressor), 99M unused.\nVM: 308T vsize, 6144M framework vsize, 1150357(0) swapins, 1906904(0) swapouts.\nNetworks: packets: 19477516/22G in, 8518109/7732M out.\nDisks: 49091566/941G read, 62875648/3798G written.\n\n\n",
+    "limit": "Single aggregate snapshot reports31GiB used/9.7GiB compressor; this does not establish a causal memory-pressure event. The first top CPU display is not used as a current-interval CPU comparison."
+  },
+  "cleanup": {
+    "app_stop": {
+      "stopped_pgid": 371,
+      "members_before": [
+        371,
+        372
+      ]
+    },
+    "database_drop": {
+      "database": "mc_pair_20261023_181051_2b1bad_1",
+      "dropped": true
+    },
+    "client_state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 137,
+      "Error": "",
+      "StartedAt": "2026-10-23T18:10:51.96194696Z",
+      "FinishedAt": "2026-10-23T18:22:02.973350465Z"
+    },
+    "target_state": {
+      "Status": "running",
+      "Running": true,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 48077,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-23T18:10:10.372198136Z",
+      "FinishedAt": "2026-10-23T17:22:56.65662267Z"
+    },
+    "target_left": "PG/target running and idle after the diagnostic; owned application and client stopped."
+  },
+  "conclusions": [
+    "All three fixed phases completed, but all remain invalid and fail their native SLO. No hold or capacity score exists.",
+    "Increasing client GOMAXPROCS to2 did not remove severe timer/active-user failures. The100k/110k client cgroup used about5.80/5.63CPU cores while the target used about3.27/4.02; this is consistent with client/VM scheduling pressure, not proof that the server is fault-free.",
+    "No blocker PID was sampled in any phase. The earlier P1 relation-lock episode was not reproduced, and cannot be the necessary explanation for this P2 collapse.",
+    "Sampled database work includes idle readers, active execution and WAL sync/write waits. Samples do not identify all queued or unsampled application work.",
+    "Completed GC traces show no seconds-long individual STW phase. A48.426-second sampler gap lies wholly between completed collections even with full anchor uncertainty; those recorded collections do not explain it. Allocation/sweeping, descheduling and queued application work are not thereby excluded.",
+    "Raw cpu.max changed from800000/100000 to1600000/200000 while retaining exactly8CPU. The frozen exact-string audit flags a budget mismatch; it does not demonstrate more than8CPU. Preserve the original verdicts because real scheduling, timing, active-user and SLO failures remain.",
+    "The charging guard remained safe and the host clock stayed consistent within1.27ms. Guest whole-phase clock drift111ms warm/146ms110 is real saved evidence but alone does not prove host sleep.",
+    "P1/P2 changes include both client concurrency and observer details, so this is not a pure causal comparison or a performance comparison. Initial collapse cause remains unresolved."
+  ],
+  "raw_inputs": {
+    "audit/diagnostic-p2-review.py": {
+      "bytes": 16862,
+      "sha256": "5e43eb583030181d25a8d7903420fc7597729be0b4d04c9a42a7de5849923a59"
+    },
+    "audit/diagnostic-goose110-gc-analyze.py": {
+      "bytes": 15139,
+      "sha256": "89c9813046837332de3b02dd8168cf1100fc9cff78bb28f17cb23153e6c32afe"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/plan.json": {
+      "bytes": 6182,
+      "sha256": "3216bf9369eee3d245aa25234c9346fcfa9df8cdec951bafb62aaf6f56029899"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/frozen/metadata.json": {
+      "bytes": 4584,
+      "sha256": "83cd5f6753265d21bf4bc128c807608840be264e6155b1096d0072937fc3259d"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/frozen/app": {
+      "bytes": 423640,
+      "sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/01-warmup-10000/assessment.json": {
+      "bytes": 15134,
+      "sha256": "6a5f4e7282c3c5b57d54d83a17e0beb94aeaf917948706fd2fc5b1daca27a37f"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/01-warmup-10000/phase.json": {
+      "bytes": 512,
+      "sha256": "83abd1f714622cb0b4ec0f9ec0d4d2970ab1680c4a6e57829937fab8a8763115"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/01-warmup-10000/box0.json": {
+      "bytes": 373435,
+      "sha256": "f0e9d7f530e98a5a8b94f1d7561270108669bf483c0869a8fbffb87fc87abf2b"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/01-warmup-10000/box0.log": {
+      "bytes": 8327,
+      "sha256": "a4e33c7c335e9459a88a2376ff4f34bed967856dd833d6fc8d363cbfeb32c5da"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/01-warmup-10000/pg-samples.jsonl": {
+      "bytes": 636758,
+      "sha256": "9f6f1acfb8436a6bdb9fdac2e52a93d436e7f59df6f4c28c7de6eac1a8d3d5e2"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/01-warmup-10000/target-monitor.jsonl": {
+      "bytes": 171367,
+      "sha256": "93a2a9eb61096a1aa77bd26442d298820a00ea28b376976ee6170b6e6eadaa16"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/01-warmup-10000/load-monitor.jsonl": {
+      "bytes": 151309,
+      "sha256": "f440dad90be787b681d1c04a662a6849576122478a92365e978fc543b62b6fab"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/assessment.json": {
+      "bytes": 25833,
+      "sha256": "73d5c856f422f50900e1922f208e33cd131441be9d8a421f471305cb22da58a3"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/phase.json": {
+      "bytes": 976,
+      "sha256": "3a5d4d6b224e4793e1a38a256022acf70e40773a5ac5acc84d6f930a27d04b80"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/box0.json": {
+      "bytes": 125299,
+      "sha256": "5d58fc661b523fd84e582f55acf40c6c9b4207d75ecfea283463eaab5c7c0c5b"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/box0.log": {
+      "bytes": 5109,
+      "sha256": "ba4148f6ba5ea5a605f8ded6f896d04783ad831a7cb8f2f6fb77342803a00db8"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/box1.json": {
+      "bytes": 129245,
+      "sha256": "3d015a2544176e2893bf6d1837cc960f20a1fcf2b5b99dce771f2baa83b384d6"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/box1.log": {
+      "bytes": 5262,
+      "sha256": "994bc93d70d1e13ae2af014d6e386d76e1335268d77838bda970d8c671e299e2"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/box2.json": {
+      "bytes": 124096,
+      "sha256": "5750eef176e7334972b40742c056f59c1d8b52e95042872d42a93645231989cf"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/box2.log": {
+      "bytes": 4975,
+      "sha256": "0504daa4d79c394d6d192934a762617b912e31ce2af4699edaf83dca98d2b33e"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/box3.json": {
+      "bytes": 136312,
+      "sha256": "f5852b0ea92fc60ad5f0eeff7e14ba47959d2909da2f4ed544f1b4bf2a51bf83"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/box3.log": {
+      "bytes": 5101,
+      "sha256": "5d9f5ee4dc6048d499d06dd96aa7d8e297eb70fc12b97d3b39bdec3d3fa25915"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/box4.json": {
+      "bytes": 137183,
+      "sha256": "b8eaa5da7e0fae4f38792415a3af2079c3780c2966597e2403d91da456457cff"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/box4.log": {
+      "bytes": 5202,
+      "sha256": "f0c82976c38fcff7bc914ee11f153ff9c9a7c7a95cc33e5bf5b1d80ae1e3a044"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/pg-samples.jsonl": {
+      "bytes": 471668,
+      "sha256": "b23efbf5c4289bf2558deb5f722bb3d88dc329d9e899fb50f1e3ba92b0c2f78e"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/target-monitor.jsonl": {
+      "bytes": 135439,
+      "sha256": "8f7a4ab3012128fb00218726e1e8bd88a98a6682c873f2d85e358ef2b63e3549"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/02-probe-100000/load-monitor.jsonl": {
+      "bytes": 118767,
+      "sha256": "ba04757a29ceb4a3f1b0e36fb40152b44685dfc194856f1cf2f6ccbf35eb8787"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/assessment.json": {
+      "bytes": 28830,
+      "sha256": "8e7c4c6f210050987ea916c194608124c1fa3fccf5828172ab93aca7881cce16"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/phase.json": {
+      "bytes": 1092,
+      "sha256": "dd5eb81a12a507c840d3abbab296e2f7f203d66749438274a250931c111c971f"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/box0.json": {
+      "bytes": 141181,
+      "sha256": "fff4a8d582918bf3dd0458fa5730fe37bd314ab2a4b5604d4de0c9801feca824"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/box0.log": {
+      "bytes": 4910,
+      "sha256": "4990cfa77da0cd67f72826e4e52dbfa6942a08034a37070dbc41ff8094eee637"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/box1.json": {
+      "bytes": 130205,
+      "sha256": "113c40a650e89233e52dcca689f586606ea14fe945cfd4e90e3c46947cc4d2cf"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/box1.log": {
+      "bytes": 4939,
+      "sha256": "00fcd3a60764341ed09f6ec387c1bf5207ef7a1aea91e008ab23160e5539cbc7"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/box2.json": {
+      "bytes": 134869,
+      "sha256": "ab287af29c12fbc882501165f2c25820eede8c24162ec4407d94d2d1131ed25e"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/box2.log": {
+      "bytes": 4976,
+      "sha256": "dd5c2778f3e3740e7f281cc92cbcf67691daa8f8311b214fe6edb1d3131bdf4a"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/box3.json": {
+      "bytes": 126108,
+      "sha256": "a1e2b6c37ac8266c095563ca4451e71cb6ab462bf03ff75dd0571096ab8d7b86"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/box3.log": {
+      "bytes": 4940,
+      "sha256": "42f6651b4034d50020b27b7738d1eb482204babc42bb7016fddf5e2b8a0d2f97"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/box4.json": {
+      "bytes": 128980,
+      "sha256": "7ce4d6b9b216e903255a2c3e5e71822c0ff4b4251a00f4d42276a954fe77ad3b"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/box4.log": {
+      "bytes": 5070,
+      "sha256": "1758163f29795a3036c86439466123d4f65230bb84c982e05bf8264ee0998b2b"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/box5.json": {
+      "bytes": 132474,
+      "sha256": "24e30f0f0f6f435687c1737b9a69c1915771f6d53d0c992a39e2338e2178bb64"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/box5.log": {
+      "bytes": 5078,
+      "sha256": "48a04415e3ab794b3e382b94ba39f1d8355478da1ce01e4ef81477f412785702"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/pg-samples.jsonl": {
+      "bytes": 499719,
+      "sha256": "cbe91eecb17937dceb8ee83c1b171a9aeb7c0ecbd5868f92b33397188148a722"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/target-monitor.jsonl": {
+      "bytes": 134575,
+      "sha256": "d70174d55e98a045319b3fedf833eceacce31b48b18367bd67476bfe3adb3afd"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/phases/03-probe-110000/load-monitor.jsonl": {
+      "bytes": 117250,
+      "sha256": "281ad42f0d6c5e9b0102b98eeb6a0bcd34c3225923d16a8bf3d06111fc6f3b18"
+    },
+    "diagnostics/power-guard-p2-20261023t1811.jsonl": {
+      "bytes": 17731,
+      "sha256": "afd28ff335e38552c5d380e6af54844255ebb0a968063f0992052b63455c897b"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/stopped.json": {
+      "bytes": 52,
+      "sha256": "c5b44f6b6909aa46589e2110681bbfc7442a46ed2631a7d25e35b5a98a48b110"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/cases/goose32/dropped.json": {
+      "bytes": 66,
+      "sha256": "85fd761460ff55fb9b08d54beed162cdeb15b55328daef3749eae43923beaaf2"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/load-final-inspect.json": {
+      "bytes": 7177,
+      "sha256": "d9a3304705e2639e24a4157377e6de89b7a58190938fb263e6d84ce89eafd98b"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/target-final-inspect.json": {
+      "bytes": 8183,
+      "sha256": "58042b975c6945af29970e4fad90a4f7d034f28806a76b494b484a790a4793df"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/final-resource-check.json": {
+      "bytes": 147,
+      "sha256": "2a6fae0f9e785f39feff3f19ea14c5af57ae02c594477f5ee788645d9e50a53f"
+    },
+    "diagnosticgoose110p2_20261023t181051_2b1bad/diagnostic-result.json": {
+      "bytes": 93908,
+      "sha256": "628d6b6cbd2ffe3e626499f3b419640fb39e6287e81dbc27f32fcfd5d9e02e0e"
+    },
+    "audit/host-top-p2-20261023t1818.txt": {
+      "bytes": 535,
+      "sha256": "e780102145bb2d6ff7e3705a7d4bd1dcbe032561fda9d8289564d61d1923ff07"
+    }
+  }
+}

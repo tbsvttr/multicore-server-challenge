@@ -1,0 +1,75 @@
+{
+  "schema": "native-darwin-driver-independent-static-review-v2",
+  "created_utc": "2026-10-23T18:59:41.972216+00:00",
+  "status": "GO_STATIC_PREPARATION_ONLY",
+  "source_path": "/private/tmp/multicore-optimize-20261023/diagnostics/native-darwin-plan/run-diagnostic-v2.py",
+  "source_sha256": "c74657fca0b0b23e18d02c2d6d07d8aabd4c8eba02c2e2028a2f605358a71d06",
+  "frozen_v1_source_sha256_unchanged": "06a7853f104a4b8a477fe80dc0ce2d3e866a92cf781dc9237af56d9fc3876aab",
+  "scope": "Future V2 source/AST review only. No runtime, Docker, SQL, network, sockets, workload, process inspection/control, or test execution was performed. Current V1 experiment artifacts were not read or changed.",
+  "syntax": {
+    "driver_ast": true,
+    "embedded_launcher_asts": [
+      "client_launcher",
+      "monitor_launcher"
+    ]
+  },
+  "checks": [
+    {
+      "item": "Clone Docker CLI runs in a separate session while driver handlers defer INT/TERM/HUP",
+      "lines": [
+        118,
+        135
+      ]
+    },
+    {
+      "item": "Deferred interruption is raised only after helper command returns; earlier driver handlers are restored",
+      "lines": [
+        129,
+        135
+      ]
+    },
+    {
+      "item": "CLI has a150-second timeout; helper errors/timeouts mark clone-helper failure",
+      "lines": [
+        132,
+        218,
+        221
+      ]
+    },
+    {
+      "item": "Unique PGAPPNAME tag scopes cleanup observations and cancellation to this clone operation",
+      "lines": [
+        116,
+        130,
+        137,
+        158
+      ]
+    },
+    {
+      "item": "Backend settlement is checked before exact generated-name drop and absence verification",
+      "lines": [
+        321,
+        334
+      ]
+    },
+    {
+      "item": "Helper/settlement uncertainty forces the newly owned diagnostic target stopped even if charging remains safe",
+      "lines": [
+        323,
+        325,
+        345,
+        348
+      ]
+    },
+    {
+      "item": "Frozen V1 script still hashes to06a7853f; no current-run artifact was rewritten",
+      "lines": []
+    }
+  ],
+  "actionable_findings": [],
+  "limitations": [
+    "This is static review, not executed cancellation/timeout proof.",
+    "The helper has per-query120-second bounds; V2 independently caps the attached clone CLI at150seconds and then uses scoped backend cleanup/fallback target stop.",
+    "A failed uncertain preparation retains data/artifacts and is not represented as a successful capacity or performance result."
+  ]
+}

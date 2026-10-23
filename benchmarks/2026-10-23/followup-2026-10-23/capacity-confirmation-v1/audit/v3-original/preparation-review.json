@@ -1,0 +1,71 @@
+{
+  "schema": "multicore-local-capacity-v3-preparation-review",
+  "status": "PASS",
+  "created_utc": "2026-10-23T10:33:05.483311+00:00",
+  "new_prepared_schema": "multicore-local-capacity-v3",
+  "test_command": "python3 /private/tmp/multicore-optimize-20261023/capacity-v3/audit/test_capacity.py",
+  "checks_passed": 72,
+  "new_config_fields": {
+    "growth_factor": 1.1,
+    "search_overrides": {
+      "start_users": 80000
+    }
+  },
+  "growth_policy": "Allowed1.1or2(default2); nice(lo*factor), strictlyincrease withlo+1 fallback and clamp160000. Same\u226416probes,\u22644holds,5% bracket,300s hold,10k120s warmup; no old results reused.",
+  "exact_pass_expansion_sequence": [
+    80000,
+    88000,
+    97000,
+    110000,
+    120000,
+    130000,
+    140000,
+    150000,
+    160000
+  ],
+  "unchanged": "App+PG8CPU16GiB; declaredclient8CPU8GiB; same workload/native binary/SLO/rawnative qualification and explicit local CPU scope; timing/active/cgroup75%/clock/NOFILE/source/fullseed gates unchanged.",
+  "code_sha256": {
+    "capacity_controller.py": "8d371868b88e345d258c461a44befd8d98f387241efd0d9fa648ed696253d478",
+    "search_policy.py": "33aa0281a09e4f1e3b50dcf63c98e419694735969b481963be971c146195ac5c",
+    "audit/aggregate.py": "e8510cc57870532450be39dd01049d81c1b7877158b93e2c228c75af30b65452",
+    "audit/evidence.py": "33a17c583571b42d040fc9e475256302281635fc58fd2171fc59f3d47f16e115",
+    "audit/primitives.py": "8908b204b243ad5ad20e725d3284d115b5f9ccc8719931cd5018fcaf73104423",
+    "audit/test_capacity.py": "33476c5babbbcbf177269b1db3b960a2319eace06966db7e0326909f02846cb8",
+    "CAPACITY.md": "6a26f06c19cc0facf95f194688cad5693b5b33e75b964a2b6dfbcec6fa441844"
+  },
+  "protected_active_v2_modules": {
+    "capacity_controller.py": {
+      "source_sha256": "144ef5c5e963427bb424193777220dddc51238635fcfdf95ca801aed54040528",
+      "frozen_sha256": "144ef5c5e963427bb424193777220dddc51238635fcfdf95ca801aed54040528",
+      "unchanged": true
+    },
+    "search_policy.py": {
+      "source_sha256": "49a427b137ec0893db213b229cc301a06903fac95ba2bfef2c8bbc7e8ae1ae19",
+      "frozen_sha256": "49a427b137ec0893db213b229cc301a06903fac95ba2bfef2c8bbc7e8ae1ae19",
+      "unchanged": true
+    },
+    "audit/aggregate.py": {
+      "source_sha256": "017d50cc0265fd8804d7abfcd2bd7f514a1fb257d586f6f36172b607d1281558",
+      "frozen_sha256": "017d50cc0265fd8804d7abfcd2bd7f514a1fb257d586f6f36172b607d1281558",
+      "unchanged": true
+    },
+    "audit/evidence.py": {
+      "source_sha256": "2b3f5338b8053b5eba3b01135dea76f595e575daa85fe421009a1c2795f04dca",
+      "frozen_sha256": "2b3f5338b8053b5eba3b01135dea76f595e575daa85fe421009a1c2795f04dca",
+      "unchanged": true
+    },
+    "audit/primitives.py": {
+      "source_sha256": "8908b204b243ad5ad20e725d3284d115b5f9ccc8719931cd5018fcaf73104423",
+      "frozen_sha256": "8908b204b243ad5ad20e725d3284d115b5f9ccc8719931cd5018fcaf73104423",
+      "unchanged": true
+    },
+    "audit/test_capacity.py": {
+      "source_sha256": "7e8e2ea5f0ab29fd7a7dc443c110bfd685663bb0339ab7169dfd080443e9cc73",
+      "frozen_sha256": "7e8e2ea5f0ab29fd7a7dc443c110bfd685663bb0339ab7169dfd080443e9cc73",
+      "unchanged": true
+    }
+  },
+  "diagnosis_path": "/private/tmp/multicore-optimize-20261023/audit/capacity-v2-rust160-diagnosis.json",
+  "diagnosis_sha256": "70f104a819d0148a98cb35f83ac6ba68cccb3749badf7aa8ce23a0c53323f6d4",
+  "execution": "No Docker/build/query/load. No source module or raw mutation in activev2; only newcapacity-v3 package and derived diagnostic outsideactive run."
+}

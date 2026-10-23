@@ -1,0 +1,47 @@
+{
+  "schema": "confirmation-preparation-summary-v1",
+  "status": "UNEXECUTED_DRAFT_READY",
+  "runtime_executed": false,
+  "immutable_plan_prepared": false,
+  "B_count_selected": false,
+  "selected_points": {
+    "goose32-prototypeB": null,
+    "rust7": 130000
+  },
+  "controller_sha256": "c159a66c410d23e5358ee619ac278f7ce13fe366a5321a35b94faf2aa6b75d8f",
+  "aggregate_sha256": "835c88cb6f78e422fd1c325fc16ea015ff007095fcea607413fd28714d8acbda",
+  "draft_sha256": "ff3c0790145ed8b16560b3818be218d3e14da9f4588c1b91ee0d4b60508afd67",
+  "static_preparation_checks": {
+    "passed": 43,
+    "total": 43,
+    "proof": "audit/preparation-proof-final-v2.json"
+  },
+  "synthetic_orchestration_and_aggregate_test_methods": {
+    "passed": 19,
+    "failed": 0,
+    "proof": "audit/test-confirmation-final-result.json",
+    "sha256": "eb08d7cf4a99bb36110ba3780a07826a05254e64e1830f2e4b62e8d69f6928cc"
+  },
+  "unchanged_CPU_ratio_test_methods": {
+    "passed": 8,
+    "failed": 0,
+    "command": [
+      "python3",
+      "-B",
+      "audit/test_cpu_ratio.py"
+    ],
+    "test_sha256": "9c6084b6aedfb02fa98dbd45be2a29e33185b76809893cbc27482304216e6996",
+    "note": "Run in this preparation folder; equivalent positive quota periods accepted, wrong ratios/malformed/monitor gates retained."
+  },
+  "independent_source_review": {
+    "status": "PASS_SOURCE_REVIEW",
+    "path": "audit/independent-review.json",
+    "sha256": "84384733955737af340dc371d9e2bc605fe8f846630cf0d6ddf5f32a0d9a80a6"
+  },
+  "resolved_preparation_findings": [
+    "Complete effective configuration is bound to the completed first study and its audited plan hash.",
+    "Case-start receipts cover every artifact case in exact reverse order; missing/repeated/wrongly ordered starts cannot confirm both."
+  ],
+  "preservation": "Earlier synthetic failure receipts and initial preparation snapshots remain; capacity-v4 and all app sources unchanged.",
+  "limitation": "Confirmation can only repeat selected points in fresh sessions; no new maximum, first-study phase reuse, official rank or controlled causal claim."
+}

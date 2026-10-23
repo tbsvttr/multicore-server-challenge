@@ -1,0 +1,36 @@
+2026-10-23 20:10:51 +0200 
+Assertion status system-wide:
+   BackgroundTask                 0
+   ApplePushServiceTask           0
+   UserIsActive                   1
+   PreventUserIdleDisplaySleep    1
+   SoftwareUpdateTask             0
+   PreventSystemSleep             1
+   ExternalMedia                  0
+   InternalPreventDisplaySleep    1
+   PreventUserIdleSystemSleep     1
+   NetworkClientActive            0
+Listed by owning process:
+   pid 871(Caffeine): [0x000181430005a326] 00:00:01 PreventUserIdleDisplaySleep named: "Caffeine is Active"  
+   pid 871(Caffeine): [0x000181430009a325] 00:00:01 UserIsActive named: "Caffeine is Active"  
+	Timeout will fire in 599 secs Action=TimeoutActionRelease
+   pid 68874(caffeinate): [0x000181450001a327] 00:00:00 PreventUserIdleSystemSleep named: "caffeinate command-line tool"  
+	Details: caffeinate asserting on behalf of 'python3' (pid 68873)
+	Localized=THE CAFFEINATE TOOL IS PREVENTING SLEEP.
+   pid 68874(caffeinate): [0x000181450007a328] 00:00:00 PreventSystemSleep named: "caffeinate command-line tool"  
+	Details: caffeinate asserting on behalf of 'python3' (pid 68873)
+	Localized=THE CAFFEINATE TOOL IS PREVENTING SLEEP.
+   pid 351(powerd): [0x00017bbe0001a239] 00:23:36 PreventUserIdleSystemSleep named: "Powerd - Prevent sleep while display is on"  
+   pid 351(powerd): [0x0001803f0010823c] 00:00:01 InternalPreventDisplaySleep named: "com.apple.powermanagement.delayDisplayOff"  
+	Timeout will fire in 299 secs Action=TimeoutActionTurnOff
+   pid 430(coreaudiod): [0x000180b400018317] 00:02:24 PreventUserIdleSystemSleep named: "com.apple.audio.BuiltInSpeakerDevice.context.preventuseridlesleep"  
+	Created for PID: 2094. 
+	Resources: audio-out BuiltInSpeakerDevice 
+   pid 538(mds_stores): [0x00017e36000ba2b2] 00:13:03 BackgroundTask named: "com.apple.metadata.mds_stores.power"  
+   pid 366(mds): [0x000180dc000ba309] 00:01:45 BackgroundTask named: "com.apple.metadata.mds.power"  
+   pid 410(WindowServer): [0x0001803c0009a2b9] 00:00:00 UserIsActive named: "com.apple.iohideventsystem.queue.tickle serviceID:100007db2 service:AppleHIDKeyboardEventDriverV2 product:Apple Internal Keyboard / Trackpad eventType:3"  
+	Timeout will fire in 600 secs Action=TimeoutActionRelease
+   pid 1043(Google Chrome): [0x000180b50001a2fd] 00:02:24 NoIdleSleepAssertion named: "Playing audio"  
+   pid 1043(Google Chrome): [0x0001810f0005a318] 00:00:53 NoDisplaySleepAssertion named: "Video Wake Lock"  
+Kernel Assertions: 0x100=MAGICWAKE
+   id=563  level=255 0x100=MAGICWAKE creat=21.10.26, 10:37  mod=23.10.26, 19:51 description=en0 owner=IOSkywalkNetworkBSDClient

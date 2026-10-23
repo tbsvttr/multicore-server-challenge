@@ -1,0 +1,3911 @@
+{
+  "schema": "multicore-confirmation-Rust-native-replay-v1",
+  "created_utc": "2026-10-23T21:44:06.295606+00:00",
+  "status": "PASS",
+  "scope": "Closed Rust confirmation case only; native/local per-phase evidence replay. B evidence is not repeated. Whole-pair/global order/provenance/reference audit belongs to the parent. No official ranking, exact capacity maximum or promotion claim.",
+  "run": "/private/tmp/multicore-optimize-20261023/confirmation_20261023t211121_c42d47",
+  "case": "rust7",
+  "method": {
+    "operations": "Saved-file Python only; no Docker, SQL, build, load, network, process observation or source/original-artifact changes.",
+    "verifier": "Frozen confirmation/tools/audit/evidence.py audit_phase called separately on each phase with global_valid=True for scoped phase replay only; global whole-pair qualification is outside scope.",
+    "histograms": "Frozen verifier decodes HdrHistogramV2, exact per-raw endpoint counts and merged bin/count/status/error sums, overall quantiles, full synchronized measurement timelines and native verdicts.",
+    "saved_assessment_comparison": "Exact comparison of all saved assessment fields except recorded_classification (initial null placeholder becomes PASS on replay).",
+    "CPU_scope": "Native generator guard uses measurement-average whole-VM CPU >75%. Rust hold averages are ~76.390%, preserving seven native LG reasons and native_qualified=false. The predeclared dedicated_client_cgroup_v1 local policy accepts the CPU-only exception because timeline/timer evidence is complete and client cgroup budget/headroom gates pass; native flags remain unchanged."
+  },
+  "independent_checks": [
+    {
+      "check": "exact_three_closed_Rust_phase_directories",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:exact_stage_users_and_raw_durations",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:all_frozen_phase_checks_PASS",
+      "pass": true,
+      "detail": {
+        "checks": 101,
+        "failed": []
+      }
+    },
+    {
+      "check": "01-warmup-10000:saved_assessment_exactly_matches_replay",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "01-warmup-10000:local_qualified_and_SLO_PASS",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:zero_measured_and_full_timeline_errors",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:complete_timelines_no_timer_flags",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:native_qualified_without_CPU_exception",
+      "pass": true
+    },
+    {
+      "check": "02-probe-130000:exact_stage_users_and_raw_durations",
+      "pass": true
+    },
+    {
+      "check": "02-probe-130000:all_frozen_phase_checks_PASS",
+      "pass": true,
+      "detail": {
+        "checks": 269,
+        "failed": []
+      }
+    },
+    {
+      "check": "02-probe-130000:saved_assessment_exactly_matches_replay",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "02-probe-130000:local_qualified_and_SLO_PASS",
+      "pass": true
+    },
+    {
+      "check": "02-probe-130000:zero_measured_and_full_timeline_errors",
+      "pass": true
+    },
+    {
+      "check": "02-probe-130000:complete_timelines_no_timer_flags",
+      "pass": true
+    },
+    {
+      "check": "02-probe-130000:native_qualified_without_CPU_exception",
+      "pass": true
+    },
+    {
+      "check": "03-hold-130000:exact_stage_users_and_raw_durations",
+      "pass": true
+    },
+    {
+      "check": "03-hold-130000:all_frozen_phase_checks_PASS",
+      "pass": true,
+      "detail": {
+        "checks": 269,
+        "failed": []
+      }
+    },
+    {
+      "check": "03-hold-130000:saved_assessment_exactly_matches_replay",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "03-hold-130000:local_qualified_and_SLO_PASS",
+      "pass": true
+    },
+    {
+      "check": "03-hold-130000:zero_measured_and_full_timeline_errors",
+      "pass": true
+    },
+    {
+      "check": "03-hold-130000:complete_timelines_no_timer_flags",
+      "pass": true
+    },
+    {
+      "check": "03-hold-130000:native_CPU_only_exception_preserved",
+      "pass": true,
+      "detail": {
+        "native_reasons": [
+          "box 0 CPU 76% > 75%",
+          "box 1 CPU 76% > 75%",
+          "box 2 CPU 76% > 75%",
+          "box 3 CPU 76% > 75%",
+          "box 4 CPU 76% > 75%",
+          "box 5 CPU 76% > 75%",
+          "box 6 CPU 76% > 75%"
+        ]
+      }
+    },
+    {
+      "check": "03-hold-130000:dedicated_client_cgroup_qualifies_CPU_scope",
+      "pass": true,
+      "detail": {
+        "declared_policy": "dedicated_client_cgroup_v1",
+        "client_quota_utilization_pct": 20.612950496628013
+      }
+    },
+    {
+      "check": "all_consumed_inputs_unchanged",
+      "pass": true,
+      "detail": {
+        "files": 75
+      }
+    }
+  ],
+  "independent_check_count": 24,
+  "frozen_phase_check_count": 639,
+  "frozen_phase_checks_all_pass": true,
+  "phases": [
+    {
+      "id": "01-warmup-10000",
+      "stage": "warmup",
+      "users": 10000,
+      "database": "mc_pair_20261023_211121_c42d47_2",
+      "session_id": "rust7",
+      "run_id": "confirmation_20261023t211121_c42d47-warmup-10000",
+      "classification": "PASS",
+      "eligible": true,
+      "native_qualified": true,
+      "local_qualified": true,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "native_whole_vm_CPU_flag_count": 0,
+      "native_whole_vm_CPU_flagged_shards": [],
+      "local_whole_vm_CPU_scope_exception": false,
+      "zero_measured_errors": true,
+      "observed_timeline_errors": 0,
+      "overall": {
+        "count": 318326,
+        "rps": 2652.7166666666667,
+        "p50_ms": 0.189,
+        "p90_ms": 0.51,
+        "p95_ms": 1.557,
+        "p99_ms": 2.917,
+        "max_ms": 231.679,
+        "mean_ms": 0.5608285782499693,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 312523,
+          "201": 5681,
+          "204": 122
+        }
+      },
+      "conformance_197_full_seed_proven": true,
+      "target_oom_delta": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "post_load_healthy": true,
+      "declared_load_cpus": 8,
+      "declared_load_memory_bytes": 8589934592,
+      "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+      "target_cpu_max_before_after": {
+        "before": "800000 100000",
+        "after": "800000 100000"
+      },
+      "target_cpu_period_policy_warnings": [],
+      "ramp_measure_tail_s": [
+        60,
+        120,
+        15
+      ],
+      "frozen_verifier_checks": [
+        {
+          "check": "complete_saved_phase",
+          "pass": true,
+          "detail": []
+        },
+        {
+          "check": "predeclared_balanced_shards_and_limits",
+          "pass": true
+        },
+        {
+          "check": "single_database_and_continuous_app_session",
+          "pass": true
+        },
+        {
+          "check": "declared_binary_env_and_common_runtime",
+          "pass": true
+        },
+        {
+          "check": "before:fixed_target_budget",
+          "pass": true
+        },
+        {
+          "check": "before:official_sources_and_pg_settings_fixed",
+          "pass": true
+        },
+        {
+          "check": "after:fixed_target_budget",
+          "pass": true
+        },
+        {
+          "check": "after:official_sources_and_pg_settings_fixed",
+          "pass": true
+        },
+        {
+          "check": "startup:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "startup:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "startup:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "startup:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "before:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "before:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "before:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "before:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "before:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "before:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "before:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "after:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "after:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "after:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "after:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "after:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "after:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "after:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "app_healthy_before_load",
+          "pass": true
+        },
+        {
+          "check": "after_health_witness_present",
+          "pass": true
+        },
+        {
+          "check": "all_native_processes_exited_normally",
+          "pass": true
+        },
+        {
+          "check": "synchronized_raw_windows",
+          "pass": true
+        },
+        {
+          "check": "native_metadata_exact_stage_protocol",
+          "pass": true
+        },
+        {
+          "check": "container_and_each_shard_actual_GOMAXPROCS2",
+          "pass": true
+        },
+        {
+          "check": "one_saved_command_per_shard",
+          "pass": true
+        },
+        {
+          "check": "shard0:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard0:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard0:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "all_histogram_configurations_match",
+          "pass": true
+        },
+        {
+          "check": "merged_histogram_equals_exact_bin_sum",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:p50_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:p95_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:p99_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:max_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_count_equals_raw_counts",
+          "pass": true
+        },
+        {
+          "check": "merged_statuses_equal_raw_counts",
+          "pass": true
+        },
+        {
+          "check": "merged_errors_equal_raw_counts",
+          "pass": true
+        },
+        {
+          "check": "all_endpoints_retained",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "merged_all_shards_and_users",
+          "pass": true
+        },
+        {
+          "check": "native_verdict_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard0:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard0:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard0:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard0:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "native_generator_reasons_reproduced_exactly",
+          "pass": true
+        },
+        {
+          "check": "request_rate_and_errors_reproduced",
+          "pass": true
+        },
+        {
+          "check": "target:entire_phase_clock_drift_under100ms",
+          "pass": true,
+          "detail": 0.002108335494995117
+        },
+        {
+          "check": "load:entire_phase_clock_drift_under100ms",
+          "pass": true,
+          "detail": 0.002109050750732422
+        }
+      ],
+      "recorded_assessment_mismatches": [],
+      "timing_failed_shards": [],
+      "expected_native_lg_reasons": [],
+      "shards": [
+        {
+          "box_index": 0,
+          "users": 10000,
+          "measurement_timeline_rows": 120,
+          "native_CPU_mean_pct": 8.39941740270144,
+          "native_CPU_max_pct": 10.109018830525272,
+          "native_CPU_mean_above75_flag": false,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 10000,
+          "max_tick_lag_ms": 10.866,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        }
+      ],
+      "target_monitor": {
+        "eligible": true,
+        "samples": 122,
+        "window_s": 120.0,
+        "max_gap_s": 1.002477876,
+        "cgroup_quota_utilization_pct": 6.733372623782354,
+        "memory_peak_sampled_bytes": 7307563008,
+        "swap_peak_sampled_bytes": 0,
+        "oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "warnings": [
+          "pg: live-PID CPU sum changed population or decreased; component CPU withheld"
+        ],
+        "observed_cpu_periods_us": [
+          100000
+        ],
+        "cpu_period_changed": false,
+        "checks": [
+          {
+            "check": "monitor_has_samples",
+            "pass": true
+          },
+          {
+            "check": "strict_wall_and_monotonic_order",
+            "pass": true
+          },
+          {
+            "check": "full_measurement_window_bracketed",
+            "pass": true,
+            "detail": {
+              "first_ms": 1792790839556.528,
+              "start_ms": 1792790904579.0,
+              "last_ms": 1792791040729.893,
+              "end_ms": 1792791024579.0
+            }
+          },
+          {
+            "check": "max_sample_gap_at_most_3s",
+            "pass": true,
+            "detail": 1.002477876
+          },
+          {
+            "check": "cgroup_budget_continuous",
+            "pass": true
+          },
+          {
+            "check": "total_cpu_counter_nondecreasing",
+            "pass": true
+          },
+          {
+            "check": "no_measurement_oom",
+            "pass": true,
+            "detail": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            }
+          },
+          {
+            "check": "wall_to_monotonic_drift_below_100ms",
+            "pass": true,
+            "detail": 0.0005173683166503906
+          }
+        ],
+        "observed_raw_cpu_max": [
+          "800000 100000"
+        ]
+      },
+      "load_monitor": {
+        "eligible": true,
+        "samples": 122,
+        "window_s": 120.0,
+        "max_gap_s": 1.010912167,
+        "cgroup_quota_utilization_pct": 1.7113844228110746,
+        "memory_peak_sampled_bytes": 258580480,
+        "swap_peak_sampled_bytes": 0,
+        "oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "warnings": [],
+        "observed_cpu_periods_us": [
+          100000
+        ],
+        "cpu_period_changed": false,
+        "checks": [
+          {
+            "check": "monitor_has_samples",
+            "pass": true
+          },
+          {
+            "check": "strict_wall_and_monotonic_order",
+            "pass": true
+          },
+          {
+            "check": "full_measurement_window_bracketed",
+            "pass": true,
+            "detail": {
+              "first_ms": 1792790839594.7104,
+              "start_ms": 1792790904579.0,
+              "last_ms": 1792791040801.0452,
+              "end_ms": 1792791024579.0
+            }
+          },
+          {
+            "check": "max_sample_gap_at_most_3s",
+            "pass": true,
+            "detail": 1.010912167
+          },
+          {
+            "check": "cgroup_budget_continuous",
+            "pass": true
+          },
+          {
+            "check": "total_cpu_counter_nondecreasing",
+            "pass": true
+          },
+          {
+            "check": "no_measurement_oom",
+            "pass": true,
+            "detail": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            }
+          },
+          {
+            "check": "wall_to_monotonic_drift_below_100ms",
+            "pass": true,
+            "detail": 0.0005173683166503906
+          }
+        ],
+        "observed_raw_cpu_max": [
+          "800000 100000"
+        ]
+      }
+    },
+    {
+      "id": "02-probe-130000",
+      "stage": "probe",
+      "users": 130000,
+      "database": "mc_pair_20261023_211121_c42d47_2",
+      "session_id": "rust7",
+      "run_id": "confirmation_20261023t211121_c42d47-probe-130000",
+      "classification": "PASS",
+      "eligible": true,
+      "native_qualified": true,
+      "local_qualified": true,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "native_whole_vm_CPU_flag_count": 0,
+      "native_whole_vm_CPU_flagged_shards": [],
+      "local_whole_vm_CPU_scope_exception": false,
+      "zero_measured_errors": true,
+      "observed_timeline_errors": 0,
+      "overall": {
+        "count": 2067014,
+        "rps": 34450.23333333333,
+        "p50_ms": 1.319,
+        "p90_ms": 17.023,
+        "p95_ms": 97.471,
+        "p99_ms": 206.719,
+        "max_ms": 591.359,
+        "mean_ms": 12.669091800539354,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 2029773,
+          "201": 36688,
+          "204": 553
+        }
+      },
+      "conformance_197_full_seed_proven": true,
+      "target_oom_delta": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "post_load_healthy": true,
+      "declared_load_cpus": 8,
+      "declared_load_memory_bytes": 8589934592,
+      "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+      "target_cpu_max_before_after": {
+        "before": "800000 100000",
+        "after": "800000 100000"
+      },
+      "target_cpu_period_policy_warnings": [],
+      "ramp_measure_tail_s": [
+        60,
+        60,
+        15
+      ],
+      "frozen_verifier_checks": [
+        {
+          "check": "complete_saved_phase",
+          "pass": true,
+          "detail": []
+        },
+        {
+          "check": "predeclared_balanced_shards_and_limits",
+          "pass": true
+        },
+        {
+          "check": "single_database_and_continuous_app_session",
+          "pass": true
+        },
+        {
+          "check": "declared_binary_env_and_common_runtime",
+          "pass": true
+        },
+        {
+          "check": "before:fixed_target_budget",
+          "pass": true
+        },
+        {
+          "check": "before:official_sources_and_pg_settings_fixed",
+          "pass": true
+        },
+        {
+          "check": "after:fixed_target_budget",
+          "pass": true
+        },
+        {
+          "check": "after:official_sources_and_pg_settings_fixed",
+          "pass": true
+        },
+        {
+          "check": "startup:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "startup:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "startup:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "startup:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "before:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "before:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "before:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "before:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "before:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "before:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "before:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "after:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "after:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "after:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "after:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "after:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "after:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "after:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "app_healthy_before_load",
+          "pass": true
+        },
+        {
+          "check": "after_health_witness_present",
+          "pass": true
+        },
+        {
+          "check": "all_native_processes_exited_normally",
+          "pass": true
+        },
+        {
+          "check": "synchronized_raw_windows",
+          "pass": true
+        },
+        {
+          "check": "native_metadata_exact_stage_protocol",
+          "pass": true
+        },
+        {
+          "check": "container_and_each_shard_actual_GOMAXPROCS2",
+          "pass": true
+        },
+        {
+          "check": "one_saved_command_per_shard",
+          "pass": true
+        },
+        {
+          "check": "shard0:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard0:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard0:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "shard1:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard1:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard1:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "shard2:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard2:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard2:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "shard3:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard3:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard3:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "shard4:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard4:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard4:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "shard5:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard5:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard5:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "shard6:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard6:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard6:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "all_histogram_configurations_match",
+          "pass": true
+        },
+        {
+          "check": "merged_histogram_equals_exact_bin_sum",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:p50_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:p95_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:p99_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:max_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_count_equals_raw_counts",
+          "pass": true
+        },
+        {
+          "check": "merged_statuses_equal_raw_counts",
+          "pass": true
+        },
+        {
+          "check": "merged_errors_equal_raw_counts",
+          "pass": true
+        },
+        {
+          "check": "all_endpoints_retained",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "merged_all_shards_and_users",
+          "pass": true
+        },
+        {
+          "check": "native_verdict_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard0:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard0:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard0:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard0:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "shard1:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard1:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard1:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard1:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "shard2:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard2:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard2:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard2:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "shard3:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard3:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard3:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard3:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "shard4:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard4:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard4:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard4:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "shard5:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard5:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard5:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard5:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "shard6:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard6:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard6:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard6:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "native_generator_reasons_reproduced_exactly",
+          "pass": true
+        },
+        {
+          "check": "request_rate_and_errors_reproduced",
+          "pass": true
+        },
+        {
+          "check": "target:entire_phase_clock_drift_under100ms",
+          "pass": true,
+          "detail": 0.001218557357788086
+        },
+        {
+          "check": "load:entire_phase_clock_drift_under100ms",
+          "pass": true,
+          "detail": 0.001209259033203125
+        }
+      ],
+      "recorded_assessment_mismatches": [],
+      "timing_failed_shards": [],
+      "expected_native_lg_reasons": [],
+      "shards": [
+        {
+          "box_index": 0,
+          "users": 18572,
+          "measurement_timeline_rows": 60,
+          "native_CPU_mean_pct": 74.9703561553126,
+          "native_CPU_max_pct": 89.50050968399593,
+          "native_CPU_mean_above75_flag": false,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 18572,
+          "max_tick_lag_ms": 4.122,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        },
+        {
+          "box_index": 1,
+          "users": 18572,
+          "measurement_timeline_rows": 60,
+          "native_CPU_mean_pct": 74.96927808557051,
+          "native_CPU_max_pct": 89.47368421052632,
+          "native_CPU_mean_above75_flag": false,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 18572,
+          "max_tick_lag_ms": 3.499,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        },
+        {
+          "box_index": 2,
+          "users": 18572,
+          "measurement_timeline_rows": 60,
+          "native_CPU_mean_pct": 74.97057917897843,
+          "native_CPU_max_pct": 89.52618453865337,
+          "native_CPU_mean_above75_flag": false,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 18572,
+          "max_tick_lag_ms": 2.704,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        },
+        {
+          "box_index": 3,
+          "users": 18571,
+          "measurement_timeline_rows": 60,
+          "native_CPU_mean_pct": 74.96907747322,
+          "native_CPU_max_pct": 89.39393939393939,
+          "native_CPU_mean_above75_flag": false,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 18571,
+          "max_tick_lag_ms": 2.888,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        },
+        {
+          "box_index": 4,
+          "users": 18571,
+          "measurement_timeline_rows": 60,
+          "native_CPU_mean_pct": 74.96953956099773,
+          "native_CPU_max_pct": 89.48432760364004,
+          "native_CPU_mean_above75_flag": false,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 18571,
+          "max_tick_lag_ms": 4.755,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        },
+        {
+          "box_index": 5,
+          "users": 18571,
+          "measurement_timeline_rows": 60,
+          "native_CPU_mean_pct": 74.96949454433087,
+          "native_CPU_max_pct": 89.45233265720081,
+          "native_CPU_mean_above75_flag": false,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 18571,
+          "max_tick_lag_ms": 2.343,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        },
+        {
+          "box_index": 6,
+          "users": 18571,
+          "measurement_timeline_rows": 60,
+          "native_CPU_mean_pct": 74.97016467089576,
+          "native_CPU_max_pct": 89.4575230296827,
+          "native_CPU_mean_above75_flag": false,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 18571,
+          "max_tick_lag_ms": 10.63,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        }
+      ],
+      "target_monitor": {
+        "eligible": true,
+        "samples": 62,
+        "window_s": 60.0,
+        "max_gap_s": 1.022347167,
+        "cgroup_quota_utilization_pct": 66.77029790524594,
+        "memory_peak_sampled_bytes": 8584990720,
+        "swap_peak_sampled_bytes": 0,
+        "oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "warnings": [
+          "pg: live-PID CPU sum changed population or decreased; component CPU withheld"
+        ],
+        "observed_cpu_periods_us": [
+          100000
+        ],
+        "cpu_period_changed": false,
+        "checks": [
+          {
+            "check": "monitor_has_samples",
+            "pass": true
+          },
+          {
+            "check": "strict_wall_and_monotonic_order",
+            "pass": true
+          },
+          {
+            "check": "full_measurement_window_bracketed",
+            "pass": true,
+            "detail": {
+              "first_ms": 1792791108944.7502,
+              "start_ms": 1792791173969.0,
+              "last_ms": 1792791250143.3672,
+              "end_ms": 1792791233969.0
+            }
+          },
+          {
+            "check": "max_sample_gap_at_most_3s",
+            "pass": true,
+            "detail": 1.022347167
+          },
+          {
+            "check": "cgroup_budget_continuous",
+            "pass": true
+          },
+          {
+            "check": "total_cpu_counter_nondecreasing",
+            "pass": true
+          },
+          {
+            "check": "no_measurement_oom",
+            "pass": true,
+            "detail": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            }
+          },
+          {
+            "check": "wall_to_monotonic_drift_below_100ms",
+            "pass": true,
+            "detail": 0.00025272369384765625
+          }
+        ],
+        "observed_raw_cpu_max": [
+          "800000 100000"
+        ]
+      },
+      "load_monitor": {
+        "eligible": true,
+        "samples": 62,
+        "window_s": 60.0,
+        "max_gap_s": 1.003371459,
+        "cgroup_quota_utilization_pct": 24.949079362835203,
+        "memory_peak_sampled_bytes": 3000848384,
+        "swap_peak_sampled_bytes": 0,
+        "oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "warnings": [],
+        "observed_cpu_periods_us": [
+          100000
+        ],
+        "cpu_period_changed": false,
+        "checks": [
+          {
+            "check": "monitor_has_samples",
+            "pass": true
+          },
+          {
+            "check": "strict_wall_and_monotonic_order",
+            "pass": true
+          },
+          {
+            "check": "full_measurement_window_bracketed",
+            "pass": true,
+            "detail": {
+              "first_ms": 1792791108982.391,
+              "start_ms": 1792791173969.0,
+              "last_ms": 1792791250143.3765,
+              "end_ms": 1792791233969.0
+            }
+          },
+          {
+            "check": "max_sample_gap_at_most_3s",
+            "pass": true,
+            "detail": 1.003371459
+          },
+          {
+            "check": "cgroup_budget_continuous",
+            "pass": true
+          },
+          {
+            "check": "total_cpu_counter_nondecreasing",
+            "pass": true
+          },
+          {
+            "check": "no_measurement_oom",
+            "pass": true,
+            "detail": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            }
+          },
+          {
+            "check": "wall_to_monotonic_drift_below_100ms",
+            "pass": true,
+            "detail": 0.00025343894958496094
+          }
+        ],
+        "observed_raw_cpu_max": [
+          "800000 100000"
+        ]
+      }
+    },
+    {
+      "id": "03-hold-130000",
+      "stage": "hold",
+      "users": 130000,
+      "database": "mc_pair_20261023_211121_c42d47_2",
+      "session_id": "rust7",
+      "run_id": "confirmation_20261023t211121_c42d47-hold-130000",
+      "classification": "PASS",
+      "eligible": true,
+      "native_qualified": false,
+      "local_qualified": true,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 CPU 76% > 75%",
+          "box 1 CPU 76% > 75%",
+          "box 2 CPU 76% > 75%",
+          "box 3 CPU 76% > 75%",
+          "box 4 CPU 76% > 75%",
+          "box 5 CPU 76% > 75%",
+          "box 6 CPU 76% > 75%"
+        ]
+      },
+      "native_whole_vm_CPU_flag_count": 7,
+      "native_whole_vm_CPU_flagged_shards": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "local_whole_vm_CPU_scope_exception": true,
+      "zero_measured_errors": true,
+      "observed_timeline_errors": 0,
+      "overall": {
+        "count": 10301608,
+        "rps": 34338.693333333336,
+        "p50_ms": 1.526,
+        "p90_ms": 7.491,
+        "p95_ms": 24.783,
+        "p99_ms": 401.407,
+        "max_ms": 1039.871,
+        "mean_ms": 13.834182040997895,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 10111815,
+          "201": 183416,
+          "204": 6377
+        }
+      },
+      "conformance_197_full_seed_proven": true,
+      "target_oom_delta": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "post_load_healthy": true,
+      "declared_load_cpus": 8,
+      "declared_load_memory_bytes": 8589934592,
+      "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+      "target_cpu_max_before_after": {
+        "before": "800000 100000",
+        "after": "800000 100000"
+      },
+      "target_cpu_period_policy_warnings": [],
+      "ramp_measure_tail_s": [
+        60,
+        300,
+        15
+      ],
+      "frozen_verifier_checks": [
+        {
+          "check": "complete_saved_phase",
+          "pass": true,
+          "detail": []
+        },
+        {
+          "check": "predeclared_balanced_shards_and_limits",
+          "pass": true
+        },
+        {
+          "check": "single_database_and_continuous_app_session",
+          "pass": true
+        },
+        {
+          "check": "declared_binary_env_and_common_runtime",
+          "pass": true
+        },
+        {
+          "check": "before:fixed_target_budget",
+          "pass": true
+        },
+        {
+          "check": "before:official_sources_and_pg_settings_fixed",
+          "pass": true
+        },
+        {
+          "check": "after:fixed_target_budget",
+          "pass": true
+        },
+        {
+          "check": "after:official_sources_and_pg_settings_fixed",
+          "pass": true
+        },
+        {
+          "check": "startup:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "startup:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "startup:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "startup:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "startup:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "before:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "before:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "before:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "before:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "before:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "before:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "before:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "after:normal_expected_uid",
+          "pass": true
+        },
+        {
+          "check": "after:exactly_one_expected_process",
+          "pass": true
+        },
+        {
+          "check": "after:raw_all_four_uids_match_normal_user",
+          "pass": true
+        },
+        {
+          "check": "after:raw_actual_pid_matches",
+          "pass": true
+        },
+        {
+          "check": "after:actual_process_identity_stable",
+          "pass": true
+        },
+        {
+          "check": "after:raw_soft_hard_nofile_at_least_200000",
+          "pass": true,
+          "detail": [
+            200000,
+            200000
+          ]
+        },
+        {
+          "check": "after:helper_validity_agrees_with_raw",
+          "pass": true
+        },
+        {
+          "check": "app_healthy_before_load",
+          "pass": true
+        },
+        {
+          "check": "after_health_witness_present",
+          "pass": true
+        },
+        {
+          "check": "all_native_processes_exited_normally",
+          "pass": true
+        },
+        {
+          "check": "synchronized_raw_windows",
+          "pass": true
+        },
+        {
+          "check": "native_metadata_exact_stage_protocol",
+          "pass": true
+        },
+        {
+          "check": "container_and_each_shard_actual_GOMAXPROCS2",
+          "pass": true
+        },
+        {
+          "check": "one_saved_command_per_shard",
+          "pass": true
+        },
+        {
+          "check": "shard0:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard0:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard0:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "shard1:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard1:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard1:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "shard2:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard2:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard2:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "shard3:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard3:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard3:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "shard4:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard4:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard4:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "shard5:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard5:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard5:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "shard6:exact_users_ids_destination",
+          "pass": true
+        },
+        {
+          "check": "shard6:raw_command_agrees",
+          "pass": true
+        },
+        {
+          "check": "shard6:at_least99pct_vus_active",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:0:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:1:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:2:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:3:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:4:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:5:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "raw_hist_count:6:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "all_histogram_configurations_match",
+          "pass": true
+        },
+        {
+          "check": "merged_histogram_equals_exact_bin_sum",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:p50_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:p95_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:p99_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_quantile_from_exact_histogram:max_ms",
+          "pass": true
+        },
+        {
+          "check": "merged_count_equals_raw_counts",
+          "pass": true
+        },
+        {
+          "check": "merged_statuses_equal_raw_counts",
+          "pass": true
+        },
+        {
+          "check": "merged_errors_equal_raw_counts",
+          "pass": true
+        },
+        {
+          "check": "all_endpoints_retained",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:DELETE /api/articles/:slug/comments/:id",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:DELETE /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:DELETE /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles/feed",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles?author",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles?favorited",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/articles?tag",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/profiles/:username",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/tags",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:GET /api/user",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/articles",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/articles/:slug/comments",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/articles/:slug/favorite",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/profiles/:username/follow",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/users",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:POST /api/users/login",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:PUT /api/articles/:slug",
+          "pass": true
+        },
+        {
+          "check": "endpoint_count:PUT /api/user",
+          "pass": true
+        },
+        {
+          "check": "merged_all_shards_and_users",
+          "pass": true
+        },
+        {
+          "check": "native_verdict_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard0:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard0:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard0:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard0:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "shard1:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard1:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard1:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard1:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "shard2:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard2:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard2:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard2:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "shard3:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard3:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard3:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard3:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "shard4:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard4:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard4:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard4:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "shard5:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard5:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard5:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard5:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "shard6:native_box_CPU_reproduced_from_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard6:native_timing_summary_reproduced",
+          "pass": true
+        },
+        {
+          "check": "shard6:complete_measurement_timeline",
+          "pass": true
+        },
+        {
+          "check": "shard6:merged_generator_summary_matches_raw",
+          "pass": true
+        },
+        {
+          "check": "native_generator_reasons_reproduced_exactly",
+          "pass": true
+        },
+        {
+          "check": "request_rate_and_errors_reproduced",
+          "pass": true
+        },
+        {
+          "check": "target:entire_phase_clock_drift_under100ms",
+          "pass": true,
+          "detail": 0.002482175827026367
+        },
+        {
+          "check": "load:entire_phase_clock_drift_under100ms",
+          "pass": true,
+          "detail": 0.002479076385498047
+        }
+      ],
+      "recorded_assessment_mismatches": [],
+      "timing_failed_shards": [],
+      "expected_native_lg_reasons": [
+        "box 0 CPU 76% > 75%",
+        "box 1 CPU 76% > 75%",
+        "box 2 CPU 76% > 75%",
+        "box 3 CPU 76% > 75%",
+        "box 4 CPU 76% > 75%",
+        "box 5 CPU 76% > 75%",
+        "box 6 CPU 76% > 75%"
+      ],
+      "shards": [
+        {
+          "box_index": 0,
+          "users": 18572,
+          "measurement_timeline_rows": 300,
+          "native_CPU_mean_pct": 76.39027408267913,
+          "native_CPU_max_pct": 94.12360688956434,
+          "native_CPU_mean_above75_flag": true,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 18572,
+          "max_tick_lag_ms": 6.278,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        },
+        {
+          "box_index": 1,
+          "users": 18572,
+          "measurement_timeline_rows": 300,
+          "native_CPU_mean_pct": 76.3902357592855,
+          "native_CPU_max_pct": 94.20142421159716,
+          "native_CPU_mean_above75_flag": true,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 18572,
+          "max_tick_lag_ms": 4.514,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        },
+        {
+          "box_index": 2,
+          "users": 18572,
+          "measurement_timeline_rows": 300,
+          "native_CPU_mean_pct": 76.38993583482153,
+          "native_CPU_max_pct": 94.17773237997957,
+          "native_CPU_mean_above75_flag": true,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 18572,
+          "max_tick_lag_ms": 2.887,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        },
+        {
+          "box_index": 3,
+          "users": 18571,
+          "measurement_timeline_rows": 300,
+          "native_CPU_mean_pct": 76.39035276626726,
+          "native_CPU_max_pct": 94.21319796954315,
+          "native_CPU_mean_above75_flag": true,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 18571,
+          "max_tick_lag_ms": 5.23,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        },
+        {
+          "box_index": 4,
+          "users": 18571,
+          "measurement_timeline_rows": 300,
+          "native_CPU_mean_pct": 76.39000584640412,
+          "native_CPU_max_pct": 94.15911379657604,
+          "native_CPU_mean_above75_flag": true,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 18571,
+          "max_tick_lag_ms": 4.005,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        },
+        {
+          "box_index": 5,
+          "users": 18571,
+          "measurement_timeline_rows": 300,
+          "native_CPU_mean_pct": 76.38998530275914,
+          "native_CPU_max_pct": 94.21906693711968,
+          "native_CPU_mean_above75_flag": true,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 18571,
+          "max_tick_lag_ms": 7.777,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        },
+        {
+          "box_index": 6,
+          "users": 18571,
+          "measurement_timeline_rows": 300,
+          "native_CPU_mean_pct": 76.3900060168734,
+          "native_CPU_max_pct": 94.16581371545547,
+          "native_CPU_mean_above75_flag": true,
+          "fell_behind": false,
+          "fell_behind_reasons": [],
+          "active_vus_at_window_start": 18571,
+          "max_tick_lag_ms": 3.456,
+          "seconds_mean_wake_lag_above50ms": 0,
+          "all_timeline_errors": 0
+        }
+      ],
+      "target_monitor": {
+        "eligible": true,
+        "samples": 302,
+        "window_s": 300.0,
+        "max_gap_s": 1.010141334,
+        "cgroup_quota_utilization_pct": 72.72481400593438,
+        "memory_peak_sampled_bytes": 8552960000,
+        "swap_peak_sampled_bytes": 0,
+        "oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "warnings": [
+          "pg: live-PID CPU sum changed population or decreased; component CPU withheld"
+        ],
+        "observed_cpu_periods_us": [
+          100000
+        ],
+        "cpu_period_changed": false,
+        "checks": [
+          {
+            "check": "monitor_has_samples",
+            "pass": true
+          },
+          {
+            "check": "strict_wall_and_monotonic_order",
+            "pass": true
+          },
+          {
+            "check": "full_measurement_window_bracketed",
+            "pass": true,
+            "detail": {
+              "first_ms": 1792791319334.5813,
+              "start_ms": 1792791384353.9998,
+              "last_ms": 1792791700860.766,
+              "end_ms": 1792791684353.9998
+            }
+          },
+          {
+            "check": "max_sample_gap_at_most_3s",
+            "pass": true,
+            "detail": 1.010141334
+          },
+          {
+            "check": "cgroup_budget_continuous",
+            "pass": true
+          },
+          {
+            "check": "total_cpu_counter_nondecreasing",
+            "pass": true
+          },
+          {
+            "check": "no_measurement_oom",
+            "pass": true,
+            "detail": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            }
+          },
+          {
+            "check": "wall_to_monotonic_drift_below_100ms",
+            "pass": true,
+            "detail": 0.0013203620910644531
+          }
+        ],
+        "observed_raw_cpu_max": [
+          "800000 100000"
+        ]
+      },
+      "load_monitor": {
+        "eligible": true,
+        "samples": 302,
+        "window_s": 300.0,
+        "max_gap_s": 1.04659,
+        "cgroup_quota_utilization_pct": 20.612950496628013,
+        "memory_peak_sampled_bytes": 3332755456,
+        "swap_peak_sampled_bytes": 0,
+        "oom_delta": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        },
+        "warnings": [],
+        "observed_cpu_periods_us": [
+          100000
+        ],
+        "cpu_period_changed": false,
+        "checks": [
+          {
+            "check": "monitor_has_samples",
+            "pass": true
+          },
+          {
+            "check": "strict_wall_and_monotonic_order",
+            "pass": true
+          },
+          {
+            "check": "full_measurement_window_bracketed",
+            "pass": true,
+            "detail": {
+              "first_ms": 1792791319369.516,
+              "start_ms": 1792791384353.9998,
+              "last_ms": 1792791700827.0269,
+              "end_ms": 1792791684353.9998
+            }
+          },
+          {
+            "check": "max_sample_gap_at_most_3s",
+            "pass": true,
+            "detail": 1.04659
+          },
+          {
+            "check": "cgroup_budget_continuous",
+            "pass": true
+          },
+          {
+            "check": "total_cpu_counter_nondecreasing",
+            "pass": true
+          },
+          {
+            "check": "no_measurement_oom",
+            "pass": true,
+            "detail": {
+              "oom": 0,
+              "oom_kill": 0,
+              "oom_group_kill": 0
+            }
+          },
+          {
+            "check": "wall_to_monotonic_drift_below_100ms",
+            "pass": true,
+            "detail": 0.0013179779052734375
+          }
+        ],
+        "observed_raw_cpu_max": [
+          "800000 100000"
+        ]
+      }
+    }
+  ],
+  "input_manifest": {
+    "plan.json": {
+      "sha256": "18b1619fba2be582387aefa59cce75a56ed2ba0977c842243b71048eff354f84",
+      "bytes": 6777
+    },
+    "target-initial.json": {
+      "sha256": "e7172b5fdc58469d179796a6979639485ac46a961c04f3dc844f2aefed3f00fa",
+      "bytes": 52090
+    },
+    "tools/audit/evidence.py": {
+      "sha256": "1d4617d3d9374c3643a1341dec23b8573ead1829d84d5da8d4007e4f17bfe653",
+      "bytes": 13339
+    },
+    "tools/audit/primitives.py": {
+      "sha256": "e7db1d4fe11cfc753a0dba8dcb2204716289b7e0d06b7c283f15a32be77f3b12",
+      "bytes": 17053
+    },
+    "tools/search_policy.py": {
+      "sha256": "fd5035f23358a512a6698b38853fc6187278050b162a740498d6254d16d9acb9",
+      "bytes": 6751
+    },
+    "cases/rust7/case.json": {
+      "sha256": "279e7ca81f91b83a7122e53f7faf412bf4203a669bae35fb02292b9bb8857717",
+      "bytes": 1317
+    },
+    "cases/rust7/app.json": {
+      "sha256": "efc66be48e994f81432ca74f3455b17c5a2fc0eadd3e2147f23e7a4346beccc7",
+      "bytes": 4371
+    },
+    "cases/rust7/database.json": {
+      "sha256": "55b060c4fa415b1922fd09b3537908ea8535e5e1fc191d18d9ff4476aa2e7680",
+      "bytes": 176
+    },
+    "cases/rust7/conformance.log": {
+      "sha256": "cf6dfe613fabf1936d051d8b95e3705a4f1c097801ae2be886f6c5f5aa9eba95",
+      "bytes": 53
+    },
+    "cases/rust7/phases/01-warmup-10000/after-load.json": {
+      "sha256": "bfdeeffa77195490b49af5a86ed28d5054cf322c2ba2d5b32d874536aa4937cc",
+      "bytes": 55292
+    },
+    "cases/rust7/phases/01-warmup-10000/assessment.json": {
+      "sha256": "88aa8f5f638e62c82c2726a998d7361cdf1e7be25593d9b73398cca996169296",
+      "bytes": 103305
+    },
+    "cases/rust7/phases/01-warmup-10000/before-load.json": {
+      "sha256": "76cd4526a1b45a48ccb670fba78531706d3bc84e9e138e490925a28f0d697a7e",
+      "bytes": 55286
+    },
+    "cases/rust7/phases/01-warmup-10000/box0.json": {
+      "sha256": "e924afea780f6e1cf3d5a8c1bcfdc13580a8851eedee4b4ce35a913e7c03eba3",
+      "bytes": 232189
+    },
+    "cases/rust7/phases/01-warmup-10000/box0.log": {
+      "sha256": "912a45918f996773ef18ee9a9dda4a5d0bd7b27d8d1dcb15734013e499d8e8b3",
+      "bytes": 3131
+    },
+    "cases/rust7/phases/01-warmup-10000/client-env-witness.json": {
+      "sha256": "0b7222d8d90ed6e876f67dc76cf2580d080c1c0c35483dc31b805b7b9ed983b6",
+      "bytes": 239
+    },
+    "cases/rust7/phases/01-warmup-10000/load-commands.json": {
+      "sha256": "4489ee969397d511267ec69cbbf4f3aa636b0568df74fc4417d0729b1b0c026b",
+      "bytes": 742
+    },
+    "cases/rust7/phases/01-warmup-10000/load-monitor.jsonl": {
+      "sha256": "5c0defc703aec9f5f474c9def655154dcee8e7dc27d0eaa4a8d3c5bd7c3fa8ed",
+      "bytes": 164678
+    },
+    "cases/rust7/phases/01-warmup-10000/load-monitor.stop": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "cases/rust7/phases/01-warmup-10000/merged.json": {
+      "sha256": "302fe36a4457d6465bba953fa6d1dc1dc3c6550622aa57a3536015e3f1b12e74",
+      "bytes": 51658
+    },
+    "cases/rust7/phases/01-warmup-10000/merged.txt": {
+      "sha256": "a17faa9018b8b974842a13cbb89dbfc063bbf7b81f4ea7836005bad1fae7b8d9",
+      "bytes": 2976
+    },
+    "cases/rust7/phases/01-warmup-10000/phase.json": {
+      "sha256": "093109ed406fd4f347e1a73d9c6c4887a14bdd11943093175b98a6b87f04a72f",
+      "bytes": 500
+    },
+    "cases/rust7/phases/01-warmup-10000/target-monitor.jsonl": {
+      "sha256": "d1b65121bb6b39390281389ebf39ad2d0568c4cc6ec73c0751f34825fd8177f3",
+      "bytes": 190627
+    },
+    "cases/rust7/phases/01-warmup-10000/target-monitor.stop": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "cases/rust7/phases/02-probe-130000/after-load.json": {
+      "sha256": "43bcbf98d475a425070efae5c6b41a7dcdca42ca3ee94b98ed64a52135cde54b",
+      "bytes": 55296
+    },
+    "cases/rust7/phases/02-probe-130000/assessment.json": {
+      "sha256": "1bf4a3cfa7a5c8e5f9a00ff7bbc857caedd3e4171d35d0dd7aa4c7e81c4a24e2",
+      "bytes": 92393
+    },
+    "cases/rust7/phases/02-probe-130000/before-load.json": {
+      "sha256": "db0dbe59757c1f3167534d4ec1fd8b4287edae7dd19b5e2bbe5ff53cf2d4c386",
+      "bytes": 55292
+    },
+    "cases/rust7/phases/02-probe-130000/box0.json": {
+      "sha256": "7a8579e591d153964ba145fc960610dbd06aefc9f028a876a3a5c690d5b774a2",
+      "bytes": 299616
+    },
+    "cases/rust7/phases/02-probe-130000/box0.log": {
+      "sha256": "d1b14fbbfa51118733f94f577c6b2b20fef1e0cf6caa60cd1a46ad12dbd4bd6d",
+      "bytes": 3131
+    },
+    "cases/rust7/phases/02-probe-130000/box1.json": {
+      "sha256": "ba05f20aec64b0ed7267a51cac0d6134eeab70aec895504b734b2df4994f67e2",
+      "bytes": 299688
+    },
+    "cases/rust7/phases/02-probe-130000/box1.log": {
+      "sha256": "20f9063325faf6d05a2543a465841c2f07badfd79821cd664f7e325e59c2eda4",
+      "bytes": 3131
+    },
+    "cases/rust7/phases/02-probe-130000/box2.json": {
+      "sha256": "87a2a3118b747f9c679e0b4794e97b81952f6a85690d675129e459ee5dd803d4",
+      "bytes": 300021
+    },
+    "cases/rust7/phases/02-probe-130000/box2.log": {
+      "sha256": "fb0b11fa94ab61c5213ab650d6a13dafd1a44735e28f9111d5a3a4c072355163",
+      "bytes": 3131
+    },
+    "cases/rust7/phases/02-probe-130000/box3.json": {
+      "sha256": "ae9392c45b158fbd54282fd55d527489b72af4bcb6e2d2acad862236cf46a624",
+      "bytes": 299601
+    },
+    "cases/rust7/phases/02-probe-130000/box3.log": {
+      "sha256": "e983d3f474929b1f8cd9149a39e9a4681b4a82a82bd176040c39c65dae185ff2",
+      "bytes": 3131
+    },
+    "cases/rust7/phases/02-probe-130000/box4.json": {
+      "sha256": "f544b19b277833e935badc936795f1432d5dd7fc08dc4463ba9f6d82220d0bb3",
+      "bytes": 299711
+    },
+    "cases/rust7/phases/02-probe-130000/box4.log": {
+      "sha256": "38c40f910aead16a402f82454db9c9db1592e6b3cc71449ddc5c61b899cb3609",
+      "bytes": 3131
+    },
+    "cases/rust7/phases/02-probe-130000/box5.json": {
+      "sha256": "bd3003137255fb033e35198d2ef156e56c98e737c45503bc121695cc1515c5da",
+      "bytes": 300136
+    },
+    "cases/rust7/phases/02-probe-130000/box5.log": {
+      "sha256": "e19cac7ace3887e7177c1ea74240e74f68bd25a397cd8a226fa714ee42deef4f",
+      "bytes": 3131
+    },
+    "cases/rust7/phases/02-probe-130000/box6.json": {
+      "sha256": "d56dea53c53a8a7aefcf78fc7069f9499a8fc491b872925685b1b17c302c8acb",
+      "bytes": 299855
+    },
+    "cases/rust7/phases/02-probe-130000/box6.log": {
+      "sha256": "16e046ae15ae457c7a5b934f2f27035062871f608c96114ec0b614987460caf4",
+      "bytes": 3131
+    },
+    "cases/rust7/phases/02-probe-130000/client-env-witness.json": {
+      "sha256": "35838a3e201c0891a13119af3c5ce9a83d378836696e7c6ff3c61d847e0c8753",
+      "bytes": 1259
+    },
+    "cases/rust7/phases/02-probe-130000/load-commands.json": {
+      "sha256": "2210817a16b1c416ce88cb5f29891459d13083d116ea7c1ba0e3fa69e5d0d1fc",
+      "bytes": 5194
+    },
+    "cases/rust7/phases/02-probe-130000/load-monitor.jsonl": {
+      "sha256": "adbcb479f077b93a7019237cbaaaadb6d715e18c24378dcdcd7c544396251205",
+      "bytes": 116293
+    },
+    "cases/rust7/phases/02-probe-130000/load-monitor.stop": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "cases/rust7/phases/02-probe-130000/merged.json": {
+      "sha256": "068306cf8cf24bcfe4185aefc154deeea855690ab536b75a9e342ec734e26136",
+      "bytes": 55599
+    },
+    "cases/rust7/phases/02-probe-130000/merged.txt": {
+      "sha256": "b5534c3b8e21d2d10e76d7eeda3b9942cd756612513026bb71517744bea58369",
+      "bytes": 3716
+    },
+    "cases/rust7/phases/02-probe-130000/phase.json": {
+      "sha256": "86468ab927e03633c36028c1049417c177b9665766b5f1f655fa36e9c8582c6b",
+      "bytes": 1197
+    },
+    "cases/rust7/phases/02-probe-130000/target-monitor.jsonl": {
+      "sha256": "e6aee9d80da19f5e0f02dc4401d16fd003d7a296104b5155327d215b47ae7dd4",
+      "bytes": 134516
+    },
+    "cases/rust7/phases/02-probe-130000/target-monitor.stop": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "cases/rust7/phases/03-hold-130000/after-load.json": {
+      "sha256": "eeb71a7457b75394131b1259fd945d17b0fdce7e60fe783dc7155e82294507a7",
+      "bytes": 55297
+    },
+    "cases/rust7/phases/03-hold-130000/assessment.json": {
+      "sha256": "5dbdfbb905451dc8bff312db2143752fcea1456e577e78ca66fc85372c4bdb0b",
+      "bytes": 197796
+    },
+    "cases/rust7/phases/03-hold-130000/before-load.json": {
+      "sha256": "5533cd6d43af3265990b8ceecc870c4517005a42413931b4f698b36cdcf9ffd7",
+      "bytes": 55296
+    },
+    "cases/rust7/phases/03-hold-130000/box0.json": {
+      "sha256": "8ad6a3898d791b5280300cdfa8a62034c10e69d8223172d6f644532802316aaa",
+      "bytes": 878973
+    },
+    "cases/rust7/phases/03-hold-130000/box0.log": {
+      "sha256": "1f6c35904026c61aa69feb71480ca189186e208379450402caf534bf177d9599",
+      "bytes": 3148
+    },
+    "cases/rust7/phases/03-hold-130000/box1.json": {
+      "sha256": "604b3d58dd34734bb782cab3fad912aaae34334acebbb4de57953cdd98cf6ff3",
+      "bytes": 878720
+    },
+    "cases/rust7/phases/03-hold-130000/box1.log": {
+      "sha256": "ba4f31208460453b25a1f5ca34927fb69c5287c822d329f5054d9a3350045325",
+      "bytes": 3148
+    },
+    "cases/rust7/phases/03-hold-130000/box2.json": {
+      "sha256": "f415db9fb68b2967a537e73995aa3b62fc68ff8bdf7d95945d45374b420e7ec5",
+      "bytes": 878502
+    },
+    "cases/rust7/phases/03-hold-130000/box2.log": {
+      "sha256": "42e0fa9113b4d57a645fd21d4f824c987349b7b46c712973530d27b22e46ec8e",
+      "bytes": 3148
+    },
+    "cases/rust7/phases/03-hold-130000/box3.json": {
+      "sha256": "c17c88e14134152be1271f112add2f0bd4bb49c9ec54e04162afec0523a742db",
+      "bytes": 879080
+    },
+    "cases/rust7/phases/03-hold-130000/box3.log": {
+      "sha256": "2e9f1fdb7817165114b99bb2d0c4675aa3cda3d25f6268eb387b076a3140dbd7",
+      "bytes": 3148
+    },
+    "cases/rust7/phases/03-hold-130000/box4.json": {
+      "sha256": "49746cbe8d980528c615630bf8a7b02b9ab8cbc751548914a619b78ded7ba5bd",
+      "bytes": 878965
+    },
+    "cases/rust7/phases/03-hold-130000/box4.log": {
+      "sha256": "2bb708787f2549ccab175a9de8dc54e41963572b65c0e70447cd74e93b2442a5",
+      "bytes": 3148
+    },
+    "cases/rust7/phases/03-hold-130000/box5.json": {
+      "sha256": "9ddd1ebaab9a1023571477a1449ec44e034ea47537835df252f609ca85215e11",
+      "bytes": 878481
+    },
+    "cases/rust7/phases/03-hold-130000/box5.log": {
+      "sha256": "2c3fe6a03d003002814b00c2dc10a050e54f05eab7d71c1a857fadd044b72e04",
+      "bytes": 3148
+    },
+    "cases/rust7/phases/03-hold-130000/box6.json": {
+      "sha256": "61e9724863bd122bda81ef9cd8fafe34c2853082df05d439ac152de22d7640cc",
+      "bytes": 878647
+    },
+    "cases/rust7/phases/03-hold-130000/box6.log": {
+      "sha256": "6fcece76c9ca4a3fa2678813edf24b8a42d01f4f6ac64e3c9e032b36816c13a9",
+      "bytes": 3148
+    },
+    "cases/rust7/phases/03-hold-130000/client-env-witness.json": {
+      "sha256": "3ad738ae7c8748ab5ccf59237a35bcbd634a3f901f4ea4adf51d559570428529",
+      "bytes": 1252
+    },
+    "cases/rust7/phases/03-hold-130000/load-commands.json": {
+      "sha256": "9b0cb2ce48d0a6f70b30ba6cd8948f93c8cf463c3e1d8f150605c58db6abdefb",
+      "bytes": 5187
+    },
+    "cases/rust7/phases/03-hold-130000/load-monitor.jsonl": {
+      "sha256": "0491cd5c3705b2512d516fde775ed697df3f6ba24a394f7aea196dfb5a198221",
+      "bytes": 314237
+    },
+    "cases/rust7/phases/03-hold-130000/load-monitor.stop": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "cases/rust7/phases/03-hold-130000/merged.json": {
+      "sha256": "d6b2593715f5b68a8aca5518b935add335c6427ccc929eddb0ac0e648c0ef3f4",
+      "bytes": 111058
+    },
+    "cases/rust7/phases/03-hold-130000/merged.txt": {
+      "sha256": "1f71a293a664c883906488b0122397e94d7df07bebbbe667fb77337e74173685",
+      "bytes": 3860
+    },
+    "cases/rust7/phases/03-hold-130000/phase.json": {
+      "sha256": "1cac60897159208e2a8b020253f65a6c114c4db3903487bdd225904eef98c82a",
+      "bytes": 1193
+    },
+    "cases/rust7/phases/03-hold-130000/target-monitor.jsonl": {
+      "sha256": "5630d1d7d30be7d644020f5ec0b24b7ee8be9ed22c72f295a84f9d9e3f37d699",
+      "bytes": 362813
+    },
+    "cases/rust7/phases/03-hold-130000/target-monitor.stop": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  "all_input_hashes_unchanged": true,
+  "limitations": [
+    "This receipt is not an unqualified stock-native PASS for the Rust hold: its seven native whole-VM CPU flags remain set.",
+    "Target PG component CPU is withheld where the retained live-PID counter/population warning applies. Aggregate target cgroup qualification remains valid.",
+    "Whole-pair/global/reference/source/session proof is outside this individual phase replay and is audited separately.",
+    "Local ARM results do not establish an official x86 rank or exact maximum."
+  ]
+}

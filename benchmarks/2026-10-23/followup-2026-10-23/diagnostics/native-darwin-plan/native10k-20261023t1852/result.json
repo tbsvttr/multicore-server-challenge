@@ -1,0 +1,583 @@
+{
+  "scope": "DIAGNOSTIC ONLY: native Darwin client outside Docker VM; no controlled causal comparison",
+  "run_id": "native10k_20261023t185202_0fd147",
+  "database": "mc_pair_native10k_20261023t185202_0fd147",
+  "target": "multicore-native-target-20261023",
+  "completed": true,
+  "capacity_score": false,
+  "client_headroom_qualified": false,
+  "hard_client_CPU_memory_quota": null,
+  "native_box_CPU": "N/A on Darwin; native75% headroom is not proven",
+  "commands": [
+    {
+      "argv": [
+        "docker",
+        "inspect",
+        "multicore-native-target-20261023"
+      ],
+      "exit": 0,
+      "log": "target-before-inspect.log"
+    },
+    {
+      "argv": [
+        "docker",
+        "inspect",
+        "multicore-comparison-target-20261023"
+      ],
+      "exit": 0,
+      "log": "original-target-inspect.log"
+    },
+    {
+      "argv": [
+        "docker",
+        "exec",
+        "--user",
+        "root",
+        "multicore-native-target-20261023",
+        "python3",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/tools/target_helper.py",
+        "snapshot",
+        "--out",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/target-initial.json"
+      ],
+      "exit": 0,
+      "log": "snapshot-target-initial.json.log"
+    },
+    {
+      "argv": [
+        "docker",
+        "exec",
+        "--user",
+        "root",
+        "multicore-native-target-20261023",
+        "python3",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/tools/target_helper.py",
+        "freeze",
+        "--out",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/server-frozen",
+        "--case",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/case.json"
+      ],
+      "exit": 0,
+      "log": "freeze-server-frozen.log"
+    },
+    {
+      "argv": [
+        "docker",
+        "exec",
+        "--user",
+        "root",
+        "multicore-native-target-20261023",
+        "python3",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/tools/target_helper.py",
+        "clone",
+        "--out",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/database.json",
+        "--database",
+        "mc_pair_native10k_20261023t185202_0fd147"
+      ],
+      "exit": 0,
+      "log": "clone-database.json.log"
+    },
+    {
+      "argv": [
+        "docker",
+        "exec",
+        "--user",
+        "root",
+        "multicore-native-target-20261023",
+        "python3",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/tools/target_helper.py",
+        "start",
+        "--out",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/app.json",
+        "--case",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/case.json",
+        "--database",
+        "mc_pair_native10k_20261023t185202_0fd147",
+        "--port",
+        "3000"
+      ],
+      "exit": 0,
+      "log": "start-app.json.log"
+    },
+    {
+      "argv": [
+        "docker",
+        "exec",
+        "--user",
+        "root",
+        "multicore-native-target-20261023",
+        "python3",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/tools/target_helper.py",
+        "snapshot",
+        "--out",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/before-load.json",
+        "--case",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/app.json"
+      ],
+      "exit": 0,
+      "log": "snapshot-before-load.json.log"
+    },
+    {
+      "argv": [
+        "go",
+        "version",
+        "-m",
+        "/private/tmp/multicore-comparison-20261023/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/client-frozen/loadgen-darwin"
+      ],
+      "exit": 0,
+      "log": "darwin-build-info.log"
+    },
+    {
+      "argv": [
+        "sysctl",
+        "kern.maxfiles",
+        "kern.maxfilesperproc",
+        "kern.num_files"
+      ],
+      "exit": 0,
+      "log": "darwin-file-limits.log"
+    },
+    {
+      "argv": [
+        "sh",
+        "-c",
+        "ulimit -Sn; ulimit -Hn"
+      ],
+      "exit": 0,
+      "log": "driver-nofile.log"
+    },
+    {
+      "argv": [
+        "ps",
+        "-axo",
+        "pid=,comm="
+      ],
+      "exit": 0,
+      "log": "backend-pids.log"
+    },
+    {
+      "argv": [
+        "docker",
+        "exec",
+        "--user",
+        "root",
+        "-d",
+        "multicore-native-target-20261023",
+        "python3",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/tools/monitor-launch.py",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852"
+      ],
+      "exit": 0,
+      "log": "monitor-start.log"
+    },
+    {
+      "argv": [
+        "docker",
+        "exec",
+        "--user",
+        "root",
+        "multicore-native-target-20261023",
+        "python3",
+        "-c",
+        "import json,pathlib,sys;s=json.loads(pathlib.Path(sys.argv[1]).read_text());t=pathlib.Path('/proc/'+str(s['launcher_pid'])+'/stat').read_text();p=t[t.rindex(')')+2:].split();assert p[0]!='Z' and int(p[19])==s['launcher_start_ticks'];print(json.dumps({'running':True,'pid':s['launcher_pid']}))",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/monitor-state.json"
+      ],
+      "exit": 0,
+      "log": "monitor-running.log"
+    },
+    {
+      "argv": [
+        "ps",
+        "-ww",
+        "-p",
+        "79159",
+        "-o",
+        "pid=,uid=,pgid=,comm="
+      ],
+      "exit": 0,
+      "log": "client-exec-witness.log"
+    },
+    {
+      "argv": [
+        "/private/tmp/multicore-comparison-20261023/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/client-frozen/loadgen-darwin",
+        "merge",
+        "-o",
+        "/private/tmp/multicore-comparison-20261023/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/merged.json",
+        "/private/tmp/multicore-comparison-20261023/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/box0.json"
+      ],
+      "exit": 0,
+      "log": "merged.log"
+    },
+    {
+      "argv": [
+        "docker",
+        "exec",
+        "--user",
+        "root",
+        "multicore-native-target-20261023",
+        "python3",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/tools/target_helper.py",
+        "snapshot",
+        "--out",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/after-load.json",
+        "--case",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/app.json"
+      ],
+      "exit": 0,
+      "log": "snapshot-after-load.json.log"
+    },
+    {
+      "argv": [
+        "docker",
+        "exec",
+        "--user",
+        "root",
+        "multicore-native-target-20261023",
+        "python3",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/tools/target_helper.py",
+        "stop",
+        "--out",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/app-stopped.json",
+        "--case",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/app.json"
+      ],
+      "exit": 0,
+      "log": "stop-app-stopped.json.log"
+    },
+    {
+      "argv": [
+        "docker",
+        "exec",
+        "--user",
+        "root",
+        "multicore-native-target-20261023",
+        "python3",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/tools/target_helper.py",
+        "drop",
+        "--out",
+        "/comparison/optimization/diagnostics/native-darwin-plan/native10k-20261023t1852/dropped.json",
+        "--database",
+        "mc_pair_native10k_20261023t185202_0fd147"
+      ],
+      "exit": 0,
+      "log": "drop-dropped.json.log"
+    }
+  ],
+  "started_unix_s": 1792781522.333625,
+  "power": [
+    {
+      "unix_s": 1792781522.3580642,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t25%; charging; 3:03 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781531.920735,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t25%; charging; 3:03 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781537.306092,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t25%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781542.3591402,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t25%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781547.3952389,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t25%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781552.4232142,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t25%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781557.481257,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781562.526429,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781567.580488,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781572.630933,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781577.680589,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781582.727676,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781587.772553,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781592.813487,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781597.84706,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781602.886456,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781607.9305558,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781612.974455,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 2:58 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781618.0211442,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 3:08 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781623.064322,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 3:08 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781628.1210399,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 3:08 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781633.170903,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 3:08 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781638.2181919,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 3:08 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781643.261524,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 3:08 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781648.3022668,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 3:08 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781653.345622,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 3:08 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781658.392295,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 3:08 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781663.4378219,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 3:08 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781668.48479,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t26%; charging; 3:08 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781673.514555,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t27%; charging; 3:18 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781678.5527701,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t27%; charging; 3:18 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781683.594728,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t27%; charging; 3:18 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781688.638922,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t27%; charging; 3:18 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781693.677919,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t27%; charging; 3:18 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781698.7154639,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t27%; charging; 3:18 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781703.754263,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t27%; charging; 3:18 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781708.796163,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t27%; charging; 3:18 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781713.8425071,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t27%; charging; 3:18 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781718.882096,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t27%; charging; 3:18 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781723.9261708,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t27%; charging; 3:18 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781728.9589078,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t27%; charging; 3:18 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "unix_s": 1792781736.218744,
+      "safe": true,
+      "stdout": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=23003235)\t27%; charging; 3:28 remaining present: true\n",
+      "stderr": "",
+      "exit": 0
+    }
+  ],
+  "cleanup_errors": [],
+  "client_exit": 0,
+  "merge_exit": 0,
+  "native_verdict": {
+    "pass": true,
+    "lg_limited": false
+  },
+  "native_box_CPU_missing": true,
+  "native_metadata_exact": true,
+  "native_timing_and_error_flags_preserved": true,
+  "app_source_unchanged": true,
+  "native_source_unchanged": true,
+  "client_binary_unchanged": true,
+  "app_binary_unchanged": true,
+  "frozen_app_binary_unchanged": true,
+  "target_observer_complete": true,
+  "darwin_observer_complete": true,
+  "finished_unix_s": 1792781736.219476
+}

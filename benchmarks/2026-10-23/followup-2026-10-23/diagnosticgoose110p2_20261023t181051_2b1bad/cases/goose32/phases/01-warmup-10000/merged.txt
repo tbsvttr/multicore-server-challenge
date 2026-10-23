@@ -1,0 +1,39 @@
+
+10000 users on 1 box(es), http://127.0.0.1:3000, measured 120 s after a 60 s ramp
+endpoint                                      count    req/s      p50      p90      p95      p99      max    err%
+GET /api/articles/:slug                       55198    460.0     16.4    999.4   2142.2   5083.1     7954    0.00
+GET /api/articles/:slug/comments              55162    459.7     15.6    611.3   1323.0   2734.1     6586    0.00
+GET /api/tags                                 55035    458.6     16.2   1067.0   2224.1   5214.2     7574    0.00
+GET /api/articles                             32832    273.6     17.9    772.1   1459.2   2967.6     7303    0.00
+GET /api/articles/feed                        22204    185.0     21.6    856.6   1483.8   3041.3     6418    0.00
+GET /api/profiles/:username                   14945    124.5      8.9    980.0   2027.5   5226.5     7365    0.00
+GET /api/articles?author                      11963     99.7     18.2    663.6   1365.0   2775.0     6595    0.00
+GET /api/articles?tag                         11841     98.7     19.4   1077.2   2291.7   5263.4     7102    0.00
+POST /api/articles/:slug/favorite              5509     45.9   3176.4  10010.6  10076.2  11935.7    13214   15.08
+POST /api/articles/:slug/comments              3649     30.4   2838.5  10010.6  10059.8  11894.8    13156   13.89
+GET /api/articles?favorited                    2982     24.9     18.7    645.1   1368.1   2758.7     5345    0.00
+POST /api/profiles/:username/follow            1613     13.4   3164.2  10010.6  10068.0  12058.6    13124   13.52
+GET /api/user                                  1425     11.9     11.3   1412.1   2725.9   5267.5     6664    0.00
+POST /api/articles                             1201     10.0   3366.9  10010.6  10068.0  10575.9    12853   14.74
+DELETE /api/profiles/:username/follow           539      4.5   2852.9  10010.6  10149.9  12427.3    13083   16.14
+DELETE /api/articles/:slug/favorite             448      3.7   1004.5  10002.4  10051.6  10469.4    12493   13.39
+PUT /api/user                                   434      3.6   3041.3  10010.6  10100.7  12615.7    12886   12.67
+POST /api/users/login                           330      2.8    498.4   3141.6   4689.9   7180.3     8643    0.00
+DELETE /api/articles/:slug/comments/:id         102      0.8    637.4  10010.6  10043.4  10403.8    11895   15.69
+PUT /api/articles/:slug                          36      0.3   1063.9   9527.3  10010.6  10297.3    10297   11.11
+POST /api/users                                   8      0.1   7786.5   9797.6  10043.4  10043.4    10043   12.50
+ALL                                          277456   2312.1     17.3   1201.2   2670.6   9109.5    13214    0.70
+errors: timeout=1956  (e.g. "request timeout")
+mix: 1.86 calls/page, 0.231 req/s per user, 4.9% writes, 149491 page views
+box 0 (831ef5b57bce): 10000 users, CPU avg 38% max 100%, loadgen proc 10%, RSS peak 299 MB, 11955 TCP connects, behind=true
+verdict: FAIL (p95 2671 ms >= 500, p99 9110 ms >= 1000)   [p95 < 500 ms, p99 < 1000 ms, errors < 1%]
+LG-LIMITED: box 0 fell behind: 30 of 120 seconds had mean timer wake-up lag > 50 ms; sampler tick 2895 ms late
+gc 1 @0.008s 2%: 0.023+1.5+0.29 ms clock, 0.046+0/0.20/0.85+0.59 ms cpu, 3->3->0 MB, 4 MB goal, 0 MB stacks, 0 MB globals, 2 P
+gc 2 @0.020s 2%: 0.030+0.96+0.070 ms clock, 0.060+0.093/0.34/0.70+0.14 ms cpu, 3->3->2 MB, 4 MB goal, 0 MB stacks, 0 MB globals, 2 P
+gc 3 @0.027s 2%: 0.028+0.55+0.075 ms clock, 0.057+0.083/0.24/0.076+0.15 ms cpu, 4->4->2 MB, 4 MB goal, 0 MB stacks, 0 MB globals, 2 P
+gc 4 @0.033s 2%: 0.022+0.24+0.002 ms clock, 0.044+0.18/0.068/0.14+0.004 ms cpu, 6->6->4 MB, 6 MB goal, 0 MB stacks, 0 MB globals, 2 P
+gc 5 @0.036s 2%: 0.043+0.40+0.060 ms clock, 0.087+0.071/0.10/0.18+0.12 ms cpu, 8->8->6 MB, 8 MB goal, 0 MB stacks, 0 MB globals, 2 P
+gc 6 @0.039s 3%: 0.026+0.37+0.050 ms clock, 0.053+0.070/0.24/0.058+0.10 ms cpu, 11->11->8 MB, 12 MB goal, 0 MB stacks, 0 MB globals, 2 P
+gc 7 @0.045s 3%: 0.021+0.42+0.056 ms clock, 0.043+0.063/0.18/0.079+0.11 ms cpu, 16->16->11 MB, 16 MB goal, 0 MB stacks, 0 MB globals, 2 P
+gc 8 @0.054s 3%: 0.044+0.53+0.079 ms clock, 0.088+0/0.27/0.13+0.15 ms cpu, 22->23->16 MB, 23 MB goal, 0 MB stacks, 0 MB globals, 2 P
+gc 9 @0.067s 2%: 0.030+0.98+0.060 ms clock, 0.061+0/0.27/0.15+0.12 ms cpu, 32->33->23 MB, 33 MB goal, 0 MB stacks, 0 MB globals, 2 P

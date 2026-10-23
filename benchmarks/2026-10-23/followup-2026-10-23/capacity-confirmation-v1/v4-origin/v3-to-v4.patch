@@ -1,0 +1,651 @@
+--- a/capacity_controller.py
++++ b/capacity_controller.py
+@@ -15,7 +15,7 @@
+ import threading
+ import time
+ 
+-from search_policy import DEFAULT_PROTOCOL, client_cpu_scope_policy, growth_factor, load_cpus, load_memory_bytes, next_action, shards
++from search_policy import DEFAULT_PROTOCOL, client_gomaxprocs, client_cpu_scope_policy, growth_factor, load_cpus, load_memory_bytes, next_action, shards
+ from audit.evidence import audit_phase
+ from audit.primitives import inspect_budget, read, sha
+ 
+@@ -62,6 +62,7 @@
+     protocol['load_cpus'] = cfg['load_cpus']
+     protocol['client_cpu_scope_policy'] = cfg['client_cpu_scope_policy']
+     protocol['growth_factor'] = cfg['growth_factor']
++    client_gomaxprocs(protocol, cfg)
+     growth_factor(protocol, cfg)
+     client_cpu_scope_policy(protocol, cfg)
+     load_memory_bytes(protocol, cfg)
+@@ -70,7 +71,7 @@
+         protocol[key] = int(value)
+     assert 10 <= protocol['start_users'] <= protocol['max_users'] <= 160000
+     assert 1 <= protocol['max_probes'] <= 20 and 1 <= protocol['max_holds'] <= 8
+-    plan = {'schema': 'multicore-local-capacity-v3',
++    plan = {'schema': 'multicore-local-capacity-v4',
+             'scope': 'Local shared ARM64 Mac/Docker capacity search; no official x86 rank or all-competitor claim.',
+             'configuration': cfg, 'protocol': protocol,
+             'created_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+@@ -85,12 +86,13 @@
+ class Controller:
+     def __init__(self, plan_path):
+         self.plan_path, self.plan = plan_path, read(plan_path)
+-        assert self.plan['schema'] == 'multicore-local-capacity-v3'
++        assert self.plan['schema'] == 'multicore-local-capacity-v4'
+         assert sha(plan_path) == plan_path.with_suffix(plan_path.suffix + '.sha256').read_text().strip()
+         self.cfg, self.protocol = self.plan['configuration'], self.plan['protocol']
+         for name in ['warmup_users', 'warmup', 'probe', 'hold', 'target_cpus', 'target_memory_bytes',
+                      'max_users_per_shard', 'max_shards', 'gomaxprocs_per_shard', 'resolution', 'load_cpu_limit_pct', 'rounding_policy']:
+             assert self.protocol[name] == DEFAULT_PROTOCOL[name], 'normal protocol changed: ' + name
++        client_gomaxprocs(self.protocol, self.cfg)
+         self.load_memory = load_memory_bytes(self.protocol, self.cfg)
+         self.load_cpus = load_cpus(self.protocol, self.cfg)
+         self.cpu_scope_policy = client_cpu_scope_policy(self.protocol, self.cfg)
+@@ -193,6 +195,24 @@
+         with contextlib.suppress(Exception):
+             self.docker('exec', '--user', 'root', self.client, 'python3', '-c', code)
+ 
++    def client_environment_witness(self, directory, run_id, count):
++        container_code = "import os,json;print(json.dumps({'GOMAXPROCS':os.environ.get('GOMAXPROCS')}))"
++        container_env = json.loads(self.docker('exec', '--user', 'root', self.client, 'python3', '-c', container_code).stdout)
++        assert container_env == self.cfg['client_env'], 'container GOMAXPROCS differs'
++        code = "import pathlib,os,json;binary=" + repr(self.cfg['native_binary']) + ";run=" + repr(run_id) + ";rows=[]\nfor p in pathlib.Path('/proc').glob('[0-9]*/cmdline'):\n try:\n  a=p.read_bytes().split(bytes([0]));\n  if os.path.realpath(p.parent/'exe')==binary and run.encode() in a:\n   env=dict(x.split(bytes([61]),1) for x in (p.parent/'environ').read_bytes().split(bytes([0])) if bytes([61]) in x);rows.append({'pid':int(p.parent.name),'box_index':int(a[a.index(b'-box-index')+1]),'run_id':run,'env':{'GOMAXPROCS':env.get(b'GOMAXPROCS',b'').decode()}})\n except (OSError,ValueError,IndexError): pass\nprint(json.dumps(rows))"
++        deadline = time.monotonic() + 3
++        while True:
++            rows = json.loads(self.docker('exec', '--user', 'root', self.client, 'python3', '-c', code).stdout)
++            if len(rows) == count:
++                break
++            if time.monotonic() >= deadline:
++                raise RuntimeError('missing native process environment witnesses')
++            time.sleep(.1)
++        assert len({row['pid'] for row in rows}) == count
++        assert sorted(row['box_index'] for row in rows) == list(range(count))
++        assert all(row['run_id'] == run_id and row['env'] == self.cfg['client_env'] for row in rows)
++        write(directory / 'client-env-witness.json', {'container_env': container_env, 'shards': rows})
++
+     def phase(self, case_dir, ccase, case, action, serial):
+         stage, users = action['stage'], action['users']
+         name = f'{serial:02d}-{stage}-{users}'
+@@ -220,7 +240,7 @@
+             commands = []
+             for shard in allocation:
+                 i = shard['box_index']
+-                argv = ['docker', 'exec', '--user', 'root', '--env', 'GOMAXPROCS=1', self.client, self.cfg['native_binary'], 'run',
++                argv = ['docker', 'exec', '--user', 'root', '--env', 'GOMAXPROCS=2', self.client, self.cfg['native_binary'], 'run',
+                         '-target', f"http://{shard['host']}:{self.cfg['port']}", '-users', str(shard['users']),
+                         '-ramp', str(durations['ramp_s']) + 's', '-measure', str(durations['measure_s']) + 's',
+                         '-tail', str(durations['tail_s']) + 's', '-articles', '500000', '-think-scale', '1',
+@@ -231,6 +251,7 @@
+                 processes.append(subprocess.Popen(argv, stdout=log, stderr=subprocess.STDOUT))
+             self.current_generators = processes
+             write(directory / 'load-commands.json', commands)
++            self.client_environment_witness(directory, state['run_id'], len(allocation))
+             deadline = time.monotonic() + sum(durations.values()) + 45
+             heartbeat = time.monotonic() + 15
+             while any(proc.poll() is None for proc in processes):
+@@ -359,6 +380,7 @@
+                         '--network', 'container:' + self.target,
+                         '--volume', str(self.host_base) + ':' + self.cfg['container_evidence'] + ':rw',
+                         '--volume', self.cfg['old_host_evidence'] + ':/evidence:ro',
++                        '--env', 'GOMAXPROCS=2',
+                         '--entrypoint', '/bin/sh', self.cfg.get('load_image') or target['Image'], '-c', 'exec sleep infinity')
+             self.load_created = True
+             self.inspect(self.client, self.root / 'load-inspect.json', self.load_cpus, self.load_memory)
+--- a/search_policy.py
++++ b/search_policy.py
+@@ -10,7 +10,7 @@
+     'probe': {'ramp_s': 60, 'measure_s': 60, 'tail_s': 15},
+     'hold': {'ramp_s': 60, 'measure_s': 300, 'tail_s': 15},
+     'articles': 500000, 'think_scale': 1.0, 'max_users_per_shard': 20000,
+-    'max_shards': 8, 'gomaxprocs_per_shard': 1,
++    'max_shards': 8, 'gomaxprocs_per_shard': 2,
+     'target_cpus': 8, 'target_memory_bytes': 16 * 1024**3,
+     'load_cpus': 4, 'load_memory_bytes': 4 * 1024**3,
+     'client_cpu_scope_policy': 'native_whole_vm_v1',
+@@ -21,6 +21,16 @@
+     'database_policy': 'one fresh full-seed clone and one continuous app session per implementation; no reset between warmup/probes/holds',
+     'invalid_policy': 'retain and stop that implementation; invalid phases never enter pass/fail brackets or receive a score; no selective retry',
+ }
++
++
++def client_gomaxprocs(protocol, configuration):
++    """Version4 requires the same explicit two-P client runtime everywhere."""
++    value = protocol.get('gomaxprocs_per_shard')
++    configured = configuration.get('gomaxprocs_per_shard')
++    if (type(value) is not int or value != 2 or type(configured) is not int
++            or configured != value or configuration.get('client_env') != {'GOMAXPROCS': '2'}):
++        raise ValueError('v4 requires explicit matching GOMAXPROCS2 configuration, protocol and client_env')
++    return value
+ 
+ 
+ def growth_factor(protocol, configuration):
+--- a/audit/evidence.py
++++ b/audit/evidence.py
+@@ -6,8 +6,8 @@
+ import sys
+ 
+ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+-from search_policy import client_cpu_scope_policy, growth_factor, load_cpus, load_memory_bytes, shards
+-from .primitives import (GiB, actual_process_checks, check, events_dict, exact_merge, generator_details,
++from search_policy import client_cpu_scope_policy, client_gomaxprocs, growth_factor, load_cpus, load_memory_bytes, shards
++from .primitives import (GiB, cpu_budget_matches, actual_process_checks, check, events_dict, exact_merge, generator_details,
+                          jsonl, monitor, native_verdict, read, setting_map, sha)
+ 
+ 
+@@ -29,13 +29,14 @@
+     checks = out['checks']
+     count = len(state.get('shards', []))
+     required = ['phase.json', 'before-load.json', 'after-load.json', 'target-monitor.jsonl', 'load-monitor.jsonl',
+-                'merged.json', 'load-commands.json'] + [f'box{i}.json' for i in range(count)]
++                'merged.json', 'load-commands.json', 'client-env-witness.json'] + [f'box{i}.json' for i in range(count)]
+     missing = [name for name in required if not (directory / name).exists()]
+     check(checks, 'complete_saved_phase', not missing and count > 0, missing)
+     if missing or count == 0:
+         return out
+     try:
+         protocol = plan['protocol']
++        gomax = client_gomaxprocs(protocol, plan['configuration'])
+         client_memory = load_memory_bytes(protocol, plan['configuration'])
+         client_cpus = load_cpus(protocol, plan['configuration'])
+         cpu_scope = client_cpu_scope_policy(protocol, plan['configuration'])
+@@ -44,6 +45,12 @@
+         expected_shards = shards(state['users'], protocol)
+         app, db = read(case_dir / 'app.json'), read(case_dir / 'database.json')
+         before, after = read(directory / 'before-load.json'), read(directory / 'after-load.json')
++        raw_target_budgets = {label: snapshot.get('cpu.max') for label, snapshot in [('before', before), ('after', after)]}
++        target_periods = sorted({int(value.split()[1]) for value in raw_target_budgets.values() if cpu_budget_matches(value, 8)})
++        out['target_cpu_max_before_after'] = raw_target_budgets
++        out['target_cpu_period_policy_warnings'] = ([
++            'Non-default or changed CFS period affects latency policy; raw quota/period remains preserved: ' + str(raw_target_budgets)
++        ] if len(target_periods) > 1 or any(period != 100000 for period in target_periods) else [])
+         raws = [read(directory / f'box{i}.json') for i in range(count)]
+         merged, commands = read(directory / 'merged.json'), read(directory / 'load-commands.json')
+         check(checks, 'predeclared_balanced_shards_and_limits', state['shards'] == expected_shards
+@@ -56,7 +63,7 @@
+               and app['env'].get('HOST') == '0.0.0.0' and app['env'].get('PORT') == str(plan['configuration']['port'])
+               and app['env'].get('JWT_SECRET') == plan['configuration']['jwt_secret'])
+         for label, snap in [('before', before), ('after', after)]:
+-            check(checks, label + ':fixed_target_budget', snap.get('cpu.max') == '800000 100000'
++            check(checks, label + ':fixed_target_budget', cpu_budget_matches(snap.get('cpu.max'), 8)
+                   and snap.get('memory.max') == str(16 * GiB) and snap.get('memory.swap.max') == '0'
+                   and snap.get('cpuset.cpus') == '')
+             check(checks, label + ':official_sources_and_pg_settings_fixed',
+@@ -76,9 +83,17 @@
+         check(checks, 'synchronized_raw_windows', all(len({m[k] for m in metas}) == 1 for k in common))
+         check(checks, 'native_metadata_exact_stage_protocol', all(
+               all(m[k] == expected_stage[k] for k in ['ramp_s', 'measure_s', 'tail_s'])
+-              and m['articles'] == 500000 and m['think_scale'] == 1 and m['gomaxprocs'] == 1
++              and m['articles'] == 500000 and m['think_scale'] == 1 and m['gomaxprocs'] == gomax
+               and m['run_id'] == state['run_id'] and m['window_start_ms'] == m['start_at_ms'] + expected_stage['ramp_s'] * 1000
+               and m['window_end_ms'] == m['window_start_ms'] + expected_stage['measure_s'] * 1000 for m in metas))
++        environment = read(directory / 'client-env-witness.json')
++        observed = environment.get('shards', [])
++        check(checks, 'container_and_each_shard_actual_GOMAXPROCS2',
++              environment.get('container_env') == {'GOMAXPROCS': '2'}
++              and len(observed) == count and len({row.get('pid') for row in observed}) == count
++              and all(type(row.get('pid')) is int and row['pid'] > 0 for row in observed)
++              and sorted(row.get('box_index', -1) for row in observed) == list(range(count))
++              and all(row.get('env') == {'GOMAXPROCS': '2'} and row.get('run_id') == state['run_id'] for row in observed))
+         check(checks, 'one_saved_command_per_shard', len(commands) == count)
+         for i, (raw, expected) in enumerate(zip(raws, expected_shards)):
+             meta = raw['meta']
+@@ -91,7 +106,7 @@
+                       '-ramp': str(expected_stage['ramp_s']) + 's', '-measure': str(expected_stage['measure_s']) + 's',
+                       '-tail': str(expected_stage['tail_s']) + 's', '-articles': '500000', '-think-scale': '1',
+                       '-secret': plan['configuration']['jwt_secret']}
+-            check(checks, f'shard{i}:raw_command_agrees', all(flags.get(k) == v for k, v in values.items()) and 'GOMAXPROCS=1' in command)
++            check(checks, f'shard{i}:raw_command_agrees', all(flags.get(k) == v for k, v in values.items()) and [arg for arg in command if arg.startswith('GOMAXPROCS=')] == ['GOMAXPROCS=2'])
+             check(checks, f'shard{i}:at_least99pct_vus_active', raw['box'].get('active_vus_at_window_start', 0) >= .99 * expected['users'])
+         checks.extend(exact_merge(raws, merged))
+         check(checks, 'merged_all_shards_and_users', merged['users'] == state['users'] and len(merged['boxes']) == count
+--- a/audit/aggregate.py
++++ b/audit/aggregate.py
+@@ -8,7 +8,7 @@
+ import time
+ 
+ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+-from search_policy import DEFAULT_PROTOCOL, client_cpu_scope_policy, growth_factor, load_cpus, load_memory_bytes, next_action
++from search_policy import DEFAULT_PROTOCOL, client_gomaxprocs, client_cpu_scope_policy, growth_factor, load_cpus, load_memory_bytes, next_action
+ from audit.evidence import audit_phase, conformance
+ from audit.primitives import GiB, check, inspect_budget, jsonl, read, setting_map, sha
+ 
+@@ -31,6 +31,7 @@
+         return result
+     check(checks, 'plan_hash_fixed', sha(root / 'plan.json') == (root / 'plan.sha256').read_text().strip())
+     try:
++        gomax = client_gomaxprocs(plan['protocol'], plan['configuration'])
+         client_memory = load_memory_bytes(plan['protocol'], plan['configuration'])
+         client_cpus = load_cpus(plan['protocol'], plan['configuration'])
+         cpu_scope = client_cpu_scope_policy(plan['protocol'], plan['configuration'])
+@@ -62,6 +63,10 @@
+         check(checks, kind + ':actual_budget_identity_and_no_affinity', bool(before) and bool(after)
+               and inspect_budget(before, cpus, memory) and inspect_budget(after, cpus, memory)
+               and before['Id'] == after['Id'])
++        if kind == 'load':
++            check(checks, 'load:container_GOMAXPROCS2_before_and_after', all(
++                  [v for v in inspection.get('Config', {}).get('Env', []) if v.startswith('GOMAXPROCS=')] == ['GOMAXPROCS=2']
++                  for inspection in [before, after]))
+     target, load = read(root / 'target-inspect.json'), read(root / 'load-inspect.json')
+     check(checks, 'external_client_cgroup_shared_network_only', target['Id'] != load['Id']
+           and load['HostConfig']['NetworkMode'] == 'container:' + target['Id'])
+--- a/audit/primitives.py
++++ b/audit/primitives.py
+@@ -2,6 +2,7 @@
+ 
+ import base64, bisect, collections, hashlib, json, math, re, struct, zlib
+ 
++from fractions import Fraction
+ from pathlib import Path
+ 
+ GiB=1024**3
+@@ -32,13 +33,52 @@
+     return (h['NanoCpus'] == cpus * 10 ** 9 and h['Memory'] == memory
+             and h['MemorySwap'] == memory and h['CpusetCpus'] == '' and h.get('CpusetMems', '') == '')
+ 
++def _cpu_budget_parts(value):
++    if not isinstance(value, str):
++        return None
++    text = value.strip()
++    if re.fullmatch(r'-?[0-9]+[ \t]+-?[0-9]+', text) is None:
++        return None
++    try:
++        quota, period = map(int, text.split())
++    except ValueError:
++        return None
++    return quota, period
++
++def cpu_budget_matches(value, cpus):
++    """Whether numeric, positive cpu.max quota/period equals declared CPUs exactly."""
++    parts = _cpu_budget_parts(value)
++    if parts is None or isinstance(cpus, bool) or not isinstance(cpus, (int, float)):
++        return False
++    try:
++        declared = Fraction(str(cpus))
++    except (ValueError, ZeroDivisionError):
++        return False
++    quota, period = parts
++    return quota > 0 and period > 0 and declared > 0 and quota * declared.denominator == period * declared.numerator
++
+ def monitor(path, meta, cpus, memory):
+     rows = jsonl(path)
+     checks, warnings = [], []
++    cpu_observations = []
++    for index, row in enumerate(rows):
++        parts = _cpu_budget_parts(row.get('cpu.max'))
++        cpu_observations.append({'sample_index': index, 'wall_ns': row.get('wall_ns'),
++                                 'monotonic_ns': row.get('monotonic_ns'), 'cpu.max': row.get('cpu.max'),
++                                 'quota_us': parts[0] if parts else None,
++                                 'period_us': parts[1] if parts else None})
++    periods = sorted({sample['period_us'] for sample in cpu_observations if sample['period_us'] is not None})
++    cpu_detail = {'cpu_budget_observations': cpu_observations, 'observed_cpu_periods_us': periods,
++                  'cpu_period_changed': len(periods) > 1}
++    if any(period != 100000 for period in periods):
++        warnings.append('cpu.max has non-default period(s) in microseconds: ' + str(periods)
++                        + '; eligibility checks the exact quota/period CPU ratio')
++    if len(periods) > 1:
++        warnings.append('cpu.max period changed across saved samples; all raw quota/period values are retained')
+     start, end = meta['window_start_ms'] * 10 ** 6, meta['window_end_ms'] * 10 ** 6
+     check(checks, 'monitor_has_samples', len(rows) >= 2)
+     if len(rows) < 2:
+-        return {'checks': checks, 'warnings': warnings, 'eligible': False}
++        return {'checks': checks, 'warnings': warnings, 'eligible': False, **cpu_detail}
+     walls = [r['wall_ns'] for r in rows]
+     check(checks, 'strict_wall_and_monotonic_order', all(
+         b['wall_ns'] > a['wall_ns'] and b['monotonic_ns'] > a['monotonic_ns'] for a, b in zip(rows, rows[1:])))
+@@ -50,7 +90,7 @@
+     max_gap = max(gaps, default=None)
+     check(checks, 'max_sample_gap_at_most_3s', max_gap is not None and max_gap <= 3, max_gap)
+     check(checks, 'cgroup_budget_continuous', all(
+-        r.get('cpu.max') == f'{cpus * 100000} 100000'
++        cpu_budget_matches(r.get('cpu.max'), cpus)
+         and int(r.get('memory.max') or -1) == memory and int(r.get('memory.swap.max') or -1) == 0
+         and int(r.get('memory.swap.current') or -1) == 0
+         and int(r.get('memory.current') or memory + 1) <= memory for r in selected))
+@@ -74,7 +114,7 @@
+     interval_utilization = [(b['cpu']['usage_usec'] - a['cpu']['usage_usec']) / 1e6
+                             / ((b['monotonic_ns'] - a['monotonic_ns']) / 1e9) / cpus * 100
+                             for a, b in zip(selected, selected[1:])]
+-    result = {'checks': checks, 'warnings': warnings, 'eligible': all(c['pass'] for c in checks),
++    result = {'checks': checks, 'warnings': warnings, 'eligible': all(c['pass'] for c in checks), **cpu_detail,
+               'samples': len(selected), 'max_gap_s': max_gap, 'window_s': seconds,
+               'cgroup_cpu_seconds_estimate': total_cpu, 'cgroup_quota_utilization_pct': total_cpu / seconds / cpus * 100,
+               'max_sample_interval_quota_utilization_pct': max(interval_utilization, default=None),
+--- a/audit/test_capacity.py
++++ b/audit/test_capacity.py
+@@ -14,7 +14,36 @@
+ from search_policy import DEFAULT_PROTOCOL, growth_factor, load_cpus, load_memory_bytes, next_action, shards
+ from audit.evidence import audit_phase
+ from audit.primitives import GiB, inspect_budget, sha
+-from capacity_controller import database_name, prepare
++from capacity_controller import database_name, prepare as actual_prepare
++
++
++def prepare(config_path, plan_path):
++    # Existing boundary tests declare the new mandatory client fields in their
++    # TEMPORARY configs; actual_prepare remains fail-closed when they are absent.
++    config = json.loads(config_path.read_text())
++    config.setdefault('gomaxprocs_per_shard', 2)
++    config.setdefault('client_env', {'GOMAXPROCS': '2'})
++    config_path.write_text(json.dumps(config))
++    return actual_prepare(config_path, plan_path)
++
++
++def derive_phase(source, destination):
++    """Synthetic audit fixture, not a claim the historical workload ran at P2."""
++    destination.mkdir(parents=True)
++    for file in source.iterdir():
++        if file.is_file():
++            (destination / file.name).symlink_to(file)
++    boxes = sorted(file for file in destination.iterdir() if re.fullmatch(r'box[0-9]+\.json', file.name))
++    for file in boxes:
++        data = json.loads(file.read_text()); data['meta']['gomaxprocs'] = 2
++        file.unlink(); file.write_text(json.dumps(data))
++    commands = destination / 'load-commands.json'
++    data = json.loads(commands.read_text())
++    data = [[v.replace('GOMAXPROCS=1', 'GOMAXPROCS=2') for v in command] for command in data]
++    commands.unlink(); commands.write_text(json.dumps(data))
++    run_id = json.loads(boxes[0].read_text())['meta']['run_id']
++    (destination / 'client-env-witness.json').write_text(json.dumps({'container_env': {'GOMAXPROCS': '2'},
++        'shards': [{'pid': 10000+i, 'box_index': i, 'run_id': run_id, 'env': {'GOMAXPROCS': '2'}} for i in range(len(boxes))]}))
+ 
+ 
+ def main():
+@@ -110,8 +139,13 @@
+           'stage': 'hold', 'users': 150000, 'probe_budget_exhausted': True})
+ 
+     old = Path('/private/tmp/multicore-research-20261022/paired-multi-load-v3/v3_multi_pair_20261022t200445_706372')
+-    source = old / '01-p1-rust7'
++    fixture = tempfile.TemporaryDirectory(prefix='capacity-v4-audit-source-', dir=Path(__file__).resolve().parent)
++    fixture_root = Path(fixture.name)
++    source = fixture_root / '01-p1-rust7'
++    derive_phase(old / '01-p1-rust7', source)
+     old_plan = json.loads((old / 'plan.json').read_text())
++    old_plan['configuration']['gomaxprocs_per_shard'] = 2
++    old_plan['configuration']['client_env'] = {'GOMAXPROCS': '2'}
+     case = old_plan['configuration']['cases'][0]
+     initial = json.loads((old / 'target-initial.json').read_text())
+     plan = {'configuration': old_plan['configuration'], 'protocol': DEFAULT_PROTOCOL}
+@@ -134,14 +168,14 @@
+           and not inspect_budget(cpu_eight_inspect, 4, 8 * GiB))
+     with tempfile.TemporaryDirectory(prefix='capacity-audit-', dir=Path(__file__).resolve().parent) as temporary:
+         directory = Path(temporary)
+-        for name in ['before-load.json', 'after-load.json', 'target-monitor.jsonl', 'load-monitor.jsonl', 'merged.json', 'load-commands.json', *[f'box{i}.json' for i in range(4)]]:
++        for name in ['before-load.json', 'after-load.json', 'target-monitor.jsonl', 'load-monitor.jsonl', 'merged.json', 'load-commands.json', 'client-env-witness.json', *[f'box{i}.json' for i in range(4)]]:
+             (directory / name).symlink_to(source / name)
+         state = {'id': directory.name, 'case': case['name'], 'stage': 'probe', 'users': 80000,
+                  'shards': shards(80000), 'database': prior['database'], 'session_id': source.name,
+                  'run_id': raw0['meta']['run_id'], 'load_exits': [0] * 4, 'merge_exit': prior['merge_exit']}
+         (directory / 'phase.json').write_text(json.dumps(state))
+         baseline = audit_phase(directory, source, plan, case, initial)
+-        check('actual_saved_four_shard_run_independently_passes', baseline['classification'] == 'PASS')
++        check('synthetic_P2_protocol_wrapper_over_actual_saved_histograms_passes', baseline['classification'] == 'PASS')
+         def replace(name, value):
+             path = directory / name
+             path.unlink()
+@@ -150,6 +184,54 @@
+             path = directory / name
+             path.unlink()
+             path.symlink_to(source / name)
++        bad_plan = copy.deepcopy(plan); bad_plan['protocol']['gomaxprocs_per_shard'] = 1
++        check('P1_protocol_rejected_by_P2_auditor', audit_phase(directory, source, bad_plan, case, initial)['classification'] == 'INVALID_EVIDENCE')
++        bad_plan = copy.deepcopy(plan); bad_plan['configuration']['client_env'] = {'GOMAXPROCS': '1'}
++        check('P1_config_env_rejected', audit_phase(directory, source, bad_plan, case, initial)['classification'] == 'INVALID_EVIDENCE')
++        bad = json.loads((source / 'box0.json').read_text()); bad['meta']['gomaxprocs'] = 1
++        replace('box0.json', bad)
++        check('raw_P1_metadata_not_reclassified_as_P2', audit_phase(directory, source, plan, case, initial)['classification'] == 'INVALID_EVIDENCE')
++        restore('box0.json')
++        bad = json.loads((source / 'load-commands.json').read_text()); bad[0] = [v.replace('GOMAXPROCS=2', 'GOMAXPROCS=1') for v in bad[0]]
++        replace('load-commands.json', bad)
++        check('P1_raw_command_rejected', audit_phase(directory, source, plan, case, initial)['classification'] == 'INVALID_EVIDENCE')
++        restore('load-commands.json')
++        original_env = json.loads((source / 'client-env-witness.json').read_text())
++        variants = []
++        bad = copy.deepcopy(original_env); bad['container_env']['GOMAXPROCS'] = '1'; variants.append(('actual_container_P1', bad))
++        bad = copy.deepcopy(original_env); bad['shards'][0]['env']['GOMAXPROCS'] = '1'; variants.append(('actual_shard_P1', bad))
++        bad = copy.deepcopy(original_env); bad['shards'][0]['box_index'] = 1; variants.append(('duplicate_actual_shard', bad))
++        bad = copy.deepcopy(original_env); bad['shards'][0]['pid'] = bad['shards'][1]['pid']; variants.append(('duplicate_actual_PID', bad))
++        bad = copy.deepcopy(original_env); bad['shards'].pop(); variants.append(('missing_actual_shard', bad))
++        bad = copy.deepcopy(original_env); bad['shards'][0]['run_id'] = 'another-run'; variants.append(('wrong_actual_run', bad))
++        for label, value in variants:
++            replace('client-env-witness.json', value)
++            check(label + '_rejected', audit_phase(directory, source, plan, case, initial)['classification'] == 'INVALID_EVIDENCE')
++            restore('client-env-witness.json')
++        missing_cfg = directory / 'missing-P2-config.json'; missing_cfg.write_text(json.dumps({'cases': [copy.deepcopy(case)]}))
++        missing_plan = directory / 'missing-P2-plan.json'
++        try:
++            actual_prepare(missing_cfg, missing_plan)
++        except ValueError:
++            check('P2_must_be_explicit_before_plan_written', not missing_plan.exists())
++        else:
++            raise AssertionError('missing P2 fields accepted')
++        for name in ['before-load.json', 'after-load.json']:
++            value = json.loads((source / name).read_text()); value['cpu.max'] = '1600000 200000'
++            replace(name, value)
++        target_rows = [json.loads(line) for line in (source / 'target-monitor.jsonl').read_text().splitlines()]
++        for value in target_rows: value['cpu.max'] = '1600000 200000'
++        path = directory / 'target-monitor.jsonl'; path.unlink(); path.write_text(''.join(json.dumps(row) + '\n' for row in target_rows))
++        ratio_audit = audit_phase(directory, source, plan, case, initial)
++        check('equivalent8CPU_200ms_snapshot_and_monitor_budget_accepts_with_warning',
++              ratio_audit['classification'] == 'PASS' and ratio_audit['target_cpu_period_policy_warnings']
++              and ratio_audit['target_monitor']['observed_cpu_periods_us'] == [200000]
++              and ratio_audit['target_monitor']['warnings'])
++        value = json.loads((directory / 'after-load.json').read_text()); value['cpu.max'] = '1600001 200000'
++        replace('after-load.json', value)
++        check('higher_actual_CPU_ratio_is_rejected_by_phase_auditor',
++              audit_phase(directory, source, plan, case, initial)['classification'] == 'INVALID_EVIDENCE')
++        restore('before-load.json'); restore('after-load.json'); restore('target-monitor.jsonl')
+         eight_plan = copy.deepcopy(plan)
+         eight_plan['configuration']['load_memory_bytes'] = eight_plan['protocol']['load_memory_bytes'] = 8 * GiB
+         rows = [json.loads(line) for line in (source / 'load-monitor.jsonl').read_text().splitlines()]
+@@ -216,7 +298,7 @@
+                 with contextlib.redirect_stdout(io.StringIO()):
+                     prepare(cfg_path, dst)
+                 receipt = json.loads(dst.read_text())
+-                check('prepare_explicit8CPU8GiB_receipt_and_fixed_server', receipt['schema'] == 'multicore-local-capacity-v3'
++                check('prepare_explicit8CPU8GiB_receipt_and_fixed_server', receipt['schema'] == 'multicore-local-capacity-v4'
+                       and receipt['configuration']['load_cpus'] == receipt['protocol']['load_cpus'] == 8
+                       and receipt['configuration']['load_memory_bytes'] == receipt['protocol']['load_memory_bytes'] == 8 * GiB
+                       and receipt['protocol']['target_cpus'] == 8 and receipt['protocol']['target_memory_bytes'] == 16 * GiB
+@@ -238,7 +320,7 @@
+                 receipt = json.loads(dst.read_text())
+                 check('prepare_freezes_explicit_local_CPU_scope_in_source_config_receipt',
+                       receipt['configuration']['client_cpu_scope_policy'] == receipt['protocol']['client_cpu_scope_policy'] == policy
+-                      and receipt['schema'] == 'multicore-local-capacity-v3' and receipt['source_config_sha256'] == sha(cfg_path))
++                      and receipt['schema'] == 'multicore-local-capacity-v4' and receipt['source_config_sha256'] == sha(cfg_path))
+                 prepare_checks.append({'client_cpu_scope_policy': policy, 'source_config_sha256': sha(cfg_path), 'plan_sha256': sha(dst)})
+             except ValueError:
+                 check('prepare_rejects_unknown_CPU_scope_before_writing_plan', policy == 'waive_all_invalidity' and not dst.exists())
+@@ -252,7 +334,7 @@
+                 receipt = json.loads(dst.read_text())
+                 check(f'prepare_freezes_growth{factor}_with_source_config_receipt',
+                       receipt['configuration']['growth_factor'] == receipt['protocol']['growth_factor'] == factor
+-                      and receipt['schema'] == 'multicore-local-capacity-v3' and receipt['source_config_sha256'] == sha(cfg_path))
++                      and receipt['schema'] == 'multicore-local-capacity-v4' and receipt['source_config_sha256'] == sha(cfg_path))
+                 prepare_checks.append({'growth_factor': factor, 'source_config_sha256': sha(cfg_path), 'plan_sha256': sha(dst)})
+             except ValueError:
+                 check(f'prepare_rejects_unsupported_growth{factor}_before_writing_plan', factor in [1.2, True] and not dst.exists())
+@@ -327,9 +409,16 @@
+         historical_plan = json.loads((historical / 'plan.json').read_text())
+         historical_plan['configuration']['growth_factor'] = historical_plan['protocol']['growth_factor'] = 2
+         historical_plan['configuration']['client_cpu_scope_policy'] = historical_plan['protocol']['client_cpu_scope_policy'] = 'dedicated_client_cgroup_v1'
+-        old_stall = audit_phase(historical / 'cases/rust7/phases/03-probe-160000', historical / 'cases/rust7', historical_plan,
++        historical_plan['configuration']['gomaxprocs_per_shard'] = historical_plan['protocol']['gomaxprocs_per_shard'] = 2
++        historical_plan['configuration']['client_env'] = {'GOMAXPROCS': '2'}
++        hcase = fixture_root / 'historical/cases/rust7'; hcase.mkdir(parents=True)
++        for file in (historical / 'cases/rust7').iterdir():
++            if file.is_file(): (hcase / file.name).symlink_to(file)
++        hphase = hcase / 'phases/03-probe-160000'
++        derive_phase(historical / 'cases/rust7/phases/03-probe-160000', hphase)
++        old_stall = audit_phase(hphase, hcase, historical_plan,
+                                historical_plan['configuration']['cases'][0], json.loads((historical / 'target-initial.json').read_text()))
+-        check('genuine_saved160k_stall_remains_invalid_with_new_local_policy', old_stall['classification'] == 'INVALID_GENERATOR'
++        check('synthetic_P2_wrapper_does_not_erase_genuine_saved160k_stall', old_stall['classification'] == 'INVALID_GENERATOR'
+               and not old_stall['eligible'] and not old_stall['native_qualified'] and not old_stall['local_whole_vm_CPU_scope_exception'])
+         bad = json.loads((source / 'before-load.json').read_text())
+         bad['actual_app']['processes'][0]['proc_limits'] = bad['actual_app']['processes'][0]['proc_limits'].replace('200000', '1024')
+@@ -353,7 +442,8 @@
+         check('wall_clock_jump_never_yields_server_failure', audit_phase(directory, source, plan, case, initial)['classification'] == 'INVALID_CLOCK')
+     out = Path(__file__).with_name('test-proof.json')
+     out.write_text(json.dumps({'pass': True, 'checks': checks, 'prepare_receipts': prepare_checks,
+-                              'docker_or_benchmark_execution': False}, indent=2) + '\n')
++                              'docker_or_benchmark_execution': False, 'fixture_scope': 'Synthetic P2 metadata/argv/env witness wrapper over unchanged historical histograms/timelines; no actual P2 performance claim'}, indent=2) + '\n')
++    fixture.cleanup()
+     print(json.dumps({'pass': True, 'checks': len(checks), 'proof': str(out)}))
+ 
+ 
+--- /dev/null
++++ b/audit/test_cpu_ratio.py
+@@ -0,0 +1,153 @@
++#!/usr/bin/env python3
++"""Light saved-monitor tests using synthetic rows; never reads active trials."""
++import json
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++
++sys.dont_write_bytecode = True
++sys.path.insert(0, str(Path(__file__).resolve().parent))
++from primitives import GiB, cpu_budget_matches, monitor
++
++
++class CPUBudgetTests(unittest.TestCase):
++    def test_equivalent_positive_quotas_match_exact_cpu_budget(self):
++        for value in ['800000 100000', '1600000 200000', '4000000 500000',
++                      ' 800000\t100000\n', '000800000 0100000']:
++            with self.subTest(value=value):
++                self.assertTrue(cpu_budget_matches(value, 8))
++        self.assertTrue(cpu_budget_matches('800000 100000', 8.0))
++        self.assertTrue(cpu_budget_matches('250000 100000', 2.5))
++
++    def test_wrong_positive_ratios_rejected_in_both_directions(self):
++        for value in ['799999 100000', '800001 100000', '700000 100000',
++                      '900000 100000', '1600000 100000', '800000 200000']:
++            with self.subTest(value=value):
++                self.assertFalse(cpu_budget_matches(value, 8))
++
++    def test_unlimited_negative_zero_and_malformed_rejected(self):
++        for value in [None, 8, b'800000 100000', '', 'max 100000', '-1 100000',
++                      '800000 -100000', '-800000 -100000', '0 100000', '800000 0',
++                      '0 0', '800000', '800000 100000 extra', '800000.0 100000',
++                      '+800000 100000', '800000 1e5', '800000\n100000',
++                      '800000\x00100000', '８０００００ １０００００']:
++            with self.subTest(value=value):
++                self.assertFalse(cpu_budget_matches(value, 8))
++        for cpus in [0, -8, True, False, '8', None, float('nan'), float('inf')]:
++            with self.subTest(cpus=cpus):
++                self.assertFalse(cpu_budget_matches('800000 100000', cpus))
++
++
++class MonitorTests(unittest.TestCase):
++    memory = 16 * GiB
++    meta = {'window_start_ms': 1000, 'window_end_ms': 3000}
++    labels = {'monitor_has_samples', 'strict_wall_and_monotonic_order',
++              'full_measurement_window_bracketed', 'max_sample_gap_at_most_3s',
++              'cgroup_budget_continuous', 'total_cpu_counter_nondecreasing',
++              'no_measurement_oom', 'wall_to_monotonic_drift_below_100ms'}
++
++    def rows(self, values=None):
++        values = values or ['800000 100000'] * 3
++        return [{'wall_ns': (index + 1) * 10**9,
++                 'monotonic_ns': (index + 1) * 10**9,
++                 'cpu.max': value, 'cpu': {'usage_usec': (index + 1) * 10**6},
++                 'memory.max': str(self.memory), 'memory.swap.max': '0',
++                 'memory.swap.current': '0', 'memory.current': '1024',
++                 'memory.peak': '2048',
++                 'memory.events': 'low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0',
++                 'app': {'pids': [101], 'cpu_s': (index + 1) * .25},
++                 'pg': {'pids': [201, 202], 'cpu_s': (index + 1) * .5}}
++                for index, value in enumerate(values)]
++
++    def audit(self, rows, meta=None):
++        with tempfile.TemporaryDirectory(prefix='cpu-ratio-synthetic-') as tmp:
++            path = Path(tmp) / 'monitor.jsonl'
++            path.write_text(''.join(json.dumps(row) + '\n' for row in rows))
++            return monitor(path, meta or self.meta, 8, self.memory)
++
++    def verdicts(self, result):
++        return {check['check']: check['pass'] for check in result['checks']}
++
++    def test_default_period_preserves_all_existing_gates_and_metrics(self):
++        result = self.audit(self.rows())
++        self.assertTrue(result['eligible'])
++        self.assertEqual(set(self.verdicts(result)), self.labels)
++        self.assertEqual(result['warnings'], [])
++        self.assertFalse(result['cpu_period_changed'])
++        self.assertEqual(result['observed_cpu_periods_us'], [100000])
++        self.assertEqual(result['cgroup_cpu_seconds_estimate'], 2)
++        self.assertEqual(result['cgroup_quota_utilization_pct'], 12.5)
++        self.assertEqual(result['swap_peak_sampled_bytes'], 0)
++
++    def test_200ms_and_mixed_periods_are_eligible_but_warn_and_retain_raw(self):
++        baseline = self.audit(self.rows())
++        values = ['800000 100000', '1600000 200000', '800000 100000']
++        result = self.audit(self.rows(values))
++        self.assertTrue(result['eligible'])
++        self.assertTrue(result['cpu_period_changed'])
++        self.assertEqual(result['observed_cpu_periods_us'], [100000, 200000])
++        self.assertEqual([row['cpu.max'] for row in result['cpu_budget_observations']], values)
++        self.assertEqual([row['period_us'] for row in result['cpu_budget_observations']], [100000, 200000, 100000])
++        self.assertEqual([row['quota_us'] for row in result['cpu_budget_observations']], [800000, 1600000, 800000])
++        self.assertEqual([row['sample_index'] for row in result['cpu_budget_observations']], [0, 1, 2])
++        self.assertEqual(len(result['warnings']), 2)
++        self.assertTrue(any('non-default' in value for value in result['warnings']))
++        self.assertTrue(any('changed' in value for value in result['warnings']))
++        detail_keys = {'cpu_budget_observations', 'observed_cpu_periods_us', 'cpu_period_changed', 'warnings'}
++        self.assertEqual({k:v for k,v in result.items() if k not in detail_keys},
++                         {k:v for k,v in baseline.items() if k not in detail_keys})
++        constant = self.audit(self.rows(['1600000 200000'] * 3))
++        self.assertTrue(constant['eligible'])
++        self.assertFalse(constant['cpu_period_changed'])
++        self.assertEqual(len(constant['warnings']), 1)
++
++    def test_every_sample_budget_must_match_and_raw_invalid_values_remain(self):
++        for value in ['700000 100000', '900000 100000', 'max 100000',
++                      '800000 0', '-800000 -100000', 'invalid', None]:
++            with self.subTest(value=value):
++                result = self.audit(self.rows(['800000 100000', value, '1600000 200000']))
++                self.assertFalse(result['eligible'])
++                self.assertFalse(self.verdicts(result)['cgroup_budget_continuous'])
++                self.assertEqual(result['cpu_budget_observations'][1]['cpu.max'], value)
++                self.assertEqual(set(self.verdicts(result)), self.labels)
++
++    def test_memory_swap_oom_clock_and_coverage_failures_remain_ineligible(self):
++        cases = [
++            ('memory_limit', 'cgroup_budget_continuous', lambda rows: rows[1].update({'memory.max': str(self.memory + 1)})),
++            ('memory_usage', 'cgroup_budget_continuous', lambda rows: rows[1].update({'memory.current': str(self.memory + 1)})),
++            ('swap_limit', 'cgroup_budget_continuous', lambda rows: rows[1].update({'memory.swap.max': '1'})),
++            ('swap_usage', 'cgroup_budget_continuous', lambda rows: rows[1].update({'memory.swap.current': '1'})),
++            ('oom', 'no_measurement_oom', lambda rows: rows[2].update({'memory.events': 'oom 1\noom_kill 0\noom_group_kill 0'})),
++            ('clock_drift', 'wall_to_monotonic_drift_below_100ms', lambda rows: rows[2].update({'wall_ns': rows[2]['wall_ns'] + 200000000})),
++            ('cpu_counter', 'total_cpu_counter_nondecreasing', lambda rows: rows[1].update({'cpu': {'usage_usec': 0}})),
++            ('wall_order', 'strict_wall_and_monotonic_order', lambda rows: rows[1].update({'monotonic_ns': rows[0]['monotonic_ns'] - 1})),
++        ]
++        for name, label, change in cases:
++            with self.subTest(case=name):
++                rows = self.rows(['1600000 200000'] * 3)
++                change(rows)
++                result = self.audit(rows)
++                self.assertFalse(result['eligible'])
++                self.assertFalse(self.verdicts(result)[label])
++                self.assertEqual(set(self.verdicts(result)), self.labels)
++        coverage = self.audit(self.rows(), {'window_start_ms': 500, 'window_end_ms': 3000})
++        self.assertFalse(coverage['eligible'])
++        self.assertFalse(self.verdicts(coverage)['full_measurement_window_bracketed'])
++        gaps = self.rows()
++        gaps[1]['wall_ns'] = gaps[1]['monotonic_ns'] = 5 * 10**9
++        gaps[2]['wall_ns'] = gaps[2]['monotonic_ns'] = 9 * 10**9
++        gap_result = self.audit(gaps, {'window_start_ms': 1000, 'window_end_ms': 9000})
++        self.assertFalse(gap_result['eligible'])
++        self.assertFalse(self.verdicts(gap_result)['max_sample_gap_at_most_3s'])
++
++    def test_raw_cpu_observations_survive_insufficient_sample_failure(self):
++        result = self.audit(self.rows(['1600000 200000']))
++        self.assertFalse(result['eligible'])
++        self.assertEqual(result['cpu_budget_observations'][0]['cpu.max'], '1600000 200000')
++        self.assertEqual(result['cpu_budget_observations'][0]['period_us'], 200000)
++        self.assertEqual(len(result['warnings']), 1)
++
++
++if __name__ == '__main__':
++    unittest.main(verbosity=2)

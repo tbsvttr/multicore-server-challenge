@@ -1,0 +1,321 @@
+--- capacity-v4/capacity_controller.py
++++ capacity-confirmation-v1/capacity_controller.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""Prepare or explicitly execute a finite local ARM capacity search.
++"""Prepare or explicitly execute fixed selected-point confirmation; no maximum search.
+ 
+ Preparing a plan performs no Docker/network operations. Execution creates one
+ owned client container and one fresh full-seed app session per declared case.
+@@ -28,10 +28,82 @@
+     return 'mc_pair_' + run_name.split('_', 1)[1].replace('t', '_') + '_' + str(case_index)
+ 
+ 
++CONFIRMATION_MODE = 'selected-held-points-reverse-order-v1'
++
++
++def confirmation_actions(case):
++    users = case.get('confirm_users')
++    if type(users) is not int or not 10 <= users <= 160000:
++        raise ValueError('confirm_users must be a selected positive held count; placeholders cannot prepare/run')
++    return [{'stage': 'warmup', 'users': 10000},
++            {'stage': 'probe', 'users': users},
++            {'stage': 'hold', 'users': users}]
++
++
++def confirmation_inputs(configuration):
++    """Effective inputs that must remain identical across the two blocks."""
++    omitted = {'scope', 'study_note', 'study_mode', 'first_study_audit', 'first_study_audit_sha256'}
++    result = {key: value for key, value in configuration.items() if key not in omitted and key != 'cases'}
++    result.setdefault('lifecycle_helper', '/private/tmp/multicore-research-20261022/lab-target-control-v2.py')
++    result.setdefault('monitor_helper', '/private/tmp/multicore-research-20261022/lab-monitor.py')
++    result['cases'] = sorted(({key: value for key, value in case.items() if key != 'confirm_users'}
++                              for case in configuration.get('cases', [])), key=lambda case: case['name'])
++    return result
++
++
++def validate_confirmation(cfg):
++    if cfg.get('study_mode') != CONFIRMATION_MODE:
++        raise ValueError('explicit selected-point confirmation mode required')
++    if cfg.get('load_cpus') != 8 or cfg.get('load_memory_bytes') != 8 * 1024**3:
++        raise ValueError('confirmation retains the first block external client8CPU/8GiB budget')
++    if 'search_overrides' in cfg:
++        raise ValueError('confirmation has no search overrides')
++    cases = cfg.get('cases', [])
++    if [c.get('name') for c in cases] != ['goose32-prototypeB', 'rust7']:
++        raise ValueError('confirmation order is fixed: sourceB, then unchanged Rust control')
++    expected = ['9016ff93e924c0d94652490ac895d1fbc64153fd9d3ea4b8b52b66ae892c3424',
++                '844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241']
++    for case, binary in zip(cases, expected):
++        confirmation_actions(case)
++        if case.get('expected_binary_sha256') != binary:
++            raise ValueError('confirmation must retain the exact first-study binaries')
++    if cases[0]['confirm_users'] <= cases[1]['confirm_users']:
++        raise ValueError('this proposed block is conditional on B holding more users than Rust')
++    reference = cfg.get('first_study_audit')
++    reference_sha = cfg.get('first_study_audit_sha256')
++    if not isinstance(reference, str) or not reference or not isinstance(reference_sha, str):
++        raise ValueError('completed first-study audit and its hash must be selected before preparing a plan')
++    reference = Path(reference)
++    if not reference.is_file() or sha(reference) != reference_sha:
++        raise ValueError('first-study audit missing or changed')
++    prior = read(reference)
++    if prior.get('status') != 'AUDITED_COMPLETED_LOCAL_SEARCH' or prior.get('study_complete') is not True:
++        raise ValueError('first study must be completed and audited; active/partial phases cannot be reused')
++    prior_run = prior.get('run')
++    if not isinstance(prior_run, str):
++        raise ValueError('completed first-study run/plan provenance required')
++    prior_plan_path = Path(prior_run) / 'plan.json'
++    if (not prior_plan_path.is_file()
++            or sha(prior_plan_path) != prior.get('raw_input_sha256', {}).get('plan.json')):
++        raise ValueError('completed first-study plan missing or changed from its audited hash')
++    prior_plan = read(prior_plan_path)
++    if (prior_plan.get('schema') != 'multicore-local-capacity-v4'
++            or confirmation_inputs(prior_plan.get('configuration', {})) != confirmation_inputs(cfg)):
++        raise ValueError('confirmation must retain every effective first-study source, environment and runtime input')
++    rows = {row.get('case'): row for row in prior.get('rows', [])}
++    for case in cases:
++        row = rows.get(case['name'], {})
++        if not (row.get('binary_sha256') == case['expected_binary_sha256']
++                and row.get('capacity_users') == case['confirm_users'] and row.get('measured_seconds') == 300
++                and row.get('local_qualified') is True and row.get('conformance_197_full_seed_proven') is True):
++            raise ValueError('selected count must match the exact binary and its qualified first-study300s hold')
++
++
+ def prepare(config_path, plan_path):
+     if plan_path.exists() or plan_path.with_suffix(plan_path.suffix + '.sha256').exists():
+         raise FileExistsError('refusing to replace a frozen plan')
+     cfg = read(config_path)
++    validate_confirmation(cfg)
+     cfg.setdefault('target_container', 'multicore-comparison-target-20261023')
+     cfg.setdefault('host_evidence', '/private/tmp/multicore-comparison-20261023')
+     cfg.setdefault('container_evidence', '/comparison')
+@@ -71,8 +143,9 @@
+         protocol[key] = int(value)
+     assert 10 <= protocol['start_users'] <= protocol['max_users'] <= 160000
+     assert 1 <= protocol['max_probes'] <= 20 and 1 <= protocol['max_holds'] <= 8
+-    plan = {'schema': 'multicore-local-capacity-v4',
+-            'scope': 'Local shared ARM64 Mac/Docker capacity search; no official x86 rank or all-competitor claim.',
++    plan = {'schema': 'multicore-local-confirmation-v1',
++            'scope': 'Fresh reverse-order confirmation of selected held points only; no capacity maximum, official x86 rank or causal claim.',
++            'study_mode': CONFIRMATION_MODE, 'capacity_search_disabled': True,
+             'configuration': cfg, 'protocol': protocol,
+             'created_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+             'source_config_sha256': sha(config_path)}
+@@ -86,9 +159,11 @@
+ class Controller:
+     def __init__(self, plan_path):
+         self.plan_path, self.plan = plan_path, read(plan_path)
+-        assert self.plan['schema'] == 'multicore-local-capacity-v4'
++        assert self.plan['schema'] == 'multicore-local-confirmation-v1'
+         assert sha(plan_path) == plan_path.with_suffix(plan_path.suffix + '.sha256').read_text().strip()
+         self.cfg, self.protocol = self.plan['configuration'], self.plan['protocol']
++        assert self.plan.get('study_mode') == CONFIRMATION_MODE and self.plan.get('capacity_search_disabled') is True
++        validate_confirmation(self.cfg)
+         for name in ['warmup_users', 'warmup', 'probe', 'hold', 'target_cpus', 'target_memory_bytes',
+                      'max_users_per_shard', 'max_shards', 'gomaxprocs_per_shard', 'resolution', 'load_cpu_limit_pct', 'rounding_policy']:
+             assert self.protocol[name] == DEFAULT_PROTOCOL[name], 'normal protocol changed: ' + name
+@@ -99,12 +174,12 @@
+         growth_factor(self.protocol, self.cfg)
+         self.target = self.cfg['target_container']
+         stamp = time.strftime('%Y%m%dT%H%M%S', time.gmtime()).lower()
+-        self.name = 'capacity_' + stamp + '_' + os.urandom(3).hex()
++        self.name = 'confirmation_' + stamp + '_' + os.urandom(3).hex()
+         self.host_base = Path(self.cfg['host_evidence'])
+         self.root = self.host_base / 'optimization' / self.name
+         self.root.mkdir(parents=True, exist_ok=False)
+         self.croot = self.cfg['container_evidence'].rstrip('/') + '/optimization/' + self.name
+-        self.client = 'multicore-capacity-client-' + stamp + '-' + os.urandom(3).hex()
++        self.client = 'multicore-confirmation-client-' + stamp + '-' + os.urandom(3).hex()
+         self.events = (self.root / 'events.jsonl').open('x')
+         self.load_created = False
+         self.stop_host = threading.Event()
+@@ -325,16 +400,25 @@
+                          '--port', str(self.cfg['port']), '--secret', self.cfg['jwt_secret'], timeout=80)
+             app_started = True
+             self.idle(5)
+-            while True:
+-                action = next_action(record['phases'], self.protocol)
+-                if action['stage'] == 'stop':
+-                    record['status'], record['stop_action'] = action['reason'], action
+-                    break
++            actions = confirmation_actions(case)
++            record['confirmation_users'] = case['confirm_users']
++            record['capacity_maximum_established'] = False
++            for action in actions:
+                 if record['phases']:
+                     self.idle(self.protocol['between_phase_minimum_s'])
+                 result = self.phase(directory, cdir, case, action, len(record['phases']) + 1)
+                 record['phases'].append(result)
+                 write(directory / 'session.json', record)
++                if result.get('classification') != 'PASS' or result.get('eligible') is not True:
++                    reason = result.get('classification', 'INCOMPLETE')
++                    record['status'] = 'CONFIRMATION_STOP_' + reason
++                    record['stop_action'] = {'stage': 'stop', 'reason': reason,
++                                             'confirmation_only': True, 'no_retry_or_fallback': True}
++                    break
++            else:
++                record['status'] = 'CONFIRMATION_PASSED'
++                record['stop_action'] = {'stage': 'stop', 'reason': 'CONFIRMATION_PASSED',
++                                         'users': case['confirm_users'], 'capacity_maximum_established': False}
+         except Exception as error:
+             record.update(status='INVALID_SESSION', error=type(error).__name__ + ': ' + str(error))
+         finally:
+--- capacity-v4/audit/aggregate.py
++++ capacity-confirmation-v1/audit/aggregate.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""Audit completed capacity searches from raw artifacts; never runs Docker."""
++"""Audit completed selected-point confirmation; never infer a new capacity maximum."""
+ import argparse
+ import hashlib
+ import json
+@@ -10,13 +10,14 @@
+ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+ from search_policy import DEFAULT_PROTOCOL, client_gomaxprocs, client_cpu_scope_policy, growth_factor, load_cpus, load_memory_bytes, next_action
+ from audit.evidence import audit_phase, conformance
++from capacity_controller import CONFIRMATION_MODE, confirmation_actions, validate_confirmation
+ from audit.primitives import GiB, check, inspect_budget, jsonl, read, setting_map, sha
+ 
+ 
+ def audit_run(root):
+     plan, events = read(root / 'plan.json'), jsonl(root / 'events.jsonl')
+     result = {'run': str(root), 'checks': [], 'rows': [], 'official_rank_proven': False,
+-              'all_competitors_beaten': False, 'scope': plan['scope']}
++              'all_competitors_beaten': False, 'capacity_maximum_established': False, 'scope': plan['scope']}
+     if not any(e['event'] == 'controller_finished' for e in events):
+         result['status'] = 'ACTIVE_NOT_READ'
+         return result
+@@ -30,6 +31,21 @@
+                              'phase_paths_retained': [str(p) for p in (root / 'cases' / c['name'] / 'phases').glob('*')]} for c in plan['configuration']['cases']])
+         return result
+     check(checks, 'plan_hash_fixed', sha(root / 'plan.json') == (root / 'plan.sha256').read_text().strip())
++    check(checks, 'explicit_confirmation_only_mode', plan.get('schema') == 'multicore-local-confirmation-v1'
++          and plan.get('study_mode') == CONFIRMATION_MODE and plan.get('capacity_search_disabled') is True)
++    started_cases = [event.get('case') for event in events if event.get('event') == 'case_start']
++    selected_order = [case['name'] for case in plan['configuration']['cases']]
++    check(checks, 'reverse_order_case_starts_preserved', started_cases == selected_order[:len(started_cases)]
++          and len(started_cases) == len(set(started_cases)))
++    try:
++        validate_confirmation(plan['configuration'])
++        reference_valid = True
++    except (KeyError, TypeError, ValueError, OSError):
++        reference_valid = False
++    check(checks, 'selected_points_bound_to_completed_first_study', reference_valid)
++    result['first_study_audit'] = plan['configuration'].get('first_study_audit')
++    result['first_study_audit_sha256'] = plan['configuration'].get('first_study_audit_sha256')
++
+     try:
+         gomax = client_gomaxprocs(plan['protocol'], plan['configuration'])
+         client_memory = load_memory_bytes(plan['protocol'], plan['configuration'])
+@@ -87,7 +103,8 @@
+     for case in plan['configuration']['cases']:
+         directory = root / 'cases' / case['name']
+         row = {'case': case['name'], 'checks': [], 'phases': [], 'capacity_users': None,
+-               'highest_passing_probe_users': None, 'highest_passing_hold_users': None,
++               'selected_users': case['confirm_users'], 'confirmed_users': None, 'confirmation_passed': False,
++               'capacity_maximum_established': False,
+                'source_revision': case.get('source_revision'), 'binary_sha256': case['expected_binary_sha256']}
+         if not directory.exists():
+             row['status'] = 'NOT_STARTED'
+@@ -110,51 +127,47 @@
+         phases = sorted((directory / 'phases').iterdir()) if (directory / 'phases').exists() else []
+         phases = [p for p in phases if p.is_dir()]
+         replay = []
+-        for phase_dir in phases:
++        actions = confirmation_actions(case)
++        for index, phase_dir in enumerate(phases):
+             state = read(phase_dir / 'phase.json', {})
+-            action = next_action(replay, plan['protocol'])
+-            check(cc, phase_dir.name + ':predeclared_search_decision', action['stage'] != 'stop'
++            action = actions[index] if index < len(actions) else None
++            check(cc, phase_dir.name + ':predeclared_fixed_confirmation_action', action is not None
+                   and action.get('stage') == state.get('stage') and action.get('users') == state.get('users'))
++            check(cc, phase_dir.name + ':no_phase_after_failure_or_invalidity',
++                  all(p.get('classification') == 'PASS' and p.get('eligible') is True for p in replay))
+             phase = audit_phase(phase_dir, directory, plan, case, initial, global_ok and all(c['pass'] for c in cc))
+             row['phases'].append(phase)
+             replay.append(phase)
+         recorded_starts = [e['id'] for e in events if e['event'] == 'phase_start' and e['case'] == case['name']]
+         check(cc, 'all_started_phases_preserved_once', recorded_starts == [p.name for p in phases]
+               and len(recorded_starts) == len(set(recorded_starts)))
+-        passing_probes = [p for p in replay if p['stage'] == 'probe' and p['eligible']]
+-        passing_holds = [p for p in replay if p['stage'] == 'hold' and p['eligible']]
+-        row['highest_passing_probe_users'] = max((p['users'] for p in passing_probes), default=None)
+-        row['highest_passing_hold_users'] = max((p['users'] for p in passing_holds), default=None)
+         qualified = global_ok and all(c['pass'] for c in cc) and row['conformance_197_full_seed_proven']
+-        if qualified and passing_holds:
+-            best = max(passing_holds, key=lambda p: p['users'])
+-            upper = min((p['users'] for p in replay if p.get('valid_server_failure') and p['users'] > best['users']), default=None)
+-            resolved = upper is not None and upper - best['users'] <= plan['protocol']['resolution'] * best['users']
+-            row.update(capacity_users=best['users'], scored_phase=best['id'], measured_seconds=300,
+-                       failed_upper_bound_users=upper,
+-                       status='LOCAL_CAPACITY_INTERVAL' if resolved else 'LOCAL_HOLD_LOWER_BOUND',
+-                       capacity_interval={'held_at_least_users': best['users'], 'failed_at_users': upper},
+-                       overall=best['overall'], zero_measured_errors=best['zero_measured_errors'],
+-                       observed_timeline_errors=best['observed_timeline_errors'],
+-                       cpu_ms_per_successful_request_sampled_estimate=best['cpu_ms_per_successful_request_sampled_estimate'])
+-            row.update(native_qualified=best['native_qualified'], local_qualified=best['local_qualified'],
+-                       native_verdict=best['native_verdict'],
+-                       native_whole_vm_CPU_flag_count=best['native_whole_vm_CPU_flag_count'],
+-                       native_whole_vm_CPU_flagged_shards=best['native_whole_vm_CPU_flagged_shards'],
+-                       local_whole_vm_CPU_scope_exception=best['local_whole_vm_CPU_scope_exception'])
++        passed = len(replay) == 3 and all(p.get('classification') == 'PASS' and p.get('eligible') is True for p in replay)
++        if qualified and passed:
++            held = replay[-1]
++            row.update(confirmed_users=case['confirm_users'], confirmation_passed=True,
++                       status='LOCAL_CONFIRMATION_PASSED', held_phase=held['id'], measured_seconds=300,
++                       overall=held['overall'], zero_measured_errors=held['zero_measured_errors'],
++                       observed_timeline_errors=held['observed_timeline_errors'],
++                       cpu_ms_per_successful_request_sampled_estimate=held['cpu_ms_per_successful_request_sampled_estimate'],
++                       native_qualified=held['native_qualified'], local_qualified=held['local_qualified'],
++                       native_verdict=held['native_verdict'],
++                       native_whole_vm_CPU_flag_count=held['native_whole_vm_CPU_flag_count'],
++                       native_whole_vm_CPU_flagged_shards=held['native_whole_vm_CPU_flagged_shards'],
++                       local_whole_vm_CPU_scope_exception=held['local_whole_vm_CPU_scope_exception'])
+         else:
+             last = replay[-1]['classification'] if replay else read(directory / 'session.json', {}).get('status', 'INCOMPLETE')
+-            row['status'] = 'UNQUALIFIED_CONFORMANCE' if passing_holds and not row['conformance_197_full_seed_proven'] else last if last != 'PASS' else 'NO_PASSING_HOLD'
++            row['status'] = 'UNQUALIFIED_CONFORMANCE' if passed and not row['conformance_197_full_seed_proven'] else 'CONFIRMATION_STOP_' + last
+         result['rows'].append(row)
+-    result['status'] = 'AUDITED_COMPLETED_LOCAL_SEARCH' if global_ok else 'INVALID_GLOBAL_EVIDENCE'
+-    result['interpretation'] = ('Only a qualified300s hold yields a local held-user score. Ceiling/budget bounds are censored lower bounds, '
+-                                'not proved maxima. Invalid generator/clock phases never become server failures or capacity scores. '
+-                                'Native SLO permits<1% measured errors; zero errors and recorded ramp/tail errors are separate. '
+-                                'This ARM Mac study cannot establish the official x86 leaderboard rank.')
++    result['status'] = 'AUDITED_COMPLETED_CONFIRMATION' if global_ok else 'INVALID_GLOBAL_EVIDENCE'
++    result['both_selected_points_confirmed'] = len(result['rows']) == 2 and all(r.get('confirmation_passed') for r in result['rows'])
++    result['interpretation'] = ('This fresh reverse-order block confirms only its preselected held-user points when warmup, probe and300s hold all qualify. '
++                                'It does not search for or establish a new maximum or failure bound; prior first-study bounds remain separate. '
++                                'Any invalidity or SLO failure stops that case without fallback, retry or phase reuse. '
++                                'Native flags and exact measured/ramp/tail errors remain visible. No official x86 rank or controlled causal claim is made.')
+     if cpu_scope == 'dedicated_client_cgroup_v1':
+-        result['interpretation'] += (' Preregistered local qualification substitutes measured external-client cgroup CPU≤75% '
+-                                     'for the native whole-VM /proc/stat CPU flag only. All native timing/active-user gates remain. '
+-                                     'Native verdicts are preserved separately; a local score may remain native LG-limited and is not an official/native-qualified score.')
++        result['interpretation'] += (' The unchanged preregistered local policy substitutes external-client cgroup CPU<=75% for native whole-VM CPU only. '
++                                     'All timing/active/clock/histogram/error/SLO gates remain; local confirmation can remain native LG-limited.')
+     return result
+ 
+ 
+@@ -170,16 +183,16 @@
+         result['raw_input_sha256'] = {str(p.relative_to(args.run)): sha(p) for p in args.run.rglob('*') if p.is_file()}
+     args.out.parent.mkdir(parents=True, exist_ok=True)
+     args.out.write_text(json.dumps(result, indent=2, allow_nan=False) + '\n')
+-    lines = ['# Local capacity audit', '', result['scope'], '',
++    lines = ['# Selected-point confirmation audit', '', result['scope'], '',
+              'Qualification follows the preregistered `' + str(result.get('client_cpu_scope_policy')) + '` policy. Local and native qualification of each scored hold are shown separately.', '',
+-             '| Implementation | Result |300s held users | Highest60s probe | p95/p99 ms | Measured errors | Local qualified | Native qualified | Whole-VM CPU flags |',
++             '| Implementation | Result | Selected users | Confirmed300s users | p95/p99 ms | Measured errors | Local qualified | Native qualified | Whole-VM CPU flags |',
+              '|---|---|---:|---:|---:|---:|---|---|---:|']
+     for r in result['rows']:
+         m = r.get('overall', {})
+-        lines.append(f"| {r['case']} | {r['status']} | {r.get('capacity_users') or '—'} | {r.get('highest_passing_probe_users') or '—'} | {str(m.get('p95_ms', '—')) + '/' + str(m.get('p99_ms', '—'))} | {m.get('errors', '—')} | {r.get('local_qualified', '—')} | {r.get('native_qualified', '—')} | {r.get('native_whole_vm_CPU_flag_count', '—')} |")
++        lines.append(f"| {r['case']} | {r['status']} | {r.get('selected_users') or '—'} | {r.get('confirmed_users') or '—'} | {str(m.get('p95_ms', '—')) + '/' + str(m.get('p99_ms', '—'))} | {m.get('errors', '—')} | {r.get('local_qualified', '—')} | {r.get('native_qualified', '—')} | {r.get('native_whole_vm_CPU_flag_count', '—')} |")
+     lines.extend(['', result.get('interpretation', 'Active run; no raw phases audited.')])
+     args.out.with_suffix('.md').write_text('\n'.join(lines) + '\n')
+-    print(json.dumps({'output': str(args.out), 'status': result['status'], 'rows': [{k: r.get(k) for k in ['case', 'status', 'capacity_users', 'highest_passing_probe_users']} for r in result['rows']]}))
++    print(json.dumps({'output': str(args.out), 'status': result['status'], 'rows': [{k: r.get(k) for k in ['case', 'status', 'selected_users', 'confirmed_users']} for r in result['rows']]}))
+ 
+ 
+ if __name__ == '__main__':

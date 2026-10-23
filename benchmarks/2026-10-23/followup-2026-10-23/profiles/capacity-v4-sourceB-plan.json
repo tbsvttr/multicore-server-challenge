@@ -1,0 +1,146 @@
+{
+  "schema": "multicore-local-capacity-v4",
+  "scope": "Local shared ARM64 Mac/Docker capacity search; no official x86 rank or all-competitor claim.",
+  "configuration": {
+    "target_container": "multicore-native-target-20261023",
+    "host_evidence": "/private/tmp/multicore-comparison-20261023",
+    "container_evidence": "/comparison",
+    "old_host_evidence": "/private/tmp/multicore-research-20261022",
+    "native_binary": "/evidence/tools/loadgen",
+    "expected_native_sha256": "886eaa564c6cdab1a791534d6931d1b8eb9b5c21d1e1ebaaa2824616c4562cdb",
+    "port": 3000,
+    "jwt_secret": "multicore-server-challenge",
+    "load_memory_bytes": 8589934592,
+    "cases": [
+      {
+        "name": "rust7",
+        "binary": "/work/submissions/rust-tokio-Scooter1337/target/release/conduit",
+        "source_dir": "/work/submissions/rust-tokio-Scooter1337",
+        "env": {
+          "APP_THREADS": "2",
+          "DB_CONNS": "6",
+          "DB_WRITE_CONNS": "2",
+          "BCRYPT_THREADS": "1",
+          "WRITE_BATCH_US": "1000",
+          "BCRYPT_BATCH_MS": "160",
+          "READ_BATCH_SIZE": "32",
+          "READ_BATCH_US": "0",
+          "READ_SQL_BATCH": "1",
+          "READ_ROUTE_SLACK": "8",
+          "READ_TAG_ROUTE": "1",
+          "READ_COMMENT_SET": "1",
+          "READ_TAG_BATCH": "1"
+        },
+        "expected_binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+        "source_revision": "PR7 dc7c249229bd43d8752e7ffb28ce81ee4401d8ae; canonical merged submission tree f542997eb07942e25fa44b7f288c8e1d508c176c; all66 canonical files verified byte-identical",
+        "conformance": {
+          "passed": true,
+          "checks_passed": 197,
+          "checks_total": 197,
+          "binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241",
+          "log_host_path": "/private/tmp/multicore-optimize-20261023/builds/rust7-full/output.log",
+          "log_sha256": "cf6dfe613fabf1936d051d8b95e3705a4f1c097801ae2be886f6c5f5aa9eba95"
+        }
+      },
+      {
+        "name": "goose32-prototypeB",
+        "binary": "/comparison/optimization/candidates/leader2-ready/bin/conduit",
+        "source_dir": "/comparison/optimization/candidates/leader2-ready",
+        "expected_binary_sha256": "9016ff93e924c0d94652490ac895d1fbc64153fd9d3ea4b8b52b66ae892c3424",
+        "env": {
+          "WORKERS": "2",
+          "PG_READERS": "3",
+          "HASHERS": "2",
+          "BCRYPT_BATCH_MS": "250",
+          "READ_BATCH": "32",
+          "READ_HOLD": "1",
+          "ARTICLE_BATCH": "1",
+          "WRITE_BATCH_US": "1000",
+          "READ_BATCH_US": "5000",
+          "PG_READ_GROUPS": "4"
+        },
+        "source_revision": "75c4924c97b7988e2bb4aa03cbef36cf11d4976b",
+        "conformance": {
+          "passed": true,
+          "checks_passed": 197,
+          "checks_total": 197,
+          "binary_sha256": "9016ff93e924c0d94652490ac895d1fbc64153fd9d3ea4b8b52b66ae892c3424",
+          "log_host_path": "/private/tmp/multicore-optimize-20261023/builds/leader2-full/output.log",
+          "log_sha256": "f9f73261f2159edbd4eb35bbc00a03d5cc6c4787622a28c5e54ed221127d8a9b"
+        },
+        "source_revision_pending": false,
+        "prototype": true,
+        "dev_conformance": {
+          "passed": true,
+          "checks_passed": 197,
+          "checks_total": 197,
+          "binary_sha256": "9016ff93e924c0d94652490ac895d1fbc64153fd9d3ea4b8b52b66ae892c3424",
+          "log_host_path": "/private/tmp/multicore-optimize-20261023/builds/leader2-dev/output.log",
+          "log_sha256": "517a4086e5a7fe09308aab72ae10fbc5402d9728ee50d50c1f238e8581ac4f2d"
+        },
+        "source_tree": "8e821a9ff6f6641ba35aba233cbcffadee81c68c",
+        "source_transfer_receipt": "/private/tmp/multicore-optimize-20261023/audit/leader2-ready-source-transfer.json",
+        "source_transfer_sha256": "bcb99054de40539968858112270e18ba3c3a490ed0c83ce2e6eef4daee8615a2"
+      }
+    ],
+    "load_cpus": 8,
+    "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+    "study_note": "Fresh full-seed clone and complete10k warmup for each exact binary after effective charging recovered. Same target8CPU16GiB/noSwap and external client8CPU8GiB/noSwap; explicitGOMAXPROCS2. Every genuine invalid/clock/monitor/SLO gate unchanged. Target is prepared new8/16 checkpoint; original target preserved stopped. No nativeMac or earlier Linux phases reused.",
+    "growth_factor": 1.1,
+    "keepawake_wrapper": "caffeinate -is",
+    "gomaxprocs_per_shard": 2,
+    "client_env": {
+      "GOMAXPROCS": "2"
+    },
+    "scope": "Fresh complete Linux GOMAXPROCS2 local ARM capacity comparison; no prior phase reuse; prototypeB remains unpromoted until root choice/results.",
+    "lifecycle_helper": "/private/tmp/multicore-research-20261022/lab-target-control-v2.py",
+    "monitor_helper": "/private/tmp/multicore-research-20261022/lab-monitor.py"
+  },
+  "protocol": {
+    "warmup_users": 10000,
+    "start_users": 100000,
+    "max_users": 160000,
+    "resolution": 0.05,
+    "growth_factor": 1.1,
+    "max_probes": 16,
+    "max_holds": 4,
+    "minimum_users": 10,
+    "warmup": {
+      "ramp_s": 60,
+      "measure_s": 120,
+      "tail_s": 15
+    },
+    "probe": {
+      "ramp_s": 60,
+      "measure_s": 60,
+      "tail_s": 15
+    },
+    "hold": {
+      "ramp_s": 60,
+      "measure_s": 300,
+      "tail_s": 15
+    },
+    "articles": 500000,
+    "think_scale": 1.0,
+    "max_users_per_shard": 20000,
+    "max_shards": 8,
+    "gomaxprocs_per_shard": 2,
+    "target_cpus": 8,
+    "target_memory_bytes": 17179869184,
+    "load_cpus": 8,
+    "load_memory_bytes": 8589934592,
+    "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+    "load_cpu_limit_pct": 75.0,
+    "actual_nofile_minimum": 200000,
+    "between_phase_minimum_s": 65,
+    "idle_cpu_pct": 15.0,
+    "idle_max_s": 90,
+    "clock_drift_limit_s": 0.1,
+    "monitor_gap_limit_s": 3.0,
+    "rounding_policy": "local search: two significant digits; bisection uses strict integer midpoint if rounded midpoint hits either bound",
+    "database_policy": "one fresh full-seed clone and one continuous app session per implementation; no reset between warmup/probes/holds",
+    "invalid_policy": "retain and stop that implementation; invalid phases never enter pass/fail brackets or receive a score; no selective retry"
+  },
+  "created_utc": "2026-10-23T19:22:00Z",
+  "source_config_sha256": "0cc5ef66bedc637934a9b657b84fb4d2c3c487e9eb5e45e1fe870ef19eabad53"
+}

@@ -1,0 +1,39 @@
+{
+  "status": "STATIC_NORMAL_PATH_GO_WITH_DOCUMENTED_CANCELLATION_LIMITATION",
+  "driver": "run-diagnostic.py",
+  "driver_sha256": "06a7853f104a4b8a477fe80dc0ce2d3e866a92cf781dc9237af56d9fc3876aab",
+  "AST_and_embedded_launchers": "PASS",
+  "independent_review_receipt": "run-diagnostic-static-review-06a7853f.json",
+  "execution_by_preparing_agent": false,
+  "normal_path": "Root reports current native10k-20261023t1852 is beyond successful clone/app startup; no active source changes made. Runtime outcome not claimed here.",
+  "limitation": "SIGINT/TERM/HUP during attached Docker clone command can race an in-flight CREATE and early absence verification. Frozen06a remains unchanged. Future isolated v2 will defer clone cancellation and synchronize owned CREATE completion before cleanup.",
+  "claims": {
+    "capacity_score": false,
+    "hard_client_CPU_memory_quota": null,
+    "native_box_CPU": "N/A on Darwin",
+    "client_headroom_qualified": false
+  },
+  "expected_binaries": {
+    "sourceA_linux": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+    "client_darwin": "c6053653c26c2136bd7bd007df68cfb8cf51975f9bf8e6f38bcebdd7484076e9"
+  },
+  "protocol": {
+    "users": 10000,
+    "ramp_s": 60,
+    "measure_s": 120,
+    "tail_s": 15,
+    "start_delay_ms": 5000,
+    "destinations": 16,
+    "app_uid": 501,
+    "app_nofile": 200000,
+    "client_uid": 501,
+    "client_soft_hard_nofile": [
+      32768,
+      32768
+    ],
+    "client_env": {
+      "GOMAXPROCS": "2",
+      "GODEBUG": "gctrace=1"
+    }
+  }
+}

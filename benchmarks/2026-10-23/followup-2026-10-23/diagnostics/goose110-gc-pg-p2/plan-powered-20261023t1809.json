@@ -1,0 +1,129 @@
+{
+  "schema": "multicore-fixed-goose110-diagnostic-p2-v1",
+  "scope": "DIAGNOSTIC ONLY: fixed warmup10k, probe100k, probe110k; explicit GOMAXPROCS2 and enriched blocker observations. No hold, capacity score, performance comparison or rank claim.",
+  "configuration": {
+    "target_container": "multicore-comparison-target-20261023",
+    "host_evidence": "/private/tmp/multicore-comparison-20261023",
+    "container_evidence": "/comparison",
+    "old_host_evidence": "/private/tmp/multicore-research-20261022",
+    "native_binary": "/evidence/tools/loadgen",
+    "expected_native_sha256": "886eaa564c6cdab1a791534d6931d1b8eb9b5c21d1e1ebaaa2824616c4562cdb",
+    "port": 3000,
+    "jwt_secret": "multicore-server-challenge",
+    "load_memory_bytes": 8589934592,
+    "load_cpus": 8,
+    "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+    "growth_factor": 1.1,
+    "keepawake_wrapper": "caffeinate -is",
+    "cases": [
+      {
+        "name": "goose32",
+        "binary": "/comparison/optimization/candidates/leader1/bin/conduit",
+        "source_dir": "/comparison/optimization/candidates/leader1",
+        "expected_binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+        "env": {
+          "WORKERS": "2",
+          "PG_READERS": "3",
+          "HASHERS": "2",
+          "BCRYPT_BATCH_MS": "250",
+          "READ_BATCH": "32",
+          "READ_HOLD": "1",
+          "ARTICLE_BATCH": "1",
+          "WRITE_BATCH_US": "1000",
+          "READ_BATCH_US": "5000"
+        },
+        "source_revision": "23a14e8cbf32113509cd0ad941320ef947508981",
+        "conformance": {
+          "passed": true,
+          "checks_passed": 197,
+          "checks_total": 197,
+          "binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+          "log_host_path": "/private/tmp/multicore-optimize-20261023/builds/leader1-full/output.log",
+          "log_sha256": "5134e8354b07c4b7a7105dd870aeafa45cbaeab5274363273b402b4013216d36"
+        }
+      }
+    ],
+    "client_env": {
+      "GOMAXPROCS": "2",
+      "GODEBUG": "gctrace=1"
+    },
+    "collector_interval_s": 1.0,
+    "study_note": "DIAGNOSTIC ONLY, prepared but not executed. Same unchanged7a7 app/native886, full seed and fixed10k/100k/110k sequence with the same budgets/guards; client GOMAXPROCS2 is explicit in protocol/metadata/actual-env checks. Collector additionally records blocking PID identities and compact lock modes. Because observer detail also changes, P1/P2 is not a pure causal comparison. No capacity score, performance comparison or rank claim. OriginalP1 package/plan/raw remain immutable. Execute only after root review and other builds/tests have stopped.",
+    "collector_observability": "v2: additionally capture blocking PID identities and compact lock modes; not a pure GOMAXPROCS causal comparison against P1",
+    "lifecycle_helper": "/private/tmp/multicore-research-20261022/lab-target-control-v2.py",
+    "monitor_helper": "/private/tmp/multicore-research-20261022/lab-monitor.py"
+  },
+  "protocol": {
+    "warmup_users": 10000,
+    "start_users": 10000,
+    "max_users": 160000,
+    "resolution": 0.05,
+    "growth_factor": 1.1,
+    "max_probes": 16,
+    "max_holds": 4,
+    "minimum_users": 10,
+    "warmup": {
+      "ramp_s": 60,
+      "measure_s": 120,
+      "tail_s": 15
+    },
+    "probe": {
+      "ramp_s": 60,
+      "measure_s": 60,
+      "tail_s": 15
+    },
+    "hold": {
+      "ramp_s": 60,
+      "measure_s": 300,
+      "tail_s": 15
+    },
+    "articles": 500000,
+    "think_scale": 1.0,
+    "max_users_per_shard": 20000,
+    "max_shards": 8,
+    "gomaxprocs_per_shard": 2,
+    "target_cpus": 8,
+    "target_memory_bytes": 17179869184,
+    "load_cpus": 8,
+    "load_memory_bytes": 8589934592,
+    "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+    "load_cpu_limit_pct": 75.0,
+    "actual_nofile_minimum": 200000,
+    "between_phase_minimum_s": 65,
+    "idle_cpu_pct": 15.0,
+    "idle_max_s": 90,
+    "clock_drift_limit_s": 0.1,
+    "monitor_gap_limit_s": 3.0,
+    "rounding_policy": "local search: two significant digits; bisection uses strict integer midpoint if rounded midpoint hits either bound",
+    "database_policy": "one fresh full-seed clone and one continuous app session per implementation; no reset between warmup/probes/holds",
+    "invalid_policy": "retain and stop that implementation; invalid phases never enter pass/fail brackets or receive a score; no selective retry"
+  },
+  "fixed_sequence": [
+    {
+      "stage": "warmup",
+      "users": 10000
+    },
+    {
+      "stage": "probe",
+      "users": 100000
+    },
+    {
+      "stage": "probe",
+      "users": 110000
+    }
+  ],
+  "capacity_search_disabled": true,
+  "holds_disabled": true,
+  "created_utc": "2026-10-23T18:09:02Z",
+  "source_config_sha256": "5cf753cbf3cd21ff63bec1c706c3cd423f91ff733abb0f377bd7fdc806afc2ad",
+  "source_config_path": "/private/tmp/multicore-comparison-20261023/optimization/diagnostics/goose110-gc-pg-p2/config.json",
+  "prepared_tool_sha256": {
+    "/private/tmp/multicore-comparison-20261023/optimization/diagnostics/goose110-gc-pg-p2/capacity_controller.py": "254b0173e0f53173860c2fd1dafb898424256d472b4ab132342f9e18dc6f8894",
+    "/private/tmp/multicore-comparison-20261023/optimization/diagnostics/goose110-gc-pg-p2/pg_collect.py": "76d449b16ef18b9a56c8d31f41d74b84847b90c300b97bebc7830ad090ea2ee6",
+    "/private/tmp/multicore-comparison-20261023/optimization/diagnostics/goose110-gc-pg-p2/search_policy.py": "33aa0281a09e4f1e3b50dcf63c98e419694735969b481963be971c146195ac5c",
+    "/private/tmp/multicore-comparison-20261023/optimization/diagnostics/goose110-gc-pg-p2/audit/evidence.py": "60aa5aa7b1ea8cc1efcc477fbd5973604b45aea4b1faa6907eb201184542bce3",
+    "/private/tmp/multicore-comparison-20261023/optimization/diagnostics/goose110-gc-pg-p2/audit/primitives.py": "8908b204b243ad5ad20e725d3284d115b5f9ccc8719931cd5018fcaf73104423",
+    "/private/tmp/multicore-research-20261022/lab-target-control-v2.py": "a079f25c5c1381392c4824267722c8ba74214ca6f73c98f4a6edfe6ec20b0581",
+    "/private/tmp/multicore-research-20261022/lab-monitor.py": "c33fa617d1758269adb44d71372b457257c92e1ec877d23a7673a688f590a4b4"
+  }
+}

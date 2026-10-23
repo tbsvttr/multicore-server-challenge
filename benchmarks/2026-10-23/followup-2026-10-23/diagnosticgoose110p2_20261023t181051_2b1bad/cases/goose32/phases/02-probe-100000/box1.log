@@ -1,0 +1,45 @@
+gc 1 @0.004s 2%: 0.012+0.50+0.19 ms clock, 0.025+0/0.091/0.067+0.39 ms cpu, 3->3->0 MB, 4 MB goal, 0 MB stacks, 0 MB globals, 2 P
+gc 2 @0.006s 3%: 0.006+0.16+0.001 ms clock, 0.012+0.10/0/0+0.002 ms cpu, 3->3->3 MB, 4 MB goal, 0 MB stacks, 0 MB globals, 2 P
+gc 3 @0.007s 2%: 0.017+6.2+0.040 ms clock, 0.035+0/0.18/0.039+0.080 ms cpu, 7->7->7 MB, 7 MB goal, 0 MB stacks, 0 MB globals, 2 P
+run diagnosticgoose110p2_20261023t181051_2b1bad-probe-100000: box 1, 20000 users -> http://127.0.0.2:3000, start 18:15:37.250, ramp 1m0s + measure 1m0s + tail 15s
+gc 4 @0.027s 12%: 0.030+4.2+0.039 ms clock, 0.061+5.7/1.0/0+0.078 ms cpu, 15->16->15 MB, 15 MB goal, 1 MB stacks, 0 MB globals, 2 P
+gc 5 @0.091s 11%: 0.48+10+0.030 ms clock, 0.97+10/5.7/0+0.060 ms cpu, 27->30->28 MB, 33 MB goal, 10 MB stacks, 0 MB globals, 2 P
+gc 6 @13.921s 0%: 0.030+15+0.034 ms clock, 0.061+0.27/7.9/21+0.068 ms cpu, 55->55->33 MB, 67 MB goal, 15 MB stacks, 0 MB globals, 2 P
+gc 7 @21.619s 0%: 0.028+25+0.023 ms clock, 0.057+0.50/13/36+0.046 ms cpu, 68->68->36 MB, 82 MB goal, 15 MB stacks, 0 MB globals, 2 P
+gc 8 @28.019s 0%: 0.029+28+0.003 ms clock, 0.059+0.29/14/39+0.007 ms cpu, 74->74->40 MB, 89 MB goal, 16 MB stacks, 0 MB globals, 2 P
+gc 9 @33.867s 0%: 0.036+29+0.003 ms clock, 0.072+0.29/15/40+0.006 ms cpu, 79->79->43 MB, 96 MB goal, 16 MB stacks, 0 MB globals, 2 P
+gc 10 @39.140s 0%: 0.64+66+0.005 ms clock, 1.2+3.7/25/97+0.011 ms cpu, 85->86->47 MB, 103 MB goal, 16 MB stacks, 0 MB globals, 2 P
+gc 11 @45.758s 0%: 0.078+77+0.073 ms clock, 0.15+5.0/43/74+0.14 ms cpu, 107->108->51 MB, 111 MB goal, 16 MB stacks, 0 MB globals, 2 P
+gc 12 @52.096s 1%: 31+668+0.23 ms clock, 63+618/358/0+0.46 ms cpu, 116->119->89 MB, 120 MB goal, 31 MB stacks, 0 MB globals, 2 P
+gc 13 @72.091s 2%: 56+5746+0.026 ms clock, 113+448/2896/0+0.052 ms cpu, 188->192->128 MB, 211 MB goal, 52 MB stacks, 0 MB globals, 2 P
+gc 14 @150.011s 1%: 43+959+0.019 ms clock, 87+176/492/107+0.039 ms cpu, 276->283->127 MB, 308 MB goal, 9 MB stacks, 0 MB globals, 2 P
+
+20000 users on 1 box(es), http://127.0.0.2:3000, measured 60 s after a 60 s ramp
+endpoint                                      count    req/s      p50      p90      p95      p99      max    err%
+GET /api/articles/:slug                        8670    144.5  14368.8  41353.2  46563.3  50528.3    60031   59.67
+GET /api/tags                                  7434    123.9  14024.7  41254.9  46399.5  50659.3    58786   53.87
+GET /api/articles/:slug/comments               7404    123.4  13533.2  41844.7  42729.5  50200.6    60031   59.64
+GET /api/articles                              3642     60.7  13836.3  41943.0  42762.2  50397.2    59638   97.01
+GET /api/articles/feed                         2578     43.0  14458.9  41943.0  42762.2  50266.1    60031   96.74
+GET /api/profiles/:username                    1746     29.1  13877.2  42074.1  44367.9  50528.3    53510   31.39
+GET /api/articles?tag                          1533     25.6  14008.3  40992.8  42926.1  50692.1    60031   97.06
+GET /api/articles?author                        999     16.6  32751.6  42139.6  42598.4  45219.8    54297   21.72
+POST /api/articles/:slug/favorite               610     10.2  13795.3  42172.4  43089.9  49643.5    50790   31.31
+POST /api/articles/:slug/comments               475      7.9  14368.8  41877.5  42500.1  50167.8    53510   35.37
+GET /api/user                                   474      7.9  17956.9  41091.1  42565.6  49807.4    53346   48.95
+GET /api/articles?favorited                     238      4.0  16760.8  41975.8  42532.9  49545.2    53281   27.31
+POST /api/profiles/:username/follow             179      3.0  14377.0  42074.1  47546.4  50855.9    53379   34.64
+POST /api/articles                              163      2.7  13721.6  40861.7  41844.7  49676.3    50233   55.83
+POST /api/users/login                           149      2.5  20021.2  42958.8  46792.7  50069.5    50528   51.01
+PUT /api/user                                    46      0.8  13336.6  40435.7  41713.7  49283.1    49283   36.96
+DELETE /api/articles/:slug/favorite              40      0.7  13729.8  41549.8  42860.5  50757.6    50758   20.00
+DELETE /api/profiles/:username/follow            38      0.6  13336.6  42270.7  49643.5  51249.2    51249   42.11
+POST /api/users                                   2      0.0  40763.4  43057.2  43057.2  43057.2    43057   50.00
+DELETE /api/articles/:slug/comments/:id           2      0.0  19464.2  34668.5  34668.5  34668.5    34669   50.00
+PUT /api/articles/:slug                           1      0.0  13369.3  13369.3  13369.3  13369.3    13369    0.00
+ALL                                           36423    607.0  14131.2  41877.5  42795.0  50397.2    60031   62.60
+errors: timeout=22802  (e.g. "request timeout")
+mix: 1.74 calls/page, 0.030 req/s per user, 4.3% writes, 20881 page views
+box 1 (831ef5b57bce): 20000 users, CPU avg 99% max 100%, loadgen proc 26%, RSS peak 461 MB, 44126 TCP connects, behind=true
+verdict: FAIL (p95 42795 ms >= 500, p99 50397 ms >= 1000, errors 62.60% >= 1%)   [p95 < 500 ms, p99 < 1000 ms, errors < 1%]
+LG-LIMITED: box 1 CPU 99% > 75%; box 1 fell behind: 56 of 60 seconds had mean timer wake-up lag > 50 ms; sampler tick 83896 ms late; only 4936 of 20000 users active at window start

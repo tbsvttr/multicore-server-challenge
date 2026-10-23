@@ -1,0 +1,1594 @@
+{
+  "schema": "new-unscored-primary-source-inventory-v1",
+  "created_utc": "2026-10-23T21:20:44.787837+00:00",
+  "range_requested": [
+    34,
+    42
+  ],
+  "actual_open_PR_count": 8,
+  "not_a_PR": {
+    "number": 39,
+    "type": "issue",
+    "title": "Scoring Cutoff Date",
+    "url": "https://github.com/arjaythedev/multicore-server-challenge/issues/39",
+    "implementation": false
+  },
+  "official_reference": {
+    "main": "c3012257f2ee3dd2ccc72ada2eeba2b0d1278e8e",
+    "leader_PR": 7,
+    "users": 100000,
+    "leaderboard_unchanged_at_latest_check": true
+  },
+  "our_comparison_scope": "Current local performance work compares GooseB only with Rust7; it does not benchmark these new entries or establish fastest-of-all. Local140k and official100k are different protocols/hosts.",
+  "measured_comparable_fullseed_8CPU16GiB_300s_claim_above100k_found": false,
+  "measured_comparable_fullseed_8CPU16GiB_300s_claim_above140k_found": false,
+  "these_are_absence_of_supplied_comparable_claim_not_proof_of_slower_solutions": true,
+  "official_or_independent_status_for_all": "UNSCORED / NOT INDEPENDENTLY COMPARED",
+  "rows": [
+    {
+      "PR": 34,
+      "state": "OPEN",
+      "url": "https://github.com/arjaythedev/multicore-server-challenge/pull/34",
+      "language": "D2.111 / LDC1.41.0 + photon-http",
+      "directory": "submissions/d-photon-cyrusmsk",
+      "head": "df63d31d1892610ea39b19c5186934fd42178d39",
+      "repository": "cyrusmsk/multicore-server-challenge",
+      "official_rank": null,
+      "official_users": null,
+      "officially_scored": false,
+      "independently_compared": false,
+      "claims": [],
+      "stated_hardware": {
+        "measurement_machine": null,
+        "resource_cap": null
+      },
+      "stated_protocol": {
+        "duration_s": null,
+        "measurement_result": "No numeric load result found in body/README"
+      },
+      "conformance": {
+        "classification": "AUTHOR_REPORTED",
+        "checks": "197/197",
+        "seed": "dev example shown; full-seed conformance not stated",
+        "raw_receipts_inspected": false
+      },
+      "resources": {
+        "front": "direct",
+        "Postgres_connections": "CONNS95 default and capped95",
+        "workers": "one photon scheduler per affinity-visible core",
+        "build": "LDC1.41.0 SHA-pinned x86_64/aarch64; pinned DUB selection; libpq17+ fromPGDG, BSD/OpenSSL/zlib/mimalloc; dub release native"
+      },
+      "direct_source_notes": [
+        "README mentions taskset as an optional way to change scheduler count, but downloaded start.sh does not invoke it. No measured affinity violation established.",
+        "No cross-request cache is claimed; selected source/script review is not a comprehensive compliance verdict."
+      ],
+      "source_urls": {
+        "README": "https://github.com/cyrusmsk/multicore-server-challenge/blob/df63d31d1892610ea39b19c5186934fd42178d39/submissions/d-photon-cyrusmsk/README.md",
+        "build": "https://github.com/cyrusmsk/multicore-server-challenge/blob/df63d31d1892610ea39b19c5186934fd42178d39/submissions/d-photon-cyrusmsk/build.sh",
+        "start": "https://github.com/cyrusmsk/multicore-server-challenge/blob/df63d31d1892610ea39b19c5186934fd42178d39/submissions/d-photon-cyrusmsk/start.sh",
+        "install": "https://github.com/cyrusmsk/multicore-server-challenge/blob/df63d31d1892610ea39b19c5186934fd42178d39/submissions/d-photon-cyrusmsk/install.sh"
+      },
+      "changed_filenames": [
+        {
+          "path": "submissions/d-photon-cyrusmsk/.gitignore",
+          "additions": 9,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/README.md",
+          "additions": 117,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/build.sh",
+          "additions": 13,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/dub.json",
+          "additions": 47,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/dub.selections.json",
+          "additions": 24,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/install.sh",
+          "additions": 47,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/source/api.d",
+          "additions": 1746,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/source/app.d",
+          "additions": 350,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/source/auth.d",
+          "additions": 146,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/source/bcrypt.d",
+          "additions": 85,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/source/db.d",
+          "additions": 627,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/source/diag.d",
+          "additions": 20,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/source/photon/conduit_shim.d",
+          "additions": 67,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/start.sh",
+          "additions": 33,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/vendor/photon-http/LICENSE",
+          "additions": 23,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/vendor/photon-http/README.md",
+          "additions": 155,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/vendor/photon-http/dub.json",
+          "additions": 25,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/vendor/photon-http/source/photon/http/http_parser.d",
+          "additions": 419,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/vendor/photon-http/source/photon/http/http_parser_test.d",
+          "additions": 24,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/vendor/photon-http/source/photon/http/http_server.d",
+          "additions": 530,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/vendor/photon-http/source/photon/http/package.d",
+          "additions": 8,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/d-photon-cyrusmsk/vendor/photon-http/source/photon/http/state_machine.d",
+          "additions": 212,
+          "deletions": 0,
+          "changeType": "ADDED"
+        }
+      ]
+    },
+    {
+      "PR": 35,
+      "state": "OPEN",
+      "url": "https://github.com/arjaythedev/multicore-server-challenge/pull/35",
+      "language": "GNU C11 / GCC + io_uring/epoll",
+      "directory": "submissions/c-iouring-ssmurfgg04-gif",
+      "head": "be1897a8e2f865979a2afc3669c897017d882088",
+      "repository": "ssmurfgg04-gif/multicore-server-challenge",
+      "official_rank": null,
+      "official_users": null,
+      "officially_scored": false,
+      "independently_compared": false,
+      "claims": [
+        {
+          "type": "AUTHOR_REPORTED_STABILITY",
+          "users": [
+            1000,
+            2500,
+            5000,
+            10000,
+            15000,
+            20000
+          ],
+          "errors": "0% at each level",
+          "capacity_claim": false
+        }
+      ],
+      "stated_hardware": {
+        "measurement_machine": "GitHub runners4vCPU; app+PG+loadgen co-located",
+        "target8CPU16GiB_proven": false
+      },
+      "stated_protocol": {
+        "duration_s": null,
+        "seed": "Not pinned for reported load in body/README",
+        "workload": "Challenge load test claimed; raw artifacts not inspected"
+      },
+      "conformance": {
+        "classification": "AUTHOR_REPORTED",
+        "checks": "197/197",
+        "seed": "dev PostgreSQL18, kernel6.8 io_uring/SCRAM;42point local smoke also claimed",
+        "raw_receipts_inspected": false
+      },
+      "resources": {
+        "front": "direct",
+        "Postgres_connections": "DB_READS9 + DB_WRITES3 per worker; default THREADS half cores (48connections on8 cores)",
+        "build": "Ubuntu build-essential/liburing-dev/libcrypt-dev; GCC-O3-march=native-flto-pthread; epoll fallback claimed"
+      },
+      "direct_source_notes": [
+        "Reported runner results explicitly establish stability, not absolute leaderboard latency.",
+        "No measured comparable300-second capacity provided. No independent correctness/compliance audit performed."
+      ],
+      "source_urls": {
+        "README": "https://github.com/ssmurfgg04-gif/multicore-server-challenge/blob/be1897a8e2f865979a2afc3669c897017d882088/submissions/c-iouring-ssmurfgg04-gif/README.md",
+        "build": "https://github.com/ssmurfgg04-gif/multicore-server-challenge/blob/be1897a8e2f865979a2afc3669c897017d882088/submissions/c-iouring-ssmurfgg04-gif/build.sh",
+        "start": "https://github.com/ssmurfgg04-gif/multicore-server-challenge/blob/be1897a8e2f865979a2afc3669c897017d882088/submissions/c-iouring-ssmurfgg04-gif/start.sh",
+        "install": "https://github.com/ssmurfgg04-gif/multicore-server-challenge/blob/be1897a8e2f865979a2afc3669c897017d882088/submissions/c-iouring-ssmurfgg04-gif/install.sh"
+      },
+      "changed_filenames": [
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/.gitignore",
+          "additions": 2,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/README.md",
+          "additions": 84,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/build.sh",
+          "additions": 13,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/install.sh",
+          "additions": 9,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/api.c",
+          "additions": 1336,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/bcrypt.c",
+          "additions": 529,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/bcrypt.h",
+          "additions": 43,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/bf_pi.h",
+          "additions": 196,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/conduit.h",
+          "additions": 258,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/http.c",
+          "additions": 202,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/http.h",
+          "additions": 19,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/json.c",
+          "additions": 330,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/json.h",
+          "additions": 34,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/jwt.c",
+          "additions": 363,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/jwt.h",
+          "additions": 22,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/pg.c",
+          "additions": 723,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/pg.h",
+          "additions": 44,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/server.c",
+          "additions": 1054,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/util.c",
+          "additions": 126,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/src/util.h",
+          "additions": 33,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-iouring-ssmurfgg04-gif/start.sh",
+          "additions": 4,
+          "deletions": 0,
+          "changeType": "ADDED"
+        }
+      ]
+    },
+    {
+      "PR": 36,
+      "state": "OPEN",
+      "url": "https://github.com/arjaythedev/multicore-server-challenge/pull/36",
+      "language": "GNU C11 + C++ / libco + io_uring",
+      "directory": "submissions/c-libco-ssmurfgg04-gif",
+      "head": "bcc2c7a7378c9dac316a0477900d8e489ebc1ea1",
+      "repository": "ssmurfgg04-gif/multicore-server-challenge",
+      "official_rank": null,
+      "official_users": null,
+      "officially_scored": false,
+      "independently_compared": false,
+      "claims": [
+        {
+          "type": "PROJECTION_ONLY",
+          "users": [
+            111000,
+            118000,
+            133000
+          ],
+          "basis": "CPU-cost model calibrated to official Rust/C scores; own8-core per-request PG cost explicitly unmeasured",
+          "capacity_claim": false
+        },
+        {
+          "type": "AUTHOR_REPORTED_STABILITY",
+          "users": [
+            1000,
+            2500,
+            5000
+          ],
+          "errors": "0%",
+          "capacity_claim": false
+        }
+      ],
+      "stated_hardware": {
+        "measurement_machine": "GitHub4vCPU runners, app+PG+client co-located",
+        "target8CPU16GiB_proven": false
+      },
+      "stated_protocol": {
+        "declared_workflow_seed": "dev10,000articles, PostgreSQL18",
+        "declared_workflow_warmup": {
+          "users": 300,
+          "ramp_s": 20,
+          "measure_s": 40
+        },
+        "declared_workflow_probe": {
+          "ramp_s": 45,
+          "measure_s": 90,
+          "levels_default": [
+            1000,
+            2500,
+            5000,
+            10000,
+            15000,
+            20000
+          ]
+        },
+        "execution_receipts_inspected": false
+      },
+      "conformance": {
+        "classification": "AUTHOR_REPORTED",
+        "checks": "197/197",
+        "seed": "devPG18; local42point smoke includes body caveat of one harness-idempotency artifact",
+        "raw_receipts_inspected": false
+      },
+      "resources": {
+        "front": "direct",
+        "Postgres_connections": "default12 per worker, THREADS half cores; CI declares2workers/24connections",
+        "build": "build-essential/liburing/libcrypt; C/C++-O3-native-LTO; vendored Tencent libco"
+      },
+      "direct_source_notes": [
+        "Changed-file list includes .github/workflows/bench.yml and conformance.yml outside the submission folder; submission-scope review needed against the repository submission instructions.",
+        "Downloaded workflow declares dev seed/90-second probes, not a full-seed300-second capacity proof.",
+        "The133k estimate is explicitly a projection, not measured greater-than-Rust capacity."
+      ],
+      "source_urls": {
+        "README": "https://github.com/ssmurfgg04-gif/multicore-server-challenge/blob/bcc2c7a7378c9dac316a0477900d8e489ebc1ea1/submissions/c-libco-ssmurfgg04-gif/README.md",
+        "build": "https://github.com/ssmurfgg04-gif/multicore-server-challenge/blob/bcc2c7a7378c9dac316a0477900d8e489ebc1ea1/submissions/c-libco-ssmurfgg04-gif/build.sh",
+        "start": "https://github.com/ssmurfgg04-gif/multicore-server-challenge/blob/bcc2c7a7378c9dac316a0477900d8e489ebc1ea1/submissions/c-libco-ssmurfgg04-gif/start.sh",
+        "install": "https://github.com/ssmurfgg04-gif/multicore-server-challenge/blob/bcc2c7a7378c9dac316a0477900d8e489ebc1ea1/submissions/c-libco-ssmurfgg04-gif/install.sh"
+      },
+      "changed_filenames": [
+        {
+          "path": ".github/workflows/bench.yml",
+          "additions": 137,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": ".github/workflows/conformance.yml",
+          "additions": 45,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/.gitignore",
+          "additions": 5,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/README.md",
+          "additions": 84,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/build.sh",
+          "additions": 25,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/install.sh",
+          "additions": 9,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/api.c",
+          "additions": 1337,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/bcrypt.c",
+          "additions": 529,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/bcrypt.h",
+          "additions": 43,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/bf_pi.h",
+          "additions": 196,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/conduit.h",
+          "additions": 271,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/coro.cpp",
+          "additions": 187,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/coro.h",
+          "additions": 45,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/http.c",
+          "additions": 202,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/http.h",
+          "additions": 19,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/json.c",
+          "additions": 330,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/json.h",
+          "additions": 34,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/jwt.c",
+          "additions": 363,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/jwt.h",
+          "additions": 22,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/libco/LICENSE.txt",
+          "additions": 0,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/libco/co_closure.h",
+          "additions": 97,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/libco/co_comm.cpp",
+          "additions": 23,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/libco/co_comm.h",
+          "additions": 29,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/libco/co_epoll.cpp",
+          "additions": 318,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/libco/co_epoll.h",
+          "additions": 93,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/libco/co_hook_sys_call.cpp",
+          "additions": 1039,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/libco/co_routine.cpp",
+          "additions": 1196,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/libco/co_routine.h",
+          "additions": 93,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/libco/co_routine_inner.h",
+          "additions": 114,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/libco/co_routine_specific.h",
+          "additions": 86,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/libco/coctx.cpp",
+          "additions": 132,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/libco/coctx.h",
+          "additions": 42,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/libco/coctx_swap.S",
+          "additions": 83,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/pg.c",
+          "additions": 736,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/pg.h",
+          "additions": 44,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/server.c",
+          "additions": 1071,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/util.c",
+          "additions": 126,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/src/util.h",
+          "additions": 33,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/c-libco-ssmurfgg04-gif/start.sh",
+          "additions": 4,
+          "deletions": 0,
+          "changeType": "ADDED"
+        }
+      ]
+    },
+    {
+      "PR": 37,
+      "state": "OPEN",
+      "url": "https://github.com/arjaythedev/multicore-server-challenge/pull/37",
+      "language": "Go1.27.2 / pgx-pgconn5.11.0",
+      "directory": "submissions/go-raw-kimmotamio",
+      "head": "70bc115179047d7d729807956a24124b5a0f3c2b",
+      "repository": "kimmotamio/multicore-server-challenge",
+      "official_rank": null,
+      "official_users": null,
+      "officially_scored": false,
+      "independently_compared": false,
+      "claims": [
+        {
+          "type": "AUTHOR_REPORTED_MEASUREMENT",
+          "actual_VUs": 6000,
+          "think_scale": 0.05,
+          "rps": 31138,
+          "p50_ms": 4.2,
+          "p95_ms": 8.5,
+          "p99_ms": 12,
+          "errors": 0,
+          "app_CPU_cores": 2.1,
+          "PG_CPU_cores": 2.4,
+          "app_RSS_MB": 165,
+          "approximately_equivalent_request_rate_users": 115000,
+          "capacity_claim": false
+        },
+        {
+          "type": "AUTHOR_REPORTED_RELATIVE_CPU",
+          "PG_CPU_without_window_cores": 3.8,
+          "app_CPU_without_window_cores": 2.6,
+          "label": "Same local setup; not independent repeated comparison"
+        }
+      ],
+      "stated_hardware": {
+        "measurement_machine": "Apple M-series16cores/128GB; PostgreSQL17 and client on same machine",
+        "target8CPU16GiB_proven": false
+      },
+      "stated_protocol": {
+        "seed": "full",
+        "loadgen": "one loadgen run; think-scale.05",
+        "ramp_s": 15,
+        "measure_s": 40,
+        "hold_s": null
+      },
+      "conformance": {
+        "classification": "AUTHOR_REPORTED",
+        "checks": "197/197 and bcrypt/HTTP tests",
+        "seed": "Conformance seed not specified in body/README",
+        "raw_receipts_inspected": false
+      },
+      "resources": {
+        "front": "direct",
+        "Postgres_connections": 16,
+        "default_read_connections": 12,
+        "default_write_connections": 4,
+        "read_batch": 64,
+        "read_window_us": 4000,
+        "write_window_us": 2000,
+        "bcrypt_wait_ms": 100,
+        "build": "Go1.27.2 official Linux-amd64 tarball; CGO0-trimpath; modules pinned"
+      },
+      "direct_source_notes": [
+        "The~115k figure is request-rate equivalence from6,000VU/think-scale.05, not115,000 connected users or a300-second hold.",
+        "Body says no read timer, but pinned README and main.go declare READ_BATCH_US4000; source defaults used in this inventory.",
+        "Selected sql.go/db.go retain live statement-local work and session-only setup; no cross-request data cache found in selected files. This is not comprehensive compliance validation."
+      ],
+      "source_urls": {
+        "README": "https://github.com/kimmotamio/multicore-server-challenge/blob/70bc115179047d7d729807956a24124b5a0f3c2b/submissions/go-raw-kimmotamio/README.md",
+        "build": "https://github.com/kimmotamio/multicore-server-challenge/blob/70bc115179047d7d729807956a24124b5a0f3c2b/submissions/go-raw-kimmotamio/build.sh",
+        "start": "https://github.com/kimmotamio/multicore-server-challenge/blob/70bc115179047d7d729807956a24124b5a0f3c2b/submissions/go-raw-kimmotamio/start.sh",
+        "install": "https://github.com/kimmotamio/multicore-server-challenge/blob/70bc115179047d7d729807956a24124b5a0f3c2b/submissions/go-raw-kimmotamio/install.sh"
+      },
+      "changed_filenames": [
+        {
+          "path": "submissions/go-raw-kimmotamio/.gitignore",
+          "additions": 1,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/LICENSE-x-crypto",
+          "additions": 27,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/README.md",
+          "additions": 129,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/bcrypt.go",
+          "additions": 333,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/bcrypt_lanes.go",
+          "additions": 1091,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/bcrypt_pi.go",
+          "additions": 198,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/bcrypt_test.go",
+          "additions": 116,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/build.sh",
+          "additions": 10,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/db.go",
+          "additions": 644,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/gen_bcrypt.py",
+          "additions": 38,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/go.mod",
+          "additions": 14,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/go.sum",
+          "additions": 28,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/handlers.go",
+          "additions": 721,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/http.go",
+          "additions": 282,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/http_test.go",
+          "additions": 44,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/install.sh",
+          "additions": 11,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/jsonw.go",
+          "additions": 158,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/jwt.go",
+          "additions": 268,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/main.go",
+          "additions": 103,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/sql.go",
+          "additions": 536,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/start.sh",
+          "additions": 4,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/go-raw-kimmotamio/wire.go",
+          "additions": 100,
+          "deletions": 0,
+          "changeType": "ADDED"
+        }
+      ]
+    },
+    {
+      "PR": 38,
+      "state": "OPEN",
+      "url": "https://github.com/arjaythedev/multicore-server-challenge/pull/38",
+      "language": "Nim2.2.12 / async HTTP + libpq",
+      "directory": "submissions/nim-conduit-NioHast",
+      "head": "7e31673ee7e3064bbce8239f365b96da978c40dd",
+      "repository": "NioHast/multicore-server-challenge",
+      "official_rank": null,
+      "official_users": null,
+      "officially_scored": false,
+      "independently_compared": false,
+      "claims": [
+        {
+          "type": "AUTHOR_REPORTED_SMOKE",
+          "users": 2000,
+          "errors": 0,
+          "p95_p99": "Below limits, exact numbers absent",
+          "generator_limited": true,
+          "capacity_claim": false
+        }
+      ],
+      "stated_hardware": {
+        "measurement_machine": "4-vCPU machine; client co-located",
+        "target8CPU16GiB_proven": false
+      },
+      "stated_protocol": {
+        "duration_s": null,
+        "seed": "Load-smoke seed not stated"
+      },
+      "conformance": {
+        "classification": "AUTHOR_REPORTED",
+        "checks": "197/197",
+        "seed": "bothdev andfull2.35GB",
+        "raw_receipts_inspected": false
+      },
+      "resources": {
+        "front": "direct",
+        "workers": "WORKERS=4*nproc,32 on8vCPU",
+        "Postgres_connections": "one per worker,32 on8vCPU",
+        "build": "SHA-pinned Nim2.2.12 Linuxx64; libpq/libcrypt/libssl; release ARC,threads off"
+      },
+      "direct_source_notes": [
+        "README explicitly says generatorCPU-limited and no official8-vCPU access.",
+        "start.sh waits for a child exit then cleans up remaining children; no restart loop in inspected script. No comprehensive correctness audit performed."
+      ],
+      "source_urls": {
+        "README": "https://github.com/NioHast/multicore-server-challenge/blob/7e31673ee7e3064bbce8239f365b96da978c40dd/submissions/nim-conduit-NioHast/README.md",
+        "build": "https://github.com/NioHast/multicore-server-challenge/blob/7e31673ee7e3064bbce8239f365b96da978c40dd/submissions/nim-conduit-NioHast/build.sh",
+        "start": "https://github.com/NioHast/multicore-server-challenge/blob/7e31673ee7e3064bbce8239f365b96da978c40dd/submissions/nim-conduit-NioHast/start.sh",
+        "install": "https://github.com/NioHast/multicore-server-challenge/blob/7e31673ee7e3064bbce8239f365b96da978c40dd/submissions/nim-conduit-NioHast/install.sh"
+      },
+      "changed_filenames": [
+        {
+          "path": "submissions/nim-conduit-NioHast/.gitignore",
+          "additions": 2,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/nim-conduit-NioHast/README.md",
+          "additions": 65,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/nim-conduit-NioHast/build.sh",
+          "additions": 11,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/nim-conduit-NioHast/install.sh",
+          "additions": 23,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/nim-conduit-NioHast/src/api.nim",
+          "additions": 594,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/nim-conduit-NioHast/src/auth.nim",
+          "additions": 119,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/nim-conduit-NioHast/src/main.nim",
+          "additions": 47,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/nim-conduit-NioHast/src/password.nim",
+          "additions": 34,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/nim-conduit-NioHast/src/pg.nim",
+          "additions": 223,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/nim-conduit-NioHast/start.sh",
+          "additions": 26,
+          "deletions": 0,
+          "changeType": "ADDED"
+        }
+      ]
+    },
+    {
+      "PR": 40,
+      "state": "OPEN",
+      "url": "https://github.com/arjaythedev/multicore-server-challenge/pull/40",
+      "language": "Python3.12+ / raw selectors + psycopg3",
+      "directory": "submissions/python-rawsocket-shawal-mbalire",
+      "head": "d1e339f9b6c03aafb3dee4bc72e101d5b11a61ab",
+      "repository": "shawal-mbalire/multicore-server-challenge",
+      "official_rank": null,
+      "official_users": null,
+      "officially_scored": false,
+      "independently_compared": false,
+      "claims": [],
+      "stated_hardware": {
+        "measurement_machine": null,
+        "resource_cap": null
+      },
+      "stated_protocol": {
+        "duration_s": null,
+        "measurement_result": "No numeric load result found in body/README"
+      },
+      "conformance": {
+        "classification": "AUTHOR_REPORTED",
+        "checks": "197/197 via just test",
+        "seed": "justfile description says freshdev copy",
+        "raw_receipts_inspected": false
+      },
+      "resources": {
+        "front": "direct",
+        "Postgres_connections": "psycopg_pool min5/max30",
+        "build": "SystemPython/venv, pip26.2.2; constraints pins psycopg3.3.4,psycopg_pool3.3.3,bcrypt5.0.0,PyJWT2.15.1"
+      },
+      "direct_source_notes": [
+        "No measured capacity or resource-qualified load result provided. Source correctness/compliance not independently audited."
+      ],
+      "source_urls": {
+        "README": "https://github.com/shawal-mbalire/multicore-server-challenge/blob/d1e339f9b6c03aafb3dee4bc72e101d5b11a61ab/submissions/python-rawsocket-shawal-mbalire/README.md",
+        "build": "https://github.com/shawal-mbalire/multicore-server-challenge/blob/d1e339f9b6c03aafb3dee4bc72e101d5b11a61ab/submissions/python-rawsocket-shawal-mbalire/build.sh",
+        "start": "https://github.com/shawal-mbalire/multicore-server-challenge/blob/d1e339f9b6c03aafb3dee4bc72e101d5b11a61ab/submissions/python-rawsocket-shawal-mbalire/start.sh",
+        "install": "https://github.com/shawal-mbalire/multicore-server-challenge/blob/d1e339f9b6c03aafb3dee4bc72e101d5b11a61ab/submissions/python-rawsocket-shawal-mbalire/install.sh"
+      },
+      "changed_filenames": [
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/.gitignore",
+          "additions": 3,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/AGENTS.md",
+          "additions": 78,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/README.md",
+          "additions": 76,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/build.sh",
+          "additions": 9,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/conduit_server/adapters/inbound/controllers.py",
+          "additions": 427,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/conduit_server/adapters/inbound/errors.py",
+          "additions": 7,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/conduit_server/adapters/inbound/router.py",
+          "additions": 156,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/conduit_server/adapters/inbound/socket_server.py",
+          "additions": 127,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/conduit_server/adapters/outbound/crypto_adapter.py",
+          "additions": 43,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/conduit_server/adapters/outbound/pg_repository.py",
+          "additions": 331,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/conduit_server/domain/models.py",
+          "additions": 83,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/conduit_server/domain/services.py",
+          "additions": 53,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/conduit_server/main.py",
+          "additions": 45,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/conduit_server/ports/inbound.py",
+          "additions": 15,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/conduit_server/ports/outbound.py",
+          "additions": 50,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/constraints.txt",
+          "additions": 5,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/install.sh",
+          "additions": 6,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/justfile",
+          "additions": 32,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/scripts/check.py",
+          "additions": 24,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/python-rawsocket-shawal-mbalire/start.sh",
+          "additions": 6,
+          "deletions": 0,
+          "changeType": "ADDED"
+        }
+      ]
+    },
+    {
+      "PR": 41,
+      "state": "OPEN",
+      "url": "https://github.com/arjaythedev/multicore-server-challenge/pull/41",
+      "language": "PureBasic6.41 free / epoll + libpq",
+      "directory": "submissions/purebasic-epoll-ALharchi",
+      "head": "990f04f73325c7c4e63b39433858621781f382e0",
+      "repository": "ALharchi/multicore-server-challenge",
+      "official_rank": null,
+      "official_users": null,
+      "officially_scored": false,
+      "independently_compared": false,
+      "claims": [
+        {
+          "type": "AUTHOR_REPORTED_MEASUREMENT",
+          "users": 40000,
+          "rps_range": [
+            8500,
+            10000
+          ],
+          "author_verdict": "pass",
+          "capacity_claim": false
+        },
+        {
+          "type": "AUTHOR_REPORTED_MEASUREMENT",
+          "users": 50000,
+          "author_verdict": "p95 narrowly fails",
+          "capacity_claim": false
+        },
+        {
+          "type": "AUTHOR_REPORTED_SQL_OPTIMIZATION",
+          "global_list_planning_plus_execution_ms_before": 1.9,
+          "after": 0.6,
+          "throughput_increase_pct": 30
+        }
+      ],
+      "stated_hardware": {
+        "measurement_machine": "Ryzen5 2600X/DockerDesktop; app+PG limited4cores(8threads); client on othercores",
+        "memory_budget": null,
+        "target8CPU16GiB_proven": false
+      },
+      "stated_protocol": {
+        "seed": "full",
+        "measure_s": 60,
+        "hold_s": null,
+        "PG_version": "Not stated in local-measurement paragraph"
+      },
+      "conformance": {
+        "classification": "AUTHOR_REPORTED",
+        "checks": "197/197",
+        "seed": "Not specified for conformance",
+        "raw_receipts_inspected": false
+      },
+      "resources": {
+        "front": "direct",
+        "workers_threads": 32,
+        "Postgres_connections": 32,
+        "build": "SHA-checked unversioned vendorx64 PureBasic6.41 tarball; GCC/libpq/OpenSSL, --optimizer --thread"
+      },
+      "direct_source_notes": [
+        "README acknowledges unversioned compiler URL; checksum intentionally fails if vendor replaces archive.",
+        "Local60-second40k result is not comparable8CPU16GiB/300-second capacity. No independent semantic/compliance verdict."
+      ],
+      "source_urls": {
+        "README": "https://github.com/ALharchi/multicore-server-challenge/blob/990f04f73325c7c4e63b39433858621781f382e0/submissions/purebasic-epoll-ALharchi/README.md",
+        "build": "https://github.com/ALharchi/multicore-server-challenge/blob/990f04f73325c7c4e63b39433858621781f382e0/submissions/purebasic-epoll-ALharchi/build.sh",
+        "start": "https://github.com/ALharchi/multicore-server-challenge/blob/990f04f73325c7c4e63b39433858621781f382e0/submissions/purebasic-epoll-ALharchi/start.sh",
+        "install": "https://github.com/ALharchi/multicore-server-challenge/blob/990f04f73325c7c4e63b39433858621781f382e0/submissions/purebasic-epoll-ALharchi/install.sh"
+      },
+      "changed_filenames": [
+        {
+          "path": "submissions/purebasic-epoll-ALharchi/.gitignore",
+          "additions": 1,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/purebasic-epoll-ALharchi/README.md",
+          "additions": 79,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/purebasic-epoll-ALharchi/build.sh",
+          "additions": 7,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/purebasic-epoll-ALharchi/conduit.pb",
+          "additions": 650,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/purebasic-epoll-ALharchi/install.sh",
+          "additions": 22,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/purebasic-epoll-ALharchi/start.sh",
+          "additions": 4,
+          "deletions": 0,
+          "changeType": "ADDED"
+        }
+      ]
+    },
+    {
+      "PR": 42,
+      "state": "OPEN",
+      "url": "https://github.com/arjaythedev/multicore-server-challenge/pull/42",
+      "language": "Elixir1.19.6 / OTP28.5.0.8 / ownPG",
+      "directory": "submissions/elixir-gentcp-chuukwudi",
+      "head": "f6f3a4d60e961a74de16a939b70d8deac5818b46",
+      "repository": "Chuukwudi/multicore-server-challenge",
+      "official_rank": null,
+      "official_users": null,
+      "officially_scored": false,
+      "independently_compared": false,
+      "claims": [
+        {
+          "type": "AUTHOR_REPORTED_COMPARISON",
+          "actual_VUs": 6000,
+          "think_scale": 0.1,
+          "server": "Elixir42",
+          "rps": 15835,
+          "p95_ms": 4.3,
+          "p99_ms": 13.3,
+          "PG_CPU_pct": 182,
+          "app_CPU_pct": 138,
+          "errors": 0,
+          "capacity_claim": false
+        },
+        {
+          "type": "AUTHOR_REPORTED_COMPARISON",
+          "actual_VUs": 6000,
+          "think_scale": 0.1,
+          "server": "Rust7",
+          "rps": 15468,
+          "p95_ms": 42,
+          "p99_ms": 278.8,
+          "PG_CPU_pct": 163,
+          "app_CPU_pct": 78,
+          "errors": 0,
+          "capacity_claim": false
+        },
+        {
+          "type": "AUTHOR_REPORTED_COMPARISON",
+          "actual_VUs": 10000,
+          "think_scale": 0.05,
+          "server": "Elixir42",
+          "rps": 39678,
+          "p95_ms": 113,
+          "p99_ms": 146,
+          "PG_CPU_pct": 279,
+          "app_CPU_pct": 203,
+          "errors": 0,
+          "generator_limited": true,
+          "capacity_claim": false
+        },
+        {
+          "type": "AUTHOR_REPORTED_COMPARISON",
+          "actual_VUs": 10000,
+          "think_scale": 0.05,
+          "server": "Rust7",
+          "rps": 40238,
+          "p95_ms": 136,
+          "p99_ms": 204,
+          "PG_CPU_pct": 297,
+          "app_CPU_pct": 135,
+          "errors": 0,
+          "generator_limited": true,
+          "capacity_claim": false
+        }
+      ],
+      "stated_hardware": {
+        "measurement_machine": "AppleM-series; Ubuntu24.04server+loadgen andPostgres18 share6-CPU DockerVM; PG boxconfig values claimed",
+        "memory_budget": null,
+        "target8CPU16GiB_proven": false
+      },
+      "stated_protocol": {
+        "seed": "full",
+        "think_scale": [
+          0.1,
+          0.05
+        ],
+        "duration_s": null,
+        "hold_s": null,
+        "saturated_runs_generator_limited": true
+      },
+      "conformance": {
+        "classification": "AUTHOR_REPORTED",
+        "checks": "197/197 dev/full,12 mix tests; cleanUbuntu24.04ARM build",
+        "raw_receipts_inspected": false
+      },
+      "resources": {
+        "front": "direct",
+        "Postgres_connections": "6read+6write+1startup=13; runtime rejects total>95",
+        "read_batch": 64,
+        "read_collection_timer": "none; pending work batches during in-flight rounds",
+        "bcrypt_wait_ms": 200,
+        "build": "SHA-pinned OTP28.5.0.8 x86/ARM andElixir1.19.6; noHexdeps; nativeC bcrypt NIF +mixrelease"
+      },
+      "direct_source_notes": [
+        "application.ex35 configures one_for_one supervision with max_restarts10,000/10s; pg/conn.ex21 explicitly marks PG workers restart:permanent. This is a direct rule9 restart-policy attention item, not an observed restart or assignedFAIL.",
+        "HTTP requests are short-lived processes; creation per request is not itself a crash restart. No evidence of a restart during the stated local runs was inspected.",
+        "Selected SQL/batching source uses per-request ordinal and request-tied counts; no result-cache violation established in selected files. Not an independent compliance audit."
+      ],
+      "source_urls": {
+        "README": "https://github.com/Chuukwudi/multicore-server-challenge/blob/f6f3a4d60e961a74de16a939b70d8deac5818b46/submissions/elixir-gentcp-chuukwudi/README.md",
+        "build": "https://github.com/Chuukwudi/multicore-server-challenge/blob/f6f3a4d60e961a74de16a939b70d8deac5818b46/submissions/elixir-gentcp-chuukwudi/build.sh",
+        "start": "https://github.com/Chuukwudi/multicore-server-challenge/blob/f6f3a4d60e961a74de16a939b70d8deac5818b46/submissions/elixir-gentcp-chuukwudi/start.sh",
+        "install": "https://github.com/Chuukwudi/multicore-server-challenge/blob/f6f3a4d60e961a74de16a939b70d8deac5818b46/submissions/elixir-gentcp-chuukwudi/install.sh"
+      },
+      "changed_filenames": [
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/.formatter.exs",
+          "additions": 4,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/.gitignore",
+          "additions": 4,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/README.md",
+          "additions": 146,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/build.sh",
+          "additions": 11,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/c_src/README.md",
+          "additions": 9,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/c_src/bcrypt-batch-impl.h",
+          "additions": 86,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/c_src/bcrypt_nif.c",
+          "additions": 109,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/c_src/byteorder.h",
+          "additions": 19,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/c_src/crypt-bcrypt.c",
+          "additions": 1061,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/c_src/crypt-port.h",
+          "additions": 14,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/install.sh",
+          "additions": 39,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/lib/conduit/application.ex",
+          "additions": 102,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/lib/conduit/bcrypt.ex",
+          "additions": 165,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/lib/conduit/db.ex",
+          "additions": 68,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/lib/conduit/handler.ex",
+          "additions": 673,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/lib/conduit/http.ex",
+          "additions": 257,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/lib/conduit/json.ex",
+          "additions": 141,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/lib/conduit/jwt.ex",
+          "additions": 131,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/lib/conduit/pg/batch.ex",
+          "additions": 130,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/lib/conduit/pg/conn.ex",
+          "additions": 383,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/lib/conduit/pg/proto.ex",
+          "additions": 174,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/lib/conduit/sql.ex",
+          "additions": 244,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/mix.exs",
+          "additions": 21,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/start.sh",
+          "additions": 17,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/test/handler_test.exs",
+          "additions": 26,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/test/http_test.exs",
+          "additions": 28,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/test/json_test.exs",
+          "additions": 53,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/test/jwt_test.exs",
+          "additions": 69,
+          "deletions": 0,
+          "changeType": "ADDED"
+        },
+        {
+          "path": "submissions/elixir-gentcp-chuukwudi/test/test_helper.exs",
+          "additions": 1,
+          "deletions": 0,
+          "changeType": "ADDED"
+        }
+      ]
+    }
+  ],
+  "read_only": true,
+  "no_source_port_or_build_execution": true,
+  "files_downloaded": 47
+}

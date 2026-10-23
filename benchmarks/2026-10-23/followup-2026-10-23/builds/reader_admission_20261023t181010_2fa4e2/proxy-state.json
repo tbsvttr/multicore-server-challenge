@@ -1,0 +1,31 @@
+{
+  "launcher_pid": 81,
+  "pgid": 81,
+  "frozen_binary": "/usr/bin/python3.12",
+  "app_user": "challenge",
+  "app_uid": 501,
+  "role": "proxy",
+  "command": [
+    "runuser",
+    "-u",
+    "challenge",
+    "--",
+    "prlimit",
+    "--nofile=200000:200000",
+    "--",
+    "python3",
+    "/comparison/optimization/builds/reader_admission_20261023t181010_2fa4e2/tools/reader-admission.py",
+    "--proxy",
+    "--database-url",
+    "postgres://postgres:challenge-test-only@127.0.0.1:5432/mc_pair_reader_20261023t181010_2fa4e2",
+    "--listen",
+    "127.0.0.1:15439",
+    "--wire-log",
+    "/comparison/optimization/builds/reader_admission_20261023t181010_2fa4e2/wire.jsonl",
+    "--ready",
+    "/comparison/optimization/builds/reader_admission_20261023t181010_2fa4e2/proxy-ready.json"
+  ],
+  "port": 15439,
+  "start_monotonic_ns": 97098118701992,
+  "launcher_start_ticks": 9709811
+}

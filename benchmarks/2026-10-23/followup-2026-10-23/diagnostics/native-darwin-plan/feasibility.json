@@ -1,0 +1,85 @@
+{
+  "created_utc": "2026-10-23T18:10:25.136685+00:00",
+  "status": "READ_ONLY_FEASIBILITY_NOT_BUILT_OR_EXECUTED",
+  "recommendation": "Feasible for a small unchanged-source Darwin client diagnostic, but not a drop-in100k\u2013160k capacity solution under current Mac networking/FD limits. P2 is the simpler next test. Do not compile during a timed diagnostic.",
+  "observed_host": {
+    "go_version": "go1.27.2 darwin/arm64",
+    "shell_nofile_soft": 4096,
+    "shell_nofile_hard": "unlimited",
+    "launchctl_maxfiles_soft": 256,
+    "launchctl_maxfiles_hard": "unlimited",
+    "kern_maxfiles": 245760,
+    "kern_maxfilesperproc": 122880,
+    "kern_num_files_at_read": 53657,
+    "ephemeral_first": 49152,
+    "ephemeral_last": 65535,
+    "ephemeral_destination_capacity": 16384,
+    "tcp_msl_ms": 15000
+  },
+  "target_snapshot": {
+    "path": "diagnosticgoose110_20261023t164733_2f2b88/target-inspect.json",
+    "published_ports": {},
+    "network_mode": "bridge",
+    "cpus": 8,
+    "memory_bytes": 17179869184,
+    "swap_budget_bytes": 0,
+    "cpu_affinity": ""
+  },
+  "source_feasibility": {
+    "workload_source": "/private/tmp/multicore-challenge-20261022/bench/cmd/loadgen",
+    "bench_go_version": "1.27.1 minimum",
+    "native_darwin_build_tested": false,
+    "dependencies": "HdrHistogram1.4.0 and jwt/v55.3.1; loadgen has no Linux build constraints/cgo dependency in inspected source.",
+    "portable_paths": [
+      "sysstat.go gracefully returns CPU N/A when/proc/stat is absent.",
+      "Getrusage supplies process CPU; Darwin peakRSS has explicit byte-unit conversion.",
+      "run/merge networking uses standard net.Conn and accepts comma-separated host:port targets."
+    ],
+    "limits": [
+      "The full search/monitor orchestration assumes Linux target/SSH shell tools; prefer external driver invoking unchanged run/merge.",
+      "Darwin whole-box CPU field is N/A; native CPU75% eligibility cannot be assumed. Preserve that fact and collect separate host/client/proxy CPU evidence.",
+      "Darwin client cannot inherit a Linux cgroup8CPU/8GiB quota; GOMAXPROCS is concurrency, not an equivalent hard CPU/memory cap."
+    ]
+  },
+  "routing_and_ports": {
+    "current_blocker": "Existing saved target has no published ports, so it is not reachable from native Mac through localhost. A new explicitly declared target with published loopback ports is needed.",
+    "minimal_future_mapping": "One owned replacement target with16 loopback host ports33000..33015 all forwarding to the same container3000; no lo0 aliases or source changes. Preserve the exact target image/volumes/PG settings/resource budget.",
+    "native_target_argument": "Comma-separated http://127.0.0.1:33000,...,:33015, distributed by unchanged parseTargets/VU logic. Distinct destination ports expand socket4-tuples just as distinct destination IPs do.",
+    "capacity_arithmetic": "At the measured16,384 ephemeral ports per destination, one port cannot support100k;8 ports gives131,072 theoretical concurrent tuples and16 gives262,144 before reserved/TIME_WAIT/retries.160k needs at least10 destinations even without safety margin.",
+    "drain": "Current MSL15s suggests a30s TIME_WAIT scale; keep at least the existing65s drain and verify observed closure/port headroom rather than relying on arithmetic alone."
+  },
+  "fd_budget": {
+    "known": "Global file-table headroom at read is192,103; per-process kernel ceiling122,880 despite shell hard=unlimited. Use multiple native processes rather than one100k+ process.",
+    "proxy_estimate": "Docker documents host TCP forwarding through com.docker.backend. Planning assumption: roughly one client socket FD plus one accepted proxy FD per active host connection. Under that assumption100k adds~200k Mac FDs, exceeding current~192k global headroom, and160k exceeds the per-process proxy ceiling. Actual backend FD ownership/limits must be observed before high load.",
+    "conclusion": "A10k smoke can fit current limits with inherited soft nofile raised within the existing ceiling. A credible100k\u2013160k run needs deliberate higher host/proxy FD limits or different direct networking/external client; none was changed."
+  },
+  "minimal_stages": [
+    {
+      "stage": 1,
+      "action": "After P2/builds finish, pin source/module hashes and compile a new Darwin artifact from unchanged loadgen source with local Go1.27.2; record compiler/build info and new binary hash. Source remains identical, binary is not Linux886."
+    },
+    {
+      "stage": 2,
+      "action": "Root reviews an owned replacement target declaration with loopback port mappings, unchanged app+PG8CPU/16GiB/no-swap/no-affinity settings, full seed and original PG config. Do not alter the running/current container."
+    },
+    {
+      "stage": 3,
+      "action": "Run only a small5k\u201310k diagnostic first, normal-user native processes with explicit raised soft nofile(e.g.32768), preregistered GOMAXPROCS and exact original run/merge/workload flags. Record actual FD/env/PID/source/target/resource identities."
+    },
+    {
+      "stage": 4,
+      "action": "Collect Darwin process CPU/RSS/faults plus host CPU/memory/compression and com.docker.backend resource usage; retain native CPU N/A, lag/active/clock/error flags and incomplete work. Do not interpret missing CPU guard as passing headroom."
+    },
+    {
+      "stage": 5,
+      "action": "Attempt higher load only after the FD/ephemeral-port/proxy/headroom checks pass. Use fresh predeclared matched client configuration for both Rust and Goose; this is a new exploratory protocol, not a continuation/rescue of previous v3/P1/P2 scores."
+    }
+  ],
+  "source_references": {
+    "Docker Desktop host forwarding": "https://docs.docker.com/desktop/features/networking/",
+    "Go Darwin support": "https://go.dev/wiki/Darwin",
+    "Go1.27 Darwin minimum": "https://go.dev/doc/go1.27"
+  },
+  "scope": "Legitimate local exploratory architecture: application/PG remain inside original shared target budget and workload source remains unchanged. It removes the generator from the Linux VM scheduler, but shares physical Mac CPU/RAM and adds a Desktop TCP proxy. It cannot establish official dedicated-x86 rank or guarantee elimination of host bottlenecks.",
+  "mutations_build_or_load_performed": false
+}

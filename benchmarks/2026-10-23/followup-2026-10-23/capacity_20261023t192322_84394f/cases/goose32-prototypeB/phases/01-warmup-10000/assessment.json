@@ -1,0 +1,3862 @@
+{
+  "id": "01-warmup-10000",
+  "case": "goose32-prototypeB",
+  "stage": "warmup",
+  "users": 10000,
+  "run_id": "capacity_20261023t192322_84394f-warmup-10000",
+  "database": "mc_pair_20261023_192322_84394f_2",
+  "session_id": "goose32-prototypeB",
+  "recorded_classification": null,
+  "checks": [
+    {
+      "check": "complete_saved_phase",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "predeclared_balanced_shards_and_limits",
+      "pass": true
+    },
+    {
+      "check": "single_database_and_continuous_app_session",
+      "pass": true
+    },
+    {
+      "check": "declared_binary_env_and_common_runtime",
+      "pass": true
+    },
+    {
+      "check": "before:fixed_target_budget",
+      "pass": true
+    },
+    {
+      "check": "before:official_sources_and_pg_settings_fixed",
+      "pass": true
+    },
+    {
+      "check": "after:fixed_target_budget",
+      "pass": true
+    },
+    {
+      "check": "after:official_sources_and_pg_settings_fixed",
+      "pass": true
+    },
+    {
+      "check": "startup:normal_expected_uid",
+      "pass": true
+    },
+    {
+      "check": "startup:exactly_one_expected_process",
+      "pass": true
+    },
+    {
+      "check": "startup:raw_all_four_uids_match_normal_user",
+      "pass": true
+    },
+    {
+      "check": "startup:raw_actual_pid_matches",
+      "pass": true
+    },
+    {
+      "check": "startup:actual_process_identity_stable",
+      "pass": true
+    },
+    {
+      "check": "startup:raw_soft_hard_nofile_at_least_200000",
+      "pass": true,
+      "detail": [
+        200000,
+        200000
+      ]
+    },
+    {
+      "check": "startup:helper_validity_agrees_with_raw",
+      "pass": true
+    },
+    {
+      "check": "before:normal_expected_uid",
+      "pass": true
+    },
+    {
+      "check": "before:exactly_one_expected_process",
+      "pass": true
+    },
+    {
+      "check": "before:raw_all_four_uids_match_normal_user",
+      "pass": true
+    },
+    {
+      "check": "before:raw_actual_pid_matches",
+      "pass": true
+    },
+    {
+      "check": "before:actual_process_identity_stable",
+      "pass": true
+    },
+    {
+      "check": "before:raw_soft_hard_nofile_at_least_200000",
+      "pass": true,
+      "detail": [
+        200000,
+        200000
+      ]
+    },
+    {
+      "check": "before:helper_validity_agrees_with_raw",
+      "pass": true
+    },
+    {
+      "check": "after:normal_expected_uid",
+      "pass": true
+    },
+    {
+      "check": "after:exactly_one_expected_process",
+      "pass": true
+    },
+    {
+      "check": "after:raw_all_four_uids_match_normal_user",
+      "pass": true
+    },
+    {
+      "check": "after:raw_actual_pid_matches",
+      "pass": true
+    },
+    {
+      "check": "after:actual_process_identity_stable",
+      "pass": true
+    },
+    {
+      "check": "after:raw_soft_hard_nofile_at_least_200000",
+      "pass": true,
+      "detail": [
+        200000,
+        200000
+      ]
+    },
+    {
+      "check": "after:helper_validity_agrees_with_raw",
+      "pass": true
+    },
+    {
+      "check": "app_healthy_before_load",
+      "pass": true
+    },
+    {
+      "check": "after_health_witness_present",
+      "pass": true
+    },
+    {
+      "check": "all_native_processes_exited_normally",
+      "pass": true
+    },
+    {
+      "check": "synchronized_raw_windows",
+      "pass": true
+    },
+    {
+      "check": "native_metadata_exact_stage_protocol",
+      "pass": true
+    },
+    {
+      "check": "container_and_each_shard_actual_GOMAXPROCS2",
+      "pass": true
+    },
+    {
+      "check": "one_saved_command_per_shard",
+      "pass": true
+    },
+    {
+      "check": "shard0:exact_users_ids_destination",
+      "pass": true
+    },
+    {
+      "check": "shard0:raw_command_agrees",
+      "pass": true
+    },
+    {
+      "check": "shard0:at_least99pct_vus_active",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:DELETE /api/articles/:slug/comments/:id",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:DELETE /api/articles/:slug/favorite",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:DELETE /api/profiles/:username/follow",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/articles",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/articles/:slug",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/articles/:slug/comments",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/articles/feed",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/articles?author",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/articles?favorited",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/articles?tag",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/profiles/:username",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/tags",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:GET /api/user",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:POST /api/articles",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:POST /api/articles/:slug/comments",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:POST /api/articles/:slug/favorite",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:POST /api/profiles/:username/follow",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:POST /api/users",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:POST /api/users/login",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:PUT /api/articles/:slug",
+      "pass": true
+    },
+    {
+      "check": "raw_hist_count:0:PUT /api/user",
+      "pass": true
+    },
+    {
+      "check": "all_histogram_configurations_match",
+      "pass": true
+    },
+    {
+      "check": "merged_histogram_equals_exact_bin_sum",
+      "pass": true
+    },
+    {
+      "check": "merged_quantile_from_exact_histogram:p50_ms",
+      "pass": true
+    },
+    {
+      "check": "merged_quantile_from_exact_histogram:p95_ms",
+      "pass": true
+    },
+    {
+      "check": "merged_quantile_from_exact_histogram:p99_ms",
+      "pass": true
+    },
+    {
+      "check": "merged_quantile_from_exact_histogram:max_ms",
+      "pass": true
+    },
+    {
+      "check": "merged_count_equals_raw_counts",
+      "pass": true
+    },
+    {
+      "check": "merged_statuses_equal_raw_counts",
+      "pass": true
+    },
+    {
+      "check": "merged_errors_equal_raw_counts",
+      "pass": true
+    },
+    {
+      "check": "all_endpoints_retained",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:DELETE /api/articles/:slug/comments/:id",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:DELETE /api/articles/:slug/favorite",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:DELETE /api/profiles/:username/follow",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/articles",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/articles/:slug",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/articles/:slug/comments",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/articles/feed",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/articles?author",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/articles?favorited",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/articles?tag",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/profiles/:username",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/tags",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:GET /api/user",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:POST /api/articles",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:POST /api/articles/:slug/comments",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:POST /api/articles/:slug/favorite",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:POST /api/profiles/:username/follow",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:POST /api/users",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:POST /api/users/login",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:PUT /api/articles/:slug",
+      "pass": true
+    },
+    {
+      "check": "endpoint_count:PUT /api/user",
+      "pass": true
+    },
+    {
+      "check": "merged_all_shards_and_users",
+      "pass": true
+    },
+    {
+      "check": "native_verdict_reproduced",
+      "pass": true
+    },
+    {
+      "check": "shard0:native_box_CPU_reproduced_from_timeline",
+      "pass": true
+    },
+    {
+      "check": "shard0:native_timing_summary_reproduced",
+      "pass": true
+    },
+    {
+      "check": "shard0:complete_measurement_timeline",
+      "pass": true
+    },
+    {
+      "check": "shard0:merged_generator_summary_matches_raw",
+      "pass": true
+    },
+    {
+      "check": "native_generator_reasons_reproduced_exactly",
+      "pass": true
+    },
+    {
+      "check": "request_rate_and_errors_reproduced",
+      "pass": true
+    },
+    {
+      "check": "target:entire_phase_clock_drift_under100ms",
+      "pass": true,
+      "detail": 0.0010852813720703125
+    },
+    {
+      "check": "load:entire_phase_clock_drift_under100ms",
+      "pass": true,
+      "detail": 0.0010848045349121094
+    }
+  ],
+  "classification": "PASS",
+  "eligible": true,
+  "valid_server_failure": false,
+  "target_cpu_max_before_after": {
+    "before": "800000 100000",
+    "after": "800000 100000"
+  },
+  "target_cpu_period_policy_warnings": [],
+  "overall": {
+    "count": 317998,
+    "rps": 2649.983333333333,
+    "p50_ms": 2.589,
+    "p90_ms": 6.315,
+    "p95_ms": 6.639,
+    "p99_ms": 7.315,
+    "max_ms": 324.095,
+    "mean_ms": 3.435293008132123,
+    "errors": 0,
+    "error_rate": 0,
+    "statuses": {
+      "200": 312107,
+      "201": 5767,
+      "204": 124
+    }
+  },
+  "native_verdict": {
+    "pass": true,
+    "lg_limited": false
+  },
+  "target_monitor": {
+    "checks": [
+      {
+        "check": "monitor_has_samples",
+        "pass": true
+      },
+      {
+        "check": "strict_wall_and_monotonic_order",
+        "pass": true
+      },
+      {
+        "check": "full_measurement_window_bracketed",
+        "pass": true,
+        "detail": {
+          "first_ms": 1792785413842.5046,
+          "start_ms": 1792785478869.0,
+          "last_ms": 1792785614058.7358,
+          "end_ms": 1792785598869.0
+        }
+      },
+      {
+        "check": "max_sample_gap_at_most_3s",
+        "pass": true,
+        "detail": 1.006503709
+      },
+      {
+        "check": "cgroup_budget_continuous",
+        "pass": true
+      },
+      {
+        "check": "total_cpu_counter_nondecreasing",
+        "pass": true
+      },
+      {
+        "check": "no_measurement_oom",
+        "pass": true,
+        "detail": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        }
+      },
+      {
+        "check": "wall_to_monotonic_drift_below_100ms",
+        "pass": true,
+        "detail": 0.0006167888641357422
+      }
+    ],
+    "warnings": [
+      "pg: live-PID CPU sum changed population or decreased; component CPU withheld"
+    ],
+    "eligible": true,
+    "cpu_budget_observations": [
+      {
+        "sample_index": 0,
+        "wall_ns": 1792785413842504669,
+        "monotonic_ns": 102505375719201,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 1,
+        "wall_ns": 1792785414851710878,
+        "monotonic_ns": 102506384929618,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 2,
+        "wall_ns": 1792785415854707212,
+        "monotonic_ns": 102507387924369,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 3,
+        "wall_ns": 1792785416866695171,
+        "monotonic_ns": 102508399912994,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 4,
+        "wall_ns": 1792785417869693088,
+        "monotonic_ns": 102509402910995,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 5,
+        "wall_ns": 1792785418878532921,
+        "monotonic_ns": 102510411749662,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 6,
+        "wall_ns": 1792785419881555714,
+        "monotonic_ns": 102511414772204,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 7,
+        "wall_ns": 1792785420884597214,
+        "monotonic_ns": 102512417814579,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 8,
+        "wall_ns": 1792785421888627340,
+        "monotonic_ns": 102513421845705,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 9,
+        "wall_ns": 1792785422892898132,
+        "monotonic_ns": 102514426116497,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 10,
+        "wall_ns": 1792785423894884007,
+        "monotonic_ns": 102515428099331,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 11,
+        "wall_ns": 1792785424896437091,
+        "monotonic_ns": 102516429654540,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 12,
+        "wall_ns": 1792785425897925716,
+        "monotonic_ns": 102517431141707,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 13,
+        "wall_ns": 1792785426899467300,
+        "monotonic_ns": 102518432684457,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 14,
+        "wall_ns": 1792785427901083551,
+        "monotonic_ns": 102519434299833,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 15,
+        "wall_ns": 1792785428902332093,
+        "monotonic_ns": 102520435547625,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 16,
+        "wall_ns": 1792785429902907593,
+        "monotonic_ns": 102521436123417,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 17,
+        "wall_ns": 1792785430903728386,
+        "monotonic_ns": 102522436943918,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 18,
+        "wall_ns": 1792785431904438261,
+        "monotonic_ns": 102523437653960,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 19,
+        "wall_ns": 1792785432905173470,
+        "monotonic_ns": 102524438389377,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 20,
+        "wall_ns": 1792785433905635345,
+        "monotonic_ns": 102525438850586,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 21,
+        "wall_ns": 1792785434906896679,
+        "monotonic_ns": 102526440113086,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 22,
+        "wall_ns": 1792785435908590263,
+        "monotonic_ns": 102527441805712,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 23,
+        "wall_ns": 1792785436909410930,
+        "monotonic_ns": 102528442627004,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 24,
+        "wall_ns": 1792785437912572416,
+        "monotonic_ns": 102529445297795,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 25,
+        "wall_ns": 1792785438913726583,
+        "monotonic_ns": 102530446451629,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 26,
+        "wall_ns": 1792785439914182709,
+        "monotonic_ns": 102531446907921,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 27,
+        "wall_ns": 1792785440914569668,
+        "monotonic_ns": 102532447294880,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 28,
+        "wall_ns": 1792785441914936335,
+        "monotonic_ns": 102533447661797,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 29,
+        "wall_ns": 1792785442915911835,
+        "monotonic_ns": 102534448637131,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 30,
+        "wall_ns": 1792785443916314044,
+        "monotonic_ns": 102535449039506,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 31,
+        "wall_ns": 1792785444917611920,
+        "monotonic_ns": 102536450336923,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 32,
+        "wall_ns": 1792785445917949670,
+        "monotonic_ns": 102537450675882,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 33,
+        "wall_ns": 1792785446918318504,
+        "monotonic_ns": 102538451043924,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 34,
+        "wall_ns": 1792785447919094629,
+        "monotonic_ns": 102539451819841,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 35,
+        "wall_ns": 1792785448919752380,
+        "monotonic_ns": 102540452477217,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 36,
+        "wall_ns": 1792785449921078505,
+        "monotonic_ns": 102541453804134,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 37,
+        "wall_ns": 1792785450922045256,
+        "monotonic_ns": 102542454770718,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 38,
+        "wall_ns": 1792785451922897965,
+        "monotonic_ns": 102543455623135,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 39,
+        "wall_ns": 1792785452923983173,
+        "monotonic_ns": 102544456708219,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 40,
+        "wall_ns": 1792785453924354841,
+        "monotonic_ns": 102545457080053,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 41,
+        "wall_ns": 1792785454924772341,
+        "monotonic_ns": 102546457497428,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 42,
+        "wall_ns": 1792785455926225383,
+        "monotonic_ns": 102547458950928,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 43,
+        "wall_ns": 1792785456927273634,
+        "monotonic_ns": 102548459999512,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 44,
+        "wall_ns": 1792785457929093801,
+        "monotonic_ns": 102549461819138,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 45,
+        "wall_ns": 1792785458930062510,
+        "monotonic_ns": 102550462787305,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 46,
+        "wall_ns": 1792785459930565343,
+        "monotonic_ns": 102551463289847,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 47,
+        "wall_ns": 1792785460930868219,
+        "monotonic_ns": 102552463592681,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 48,
+        "wall_ns": 1792785461933049719,
+        "monotonic_ns": 102553465774431,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 49,
+        "wall_ns": 1792785462933928220,
+        "monotonic_ns": 102554466652890,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 50,
+        "wall_ns": 1792785463934184512,
+        "monotonic_ns": 102555466909182,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 51,
+        "wall_ns": 1792785464935675846,
+        "monotonic_ns": 102556468400766,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 52,
+        "wall_ns": 1792785465937963805,
+        "monotonic_ns": 102557470688475,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 53,
+        "wall_ns": 1792785466938515013,
+        "monotonic_ns": 102558471239517,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 54,
+        "wall_ns": 1792785467940251708,
+        "monotonic_ns": 102559472511559,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 55,
+        "wall_ns": 1792785468940752750,
+        "monotonic_ns": 102560473012851,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 56,
+        "wall_ns": 1792785469941523709,
+        "monotonic_ns": 102561473783685,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 57,
+        "wall_ns": 1792785470941787251,
+        "monotonic_ns": 102562474047602,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 58,
+        "wall_ns": 1792785471942507626,
+        "monotonic_ns": 102563474767602,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 59,
+        "wall_ns": 1792785472943371502,
+        "monotonic_ns": 102564475631894,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 60,
+        "wall_ns": 1792785473944204961,
+        "monotonic_ns": 102565476465020,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 61,
+        "wall_ns": 1792785474944634545,
+        "monotonic_ns": 102566476894395,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 62,
+        "wall_ns": 1792785475945021462,
+        "monotonic_ns": 102567477281271,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 63,
+        "wall_ns": 1792785476946344171,
+        "monotonic_ns": 102568478603980,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 64,
+        "wall_ns": 1792785477946692879,
+        "monotonic_ns": 102569478953022,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 65,
+        "wall_ns": 1792785478947077963,
+        "monotonic_ns": 102570479337939,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 66,
+        "wall_ns": 1792785479947611964,
+        "monotonic_ns": 102571479871981,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 67,
+        "wall_ns": 1792785480947927922,
+        "monotonic_ns": 102572480188190,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 68,
+        "wall_ns": 1792785481948269590,
+        "monotonic_ns": 102573480529565,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 69,
+        "wall_ns": 1792785482950547632,
+        "monotonic_ns": 102574482807816,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 70,
+        "wall_ns": 1792785483951202882,
+        "monotonic_ns": 102575483462858,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 71,
+        "wall_ns": 1792785484951510466,
+        "monotonic_ns": 102576483770358,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 72,
+        "wall_ns": 1792785485951733425,
+        "monotonic_ns": 102577483993276,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 73,
+        "wall_ns": 1792785486952311384,
+        "monotonic_ns": 102578484571359,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 74,
+        "wall_ns": 1792785487952670301,
+        "monotonic_ns": 102579484930735,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 75,
+        "wall_ns": 1792785488952925801,
+        "monotonic_ns": 102580485186027,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 76,
+        "wall_ns": 1792785489953614760,
+        "monotonic_ns": 102581485875027,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 77,
+        "wall_ns": 1792785490954871927,
+        "monotonic_ns": 102582487131778,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 78,
+        "wall_ns": 1792785491955588261,
+        "monotonic_ns": 102583487848362,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 79,
+        "wall_ns": 1792785492956472553,
+        "monotonic_ns": 102584488732571,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 80,
+        "wall_ns": 1792785493956764429,
+        "monotonic_ns": 102585489024196,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 81,
+        "wall_ns": 1792785494957204721,
+        "monotonic_ns": 102586489464530,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 82,
+        "wall_ns": 1792785495957680138,
+        "monotonic_ns": 102587489940072,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 83,
+        "wall_ns": 1792785496958085805,
+        "monotonic_ns": 102588490346197,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 84,
+        "wall_ns": 1792785497959565041,
+        "monotonic_ns": 102589491714447,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 85,
+        "wall_ns": 1792785498959912875,
+        "monotonic_ns": 102590492061864,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 86,
+        "wall_ns": 1792785499963693792,
+        "monotonic_ns": 102591495842698,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 87,
+        "wall_ns": 1792785500965237959,
+        "monotonic_ns": 102592497387074,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 88,
+        "wall_ns": 1792785501966132418,
+        "monotonic_ns": 102593498281658,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 89,
+        "wall_ns": 1792785502966587919,
+        "monotonic_ns": 102594498736950,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 90,
+        "wall_ns": 1792785503967246044,
+        "monotonic_ns": 102595499395325,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 91,
+        "wall_ns": 1792785504968476211,
+        "monotonic_ns": 102596500625576,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 92,
+        "wall_ns": 1792785505970417337,
+        "monotonic_ns": 102597502566493,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 93,
+        "wall_ns": 1792785506970779087,
+        "monotonic_ns": 102598502928618,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 94,
+        "wall_ns": 1792785507971134879,
+        "monotonic_ns": 102599503283869,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 95,
+        "wall_ns": 1792785508972940297,
+        "monotonic_ns": 102600505089328,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 96,
+        "wall_ns": 1792785509973808172,
+        "monotonic_ns": 102601505957245,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 97,
+        "wall_ns": 1792785510974092006,
+        "monotonic_ns": 102602506241162,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 98,
+        "wall_ns": 1792785511975468965,
+        "monotonic_ns": 102603507617871,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 99,
+        "wall_ns": 1792785512976731757,
+        "monotonic_ns": 102604508880871,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 100,
+        "wall_ns": 1792785513977375382,
+        "monotonic_ns": 102605509524538,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 101,
+        "wall_ns": 1792785514977935883,
+        "monotonic_ns": 102606510084830,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 102,
+        "wall_ns": 1792785515978131883,
+        "monotonic_ns": 102607510280914,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 103,
+        "wall_ns": 1792785516978558592,
+        "monotonic_ns": 102608510708748,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 104,
+        "wall_ns": 1792785517979253384,
+        "monotonic_ns": 102609511402915,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 105,
+        "wall_ns": 1792785518979716635,
+        "monotonic_ns": 102610511866041,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 106,
+        "wall_ns": 1792785519980305385,
+        "monotonic_ns": 102611512454583,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 107,
+        "wall_ns": 1792785520980667386,
+        "monotonic_ns": 102612512816500,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 108,
+        "wall_ns": 1792785521980923969,
+        "monotonic_ns": 102613513072875,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 109,
+        "wall_ns": 1792785522981137012,
+        "monotonic_ns": 102614513285876,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 110,
+        "wall_ns": 1792785523982197804,
+        "monotonic_ns": 102615514347251,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 111,
+        "wall_ns": 1792785524983771179,
+        "monotonic_ns": 102616515920335,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 112,
+        "wall_ns": 1792785525984638096,
+        "monotonic_ns": 102617516787086,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 113,
+        "wall_ns": 1792785526985865263,
+        "monotonic_ns": 102618518014419,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 114,
+        "wall_ns": 1792785527986508750,
+        "monotonic_ns": 102619518642544,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 115,
+        "wall_ns": 1792785528986949875,
+        "monotonic_ns": 102620519083670,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 116,
+        "wall_ns": 1792785529987186334,
+        "monotonic_ns": 102621519320670,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 117,
+        "wall_ns": 1792785530987745959,
+        "monotonic_ns": 102622519879629,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 118,
+        "wall_ns": 1792785531988681418,
+        "monotonic_ns": 102623520815088,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 119,
+        "wall_ns": 1792785532988996085,
+        "monotonic_ns": 102624521129922,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 120,
+        "wall_ns": 1792785533990212002,
+        "monotonic_ns": 102625522345964,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 121,
+        "wall_ns": 1792785534990779670,
+        "monotonic_ns": 102626522913381,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 122,
+        "wall_ns": 1792785535991599878,
+        "monotonic_ns": 102627523733673,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 123,
+        "wall_ns": 1792785536993295337,
+        "monotonic_ns": 102628525429007,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 124,
+        "wall_ns": 1792785537993652671,
+        "monotonic_ns": 102629525786382,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 125,
+        "wall_ns": 1792785538995412755,
+        "monotonic_ns": 102630527546841,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 126,
+        "wall_ns": 1792785539996514172,
+        "monotonic_ns": 102631528648050,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 127,
+        "wall_ns": 1792785540997055922,
+        "monotonic_ns": 102632529189550,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 128,
+        "wall_ns": 1792785541997453048,
+        "monotonic_ns": 102633529587176,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 129,
+        "wall_ns": 1792785542998262632,
+        "monotonic_ns": 102634530396468,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 130,
+        "wall_ns": 1792785543998793632,
+        "monotonic_ns": 102635530927385,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 131,
+        "wall_ns": 1792785544999199216,
+        "monotonic_ns": 102636531332886,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 132,
+        "wall_ns": 1792785546000315550,
+        "monotonic_ns": 102637532449220,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 133,
+        "wall_ns": 1792785547000826842,
+        "monotonic_ns": 102638532961095,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 134,
+        "wall_ns": 1792785548001102009,
+        "monotonic_ns": 102639533236054,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 135,
+        "wall_ns": 1792785549001736593,
+        "monotonic_ns": 102640533870471,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 136,
+        "wall_ns": 1792785550002379718,
+        "monotonic_ns": 102641534513555,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 137,
+        "wall_ns": 1792785551003348386,
+        "monotonic_ns": 102642535482097,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 138,
+        "wall_ns": 1792785552004305219,
+        "monotonic_ns": 102643536438847,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 139,
+        "wall_ns": 1792785553004513595,
+        "monotonic_ns": 102644536647473,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 140,
+        "wall_ns": 1792785554005807470,
+        "monotonic_ns": 102645537941223,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 141,
+        "wall_ns": 1792785555006385137,
+        "monotonic_ns": 102646538518849,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 142,
+        "wall_ns": 1792785556006804930,
+        "monotonic_ns": 102647538938724,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 143,
+        "wall_ns": 1792785557007186888,
+        "monotonic_ns": 102648539320725,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 144,
+        "wall_ns": 1792785558007372291,
+        "monotonic_ns": 102649539596599,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 145,
+        "wall_ns": 1792785559007737500,
+        "monotonic_ns": 102650539962391,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 146,
+        "wall_ns": 1792785560008718584,
+        "monotonic_ns": 102651540943184,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 147,
+        "wall_ns": 1792785561009446459,
+        "monotonic_ns": 102652541670809,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 148,
+        "wall_ns": 1792785562010267710,
+        "monotonic_ns": 102653542492226,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 149,
+        "wall_ns": 1792785563010538627,
+        "monotonic_ns": 102654542762810,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 150,
+        "wall_ns": 1792785564011239919,
+        "monotonic_ns": 102655543464435,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 151,
+        "wall_ns": 1792785565011439795,
+        "monotonic_ns": 102656543664394,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 152,
+        "wall_ns": 1792785566012766170,
+        "monotonic_ns": 102657544990561,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 153,
+        "wall_ns": 1792785567017264962,
+        "monotonic_ns": 102658549489729,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 154,
+        "wall_ns": 1792785568017620296,
+        "monotonic_ns": 102659549844729,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 155,
+        "wall_ns": 1792785569018236505,
+        "monotonic_ns": 102660550460938,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 156,
+        "wall_ns": 1792785570018676005,
+        "monotonic_ns": 102661550900813,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 157,
+        "wall_ns": 1792785571025180214,
+        "monotonic_ns": 102662557404522,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 158,
+        "wall_ns": 1792785572025580048,
+        "monotonic_ns": 102663557804689,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 159,
+        "wall_ns": 1792785573026058673,
+        "monotonic_ns": 102664558283273,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 160,
+        "wall_ns": 1792785574027577549,
+        "monotonic_ns": 102665559801857,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 161,
+        "wall_ns": 1792785575027861716,
+        "monotonic_ns": 102666560085982,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 162,
+        "wall_ns": 1792785576028293008,
+        "monotonic_ns": 102667560517233,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 163,
+        "wall_ns": 1792785577028586384,
+        "monotonic_ns": 102668560810525,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 164,
+        "wall_ns": 1792785578028963009,
+        "monotonic_ns": 102669561187359,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 165,
+        "wall_ns": 1792785579029510718,
+        "monotonic_ns": 102670561734943,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 166,
+        "wall_ns": 1792785580029849218,
+        "monotonic_ns": 102671562073776,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 167,
+        "wall_ns": 1792785581030154552,
+        "monotonic_ns": 102672562378902,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 168,
+        "wall_ns": 1792785582030413594,
+        "monotonic_ns": 102673562637902,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 169,
+        "wall_ns": 1792785583031211137,
+        "monotonic_ns": 102674563435653,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 170,
+        "wall_ns": 1792785584031933970,
+        "monotonic_ns": 102675564158112,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 171,
+        "wall_ns": 1792785585032409971,
+        "monotonic_ns": 102676564634196,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 172,
+        "wall_ns": 1792785586033604305,
+        "monotonic_ns": 102677565829196,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 173,
+        "wall_ns": 1792785587033864347,
+        "monotonic_ns": 102678566089155,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 174,
+        "wall_ns": 1792785588033765666,
+        "monotonic_ns": 102679566515863,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 175,
+        "wall_ns": 1792785589034476625,
+        "monotonic_ns": 102680567226780,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 176,
+        "wall_ns": 1792785590035910251,
+        "monotonic_ns": 102681568660156,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 177,
+        "wall_ns": 1792785591036501668,
+        "monotonic_ns": 102682569251906,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 178,
+        "wall_ns": 1792785592037128918,
+        "monotonic_ns": 102683569879240,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 179,
+        "wall_ns": 1792785593037698960,
+        "monotonic_ns": 102684570448907,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 180,
+        "wall_ns": 1792785594039685169,
+        "monotonic_ns": 102685572435199,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 181,
+        "wall_ns": 1792785595040036795,
+        "monotonic_ns": 102686572786866,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 182,
+        "wall_ns": 1792785596040280378,
+        "monotonic_ns": 102687573030450,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 183,
+        "wall_ns": 1792785597041200046,
+        "monotonic_ns": 102688573950117,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 184,
+        "wall_ns": 1792785598041941504,
+        "monotonic_ns": 102689574691618,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 185,
+        "wall_ns": 1792785599042232005,
+        "monotonic_ns": 102690574982243,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 186,
+        "wall_ns": 1792785600042768172,
+        "monotonic_ns": 102691575518119,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 187,
+        "wall_ns": 1792785601043503339,
+        "monotonic_ns": 102692576253577,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 188,
+        "wall_ns": 1792785602043781631,
+        "monotonic_ns": 102693576531578,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 189,
+        "wall_ns": 1792785603044683715,
+        "monotonic_ns": 102694577433787,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 190,
+        "wall_ns": 1792785604046892632,
+        "monotonic_ns": 102695579642704,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 191,
+        "wall_ns": 1792785605048057716,
+        "monotonic_ns": 102696580808121,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 192,
+        "wall_ns": 1792785606052572758,
+        "monotonic_ns": 102697585323288,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 193,
+        "wall_ns": 1792785607052988009,
+        "monotonic_ns": 102698585737997,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 194,
+        "wall_ns": 1792785608054111301,
+        "monotonic_ns": 102699586861373,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 195,
+        "wall_ns": 1792785609054302968,
+        "monotonic_ns": 102700587053081,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 196,
+        "wall_ns": 1792785610054794385,
+        "monotonic_ns": 102701587544332,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 197,
+        "wall_ns": 1792785611055059677,
+        "monotonic_ns": 102702587809791,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 198,
+        "wall_ns": 1792785612055893428,
+        "monotonic_ns": 102703588643624,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 199,
+        "wall_ns": 1792785613057139178,
+        "monotonic_ns": 102704589889167,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 200,
+        "wall_ns": 1792785614058735970,
+        "monotonic_ns": 102705591486209,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      }
+    ],
+    "observed_cpu_periods_us": [
+      100000
+    ],
+    "cpu_period_changed": false,
+    "samples": 122,
+    "max_gap_s": 1.006503709,
+    "window_s": 120.0,
+    "cgroup_cpu_seconds_estimate": 56.30278126720077,
+    "cgroup_quota_utilization_pct": 5.864873048666747,
+    "max_sample_interval_quota_utilization_pct": 8.206684567100853,
+    "memory_peak_sampled_bytes": 7958134784,
+    "memory_counter_peak_bytes": 7959429120,
+    "swap_peak_sampled_bytes": 0,
+    "oom_delta": {
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0
+    },
+    "app_cpu_seconds_estimate": 23.369363100189293,
+    "app_counter_valid": true,
+    "app_pids_stable": true,
+    "app_process_count_max": 2,
+    "app_whole_target_cpu_pct": 2.4343086562697183,
+    "pg_cpu_seconds_estimate": null,
+    "pg_counter_valid": false,
+    "pg_pids_stable": false,
+    "pg_process_count_max": 18,
+    "pg_whole_target_cpu_pct": null
+  },
+  "load_monitor": {
+    "checks": [
+      {
+        "check": "monitor_has_samples",
+        "pass": true
+      },
+      {
+        "check": "strict_wall_and_monotonic_order",
+        "pass": true
+      },
+      {
+        "check": "full_measurement_window_bracketed",
+        "pass": true,
+        "detail": {
+          "first_ms": 1792785413883.983,
+          "start_ms": 1792785478869.0,
+          "last_ms": 1792785614061.7542,
+          "end_ms": 1792785598869.0
+        }
+      },
+      {
+        "check": "max_sample_gap_at_most_3s",
+        "pass": true,
+        "detail": 1.005284376
+      },
+      {
+        "check": "cgroup_budget_continuous",
+        "pass": true
+      },
+      {
+        "check": "total_cpu_counter_nondecreasing",
+        "pass": true
+      },
+      {
+        "check": "no_measurement_oom",
+        "pass": true,
+        "detail": {
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0
+        }
+      },
+      {
+        "check": "wall_to_monotonic_drift_below_100ms",
+        "pass": true,
+        "detail": 0.0006167888641357422
+      }
+    ],
+    "warnings": [],
+    "eligible": true,
+    "cpu_budget_observations": [
+      {
+        "sample_index": 0,
+        "wall_ns": 1792785413883982877,
+        "monotonic_ns": 102505417197493,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 1,
+        "wall_ns": 1792785414891176211,
+        "monotonic_ns": 102506424394243,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 2,
+        "wall_ns": 1792785415892049462,
+        "monotonic_ns": 102507425266119,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 3,
+        "wall_ns": 1792785416901860129,
+        "monotonic_ns": 102508435077286,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 4,
+        "wall_ns": 1792785417912920213,
+        "monotonic_ns": 102509446137203,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 5,
+        "wall_ns": 1792785418913432546,
+        "monotonic_ns": 102510446648495,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 6,
+        "wall_ns": 1792785419914864964,
+        "monotonic_ns": 102511448080871,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 7,
+        "wall_ns": 1792785420915572172,
+        "monotonic_ns": 102512448788288,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 8,
+        "wall_ns": 1792785421916261381,
+        "monotonic_ns": 102513449477622,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 9,
+        "wall_ns": 1792785422917201923,
+        "monotonic_ns": 102514450417955,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 10,
+        "wall_ns": 1792785423918378174,
+        "monotonic_ns": 102515451592998,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 11,
+        "wall_ns": 1792785424920220758,
+        "monotonic_ns": 102516453436206,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 12,
+        "wall_ns": 1792785425920858383,
+        "monotonic_ns": 102517454073582,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 13,
+        "wall_ns": 1792785426921386259,
+        "monotonic_ns": 102518454601666,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 14,
+        "wall_ns": 1792785427922206217,
+        "monotonic_ns": 102519455421458,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 15,
+        "wall_ns": 1792785428922421926,
+        "monotonic_ns": 102520455636833,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 16,
+        "wall_ns": 1792785429923651052,
+        "monotonic_ns": 102521456866250,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 17,
+        "wall_ns": 1792785430925216594,
+        "monotonic_ns": 102522458431834,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 18,
+        "wall_ns": 1792785431926933469,
+        "monotonic_ns": 102523460148126,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 19,
+        "wall_ns": 1792785432928477470,
+        "monotonic_ns": 102524461692544,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 20,
+        "wall_ns": 1792785433929519012,
+        "monotonic_ns": 102525462733919,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 21,
+        "wall_ns": 1792785434930851304,
+        "monotonic_ns": 102526464066586,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 22,
+        "wall_ns": 1792785435931890930,
+        "monotonic_ns": 102527465106337,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 23,
+        "wall_ns": 1792785436932948722,
+        "monotonic_ns": 102528466163920,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 24,
+        "wall_ns": 1792785437934599583,
+        "monotonic_ns": 102529467324378,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 25,
+        "wall_ns": 1792785438935144917,
+        "monotonic_ns": 102530467869629,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 26,
+        "wall_ns": 1792785439936213834,
+        "monotonic_ns": 102531468938921,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 27,
+        "wall_ns": 1792785440936859251,
+        "monotonic_ns": 102532469584088,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 28,
+        "wall_ns": 1792785441937228335,
+        "monotonic_ns": 102533469953255,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 29,
+        "wall_ns": 1792785442938011627,
+        "monotonic_ns": 102534470736714,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 30,
+        "wall_ns": 1792785443939579961,
+        "monotonic_ns": 102535472304798,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 31,
+        "wall_ns": 1792785444941403045,
+        "monotonic_ns": 102536474127715,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 32,
+        "wall_ns": 1792785445942062462,
+        "monotonic_ns": 102537474787299,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 33,
+        "wall_ns": 1792785446942423129,
+        "monotonic_ns": 102538475147466,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 34,
+        "wall_ns": 1792785447943265629,
+        "monotonic_ns": 102539475990425,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 35,
+        "wall_ns": 1792785448943782672,
+        "monotonic_ns": 102540476507092,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 36,
+        "wall_ns": 1792785449944057839,
+        "monotonic_ns": 102541476782634,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 37,
+        "wall_ns": 1792785450948667714,
+        "monotonic_ns": 102542481392926,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 38,
+        "wall_ns": 1792785451948940298,
+        "monotonic_ns": 102543481665260,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 39,
+        "wall_ns": 1792785452949420757,
+        "monotonic_ns": 102544482145552,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 40,
+        "wall_ns": 1792785453949910549,
+        "monotonic_ns": 102545482635428,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 41,
+        "wall_ns": 1792785454950240508,
+        "monotonic_ns": 102546482965345,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 42,
+        "wall_ns": 1792785455952835925,
+        "monotonic_ns": 102547485561720,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 43,
+        "wall_ns": 1792785456954621425,
+        "monotonic_ns": 102548487346387,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 44,
+        "wall_ns": 1792785457954822509,
+        "monotonic_ns": 102549487547263,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 45,
+        "wall_ns": 1792785458955157885,
+        "monotonic_ns": 102550487882472,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 46,
+        "wall_ns": 1792785459955973177,
+        "monotonic_ns": 102551488697555,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 47,
+        "wall_ns": 1792785460956218511,
+        "monotonic_ns": 102552488942973,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 48,
+        "wall_ns": 1792785461956855886,
+        "monotonic_ns": 102553489580348,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 49,
+        "wall_ns": 1792785462957366470,
+        "monotonic_ns": 102554490091015,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 50,
+        "wall_ns": 1792785463958110679,
+        "monotonic_ns": 102555490835182,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 51,
+        "wall_ns": 1792785464958991554,
+        "monotonic_ns": 102556491716058,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 52,
+        "wall_ns": 1792785465959390846,
+        "monotonic_ns": 102557492115725,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 53,
+        "wall_ns": 1792785466959605888,
+        "monotonic_ns": 102558492330517,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 54,
+        "wall_ns": 1792785467960209583,
+        "monotonic_ns": 102559492469350,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 55,
+        "wall_ns": 1792785468960925458,
+        "monotonic_ns": 102560493185517,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 56,
+        "wall_ns": 1792785469962126042,
+        "monotonic_ns": 102561494385810,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 57,
+        "wall_ns": 1792785470962418834,
+        "monotonic_ns": 102562494678560,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 58,
+        "wall_ns": 1792785471963994252,
+        "monotonic_ns": 102563496254269,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 59,
+        "wall_ns": 1792785472964319460,
+        "monotonic_ns": 102564496579478,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 60,
+        "wall_ns": 1792785473964661211,
+        "monotonic_ns": 102565496921061,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 61,
+        "wall_ns": 1792785474965136378,
+        "monotonic_ns": 102566497396062,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 62,
+        "wall_ns": 1792785475965505212,
+        "monotonic_ns": 102567497764937,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 63,
+        "wall_ns": 1792785476966095046,
+        "monotonic_ns": 102568498355021,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 64,
+        "wall_ns": 1792785477966614671,
+        "monotonic_ns": 102569498874397,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 65,
+        "wall_ns": 1792785478967013172,
+        "monotonic_ns": 102570499272814,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 66,
+        "wall_ns": 1792785479967232672,
+        "monotonic_ns": 102571499492314,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 67,
+        "wall_ns": 1792785480968224714,
+        "monotonic_ns": 102572500484606,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 68,
+        "wall_ns": 1792785481968368465,
+        "monotonic_ns": 102573500628482,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 69,
+        "wall_ns": 1792785482969085090,
+        "monotonic_ns": 102574501345191,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 70,
+        "wall_ns": 1792785483969383466,
+        "monotonic_ns": 102575501643608,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 71,
+        "wall_ns": 1792785484970577466,
+        "monotonic_ns": 102576502837233,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 72,
+        "wall_ns": 1792785485973970217,
+        "monotonic_ns": 102577506230026,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 73,
+        "wall_ns": 1792785486975413550,
+        "monotonic_ns": 102578507673609,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 74,
+        "wall_ns": 1792785487976337092,
+        "monotonic_ns": 102579508597151,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 75,
+        "wall_ns": 1792785488976668301,
+        "monotonic_ns": 102580508928569,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 76,
+        "wall_ns": 1792785489977032135,
+        "monotonic_ns": 102581509292152,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 77,
+        "wall_ns": 1792785490978306344,
+        "monotonic_ns": 102582510566111,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 78,
+        "wall_ns": 1792785491978698094,
+        "monotonic_ns": 102583510957862,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 79,
+        "wall_ns": 1792785492978969428,
+        "monotonic_ns": 102584511229404,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 80,
+        "wall_ns": 1792785493979951220,
+        "monotonic_ns": 102585512211363,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 81,
+        "wall_ns": 1792785494980602804,
+        "monotonic_ns": 102586512862571,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 82,
+        "wall_ns": 1792785495981091888,
+        "monotonic_ns": 102587513351655,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 83,
+        "wall_ns": 1792785496981810805,
+        "monotonic_ns": 102588514070739,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 84,
+        "wall_ns": 1792785497982168791,
+        "monotonic_ns": 102589514317906,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 85,
+        "wall_ns": 1792785498982808792,
+        "monotonic_ns": 102590514957739,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 86,
+        "wall_ns": 1792785499983538667,
+        "monotonic_ns": 102591515687615,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 87,
+        "wall_ns": 1792785500985508668,
+        "monotonic_ns": 102592517657657,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 88,
+        "wall_ns": 1792785501985755710,
+        "monotonic_ns": 102593517904908,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 89,
+        "wall_ns": 1792785502986165502,
+        "monotonic_ns": 102594518314158,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 90,
+        "wall_ns": 1792785503987192169,
+        "monotonic_ns": 102595519340950,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 91,
+        "wall_ns": 1792785504987581211,
+        "monotonic_ns": 102596519730159,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 92,
+        "wall_ns": 1792785505987980753,
+        "monotonic_ns": 102597520129868,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 93,
+        "wall_ns": 1792785506988714171,
+        "monotonic_ns": 102598520863160,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 94,
+        "wall_ns": 1792785507989229338,
+        "monotonic_ns": 102599521378202,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 95,
+        "wall_ns": 1792785508990720963,
+        "monotonic_ns": 102600522870203,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 96,
+        "wall_ns": 1792785509991386047,
+        "monotonic_ns": 102601523535078,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 97,
+        "wall_ns": 1792785510991704881,
+        "monotonic_ns": 102602523853828,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 98,
+        "wall_ns": 1792785511993063215,
+        "monotonic_ns": 102603525212204,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 99,
+        "wall_ns": 1792785512993294007,
+        "monotonic_ns": 102604525442871,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 100,
+        "wall_ns": 1792785513994027299,
+        "monotonic_ns": 102605526176413,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 101,
+        "wall_ns": 1792785514995009466,
+        "monotonic_ns": 102606527158372,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 102,
+        "wall_ns": 1792785515995445758,
+        "monotonic_ns": 102607527594748,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 103,
+        "wall_ns": 1792785516996154634,
+        "monotonic_ns": 102608528303415,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 104,
+        "wall_ns": 1792785517996405842,
+        "monotonic_ns": 102609528554873,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 105,
+        "wall_ns": 1792785518996670426,
+        "monotonic_ns": 102610528819541,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 106,
+        "wall_ns": 1792785519996878218,
+        "monotonic_ns": 102611529027291,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 107,
+        "wall_ns": 1792785520997592094,
+        "monotonic_ns": 102612529740958,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 108,
+        "wall_ns": 1792785521998384428,
+        "monotonic_ns": 102613530533375,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 109,
+        "wall_ns": 1792785522999018137,
+        "monotonic_ns": 102614531167918,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 110,
+        "wall_ns": 1792785524000279304,
+        "monotonic_ns": 102615532428210,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 111,
+        "wall_ns": 1792785525002505429,
+        "monotonic_ns": 102616534654252,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 112,
+        "wall_ns": 1792785526002999305,
+        "monotonic_ns": 102617535148252,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 113,
+        "wall_ns": 1792785527003244305,
+        "monotonic_ns": 102618535393253,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 114,
+        "wall_ns": 1792785528003663666,
+        "monotonic_ns": 102619535797503,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 115,
+        "wall_ns": 1792785529004175167,
+        "monotonic_ns": 102620536308753,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 116,
+        "wall_ns": 1792785530004469417,
+        "monotonic_ns": 102621536602837,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 117,
+        "wall_ns": 1792785531004711834,
+        "monotonic_ns": 102622536845629,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 118,
+        "wall_ns": 1792785532005093377,
+        "monotonic_ns": 102623537227171,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 119,
+        "wall_ns": 1792785533006325127,
+        "monotonic_ns": 102624538458588,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 120,
+        "wall_ns": 1792785534006529752,
+        "monotonic_ns": 102625538663172,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 121,
+        "wall_ns": 1792785535006951836,
+        "monotonic_ns": 102626539085423,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 122,
+        "wall_ns": 1792785536008120795,
+        "monotonic_ns": 102627540254381,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 123,
+        "wall_ns": 1792785537008395546,
+        "monotonic_ns": 102628540529090,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 124,
+        "wall_ns": 1792785538008877129,
+        "monotonic_ns": 102629541010757,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 125,
+        "wall_ns": 1792785539009388422,
+        "monotonic_ns": 102630541522091,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 126,
+        "wall_ns": 1792785540009594089,
+        "monotonic_ns": 102631541727800,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 127,
+        "wall_ns": 1792785541011429881,
+        "monotonic_ns": 102632543563800,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 128,
+        "wall_ns": 1792785542012121090,
+        "monotonic_ns": 102633544254634,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 129,
+        "wall_ns": 1792785543012488382,
+        "monotonic_ns": 102634544621926,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 130,
+        "wall_ns": 1792785544013055757,
+        "monotonic_ns": 102635545189344,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 131,
+        "wall_ns": 1792785545013628591,
+        "monotonic_ns": 102636545762094,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 132,
+        "wall_ns": 1792785546013911800,
+        "monotonic_ns": 102637546045386,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 133,
+        "wall_ns": 1792785547014282300,
+        "monotonic_ns": 102638546415970,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 134,
+        "wall_ns": 1792785548014940467,
+        "monotonic_ns": 102639547074512,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 135,
+        "wall_ns": 1792785549015582718,
+        "monotonic_ns": 102640547716388,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 136,
+        "wall_ns": 1792785550015832093,
+        "monotonic_ns": 102641547965805,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 137,
+        "wall_ns": 1792785551016479177,
+        "monotonic_ns": 102642548612722,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 138,
+        "wall_ns": 1792785552016712344,
+        "monotonic_ns": 102643548845931,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 139,
+        "wall_ns": 1792785553017125720,
+        "monotonic_ns": 102644549259265,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 140,
+        "wall_ns": 1792785554017382929,
+        "monotonic_ns": 102645549516473,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 141,
+        "wall_ns": 1792785555017614762,
+        "monotonic_ns": 102646549748557,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 142,
+        "wall_ns": 1792785556018113971,
+        "monotonic_ns": 102647550247558,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 143,
+        "wall_ns": 1792785557019450263,
+        "monotonic_ns": 102648551583850,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 144,
+        "wall_ns": 1792785558020087750,
+        "monotonic_ns": 102649552312349,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 145,
+        "wall_ns": 1792785559020345042,
+        "monotonic_ns": 102650552569100,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 146,
+        "wall_ns": 1792785560021071167,
+        "monotonic_ns": 102651553295225,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 147,
+        "wall_ns": 1792785561021383293,
+        "monotonic_ns": 102652553607517,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 148,
+        "wall_ns": 1792785562021695293,
+        "monotonic_ns": 102653553919518,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 149,
+        "wall_ns": 1792785563022404002,
+        "monotonic_ns": 102654554628060,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 150,
+        "wall_ns": 1792785564023073752,
+        "monotonic_ns": 102655555297894,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 151,
+        "wall_ns": 1792785565023293128,
+        "monotonic_ns": 102656555517228,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 152,
+        "wall_ns": 1792785566023498462,
+        "monotonic_ns": 102657555722561,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 153,
+        "wall_ns": 1792785567023941629,
+        "monotonic_ns": 102658556165770,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 154,
+        "wall_ns": 1792785568024637879,
+        "monotonic_ns": 102659556862062,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 155,
+        "wall_ns": 1792785569024845547,
+        "monotonic_ns": 102660557069688,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 156,
+        "wall_ns": 1792785570025624755,
+        "monotonic_ns": 102661557848897,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 157,
+        "wall_ns": 1792785571026238506,
+        "monotonic_ns": 102662558462564,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 158,
+        "wall_ns": 1792785572026942298,
+        "monotonic_ns": 102663559166689,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 159,
+        "wall_ns": 1792785573027585632,
+        "monotonic_ns": 102664559809856,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 160,
+        "wall_ns": 1792785574028168132,
+        "monotonic_ns": 102665560392149,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 161,
+        "wall_ns": 1792785575028834341,
+        "monotonic_ns": 102666561058524,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 162,
+        "wall_ns": 1792785576032968175,
+        "monotonic_ns": 102667565192233,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 163,
+        "wall_ns": 1792785577034214092,
+        "monotonic_ns": 102668566438150,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 164,
+        "wall_ns": 1792785578034440134,
+        "monotonic_ns": 102669566664484,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 165,
+        "wall_ns": 1792785579034834301,
+        "monotonic_ns": 102670567058318,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 166,
+        "wall_ns": 1792785580035343552,
+        "monotonic_ns": 102671567567693,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 167,
+        "wall_ns": 1792785581040627927,
+        "monotonic_ns": 102672572852069,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 168,
+        "wall_ns": 1792785582041390844,
+        "monotonic_ns": 102673573614861,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 169,
+        "wall_ns": 1792785583041557220,
+        "monotonic_ns": 102674573781278,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 170,
+        "wall_ns": 1792785584042093679,
+        "monotonic_ns": 102675574317737,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 171,
+        "wall_ns": 1792785585042404971,
+        "monotonic_ns": 102676574629029,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 172,
+        "wall_ns": 1792785586043122305,
+        "monotonic_ns": 102677575346613,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 173,
+        "wall_ns": 1792785587043646972,
+        "monotonic_ns": 102678575871363,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 174,
+        "wall_ns": 1792785588044000750,
+        "monotonic_ns": 102679576750655,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 175,
+        "wall_ns": 1792785589044657125,
+        "monotonic_ns": 102680577406947,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 176,
+        "wall_ns": 1792785590046135959,
+        "monotonic_ns": 102681578885906,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 177,
+        "wall_ns": 1792785591046657168,
+        "monotonic_ns": 102682579406948,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 178,
+        "wall_ns": 1792785592047009752,
+        "monotonic_ns": 102683579759573,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 179,
+        "wall_ns": 1792785593047295627,
+        "monotonic_ns": 102684580045324,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 180,
+        "wall_ns": 1792785594047525127,
+        "monotonic_ns": 102685580274907,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 181,
+        "wall_ns": 1792785595047997545,
+        "monotonic_ns": 102686580747366,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 182,
+        "wall_ns": 1792785596048325087,
+        "monotonic_ns": 102687581075075,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 183,
+        "wall_ns": 1792785597048518962,
+        "monotonic_ns": 102688581268826,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 184,
+        "wall_ns": 1792785598049140296,
+        "monotonic_ns": 102689581890159,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 185,
+        "wall_ns": 1792785599049731838,
+        "monotonic_ns": 102690582481660,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 186,
+        "wall_ns": 1792785600049965089,
+        "monotonic_ns": 102691582715035,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 187,
+        "wall_ns": 1792785601050525089,
+        "monotonic_ns": 102692583274911,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 188,
+        "wall_ns": 1792785602052825923,
+        "monotonic_ns": 102693585575745,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 189,
+        "wall_ns": 1792785603053122840,
+        "monotonic_ns": 102694585872703,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 190,
+        "wall_ns": 1792785604053433091,
+        "monotonic_ns": 102695586182996,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 191,
+        "wall_ns": 1792785605054087924,
+        "monotonic_ns": 102696586837746,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 192,
+        "wall_ns": 1792785606054421300,
+        "monotonic_ns": 102697587171205,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 193,
+        "wall_ns": 1792785607055705217,
+        "monotonic_ns": 102698588454955,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 194,
+        "wall_ns": 1792785608056662718,
+        "monotonic_ns": 102699589412789,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 195,
+        "wall_ns": 1792785609057104718,
+        "monotonic_ns": 102700589854581,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 196,
+        "wall_ns": 1792785610057831510,
+        "monotonic_ns": 102701590581457,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 197,
+        "wall_ns": 1792785611058305094,
+        "monotonic_ns": 102702591054916,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 198,
+        "wall_ns": 1792785612058716094,
+        "monotonic_ns": 102703591465916,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 199,
+        "wall_ns": 1792785613059673178,
+        "monotonic_ns": 102704592423208,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      },
+      {
+        "sample_index": 200,
+        "wall_ns": 1792785614061754095,
+        "monotonic_ns": 102705594504042,
+        "cpu.max": "800000 100000",
+        "quota_us": 800000,
+        "period_us": 100000
+      }
+    ],
+    "observed_cpu_periods_us": [
+      100000
+    ],
+    "cpu_period_changed": false,
+    "samples": 122,
+    "max_gap_s": 1.005284376,
+    "window_s": 120.0,
+    "cgroup_cpu_seconds_estimate": 15.387004607453491,
+    "cgroup_quota_utilization_pct": 1.6028129799430721,
+    "max_sample_interval_quota_utilization_pct": 2.066559608371658,
+    "memory_peak_sampled_bytes": 266059776,
+    "memory_counter_peak_bytes": 4096888832,
+    "swap_peak_sampled_bytes": 0,
+    "oom_delta": {
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0
+    },
+    "app_cpu_seconds_estimate": 0.0,
+    "app_counter_valid": true,
+    "app_pids_stable": true,
+    "app_process_count_max": 0,
+    "app_whole_target_cpu_pct": 0.0,
+    "pg_cpu_seconds_estimate": 0.0,
+    "pg_counter_valid": true,
+    "pg_pids_stable": true,
+    "pg_process_count_max": 0,
+    "pg_whole_target_cpu_pct": 0.0
+  },
+  "declared_load_memory_bytes": 8589934592,
+  "declared_load_cpus": 8,
+  "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+  "classification_scope": "independent_local",
+  "native_qualified": true,
+  "native_whole_vm_CPU_flagged_shards": [],
+  "native_whole_vm_CPU_flag_count": 0,
+  "target_oom_delta": {
+    "oom": 0,
+    "oom_kill": 0,
+    "oom_group_kill": 0
+  },
+  "post_load_healthy": true,
+  "zero_measured_errors": true,
+  "observed_timeline_errors": 0,
+  "conformance_197_full_seed_proven": true,
+  "cpu_ms_per_successful_request_sampled_estimate": 0.17705388482695103,
+  "local_whole_vm_CPU_scope_exception": false,
+  "all_classifications": [
+    "PASS"
+  ],
+  "local_qualified": true
+}

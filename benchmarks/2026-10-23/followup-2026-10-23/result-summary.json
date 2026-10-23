@@ -1,0 +1,473 @@
+{
+  "schema": "goose-B-current-publication-index-v1",
+  "updated_utc": "2026-10-23T21:50:32.866863+00:00",
+  "status": "PROMOTED_CODE_AND_COMPLETED_LOCAL_CONFIRMATION",
+  "current_PR": "https://github.com/arjaythedev/multicore-server-challenge/pull/32",
+  "current_submission_source": "545455a3afbf31b0eababde304c10439d7e6d0ba",
+  "current_submission_tree": "036ba817f95a9b95da9d869486000582c50fede5",
+  "current_implementation": "Goose B: bounded age-ordered reader admission; one current Goose PR32 entry",
+  "current_implementation_table_rows": 1,
+  "source_provenance": {
+    "promoted": true,
+    "CI_source": "75c4924c97b7988e2bb4aa03cbef36cf11d4976b",
+    "CI_submission_tree": "8e821a9ff6f6641ba35aba233cbcffadee81c68c",
+    "all_35_non_README_blob_mode_path_entries_match_CI": true,
+    "README_only_diff_from_CI": true,
+    "ARM_benchmark_binary_sha256": "9016ff93e924c0d94652490ac895d1fbc64153fd9d3ea4b8b52b66ae892c3424",
+    "x86_CI_binary_sha256": "9d7a658317ad7b13bcf8a1316d4b59d5c00cf7b648a4872265abecc9057daf4f",
+    "x86_CI_stages_passed": 18,
+    "x86_CI_run": "https://github.com/tbsvttr/multicore-server-challenge/actions/runs/40001884934",
+    "wire_checks_passed": 26,
+    "source_commit_receipt_status": "VERIFIED_LOCAL_COMMIT_READY_FOR_PUBLICATION",
+    "source_commit_receipt_status_note": "Receipt records the local promotion commit state when saved; it is not a later remote-push or maintainer-scoring receipt.",
+    "proofs": [
+      {
+        "path": "publication/promoted-source-receipt.json",
+        "sha256": "ecdc5a8d86d7ffeab61ca929342eac4a237085646d4d80793ffbefeadadbb1c7"
+      },
+      {
+        "path": "publication/promoted-code-equivalence.json",
+        "sha256": "e70d1d8cd43f7592ecd81e220ebc30128661dc9966042a2881cfea2f33adc7b2"
+      }
+    ]
+  },
+  "performance_comparison": {
+    "scope": "Local ARM64 Mac/Docker comparison against unchanged Rust PR7 only. Four new 300-second measured holds across a capacity search and an independent fresh reverse-order selected-point confirmation.",
+    "target": {
+      "shared_app_and_PostgreSQL_cpus": 8,
+      "memory_bytes": 17179869184,
+      "swap": false,
+      "affinity": false,
+      "PostgreSQL_major": 18,
+      "full_seed_users": 100000,
+      "full_seed_articles": 500000,
+      "schema_and_durable_cluster_settings_unchanged": true
+    },
+    "client": {
+      "dedicated_cgroup_cpus": 8,
+      "memory_bytes": 8589934592,
+      "GOMAXPROCS_per_shard": 2,
+      "native_workload_binary_sha256": "886eaa564c6cdab1a791534d6931d1b8eb9b5c21d1e1ebaaa2824616c4562cdb",
+      "same_physical_VM_as_target": true
+    },
+    "SLO": {
+      "p95_ms_strictly_below": 500,
+      "p99_ms_strictly_below": 1000,
+      "error_fraction_strictly_below": 0.01
+    },
+    "local_qualification_policy": "dedicated_client_cgroup_v1; all native flags retained; only CPU-only whole-VM accounting exceptions allowed, with original timing/clock/active-user/coverage/OOM/evidence/SLO gates intact",
+    "held_users": {
+      "current_goose_B": 140000,
+      "unchanged_Rust_PR7": 130000,
+      "relative_local_held_users_gain_pct": 7.692307692307687
+    },
+    "gain_interpretation": "7.6923% higher locally qualified held-user point in both study blocks; not a universal latency/speed percentage, exact maximum or official x86 score.",
+    "qualified_300s_holds": {
+      "local_total": 4,
+      "current_goose_B_local": 2,
+      "Rust_control_local": 2,
+      "current_goose_B_native": 2,
+      "Rust_control_native": 0
+    },
+    "all_four_holds_zero_measured_and_timeline_errors": true,
+    "holds": [
+      {
+        "study": "first_search",
+        "implementation": "current_goose_B",
+        "phase": "capacity_20261023t192322_84394f/cases/goose32-prototypeB/phases/09-hold-140000",
+        "users": 140000,
+        "measure_s": 300,
+        "requests": 11099009,
+        "rps": 36996.69666666666,
+        "p95_ms": 18.015,
+        "p99_ms": 307.711,
+        "measured_errors": 0,
+        "timeline_errors": 0,
+        "native_qualified": true,
+        "local_qualified": true,
+        "native_verdict": {
+          "pass": true,
+          "lg_limited": false
+        },
+        "native_whole_vm_CPU_flag_count": 0,
+        "local_CPU_only_scope_exception": false,
+        "native_whole_VM_CPU_mean_range_pct": [
+          74.57371911700503,
+          74.57615204876976
+        ],
+        "dedicated_client_cgroup_quota_utilization_pct": 21.996899321549012
+      },
+      {
+        "study": "first_search",
+        "implementation": "unchanged_Rust_PR7_control",
+        "phase": "capacity_20261023t192322_84394f/cases/rust7/phases/08-hold-130000",
+        "users": 130000,
+        "measure_s": 300,
+        "requests": 10271933,
+        "rps": 34239.776666666665,
+        "p95_ms": 117.951,
+        "p99_ms": 580.095,
+        "measured_errors": 0,
+        "timeline_errors": 0,
+        "native_qualified": false,
+        "local_qualified": true,
+        "native_verdict": {
+          "pass": true,
+          "lg_limited": true,
+          "lg_reasons": [
+            "box 0 CPU 77% > 75%",
+            "box 1 CPU 77% > 75%",
+            "box 2 CPU 77% > 75%",
+            "box 3 CPU 77% > 75%",
+            "box 4 CPU 77% > 75%",
+            "box 5 CPU 77% > 75%",
+            "box 6 CPU 77% > 75%"
+          ]
+        },
+        "native_whole_vm_CPU_flag_count": 7,
+        "local_CPU_only_scope_exception": true,
+        "native_whole_VM_CPU_mean_range_pct": [
+          76.86637453987852,
+          76.86661890570954
+        ],
+        "dedicated_client_cgroup_quota_utilization_pct": 20.236328782578056
+      },
+      {
+        "study": "fresh_reverse_confirmation",
+        "implementation": "current_goose_B",
+        "phase": "confirmation_20261023t211121_c42d47/cases/goose32-prototypeB/phases/03-hold-140000",
+        "users": 140000,
+        "measure_s": 300,
+        "requests": 11109776,
+        "rps": 37032.58666666667,
+        "p95_ms": 10.903,
+        "p99_ms": 239.615,
+        "measured_errors": 0,
+        "timeline_errors": 0,
+        "native_qualified": true,
+        "local_qualified": true,
+        "native_verdict": {
+          "pass": true,
+          "lg_limited": false
+        },
+        "native_whole_vm_CPU_flag_count": 0,
+        "local_CPU_only_scope_exception": false,
+        "native_whole_VM_CPU_mean_range_pct": [
+          72.2223037183683,
+          72.22355577529967
+        ],
+        "dedicated_client_cgroup_quota_utilization_pct": 22.07548504317006
+      },
+      {
+        "study": "fresh_reverse_confirmation",
+        "implementation": "unchanged_Rust_PR7_control",
+        "phase": "confirmation_20261023t211121_c42d47/cases/rust7/phases/03-hold-130000",
+        "users": 130000,
+        "measure_s": 300,
+        "requests": 10301608,
+        "rps": 34338.693333333336,
+        "p95_ms": 24.783,
+        "p99_ms": 401.407,
+        "measured_errors": 0,
+        "timeline_errors": 0,
+        "native_qualified": false,
+        "local_qualified": true,
+        "native_verdict": {
+          "pass": true,
+          "lg_limited": true,
+          "lg_reasons": [
+            "box 0 CPU 76% > 75%",
+            "box 1 CPU 76% > 75%",
+            "box 2 CPU 76% > 75%",
+            "box 3 CPU 76% > 75%",
+            "box 4 CPU 76% > 75%",
+            "box 5 CPU 76% > 75%",
+            "box 6 CPU 76% > 75%"
+          ]
+        },
+        "native_whole_vm_CPU_flag_count": 7,
+        "local_CPU_only_scope_exception": true,
+        "native_whole_VM_CPU_mean_range_pct": [
+          76.38993583482153,
+          76.39035276626726
+        ],
+        "dedicated_client_cgroup_quota_utilization_pct": 20.612950496628013
+      }
+    ],
+    "first_search": {
+      "run": "capacity_20261023t192322_84394f",
+      "status": "AUDITED_COMPLETED_LOCAL_SEARCH",
+      "case_order": [
+        "rust7",
+        "goose32-prototypeB"
+      ],
+      "intervals": {
+        "current_goose_B": {
+          "held_at_least_users": 140000,
+          "failed_at_users": 145000,
+          "all_valid_failed_probe_users": [
+            145000,
+            150000
+          ],
+          "interpretation": "Local held/failed interval; exact maximum not established."
+        },
+        "unchanged_Rust_PR7_control": {
+          "held_at_least_users": 130000,
+          "failed_at_users": 135000,
+          "all_valid_failed_probe_users": [
+            135000,
+            140000
+          ],
+          "interpretation": "Local held/failed interval; exact maximum not established."
+        }
+      },
+      "path": "audit/capacity-v4-result.json",
+      "sha256": "5eed628b3f041e6f1572fa3d08ced1202e52feae0077715cb1c99e4430a1d4b7"
+    },
+    "fresh_confirmation": {
+      "run": "confirmation_20261023t211121_c42d47",
+      "status": "AUDITED_COMPLETED_CONFIRMATION",
+      "case_order": [
+        "goose32-prototypeB",
+        "rust7"
+      ],
+      "one_fresh_full_seed_clone_and_continuous_app_per_case": true,
+      "both_selected_points_confirmed": true,
+      "selected_points_only": true,
+      "new_maximum_established": false,
+      "path": "audit/confirmation-v1-result.json",
+      "sha256": "37a6af4cdcff1c85dd7bb03b55e5e4b5c1528f0ff2ba12e93d85c2600dfff903"
+    },
+    "independent_native_replays": [
+      {
+        "path": "audit/confirmation-v1-goose-native-replay.json",
+        "sha256": "8a3dfc7814ff43e6453a762fab87974c5ad66980ea5fbc2f90fe20355eca2f26"
+      },
+      {
+        "path": "audit/confirmation-v1-rust-native-replay.json",
+        "sha256": "41bf3c99ea98d4fecb23a4153264036e363e112e9996911f1d989cd0eecdba2f"
+      }
+    ]
+  },
+  "official_status": {
+    "snapshot_checked_utc": "2026-10-23T21:12:30.375074+00:00",
+    "historical_Goose_PR32_rank": 8,
+    "historical_Goose_PR32_users": 65000,
+    "historical_score_predates_optimized_A_and_B": true,
+    "historical_score_exact_measured_source_publicly_pinned": false,
+    "current_B_official_users": null,
+    "current_B_official_rank": null,
+    "optimized_source_official_score": null,
+    "official_rank_first_proven": false,
+    "all_competitors_beaten": false,
+    "fastest_of_all_solutions_proven": false,
+    "current_official_leader": {
+      "rank": 1,
+      "users": 100000,
+      "PR": 7
+    },
+    "newer_unscored_PRs": [
+      42,
+      41,
+      40,
+      38,
+      37,
+      36,
+      35,
+      34
+    ],
+    "newer_unscored_PR_count": 8,
+    "selected_primary_source_files_reviewed": 47,
+    "PR39": {
+      "is_implementation_PR": false,
+      "is_issue": true,
+      "title": "Scoring Cutoff Date"
+    },
+    "unmeasured_competitor_performance": "UNKNOWN; absence of a supplied comparable claim is not evidence that a solution is slower.",
+    "proofs": [
+      {
+        "path": "publication/latest-official-during-confirmation/summary.json",
+        "sha256": "54d380757818fa29faf4838adcc5cda0bca029e344928adb84f5f039d6b4bd35"
+      },
+      {
+        "path": "publication/new-unscored-34-42/inventory.json",
+        "sha256": "ca723a225bff70645c8ee9b34135419d95baf15114c64ff54bc1ae5a1a78d966"
+      }
+    ]
+  },
+  "historical_evidence": {
+    "preserved_earlier_export_commit_prefix": "dd941",
+    "earlier_export_rewritten": false,
+    "previous_five_capacity_searches": [
+      {
+        "name": "first",
+        "path": "audit/capacity-first-result.json",
+        "sha256": "02f949323af411f0b4897a3f1c2117e85852a12606268165c2828a55179c43de"
+      },
+      {
+        "name": "second",
+        "path": "audit/capacity-v2-result.json",
+        "sha256": "6f4327d935d9797f90a1975563fbfe3995742a941ad7d50ab70c0ca044d0fb4d"
+      },
+      {
+        "name": "gradual",
+        "path": "audit/capacity-v3-result.json",
+        "sha256": "2181c41f4769572898abad0b8ac4df9b8aabaec14215742f700979a6dd6788ac"
+      },
+      {
+        "name": "powered_A",
+        "path": "audit/capacity-powered-result.json",
+        "sha256": "fc02e1ce0aa0a586328c3be86e060402e82a22084e2bef13b4748fa769dbd310"
+      },
+      {
+        "name": "narrow_Rust",
+        "path": "audit/capacity-rust110-115-result.json",
+        "sha256": "1570583a9a4b20716f19c8ad3dd8cc208c3181bb949b5ec385dca141a721394a"
+      }
+    ],
+    "previous_five_searches_qualified_300s_holds": 0,
+    "all_raw_failures_native_flags_and_invalid_records_retained": true,
+    "historical_A_100k_point": {
+      "source": "23a14e8cbf32113509cd0ad941320ef947508981",
+      "binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+      "users": 100000,
+      "measure_s": 60,
+      "lower_combined_target_CPU_per_successful_request_pct": 16.09,
+      "interpretation": "One exploratory CPU-efficiency point on source A; not a B result, held-user capacity or general latency/speed claim.",
+      "path": "audit/final-source-100k-comparison.json",
+      "sha256": "f0e81658c1faf22f8986512e54d0f310b94878dc19471cea1c4a951b18cd54a3"
+    },
+    "previous_publication_summary": {
+      "path": "publication/followup-result-summary.pre-promotion.json",
+      "sha256": "1a8acd8b20662e4938c9f5a4c15e529a0b3a2868af9a955a71efd9119122265c",
+      "bytes": 1870
+    }
+  },
+  "P2": {
+    "run": "diagnosticgoose110p2_20261023t181051_2b1bad",
+    "all_phases_invalid": true,
+    "measured_timeouts": [
+      1956,
+      83745,
+      90730
+    ],
+    "score": null,
+    "host_sleep_observed": false,
+    "cause": "UNRESOLVED; generator scheduling and CPU pressure evidence does not exonerate application",
+    "source": "23a14e8cbf32113509cd0ad941320ef947508981",
+    "application_exonerated": false,
+    "interpretation": "All three phases remain invalid and unscored. Original collapse cause remains unresolved.",
+    "path": "audit/diagnostic-p2-review.json",
+    "sha256": "86639952d6eb53e8fefcd69f2b9a292096927ac4bb796ef8c9d2375ff732fbdd"
+  },
+  "native_Darwin": {
+    "status": "COMPLETED_DIAGNOSTIC_PASS",
+    "source": "23a14e8cbf32113509cd0ad941320ef947508981",
+    "app_binary_sha256": "7a7c31fbaedbb9687f048158623b3c311ea5f240ecc4bfcff985b718bd2afc21",
+    "client_binary_sha256": "c6053653c26c2136bd7bd007df68cfb8cf51975f9bf8e6f38bcebdd7484076e9",
+    "users": 10000,
+    "measure_s": 120,
+    "measured_requests": 316229,
+    "measured_errors": 0,
+    "p95_ms": 8.359,
+    "p99_ms": 10.663,
+    "native_verdict": {
+      "pass": true,
+      "lg_limited": false
+    },
+    "native_box_CPU": "N/A",
+    "hard_client_8CPU8GiB_cgroup": false,
+    "client_headroom": "UNKNOWN / NOT QUALIFIED",
+    "score": null,
+    "cause_of_improvement_established": false,
+    "comparison_confounds": [
+      "A proper charger and recovered charging state were reported for this diagnostic, a material uncontrolled difference from prior Linux P2. This audit verified the diagnostic saved charging samples but did not inspect or remeasure P2.",
+      "The protocols were not matched for charging state, client placement/resource controls, or load. Moving the client outside the Docker VM is therefore not established as the cause of any improvement."
+    ],
+    "path": "diagnostics/native-darwin-plan/native10k-20261023t1852/independent-native10k-verification.json",
+    "sha256": "f6dc067c14d52ea00e04c1f53387ff7a8070ded7f01f6756a863687a1c73961e"
+  },
+  "target_setup": {
+    "v1": "Initial invocation aborted at charging preflight before any Docker action; its original receipt remains unchanged.",
+    "v2": "Executed successfully after stable charging; new owned loopback target/image, original target preserved stopped.",
+    "original_v1_and_failed_receipt_unchanged": true,
+    "old_preserved_stopped": true,
+    "server_budget_matches": true,
+    "original_pg_settings_equal": true,
+    "original_sources_equal": true,
+    "host_settings_changed": false,
+    "path": "diagnostics/native-darwin-plan/target-preparation-v2-20261023t1846/proof.json",
+    "sha256": "528424768864caade02b939b6f8ec38f41689f0bde33d3dd810041f294682089"
+  },
+  "cleanup": {
+    "all_owned_benchmark_containers_stopped": true,
+    "owned_PostgreSQL_stopped": true,
+    "data_and_images_preserved": true,
+    "unrelated_containers_untouched": true,
+    "path": "audit/final-benchmark-resource-cleanup.json",
+    "sha256": "365734f99f65f9d00231f2cffa2dc7fd12102990dc575b92327b9ef717cb99bc"
+  },
+  "privacy": {
+    "full_incidental_process_listing_excluded_from_public_export": true,
+    "full_original_retained_privately": true,
+    "original_sha256": "ed3d25f575bbcda338960728470862c461257cd715e786f50f50bf535badc45e",
+    "original_bytes": 62586,
+    "public_related_backend_only_file": "diagnostics/native-darwin-plan/native10k-20261023t1852/backend-pids-related-only.log",
+    "public_related_backend_only_sha256": "26fd9c9c3c77f79c765ef8e36ff53ae5f01442de98b758d9867bbe92fa345d81",
+    "public_related_backend_only_lines": 3,
+    "benchmark_error_files_filtered_or_removed": false,
+    "path": "diagnostics/native-darwin-plan/native10k-20261023t1852/backend-pids-redaction.json",
+    "sha256": "0ce4b6593a6646d5dc10e2e02a8a3a06d2a3b909ece875ba2559fdc0f70c7857"
+  },
+  "correctness_validation": {
+    "exact_current_code": true,
+    "ARM_binary_sha256": "9016ff93e924c0d94652490ac895d1fbc64153fd9d3ea4b8b52b66ae892c3424",
+    "dev_and_full_conformance": {
+      "passed": true,
+      "checks_per_suite": 197,
+      "x86_original_conformance_suite_runs": 4
+    },
+    "concurrent_read_comparisons": {
+      "passed": true,
+      "requests": 1664
+    },
+    "direct_PG_wire": {
+      "passed": true,
+      "checks": 26
+    },
+    "native_x86_validation": {
+      "passed": true,
+      "stages": 18
+    },
+    "native_assertions": 293966,
+    "JWT_assertions": 4000,
+    "exact_lane_bcrypt_comparisons": 252,
+    "targeted_checks": {
+      "deferred_COMMIT_no_early_success": true,
+      "grouped_rollback": true,
+      "quiet_read_timers": true,
+      "favorite_freshness": true,
+      "concurrent_article_update_and_rename": true,
+      "legal_NUL_password_trusted_Go_interoperability": true
+    },
+    "proofs": [
+      {
+        "path": "ci/leader2-executed/summary.md",
+        "sha256": "4cb45508544ac137ea75d0484c519cf52dee5334ced15d02cf51a7f86e2db8ec"
+      },
+      {
+        "path": "builds/reader_admission_20261023t181010_2fa4e2/PROOF.md",
+        "sha256": "4e7b659609251a4d5bca4186a3445b05051402e009830038a690380848824f5b"
+      },
+      {
+        "path": "capacity_20261023t192322_84394f/cases/goose32-prototypeB/conformance.log",
+        "sha256": "f9f73261f2159edbd4eb35bbc00a03d5cc6c4787622a28c5e54ed221127d8a9b"
+      }
+    ],
+    "previous_index_before_coverage_addition": {
+      "path": "publication/followup-result-summary.before-correctness-validation.json",
+      "sha256": "01a5ef43f54f7e2f19eef06ab3c826f723aa64068b8da494b46f670eea380d6e",
+      "bytes": 16878
+    }
+  }
+}

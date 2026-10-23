@@ -1,0 +1,397 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "v3_original_files_unchanged": true,
+  "unchanged_policy_functions": {
+    "next_action": true,
+    "shards": true,
+    "growth_factor": true,
+    "load_cpus": true,
+    "load_memory_bytes": true,
+    "client_cpu_scope_policy": true
+  },
+  "unchanged_native_verification_functions": {
+    "native_verdict": true,
+    "generator_details": true,
+    "exact_merge": true,
+    "histogram": true,
+    "actual_process_checks": true,
+    "inspect_budget": true
+  },
+  "native_classification_tail_byte_identical": true,
+  "unit_search_audit_checks": [
+    {
+      "check": "database1:accepted_by_unmodified_lifecycle_guard",
+      "pass": true
+    },
+    {
+      "check": "database3:accepted_by_unmodified_lifecycle_guard",
+      "pass": true
+    },
+    {
+      "check": "database999:accepted_by_unmodified_lifecycle_guard",
+      "pass": true
+    },
+    {
+      "check": "one_phase_complete_event_callsite",
+      "pass": true
+    },
+    {
+      "check": "10:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "10000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "20000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "20001:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "80000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "100001:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "120000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "160000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "capacity_search_brackets_then_holds",
+      "pass": true
+    },
+    {
+      "check": "ceiling_pass_is_a_hold_at_ceiling_without_invented_failure",
+      "pass": true
+    },
+    {
+      "check": "initial_failure_halves_until_low_pass",
+      "pass": true
+    },
+    {
+      "check": "four_failed_holds_stop_finitely",
+      "pass": true
+    },
+    {
+      "check": "generator_invalid_stops_without_failure_bracket_or_hold",
+      "pass": true
+    },
+    {
+      "check": "clock_invalid_never_becomes_server_failure",
+      "pass": true
+    },
+    {
+      "check": "declared80k_probe_start_preserves10k_warmup",
+      "pass": true
+    },
+    {
+      "check": "declared160k_probe_start_still_warms_at10k",
+      "pass": true
+    },
+    {
+      "check": "valid160k_failure_halves_to_fresh80k_probe",
+      "pass": true
+    },
+    {
+      "check": "gradual_expansion_uses_existing_nice_rounding_and_reaches_ceiling_finitely",
+      "pass": true
+    },
+    {
+      "check": "gradual_expansion_brackets_and_bisects_within5pct_then_300s_hold",
+      "pass": true
+    },
+    {
+      "check": "rounded_expansion_that_hits_lower_bound_still_increases",
+      "pass": true
+    },
+    {
+      "check": "gradual_search_respects_finite_probe_and_failed_hold_budgets",
+      "pass": true
+    },
+    {
+      "check": "150k_pass160k_fail_probes_strict155k_midpoint",
+      "pass": true
+    },
+    {
+      "check": "155k_pass160k_fail_then_holds_resolved_interval",
+      "pass": true
+    },
+    {
+      "check": "rounding_fallback_does_not_exceed_finite_probe_budget",
+      "pass": true
+    },
+    {
+      "check": "actual_inspector_accepts_declared8GiB_only",
+      "pass": true
+    },
+    {
+      "check": "actual_inspector_rejects_swap_allowance_above8GiB",
+      "pass": true
+    },
+    {
+      "check": "server_budget_stays8CPU16GiB",
+      "pass": true
+    },
+    {
+      "check": "actual_inspector_accepts8CPU8GiB_and_rejects4CPU_claim",
+      "pass": true
+    },
+    {
+      "check": "synthetic_P2_protocol_wrapper_over_actual_saved_histograms_passes",
+      "pass": true
+    },
+    {
+      "check": "P1_protocol_rejected_by_P2_auditor",
+      "pass": true
+    },
+    {
+      "check": "P1_config_env_rejected",
+      "pass": true
+    },
+    {
+      "check": "raw_P1_metadata_not_reclassified_as_P2",
+      "pass": true
+    },
+    {
+      "check": "P1_raw_command_rejected",
+      "pass": true
+    },
+    {
+      "check": "actual_container_P1_rejected",
+      "pass": true
+    },
+    {
+      "check": "actual_shard_P1_rejected",
+      "pass": true
+    },
+    {
+      "check": "duplicate_actual_shard_rejected",
+      "pass": true
+    },
+    {
+      "check": "duplicate_actual_PID_rejected",
+      "pass": true
+    },
+    {
+      "check": "missing_actual_shard_rejected",
+      "pass": true
+    },
+    {
+      "check": "wrong_actual_run_rejected",
+      "pass": true
+    },
+    {
+      "check": "P2_must_be_explicit_before_plan_written",
+      "pass": true
+    },
+    {
+      "check": "equivalent8CPU_200ms_snapshot_and_monitor_budget_accepts_with_warning",
+      "pass": true
+    },
+    {
+      "check": "higher_actual_CPU_ratio_is_rejected_by_phase_auditor",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_accepts_observed8GiB_with_matching_explicit_plan",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_rejects_observed8GiB_against4GiB_plan",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_rejects_declared8GiB_with_observed4GiB",
+      "pass": true
+    },
+    {
+      "check": "config_protocol_memory_mismatch_rejected",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_accepts_observed8CPU8GiB_matching_plan",
+      "pass": true
+    },
+    {
+      "check": "client_CPU_utilization_uses_declared8CPU_denominator",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_rejects_observed8CPU_against4CPU_plan",
+      "pass": true
+    },
+    {
+      "check": "config_protocol_CPU_mismatch_rejected",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_rejects_observed4CPU_against8CPU_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_explicit4GiB_receipt_and_immutable_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_explicit8GiB_receipt_and_immutable_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_rejects_unsupported6GiB_before_writing_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_default4GiB_preserves_historical_budget",
+      "pass": true
+    },
+    {
+      "check": "prepare_explicit8CPU8GiB_receipt_and_fixed_server",
+      "pass": true
+    },
+    {
+      "check": "prepare_rejects_unsupported6CPU_before_writing_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_default4CPU_preserves_historical_budget",
+      "pass": true
+    },
+    {
+      "check": "prepare_freezes_explicit_local_CPU_scope_in_source_config_receipt",
+      "pass": true
+    },
+    {
+      "check": "prepare_rejects_unknown_CPU_scope_before_writing_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_freezes_growth1.1_with_source_config_receipt",
+      "pass": true
+    },
+    {
+      "check": "prepare_freezes_growth2_with_source_config_receipt",
+      "pass": true
+    },
+    {
+      "check": "prepare_rejects_unsupported_growth1.2_before_writing_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_rejects_unsupported_growthTrue_before_writing_plan",
+      "pass": true
+    },
+    {
+      "check": "default_growth_preserves_doubling_policy",
+      "pass": true
+    },
+    {
+      "check": "config_protocol_growth_mismatch_rejected",
+      "pass": true
+    },
+    {
+      "check": "whole_VM_CPU_only_exception_local_pass_preserves_native_LG_failure",
+      "pass": true
+    },
+    {
+      "check": "same_whole_VM_CPU_only_fixture_remains_invalid_under_default_native_policy",
+      "pass": true
+    },
+    {
+      "check": "whole_VM_CPU_exception_does_not_waive_actual_client_cgroup80pct",
+      "pass": true
+    },
+    {
+      "check": "unknown_native_generator_reason_is_not_waived",
+      "pass": true
+    },
+    {
+      "check": "false_native_CPU_reason_is_not_waived",
+      "pass": true
+    },
+    {
+      "check": "CPU_summary_not_matching_timeline_is_not_waived",
+      "pass": true
+    },
+    {
+      "check": "whole_VM_CPU_plus_actual_sampler_stall_remains_invalid",
+      "pass": true
+    },
+    {
+      "check": "hidden_timeline_stall_is_independently_rejected",
+      "pass": true
+    },
+    {
+      "check": "histogram_quantile_tampering_remains_invalid_under_local_policy",
+      "pass": true
+    },
+    {
+      "check": "unsupported_or_mismatched_CPU_scope_policy_is_rejected",
+      "pass": true
+    },
+    {
+      "check": "synthetic_P2_wrapper_does_not_erase_genuine_saved160k_stall",
+      "pass": true
+    },
+    {
+      "check": "raw1024_limit_rejected_even_if_helper_valid_true",
+      "pass": true
+    },
+    {
+      "check": "false_merged_rps_rejected",
+      "pass": true
+    },
+    {
+      "check": "native_generator_limit_never_yields_score",
+      "pass": true
+    },
+    {
+      "check": "wall_clock_jump_never_yields_server_failure",
+      "pass": true
+    }
+  ],
+  "cpu_ratio_tests": {
+    "passed": 8,
+    "log_sha256": "c8a448a07ea9cad003237c2e459ee4817571a5f14dce050c5daeeb87aad0a170"
+  },
+  "draft_config_sha256": "231b7234467da8d373ad2d59e930fc36543395ec19b6b9da2ec9259c2de37e34",
+  "frozen_final_plan_created": false,
+  "docker_or_sql_or_build_execution": false,
+  "source_files_sha256": {
+    "capacity_controller.py": "56b1c43b5ab1f18f968110fabe10d07a00e40c6054f3a5b46369c3af530af8df",
+    "DELTAS.md": "09aa9b2d2b1dbec38720c66bbd2a1f751b55add8a97de6a0bc3357906ef37673",
+    "search_policy.py": "fd5035f23358a512a6698b38853fc6187278050b162a740498d6254d16d9acb9",
+    "CAPACITY.md": "c97e5a458297ca377b1016fdf99ccaf607dd2716b20406f93c8d1a7a25d7db00",
+    "v3-baseline-sha256.json": "2631c6e31aaf4db9e0f4a2942726e29031509b5a33533f261984215fa7a78975",
+    "cases-DRAFT.json": "231b7234467da8d373ad2d59e930fc36543395ec19b6b9da2ec9259c2de37e34",
+    "audit/aggregate.py": "a9f18ec76eb764b822bf5488ba146210ef1e7f7532509eb4b8f3401968935a5e",
+    "audit/test_cpu_ratio.py": "9c6084b6aedfb02fa98dbd45be2a29e33185b76809893cbc27482304216e6996",
+    "audit/primitives.py": "e7db1d4fe11cfc753a0dba8dcb2204716289b7e0d06b7c283f15a32be77f3b12",
+    "audit/test_capacity.py": "e62ef5e8ca0ef4b14f6378a07a8dc2207a2b2392f05691e25978c4d96a7ee25d",
+    "audit/test-cpu-ratio.log": "c8a448a07ea9cad003237c2e459ee4817571a5f14dce050c5daeeb87aad0a170",
+    "audit/test-capacity.log": "0b0bb4c6556e16dbb06cf7d971a8b6624cda1e60bad4a02272149d741dae264a",
+    "audit/test-proof.json": "4d51bbe8abd7299a96ff00721ca8243107e4769eac94cd8b423a0919db513882",
+    "audit/evidence.py": "1d4617d3d9374c3643a1341dec23b8573ead1829d84d5da8d4007e4f17bfe653",
+    "audit/v3-original/preparation-review.json": "23223d8829cef79710dafb64d56ab2093ebac357ce3c4c33d6341d9eb548fb27",
+    "audit/v3-original/test-proof.json": "b82e22ea65d8691f7cabcda1710c488abd5b62b8a4fbc0b9f5d041d86c23161b"
+  },
+  "independent_GOMAX_review": "PASS38/38; audit/independent-review.json and .md; no actionable finding",
+  "CPU_delta_review": "Implemented/tested by runtime reviewer; independently read by implementation author with no actionable finding",
+  "limitations": [
+    "Synthetic P2 audit fixtures are unit inputs, not measured two-P runs.",
+    "SourceB remains unpromoted and Git revision pending root/fork validation.",
+    "No native capacity or stability claim.",
+    "V3/P2 outcomes remain frozen; equivalent CPU quota ratio does not waive genuine lag/clock/SLO failures."
+  ],
+  "independent_review_receipt": "audit/independent-review.json"
+}

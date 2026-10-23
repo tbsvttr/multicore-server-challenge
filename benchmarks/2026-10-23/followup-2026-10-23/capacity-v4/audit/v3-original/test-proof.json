@@ -1,0 +1,327 @@
+{
+  "pass": true,
+  "checks": [
+    {
+      "check": "database1:accepted_by_unmodified_lifecycle_guard",
+      "pass": true
+    },
+    {
+      "check": "database3:accepted_by_unmodified_lifecycle_guard",
+      "pass": true
+    },
+    {
+      "check": "database999:accepted_by_unmodified_lifecycle_guard",
+      "pass": true
+    },
+    {
+      "check": "one_phase_complete_event_callsite",
+      "pass": true
+    },
+    {
+      "check": "10:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "10000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "20000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "20001:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "80000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "100001:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "120000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "160000:disjoint_complete_shards",
+      "pass": true
+    },
+    {
+      "check": "capacity_search_brackets_then_holds",
+      "pass": true
+    },
+    {
+      "check": "ceiling_pass_is_a_hold_at_ceiling_without_invented_failure",
+      "pass": true
+    },
+    {
+      "check": "initial_failure_halves_until_low_pass",
+      "pass": true
+    },
+    {
+      "check": "four_failed_holds_stop_finitely",
+      "pass": true
+    },
+    {
+      "check": "generator_invalid_stops_without_failure_bracket_or_hold",
+      "pass": true
+    },
+    {
+      "check": "clock_invalid_never_becomes_server_failure",
+      "pass": true
+    },
+    {
+      "check": "declared80k_probe_start_preserves10k_warmup",
+      "pass": true
+    },
+    {
+      "check": "declared160k_probe_start_still_warms_at10k",
+      "pass": true
+    },
+    {
+      "check": "valid160k_failure_halves_to_fresh80k_probe",
+      "pass": true
+    },
+    {
+      "check": "gradual_expansion_uses_existing_nice_rounding_and_reaches_ceiling_finitely",
+      "pass": true
+    },
+    {
+      "check": "gradual_expansion_brackets_and_bisects_within5pct_then_300s_hold",
+      "pass": true
+    },
+    {
+      "check": "rounded_expansion_that_hits_lower_bound_still_increases",
+      "pass": true
+    },
+    {
+      "check": "gradual_search_respects_finite_probe_and_failed_hold_budgets",
+      "pass": true
+    },
+    {
+      "check": "150k_pass160k_fail_probes_strict155k_midpoint",
+      "pass": true
+    },
+    {
+      "check": "155k_pass160k_fail_then_holds_resolved_interval",
+      "pass": true
+    },
+    {
+      "check": "rounding_fallback_does_not_exceed_finite_probe_budget",
+      "pass": true
+    },
+    {
+      "check": "actual_inspector_accepts_declared8GiB_only",
+      "pass": true
+    },
+    {
+      "check": "actual_inspector_rejects_swap_allowance_above8GiB",
+      "pass": true
+    },
+    {
+      "check": "server_budget_stays8CPU16GiB",
+      "pass": true
+    },
+    {
+      "check": "actual_inspector_accepts8CPU8GiB_and_rejects4CPU_claim",
+      "pass": true
+    },
+    {
+      "check": "actual_saved_four_shard_run_independently_passes",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_accepts_observed8GiB_with_matching_explicit_plan",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_rejects_observed8GiB_against4GiB_plan",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_rejects_declared8GiB_with_observed4GiB",
+      "pass": true
+    },
+    {
+      "check": "config_protocol_memory_mismatch_rejected",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_accepts_observed8CPU8GiB_matching_plan",
+      "pass": true
+    },
+    {
+      "check": "client_CPU_utilization_uses_declared8CPU_denominator",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_rejects_observed8CPU_against4CPU_plan",
+      "pass": true
+    },
+    {
+      "check": "config_protocol_CPU_mismatch_rejected",
+      "pass": true
+    },
+    {
+      "check": "phase_audit_rejects_observed4CPU_against8CPU_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_explicit4GiB_receipt_and_immutable_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_explicit8GiB_receipt_and_immutable_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_rejects_unsupported6GiB_before_writing_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_default4GiB_preserves_historical_budget",
+      "pass": true
+    },
+    {
+      "check": "prepare_explicit8CPU8GiB_receipt_and_fixed_server",
+      "pass": true
+    },
+    {
+      "check": "prepare_rejects_unsupported6CPU_before_writing_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_default4CPU_preserves_historical_budget",
+      "pass": true
+    },
+    {
+      "check": "prepare_freezes_explicit_local_CPU_scope_in_source_config_receipt",
+      "pass": true
+    },
+    {
+      "check": "prepare_rejects_unknown_CPU_scope_before_writing_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_freezes_growth1.1_with_source_config_receipt",
+      "pass": true
+    },
+    {
+      "check": "prepare_freezes_growth2_with_source_config_receipt",
+      "pass": true
+    },
+    {
+      "check": "prepare_rejects_unsupported_growth1.2_before_writing_plan",
+      "pass": true
+    },
+    {
+      "check": "prepare_rejects_unsupported_growthTrue_before_writing_plan",
+      "pass": true
+    },
+    {
+      "check": "default_growth_preserves_doubling_policy",
+      "pass": true
+    },
+    {
+      "check": "config_protocol_growth_mismatch_rejected",
+      "pass": true
+    },
+    {
+      "check": "whole_VM_CPU_only_exception_local_pass_preserves_native_LG_failure",
+      "pass": true
+    },
+    {
+      "check": "same_whole_VM_CPU_only_fixture_remains_invalid_under_default_native_policy",
+      "pass": true
+    },
+    {
+      "check": "whole_VM_CPU_exception_does_not_waive_actual_client_cgroup80pct",
+      "pass": true
+    },
+    {
+      "check": "unknown_native_generator_reason_is_not_waived",
+      "pass": true
+    },
+    {
+      "check": "false_native_CPU_reason_is_not_waived",
+      "pass": true
+    },
+    {
+      "check": "CPU_summary_not_matching_timeline_is_not_waived",
+      "pass": true
+    },
+    {
+      "check": "whole_VM_CPU_plus_actual_sampler_stall_remains_invalid",
+      "pass": true
+    },
+    {
+      "check": "hidden_timeline_stall_is_independently_rejected",
+      "pass": true
+    },
+    {
+      "check": "histogram_quantile_tampering_remains_invalid_under_local_policy",
+      "pass": true
+    },
+    {
+      "check": "unsupported_or_mismatched_CPU_scope_policy_is_rejected",
+      "pass": true
+    },
+    {
+      "check": "genuine_saved160k_stall_remains_invalid_with_new_local_policy",
+      "pass": true
+    },
+    {
+      "check": "raw1024_limit_rejected_even_if_helper_valid_true",
+      "pass": true
+    },
+    {
+      "check": "false_merged_rps_rejected",
+      "pass": true
+    },
+    {
+      "check": "native_generator_limit_never_yields_score",
+      "pass": true
+    },
+    {
+      "check": "wall_clock_jump_never_yields_server_failure",
+      "pass": true
+    }
+  ],
+  "prepare_receipts": [
+    {
+      "memory": 4294967296,
+      "source_config_sha256": "88b9d4d3b750d22bd38d2991fe0f8e8f4fcf1e06c1b7993f5e5e8d1e8bac7c0a",
+      "plan_sha256": "dcd70c79687f6e46fe626cbca0f285f645c44306d2629fa481dea1aea2ebdf91"
+    },
+    {
+      "memory": 8589934592,
+      "source_config_sha256": "ed130510fdc464ad5026ae7442cb539ef4a863644a616b418fbf74408fd5b750",
+      "plan_sha256": "8a629de44cd4a9f809fd58975bc5d67d2893472574f97aef2bcfd391ce024411"
+    },
+    {
+      "cpus": 8,
+      "memory": 8589934592,
+      "source_config_sha256": "a8060cc974498a2f7a5aec3a088dcf060ca6258d9d18f39ca5598af5d9be57a4",
+      "plan_sha256": "ee9f7ce4ffe8f886023e7c558e6e46022c3efec24e12297bb5dab543d06f2798"
+    },
+    {
+      "client_cpu_scope_policy": "dedicated_client_cgroup_v1",
+      "source_config_sha256": "0550557fb76f9e7d8277da438e0c97f1dc6023c8e96ed8438f4735998c163531",
+      "plan_sha256": "29484fa3f37d9f599db90b8d2a61b4a28bbd0b7a72ae84f472796979a0ed6372"
+    },
+    {
+      "growth_factor": 1.1,
+      "source_config_sha256": "9b78315af3e61f5a485d9ade877532721f79e56f5a84d1c545e2a00bde425f70",
+      "plan_sha256": "f0c3201fcc5a74bfd03b0215749e61e80fea6b5b716680b023cf77a84b2da08b"
+    },
+    {
+      "growth_factor": 2,
+      "source_config_sha256": "8e78ed73ccd4250fec21de3ad32839b173886002d9432ec0eb5e0d9da650305a",
+      "plan_sha256": "0ba2764c3cae79c7035350859590f827c00732487944cc9e465e3954e984c6ce"
+    }
+  ],
+  "docker_or_benchmark_execution": false
+}

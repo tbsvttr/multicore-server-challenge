@@ -1,0 +1,24 @@
+{
+  "environment": {
+    "WORKERS": "1",
+    "PG_READERS": "1",
+    "PG_READ_GROUPS": "1",
+    "HASHERS": "1",
+    "READ_BATCH": "32",
+    "READ_HOLD": "1",
+    "READ_BATCH_US": "5000",
+    "WRITE_BATCH_US": "1000",
+    "ARTICLE_BATCH": "1",
+    "BCRYPT_BATCH_MS": "250",
+    "JWT_SECRET": "multicore-server-challenge",
+    "HOST": "127.0.0.1",
+    "PORT": "3039",
+    "PGHOST": "127.0.0.1",
+    "PGPORT": "5432",
+    "PGUSER": "postgres",
+    "PGPASSWORD": "challenge-test-only"
+  },
+  "base": "http://127.0.0.1:3039",
+  "direct_database_url": "postgres://postgres:challenge-test-only@127.0.0.1:5432/mc_pair_reader_20261023t181010_2fa4e2",
+  "proxy_database_url": "postgres://conduit:conduit@127.0.0.1:15439/mc_pair_reader_20261023t181010_2fa4e2"
+}

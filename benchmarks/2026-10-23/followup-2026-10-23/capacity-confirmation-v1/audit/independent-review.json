@@ -1,0 +1,46 @@
+{
+  "schema": "selected-point-confirmation-independent-source-review-v1",
+  "review_mode": "read_only_source_comparison",
+  "runtime_executed": false,
+  "active_capacity_raw_read": false,
+  "status": "PASS_SOURCE_REVIEW",
+  "current_draft_runtime_and_case_settings_match_first_study": true,
+  "first_study_config": "profiles/capacity-v4-sourceB-config.json",
+  "first_study_config_sha256": "0cc5ef66bedc637934a9b657b84fb4d2c3c487e9eb5e45e1fe870ef19eabad53",
+  "reviewed_source_sha256": {
+    "capacity_controller.py": "c159a66c410d23e5358ee619ac278f7ce13fe366a5321a35b94faf2aa6b75d8f",
+    "audit/aggregate.py": "835c88cb6f78e422fd1c325fc16ea015ff007095fcea607413fd28714d8acbda",
+    "search_policy.py": "fd5035f23358a512a6698b38853fc6187278050b162a740498d6254d16d9acb9",
+    "audit/evidence.py": "1d4617d3d9374c3643a1341dec23b8573ead1829d84d5da8d4007e4f17bfe653",
+    "audit/primitives.py": "e7db1d4fe11cfc753a0dba8dcb2204716289b7e0d06b7c283f15a32be77f3b12",
+    "cases-DRAFT.json": "ff3c0790145ed8b16560b3818be218d3e14da9f4588c1b91ee0d4b60508afd67"
+  },
+  "reviewed_document_sha256": {
+    "README.md": "40a2bd0bb2f10a5aa3e2793700892221266a1e64ca74190669918413d6070b6a",
+    "DELTAS.md": "f5e06c2fa0eaeac4c641c6162361ad7d7c3ccb78ae5d252ef632fed549c00083"
+  },
+  "unchanged_v4_files": ["search_policy.py", "audit/evidence.py", "audit/primitives.py"],
+  "findings": [],
+  "resolved_findings": [
+    {
+      "id": "CONFIRMATION_CONFIG_DRIFT_NOT_BOUND_TO_REFERENCE",
+      "priority": "P2",
+      "status": "RESOLVED_IN_FINAL_SOURCE_REVIEW",
+      "initial_controller_sha256": "95bfbc24b83d892512e418c4a90c86d6c1c4a26e167976696066fda8e2fbf486",
+      "file": "capacity_controller.py",
+      "line": 43,
+      "witness": "validate_confirmation checks first-study row binary/count/300s qualification but does not compare case env or common effective configuration. Changing cases[0].env.READ_BATCH_US leaves those checks unchanged; audit/evidence.py:61 checks runtime only against the changed new case.",
+      "resolution": "confirmation_inputs at lines43-51 compares full effective configuration/case records; lines82-92 bind the original V4 plan to its completed audit raw-input SHA. Search overrides are rejected. Validation is used by preparation, execution and aggregate audit."
+    }
+  ],
+  "preserved": {
+    "fixed_warmup_probe_hold": true,
+    "stop_on_failure_or_invalidity_without_retry": true,
+    "fresh_case_continuous_session": true,
+    "native_and_local_qualification_separate": true,
+    "all_started_phases_preserved": true,
+    "case_start_receipts_exactly_match_present_case_directories": true,
+    "new_maximum_claim_disabled": true
+  },
+  "limitations": ["Source-only review; synthetic tests were not executed by this reviewer.", "Reviewed draft cannot prepare until B selection and completed first-study reference/hash are filled."]
+}

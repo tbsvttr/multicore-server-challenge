@@ -1,0 +1,757 @@
+{
+  "status": "PASS",
+  "scope": "Completed Rust control only; Goose B still pending, no whole-study ranking/headline",
+  "study": "/private/tmp/multicore-comparison-20261023/optimization/capacity_20261023t192322_84394f",
+  "case": "rust7",
+  "checks": [
+    {
+      "check": "case_completed_and_stopped",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:predeclared_next_stage",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:full_saved_assessment_reproduced",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:all_raw_reconstruction_and_resource_checks",
+      "pass": true
+    },
+    {
+      "check": "01-warmup-10000:only_PASS_or_valid_SLO_boundary",
+      "pass": true
+    },
+    {
+      "check": "02-probe-100000:predeclared_next_stage",
+      "pass": true
+    },
+    {
+      "check": "02-probe-100000:full_saved_assessment_reproduced",
+      "pass": true
+    },
+    {
+      "check": "02-probe-100000:all_raw_reconstruction_and_resource_checks",
+      "pass": true
+    },
+    {
+      "check": "02-probe-100000:only_PASS_or_valid_SLO_boundary",
+      "pass": true
+    },
+    {
+      "check": "03-probe-110000:predeclared_next_stage",
+      "pass": true
+    },
+    {
+      "check": "03-probe-110000:full_saved_assessment_reproduced",
+      "pass": true
+    },
+    {
+      "check": "03-probe-110000:all_raw_reconstruction_and_resource_checks",
+      "pass": true
+    },
+    {
+      "check": "03-probe-110000:only_PASS_or_valid_SLO_boundary",
+      "pass": true
+    },
+    {
+      "check": "04-probe-120000:predeclared_next_stage",
+      "pass": true
+    },
+    {
+      "check": "04-probe-120000:full_saved_assessment_reproduced",
+      "pass": true
+    },
+    {
+      "check": "04-probe-120000:all_raw_reconstruction_and_resource_checks",
+      "pass": true
+    },
+    {
+      "check": "04-probe-120000:only_PASS_or_valid_SLO_boundary",
+      "pass": true
+    },
+    {
+      "check": "05-probe-130000:predeclared_next_stage",
+      "pass": true
+    },
+    {
+      "check": "05-probe-130000:full_saved_assessment_reproduced",
+      "pass": true
+    },
+    {
+      "check": "05-probe-130000:all_raw_reconstruction_and_resource_checks",
+      "pass": true
+    },
+    {
+      "check": "05-probe-130000:only_PASS_or_valid_SLO_boundary",
+      "pass": true
+    },
+    {
+      "check": "06-probe-140000:predeclared_next_stage",
+      "pass": true
+    },
+    {
+      "check": "06-probe-140000:full_saved_assessment_reproduced",
+      "pass": true
+    },
+    {
+      "check": "06-probe-140000:all_raw_reconstruction_and_resource_checks",
+      "pass": true
+    },
+    {
+      "check": "06-probe-140000:only_PASS_or_valid_SLO_boundary",
+      "pass": true
+    },
+    {
+      "check": "07-probe-135000:predeclared_next_stage",
+      "pass": true
+    },
+    {
+      "check": "07-probe-135000:full_saved_assessment_reproduced",
+      "pass": true
+    },
+    {
+      "check": "07-probe-135000:all_raw_reconstruction_and_resource_checks",
+      "pass": true
+    },
+    {
+      "check": "07-probe-135000:only_PASS_or_valid_SLO_boundary",
+      "pass": true
+    },
+    {
+      "check": "08-hold-130000:predeclared_next_stage",
+      "pass": true
+    },
+    {
+      "check": "08-hold-130000:full_saved_assessment_reproduced",
+      "pass": true
+    },
+    {
+      "check": "08-hold-130000:all_raw_reconstruction_and_resource_checks",
+      "pass": true
+    },
+    {
+      "check": "08-hold-130000:only_PASS_or_valid_SLO_boundary",
+      "pass": true
+    },
+    {
+      "check": "next_action_is_passing130k_hold_stop",
+      "pass": true
+    },
+    {
+      "check": "one_complete_300s_hold",
+      "pass": true
+    },
+    {
+      "check": "hold_metrics_and_zero_errors",
+      "pass": true
+    },
+    {
+      "check": "native_not_qualified_only_whole_VM_CPU",
+      "pass": true
+    },
+    {
+      "check": "both_upper_failures_are_valid_server_SLO",
+      "pass": true
+    },
+    {
+      "check": "resolved_local_interval_within5pct",
+      "pass": true
+    },
+    {
+      "check": "no_target_OOM_or_crash",
+      "pass": true
+    },
+    {
+      "check": "no_unfinished_VUs_at_recorded_end",
+      "pass": true
+    },
+    {
+      "check": "finished_case_inputs_unchanged_during_replay",
+      "pass": true
+    }
+  ],
+  "passed": 42,
+  "failed": 0,
+  "local_capacity_interval": {
+    "held_at_least_users": 130000,
+    "valid_failed_upper_users": 135000,
+    "measured_hold_seconds": 300
+  },
+  "official_score_or_rank": false,
+  "native_qualified_hold": false,
+  "predeclared_local_policy": "dedicated_client_cgroup_v1",
+  "hold": {
+    "phase": "08-hold-130000",
+    "stage": "hold",
+    "users": 130000,
+    "classification": "PASS",
+    "valid_server_failure": false,
+    "local_qualified": true,
+    "native_qualified": false,
+    "native_verdict": {
+      "pass": true,
+      "lg_limited": true,
+      "lg_reasons": [
+        "box 0 CPU 77% > 75%",
+        "box 1 CPU 77% > 75%",
+        "box 2 CPU 77% > 75%",
+        "box 3 CPU 77% > 75%",
+        "box 4 CPU 77% > 75%",
+        "box 5 CPU 77% > 75%",
+        "box 6 CPU 77% > 75%"
+      ]
+    },
+    "overall": {
+      "count": 10271933,
+      "rps": 34239.776666666665,
+      "p50_ms": 1.701,
+      "p90_ms": 8.863,
+      "p95_ms": 117.951,
+      "p99_ms": 580.095,
+      "max_ms": 1265.663,
+      "mean_ms": 24.70959433876761,
+      "errors": 0,
+      "error_rate": 0,
+      "statuses": {
+        "200": 10083308,
+        "201": 182200,
+        "204": 6425
+      }
+    },
+    "client_cgroup_utilization_pct": 20.236328782578056,
+    "zero_measured_errors": true,
+    "timeline_errors": 0,
+    "native_whole_vm_CPU_flag_count": 7,
+    "target_oom_delta": {
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0
+    },
+    "post_load_healthy": true,
+    "measurement_seconds": 300,
+    "terminal_active_vus_total": 0
+  },
+  "all_phases": [
+    {
+      "phase": "01-warmup-10000",
+      "stage": "warmup",
+      "users": 10000,
+      "classification": "PASS",
+      "valid_server_failure": false,
+      "local_qualified": true,
+      "native_qualified": true,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "overall": {
+        "count": 318249,
+        "rps": 2652.075,
+        "p50_ms": 0.189,
+        "p90_ms": 0.498,
+        "p95_ms": 1.605,
+        "p99_ms": 2.907,
+        "max_ms": 229.759,
+        "mean_ms": 0.5535194894563694,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 312356,
+          "201": 5769,
+          "204": 124
+        }
+      },
+      "client_cgroup_utilization_pct": 1.7002040668906568,
+      "zero_measured_errors": true,
+      "timeline_errors": 0,
+      "native_whole_vm_CPU_flag_count": 0,
+      "target_oom_delta": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "post_load_healthy": true,
+      "measurement_seconds": 120,
+      "terminal_active_vus_total": 0
+    },
+    {
+      "phase": "02-probe-100000",
+      "stage": "probe",
+      "users": 100000,
+      "classification": "PASS",
+      "valid_server_failure": false,
+      "local_qualified": true,
+      "native_qualified": true,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "overall": {
+        "count": 1591387,
+        "rps": 26523.116666666665,
+        "p50_ms": 0.451,
+        "p90_ms": 2.034,
+        "p95_ms": 2.789,
+        "p99_ms": 4.491,
+        "max_ms": 242.431,
+        "mean_ms": 0.9641276597081659,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 1562196,
+          "201": 28758,
+          "204": 433
+        }
+      },
+      "client_cgroup_utilization_pct": 20.189748271424772,
+      "zero_measured_errors": true,
+      "timeline_errors": 0,
+      "native_whole_vm_CPU_flag_count": 0,
+      "target_oom_delta": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "post_load_healthy": true,
+      "measurement_seconds": 60,
+      "terminal_active_vus_total": 0
+    },
+    {
+      "phase": "03-probe-110000",
+      "stage": "probe",
+      "users": 110000,
+      "classification": "PASS",
+      "valid_server_failure": false,
+      "local_qualified": true,
+      "native_qualified": true,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "overall": {
+        "count": 1747468,
+        "rps": 29124.466666666667,
+        "p50_ms": 0.746,
+        "p90_ms": 3.545,
+        "p95_ms": 5.251,
+        "p99_ms": 12.927,
+        "max_ms": 277.503,
+        "mean_ms": 1.6784585611868115,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 1715727,
+          "201": 31243,
+          "204": 498
+        }
+      },
+      "client_cgroup_utilization_pct": 21.410308600441493,
+      "zero_measured_errors": true,
+      "timeline_errors": 0,
+      "native_whole_vm_CPU_flag_count": 0,
+      "target_oom_delta": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "post_load_healthy": true,
+      "measurement_seconds": 60,
+      "terminal_active_vus_total": 0
+    },
+    {
+      "phase": "04-probe-120000",
+      "stage": "probe",
+      "users": 120000,
+      "classification": "PASS",
+      "valid_server_failure": false,
+      "local_qualified": true,
+      "native_qualified": true,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "overall": {
+        "count": 1904616,
+        "rps": 31743.6,
+        "p50_ms": 1.127,
+        "p90_ms": 14.527,
+        "p95_ms": 81.663,
+        "p99_ms": 143.615,
+        "max_ms": 408.575,
+        "mean_ms": 10.09908910090014,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 1870049,
+          "201": 34067,
+          "204": 500
+        }
+      },
+      "client_cgroup_utilization_pct": 22.644457246239778,
+      "zero_measured_errors": true,
+      "timeline_errors": 0,
+      "native_whole_vm_CPU_flag_count": 0,
+      "target_oom_delta": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "post_load_healthy": true,
+      "measurement_seconds": 60,
+      "terminal_active_vus_total": 0
+    },
+    {
+      "phase": "05-probe-130000",
+      "stage": "probe",
+      "users": 130000,
+      "classification": "PASS",
+      "valid_server_failure": false,
+      "local_qualified": true,
+      "native_qualified": false,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 CPU 78% > 75%",
+          "box 1 CPU 78% > 75%",
+          "box 2 CPU 78% > 75%",
+          "box 3 CPU 78% > 75%",
+          "box 4 CPU 78% > 75%",
+          "box 5 CPU 78% > 75%",
+          "box 6 CPU 78% > 75%"
+        ]
+      },
+      "overall": {
+        "count": 2049765,
+        "rps": 34162.75,
+        "p50_ms": 1.453,
+        "p90_ms": 237.055,
+        "p95_ms": 322.815,
+        "p99_ms": 466.175,
+        "max_ms": 875.007,
+        "mean_ms": 41.68621673411342,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 2012449,
+          "201": 36756,
+          "204": 560
+        }
+      },
+      "client_cgroup_utilization_pct": 24.47910421825095,
+      "zero_measured_errors": true,
+      "timeline_errors": 0,
+      "native_whole_vm_CPU_flag_count": 7,
+      "target_oom_delta": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "post_load_healthy": true,
+      "measurement_seconds": 60,
+      "terminal_active_vus_total": 0
+    },
+    {
+      "phase": "06-probe-140000",
+      "stage": "probe",
+      "users": 140000,
+      "classification": "FAIL_SLO",
+      "valid_server_failure": true,
+      "local_qualified": false,
+      "native_qualified": false,
+      "native_verdict": {
+        "pass": false,
+        "fail_reasons": [
+          "p95 1070 ms >= 500",
+          "p99 1366 ms >= 1000"
+        ],
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 CPU 83% > 75%",
+          "box 1 CPU 83% > 75%",
+          "box 2 CPU 83% > 75%",
+          "box 3 CPU 83% > 75%",
+          "box 4 CPU 83% > 75%",
+          "box 5 CPU 83% > 75%",
+          "box 6 CPU 83% > 75%"
+        ]
+      },
+      "overall": {
+        "count": 2126657,
+        "rps": 35444.28333333333,
+        "p50_ms": 4.579,
+        "p90_ms": 859.647,
+        "p95_ms": 1070.079,
+        "p99_ms": 1366.015,
+        "max_ms": 2283.519,
+        "mean_ms": 193.73923917491186,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 2088571,
+          "201": 37561,
+          "204": 525
+        }
+      },
+      "client_cgroup_utilization_pct": 26.416845452628145,
+      "zero_measured_errors": true,
+      "timeline_errors": 0,
+      "native_whole_vm_CPU_flag_count": 7,
+      "target_oom_delta": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "post_load_healthy": true,
+      "measurement_seconds": 60,
+      "terminal_active_vus_total": 0
+    },
+    {
+      "phase": "07-probe-135000",
+      "stage": "probe",
+      "users": 135000,
+      "classification": "FAIL_SLO",
+      "valid_server_failure": true,
+      "local_qualified": false,
+      "native_qualified": false,
+      "native_verdict": {
+        "pass": false,
+        "fail_reasons": [
+          "p95 742 ms >= 500",
+          "p99 1016 ms >= 1000"
+        ],
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 CPU 81% > 75%",
+          "box 1 CPU 81% > 75%",
+          "box 2 CPU 81% > 75%",
+          "box 3 CPU 81% > 75%",
+          "box 4 CPU 81% > 75%",
+          "box 5 CPU 81% > 75%",
+          "box 6 CPU 81% > 75%"
+        ]
+      },
+      "overall": {
+        "count": 2079740,
+        "rps": 34662.333333333336,
+        "p50_ms": 3.999,
+        "p90_ms": 603.135,
+        "p95_ms": 742.399,
+        "p99_ms": 1015.807,
+        "max_ms": 1421.311,
+        "mean_ms": 133.0792175161318,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 2041566,
+          "201": 37623,
+          "204": 551
+        }
+      },
+      "client_cgroup_utilization_pct": 25.159232143385328,
+      "zero_measured_errors": true,
+      "timeline_errors": 0,
+      "native_whole_vm_CPU_flag_count": 7,
+      "target_oom_delta": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "post_load_healthy": true,
+      "measurement_seconds": 60,
+      "terminal_active_vus_total": 0
+    },
+    {
+      "phase": "08-hold-130000",
+      "stage": "hold",
+      "users": 130000,
+      "classification": "PASS",
+      "valid_server_failure": false,
+      "local_qualified": true,
+      "native_qualified": false,
+      "native_verdict": {
+        "pass": true,
+        "lg_limited": true,
+        "lg_reasons": [
+          "box 0 CPU 77% > 75%",
+          "box 1 CPU 77% > 75%",
+          "box 2 CPU 77% > 75%",
+          "box 3 CPU 77% > 75%",
+          "box 4 CPU 77% > 75%",
+          "box 5 CPU 77% > 75%",
+          "box 6 CPU 77% > 75%"
+        ]
+      },
+      "overall": {
+        "count": 10271933,
+        "rps": 34239.776666666665,
+        "p50_ms": 1.701,
+        "p90_ms": 8.863,
+        "p95_ms": 117.951,
+        "p99_ms": 580.095,
+        "max_ms": 1265.663,
+        "mean_ms": 24.70959433876761,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 10083308,
+          "201": 182200,
+          "204": 6425
+        }
+      },
+      "client_cgroup_utilization_pct": 20.236328782578056,
+      "zero_measured_errors": true,
+      "timeline_errors": 0,
+      "native_whole_vm_CPU_flag_count": 7,
+      "target_oom_delta": {
+        "oom": 0,
+        "oom_kill": 0,
+        "oom_group_kill": 0
+      },
+      "post_load_healthy": true,
+      "measurement_seconds": 300,
+      "terminal_active_vus_total": 0
+    }
+  ],
+  "replayed_input_sha256": {
+    "cases/rust7/phases/01-warmup-10000/phase.json": "978923280111c04c8234047fb2d5b4bea86ff0b92c639bbb21c0202584cd162f",
+    "cases/rust7/phases/01-warmup-10000/assessment.json": "5927f2bc9594ffe02c7c9e3ae5c2be7352f4854705fe5fd14b60f5c1d5c1c2df",
+    "cases/rust7/phases/01-warmup-10000/before-load.json": "35d26c47a7984ec276132d528336d30c96c29b6171c67ed88dc52a97f0789c09",
+    "cases/rust7/phases/01-warmup-10000/after-load.json": "f20d1e679a35c91a303eac9e0416d612b07384f2ac96ba2f7b1160a5a9419574",
+    "cases/rust7/phases/01-warmup-10000/target-monitor.jsonl": "e603e28e76200bf82eb41edcc7873008c9f67ec6806830d6755a4a3e8b11ca09",
+    "cases/rust7/phases/01-warmup-10000/load-monitor.jsonl": "5b9248e84c74dc7b1b3feeda8eac1f43875c9f6a9a1afc8adeda214af4857bd0",
+    "cases/rust7/phases/01-warmup-10000/client-env-witness.json": "e954fb4cb450b7d4fa0a393d60976500706d1f652e071d788aa439a62f294575",
+    "cases/rust7/phases/01-warmup-10000/merged.json": "0f5d1286bddfcc95968e72ea3d274330afde184dfa53225a711d14659f5c24a8",
+    "cases/rust7/phases/01-warmup-10000/load-commands.json": "c3beae47bd795f5cb1a46d7ddd0df2ab43d2599225f7cadff7b1a3791e42db1d",
+    "cases/rust7/phases/01-warmup-10000/box0.json": "118c868e4ea6e483f974febcda8961711e41f1e3619f14ede0d7bf30d9b62b50",
+    "cases/rust7/phases/02-probe-100000/phase.json": "cd1be2b339c54f7fd321a1e9c72f4349e54562b8c501ba1d7bbe70483f579322",
+    "cases/rust7/phases/02-probe-100000/assessment.json": "05bf575112b24c7c4344d747b1d1b96eb7c7c0af880173abc0ea68d8b09e8ca5",
+    "cases/rust7/phases/02-probe-100000/before-load.json": "b6ffd53a525298174ce76df187ad3aa10505b599618abaab871a4a7db280093a",
+    "cases/rust7/phases/02-probe-100000/after-load.json": "8ebcc33e0d6045b9a3eb7d9ada56164fdf3f62e8cc1465053a6413a068039d42",
+    "cases/rust7/phases/02-probe-100000/target-monitor.jsonl": "1268318dfd51bff97b7809219d0109cc2cba0a160d42c135a8cd01608a3cb656",
+    "cases/rust7/phases/02-probe-100000/load-monitor.jsonl": "50c2d969c470be34d28fba9998a0eae2c1736f4bda0db113f008365b99b607c8",
+    "cases/rust7/phases/02-probe-100000/client-env-witness.json": "ea4f247986e44f4d8fd4dfb8ba36da0cc3aa220c8f4c257cfb9fe9afc371b06d",
+    "cases/rust7/phases/02-probe-100000/merged.json": "6d35ffa8ebafe5e41ac2a39eb4789b982159806b17fc64d04e9bc6e1c12509c8",
+    "cases/rust7/phases/02-probe-100000/load-commands.json": "94a78b26a8d5c0b7d36991c5e287cf7b7de32092281f118ec7247c875b41138e",
+    "cases/rust7/phases/02-probe-100000/box0.json": "9b1afb1e469622de57f2a97705fff4fb8b990476e31a78334c8c43d9ae5ba268",
+    "cases/rust7/phases/02-probe-100000/box1.json": "618e69b036c05fd3ff9c210836cdff354f867d099a720f56aea173555ae6c598",
+    "cases/rust7/phases/02-probe-100000/box2.json": "91a6be40ecd7ce677dd0868ff354dc9aa6772caf0b3eb85b91e9b8485d741cba",
+    "cases/rust7/phases/02-probe-100000/box3.json": "f6d4f0588cdc2f9f84968f4f35032301153442c92c5a8070c59dbfe31522b513",
+    "cases/rust7/phases/02-probe-100000/box4.json": "f95f12e7b9b70818d8b6dee263b5f1ff82faf8139fc10aabcc06d2706e29b21d",
+    "cases/rust7/phases/03-probe-110000/phase.json": "e3e02ddd5f2261966006377309c9749ce06e677c27503c5bf16b6c826bc4b88c",
+    "cases/rust7/phases/03-probe-110000/assessment.json": "183c0ad422f8fe79fa4dd0bb9dd58a8b583072214aae6b7b6e11c6a4c010160d",
+    "cases/rust7/phases/03-probe-110000/before-load.json": "739fade30d2878fdc8ab5d2dd58f30b9f3262592ad68cb4722f8c819050e65f4",
+    "cases/rust7/phases/03-probe-110000/after-load.json": "93954e0814e804c546408dfd1b55ab62e9099a3d9334d0f1d81e223d583952f2",
+    "cases/rust7/phases/03-probe-110000/target-monitor.jsonl": "52b1be4b238f5b1f2d9cb7d4f6be2e119aca156f9a4a63b0b959c012ae5ab874",
+    "cases/rust7/phases/03-probe-110000/load-monitor.jsonl": "17b06c8ae77ddfcc4529fe5d4f5db2852c3121f50481fb5e22b7a730243863e1",
+    "cases/rust7/phases/03-probe-110000/client-env-witness.json": "40307d83509e0736977b213e63cbb6b391438d3b10476056f12aa2db817b867a",
+    "cases/rust7/phases/03-probe-110000/merged.json": "d6d505b7c4b0dd45776793f6a3650c0883336e64c81ef0e2b332d3a26040a87b",
+    "cases/rust7/phases/03-probe-110000/load-commands.json": "386465c6952dd142504d062664e914de9a632d14ef7c7c809e29e30e6ed8b404",
+    "cases/rust7/phases/03-probe-110000/box0.json": "62a4c1e4e9ccf6bf89b19636849c5be01e8d793b9cf09b4cb3085538498e737b",
+    "cases/rust7/phases/03-probe-110000/box1.json": "98d4b71c60f69c612f9433edba305d7b7b0cbac4c6775663d671d76757587a72",
+    "cases/rust7/phases/03-probe-110000/box2.json": "6422e287d69ef2a2373e48180b4316e3edaf9188c7c11317a4e30ee0e282585b",
+    "cases/rust7/phases/03-probe-110000/box3.json": "389890d412c4b0a483cff193d272cf953774776b73edc3eb1074a954572f7b5b",
+    "cases/rust7/phases/03-probe-110000/box4.json": "3293dd6a989cb1f9cc6e1e01b7883a118ac77611aff015e1115ef1999c77cafe",
+    "cases/rust7/phases/03-probe-110000/box5.json": "7df1fc85e878bec18de52b4f50150375df3a5fb715319bfc9c041c75226884ab",
+    "cases/rust7/phases/04-probe-120000/phase.json": "d2c527ca6bbc3d438b05e3deccd0b8a6dd2e52dd713fa4975dabcd75f467fc07",
+    "cases/rust7/phases/04-probe-120000/assessment.json": "a91d3065be538b5f0163bedcb769b47b10d5667c10750a88ae4885c14046b1ed",
+    "cases/rust7/phases/04-probe-120000/before-load.json": "0f1f22d4cbd4f73e444014b5b8edf2a50cbeae556b1b48ddb234b8de4ec8af52",
+    "cases/rust7/phases/04-probe-120000/after-load.json": "a5ebbc3a14654552cc33f89dbf9d548f9d1ca6f842902c04d77cf3e431165363",
+    "cases/rust7/phases/04-probe-120000/target-monitor.jsonl": "67225c1e98a90e8aba82fa075412046a80a5bdd6400e2e79e16f744296161690",
+    "cases/rust7/phases/04-probe-120000/load-monitor.jsonl": "f32b5918f0e98e56094f6ab9e26da1898cdedd7caf7599d48ecdeb07e8a23783",
+    "cases/rust7/phases/04-probe-120000/client-env-witness.json": "e43b17e127acd075837aa2f49fca8989929ad26a26f0d6cce2577c83e3037083",
+    "cases/rust7/phases/04-probe-120000/merged.json": "bb90278f27d86e100f921fe56da589f26201f9374b283c2cd407feb45afc5dd3",
+    "cases/rust7/phases/04-probe-120000/load-commands.json": "6cf189ef44f2f5f05dbb43e86ed07fd80d4931d5eb5b2096084903acbadccce5",
+    "cases/rust7/phases/04-probe-120000/box0.json": "e835c0e90cd94ce724921046bc538cb7811f83873346537160212af2b5d17b55",
+    "cases/rust7/phases/04-probe-120000/box1.json": "92708fc6179d177de3a6bf758e8479457ddd991894762e18ffbca8f4fd8e4dbb",
+    "cases/rust7/phases/04-probe-120000/box2.json": "b2856e9ba3b680c61d5d016b6aa080689bd4ed1de991d069a0e7bace8e6c6ec2",
+    "cases/rust7/phases/04-probe-120000/box3.json": "21c7efa79de1621ca60749f2f8783b6b150b2034ee7b1444160b30c16a3170f4",
+    "cases/rust7/phases/04-probe-120000/box4.json": "90a68035c4ded25bc1e5c3bdaa2ce0974986396e8e34f7d7c64aada9e50fe80b",
+    "cases/rust7/phases/04-probe-120000/box5.json": "883069e2901cca3bef4b0883c8f031cea6a7be97bd5729582f51ad5e320b5759",
+    "cases/rust7/phases/05-probe-130000/phase.json": "c46a8d27312891aea0a1c2c0a20b9ad2d54e24806f52cede9bd2cd4ffd88edff",
+    "cases/rust7/phases/05-probe-130000/assessment.json": "0c15d3c2399909aeb80bd4a5041bb39f05650e18f2239eab4956f5c5a4d4e116",
+    "cases/rust7/phases/05-probe-130000/before-load.json": "280aa1acc2d601acd51a97acfa83a84765de2931b554eb7b1c92b8d9597e2877",
+    "cases/rust7/phases/05-probe-130000/after-load.json": "a3624c271da912eec58596473aeeb6d27de7a98c234873ec7c20517c0b941ae7",
+    "cases/rust7/phases/05-probe-130000/target-monitor.jsonl": "f0ec7b204d8c4299cf24a3d4040e1250f2154738b76cb87c9cc26ff4146d6112",
+    "cases/rust7/phases/05-probe-130000/load-monitor.jsonl": "643c0f0b6e92559f7226f9c16061d63022798a99d55ca0e17b090c39a847ae58",
+    "cases/rust7/phases/05-probe-130000/client-env-witness.json": "5e3f92fc0784b9c55dbec3e64e287885bb5e64b165777e9f04b975fc3a166cff",
+    "cases/rust7/phases/05-probe-130000/merged.json": "c740f96b75c5d470e314035c4f150af1a2621da545724fbc02a75c351b46580d",
+    "cases/rust7/phases/05-probe-130000/load-commands.json": "d9496ebf7d165c324caf7080bc422e0d9d8fe92a55f764b9eae47e92f4adbcd0",
+    "cases/rust7/phases/05-probe-130000/box0.json": "db8fc34fe558f0eaebec6aef8db549dad1fcdfc6ad371e75faff25335e326414",
+    "cases/rust7/phases/05-probe-130000/box1.json": "3b9c4427a33325a2134ea32130b0d06340dddf3d6d628b2af8d5053ce6c06563",
+    "cases/rust7/phases/05-probe-130000/box2.json": "ec87f405fae7a45876757e73b830964bb643a5b498cc921428c502ba34da6e13",
+    "cases/rust7/phases/05-probe-130000/box3.json": "5f0c2c2d22e6630a15160f843ea80f32878f489a5579484b1e5ab8bf65a0955b",
+    "cases/rust7/phases/05-probe-130000/box4.json": "8717c59a1c8e73077401afde18e88b5ce214612c07222e7bc7e87e035673b8ed",
+    "cases/rust7/phases/05-probe-130000/box5.json": "6ca78a1c1c4aacd03f604809605582219bec01e452dab23a2824aadcf9bad988",
+    "cases/rust7/phases/05-probe-130000/box6.json": "3fa90ac8d3d2d24031729a92088e74950cda1d035023454c735db205988bfce2",
+    "cases/rust7/phases/06-probe-140000/phase.json": "c3f9eff84d0240d891ee4ca335e12d42d599bdcd01c6570b2d70c2a478b9d4b3",
+    "cases/rust7/phases/06-probe-140000/assessment.json": "22edf0ad277960e6a137082fdfc3e196332ac2896b23ba310fae40c023a2afe3",
+    "cases/rust7/phases/06-probe-140000/before-load.json": "4eca5a257c7049bd3811b16ff2a0b97f09096a20d42a8309a195a98e1c4488c8",
+    "cases/rust7/phases/06-probe-140000/after-load.json": "772d22fdcdf22e7c698573781924d3d66c9fa5cbb4f8a3fb91ba7cf30b8a9cf8",
+    "cases/rust7/phases/06-probe-140000/target-monitor.jsonl": "1abcecd1516840ee11fe88adf415e3b6e19b44de1224e5c7d8e9cf1efa31b300",
+    "cases/rust7/phases/06-probe-140000/load-monitor.jsonl": "cd9948a293922878c2b238832f3411295862e937f6b365de3a758c3a2d7ff557",
+    "cases/rust7/phases/06-probe-140000/client-env-witness.json": "472eada3838fad9dd53e3cd19a970773a597effa3af2ea009912f0ec64337dec",
+    "cases/rust7/phases/06-probe-140000/merged.json": "1f8e74b03f9cf149f03bcca74abaf120905c54abf4f1ea5fcc08c8da42c544be",
+    "cases/rust7/phases/06-probe-140000/load-commands.json": "6baded30632788d8c85fdada7926b674de79b88e69331f00f46d80d5577003b1",
+    "cases/rust7/phases/06-probe-140000/box0.json": "8e7a6c013b1597eefd13d9e95d499d9f353ad1df43070168df05b31ac451299c",
+    "cases/rust7/phases/06-probe-140000/box1.json": "111a9d0dcf642e0e1231243e11bf62dd36378568c148ef896835284db62198fb",
+    "cases/rust7/phases/06-probe-140000/box2.json": "f8d3eb05efa7a7cbaa9db6d17f6115842d3c78f2529c3d58d6d1b064109228f9",
+    "cases/rust7/phases/06-probe-140000/box3.json": "91c2cf107f25cb8338268b760517767b58d6488c9b4a41e4a2aaad96b0ce2c3a",
+    "cases/rust7/phases/06-probe-140000/box4.json": "0b031b44f2c11adea5ea3f4507da065d8855e7953ef52c07e7de3135d66147ad",
+    "cases/rust7/phases/06-probe-140000/box5.json": "5a353937a933163430698239b15645caaca83e519775a6127a2da65f9c74530a",
+    "cases/rust7/phases/06-probe-140000/box6.json": "e1f954e55c67eaac26f233daff17e3f8ccead5a80ffb155869163b948ffaa2d4",
+    "cases/rust7/phases/07-probe-135000/phase.json": "ed47b2342221bf52b4836fe97642731a75361db12b65424122168ef9816a429e",
+    "cases/rust7/phases/07-probe-135000/assessment.json": "643230e7d491dd5d18d219bea7a4b9b6536bbeee18bb177d49f56f48a27f02e7",
+    "cases/rust7/phases/07-probe-135000/before-load.json": "a8730338b74c10c9bdc3c9d272e87f20a31b68ef543087113db914abdb6a2d1c",
+    "cases/rust7/phases/07-probe-135000/after-load.json": "958a5315c7c31aae8d1e80983c22bad51dcaddb1a342c9f4114ced8c62ee3bf7",
+    "cases/rust7/phases/07-probe-135000/target-monitor.jsonl": "57563daf71e7a96d41341850055e8db3d93a9aac58e51202ab69d05713987328",
+    "cases/rust7/phases/07-probe-135000/load-monitor.jsonl": "8b761a6078d6bcc1c0ffa428a8ddd1d1f156192a3687b94c0b489573e4858423",
+    "cases/rust7/phases/07-probe-135000/client-env-witness.json": "ec5268a4bf042f88ea9dc39621d40fdb71c3a6f63596848961be6afcffa1740c",
+    "cases/rust7/phases/07-probe-135000/merged.json": "db301053308ec0dba9052e5b1eba55f641742c46646ea765d503034eb72217b4",
+    "cases/rust7/phases/07-probe-135000/load-commands.json": "f9e9694e9a442dc982eee59709576a585b7179ad196fdf4fac75cba4cff2ff80",
+    "cases/rust7/phases/07-probe-135000/box0.json": "aaf5dba5efe98db2fc9cc11fa9a4a11da6bea1495146130b49e13caca2cb7882",
+    "cases/rust7/phases/07-probe-135000/box1.json": "b2ded742be6511ce57c479d4ecb9a463c842c2ab2d05dc1f136c7b1f92d52505",
+    "cases/rust7/phases/07-probe-135000/box2.json": "fe5d43c19584dc4838bce9438e7bbe2e1808974475b6f4d1f062dc5be21dc13e",
+    "cases/rust7/phases/07-probe-135000/box3.json": "9d88184af3726de2bf3a09714d7faaf2dc6d8421635d81cc82a233466977557f",
+    "cases/rust7/phases/07-probe-135000/box4.json": "020a88862aa0a927d9bf83da1c00412d7137d7b18ec1488cd9401b0e0057f90c",
+    "cases/rust7/phases/07-probe-135000/box5.json": "b769e1be8a557c77545008d85b8067d7e9f9ca59324e9f6765818ed2d5281bad",
+    "cases/rust7/phases/07-probe-135000/box6.json": "a90f1e144ffa1180f7f529a5a728143f41d419994908189896006aabad0fa063",
+    "cases/rust7/phases/08-hold-130000/phase.json": "30b0b698bb98c92d782ec4c4047eae6e0d825cdd31a8f0571be189b1f81ff5b7",
+    "cases/rust7/phases/08-hold-130000/assessment.json": "3cab61365544a33bf5729b0f06517dd45168d54d4910f8df7be5757730404eb1",
+    "cases/rust7/phases/08-hold-130000/before-load.json": "388d7bb641ea2b2c0df53e8e30d9be07e73374b498a5de6ace96ffd855e1d53b",
+    "cases/rust7/phases/08-hold-130000/after-load.json": "b97ba288d2a9e16f911f6d1999f414c8449752a8e466a258337a8b5f5a6f747c",
+    "cases/rust7/phases/08-hold-130000/target-monitor.jsonl": "3aaa196c60f4f4f92c05f4d6752dbbbf78cc26513c80eae2f7b5167009db6c67",
+    "cases/rust7/phases/08-hold-130000/load-monitor.jsonl": "0a727b923bef3a16c7bb7c0112572c0629d1ebfa8c6c787622c453a69cb9ea48",
+    "cases/rust7/phases/08-hold-130000/client-env-witness.json": "570e4023ff99d0f0fedff28f55bc1c29a4fcc989c5ce2c96118fb0eed97918f3",
+    "cases/rust7/phases/08-hold-130000/merged.json": "ff47467917706511eaa6b649f1f5c6e00ede1bb650b15c0d3071a7ef3d08028a",
+    "cases/rust7/phases/08-hold-130000/load-commands.json": "1f6472c19aa306d3d3fb9b26047826ca688c06ea794c4506e047b2b0d95ec326",
+    "cases/rust7/phases/08-hold-130000/box0.json": "5bcee07e2a4a12f3e180c253adb32eaa084d3b3558a7becaa6f6773598152d85",
+    "cases/rust7/phases/08-hold-130000/box1.json": "737b83256f5fe58114107f9a5be01f2db71295675e73bafe76f79f1bca35b70a",
+    "cases/rust7/phases/08-hold-130000/box2.json": "2f522b20dee1764cf7519391d5658530a3708626cec0e72c2a8103d0e84e860f",
+    "cases/rust7/phases/08-hold-130000/box3.json": "a70554a5995d0df2b029a941c64f8375f7128638d08f378101984bfe33a944d7",
+    "cases/rust7/phases/08-hold-130000/box4.json": "d5b28956cb4adb101b66b9da74028ce6cf1618154974b14daa71b07c3ee22526",
+    "cases/rust7/phases/08-hold-130000/box5.json": "267b45f6d9f97be24627a9f585b1d909fcf1c7c066de11f1a8ed89a8bd1206d3",
+    "cases/rust7/phases/08-hold-130000/box6.json": "65f0ed2272ef351c77c81539c8b53f69fd447af4b7ffdb02e7e0563540134255"
+  },
+  "frozen_auditor_sha256": {
+    "audit/evidence.py": "1d4617d3d9374c3643a1341dec23b8573ead1829d84d5da8d4007e4f17bfe653",
+    "audit/primitives.py": "e7db1d4fe11cfc753a0dba8dcb2204716289b7e0d06b7c283f15a32be77f3b12",
+    "search_policy.py": "fd5035f23358a512a6698b38853fc6187278050b162a740498d6254d16d9acb9"
+  },
+  "limitations": [
+    "Local shared ARM study, not the official dedicated x86 leaderboard.",
+    "Native whole-VM CPU flags remain unchanged and visible; local qualification uses preregistered external-client cgroup scope.",
+    "Global final study aggregation waits for Goose B/session completion.",
+    "No runtime, Docker, SQL, network, observer or active peer-case access."
+  ],
+  "independent_session_review": {
+    "path": "/private/tmp/multicore-optimize-20261023/audit/rust-v4-session-independent.json",
+    "sha256": "d9a535620e8b70cdf9581713b8159bcaa604b8c40f3d6d219cb4add63b3a3b75",
+    "checks_passed": 24,
+    "checks_failed": 0,
+    "scope": "Rust frozen source/binary/full197, continuous fresh DB/app identity, exact search/drains, cleanup; no B access/hist duplication"
+  }
+}

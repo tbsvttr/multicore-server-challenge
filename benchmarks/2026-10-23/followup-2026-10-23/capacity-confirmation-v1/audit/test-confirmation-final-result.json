@@ -1,0 +1,119 @@
+{
+  "schema": "confirmation-synthetic-final-test-proof-v1",
+  "created_utc": "2026-10-23T20:31:35.021682+00:00",
+  "status": "PASS",
+  "controller_tests_passed": 12,
+  "aggregate_tests_passed": 7,
+  "total_test_methods_passed": 19,
+  "reported_runtime_seconds": {
+    "controller": 0.124,
+    "aggregate": 0.56
+  },
+  "source_sha256": {
+    "audit/test_confirmation.py": "eb48ebbba200c895d712ec137890dd246e9a3422fdf6d2db1b2925952f390729",
+    "audit/test_confirmation_audit.py": "5780a56f03043f49463907cf2e4330be32193d7973355666a227ad4018727b52",
+    "capacity_controller.py": "c159a66c410d23e5358ee619ac278f7ce13fe366a5321a35b94faf2aa6b75d8f",
+    "audit/aggregate.py": "835c88cb6f78e422fd1c325fc16ea015ff007095fcea607413fd28714d8acbda"
+  },
+  "test_methods": {
+    "audit/test_confirmation.py": [
+      "test_PASS_without_exact_true_eligibility_cannot_confirm",
+      "test_actions_are_fixed_independent_and_boundary_validated",
+      "test_actual_outer_run_keeps_B_then_Rust_order_after_B_stops",
+      "test_cleanup_failure_prevents_starting_next_case",
+      "test_each_stage_stops_on_SLO_or_invalid_without_retry_or_stepdown",
+      "test_local_PASS_retains_native_flags_and_raw_errors_verbatim",
+      "test_phase_exception_still_cleans_single_session_and_retains_failed_artifacts",
+      "test_placeholder_cannot_prepare_or_create_a_runtime_directory",
+      "test_reference_binds_effective_source_environment_and_runtime_inputs",
+      "test_reference_hash_and_selected_order_cannot_be_silently_changed",
+      "test_reference_requires_completed_exact_binary_qualified300second_points",
+      "test_success_uses_one_continuous_session_and_exact300second_hold"
+    ],
+    "audit/test_confirmation_audit.py": [
+      "test_PASS_without_exact_true_eligibility_does_not_confirm",
+      "test_case_start_wrong_order_duplicate_or_missing_cannot_confirm_both",
+      "test_exact_three_actions_confirm_points_with_native_flags_without_maximum",
+      "test_failed_or_invalid_warmup_probe_or_hold_never_confirms",
+      "test_genuinely_unstarted_next_case_retains_partial_evidence_without_both_confirmed",
+      "test_phase_after_failure_is_retained_and_invalidates_confirmation",
+      "test_wrong_phase_count_order_users_or_fourth_phase_cannot_confirm_both"
+    ]
+  },
+  "commands": [
+    [
+      "python3",
+      "-B",
+      "/private/tmp/multicore-optimize-20261023/capacity-confirmation-v1/audit/test_confirmation.py"
+    ],
+    [
+      "python3",
+      "-B",
+      "/private/tmp/multicore-optimize-20261023/capacity-confirmation-v1/audit/test_confirmation_audit.py"
+    ]
+  ],
+  "scope": "Synthetic TemporaryDirectory fixtures only. Real Controller.run_case/run and aggregate.audit_run were exercised through explicit fake boundaries. subprocess.run/Popen were guarded against external execution. No Docker, SQL, sockets, network, build, workload, active V4 data, actual prior study, or real confirmation plan was used.",
+  "selected_fixture_counts_are_not_observed_benchmark_results": true,
+  "aggregate_stubs_explicit": [
+    "audit_phase",
+    "conformance",
+    "validate_confirmation"
+  ],
+  "coverage": [
+    "one continuous fresh fake clone/app per case and original60/120/15,60/60/15,60/300/15 phase durations",
+    "fixed selected point; stop-on-any invalid/SLO/ineligible outcome; no retry/step-down; BthenRust order and cleanup refusal of next case",
+    "native CPU flags, raw error sentinels and failed fixture artifacts retained without new maximum/headroom/ranking claims",
+    "None and invalid selected counts cannot prepare/run; selected first-study audit/plan hashes and effective source/environment/runtime inputs are bound",
+    "aggregate refuses wrong counts/order/users/extra phase, phase after failure, failed warmup/probe/hold, and nonTrue eligibility",
+    "aggregate refuses missing/repeated/wrong-order case_start receipts for existing artifact cases while retaining genuinely unstarted partial next-case evidence"
+  ],
+  "preserved_attempts": [
+    {
+      "suite": "controller",
+      "tests": 9,
+      "status": "PASS",
+      "reported_seconds": 0.123
+    },
+    {
+      "suite": "controller-expanded",
+      "tests": 11,
+      "status": "FIXTURE_ERROR",
+      "errors": 1,
+      "reason": "Fixture omitted newly required8CPU/8GiB client fields; only test fixture was corrected."
+    },
+    {
+      "suite": "controller",
+      "tests": 11,
+      "status": "PASS",
+      "reported_seconds": 0.107
+    },
+    {
+      "suite": "aggregate-initial",
+      "tests": 5,
+      "status": "PASS",
+      "reported_seconds": 0.432
+    },
+    {
+      "suite": "controller-provenance-expanded",
+      "tests": 12,
+      "status": "PASS",
+      "reported_seconds": 0.124
+    },
+    {
+      "suite": "aggregate-case-start-expanded",
+      "tests": 6,
+      "status": "FAIL",
+      "failed_subcases": 2,
+      "reason": "With complete artifacts for both cases, only[B] or[] case_start receipts falsely yielded both_selected_points_confirmed=True. Parent fixed aggregate by binding starts to present cases."
+    },
+    {
+      "suite": "aggregate-after-parent-fix",
+      "tests": 7,
+      "status": "PASS",
+      "reported_seconds": 0.56
+    }
+  ],
+  "previous_proof_retained_unchanged": "audit/test-confirmation-result.json",
+  "production_source_changes_by_test_author": false,
+  "no_inherited_test_suite_rerun": true
+}
