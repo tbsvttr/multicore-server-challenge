@@ -5,6 +5,39 @@ There is no official score, established first place, or demonstrated lead over a
 other submissions. The [competitor inventory](competitors.md) covers the 27 active
 competitors and separates official five-minute results from self-reported probes.
 
+Only Rust #7 has been compared against our server for performance. The portable
+PR #31 reference passes correctness checks, but its proposed load comparison was
+not executed. Submitted defaults remain four workers with article batching off.
+
+## Final candidate result: not accepted
+
+The two-worker/article-batching experiment completed all six planned attempts.
+Five passed; the final Goose attempt was invalidated by about 926 seconds of
+wall/monotonic clock divergence and recorded no measured requests. This occurred
+despite a temporary host idle-sleep assertion. The required three valid pairs
+were not obtained, so the predefined acceptance result is **false**. The proposed
+promotion patch was not applied. The PR remains a draft with unchanged defaults.
+
+Partial observations from valid matched pairs 1 and 2 are shown once per
+implementation below. These ranges describe those two pairs; they are not a
+leaderboard or a completed three-pair result.
+
+| Implementation/configuration | Req/s | p50 ms | p95 ms | p99 ms | Total CPU ms/success | Measured errors |
+|---|---:|---:|---:|---:|---:|---:|
+| Rust #7, unchanged | 21,109.82–21,179.98 | 0.411–0.423 | 2.569–2.745 | 4.263–4.795 | 0.2066–0.2079 | 0 |
+| Goose #32, experimental W2/ARTICLE1 | 21,109.95–21,180.67 | 0.499–0.503 | 1.488–1.491 | 2.991–3.011 | 0.1954–0.1962 | 0 |
+
+Combined target CPU per success decreased by 5.0181% and 6.0277% using the
+predeclared sampled-interval metric. Independent full-window estimates decreased
+by 5.0584% and 6.0376%. p95 improved by 41.96% and 45.79%; p99 improved by 29.84%
+and 37.21%. Median latency worsened by 22.38% and 17.97%. Similar fixed-load
+throughput does not demonstrate higher capacity. The invalid third pair blocks
+default promotion and a stable three-pair gain claim; it was not replaced.
+
+See the [exact acceptance result](audit/w2-article1-preregistered-result.json)
+and [independent audit](audit/multi-audit.md) for every attempt and check. All
+earlier valid, invalid, failed and interrupted records remain preserved.
+
 ## Conditions
 
 The local target is Ubuntu 24.04 ARM64 on a shared M2 Pro Mac. The application
@@ -114,7 +147,8 @@ only `WORKERS=2` and `ARTICLE_BATCH=1`, reducing PostgreSQL connections from 16
 to 8. Full-seed conformance passes all 197 steps with the exact same binary.
 Its predefined acceptance requires three valid, zero-error pairs, at least 5%
 lower combined target CPU per success in **each** pair, and no paired p95 or
-p99 regression. The next run uses a temporary host idle-sleep assertion to
-avoid suspension; clock validity checks still apply. This is a configuration
-screen, not a capacity or first-place claim. Defaults remain unchanged pending
-the declared results.
+p99 regression. It completed with the unaccepted result documented above.
+This was a configuration screen, not a capacity or first-place claim. Defaults
+remain unchanged. The [PR #31 comparison plan](proposed-pr31-w2-article1-v3/README.md)
+is prepared only and was not executed; it cannot substitute for the failed
+Rust-study acceptance.

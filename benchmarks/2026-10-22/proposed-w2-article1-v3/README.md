@@ -1,5 +1,10 @@
 # Proposed frozen configuration experiment: two loops and shared article reads
 
+**Completed: NOT ACCEPTED.** Pairs 1 and 2 met the gates, while pair 3 was invalid
+after a VM clock discontinuity. See [the exact result](../audit/w2-article1-preregistered-result.json).
+Defaults remain unchanged and `promotion.patch` was not applied. The plan and
+acceptance contract below are preserved as declared before measurement.
+
 The unchanged full-seed conformance suite passed all 197 steps at `WORKERS=2 ARTICLE_BATCH=1` before measurement. The existing default-configuration study is complete. This plan declares a separate configuration experiment; its results will be retained alongside that study.
 
 The candidate uses the same Goose binary, SHA-256 `6ab318a0ab9389dc2e77ec6122ff077a93adbcc183c6285c347104e0f734b6c3`. It changes exactly two process settings:

@@ -1,0 +1,273 @@
+--- competitors.md.before
++++ competitors.md
+@@ -2,13 +2,13 @@
+ 
+ Snapshot: upstream `a99fc3b04a7ba6e620682df76cfba031a992a0bc`. 30 PR records: 16 open, 12 merged, 2 closed; 27 active competitors excluding ours. The leaderboard at this snapshot contains 17 official scores.
+ 
+-**The completed default-configuration Rust #7 study shows no stable overall lead.** All six attempts are retained; pairs 1 and 3 are valid, while pair 2 is invalid because of a VM clock jump. Combined app-plus-PostgreSQL CPU per success is 2.905% higher overall across the two valid pairs, with inconsistent tails. A separate `WORKERS=2 ARTICLE_BATCH=1` configuration screen against unchanged Rust is running; submitted defaults remain unchanged. Its acceptance requires at least 5% lower whole-target CPU per success and no paired p95/p99 regression in each of three valid, zero-error pairs. The disclosed portable/corrected Goose #31 reference remains unmeasured; 26 active competitors have no performance comparison by us. Same-source ablation, conformance passes and single-core results do not establish first place or superiority over them.
++**The completed default-configuration Rust #7 study shows no stable overall lead.** All six attempts are retained; pairs 1 and 3 are valid, while pair 2 is invalid because of a VM clock jump. Combined app-plus-PostgreSQL CPU per success is 2.905% higher overall across the two valid pairs, with inconsistent tails. The separate `WORKERS=2 ARTICLE_BATCH=1` configuration screen is **complete, not accepted**. Its valid pairs 1 and 2 reduce whole-target CPU per success by 5.0181% and 6.0277% with lower p95/p99, but worse p50. Pair 3's Goose arm is clock-invalid after approximately 926 seconds of wall-clock/monotonic drift. The required three valid, zero-error pairs were not obtained. Submitted defaults/source remain `3e908747`; the proposed promotion patch was not applied. The disclosed portable/corrected Goose #31 reference remains unmeasured; 26 active competitors have no performance comparison by us. Same-source ablation, conformance passes and single-core results do not establish first place or superiority over them.
+ 
+ The [official leaderboard](https://github.com/arjaythedev/multicore-server-challenge/blob/a99fc3b04a7ba6e620682df76cfba031a992a0bc/LEADERBOARD.md) measures dedicated 8-vCPU/16-GB x86_64 capacity with a remote generator and a passing 5-minute hold. PR head pins below identify source inventory; they do not independently prove which revision produced historical scores. Self-reported screens/holds are heterogeneous and are not sorted as a speed ranking. These claims have not been independently revalidated; absence of a result does not imply a slower implementation.
+ 
+ | PR / implementation | Inventoried head | Official five-minute result | Self-reported evidence / limitation | Our comparison |
+ |---|---|---|---|---|
+-| [7: rust-tokio-Scooter1337](https://github.com/arjaythedev/multicore-server-challenge/pull/7) | [`dc7c2492`](https://github.com/Scooter1337/multicore-server-challenge/tree/dc7c249229bd43d8752e7ffb28ce81ee4401d8ae/submissions/rust-tokio-Scooter1337) | #1: **100,000 users**; 26,279 req/s; 119/185 ms | 92,000-user 5-minute hold; 23,256 req/s; 408/509 ms; 0 errors (Same-host Xeon, 8 CPU/16 GiB, 5 min) | Default v3 complete: two valid pairs, no stable overall lead; separate configuration screen running |
++| [7: rust-tokio-Scooter1337](https://github.com/arjaythedev/multicore-server-challenge/pull/7) | [`dc7c2492`](https://github.com/Scooter1337/multicore-server-challenge/tree/dc7c249229bd43d8752e7ffb28ce81ee4401d8ae/submissions/rust-tokio-Scooter1337) | #1: **100,000 users**; 26,279 req/s; 119/185 ms | 92,000-user 5-minute hold; 23,256 req/s; 408/509 ms; 0 errors (Same-host Xeon, 8 CPU/16 GiB, 5 min) | Both local studies complete: no stable default lead; W2/B1 screen not accepted (only two valid pairs) |
+ | [22: csharp-sockets-jh-d](https://github.com/arjaythedev/multicore-server-challenge/pull/22) | [`4aee3c30`](https://github.com/jh-d/multicore-server-challenge/tree/4aee3c3053aa7c91c69904fd5eccb79b982eb994/submissions/csharp-sockets-jh-d) | #2: **95,000 users**; 24,696 req/s; 493/737 ms | No absolute performance claim found. | Not compared |
+ | [10: c-iouring-tigokraft](https://github.com/arjaythedev/multicore-server-challenge/pull/10) | [`19d78b3a`](https://github.com/tigokraft/multicore-server-challenge/tree/19d78b3a694f673d5677c4bb0f9b22d4d6f85b9b/submissions/c-iouring-tigokraft) | #3: **84,000 users**; 21,262 req/s; 339/421 ms | 10,000 users ×0.1; 12,800 req/s; 458/485 ms; 0 errors (i5 VM, 4 CPU, 5 min,×0.1) | Not compared |
+ | [15: cobol-gnucobol-benmandrew](https://github.com/arjaythedev/multicore-server-challenge/pull/15) | [`f732c598`](https://github.com/benmandrew/multicore-server-challenge/tree/f732c5988cc460868ffb37f45f668c2a35f177d7/submissions/cobol-gnucobol-benmandrew) | #4: **84,000 users**; 21,292 req/s; 361/461 ms | No absolute performance claim found. | Not compared |
+@@ -35,7 +35,7 @@
+ | [29: kotlin-ktor-canleon](https://github.com/arjaythedev/multicore-server-challenge/pull/29) | [`29ea7a4e`](https://github.com/canleon/multicore-server-challenge/tree/29ea7a4e70b19177890fc62c1e309c5257c5db99/submissions/kotlin-ktor-canleon) | No published score | 18,000 users; 15,700 req/s; 19k failed; duration/think scale unspecified. (8 CPU/full seed, duration and think scale unspecified) | Not compared |
+ | [30: kotlin-vertx-canleon](https://github.com/arjaythedev/multicore-server-challenge/pull/30) | [`ee01d7f5`](https://github.com/canleon/multicore-server-challenge/tree/ee01d7f518156af632c993e7e495fd3567a4ef6c/submissions/kotlin-vertx-canleon) | No published score | 19,000 users; 16,900 req/s; duration/think scale unspecified. (8 CPU/full seed, duration and think scale unspecified) | Not compared |
+ | [31: goose-epoll-xeonfx](https://github.com/arjaythedev/multicore-server-challenge/pull/31) | [`43e0919a`](https://github.com/XeonFX/multicore-server-challenge/tree/43e0919ae5b693c1d3c1e8828b74bb774ef92ee0/submissions/goose-epoll-xeonfx) | No published score | 160,000-user screen; 41,249 req/s; 368/501 ms; 0 errors; 60-second screen, not a 5-minute hold. (GCP 8 vCPU/16 GB, 60 s, full seed) | Corrected reference passed conformance; load comparison planned |
+-| [32: goose-native-tbsvttr (our candidate)](https://github.com/arjaythedev/multicore-server-challenge/pull/32) | [`3e908747`](https://github.com/tbsvttr/multicore-server-challenge/tree/3e9087473da5c56d5800ae9ee00ac1e84c44a135/submissions/goose-native-tbsvttr) | No published score | Default v3 complete; no stable overall lead. | Two valid Rust pairs; separate configuration screen running |
++| [32: goose-native-tbsvttr (our candidate)](https://github.com/arjaythedev/multicore-server-challenge/pull/32) | [`3e908747`](https://github.com/tbsvttr/multicore-server-challenge/tree/3e9087473da5c56d5800ae9ee00ac1e84c44a135/submissions/goose-native-tbsvttr) | No published score | Default study has no stable lead; W2/B1 screen not accepted. | Defaults unchanged; promotion patch not applied |
+ | [14: csharp-aspnetcore-jh-d (closed ASP.NET predecessor)](https://github.com/arjaythedev/multicore-server-challenge/pull/14) · CLOSED | [`7daae171`](https://github.com/arjaythedev/multicore-server-challenge/tree/7daae17175973867c741b75c562affb55d1f5f75/submissions/csharp-aspnetcore-jh-d) | No published score | 60,000-user 5-minute hold; ~15,400 req/s; 281/419 ms; 0.05% errors (Azure8 vCPU/remote generator, 5 min) | Not compared |
+ | [21: pony-stallion-contact-red (closed predecessor of PR24)](https://github.com/arjaythedev/multicore-server-challenge/pull/21) · CLOSED | [`f62c5f6d`](https://github.com/contact-red/multicore-server-challenge/tree/f62c5f6d0cfd9f3bbf035510bc11abed0d78ca43/submissions/pony-stallion-contact-red) | No published score | No absolute performance claim found. | Not compared |
+ 
+--- competitors.json.before
++++ competitors.json
+@@ -15,18 +15,18 @@
+     "planned_our_competitor_comparisons": [
+       31
+     ],
+-    "in_progress_our_competitor_comparisons": [
+-      7
+-    ],
++    "in_progress_our_competitor_comparisons": [],
+     "all_competitor_superiority_proven": false,
+     "official_first_place_for_ours": false,
+     "pending_rerun_our_competitor_comparisons": [],
+-    "completed_comparison_scope": "One completed default-configuration study against Rust #7: all six attempts retained, two valid pairs, pair 2 invalid; no stable overall lead.",
++    "completed_comparison_scope": "Completed default and W2/B1 local studies against Rust #7, each with two valid pairs and one clock-invalid pair retained. Default study has no stable overall lead; W2/B1 failed its required all-three-pair acceptance and was not promoted.",
+     "fully_valid_three_pair_our_competitor_comparisons": 0,
+-    "in_progress_comparison_scope": "Separate WORKERS=2 / ARTICLE_BATCH=1 configuration screen against unchanged Rust #7; submitted defaults unchanged.",
+-    "active_competitors_never_performance_compared_by_us": 26
++    "in_progress_comparison_scope": null,
++    "active_competitors_never_performance_compared_by_us": 26,
++    "completed_local_studies_against_rust7": 2,
++    "configuration_screen_accepted": false
+   },
+-  "conclusion": "The completed default-configuration Rust #7 comparison does not establish a stable overall lead: two valid pairs yield 2.905% higher combined target CPU per success overall and inconsistent tails; pair 2 is clock-invalid and retained. A separate WORKERS=2 / ARTICLE_BATCH=1 configuration screen against unchanged Rust is in progress, with submitted defaults unchanged and acceptance requiring at least 5% lower whole-target CPU per success plus no paired p95/p99 regression in each of three valid zero-error pairs. Portable/corrected Goose #31 remains unmeasured; 26 active competitors have no performance comparison by us. No evidence establishes first place or superiority to every competitor.",
++  "conclusion": "The completed default-configuration Rust #7 comparison does not establish a stable overall lead: two valid pairs yield 2.905% higher combined target CPU per success overall and inconsistent tails; pair 2 is clock-invalid and retained. The separate WORKERS=2 / ARTICLE_BATCH=1 screen is complete but NOT_ACCEPTED: pairs 1 and 2 have 5.0181% and 6.0277% lower whole-target CPU per success and lower p95/p99, with worse p50, while pair 3 has a clock-invalid Goose arm. All three valid passing pairs were required. Submitted defaults and source 3e908747 remain unchanged; promotion.patch was not applied. Portable/corrected Goose #31 remains unmeasured/proposal only; 26 active competitors have no performance comparison by us. No evidence establishes first place or superiority to every competitor.",
+   "source_pin_policy": "Latest PR heads are pinned independently from historical measured revisions. Do not attach official scores to those exact heads without a measured-source witness. Pony #24 was explicitly scored at older a38283c. Self-reported hardware, durations, think scales and revisions differ; these numbers do not form a common speed ranking.",
+   "upstream_submission_folders": [
+     "c-iouring-tigokraft",
+@@ -351,7 +351,7 @@
+       ],
+       "our_comparison": {
+         "completed": true,
+-        "status": "DEFAULT_STUDY_COMPLETE_NO_STABLE_LEAD_CONFIGURATION_SCREEN_IN_PROGRESS",
++        "status": "LOCAL_STUDIES_COMPLETE_NO_STABLE_DEFAULT_LEAD_CONFIGURATION_NOT_ACCEPTED",
+         "result": {
+           "study": "paired-multi-load-v3/v3_multi_pair_20261022t193438_99f820",
+           "protocol": "Local ARM64 Mac/Docker fixed 80,000-user diagnostic; fresh full seed, four native load shards, 60-second ramp, 60-second measurement, 15-second tail; not official capacity scoring.",
+@@ -388,7 +388,7 @@
+           }
+         ],
+         "configuration_screen": {
+-          "status": "IN_PROGRESS",
++          "status": "COMPLETE_NOT_ACCEPTED",
+           "against_pr": 7,
+           "candidate_env_delta": {
+             "WORKERS": {
+@@ -407,7 +407,82 @@
+           "paired_overall_p95_and_p99_must_not_regress": true,
+           "zero_errors_required": true,
+           "acceptance": "proposed-w2-article1-v3/acceptance.json",
+-          "claim_scope": "Local configuration screen only; no capacity, first-place, or all-competitor claim."
++          "claim_scope": "Local configuration screen only; no capacity, first-place, or all-competitor claim.",
++          "accepted": false,
++          "valid_pairs": [
++            1,
++            2
++          ],
++          "invalid_pairs": [
++            3
++          ],
++          "pr_source_unchanged": "3e9087473da5c56d5800ae9ee00ac1e84c44a135",
++          "promotion_patch_applied": false,
++          "study": "paired-multi-load-v3/v3_multi_pair_20261022t200445_706372",
++          "result": [
++            {
++              "pair": 1,
++              "accepted_pair": true,
++              "checks": {
++                "both_declared_arms_present": true,
++                "rust7_all80000_vus_active": true,
++                "rust7_clean_and_eligible": true,
++                "goose_all80000_vus_active": true,
++                "goose_clean_and_eligible": true,
++                "combined_cpu_per_success_at_least5pct_lower": true,
++                "p95_no_regression": true,
++                "p99_no_regression": true
++              },
++              "whole_target_cpu_per_success_reduction_pct": 5.0180786559058,
++              "p50_candidate_ms": 0.503,
++              "p50_rust_ms": 0.411,
++              "p95_candidate_ms": 1.491,
++              "p95_rust_ms": 2.569,
++              "p99_candidate_ms": 2.991,
++              "p99_rust_ms": 4.263,
++              "p50_regressed": true
++            },
++            {
++              "pair": 2,
++              "accepted_pair": true,
++              "checks": {
++                "both_declared_arms_present": true,
++                "rust7_all80000_vus_active": true,
++                "rust7_clean_and_eligible": true,
++                "goose_all80000_vus_active": true,
++                "goose_clean_and_eligible": true,
++                "combined_cpu_per_success_at_least5pct_lower": true,
++                "p95_no_regression": true,
++                "p99_no_regression": true
++              },
++              "whole_target_cpu_per_success_reduction_pct": 6.027651392461431,
++              "p50_candidate_ms": 0.499,
++              "p50_rust_ms": 0.423,
++              "p95_candidate_ms": 1.488,
++              "p95_rust_ms": 2.745,
++              "p99_candidate_ms": 3.011,
++              "p99_rust_ms": 4.795,
++              "p50_regressed": true
++            },
++            {
++              "pair": 3,
++              "accepted_pair": false,
++              "checks": {
++                "both_declared_arms_present": true,
++                "rust7_all80000_vus_active": true,
++                "rust7_clean_and_eligible": true,
++                "goose_all80000_vus_active": false,
++                "goose_clean_and_eligible": false,
++                "combined_cpu_per_success_at_least5pct_lower": false,
++                "p95_no_regression": true,
++                "p99_no_regression": true
++              },
++              "invalid_attempt": "06-p3-goose",
++              "invalid_reason": "Approximately 926-second wall-clock/monotonic drift; no measured candidate requests. Retained without replacement."
++            }
++          ],
++          "audit": "audit/w2-article1-preregistered-result.json",
++          "interpretation": "Two pairs pass the preregistered CPU/p95/p99 screen, but the third is clock-invalid. The required three clean passing pairs were not obtained; no promotion or stable >=5% claim. P50 was worse in both valid pairs."
+         },
+         "historical_attempt_limit_caveat": "The historical invalid-attempt entry retains its original diagnosis text. The old live Rust process limit was not directly captured; 1024/200000 was observed only in a separate runuser reproduction. The old attempt is invalid infrastructure and provides no relative-performance evidence."
+       },
+@@ -1738,7 +1813,7 @@
+       "self_reported_results": [],
+       "our_comparison": {
+         "completed": true,
+-        "status": "DEFAULT_RUST_STUDY_COMPLETE_NO_STABLE_LEAD_CONFIGURATION_SCREEN_IN_PROGRESS",
++        "status": "LOCAL_STUDIES_COMPLETE_NO_STABLE_DEFAULT_LEAD_CONFIGURATION_NOT_ACCEPTED",
+         "result": {
+           "study": "paired-multi-load-v3/v3_multi_pair_20261022t193438_99f820",
+           "protocol": "Local ARM64 Mac/Docker fixed 80,000-user diagnostic; fresh full seed, four native load shards, 60-second ramp, 60-second measurement, 15-second tail; not official capacity scoring.",
+@@ -1767,7 +1842,7 @@
+           "audit": "audit/multi-audit.md"
+         },
+         "configuration_screen": {
+-          "status": "IN_PROGRESS",
++          "status": "COMPLETE_NOT_ACCEPTED",
+           "against_pr": 7,
+           "candidate_env_delta": {
+             "WORKERS": {
+@@ -1786,13 +1861,88 @@
+           "paired_overall_p95_and_p99_must_not_regress": true,
+           "zero_errors_required": true,
+           "acceptance": "proposed-w2-article1-v3/acceptance.json",
+-          "claim_scope": "Local configuration screen only; no capacity, first-place, or all-competitor claim."
++          "claim_scope": "Local configuration screen only; no capacity, first-place, or all-competitor claim.",
++          "accepted": false,
++          "valid_pairs": [
++            1,
++            2
++          ],
++          "invalid_pairs": [
++            3
++          ],
++          "pr_source_unchanged": "3e9087473da5c56d5800ae9ee00ac1e84c44a135",
++          "promotion_patch_applied": false,
++          "study": "paired-multi-load-v3/v3_multi_pair_20261022t200445_706372",
++          "result": [
++            {
++              "pair": 1,
++              "accepted_pair": true,
++              "checks": {
++                "both_declared_arms_present": true,
++                "rust7_all80000_vus_active": true,
++                "rust7_clean_and_eligible": true,
++                "goose_all80000_vus_active": true,
++                "goose_clean_and_eligible": true,
++                "combined_cpu_per_success_at_least5pct_lower": true,
++                "p95_no_regression": true,
++                "p99_no_regression": true
++              },
++              "whole_target_cpu_per_success_reduction_pct": 5.0180786559058,
++              "p50_candidate_ms": 0.503,
++              "p50_rust_ms": 0.411,
++              "p95_candidate_ms": 1.491,
++              "p95_rust_ms": 2.569,
++              "p99_candidate_ms": 2.991,
++              "p99_rust_ms": 4.263,
++              "p50_regressed": true
++            },
++            {
++              "pair": 2,
++              "accepted_pair": true,
++              "checks": {
++                "both_declared_arms_present": true,
++                "rust7_all80000_vus_active": true,
++                "rust7_clean_and_eligible": true,
++                "goose_all80000_vus_active": true,
++                "goose_clean_and_eligible": true,
++                "combined_cpu_per_success_at_least5pct_lower": true,
++                "p95_no_regression": true,
++                "p99_no_regression": true
++              },
++              "whole_target_cpu_per_success_reduction_pct": 6.027651392461431,
++              "p50_candidate_ms": 0.499,
++              "p50_rust_ms": 0.423,
++              "p95_candidate_ms": 1.488,
++              "p95_rust_ms": 2.745,
++              "p99_candidate_ms": 3.011,
++              "p99_rust_ms": 4.795,
++              "p50_regressed": true
++            },
++            {
++              "pair": 3,
++              "accepted_pair": false,
++              "checks": {
++                "both_declared_arms_present": true,
++                "rust7_all80000_vus_active": true,
++                "rust7_clean_and_eligible": true,
++                "goose_all80000_vus_active": false,
++                "goose_clean_and_eligible": false,
++                "combined_cpu_per_success_at_least5pct_lower": false,
++                "p95_no_regression": true,
++                "p99_no_regression": true
++              },
++              "invalid_attempt": "06-p3-goose",
++              "invalid_reason": "Approximately 926-second wall-clock/monotonic drift; no measured candidate requests. Retained without replacement."
++            }
++          ],
++          "audit": "audit/w2-article1-preregistered-result.json",
++          "interpretation": "Two pairs pass the preregistered CPU/p95/p99 screen, but the third is clock-invalid. The required three clean passing pairs were not obtained; no promotion or stable >=5% claim. P50 was worse in both valid pairs."
+         }
+       },
+       "active_competitor": false,
+       "notes": [
+         "Correctness and same-source ARTICLE_BATCH ablation do not establish superiority over another PR.",
+-        "Default 80k-user Rust #7 study is complete with two valid pairs and no stable overall lead; separate two-worker/article-batching screen is in progress. Submitted defaults remain unchanged."
++        "Both local Rust #7 studies are complete. Defaults show no stable overall lead; the two-worker/article-batching screen is not accepted because pair 3 is clock-invalid. Its two valid pairs reduce whole-target CPU and p95/p99 but worsen p50. Submitted defaults/source remain 3e908747; promotion.patch was not applied."
+       ]
+     }
+   ],
+@@ -1976,5 +2126,5 @@
+       "sha256": "c2f0d8fa4cb50c8299dbc698f84da24f302cae628aca50aec69567950a378dcf"
+     }
+   ],
+-  "coverage_status_updated_at_utc": "2026-10-22T20:08:29.379138+00:00"
++  "coverage_status_updated_at_utc": "2026-10-23T06:13:34.823423+00:00"
+ }

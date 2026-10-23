@@ -1,0 +1,365 @@
+{
+  "id": "05-p3-rust7",
+  "pair": 3,
+  "case": "rust7",
+  "database": "mc_pair_20261022_200445_05_e295",
+  "classification": "PASS",
+  "before_load_actual_app": {
+    "valid": true,
+    "expected_uid": 501,
+    "minimum_nofile": 200000,
+    "processes": [
+      {
+        "pid": 23219,
+        "pgid": 23218,
+        "start_ticks": 6953294,
+        "exe": "/evidence/paired-multi-load-v3/v3_multi_pair_20261022t200445_706372/frozen/rust7/app",
+        "uid": 501,
+        "uids": [
+          501,
+          501,
+          501,
+          501
+        ],
+        "nofile_soft": 200000,
+        "nofile_hard": 200000,
+        "proc_limits": "Limit                     Soft Limit           Hard Limit           Units     \nMax cpu time              unlimited            unlimited            seconds   \nMax file size             unlimited            unlimited            bytes     \nMax data size             unlimited            unlimited            bytes     \nMax stack size            8388608              unlimited            bytes     \nMax core file size        0                    unlimited            bytes     \nMax resident set          unlimited            unlimited            bytes     \nMax processes             unlimited            unlimited            processes \nMax open files            200000               200000               files     \nMax locked memory         unlimited            unlimited            bytes     \nMax address space         unlimited            unlimited            bytes     \nMax file locks            unlimited            unlimited            locks     \nMax pending signals       64023                64023                signals   \nMax msgqueue size         819200               819200               bytes     \nMax nice priority         0                    0                    \nMax realtime priority     0                    0                    \nMax realtime timeout      unlimited            unlimited            us        \n",
+        "proc_status": "Name:\tapp\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t23219\nNgid:\t0\nPid:\t23219\nPPid:\t23218\nTracerPid:\t0\nUid:\t501\t501\t501\t501\nGid:\t501\t501\t501\t501\nFDSize:\t64\nGroups:\t501 \nNStgid:\t23219\nNSpid:\t23219\nNSpgid:\t23218\nNSsid:\t23218\nKthread:\t0\nVmPeak:\t 1258736 kB\nVmSize:\t 1193220 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t    9384 kB\nVmRSS:\t    9384 kB\nRssAnon:\t    6456 kB\nRssFile:\t    2928 kB\nRssShmem:\t       0 kB\nVmData:\t 1057672 kB\nVmStk:\t     132 kB\nVmExe:\t    1656 kB\nVmLib:\t    2460 kB\nVmPTE:\t      84 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t3\nSigQ:\t26/64023\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000001000\nSigCgt:\t0000000100000440\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tvulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t3ff\nCpus_allowed_list:\t0-9\nMems_allowed:\t1\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t114\nnonvoluntary_ctxt_switches:\t4\n"
+      }
+    ],
+    "reasons": []
+  },
+  "load_exits": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "shard_verdicts": [
+    {
+      "box_index": 0,
+      "merge_exit": 0,
+      "verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "overall": {
+        "count": 318456,
+        "rps": 5307.6,
+        "p50_ms": 0.42,
+        "p90_ms": 1.917,
+        "p95_ms": 2.663,
+        "p99_ms": 4.407,
+        "max_ms": 251.775,
+        "mean_ms": 0.901001626598336,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 312564,
+          "201": 5810,
+          "204": 82
+        }
+      },
+      "boxes": [
+        {
+          "file": "/evidence/paired-multi-load-v3/v3_multi_pair_20261022t200445_706372/05-p3-rust7/box0.json",
+          "box_index": 0,
+          "host": "a40d58b68177",
+          "users": 20000,
+          "cpu_avg_measure_pct": 58.31484252944499,
+          "cpu_max_measure_pct": 68.8728024819028,
+          "proc_cpu_avg_measure_pct": 3.304222614933087,
+          "rss_peak_mb": 414.7109375,
+          "fell_behind": false,
+          "requests_in_window": 318456,
+          "tcp_connects": 20000
+        }
+      ]
+    },
+    {
+      "box_index": 1,
+      "merge_exit": 0,
+      "verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "overall": {
+        "count": 317112,
+        "rps": 5285.2,
+        "p50_ms": 0.419,
+        "p90_ms": 1.882,
+        "p95_ms": 2.625,
+        "p99_ms": 4.299,
+        "max_ms": 248.575,
+        "mean_ms": 0.9072677665935064,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 311480,
+          "201": 5547,
+          "204": 85
+        }
+      },
+      "boxes": [
+        {
+          "file": "/evidence/paired-multi-load-v3/v3_multi_pair_20261022t200445_706372/05-p3-rust7/box1.json",
+          "box_index": 1,
+          "host": "a40d58b68177",
+          "users": 20000,
+          "cpu_avg_measure_pct": 58.315290219758865,
+          "cpu_max_measure_pct": 68.9119170984456,
+          "proc_cpu_avg_measure_pct": 3.181403271659582,
+          "rss_peak_mb": 379.8828125,
+          "fell_behind": false,
+          "requests_in_window": 317112,
+          "tcp_connects": 20000
+        }
+      ]
+    },
+    {
+      "box_index": 2,
+      "merge_exit": 0,
+      "verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "overall": {
+        "count": 317128,
+        "rps": 5285.466666666666,
+        "p50_ms": 0.419,
+        "p90_ms": 1.908,
+        "p95_ms": 2.645,
+        "p99_ms": 4.375,
+        "max_ms": 245.631,
+        "mean_ms": 0.9139424806387305,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 311380,
+          "201": 5651,
+          "204": 97
+        }
+      },
+      "boxes": [
+        {
+          "file": "/evidence/paired-multi-load-v3/v3_multi_pair_20261022t200445_706372/05-p3-rust7/box2.json",
+          "box_index": 2,
+          "host": "a40d58b68177",
+          "users": 20000,
+          "cpu_avg_measure_pct": 58.31542009926917,
+          "cpu_max_measure_pct": 69.04024767801857,
+          "proc_cpu_avg_measure_pct": 3.2745316305326457,
+          "rss_peak_mb": 404.51953125,
+          "fell_behind": false,
+          "requests_in_window": 317128,
+          "tcp_connects": 20000
+        }
+      ]
+    },
+    {
+      "box_index": 3,
+      "merge_exit": 0,
+      "verdict": {
+        "pass": true,
+        "lg_limited": false
+      },
+      "overall": {
+        "count": 316914,
+        "rps": 5281.9,
+        "p50_ms": 0.417,
+        "p90_ms": 1.889,
+        "p95_ms": 2.631,
+        "p99_ms": 4.243,
+        "max_ms": 247.039,
+        "mean_ms": 0.8882988507923287,
+        "errors": 0,
+        "error_rate": 0,
+        "statuses": {
+          "200": 311072,
+          "201": 5737,
+          "204": 105
+        }
+      },
+      "boxes": [
+        {
+          "file": "/evidence/paired-multi-load-v3/v3_multi_pair_20261022t200445_706372/05-p3-rust7/box3.json",
+          "box_index": 3,
+          "host": "a40d58b68177",
+          "users": 20000,
+          "cpu_avg_measure_pct": 58.31434348241276,
+          "cpu_max_measure_pct": 68.8728024819028,
+          "proc_cpu_avg_measure_pct": 3.1678128310986784,
+          "rss_peak_mb": 383.86328125,
+          "fell_behind": false,
+          "requests_in_window": 316914,
+          "tcp_connects": 20000
+        }
+      ]
+    }
+  ],
+  "merge_exit": 0,
+  "verdict": {
+    "pass": true,
+    "lg_limited": false
+  },
+  "overall": {
+    "count": 1269610,
+    "rps": 21160.166666666668,
+    "p50_ms": 0.419,
+    "p90_ms": 1.899,
+    "p95_ms": 2.641,
+    "p99_ms": 4.331,
+    "max_ms": 251.775,
+    "mean_ms": 0.9026283370483864,
+    "errors": 0,
+    "error_rate": 0,
+    "statuses": {
+      "200": 1246496,
+      "201": 22745,
+      "204": 369
+    }
+  },
+  "boxes": [
+    {
+      "file": "/evidence/paired-multi-load-v3/v3_multi_pair_20261022t200445_706372/05-p3-rust7/box0.json",
+      "box_index": 0,
+      "host": "a40d58b68177",
+      "users": 20000,
+      "cpu_avg_measure_pct": 58.31484252944499,
+      "cpu_max_measure_pct": 68.8728024819028,
+      "proc_cpu_avg_measure_pct": 3.304222614933087,
+      "rss_peak_mb": 414.7109375,
+      "fell_behind": false,
+      "requests_in_window": 318456,
+      "tcp_connects": 20000
+    },
+    {
+      "file": "/evidence/paired-multi-load-v3/v3_multi_pair_20261022t200445_706372/05-p3-rust7/box1.json",
+      "box_index": 1,
+      "host": "a40d58b68177",
+      "users": 20000,
+      "cpu_avg_measure_pct": 58.315290219758865,
+      "cpu_max_measure_pct": 68.9119170984456,
+      "proc_cpu_avg_measure_pct": 3.181403271659582,
+      "rss_peak_mb": 379.8828125,
+      "fell_behind": false,
+      "requests_in_window": 317112,
+      "tcp_connects": 20000
+    },
+    {
+      "file": "/evidence/paired-multi-load-v3/v3_multi_pair_20261022t200445_706372/05-p3-rust7/box2.json",
+      "box_index": 2,
+      "host": "a40d58b68177",
+      "users": 20000,
+      "cpu_avg_measure_pct": 58.31542009926917,
+      "cpu_max_measure_pct": 69.04024767801857,
+      "proc_cpu_avg_measure_pct": 3.2745316305326457,
+      "rss_peak_mb": 404.51953125,
+      "fell_behind": false,
+      "requests_in_window": 317128,
+      "tcp_connects": 20000
+    },
+    {
+      "file": "/evidence/paired-multi-load-v3/v3_multi_pair_20261022t200445_706372/05-p3-rust7/box3.json",
+      "box_index": 3,
+      "host": "a40d58b68177",
+      "users": 20000,
+      "cpu_avg_measure_pct": 58.31434348241276,
+      "cpu_max_measure_pct": 68.8728024819028,
+      "proc_cpu_avg_measure_pct": 3.1678128310986784,
+      "rss_peak_mb": 383.86328125,
+      "fell_behind": false,
+      "requests_in_window": 316914,
+      "tcp_connects": 20000
+    }
+  ],
+  "target_monitor": {
+    "samples": 60,
+    "elapsed_s": 59.036607861,
+    "cgroup_cpu_quota_pct": 54.30215511446727,
+    "cpu_scope": "sampled interval inside the measurement window",
+    "sampled_interval_start_ms": 1792700427766.9692,
+    "sampled_interval_end_ms": 1792700486804.262,
+    "memory_peak_sampled_bytes": 10183766016,
+    "swap_peak_sampled_bytes": 0,
+    "memory_events_before": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+    "memory_events_after": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+    "measurement_start_ms": 1792700427736,
+    "measurement_end_ms": 1792700487736,
+    "coverage_span_samples": 62,
+    "coverage_start_missing_s": 0.0,
+    "coverage_end_missing_s": 0.0,
+    "full_window_bracketed": true,
+    "max_sample_gap_s": 1.003029084,
+    "max_wall_sample_gap_s": 1.003029,
+    "valid_sampling": true,
+    "app_whole_target_pct": 18.348784580416293,
+    "app_rss_sum_peak_bytes": 81653760,
+    "pg_whole_target_pct": 35.85910635286525,
+    "pg_rss_sum_peak_bytes": 14273884160
+  },
+  "load_monitor": {
+    "samples": 60,
+    "elapsed_s": 59.027591944,
+    "cgroup_cpu_quota_pct": 32.32539456819146,
+    "cpu_scope": "sampled interval inside the measurement window",
+    "sampled_interval_start_ms": 1792700427847.9692,
+    "sampled_interval_end_ms": 1792700486876.2456,
+    "memory_peak_sampled_bytes": 1966911488,
+    "swap_peak_sampled_bytes": 0,
+    "memory_events_before": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+    "memory_events_after": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nsock_throttled 0",
+    "measurement_start_ms": 1792700427736,
+    "measurement_end_ms": 1792700487736,
+    "coverage_span_samples": 62,
+    "coverage_start_missing_s": 0.0,
+    "coverage_end_missing_s": 0.0,
+    "full_window_bracketed": true,
+    "max_sample_gap_s": 1.001912376,
+    "max_wall_sample_gap_s": 1.001912167,
+    "valid_sampling": true,
+    "app_whole_target_pct": 0.0,
+    "app_rss_sum_peak_bytes": 0,
+    "pg_whole_target_pct": 0.0,
+    "pg_rss_sum_peak_bytes": 0
+  },
+  "load_cgroup_headroom_pass": true,
+  "load_oom_delta": 0,
+  "after_load_actual_app": {
+    "valid": true,
+    "expected_uid": 501,
+    "minimum_nofile": 200000,
+    "processes": [
+      {
+        "pid": 23219,
+        "pgid": 23218,
+        "start_ticks": 6953294,
+        "exe": "/evidence/paired-multi-load-v3/v3_multi_pair_20261022t200445_706372/frozen/rust7/app",
+        "uid": 501,
+        "uids": [
+          501,
+          501,
+          501,
+          501
+        ],
+        "nofile_soft": 200000,
+        "nofile_hard": 200000,
+        "proc_limits": "Limit                     Soft Limit           Hard Limit           Units     \nMax cpu time              unlimited            unlimited            seconds   \nMax file size             unlimited            unlimited            bytes     \nMax data size             unlimited            unlimited            bytes     \nMax stack size            8388608              unlimited            bytes     \nMax core file size        0                    unlimited            bytes     \nMax resident set          unlimited            unlimited            bytes     \nMax processes             unlimited            unlimited            processes \nMax open files            200000               200000               files     \nMax locked memory         unlimited            unlimited            bytes     \nMax address space         unlimited            unlimited            bytes     \nMax file locks            unlimited            unlimited            locks     \nMax pending signals       64023                64023                signals   \nMax msgqueue size         819200               819200               bytes     \nMax nice priority         0                    0                    \nMax realtime priority     0                    0                    \nMax realtime timeout      unlimited            unlimited            us        \n",
+        "proc_status": "Name:\tapp\nUmask:\t0022\nState:\tS (sleeping)\nTgid:\t23219\nNgid:\t0\nPid:\t23219\nPPid:\t23218\nTracerPid:\t0\nUid:\t501\t501\t501\t501\nGid:\t501\t501\t501\t501\nFDSize:\t131072\nGroups:\t501 \nNStgid:\t23219\nNSpid:\t23219\nNSpgid:\t23218\nNSsid:\t23218\nKthread:\t0\nVmPeak:\t 1260888 kB\nVmSize:\t 1260888 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   77168 kB\nVmRSS:\t   75640 kB\nRssAnon:\t   72716 kB\nRssFile:\t    2924 kB\nRssShmem:\t       0 kB\nVmData:\t 1059868 kB\nVmStk:\t     132 kB\nVmExe:\t    1656 kB\nVmLib:\t    2460 kB\nVmPTE:\t     232 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffff\nThreads:\t4\nSigQ:\t26/64023\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000001000\nSigCgt:\t0000000100000440\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t00000000a80425fb\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tvulnerable\nSpeculationIndirectBranch:\tunknown\nCpus_allowed:\t3ff\nCpus_allowed_list:\t0-9\nMems_allowed:\t1\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t63388\nnonvoluntary_ctxt_switches:\t2429\n"
+      }
+    ],
+    "reasons": []
+  },
+  "actual_app_limits_valid": true,
+  "target_runtime": {
+    "valid_witness": true,
+    "pass": true,
+    "reasons": [],
+    "app_healthy": true,
+    "oom_deltas": {
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0
+    }
+  }
+}

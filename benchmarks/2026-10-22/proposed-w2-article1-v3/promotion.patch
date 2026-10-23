@@ -1,0 +1,64 @@
+--- a/submissions/goose-native-tbsvttr/start.sh
++++ b/submissions/goose-native-tbsvttr/start.sh
+@@ -1,4 +1,6 @@
+ #!/usr/bin/env bash
+ # Runs the server in the foreground. Config: DATABASE_URL, JWT_SECRET, HOST, PORT.
+ set -euo pipefail
++export WORKERS="${WORKERS:-2}"
++export ARTICLE_BATCH="${ARTICLE_BATCH:-1}"
+ exec "$(cd "$(dirname "$0")" && pwd)/bin/conduit"
+--- a/submissions/goose-native-tbsvttr/README.md
++++ b/submissions/goose-native-tbsvttr/README.md
+@@ -32,8 +32,9 @@
+ 
+ ## Design and conditions
+ 
+-- Four independent epoll loops, each with three read connections and one write
+-  connection: 16 PostgreSQL connections by default, below the limit of 95.
++- Two independent epoll loops, each with three read connections and one write
++  connection: eight PostgreSQL connections through `start.sh` by default, below
++  the limit of 95. Explicit `WORKERS` and `ARTICLE_BATCH` values are preserved.
+ - Pipelined prepared statements and compatible concurrent read batching;
+   shared enrichment exists only within one SQL execution. Quiet reads start
+   immediately. No responses or query results survive for later requests.
+@@ -53,10 +54,11 @@
+ `DATABASE_URL`, `JWT_SECRET`, `HOST` and `PORT` follow SPEC.md. Optional process
+ settings include `WORKERS`, `PG_READERS`, `HASHERS`, `BCRYPT_BATCH_MS`,
+ `READ_BATCH` and `READ_HOLD`, inherited from the credited base implementation.
+-`ARTICLE_BATCH=1` enables bounded overlapping article reads: one SQL execution
++`start.sh` selects `WORKERS=2` and `ARTICLE_BATCH=1` when those settings are not
++provided. Article batching bounds overlapping article reads: one SQL execution
+ reads each distinct slug's common article data once while retaining per-viewer
+-favorite/follow flags. It defaults to 0 until comparative measurements justify
+-enabling it. No data is retained for a later batch.
++favorite/follow flags. Set `ARTICLE_BATCH=0` to disable it. No data is retained
++for a later batch.
+ 
+ ## Validation status
+ 
+@@ -83,5 +85,23 @@
+ These validation runs use Ubuntu 24.04 ARM64 in Docker on a Mac. The target
+ contains both the application and PostgreSQL 18 with the published eight-core
+ cluster configuration; CPU affinity is unused. They do not establish an
+-official x86-64 score. Comparative load measurements are in progress; no
+-first-place result is claimed.
++official x86-64 score.
++
++The [local measurement record](https://github.com/tbsvttr/multicore-server-challenge/tree/benchmark-2026-10-22/benchmarks/2026-10-22)
++retains every attempted comparison, including invalid runs. The separate
++[two-loop/article-batching configuration screen](https://github.com/tbsvttr/multicore-server-challenge/tree/benchmark-2026-10-22/benchmarks/2026-10-22/proposed-w2-article1-v3)
++uses the existing binary, SHA-256
++`6ab318a0ab9389dc2e77ec6122ff077a93adbcc183c6285c347104e0f734b6c3`,
++with only these two environment selections changed. It tests a fixed 80,000-user
++load against the unchanged Rust PR #7 control on the shared ARM64 Mac, using
++three paired 60-second ramp/60-second measurement/15-second tail attempts per
++implementation. The target app and PostgreSQL retain their combined eight-CPU /
++16-GiB / no-swap budget. This local CPU/latency screen does not establish maximum
++capacity, an official score, first place, or superiority to other submissions.
++
++[Native x86-64 correctness validation](https://github.com/tbsvttr/multicore-server-challenge/actions/runs/39834209847)
++passed a clean build, both original 197-step suites and native checks on a hosted
++Ubuntu 24.04 runner. That run used submission source `3e908747` before this
++launcher-default change; it validates the previous defaults, and a new CI run is
++required for the promoted launcher defaults. It is separate from the upstream
++check requiring maintainer approval and is not an eight-CPU performance run.

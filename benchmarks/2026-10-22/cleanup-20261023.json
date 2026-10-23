@@ -1,0 +1,75 @@
+{
+  "target": "multicore-goose-dev-20261022",
+  "started_at": "2026-10-23T06:17:40.934638+00:00",
+  "purpose": "Stop only the completed experiment target and its PostgreSQL, preserving container and datasets.",
+  "commands": [
+    {
+      "argv": [
+        "docker",
+        "exec",
+        "--user",
+        "root",
+        "multicore-goose-dev-20261022",
+        "pg_ctlcluster",
+        "--mode",
+        "fast",
+        "18",
+        "main",
+        "stop"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "docker",
+        "stop",
+        "--timeout",
+        "10",
+        "multicore-goose-dev-20261022"
+      ],
+      "exit_code": 0,
+      "stdout": "multicore-goose-dev-20261022\n",
+      "stderr": ""
+    }
+  ],
+  "before": {
+    "state": {
+      "Status": "running",
+      "Running": true,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 80985,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-22T17:10:28.438923004Z",
+      "FinishedAt": "0001-01-01T00:00:00Z"
+    },
+    "mounts": {
+      "/evidence": "/private/tmp/multicore-research-20261022",
+      "/work": "/private/tmp/multicore-challenge-20261022"
+    },
+    "nano_cpus": 8000000000,
+    "memory": 17179869184,
+    "memory_swap": 17179869184
+  },
+  "after": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 137,
+    "Error": "",
+    "StartedAt": "2026-10-22T17:10:28.438923004Z",
+    "FinishedAt": "2026-10-23T06:17:51.866056169Z"
+  },
+  "finished_at": "2026-10-23T06:17:52.013568+00:00",
+  "container_and_data_preserved": true,
+  "scope": "Only the named benchmark target was stopped. No unrelated containers were changed."
+}

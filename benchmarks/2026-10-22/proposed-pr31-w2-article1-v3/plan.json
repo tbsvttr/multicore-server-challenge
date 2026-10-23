@@ -1,0 +1,178 @@
+{
+  "controller": "paired-multi-load-v3",
+  "scope": "local ARM64 Mac/Docker 80k-user four-shard whole-configuration comparison of portable/corrected PR31 and W2/ARTICLE1; not an official score or capacity search",
+  "configuration": {
+    "target_container": "multicore-goose-dev-20261022",
+    "host_evidence": "/private/tmp/multicore-research-20261022",
+    "users": 80000,
+    "port": 3000,
+    "jwt_secret": "multicore-server-challenge",
+    "cases": [
+      {
+        "name": "goose31_portable",
+        "binary": "/evidence/pr31-reference/source/bin/conduit",
+        "source_dir": "/evidence/pr31-reference/source",
+        "env": {
+          "WORKERS": "4",
+          "PG_READERS": "3",
+          "HASHERS": "2",
+          "BCRYPT_BATCH_MS": "250",
+          "READ_BATCH": "32",
+          "READ_HOLD": "1"
+        },
+        "expected_binary_sha256": "5679b2f84562b352aa80faa6491ee9a6496224333881d2d96e585d468a6b67e2"
+      },
+      {
+        "name": "goose",
+        "binary": "/work/submissions/goose-native-tbsvttr/bin/conduit",
+        "source_dir": "/work/submissions/goose-native-tbsvttr",
+        "env": {
+          "ARTICLE_BATCH": "1",
+          "WORKERS": "2",
+          "PG_READERS": "3",
+          "HASHERS": "2",
+          "BCRYPT_BATCH_MS": "250",
+          "READ_BATCH": "32",
+          "READ_HOLD": "1"
+        },
+        "expected_binary_sha256": "6ab318a0ab9389dc2e77ec6122ff077a93adbcc183c6285c347104e0f734b6c3"
+      }
+    ],
+    "reference_disclosure": "PR31 pinned at 43e0919ae5b693c1d3c1e8828b74bb774ef92ee0; local portable/correctness-corrected derivative, not its original x86 binary or an official PR31 score. Repairs are ARM/slice/epoll ABI adaptation, reliable bcrypt pipe reply delivery, PostgreSQL<=95 guard, and committed-favorite response correctness; the same pinned compiler and GCC optimization flags are used. Original pure-Goose JSON/HMAC and default WORKERS=4/PG_READERS=3/HASHERS=2 remain. Candidate WORKERS=2/ARTICLE_BATCH=1 changes configuration as well as native primitives, so this is a whole-configuration comparison.",
+    "comparison_kind": "whole_configuration"
+  },
+  "configuration_sha256": "97f20ff2f70cb512dc2bfede77b505c955a03f25bd1c987b9e791e019dc04943",
+  "protocol": {
+    "users": 80000,
+    "articles": 500000,
+    "think_scale": 1.0,
+    "ramp_s": 60,
+    "measure_s": 60,
+    "tail_s": 15,
+    "pairs": 3,
+    "order": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "fresh_full_seed_per_attempt": true,
+    "shards": [
+      {
+        "box_index": 0,
+        "users": 20000,
+        "id_offset": 0,
+        "host": "127.0.0.1"
+      },
+      {
+        "box_index": 1,
+        "users": 20000,
+        "id_offset": 20000,
+        "host": "127.0.0.2"
+      },
+      {
+        "box_index": 2,
+        "users": 20000,
+        "id_offset": 40000,
+        "host": "127.0.0.3"
+      },
+      {
+        "box_index": 3,
+        "users": 20000,
+        "id_offset": 60000,
+        "host": "127.0.0.4"
+      }
+    ],
+    "gomaxprocs_per_shard": 1,
+    "synchronized_start_at": true,
+    "load_cgroup_cpus": 4,
+    "app_nofile_minimum": 200000,
+    "actual_app_uid_and_limits_required": true,
+    "launch_wrapper": "runuser -u challenge -- prlimit --nofile=200000:200000 -- binary",
+    "load_cgroup_cpu_limit_pct": 75.0,
+    "paired_random_stream": "same native run-id and VU ids within each pair; fresh DBs prevent name collisions",
+    "warmup": "none; this is a fixed-load diagnostic, not the official warmup/search/hold protocol",
+    "invalid_policy": "native lg_limited or failed infrastructure is INVALID; retain, never replace",
+    "interpretation": "at fixed unsaturated load, compare latency/CPU; similar req/s cannot establish capacity"
+  },
+  "created_utc": "2026-10-22T20:21:17Z",
+  "proposal_label": "Portable/corrected PR31 default W4 vs frozen native Goose W2/ARTICLE1 whole-configuration comparison",
+  "comparison_kind": "whole_configuration",
+  "comparison_basis": {
+    "prior_pr31_plan": "/private/tmp/multicore-research-20261022/pr31-goose-80k-v3-plan.json",
+    "prior_pr31_plan_sha256": "8dddffde357030429b0b7c3d30de0ebebe516cd23ec5d6576f28a89b1f0aa635",
+    "candidate_rust_plan": "/private/tmp/multicore-research-20261022/proposed-w2-article1-v3/plan.json",
+    "candidate_rust_plan_sha256": "81a949b3678f2cebaecb071415fb619cb477ad8e323c4f294abe9f3c7ba3e419",
+    "reference_upstream_commit": "43e0919ae5b693c1d3c1e8828b74bb774ef92ee0",
+    "reference_derivative_manifest": "/private/tmp/multicore-research-20261022/pr31-reference/manifest.json",
+    "reference_derivative_manifest_sha256": "ecd4fb4a926e94971474edc2e75c4f98dc3d3adaf83a0bee031ba04e8dcea248",
+    "reference_derivative_patch_sha256": "888cfa4a7bdaee7a8706459a23816b4f86e4f48bca5e1727dd0fa02ccce71595"
+  },
+  "preconditions": [
+    "The active W2/ARTICLE1 versus Rust study finishes, all attempts remain retained, and its independent audit outcome is known before this study begins. Rust acceptance cannot be inferred from provisional pairs.",
+    "Both frozen binaries retain their recorded SHA256. The portable reference passed the unchanged dev/full197 suites, and the exact candidate binary passed the full197 suite with W2/ARTICLE1.",
+    "No source, app defaults, compiler, database settings, or protocol changes are included. Freeze and verify the unchanged existing v3 controller/helpers before execution.",
+    "Before evaluating this separate study, independently freeze an auditor revision that recognizes this explicitly disclosed whole-configuration WORKERS4-to2 difference; do not weaken equal PG_READERS/HASHERS/common load/resource checks. The active-study auditor remains untouched.",
+    "Root decides whether to execute after the current study and any separately justified default decision. Preparing this plan does not authorize a benchmark process."
+  ],
+  "preregistered_acceptance": {
+    "claims_scope": "Local fixed 80k-user whole-configuration diagnostic against the disclosed portable/corrected PR31 reference only; no official PR31 score, capacity, ranking, implementation-only attribution, or all-competitor superiority claim.",
+    "postgres_connections": {
+      "reference": 16,
+      "candidate": 8,
+      "formula": "WORKERS*(PG_READERS+1)"
+    },
+    "hypothesis": "The W2/ARTICLE1 configuration may lower combined app+PostgreSQL CPU and latency relative to the PR31 default configuration by combining fewer database backends, live article SQL sharing, and native JSON/HMAC. This study measures the complete configurations and cannot determine the contribution of any individual difference.",
+    "required_pairs": 3,
+    "clean_pair_definition": "All 6 prescheduled attempts classify PASS, with zero HTTP/socket/timeout errors, valid frozen target/load/host witnesses, no target OOM and zero target swap, all 80k VUs active, and no native generator-limited verdict. Existing v3 host-memory criteria are unchanged. Invalid/failing attempts are retained and block acceptance; never replace them selectively.",
+    "metric": {
+      "name": "whole_target_cpu_seconds_per_successful_request",
+      "formula": "(target_monitor.cgroup_cpu_quota_pct / 100) * 8 / (overall.rps * (1 - overall.error_rate))",
+      "scope": "Combined app + PostgreSQL target cgroup, using the existing fully bracketed v3 target monitor. The CPU average uses the sampled interval inside the 60-second native request window. App-only CPU cannot substitute.",
+      "limitation": "CPU/request is a fixed-load sampled estimate; it does not measure maximum user capacity."
+    },
+    "per_pair_acceptance": {
+      "successful_request_errors": 0,
+      "cpu_cost_improvement_fraction_minimum": 0.05,
+      "improvement_formula": "1-candidate_cpu_seconds_per_success/control_cpu_seconds_per_success",
+      "p95_no_regression": "candidate.overall.p95_ms <= control.overall.p95_ms",
+      "p99_no_regression": "candidate.overall.p99_ms <= control.overall.p99_ms",
+      "all_conditions_required_for_each_of_three_pairs": true
+    },
+    "promotion_policy": "A local improvement against this disclosed PR31 derivative may be claimed only if every pair passes the predeclared CPU/latency/cleanliness gates. This study cannot establish a Rust win: acceptance against Rust remains conditional on all three criteria of the separate frozen Rust study passing its completed audit. No source/default change, official rank, capacity claim, or all-competitor claim follows automatically.",
+    "whole_configuration_differences": {
+      "reference": {
+        "WORKERS": "4",
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "ARTICLE_BATCH": "not implemented in PR31",
+        "postgres_connections": 16,
+        "json_hmac": "original pure Goose"
+      },
+      "candidate": {
+        "WORKERS": "2",
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "ARTICLE_BATCH": "1",
+        "postgres_connections": 8,
+        "json_hmac": "native prepared OpenSSL HMAC and native SIMD JSON"
+      },
+      "equal_runtime_knobs": [
+        "PG_READERS",
+        "HASHERS",
+        "BCRYPT_BATCH_MS",
+        "READ_BATCH",
+        "READ_HOLD"
+      ],
+      "attribution_limit": "Any result applies to these complete frozen configurations; it cannot isolate native primitive improvements, worker count, or article batching."
+    }
+  }
+}

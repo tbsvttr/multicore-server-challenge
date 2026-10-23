@@ -11,18 +11,22 @@
     "active_competitors_excluding_ours": 27,
     "published_official_scores": 17,
     "active_competitors_without_published_official_score": 10,
-    "completed_our_competitor_comparisons": 0,
+    "completed_our_competitor_comparisons": 1,
     "planned_our_competitor_comparisons": [
       31
     ],
     "in_progress_our_competitor_comparisons": [],
     "all_competitor_superiority_proven": false,
     "official_first_place_for_ours": false,
-    "pending_rerun_our_competitor_comparisons": [
-      7
-    ]
+    "pending_rerun_our_competitor_comparisons": [],
+    "completed_comparison_scope": "Completed default and W2/B1 local studies against Rust #7, each with two valid pairs and one clock-invalid pair retained. Default study has no stable overall lead; W2/B1 failed its required all-three-pair acceptance and was not promoted.",
+    "fully_valid_three_pair_our_competitor_comparisons": 0,
+    "in_progress_comparison_scope": null,
+    "active_competitors_never_performance_compared_by_us": 26,
+    "completed_local_studies_against_rust7": 2,
+    "configuration_screen_accepted": false
   },
-  "conclusion": "No evidence presently establishes our Goose as faster than every competitor. The first Rust #7 comparison attempt was invalid because the launcher lowered its descriptor limit; a corrected rerun is pending. The portable corrected Goose #31 comparison is planned; other active competitors remain untested by us.",
+  "conclusion": "The completed default-configuration Rust #7 comparison does not establish a stable overall lead: two valid pairs yield 2.905% higher combined target CPU per success overall and inconsistent tails; pair 2 is clock-invalid and retained. The separate WORKERS=2 / ARTICLE_BATCH=1 screen is complete but NOT_ACCEPTED: pairs 1 and 2 have 5.0181% and 6.0277% lower whole-target CPU per success and lower p95/p99, with worse p50, while pair 3 has a clock-invalid Goose arm. All three valid passing pairs were required. Submitted defaults and source 3e908747 remain unchanged; promotion.patch was not applied. Portable/corrected Goose #31 remains unmeasured/proposal only; 26 active competitors have no performance comparison by us. No evidence establishes first place or superiority to every competitor.",
   "source_pin_policy": "Latest PR heads are pinned independently from historical measured revisions. Do not attach official scores to those exact heads without a measured-source witness. Pony #24 was explicitly scored at older a38283c. Self-reported hardware, durations, think scales and revisions differ; these numbers do not form a common speed ranking.",
   "upstream_submission_folders": [
     "c-iouring-tigokraft",
@@ -74,7 +78,7 @@
       "self_reported_results": [
         {
           "type": "SELF_REPORTED",
-          "summary": "7,000 users ×0.1; 17,100 req/s; 197/576 ms p95/p99.",
+          "summary": "7,000 users \u00d70.1; 17,100 req/s; 197/576 ms p95/p99.",
           "protocol": "Apple-silicon Docker; app + PostgreSQL 8 vCPUs; full seed; loadgen 4 other vCPUs; 20 s ramp+40 s measured; think-scale 0.1.",
           "metrics": [
             {
@@ -133,7 +137,7 @@
       "self_reported_results": [
         {
           "type": "SELF_REPORTED",
-          "summary": "4,000 users ×0.2; README 5,133 req/s; description 4,875 req/s.",
+          "summary": "4,000 users \u00d70.2; README 5,133 req/s; description 4,875 req/s.",
           "protocol": "Shared 24-thread development host including app, PostgreSQL and generator; full seed; 60 s ramp+5-minute hold; think-scale 0.2.",
           "metrics": [
             {
@@ -153,7 +157,7 @@
         },
         {
           "type": "SELF_REPORTED",
-          "summary": "Description trial: 4,000 users ×0.2; 4,875 req/s.",
+          "summary": "Description trial: 4,000 users \u00d70.2; 4,875 req/s.",
           "protocol": "Same-host development hold; 5 minutes; think-scale 0.2.",
           "metrics": [
             {
@@ -346,9 +350,35 @@
         }
       ],
       "our_comparison": {
-        "completed": false,
-        "status": "RERUN_PENDING_AFTER_INVALID_FD_LIMIT",
-        "result": null,
+        "completed": true,
+        "status": "LOCAL_STUDIES_COMPLETE_NO_STABLE_DEFAULT_LEAD_CONFIGURATION_NOT_ACCEPTED",
+        "result": {
+          "study": "paired-multi-load-v3/v3_multi_pair_20261022t193438_99f820",
+          "protocol": "Local ARM64 Mac/Docker fixed 80,000-user diagnostic; fresh full seed, four native load shards, 60-second ramp, 60-second measurement, 15-second tail; not official capacity scoring.",
+          "attempts_completed": 6,
+          "passing_zero_error_attempts": 5,
+          "valid_pairs": [
+            1,
+            3
+          ],
+          "invalid_pairs": [
+            2
+          ],
+          "invalid_attempt": "03-p2-goose",
+          "invalid_reason": "VM wall-clock jump; no measured requests. Attempt retained; no replacement.",
+          "whole_target_cpu_per_success_geometric_mean_change_pct": 2.905,
+          "whole_target_cpu_per_success_pair_change_pct": {
+            "1": 6.706,
+            "3": -0.76
+          },
+          "app_cpu_per_success_geometric_mean_change_pct": -17.05,
+          "app_cpu_caveat": "Application-only reduction does not establish an overall improvement; app plus PostgreSQL is the target metric.",
+          "tail_latency": "Inconsistent: Goose p95/p99 regress in pair 1 and improve in pair 3.",
+          "stable_overall_improvement": false,
+          "official_first_place": false,
+          "all_competitor_superiority": false,
+          "audit": "audit/multi-audit.md"
+        },
         "invalid_attempts": [
           {
             "status": "INVALID",
@@ -356,7 +386,105 @@
             "users": 80000,
             "result": null
           }
-        ]
+        ],
+        "configuration_screen": {
+          "status": "COMPLETE_NOT_ACCEPTED",
+          "against_pr": 7,
+          "candidate_env_delta": {
+            "WORKERS": {
+              "from": "4",
+              "to": "2"
+            },
+            "ARTICLE_BATCH": {
+              "from": "0",
+              "to": "1"
+            }
+          },
+          "binary_unchanged": true,
+          "submitted_defaults_unchanged": true,
+          "required_valid_pairs": 3,
+          "whole_target_cpu_per_success_improvement_required_each_pair_pct": 5,
+          "paired_overall_p95_and_p99_must_not_regress": true,
+          "zero_errors_required": true,
+          "acceptance": "proposed-w2-article1-v3/acceptance.json",
+          "claim_scope": "Local configuration screen only; no capacity, first-place, or all-competitor claim.",
+          "accepted": false,
+          "valid_pairs": [
+            1,
+            2
+          ],
+          "invalid_pairs": [
+            3
+          ],
+          "pr_source_unchanged": "3e9087473da5c56d5800ae9ee00ac1e84c44a135",
+          "promotion_patch_applied": false,
+          "study": "paired-multi-load-v3/v3_multi_pair_20261022t200445_706372",
+          "result": [
+            {
+              "pair": 1,
+              "accepted_pair": true,
+              "checks": {
+                "both_declared_arms_present": true,
+                "rust7_all80000_vus_active": true,
+                "rust7_clean_and_eligible": true,
+                "goose_all80000_vus_active": true,
+                "goose_clean_and_eligible": true,
+                "combined_cpu_per_success_at_least5pct_lower": true,
+                "p95_no_regression": true,
+                "p99_no_regression": true
+              },
+              "whole_target_cpu_per_success_reduction_pct": 5.0180786559058,
+              "p50_candidate_ms": 0.503,
+              "p50_rust_ms": 0.411,
+              "p95_candidate_ms": 1.491,
+              "p95_rust_ms": 2.569,
+              "p99_candidate_ms": 2.991,
+              "p99_rust_ms": 4.263,
+              "p50_regressed": true
+            },
+            {
+              "pair": 2,
+              "accepted_pair": true,
+              "checks": {
+                "both_declared_arms_present": true,
+                "rust7_all80000_vus_active": true,
+                "rust7_clean_and_eligible": true,
+                "goose_all80000_vus_active": true,
+                "goose_clean_and_eligible": true,
+                "combined_cpu_per_success_at_least5pct_lower": true,
+                "p95_no_regression": true,
+                "p99_no_regression": true
+              },
+              "whole_target_cpu_per_success_reduction_pct": 6.027651392461431,
+              "p50_candidate_ms": 0.499,
+              "p50_rust_ms": 0.423,
+              "p95_candidate_ms": 1.488,
+              "p95_rust_ms": 2.745,
+              "p99_candidate_ms": 3.011,
+              "p99_rust_ms": 4.795,
+              "p50_regressed": true
+            },
+            {
+              "pair": 3,
+              "accepted_pair": false,
+              "checks": {
+                "both_declared_arms_present": true,
+                "rust7_all80000_vus_active": true,
+                "rust7_clean_and_eligible": true,
+                "goose_all80000_vus_active": false,
+                "goose_clean_and_eligible": false,
+                "combined_cpu_per_success_at_least5pct_lower": false,
+                "p95_no_regression": true,
+                "p99_no_regression": true
+              },
+              "invalid_attempt": "06-p3-goose",
+              "invalid_reason": "Approximately 926-second wall-clock/monotonic drift; no measured candidate requests. Retained without replacement."
+            }
+          ],
+          "audit": "audit/w2-article1-preregistered-result.json",
+          "interpretation": "Two pairs pass the preregistered CPU/p95/p99 screen, but the third is clock-invalid. The required three clean passing pairs were not obtained; no promotion or stable >=5% claim. P50 was worse in both valid pairs."
+        },
+        "historical_attempt_limit_caveat": "The historical invalid-attempt entry retains its original diagnosis text. The old live Rust process limit was not directly captured; 1024/200000 was observed only in a separate runuser reproduction. The old attempt is invalid infrastructure and provides no relative-performance evidence."
       },
       "active_competitor": true,
       "notes": [
@@ -519,7 +647,7 @@
       "self_reported_results": [
         {
           "type": "SELF_REPORTED",
-          "summary": "10,000 users ×0.1; 12,800 req/s; 458/485 ms; 0 errors.",
+          "summary": "10,000 users \u00d70.1; 12,800 req/s; 458/485 ms; 0 errors.",
           "protocol": "i5-9500 VM; server+PostgreSQL pinned4 CPUs, loadgen 2 CPUs; full seed; 3 min warm-up+5-minute hold; think-scale 0.1.",
           "metrics": [
             {
@@ -745,7 +873,7 @@
       "self_reported_results": [
         {
           "type": "SELF_REPORTED",
-          "summary": "5,400 users ×0.2; 6,364–6,421 req/s; p95 185–215 ms.",
+          "summary": "5,400 users \u00d70.2; 6,364\u20136,421 req/s; p95 185\u2013215 ms.",
           "protocol": "4-vCPU test VM shared by app, PostgreSQL and generator; full seed; 30 s measured; think-scale 0.2; PostgreSQL SSL on.",
           "metrics": [
             {
@@ -1054,7 +1182,7 @@
         {
           "type": "SELF_REPORTED",
           "summary": "9,000-user 5-minute hold; 210/572 ms; 0 errors.",
-          "protocol": "DigitalOcean 4-vCPU/8 GB shared-vCPU droplet, full seed; remote generator; five-minute fresh-seed hold; 4–10% steal reported.",
+          "protocol": "DigitalOcean 4-vCPU/8 GB shared-vCPU droplet, full seed; remote generator; five-minute fresh-seed hold; 4\u201310% steal reported.",
           "metrics": [
             {
               "users": 9000,
@@ -1326,7 +1454,7 @@
       "self_reported_results": [
         {
           "type": "SELF_REPORTED",
-          "summary": "101,080 equivalent users ×0.1 (~17,500 req/s); not 101k real users.",
+          "summary": "101,080 equivalent users \u00d70.1 (~17,500 req/s); not 101k real users.",
           "protocol": "Ryzen 5900X; app + PostgreSQL 8 pinned hardware threads; generators on16 other threads; full seed; five-minute hold; think-scale 0.1.",
           "metrics": [
             {
@@ -1684,14 +1812,137 @@
       "official_unsuccessful_attempt": null,
       "self_reported_results": [],
       "our_comparison": {
-        "completed": false,
-        "status": "OWN_ABLATION_ONLY_RUST_COMPARISON_IN_PROGRESS",
-        "result": null
+        "completed": true,
+        "status": "LOCAL_STUDIES_COMPLETE_NO_STABLE_DEFAULT_LEAD_CONFIGURATION_NOT_ACCEPTED",
+        "result": {
+          "study": "paired-multi-load-v3/v3_multi_pair_20261022t193438_99f820",
+          "protocol": "Local ARM64 Mac/Docker fixed 80,000-user diagnostic; fresh full seed, four native load shards, 60-second ramp, 60-second measurement, 15-second tail; not official capacity scoring.",
+          "attempts_completed": 6,
+          "passing_zero_error_attempts": 5,
+          "valid_pairs": [
+            1,
+            3
+          ],
+          "invalid_pairs": [
+            2
+          ],
+          "invalid_attempt": "03-p2-goose",
+          "invalid_reason": "VM wall-clock jump; no measured requests. Attempt retained; no replacement.",
+          "whole_target_cpu_per_success_geometric_mean_change_pct": 2.905,
+          "whole_target_cpu_per_success_pair_change_pct": {
+            "1": 6.706,
+            "3": -0.76
+          },
+          "app_cpu_per_success_geometric_mean_change_pct": -17.05,
+          "app_cpu_caveat": "Application-only reduction does not establish an overall improvement; app plus PostgreSQL is the target metric.",
+          "tail_latency": "Inconsistent: Goose p95/p99 regress in pair 1 and improve in pair 3.",
+          "stable_overall_improvement": false,
+          "official_first_place": false,
+          "all_competitor_superiority": false,
+          "audit": "audit/multi-audit.md"
+        },
+        "configuration_screen": {
+          "status": "COMPLETE_NOT_ACCEPTED",
+          "against_pr": 7,
+          "candidate_env_delta": {
+            "WORKERS": {
+              "from": "4",
+              "to": "2"
+            },
+            "ARTICLE_BATCH": {
+              "from": "0",
+              "to": "1"
+            }
+          },
+          "binary_unchanged": true,
+          "submitted_defaults_unchanged": true,
+          "required_valid_pairs": 3,
+          "whole_target_cpu_per_success_improvement_required_each_pair_pct": 5,
+          "paired_overall_p95_and_p99_must_not_regress": true,
+          "zero_errors_required": true,
+          "acceptance": "proposed-w2-article1-v3/acceptance.json",
+          "claim_scope": "Local configuration screen only; no capacity, first-place, or all-competitor claim.",
+          "accepted": false,
+          "valid_pairs": [
+            1,
+            2
+          ],
+          "invalid_pairs": [
+            3
+          ],
+          "pr_source_unchanged": "3e9087473da5c56d5800ae9ee00ac1e84c44a135",
+          "promotion_patch_applied": false,
+          "study": "paired-multi-load-v3/v3_multi_pair_20261022t200445_706372",
+          "result": [
+            {
+              "pair": 1,
+              "accepted_pair": true,
+              "checks": {
+                "both_declared_arms_present": true,
+                "rust7_all80000_vus_active": true,
+                "rust7_clean_and_eligible": true,
+                "goose_all80000_vus_active": true,
+                "goose_clean_and_eligible": true,
+                "combined_cpu_per_success_at_least5pct_lower": true,
+                "p95_no_regression": true,
+                "p99_no_regression": true
+              },
+              "whole_target_cpu_per_success_reduction_pct": 5.0180786559058,
+              "p50_candidate_ms": 0.503,
+              "p50_rust_ms": 0.411,
+              "p95_candidate_ms": 1.491,
+              "p95_rust_ms": 2.569,
+              "p99_candidate_ms": 2.991,
+              "p99_rust_ms": 4.263,
+              "p50_regressed": true
+            },
+            {
+              "pair": 2,
+              "accepted_pair": true,
+              "checks": {
+                "both_declared_arms_present": true,
+                "rust7_all80000_vus_active": true,
+                "rust7_clean_and_eligible": true,
+                "goose_all80000_vus_active": true,
+                "goose_clean_and_eligible": true,
+                "combined_cpu_per_success_at_least5pct_lower": true,
+                "p95_no_regression": true,
+                "p99_no_regression": true
+              },
+              "whole_target_cpu_per_success_reduction_pct": 6.027651392461431,
+              "p50_candidate_ms": 0.499,
+              "p50_rust_ms": 0.423,
+              "p95_candidate_ms": 1.488,
+              "p95_rust_ms": 2.745,
+              "p99_candidate_ms": 3.011,
+              "p99_rust_ms": 4.795,
+              "p50_regressed": true
+            },
+            {
+              "pair": 3,
+              "accepted_pair": false,
+              "checks": {
+                "both_declared_arms_present": true,
+                "rust7_all80000_vus_active": true,
+                "rust7_clean_and_eligible": true,
+                "goose_all80000_vus_active": false,
+                "goose_clean_and_eligible": false,
+                "combined_cpu_per_success_at_least5pct_lower": false,
+                "p95_no_regression": true,
+                "p99_no_regression": true
+              },
+              "invalid_attempt": "06-p3-goose",
+              "invalid_reason": "Approximately 926-second wall-clock/monotonic drift; no measured candidate requests. Retained without replacement."
+            }
+          ],
+          "audit": "audit/w2-article1-preregistered-result.json",
+          "interpretation": "Two pairs pass the preregistered CPU/p95/p99 screen, but the third is clock-invalid. The required three clean passing pairs were not obtained; no promotion or stable >=5% claim. P50 was worse in both valid pairs."
+        }
       },
       "active_competitor": false,
       "notes": [
         "Correctness and same-source ARTICLE_BATCH ablation do not establish superiority over another PR.",
-        "Frozen 80k-user Rust7 comparison is in progress; no completed result is inventoried."
+        "Both local Rust #7 studies are complete. Defaults show no stable overall lead; the two-worker/article-batching screen is not accepted because pair 3 is clock-invalid. Its two valid pairs reduce whole-target CPU and p95/p99 but worsen p50. Submitted defaults/source remain 3e908747; promotion.patch was not applied."
       ]
     }
   ],
@@ -1875,5 +2126,5 @@
       "sha256": "c2f0d8fa4cb50c8299dbc698f84da24f302cae628aca50aec69567950a378dcf"
     }
   ],
-  "coverage_status_updated_at_utc": "2026-10-22T19:11:43.348291+00:00"
+  "coverage_status_updated_at_utc": "2026-10-23T06:13:34.823423+00:00"
 }

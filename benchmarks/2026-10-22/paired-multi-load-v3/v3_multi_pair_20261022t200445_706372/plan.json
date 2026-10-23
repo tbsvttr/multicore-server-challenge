@@ -1,0 +1,158 @@
+{
+  "controller": "paired-multi-load-v3",
+  "scope": "local ARM64 Mac/Docker80k-user four-shard fixed-load comparison; not an official score or capacity search",
+  "configuration": {
+    "target_container": "multicore-goose-dev-20261022",
+    "host_evidence": "/private/tmp/multicore-research-20261022",
+    "users": 80000,
+    "port": 3000,
+    "jwt_secret": "multicore-server-challenge",
+    "cases": [
+      {
+        "name": "rust7",
+        "binary": "/work/submissions/rust-tokio-Scooter1337/target/release/conduit",
+        "source_dir": "/work/submissions/rust-tokio-Scooter1337",
+        "env": {
+          "APP_THREADS": "2",
+          "DB_CONNS": "6",
+          "DB_WRITE_CONNS": "2",
+          "BCRYPT_THREADS": "1",
+          "WRITE_BATCH_US": "1000",
+          "BCRYPT_BATCH_MS": "160",
+          "READ_BATCH_SIZE": "32",
+          "READ_BATCH_US": "0",
+          "READ_SQL_BATCH": "1",
+          "READ_ROUTE_SLACK": "8",
+          "READ_TAG_ROUTE": "1",
+          "READ_COMMENT_SET": "1",
+          "READ_TAG_BATCH": "1"
+        },
+        "expected_binary_sha256": "844afb23cb68586c7652e70b94357e73da6c7708c723b815e1209bd520fd3241"
+      },
+      {
+        "name": "goose",
+        "binary": "/work/submissions/goose-native-tbsvttr/bin/conduit",
+        "source_dir": "/work/submissions/goose-native-tbsvttr",
+        "env": {
+          "ARTICLE_BATCH": "1",
+          "WORKERS": "2",
+          "PG_READERS": "3",
+          "HASHERS": "2",
+          "BCRYPT_BATCH_MS": "250",
+          "READ_BATCH": "32",
+          "READ_HOLD": "1"
+        },
+        "expected_binary_sha256": "6ab318a0ab9389dc2e77ec6122ff077a93adbcc183c6285c347104e0f734b6c3"
+      }
+    ]
+  },
+  "configuration_sha256": "5045a79bcd36f852ec23d9e207a90440087b2bfb5d0019b4bd1af1d5a4aa5c17",
+  "protocol": {
+    "users": 80000,
+    "articles": 500000,
+    "think_scale": 1.0,
+    "ramp_s": 60,
+    "measure_s": 60,
+    "tail_s": 15,
+    "pairs": 3,
+    "order": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "fresh_full_seed_per_attempt": true,
+    "shards": [
+      {
+        "box_index": 0,
+        "users": 20000,
+        "id_offset": 0,
+        "host": "127.0.0.1"
+      },
+      {
+        "box_index": 1,
+        "users": 20000,
+        "id_offset": 20000,
+        "host": "127.0.0.2"
+      },
+      {
+        "box_index": 2,
+        "users": 20000,
+        "id_offset": 40000,
+        "host": "127.0.0.3"
+      },
+      {
+        "box_index": 3,
+        "users": 20000,
+        "id_offset": 60000,
+        "host": "127.0.0.4"
+      }
+    ],
+    "gomaxprocs_per_shard": 1,
+    "synchronized_start_at": true,
+    "load_cgroup_cpus": 4,
+    "app_nofile_minimum": 200000,
+    "actual_app_uid_and_limits_required": true,
+    "launch_wrapper": "runuser -u challenge -- prlimit --nofile=200000:200000 -- binary",
+    "load_cgroup_cpu_limit_pct": 75.0,
+    "paired_random_stream": "same native run-id and VU ids within each pair; fresh DBs prevent name collisions",
+    "warmup": "none; this is a fixed-load diagnostic, not the official warmup/search/hold protocol",
+    "invalid_policy": "native lg_limited or failed infrastructure is INVALID; retain, never replace",
+    "interpretation": "at fixed unsaturated load, compare latency/CPU; similar req/s cannot establish capacity"
+  },
+  "created_utc": "2026-10-22T19:57:55Z",
+  "proposal_label": "Same frozen Goose binary: WORKERS=2 / ARTICLE_BATCH=1 vs unchanged Rust #7",
+  "reference_study": "/private/tmp/multicore-research-20261022/paired-multi-load-v3/v3_multi_pair_20261022t193438_99f820",
+  "reference_plan_sha256": "54cfec269821eeb21f20150446112207fbca45506e232aec136f4f3a7d10d8b0",
+  "preconditions": [
+    "The current three-pair study finishes and its results are retained before execution.",
+    "In a quiet interval, the unchanged conformance suite passes 197/197 with WORKERS=2 and ARTICLE_BATCH=1.",
+    "Frozen source/binary/tool hashes match the reference study. No compiler/source/default change is included.",
+    "Actual running challenge UID and nofile >= 200000 are verified by the existing v3 launcher."
+  ],
+  "preregistered_acceptance": {
+    "claims_scope": "Local fixed 80k-user diagnostic only; no capacity, official ranking, or all-competitor superiority claim.",
+    "candidate_env_delta": {
+      "WORKERS": {
+        "from": "4",
+        "to": "2"
+      },
+      "ARTICLE_BATCH": {
+        "from": "0",
+        "to": "1"
+      }
+    },
+    "postgres_connections": {
+      "previous": 16,
+      "candidate": 8,
+      "rust_control": 8,
+      "formula": "WORKERS*(PG_READERS+1)"
+    },
+    "hypothesis": "Lower fan-out lets compatible reads coalesce while cutting PostgreSQL backend/scheduling overhead; live article batching may reduce repeated metadata work at this load. Both changes are tested together, so the study cannot attribute individual effects.",
+    "required_pairs": 3,
+    "clean_pair_definition": "All 6 prescheduled attempts classify PASS, with zero HTTP/socket/timeout errors, valid frozen target/load/host witnesses, no target OOM and zero target swap, all 80k VUs active, and no native generator-limited verdict. Existing v3 host-memory criteria are unchanged. Invalid/failing attempts are retained and block acceptance; never replace them selectively.",
+    "metric": {
+      "name": "whole_target_cpu_seconds_per_successful_request",
+      "formula": "(target_monitor.cgroup_cpu_quota_pct / 100) * 8 / (overall.rps * (1 - overall.error_rate))",
+      "scope": "Combined app + PostgreSQL target cgroup, using the existing fully bracketed v3 target monitor. The CPU average uses the sampled interval inside the 60-second native request window. App-only CPU cannot substitute.",
+      "limitation": "CPU/request is a fixed-load sampled estimate; it does not measure maximum user capacity."
+    },
+    "per_pair_acceptance": {
+      "successful_request_errors": 0,
+      "cpu_cost_improvement_fraction_minimum": 0.05,
+      "improvement_formula": "1-candidate_cpu_seconds_per_success/control_cpu_seconds_per_success",
+      "p95_no_regression": "candidate.overall.p95_ms <= control.overall.p95_ms",
+      "p99_no_regression": "candidate.overall.p99_ms <= control.overall.p99_ms",
+      "all_conditions_required_for_each_of_three_pairs": true
+    },
+    "promotion_policy": "No speed claim or default promotion unless every pair individually passes all criteria. Do not pool away a worse pair,change thresholds after seeing results,or treat equal closed-model req/s as a capacity win. A passing combined experiment still requires separate evidence before attributing gains to either setting."
+  }
+}

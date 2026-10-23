@@ -1,0 +1,52 @@
+{
+  "claims_scope": "Local fixed 80k-user whole-configuration diagnostic against the disclosed portable/corrected PR31 reference only; no official PR31 score, capacity, ranking, implementation-only attribution, or all-competitor superiority claim.",
+  "postgres_connections": {
+    "reference": 16,
+    "candidate": 8,
+    "formula": "WORKERS*(PG_READERS+1)"
+  },
+  "hypothesis": "The W2/ARTICLE1 configuration may lower combined app+PostgreSQL CPU and latency relative to the PR31 default configuration by combining fewer database backends, live article SQL sharing, and native JSON/HMAC. This study measures the complete configurations and cannot determine the contribution of any individual difference.",
+  "required_pairs": 3,
+  "clean_pair_definition": "All 6 prescheduled attempts classify PASS, with zero HTTP/socket/timeout errors, valid frozen target/load/host witnesses, no target OOM and zero target swap, all 80k VUs active, and no native generator-limited verdict. Existing v3 host-memory criteria are unchanged. Invalid/failing attempts are retained and block acceptance; never replace them selectively.",
+  "metric": {
+    "name": "whole_target_cpu_seconds_per_successful_request",
+    "formula": "(target_monitor.cgroup_cpu_quota_pct / 100) * 8 / (overall.rps * (1 - overall.error_rate))",
+    "scope": "Combined app + PostgreSQL target cgroup, using the existing fully bracketed v3 target monitor. The CPU average uses the sampled interval inside the 60-second native request window. App-only CPU cannot substitute.",
+    "limitation": "CPU/request is a fixed-load sampled estimate; it does not measure maximum user capacity."
+  },
+  "per_pair_acceptance": {
+    "successful_request_errors": 0,
+    "cpu_cost_improvement_fraction_minimum": 0.05,
+    "improvement_formula": "1-candidate_cpu_seconds_per_success/control_cpu_seconds_per_success",
+    "p95_no_regression": "candidate.overall.p95_ms <= control.overall.p95_ms",
+    "p99_no_regression": "candidate.overall.p99_ms <= control.overall.p99_ms",
+    "all_conditions_required_for_each_of_three_pairs": true
+  },
+  "promotion_policy": "A local improvement against this disclosed PR31 derivative may be claimed only if every pair passes the predeclared CPU/latency/cleanliness gates. This study cannot establish a Rust win: acceptance against Rust remains conditional on all three criteria of the separate frozen Rust study passing its completed audit. No source/default change, official rank, capacity claim, or all-competitor claim follows automatically.",
+  "whole_configuration_differences": {
+    "reference": {
+      "WORKERS": "4",
+      "PG_READERS": "3",
+      "HASHERS": "2",
+      "ARTICLE_BATCH": "not implemented in PR31",
+      "postgres_connections": 16,
+      "json_hmac": "original pure Goose"
+    },
+    "candidate": {
+      "WORKERS": "2",
+      "PG_READERS": "3",
+      "HASHERS": "2",
+      "ARTICLE_BATCH": "1",
+      "postgres_connections": 8,
+      "json_hmac": "native prepared OpenSSL HMAC and native SIMD JSON"
+    },
+    "equal_runtime_knobs": [
+      "PG_READERS",
+      "HASHERS",
+      "BCRYPT_BATCH_MS",
+      "READ_BATCH",
+      "READ_HOLD"
+    ],
+    "attribution_limit": "Any result applies to these complete frozen configurations; it cannot isolate native primitive improvements, worker count, or article batching."
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "target_container": "multicore-goose-dev-20261022",
+  "host_evidence": "/private/tmp/multicore-research-20261022",
+  "users": 80000,
+  "port": 3000,
+  "jwt_secret": "multicore-server-challenge",
+  "cases": [
+    {
+      "name": "goose31_portable",
+      "binary": "/evidence/pr31-reference/source/bin/conduit",
+      "source_dir": "/evidence/pr31-reference/source",
+      "env": {
+        "WORKERS": "4",
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "BCRYPT_BATCH_MS": "250",
+        "READ_BATCH": "32",
+        "READ_HOLD": "1"
+      },
+      "expected_binary_sha256": "5679b2f84562b352aa80faa6491ee9a6496224333881d2d96e585d468a6b67e2"
+    },
+    {
+      "name": "goose",
+      "binary": "/work/submissions/goose-native-tbsvttr/bin/conduit",
+      "source_dir": "/work/submissions/goose-native-tbsvttr",
+      "env": {
+        "ARTICLE_BATCH": "1",
+        "WORKERS": "2",
+        "PG_READERS": "3",
+        "HASHERS": "2",
+        "BCRYPT_BATCH_MS": "250",
+        "READ_BATCH": "32",
+        "READ_HOLD": "1"
+      },
+      "expected_binary_sha256": "6ab318a0ab9389dc2e77ec6122ff077a93adbcc183c6285c347104e0f734b6c3"
+    }
+  ],
+  "reference_disclosure": "PR31 pinned at 43e0919ae5b693c1d3c1e8828b74bb774ef92ee0; local portable/correctness-corrected derivative, not its original x86 binary or an official PR31 score. Repairs are ARM/slice/epoll ABI adaptation, reliable bcrypt pipe reply delivery, PostgreSQL<=95 guard, and committed-favorite response correctness; the same pinned compiler and GCC optimization flags are used. Original pure-Goose JSON/HMAC and default WORKERS=4/PG_READERS=3/HASHERS=2 remain. Candidate WORKERS=2/ARTICLE_BATCH=1 changes configuration as well as native primitives, so this is a whole-configuration comparison.",
+  "comparison_kind": "whole_configuration"
+}

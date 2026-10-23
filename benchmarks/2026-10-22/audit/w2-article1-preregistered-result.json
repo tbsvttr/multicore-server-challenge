@@ -1,0 +1,157 @@
+{
+  "created_utc": "2026-10-22T22:27:48Z",
+  "run": "/private/tmp/multicore-research-20261022/paired-multi-load-v3/v3_multi_pair_20261022t200445_706372",
+  "evaluator_sha256": "3428d6738f705f9348cfb31f823be296618ed5edbd7b738d8ca500f22802a920",
+  "independent_audit_sha256": "bbce7d7951375f1ff9fc04cb9b9bbe694fa7b94e210f02ae6497386fb73fcefb",
+  "frozen_plan_sha256": "81a949b3678f2cebaecb071415fb619cb477ad8e323c4f294abe9f3c7ba3e419",
+  "contract": {
+    "claims_scope": "Local fixed 80k-user diagnostic only; no capacity, official ranking, or all-competitor superiority claim.",
+    "candidate_env_delta": {
+      "WORKERS": {
+        "from": "4",
+        "to": "2"
+      },
+      "ARTICLE_BATCH": {
+        "from": "0",
+        "to": "1"
+      }
+    },
+    "postgres_connections": {
+      "previous": 16,
+      "candidate": 8,
+      "rust_control": 8,
+      "formula": "WORKERS*(PG_READERS+1)"
+    },
+    "hypothesis": "Lower fan-out lets compatible reads coalesce while cutting PostgreSQL backend/scheduling overhead; live article batching may reduce repeated metadata work at this load. Both changes are tested together, so the study cannot attribute individual effects.",
+    "required_pairs": 3,
+    "clean_pair_definition": "All 6 prescheduled attempts classify PASS, with zero HTTP/socket/timeout errors, valid frozen target/load/host witnesses, no target OOM and zero target swap, all 80k VUs active, and no native generator-limited verdict. Existing v3 host-memory criteria are unchanged. Invalid/failing attempts are retained and block acceptance; never replace them selectively.",
+    "metric": {
+      "name": "whole_target_cpu_seconds_per_successful_request",
+      "formula": "(target_monitor.cgroup_cpu_quota_pct / 100) * 8 / (overall.rps * (1 - overall.error_rate))",
+      "scope": "Combined app + PostgreSQL target cgroup, using the existing fully bracketed v3 target monitor. The CPU average uses the sampled interval inside the 60-second native request window. App-only CPU cannot substitute.",
+      "limitation": "CPU/request is a fixed-load sampled estimate; it does not measure maximum user capacity."
+    },
+    "per_pair_acceptance": {
+      "successful_request_errors": 0,
+      "cpu_cost_improvement_fraction_minimum": 0.05,
+      "improvement_formula": "1-candidate_cpu_seconds_per_success/control_cpu_seconds_per_success",
+      "p95_no_regression": "candidate.overall.p95_ms <= control.overall.p95_ms",
+      "p99_no_regression": "candidate.overall.p99_ms <= control.overall.p99_ms",
+      "all_conditions_required_for_each_of_three_pairs": true
+    },
+    "promotion_policy": "No speed claim or default promotion unless every pair individually passes all criteria. Do not pool away a worse pair,change thresholds after seeing results,or treat equal closed-model req/s as a capacity win. A passing combined experiment still requires separate evidence before attributing gains to either setting."
+  },
+  "initial_checks": {
+    "independent_run_evidence_passes": false,
+    "all_six_scheduled_attempts_present": true,
+    "all_three_pairs_clean": false,
+    "zero_errors_all_recorded_windows": true,
+    "frozen_plan_hash_matches": true
+  },
+  "pairs": [
+    {
+      "pair": 1,
+      "checks": {
+        "both_declared_arms_present": true,
+        "rust7_all80000_vus_active": true,
+        "rust7_clean_and_eligible": true,
+        "goose_all80000_vus_active": true,
+        "goose_clean_and_eligible": true,
+        "combined_cpu_per_success_at_least5pct_lower": true,
+        "p95_no_regression": true,
+        "p99_no_regression": true
+      },
+      "preregistered_cpu_measurements": {
+        "rust7": {
+          "cpu_seconds_per_successful_request": 0.0002065571195550524,
+          "sampled_interval_s": 59.037874985,
+          "sampled_interval_start_ms": 1792699557110.3835,
+          "sampled_interval_end_ms": 1792699616148.447,
+          "cpu_seconds": 258.283403,
+          "successful_rps": 21179.983333333334,
+          "scope": "Combined8CPU app+PostgreSQL target cgroup; sampled inner interval."
+        },
+        "goose": {
+          "cpu_seconds_per_successful_request": 0.0001961919208264065,
+          "sampled_interval_s": 59.027650027,
+          "sampled_interval_start_ms": 1792699774313.2754,
+          "sampled_interval_end_ms": 1792699833341.031,
+          "cpu_seconds": 245.287964,
+          "successful_rps": 21180.666666666668,
+          "scope": "Combined8CPU app+PostgreSQL target cgroup; sampled inner interval."
+        }
+      },
+      "cpu_ratio_candidate_over_reference": 0.949819213440942,
+      "cpu_improvement_fraction": 0.050180786559058,
+      "full_window_interpolated_cpu_ratio": 0.9494160845915659,
+      "pass": true
+    },
+    {
+      "pair": 2,
+      "checks": {
+        "both_declared_arms_present": true,
+        "rust7_all80000_vus_active": true,
+        "rust7_clean_and_eligible": true,
+        "goose_all80000_vus_active": true,
+        "goose_clean_and_eligible": true,
+        "combined_cpu_per_success_at_least5pct_lower": true,
+        "p95_no_regression": true,
+        "p99_no_regression": true
+      },
+      "preregistered_cpu_measurements": {
+        "rust7": {
+          "cpu_seconds_per_successful_request": 0.000207901017754283,
+          "sampled_interval_s": 59.039383902,
+          "sampled_interval_start_ms": 1792700208854.6277,
+          "sampled_interval_end_ms": 1792700267894.1746,
+          "cpu_seconds": 259.109236,
+          "successful_rps": 21109.816666666666,
+          "scope": "Combined8CPU app+PostgreSQL target cgroup; sampled inner interval."
+        },
+        "goose": {
+          "cpu_seconds_per_successful_request": 0.00019536946916267546,
+          "sampled_interval_s": 59.029174151,
+          "sampled_interval_start_ms": 1792699991342.038,
+          "sampled_interval_end_ms": 1792700050371.5095,
+          "cpu_seconds": 243.450465,
+          "successful_rps": 21109.95,
+          "scope": "Combined8CPU app+PostgreSQL target cgroup; sampled inner interval."
+        }
+      },
+      "cpu_ratio_candidate_over_reference": 0.9397234860753857,
+      "cpu_improvement_fraction": 0.060276513924614306,
+      "full_window_interpolated_cpu_ratio": 0.9396243389651436,
+      "pass": true
+    },
+    {
+      "pair": 3,
+      "checks": {
+        "both_declared_arms_present": true,
+        "rust7_all80000_vus_active": true,
+        "rust7_clean_and_eligible": true,
+        "goose_all80000_vus_active": false,
+        "goose_clean_and_eligible": false,
+        "combined_cpu_per_success_at_least5pct_lower": false,
+        "p95_no_regression": true,
+        "p99_no_regression": true
+      },
+      "preregistered_cpu_measurements": {
+        "rust7": {
+          "cpu_seconds_per_successful_request": 0.00020529953651077327,
+          "sampled_interval_s": 59.036607861,
+          "sampled_interval_start_ms": 1792700427766.969,
+          "sampled_interval_end_ms": 1792700486804.2622,
+          "cpu_seconds": 256.465203,
+          "successful_rps": 21160.166666666668,
+          "scope": "Combined8CPU app+PostgreSQL target cgroup; sampled inner interval."
+        },
+        "goose": null
+      },
+      "full_window_interpolated_cpu_ratio": null,
+      "pass": false
+    }
+  ],
+  "accepted": false,
+  "official_capacity_or_rank_proven": false,
+  "interpretation": "Only the predeclared local combined-configuration CPU/latency contract is evaluated. Equal fixed-load RPS, maximum users, and official rank are different questions."
+}

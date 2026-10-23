@@ -59,3 +59,24 @@ Pair 2: no clean performance comparison; all attempts retained.
 
 Pair 3, goose/rust7 change: RPS +0.013%; p95 -56.886%; p99 -47.816%; total CPU/success -0.760%.
 
+## v3_multi_pair_20261022t200445_706372
+
+Status: **HAS_INVALID_OR_FAILED_ATTEMPTS**
+
+| Attempt | Result | Measured errors | Timeline errors | Req/s | p95/p99 ms | Total CPU ms/success |
+|---|---|---:|---:|---:|---:|---:|
+| 01-p1-rust7 | PASS | 0 | 0 | 21179.9833 | 2.5690/4.2630 | 0.2067 |
+| 02-p1-goose | PASS | 0 | 0 | 21180.6667 | 1.4910/2.9910 | 0.1963 |
+| 03-p2-goose | PASS | 0 | 0 | 21109.9500 | 1.4880/3.0110 | 0.1954 |
+| 04-p2-rust7 | PASS | 0 | 0 | 21109.8167 | 2.7450/4.7950 | 0.2080 |
+| 05-p3-rust7 | PASS | 0 | 0 | 21160.1667 | 2.6410/4.3310 | 0.2054 |
+| 06-p3-goose | INVALID_GENERATOR | 0 | 0 | 0.0000 | 0.0000/0.0000 | unverified |
+
+Four native histograms are verified by exact bin sum. At fixed closed-model load, similar request rates do not establish equal capacity; lower latency or CPU per success is diagnostic only. No warmup/search/5min hold, official x86 score, or ranking proof.
+
+Pair 1, goose/rust7 change: RPS +0.003%; p95 -41.962%; p99 -29.838%; total CPU/success -5.058%.
+
+Pair 2, goose/rust7 change: RPS +0.001%; p95 -45.792%; p99 -37.205%; total CPU/success -6.038%.
+
+Pair 3: no clean performance comparison; all attempts retained. 
+

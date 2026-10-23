@@ -1,0 +1,131 @@
+{
+  "pass": true,
+  "fixtures": [
+    {
+      "name": "reviewed whole-configuration plan",
+      "expected_accepted": true,
+      "accepted": true,
+      "comparison_kind": "whole_configuration",
+      "failed_checks": []
+    },
+    {
+      "name": "missing plan declaration",
+      "expected_accepted": false,
+      "accepted": false,
+      "comparison_kind": "whole_configuration",
+      "failed_checks": [
+        "whole_configuration_explicit_in_plan_and_configuration"
+      ]
+    },
+    {
+      "name": "missing config declaration",
+      "expected_accepted": false,
+      "accepted": false,
+      "comparison_kind": "whole_configuration",
+      "failed_checks": [
+        "whole_configuration_explicit_in_plan_and_configuration"
+      ]
+    },
+    {
+      "name": "missing difference disclosure",
+      "expected_accepted": false,
+      "accepted": false,
+      "comparison_kind": "whole_configuration",
+      "failed_checks": [
+        "whole_configuration_equal_knobs_explicitly_disclosed",
+        "whole_configuration_workers_and_article_batch_explicitly_disclosed",
+        "whole_configuration_pg_connections_16_vs8_explicitly_disclosed",
+        "whole_configuration_reference_and_attribution_limit_disclosed"
+      ]
+    },
+    {
+      "name": "wrong candidate worker count",
+      "expected_accepted": false,
+      "accepted": false,
+      "comparison_kind": "whole_configuration",
+      "failed_checks": [
+        "whole_configuration_exact_reviewed_runtime_env"
+      ]
+    },
+    {
+      "name": "unequal hasher count",
+      "expected_accepted": false,
+      "accepted": false,
+      "comparison_kind": "whole_configuration",
+      "failed_checks": [
+        "whole_configuration_exact_reviewed_runtime_env",
+        "whole_configuration_equal_knobs_explicitly_disclosed"
+      ]
+    },
+    {
+      "name": "extra undisclosed runtime flag",
+      "expected_accepted": false,
+      "accepted": false,
+      "comparison_kind": "whole_configuration",
+      "failed_checks": [
+        "whole_configuration_exact_reviewed_runtime_env"
+      ]
+    },
+    {
+      "name": "wrong reference binary",
+      "expected_accepted": false,
+      "accepted": false,
+      "comparison_kind": "whole_configuration",
+      "failed_checks": [
+        "whole_configuration_exact_reviewed_cases_and_binary_pins"
+      ]
+    },
+    {
+      "name": "misstated connection count",
+      "expected_accepted": false,
+      "accepted": false,
+      "comparison_kind": "whole_configuration",
+      "failed_checks": [
+        "whole_configuration_pg_connections_16_vs8_explicitly_disclosed"
+      ]
+    },
+    {
+      "name": "missing attribution limit",
+      "expected_accepted": false,
+      "accepted": false,
+      "comparison_kind": "whole_configuration",
+      "failed_checks": [
+        "whole_configuration_reference_and_attribution_limit_disclosed"
+      ]
+    },
+    {
+      "name": "wrong shared-knob disclosure",
+      "expected_accepted": false,
+      "accepted": false,
+      "comparison_kind": "whole_configuration",
+      "failed_checks": [
+        "whole_configuration_equal_knobs_explicitly_disclosed"
+      ]
+    },
+    {
+      "name": "undeclared worker mismatch remains rejected",
+      "expected_accepted": false,
+      "accepted": false,
+      "comparison_kind": "matched_runtime_knobs",
+      "failed_checks": [
+        "portable_reference_shared_runtime_knobs"
+      ]
+    },
+    {
+      "name": "earlier matched-worker plan remains accepted",
+      "expected_accepted": true,
+      "accepted": true,
+      "comparison_kind": "matched_runtime_knobs",
+      "failed_checks": []
+    }
+  ],
+  "files_sha256": {
+    "analyze_multi.py": "e5839c56611218372126471cfc9d36052f83eb10d7a9961029e92ff684196263",
+    "analyze_multi_whole.py": "b19cbc6abdd746e576ab4a462125e676c9e7d31a39dec5c50aac482d605ce7bd",
+    "whole_configuration_contract.py": "df4dc294a58426a2c7b91fec9364a1791945eb5aed38421325f3a68364c30d4c"
+  },
+  "no_docker_or_target_requests": true,
+  "all4_historical_run_results_exactly_unchanged": true,
+  "all_historical_raw_hashes_exactly_unchanged": true,
+  "original_auditor_unchanged": true
+}
